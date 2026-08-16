@@ -15,7 +15,7 @@ on:
       - 'data/frozen/uefa-club-coefficients-v0/**'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   reconcile:
@@ -25,6 +25,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js 22
         uses: actions/setup-node@v4
@@ -41,6 +43,100 @@ jobs:
           if [ -f "$AUDIT" ]; then
             cat "$AUDIT"
           fi
+
+      - name: Freeze foreign identity v0 immutably
+        shell: bash
+        env:
+          SOURCE_COMMIT: ${{ github.sha }}
+          SOURCE_RUN_ID: ${{ github.run_id }}
+          SOURCE_RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          set -euo pipefail
+          SRC='.nexus-club-identity-v0/reconciliation'
+          FREEZE='data/frozen/club-identity-foreign-v0'
+          ROWS='fantanexus_club_identity_reconciliation_v0_rows.json'
+          AUDIT='fantanexus_club_identity_reconciliation_v0_audit.json'
+          UNRES='fantanexus_club_identity_reconciliation_v0_unresolved.json'
+          ALIASES='data/mappings/club-identity-domestic-to-uefa-v0.json'
+          NOHIST='data/mappings/club-identity-reviewed-no-uefa-history-v0.json'
+          MANIFEST="$FREEZE/freeze_manifest.json"
+
+          STATUS="$(node -e "const a=require('./$SRC/$AUDIT'); process.stdout.write(a.status)")"
+          if [ "$STATUS" != 'PASS' ]; then
+            echo "ERROR: identity reconciliation is $STATUS, not PASS." >&2
+            exit 1
+          fi
+
+          CURRENT_ROWS_SHA="$(sha256sum "$SRC/$ROWS" | awk '{print $1}')"
+          CURRENT_ALIAS_SHA="$(sha256sum "$ALIASES" | awk '{print $1}')"
+          CURRENT_NOHIST_SHA="$(sha256sum "$NOHIST" | awk '{print $1}')"
+
+          if [ -f "$MANIFEST" ]; then
+            EXPECTED_ROWS_SHA="$(node -e "const m=require('./$MANIFEST'); process.stdout.write(m.files.rows_sha256)")"
+            EXPECTED_ALIAS_SHA="$(node -e "const m=require('./$MANIFEST'); process.stdout.write(m.files.alias_registry_sha256)")"
+            EXPECTED_NOHIST_SHA="$(node -e "const m=require('./$MANIFEST'); process.stdout.write(m.files.no_history_registry_sha256)")"
+            if [ "$CURRENT_ROWS_SHA" != "$EXPECTED_ROWS_SHA" ] || [ "$CURRENT_ALIAS_SHA" != "$EXPECTED_ALIAS_SHA" ] || [ "$CURRENT_NOHIST_SHA" != "$EXPECTED_NOHIST_SHA" ]; then
+              echo 'ERROR: club-identity foreign v0 is already frozen and current reconciliation/mappings differ.' >&2
+              echo 'Create a new identity dataset version instead of mutating v0.' >&2
+              exit 1
+            fi
+            echo 'Immutable club-identity foreign v0 freeze already exists and matches current rows/mappings.'
+            exit 0
+          fi
+
+          mkdir -p "$FREEZE"
+          cp "$SRC/$ROWS" "$FREEZE/$ROWS"
+          cp "$SRC/$AUDIT" "$FREEZE/$AUDIT"
+          cp "$SRC/$UNRES" "$FREEZE/$UNRES"
+          cp "$ALIASES" "$FREEZE/club-identity-domestic-to-uefa-v0.json"
+          cp "$NOHIST" "$FREEZE/club-identity-reviewed-no-uefa-history-v0.json"
+
+          node <<'NODE'
+          const fs = require('node:fs');
+          const crypto = require('node:crypto');
+          const path = require('node:path');
+          const freeze = 'data/frozen/club-identity-foreign-v0';
+          const sha = (p) => crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+          const rows = path.join(freeze, 'fantanexus_club_identity_reconciliation_v0_rows.json');
+          const audit = path.join(freeze, 'fantanexus_club_identity_reconciliation_v0_audit.json');
+          const unresolved = path.join(freeze, 'fantanexus_club_identity_reconciliation_v0_unresolved.json');
+          const aliases = path.join(freeze, 'club-identity-domestic-to-uefa-v0.json');
+          const noHistory = path.join(freeze, 'club-identity-reviewed-no-uefa-history-v0.json');
+          const auditJson = JSON.parse(fs.readFileSync(audit, 'utf8'));
+          const manifest = {
+            dataset: 'fantanexus_club_identity_foreign_v0',
+            status: 'PASS_FROZEN',
+            generated_at: new Date().toISOString(),
+            acquisition_repository: 'Sidious92/Fantta-Desk-data-Acquisitions',
+            acquisition_commit: process.env.SOURCE_COMMIT,
+            github_actions_run_id: Number(process.env.SOURCE_RUN_ID),
+            github_actions_run_attempt: Number(process.env.SOURCE_RUN_ATTEMPT),
+            rows: auditJson.rows,
+            counts: auditJson.counts,
+            unique_domestic_identities: auditJson.unique_domestic_identities,
+            unique_unresolved_identities: auditJson.unique_unresolved_identities,
+            files: {
+              rows_sha256: sha(rows),
+              audit_sha256: sha(audit),
+              unresolved_sha256: sha(unresolved),
+              alias_registry_sha256: sha(aliases),
+              no_history_registry_sha256: sha(noHistory)
+            },
+            semantics: {
+              matched: 'same-snapshot same-association exact normalized surface or explicit reviewed alias',
+              no_uefa_history: 'no usable UEFA coefficient signal in the relevant preseason snapshot after identity review; not an all-time historical claim',
+              fuzzy_matching: 'never promoted automatically'
+            },
+            mutability_policy: 'foreign identity v0 is immutable; changed reconciliation rows or reviewed mappings require a new version.'
+          };
+          fs.writeFileSync(path.join(freeze, 'freeze_manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
+          NODE
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$FREEZE"
+          git commit -m 'data: freeze club identity foreign v0 [skip ci]'
+          git push origin HEAD:main
 
       - name: Upload reconciliation artifact
         if: always()
