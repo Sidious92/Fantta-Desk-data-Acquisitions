@@ -11,7 +11,7 @@ on:
       - '.github/workflows/acquire-uefa-club-coefficients-v0.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   acquire-and-audit:
@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js 22
         uses: actions/setup-node@v4
@@ -36,6 +38,62 @@ jobs:
           if [ -f .nexus-uefa-club-coefficients-v0/acquisition/fantanexus_uefa_club_coefficients_2021_2026_v0_audit.json ]; then
             cat .nexus-uefa-club-coefficients-v0/acquisition/fantanexus_uefa_club_coefficients_2021_2026_v0_audit.json
           fi
+
+      - name: Freeze v0 immutably
+        shell: bash
+        env:
+          SOURCE_COMMIT: ${{ github.sha }}
+          SOURCE_RUN_ID: ${{ github.run_id }}
+          SOURCE_RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          set -euo pipefail
+          SRC='.nexus-uefa-club-coefficients-v0/acquisition'
+          FREEZE='data/frozen/uefa-club-coefficients-v0'
+          MANIFEST="$FREEZE/fantanexus_uefa_club_coefficients_2021_2026_v0_manifest.json"
+          JSON='fantanexus_uefa_club_coefficients_2021_2026_v0.json'
+          CSV='fantanexus_uefa_club_coefficients_2021_2026_v0.csv'
+
+          if [ -f "$MANIFEST" ]; then
+            CURRENT_JSON_SHA="$(sha256sum "$SRC/$JSON" | awk '{print $1}')"
+            CURRENT_CSV_SHA="$(sha256sum "$SRC/$CSV" | awk '{print $1}')"
+            EXPECTED_JSON_SHA="$(node -e "const m=require('./$MANIFEST'); process.stdout.write(m.files.json.sha256)")"
+            EXPECTED_CSV_SHA="$(node -e "const m=require('./$MANIFEST'); process.stdout.write(m.files.csv.sha256)")"
+
+            if [ "$CURRENT_JSON_SHA" != "$EXPECTED_JSON_SHA" ] || [ "$CURRENT_CSV_SHA" != "$EXPECTED_CSV_SHA" ]; then
+              echo 'ERROR: v0 is already frozen and the newly acquired data differs.' >&2
+              echo 'Create a new dataset version instead of mutating v0.' >&2
+              exit 1
+            fi
+
+            echo 'Immutable v0 freeze already exists and matches current JSON/CSV hashes.'
+            exit 0
+          fi
+
+          mkdir -p "$FREEZE"
+          cp "$SRC"/* "$FREEZE"/
+
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const freeze = 'data/frozen/uefa-club-coefficients-v0';
+          const provenance = {
+            dataset: 'fantanexus_uefa_club_coefficients_2021_2026_v0',
+            freeze_status: 'FROZEN',
+            acquisition_repository: 'Sidious92/Fantta-Desk-data-Acquisitions',
+            acquisition_commit: process.env.SOURCE_COMMIT,
+            github_actions_run_id: Number(process.env.SOURCE_RUN_ID),
+            github_actions_run_attempt: Number(process.env.SOURCE_RUN_ATTEMPT),
+            source_policy: 'Kassiesa historical UEFA five-year club coefficient tables; audit PASS required before freeze',
+            mutability_policy: 'v0 is immutable. If reacquisition changes JSON or CSV hashes, workflow fails and a new dataset version is required.'
+          };
+          fs.writeFileSync(path.join(freeze, 'freeze_provenance.json'), JSON.stringify(provenance, null, 2) + '\n');
+          NODE
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$FREEZE"
+          git commit -m 'data: freeze UEFA club coefficients v0 [skip ci]'
+          git push origin HEAD:main
 
       - name: Upload acquisition artifact
         if: always()
