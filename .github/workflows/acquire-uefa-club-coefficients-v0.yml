@@ -1,0 +1,47 @@
+name: Acquire UEFA club coefficients v0
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/nexus-acquire-uefa-club-coefficients-v0.mjs'
+      - 'package.json'
+      - '.github/workflows/acquire-uefa-club-coefficients-v0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  acquire-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Acquire and audit UEFA club coefficients
+        run: npm run acquire:uefa-club-coefficients
+
+      - name: Show audit
+        if: always()
+        run: |
+          if [ -f .nexus-uefa-club-coefficients-v0/acquisition/fantanexus_uefa_club_coefficients_2021_2026_v0_audit.json ]; then
+            cat .nexus-uefa-club-coefficients-v0/acquisition/fantanexus_uefa_club_coefficients_2021_2026_v0_audit.json
+          fi
+
+      - name: Upload acquisition artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fantanexus-uefa-club-coefficients-v0
+          path: .nexus-uefa-club-coefficients-v0/acquisition/
+          if-no-files-found: error
+          retention-days: 30
