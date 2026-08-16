@@ -1,0 +1,12 @@
+{
+  "dataset": "fantanexus_domestic_strength_foreign_raw_2021_2026_v0",
+  "freeze_status": "FROZEN",
+  "acquisition_repository": "Sidious92/Fantta-Desk-data-Acquisitions",
+  "acquisition_commit": "23a19ccbf5134fb16c209b4be85b1478308c6b5f",
+  "github_actions_run_id": 31940822771,
+  "github_actions_run_attempt": 1,
+  "source_policy": "OpenFootball completed regular-season match ledgers for ENG/GER/ESP/FRA/POR/NED, with a source-verified official NAC Breda supplement for the completed 2025/26 NAC Breda-SC Heerenveen fixture; audit PASS required before freeze.",
+  "scope_policy": "Foreign top-division raw domestic metrics only. Italy remains sourced from the separately audited private Serie A + Serie B match freeze.",
+  "metric_policy": "Preserve points_per_game, goal_difference_per_game and tie-averaged within-league ppg_percentile. No manual league or recency weights.",
+  "mutability_policy": "foreign v0 is immutable. If reacquisition changes JSON or CSV hashes, workflow fails and a new dataset version is required."
+}

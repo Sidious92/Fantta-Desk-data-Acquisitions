@@ -1,0 +1,360 @@
+{
+  "dataset": "fantanexus_domestic_strength_foreign_raw_2021_2026_v0",
+  "status": "PASS",
+  "generated_at": "2026-08-16T10:07:09.845Z",
+  "seasons": [
+    "2021-22",
+    "2022-23",
+    "2023-24",
+    "2024-25",
+    "2025-26"
+  ],
+  "associations": [
+    "ENG",
+    "GER",
+    "ESP",
+    "FRA",
+    "POR",
+    "NED"
+  ],
+  "competitions": [
+    "ENG:Premier League",
+    "GER:Bundesliga",
+    "ESP:La Liga",
+    "FRA:Ligue 1",
+    "POR:Primeira Liga",
+    "NED:Eredivisie"
+  ],
+  "rows": 564,
+  "source_files": [
+    {
+      "association": "ENG",
+      "competition": "Premier League",
+      "season": "2021-22",
+      "repository": "openfootball/england",
+      "source_path": "2021-22/1-premierleague.txt",
+      "source_ref": "https://github.com/openfootball/england/blob/master/2021-22/1-premierleague.txt",
+      "source_git_blob_sha": "d7e11e9134bfd03a7e847848f50029473bf9af9a",
+      "source_file_sha256": "592df232fbc7c2f36ec3e643eef608f77fcbf7d8da0706c94c99248d60b932b3"
+    },
+    {
+      "association": "ENG",
+      "competition": "Premier League",
+      "season": "2022-23",
+      "repository": "openfootball/england",
+      "source_path": "2022-23/1-premierleague.txt",
+      "source_ref": "https://github.com/openfootball/england/blob/master/2022-23/1-premierleague.txt",
+      "source_git_blob_sha": "3ef9d512d2150732c18ff6e39c9d7b20f446a050",
+      "source_file_sha256": "c85a2f8ac64975435b8359eb923eaa09e48f33d47672c8b32d2c6e99a8cec5f0"
+    },
+    {
+      "association": "ENG",
+      "competition": "Premier League",
+      "season": "2023-24",
+      "repository": "openfootball/england",
+      "source_path": "2023-24/1-premierleague.txt",
+      "source_ref": "https://github.com/openfootball/england/blob/master/2023-24/1-premierleague.txt",
+      "source_git_blob_sha": "23cdd8a340b72f6f30c514fbf609d5cf252723aa",
+      "source_file_sha256": "0bfb4a7fffe0b1bf7318955686eafeb28fc9676346ae433259e7409d69551450"
+    },
+    {
+      "association": "ENG",
+      "competition": "Premier League",
+      "season": "2024-25",
+      "repository": "openfootball/england",
+      "source_path": "2024-25/1-premierleague.txt",
+      "source_ref": "https://github.com/openfootball/england/blob/master/2024-25/1-premierleague.txt",
+      "source_git_blob_sha": "ca0fe4923f0164d0f879f796ab0759253e13bc06",
+      "source_file_sha256": "e39716b01af0c8654a9fae7b5555e6b02f506ea05239e0d0eef41936ba80e1e3"
+    },
+    {
+      "association": "ENG",
+      "competition": "Premier League",
+      "season": "2025-26",
+      "repository": "openfootball/england",
+      "source_path": "2025-26/1-premierleague.txt",
+      "source_ref": "https://github.com/openfootball/england/blob/master/2025-26/1-premierleague.txt",
+      "source_git_blob_sha": "918adf1c0af4f613c73530cb528ab0df72461cfb",
+      "source_file_sha256": "38c1de56c9e9b6662c7efc1420b7e1fe00dddbb502fe72d8f759e773ba3c093b"
+    },
+    {
+      "association": "GER",
+      "competition": "Bundesliga",
+      "season": "2021-22",
+      "repository": "openfootball/deutschland",
+      "source_path": "2021-22/1-bundesliga.txt",
+      "source_ref": "https://github.com/openfootball/deutschland/blob/master/2021-22/1-bundesliga.txt",
+      "source_git_blob_sha": "2d947fda8b18472ad518468c2842d5c6eea1d015",
+      "source_file_sha256": "46032813d658fb2003281e1e2d05cfb68716c1d7c79aca009f2758b49243887c"
+    },
+    {
+      "association": "GER",
+      "competition": "Bundesliga",
+      "season": "2022-23",
+      "repository": "openfootball/deutschland",
+      "source_path": "2022-23/1-bundesliga.txt",
+      "source_ref": "https://github.com/openfootball/deutschland/blob/master/2022-23/1-bundesliga.txt",
+      "source_git_blob_sha": "c564b378eb7eea5650a4f9446f860fa24209b2fe",
+      "source_file_sha256": "69af1fbc06a5cde9a203fe70e142f627f9ac36ef7e03768d52d11acb2145b737"
+    },
+    {
+      "association": "GER",
+      "competition": "Bundesliga",
+      "season": "2023-24",
+      "repository": "openfootball/deutschland",
+      "source_path": "2023-24/1-bundesliga.txt",
+      "source_ref": "https://github.com/openfootball/deutschland/blob/master/2023-24/1-bundesliga.txt",
+      "source_git_blob_sha": "dcbd22d15b3964955092ab182c611184c565c199",
+      "source_file_sha256": "77093efd6edf1090b9638f266e970236a7cc3f7ea5864f4cd8785bbbe4e91e64"
+    },
+    {
+      "association": "GER",
+      "competition": "Bundesliga",
+      "season": "2024-25",
+      "repository": "openfootball/deutschland",
+      "source_path": "2024-25/1-bundesliga.txt",
+      "source_ref": "https://github.com/openfootball/deutschland/blob/master/2024-25/1-bundesliga.txt",
+      "source_git_blob_sha": "1cfad25a7820e3aa4d0a8ee9aac2c75ef61c0ae8",
+      "source_file_sha256": "ec0f75ef3eb01eee6f2176998a05fbfce35cf6a5a82203fce676c7024b84bd3d"
+    },
+    {
+      "association": "GER",
+      "competition": "Bundesliga",
+      "season": "2025-26",
+      "repository": "openfootball/deutschland",
+      "source_path": "2025-26/1-bundesliga.txt",
+      "source_ref": "https://github.com/openfootball/deutschland/blob/master/2025-26/1-bundesliga.txt",
+      "source_git_blob_sha": "ad9f756c97c375b58e2e664ff7a10a24a52b6ae1",
+      "source_file_sha256": "c1858a191c8dddf7cc04014c29c63f401b400af0be4d20329d85af893a6b7e56"
+    },
+    {
+      "association": "ESP",
+      "competition": "La Liga",
+      "season": "2021-22",
+      "repository": "openfootball/espana",
+      "source_path": "2021-22/1-liga.txt",
+      "source_ref": "https://github.com/openfootball/espana/blob/master/2021-22/1-liga.txt",
+      "source_git_blob_sha": "8bc8976e67889c7a16203580f82d18ad2fc874d5",
+      "source_file_sha256": "bf303f9b6800ad3600693f46e657c61908e1d717669aecfd0906a3aa4210122b"
+    },
+    {
+      "association": "ESP",
+      "competition": "La Liga",
+      "season": "2022-23",
+      "repository": "openfootball/espana",
+      "source_path": "2022-23/1-liga.txt",
+      "source_ref": "https://github.com/openfootball/espana/blob/master/2022-23/1-liga.txt",
+      "source_git_blob_sha": "4a5532c651b1ed0c1bb824e91ad96d31010dcda3",
+      "source_file_sha256": "96f29c344e6d257f20b673c004ff5b279332336b7ad4fac3dc68549151a67480"
+    },
+    {
+      "association": "ESP",
+      "competition": "La Liga",
+      "season": "2023-24",
+      "repository": "openfootball/espana",
+      "source_path": "2023-24/1-liga.txt",
+      "source_ref": "https://github.com/openfootball/espana/blob/master/2023-24/1-liga.txt",
+      "source_git_blob_sha": "1ba747e149a5f0909614245392a5040d6033fc15",
+      "source_file_sha256": "d76af43f3d344065510393ad175927e8054c255953ab1de86dbfe50d929e3d50"
+    },
+    {
+      "association": "ESP",
+      "competition": "La Liga",
+      "season": "2024-25",
+      "repository": "openfootball/espana",
+      "source_path": "2024-25/1-liga.txt",
+      "source_ref": "https://github.com/openfootball/espana/blob/master/2024-25/1-liga.txt",
+      "source_git_blob_sha": "a2ad0779a7c0f315737ce0c7d54f25d83c2ed219",
+      "source_file_sha256": "4d882637dbcab8c99ff87dc16b7033acbaaeaa6ae91cc304cf19e0395852665f"
+    },
+    {
+      "association": "ESP",
+      "competition": "La Liga",
+      "season": "2025-26",
+      "repository": "openfootball/espana",
+      "source_path": "2025-26/1-liga.txt",
+      "source_ref": "https://github.com/openfootball/espana/blob/master/2025-26/1-liga.txt",
+      "source_git_blob_sha": "718e08cef33a01e5b56f7c8bb9193019d3bfb12f",
+      "source_file_sha256": "baf2a9ae42c4c6a919eb39aa2476f1d44b9d3b18050adfc6386d36ef2a98e956"
+    },
+    {
+      "association": "FRA",
+      "competition": "Ligue 1",
+      "season": "2021-22",
+      "repository": "openfootball/europe",
+      "source_path": "france/2021-22_fr1.txt",
+      "source_ref": "https://github.com/openfootball/europe/blob/master/france/2021-22_fr1.txt",
+      "source_git_blob_sha": "56f1e5148c5ac41cd4b2739fed50a7b47d6c3ffc",
+      "source_file_sha256": "a534c4c765b3dfcaed072e6f2bd32513f542f2c84fb61ce44ad24c067ed7984f"
+    },
+    {
+      "association": "FRA",
+      "competition": "Ligue 1",
+      "season": "2022-23",
+      "repository": "openfootball/europe",
+      "source_path": "france/2022-23_fr1.txt",
+      "source_ref": "https://github.com/openfootball/europe/blob/master/france/2022-23_fr1.txt",
+      "source_git_blob_sha": "228ab677025f2b47d101ca3c373bcdb8dfa1a8b2",
+      "source_file_sha256": "bfb04c9b90a8aff058e7631d740f5c9c4d968025a1c14d752c6261cbfd1828aa"
+    },
+    {
+      "association": "FRA",
+      "competition": "Ligue 1",
+      "season": "2023-24",
+      "repository": "openfootball/europe",
+      "source_path": "france/2023-24_fr1.txt",
+      "source_ref": "https://github.com/openfootball/europe/blob/master/france/2023-24_fr1.txt",
+      "source_git_blob_sha": "621eea2a9338b1c332e8698bc62dbcddde69612c",
+      "source_file_sha256": "c4a6995827f65e7c1d36bdc528d5cea284684f27d1fa8f5e5c88fd7d373f8ca9"
+    },
+    {
+      "association": "FRA",
+      "competition": "Ligue 1",
+      "season": "2024-25",
+      "repository": "openfootball/europe",
+      "source_path": "france/2024-25_fr1.txt",
+      "source_ref": "https://github.com/openfootball/europe/blob/master/france/2024-25_fr1.txt",
+      "source_git_blob_sha": "ef156ebbb27cd5b66a2b6f1175df88d95ef41aad",
+      "source_file_sha256": "169b86f635d04fefb786cf8e644e57d21bbd5c1dcc36ca1f1469560c699af19b"
+    },
+    {
+      "association": "FRA",
+      "competition": "Ligue 1",
+      "season": "2025-26",
+      "repository": "openfootball/europe",
+      "source_path": "france/2025-26_fr1.txt",
+      "source_ref": "https://github.com/openfootball/europe/blob/master/france/2025-26_fr1.txt",
+      "source_git_blob_sha": "590cd559087b68e4e556f160afd2662220b7536e",
+      "source_file_sha256": "d173d6d5e41ca1f42c1b6b0b4b65fd7eabdd49130867c47dfd3ad2007869d347"
+    },
+    {
+      "association": "POR",
+      "competition": "Primeira Liga",
+      "season": "2021-22",
+      "repository": "openfootball/europe",
+      "source_path": "portugal/2021-22_pt1.txt",
+      "source_ref": "https://github.com/openfootball/europe/blob/master/portugal/2021-22_pt1.txt",
+      "source_git_blob_sha": "c448a04c11ae5b96e6bdbedabed75d1558f447df",
+      "source_file_sha256": "5e5593b409d4b4ca31782960897b4e40917cc55370101cd68fea1af51a2a3b1c"
+    },
+    {
+      "association": "POR",
+      "competition": "Primeira Liga",
+      "season": "2022-23",
+      "repository": "openfootball/europe",
+      "source_path": "portugal/2022-23_pt1.txt",
+      "source_ref": "https://github.com/openfootball/europe/blob/master/portugal/2022-23_pt1.txt",
+      "source_git_blob_sha": "02fcf01267c8ae5305acec400e031519954600bd",
+      "source_file_sha256": "fa7d1938a28199b2e714437769c4f56ac28f184e0f1ebdfd2603683c1a850a34"
+    },
+    {
+      "association": "POR",
+      "competition": "Primeira Liga",
+      "season": "2023-24",
+      "repository": "openfootball/europe",
+      "source_path": "portugal/2023-24_pt1.txt",
+      "source_ref": "https://github.com/openfootball/europe/blob/master/portugal/2023-24_pt1.txt",
+      "source_git_blob_sha": "5b82a592e07f16ad42be4d24e0318cbac4ecf020",
+      "source_file_sha256": "7f19ddec6033a465ffa1e76b70103aea3005b63c0d27e3f723d0924c814da511"
+    },
+    {
+      "association": "POR",
+      "competition": "Primeira Liga",
+      "season": "2024-25",
+      "repository": "openfootball/europe",
+      "source_path": "portugal/2024-25_pt1.txt",
+      "source_ref": "https://github.com/openfootball/europe/blob/master/portugal/2024-25_pt1.txt",
+      "source_git_blob_sha": "0bf964ac3c7767645b4a084a8b11ec1cc0db0e6d",
+      "source_file_sha256": "3bb1acda8822a01e1aef1e70f03607650b97fb6722fd0d777f2ef9bf6544ed6c"
+    },
+    {
+      "association": "POR",
+      "competition": "Primeira Liga",
+      "season": "2025-26",
+      "repository": "openfootball/europe",
+      "source_path": "portugal/2025-26_pt1.txt",
+      "source_ref": "https://github.com/openfootball/europe/blob/master/portugal/2025-26_pt1.txt",
+      "source_git_blob_sha": "1bc5b5eae05bdcefeb64c2ea71ea931d546a6873",
+      "source_file_sha256": "967a4cde722b5598a5c28da8efa65a0ab28da9b1778cee74455b463216dd1adb"
+    },
+    {
+      "association": "NED",
+      "competition": "Eredivisie",
+      "season": "2021-22",
+      "repository": "openfootball/europe",
+      "source_path": "netherlands/2021-22_nl1.txt",
+      "source_ref": "https://github.com/openfootball/europe/blob/master/netherlands/2021-22_nl1.txt",
+      "source_git_blob_sha": "6249665f226cf6259bfd2a9e72747295010394bb",
+      "source_file_sha256": "d201613dcf5ff7ef3b1ede7c23ec7815ff3ad8c04d196c0fb047b54e37faef8f"
+    },
+    {
+      "association": "NED",
+      "competition": "Eredivisie",
+      "season": "2022-23",
+      "repository": "openfootball/europe",
+      "source_path": "netherlands/2022-23_nl1.txt",
+      "source_ref": "https://github.com/openfootball/europe/blob/master/netherlands/2022-23_nl1.txt",
+      "source_git_blob_sha": "23268303742116f940ca5d763e1ba9b54ab65bf6",
+      "source_file_sha256": "06f98c12ae5154d547aebb7bf61984e082bbfef5aab7d3b8ea4bad4145735341"
+    },
+    {
+      "association": "NED",
+      "competition": "Eredivisie",
+      "season": "2023-24",
+      "repository": "openfootball/europe",
+      "source_path": "netherlands/2023-24_nl1.txt",
+      "source_ref": "https://github.com/openfootball/europe/blob/master/netherlands/2023-24_nl1.txt",
+      "source_git_blob_sha": "6e44e6fbbb162b8475418e282b47ad10714c9d2f",
+      "source_file_sha256": "2bde6d0ca60ea6c321f359d1042ce20643880ccfb86a4d7c47f993ec546ba227"
+    },
+    {
+      "association": "NED",
+      "competition": "Eredivisie",
+      "season": "2024-25",
+      "repository": "openfootball/europe",
+      "source_path": "netherlands/2024-25_nl1.txt",
+      "source_ref": "https://github.com/openfootball/europe/blob/master/netherlands/2024-25_nl1.txt",
+      "source_git_blob_sha": "da18fab2c58b3c6850342f3679918ddaec64b882",
+      "source_file_sha256": "fe1b42aa86ef00a313e1108a8e6faef9fdd7f26ab612f56f4ed5c08a3b78e041"
+    },
+    {
+      "association": "NED",
+      "competition": "Eredivisie",
+      "season": "2025-26",
+      "repository": "openfootball/europe",
+      "source_path": "netherlands/2025-26_nl1.txt",
+      "source_ref": "https://github.com/openfootball/europe/blob/master/netherlands/2025-26_nl1.txt",
+      "source_git_blob_sha": "18739d3c6a7789d74da6a8253e8c6d4c6ee34fb2",
+      "source_file_sha256": "50216d5c06514cb255141be5f27f247a47a63a6a981ca98e54edd365b55d2387"
+    }
+  ],
+  "verified_supplements": [
+    {
+      "association": "NED",
+      "competition": "Eredivisie",
+      "season": "2025-26",
+      "home": "NAC Breda",
+      "away": "SC Heerenveen",
+      "home_goals": 2,
+      "away_goals": 0,
+      "source": "NAC Breda official",
+      "source_ref": "https://www.nac.nl/nieuws/winst-in-twee-delen-voor-gedegradeerd-nac",
+      "evidence_sha256": "1cdd5e2b97207d5b1284e5df247823f6cbd034c68e2bcf3bca4276341103bd78",
+      "reason": "OpenFootball snapshot marks the round-33 fixture cancelled after the 82nd-minute stoppage; the official club source records the completed remainder on 2026-05-11 and final 2-0 result."
+    }
+  ],
+  "files": {
+    "json": {
+      "path": ".nexus-domestic-strength-v0/acquisition/fantanexus_domestic_strength_foreign_raw_2021_2026_v0.json",
+      "sha256": "b18ba79785a4972869a9e4bee88b3cfdc05fb0b316bc79b542a1b6d63c0ff5aa"
+    },
+    "csv": {
+      "path": ".nexus-domestic-strength-v0/acquisition/fantanexus_domestic_strength_foreign_raw_2021_2026_v0.csv",
+      "sha256": "c1b75cc5175650a9923963138dd8d1e2cff68b308d23450872b2c20b5f9309af"
+    },
+    "audit": {
+      "path": ".nexus-domestic-strength-v0/acquisition/fantanexus_domestic_strength_foreign_raw_2021_2026_v0_audit.json",
+      "sha256": "517bf570e86517246595c8b89fabcbe76b24d06e27ed5ae89cc1e59e30c98a7e"
+    }
+  }
+}
