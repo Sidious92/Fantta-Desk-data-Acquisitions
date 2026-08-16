@@ -1,0 +1,69 @@
+{
+  "dataset": "FantaNexus Club Identity Reconciliation v0",
+  "status": "PASS",
+  "generated_at": "2026-08-16T10:18:05.526Z",
+  "inputs": {
+    "domestic": "data/frozen/domestic-strength-foreign-v0/fantanexus_domestic_strength_foreign_raw_2021_2026_v0.json",
+    "uefa": "data/frozen/uefa-club-coefficients-v0/fantanexus_uefa_club_coefficients_2021_2026_v0.json",
+    "aliases": "data/mappings/club-identity-domestic-to-uefa-v0.json",
+    "reviewed_no_history": "data/mappings/club-identity-reviewed-no-uefa-history-v0.json",
+    "domestic_rows": 564,
+    "uefa_rows": 2547,
+    "reviewed_aliases": 76,
+    "reviewed_no_history_identities": 80
+  },
+  "policy": {
+    "automatic_match": "same snapshot + same association + exact normalized surface only",
+    "alias_match": "explicit reviewed alias registry only",
+    "no_uefa_history": "reviewed alias/global exact surface absent in relevant snapshot, or explicit reviewed-no-history registry; never inferred from fuzzy similarity",
+    "no_history_semantics": "absence of a usable UEFA coefficient signal in that preseason snapshot, not a claim of no European participation at any point in club history",
+    "fuzzy_candidates": "diagnostic only and never promoted automatically"
+  },
+  "rows": 564,
+  "counts": {
+    "MATCHED": 296,
+    "NO_UEFA_HISTORY": 268,
+    "REVIEW_REQUIRED": 0
+  },
+  "methods": {
+    "REVIEWED_ALIAS": 169,
+    "REVIEWED_ALIAS_TARGET_ABSENT_IN_SNAPSHOT": 54,
+    "REVIEWED_NO_HISTORY_IDENTITY": 184,
+    "EXACT_NORMALIZED_SURFACE": 127,
+    "GLOBAL_EXACT_SURFACE_ABSENT_IN_SNAPSHOT": 30
+  },
+  "unique_domestic_identities": 214,
+  "unique_unresolved_identities": 0,
+  "by_association": {
+    "ENG": {
+      "MATCHED": 53,
+      "NO_UEFA_HISTORY": 47,
+      "REVIEW_REQUIRED": 0
+    },
+    "ESP": {
+      "MATCHED": 55,
+      "NO_UEFA_HISTORY": 45,
+      "REVIEW_REQUIRED": 0
+    },
+    "FRA": {
+      "MATCHED": 54,
+      "NO_UEFA_HISTORY": 40,
+      "REVIEW_REQUIRED": 0
+    },
+    "GER": {
+      "MATCHED": 59,
+      "NO_UEFA_HISTORY": 31,
+      "REVIEW_REQUIRED": 0
+    },
+    "NED": {
+      "MATCHED": 34,
+      "NO_UEFA_HISTORY": 56,
+      "REVIEW_REQUIRED": 0
+    },
+    "POR": {
+      "MATCHED": 41,
+      "NO_UEFA_HISTORY": 49,
+      "REVIEW_REQUIRED": 0
+    }
+  }
+}

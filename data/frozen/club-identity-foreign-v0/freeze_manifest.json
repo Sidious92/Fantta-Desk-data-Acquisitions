@@ -1,0 +1,30 @@
+{
+  "dataset": "fantanexus_club_identity_foreign_v0",
+  "status": "PASS_FROZEN",
+  "generated_at": "2026-08-16T10:18:05.672Z",
+  "acquisition_repository": "Sidious92/Fantta-Desk-data-Acquisitions",
+  "acquisition_commit": "f4b363d61f8329c46a22b2e66d8c4d1c62d84ba4",
+  "github_actions_run_id": 31941299055,
+  "github_actions_run_attempt": 1,
+  "rows": 564,
+  "counts": {
+    "MATCHED": 296,
+    "NO_UEFA_HISTORY": 268,
+    "REVIEW_REQUIRED": 0
+  },
+  "unique_domestic_identities": 214,
+  "unique_unresolved_identities": 0,
+  "files": {
+    "rows_sha256": "4d92c8820ecf7e02d0cf60ecbfc8350af5838876fd480a8364f575223942d0a3",
+    "audit_sha256": "9bae31b2fb0c6c3554f18df863376dfb0fd0ce50001e1ce7d88cb5f862fcef3b",
+    "unresolved_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "alias_registry_sha256": "7740bba3e404a91e10a9419fe97c76eface9784e87b5f3fe3fd174a03126e5f3",
+    "no_history_registry_sha256": "539d2f88f7cf7e45632a95c798e27b65923ef46e42ffba1e4856a7c88bdb0e7c"
+  },
+  "semantics": {
+    "matched": "same-snapshot same-association exact normalized surface or explicit reviewed alias",
+    "no_uefa_history": "no usable UEFA coefficient signal in the relevant preseason snapshot after identity review; not an all-time historical claim",
+    "fuzzy_matching": "never promoted automatically"
+  },
+  "mutability_policy": "foreign identity v0 is immutable; changed reconciliation rows or reviewed mappings require a new version."
+}
