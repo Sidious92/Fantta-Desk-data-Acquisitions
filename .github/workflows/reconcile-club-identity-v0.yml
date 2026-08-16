@@ -1,0 +1,51 @@
+name: Reconcile Club Elo identities v0
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/nexus-reconcile-club-identity-v0.mjs'
+      - 'data/mappings/club-identity-domestic-to-uefa-v0.json'
+      - 'package.json'
+      - '.github/workflows/reconcile-club-identity-v0.yml'
+      - 'data/frozen/domestic-strength-foreign-v0/**'
+      - 'data/frozen/uefa-club-coefficients-v0/**'
+
+permissions:
+  contents: read
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Reconcile identities
+        run: npm run reconcile:club-identity
+
+      - name: Show audit
+        if: always()
+        run: |
+          AUDIT='.nexus-club-identity-v0/reconciliation/fantanexus_club_identity_reconciliation_v0_audit.json'
+          if [ -f "$AUDIT" ]; then
+            cat "$AUDIT"
+          fi
+
+      - name: Upload reconciliation artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fantanexus-club-identity-reconciliation-v0
+          path: .nexus-club-identity-v0/reconciliation/
+          if-no-files-found: error
+          retention-days: 30
