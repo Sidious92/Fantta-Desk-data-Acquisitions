@@ -5,11 +5,10 @@
   "type": "module",
   "scripts": {
     "acquire:uefa-club-coefficients": "node scripts/nexus-acquire-uefa-club-coefficients-v0.mjs",
+    "acquire:uefa-association-coefficients": "node scripts/nexus-acquire-uefa-association-coefficients-v0.mjs",
     "acquire:domestic-strength": "node scripts/nexus-acquire-domestic-strength-v0.mjs",
     "probe:club-identity": "node scripts/nexus-probe-club-identity-v0.mjs",
     "reconcile:club-identity": "node scripts/nexus-reconcile-club-identity-v0.mjs"
   },
-  "engines": {
-    "node": ">=22"
-  }
+  "engines": {"node": ">=22"}
 }

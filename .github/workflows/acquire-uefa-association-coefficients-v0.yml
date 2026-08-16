@@ -1,0 +1,61 @@
+name: Acquire UEFA association coefficients v0
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/nexus-acquire-uefa-association-coefficients-v0.mjs'
+      - 'package.json'
+      - '.github/workflows/acquire-uefa-association-coefficients-v0.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  acquire-audit-freeze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Acquire and audit
+        run: npm run acquire:uefa-association-coefficients
+      - name: Show audit
+        if: always()
+        run: cat .nexus-uefa-association-coefficients-v0/acquisition/fantanexus_uefa_association_coefficients_2021_2026_v0_audit.json || true
+      - name: Freeze v0 immutably
+        shell: bash
+        env:
+          SOURCE_COMMIT: ${{ github.sha }}
+          SOURCE_RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          SRC='.nexus-uefa-association-coefficients-v0/acquisition'
+          FREEZE='data/frozen/uefa-association-coefficients-v0'
+          BASE='fantanexus_uefa_association_coefficients_2021_2026_v0'
+          STATUS="$(node -e "const a=require('./$SRC/${BASE}_audit.json');process.stdout.write(a.status)")"
+          [ "$STATUS" = PASS ] || { echo "audit is $STATUS" >&2; exit 1; }
+          if [ -f "$FREEZE/${BASE}_manifest.json" ]; then
+            J="$(sha256sum "$SRC/${BASE}.json"|awk '{print $1}')"; C="$(sha256sum "$SRC/${BASE}.csv"|awk '{print $1}')"
+            EJ="$(node -e "const m=require('./$FREEZE/${BASE}_manifest.json');process.stdout.write(m.files.json.sha256)")"; EC="$(node -e "const m=require('./$FREEZE/${BASE}_manifest.json');process.stdout.write(m.files.csv.sha256)")"
+            [ "$J" = "$EJ" ] && [ "$C" = "$EC" ] || { echo 'immutable v0 differs; create a new version' >&2; exit 1; }
+            echo 'immutable freeze already matches'; exit 0
+          fi
+          mkdir -p "$FREEZE"; cp "$SRC"/* "$FREEZE"/
+          node <<'NODE'
+          const fs=require('node:fs'); const p='data/frozen/uefa-association-coefficients-v0/freeze_provenance.json';
+          fs.writeFileSync(p,JSON.stringify({dataset:'fantanexus_uefa_association_coefficients_2021_2026_v0',freeze_status:'FROZEN',acquisition_repository:'Sidious92/Fantta-Desk-data-Acquisitions',acquisition_commit:process.env.SOURCE_COMMIT,github_actions_run_id:Number(process.env.SOURCE_RUN_ID),source_policy:'Kassiesa UEFA five-year association ranking snapshots 2021-2026; 55 associations per snapshot; audit PASS required',mutability_policy:'v0 is immutable; changed JSON/CSV requires a new version'},null,2)+'\n');
+          NODE
+          git config user.name 'github-actions[bot]'; git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$FREEZE"; git commit -m 'data: freeze UEFA association coefficients v0 [skip ci]'; git push origin HEAD:main
+      - name: Upload artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fantanexus-uefa-association-coefficients-v0
+          path: .nexus-uefa-association-coefficients-v0/acquisition/
+          if-no-files-found: error
+          retention-days: 30
