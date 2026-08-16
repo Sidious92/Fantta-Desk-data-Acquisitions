@@ -1,0 +1,12 @@
+{
+  "name": "fantta-desk-data-acquisitions",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "acquire:uefa-club-coefficients": "node scripts/nexus-acquire-uefa-club-coefficients-v0.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
