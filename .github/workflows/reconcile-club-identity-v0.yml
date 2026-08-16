@@ -8,6 +8,7 @@ on:
     paths:
       - 'scripts/nexus-reconcile-club-identity-v0.mjs'
       - 'data/mappings/club-identity-domestic-to-uefa-v0.json'
+      - 'data/mappings/club-identity-reviewed-no-uefa-history-v0.json'
       - 'package.json'
       - '.github/workflows/reconcile-club-identity-v0.yml'
       - 'data/frozen/domestic-strength-foreign-v0/**'
