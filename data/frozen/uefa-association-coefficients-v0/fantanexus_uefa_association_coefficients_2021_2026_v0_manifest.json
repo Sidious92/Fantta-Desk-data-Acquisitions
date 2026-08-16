@@ -1,0 +1,36 @@
+{
+  "dataset": "fantanexus_uefa_association_coefficients_2021_2026_v0",
+  "status": "PASS",
+  "generated_at": "2026-08-16T10:35:51.983Z",
+  "snapshot_years": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "rows": 330,
+  "sources": [
+    "https://kassiesa.net/uefa/data/method5/crank2021.html",
+    "https://kassiesa.net/uefa/data/method5/crank2022.html",
+    "https://kassiesa.net/uefa/data/method5/crank2023.html",
+    "https://kassiesa.net/uefa/data/method5/crank2024.html",
+    "https://kassiesa.net/uefa/data/method5/crank2025.html",
+    "https://kassiesa.net/uefa/data/method5/crank2026.html"
+  ],
+  "files": {
+    "json": {
+      "path": ".nexus-uefa-association-coefficients-v0/acquisition/fantanexus_uefa_association_coefficients_2021_2026_v0.json",
+      "sha256": "aae902f0a51f1b5a781db1a751cb6b710815df60d185b47e7e4a6cc4a02745bb"
+    },
+    "csv": {
+      "path": ".nexus-uefa-association-coefficients-v0/acquisition/fantanexus_uefa_association_coefficients_2021_2026_v0.csv",
+      "sha256": "f92faa78d92c2a3c5c3568e992886b4bad569300ccc256fbe2429cb88a19be14"
+    },
+    "audit": {
+      "path": ".nexus-uefa-association-coefficients-v0/acquisition/fantanexus_uefa_association_coefficients_2021_2026_v0_audit.json",
+      "sha256": "7b0073acf62aae3260c04205a909daeaddd36a2623f73848e6be262e8f379990"
+    }
+  }
+}

@@ -1,0 +1,280 @@
+{
+  "dataset": "FantaNexus UEFA Association Coefficients v0",
+  "status": "PASS",
+  "generated_at": "2026-08-16T10:35:51.979Z",
+  "snapshots": {
+    "2021": {
+      "rows": 55,
+      "associations": 55
+    },
+    "2022": {
+      "rows": 55,
+      "associations": 55
+    },
+    "2023": {
+      "rows": 55,
+      "associations": 55
+    },
+    "2024": {
+      "rows": 55,
+      "associations": 55
+    },
+    "2025": {
+      "rows": 55,
+      "associations": 55
+    },
+    "2026": {
+      "rows": 55,
+      "associations": 55
+    }
+  },
+  "checks": [
+    {
+      "name": "rows_2021_eq_55",
+      "pass": true,
+      "details": {
+        "rows": 55
+      }
+    },
+    {
+      "name": "associations_2021_unique_55",
+      "pass": true,
+      "details": {
+        "unique": 55
+      }
+    },
+    {
+      "name": "component_sum_2021",
+      "pass": true,
+      "details": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    {
+      "name": "ordering_2021",
+      "pass": true,
+      "details": {
+        "rows": 55
+      }
+    },
+    {
+      "name": "rows_2022_eq_55",
+      "pass": true,
+      "details": {
+        "rows": 55
+      }
+    },
+    {
+      "name": "associations_2022_unique_55",
+      "pass": true,
+      "details": {
+        "unique": 55
+      }
+    },
+    {
+      "name": "component_sum_2022",
+      "pass": true,
+      "details": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    {
+      "name": "ordering_2022",
+      "pass": true,
+      "details": {
+        "rows": 55
+      }
+    },
+    {
+      "name": "rows_2023_eq_55",
+      "pass": true,
+      "details": {
+        "rows": 55
+      }
+    },
+    {
+      "name": "associations_2023_unique_55",
+      "pass": true,
+      "details": {
+        "unique": 55
+      }
+    },
+    {
+      "name": "component_sum_2023",
+      "pass": true,
+      "details": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    {
+      "name": "ordering_2023",
+      "pass": true,
+      "details": {
+        "rows": 55
+      }
+    },
+    {
+      "name": "rows_2024_eq_55",
+      "pass": true,
+      "details": {
+        "rows": 55
+      }
+    },
+    {
+      "name": "associations_2024_unique_55",
+      "pass": true,
+      "details": {
+        "unique": 55
+      }
+    },
+    {
+      "name": "component_sum_2024",
+      "pass": true,
+      "details": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    {
+      "name": "ordering_2024",
+      "pass": true,
+      "details": {
+        "rows": 55
+      }
+    },
+    {
+      "name": "rows_2025_eq_55",
+      "pass": true,
+      "details": {
+        "rows": 55
+      }
+    },
+    {
+      "name": "associations_2025_unique_55",
+      "pass": true,
+      "details": {
+        "unique": 55
+      }
+    },
+    {
+      "name": "component_sum_2025",
+      "pass": true,
+      "details": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    {
+      "name": "ordering_2025",
+      "pass": true,
+      "details": {
+        "rows": 55
+      }
+    },
+    {
+      "name": "rows_2026_eq_55",
+      "pass": true,
+      "details": {
+        "rows": 55
+      }
+    },
+    {
+      "name": "associations_2026_unique_55",
+      "pass": true,
+      "details": {
+        "unique": 55
+      }
+    },
+    {
+      "name": "component_sum_2026",
+      "pass": true,
+      "details": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    {
+      "name": "ordering_2026",
+      "pass": true,
+      "details": {
+        "rows": 55
+      }
+    },
+    {
+      "name": "top7_2021_crosscheck",
+      "pass": true,
+      "details": {
+        "actual": [
+          [
+            "ENG",
+            100.569
+          ],
+          [
+            "ESP",
+            97.855
+          ],
+          [
+            "ITA",
+            75.438
+          ],
+          [
+            "GER",
+            73.57
+          ],
+          [
+            "FRA",
+            56.081
+          ],
+          [
+            "POR",
+            48.549
+          ],
+          [
+            "NED",
+            39.2
+          ]
+        ]
+      }
+    },
+    {
+      "name": "top7_2026_crosscheck",
+      "pass": true,
+      "details": {
+        "actual": [
+          [
+            "ENG",
+            119.519
+          ],
+          [
+            "ITA",
+            99.946
+          ],
+          [
+            "ESP",
+            97.046
+          ],
+          [
+            "GER",
+            92.902
+          ],
+          [
+            "FRA",
+            83.498
+          ],
+          [
+            "POR",
+            73.166
+          ],
+          [
+            "NED",
+            67.929
+          ]
+        ]
+      }
+    }
+  ],
+  "failures": []
+}

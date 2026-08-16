@@ -1,0 +1,9 @@
+{
+  "dataset": "fantanexus_uefa_association_coefficients_2021_2026_v0",
+  "freeze_status": "FROZEN",
+  "acquisition_repository": "Sidious92/Fantta-Desk-data-Acquisitions",
+  "acquisition_commit": "da18c1c07a4af75fd36a7480fa153cbc2117a33f",
+  "github_actions_run_id": 31942077548,
+  "source_policy": "Kassiesa UEFA five-year association ranking snapshots 2021-2026; 55 associations per snapshot; audit PASS required",
+  "mutability_policy": "v0 is immutable; changed JSON/CSV requires a new version"
+}
