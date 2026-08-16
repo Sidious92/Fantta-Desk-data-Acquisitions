@@ -1,0 +1,50 @@
+name: Probe Club Elo identities v0
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/nexus-probe-club-identity-v0.mjs'
+      - 'package.json'
+      - '.github/workflows/probe-club-identity-v0.yml'
+      - 'data/frozen/domestic-strength-foreign-v0/**'
+      - 'data/frozen/uefa-club-coefficients-v0/**'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run identity probe
+        run: npm run probe:club-identity
+
+      - name: Show audit
+        if: always()
+        run: |
+          AUDIT='.nexus-club-identity-v0/probe/fantanexus_club_identity_probe_v0_audit.json'
+          if [ -f "$AUDIT" ]; then
+            cat "$AUDIT"
+          fi
+
+      - name: Upload probe artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fantanexus-club-identity-probe-v0
+          path: .nexus-club-identity-v0/probe/
+          if-no-files-found: error
+          retention-days: 30
