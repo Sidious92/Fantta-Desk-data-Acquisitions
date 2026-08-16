@@ -1,0 +1,49 @@
+name: Acquire domestic strength v0
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/nexus-acquire-domestic-strength-v0.mjs'
+      - 'package.json'
+      - '.github/workflows/acquire-domestic-strength-v0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  acquire-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Acquire and audit domestic strength
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: npm run acquire:domestic-strength
+
+      - name: Show audit
+        if: always()
+        run: |
+          if [ -f .nexus-domestic-strength-v0/acquisition/fantanexus_domestic_strength_raw_2021_2026_v0_audit.json ]; then
+            cat .nexus-domestic-strength-v0/acquisition/fantanexus_domestic_strength_raw_2021_2026_v0_audit.json
+          fi
+
+      - name: Upload acquisition artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fantanexus-domestic-strength-v0
+          path: .nexus-domestic-strength-v0/acquisition/
+          if-no-files-found: error
+          retention-days: 30
