@@ -20,6 +20,7 @@
     {"association_code":"ENG","domestic_team":"Nottingham Forest","uefa_club":"Nottingham Forest"},
     {"association_code":"ENG","domestic_team":"Crystal Palace FC","uefa_club":"Crystal Palace"},
     {"association_code":"ENG","domestic_team":"Crystal Palace","uefa_club":"Crystal Palace"},
+    {"association_code":"ENG","domestic_team":"Burnley","uefa_club":"Burnley FC"},
 
     {"association_code":"ESP","domestic_team":"RC Celta de Vigo","uefa_club":"Celta de Vigo"},
     {"association_code":"ESP","domestic_team":"RC Celta","uefa_club":"Celta de Vigo"},
@@ -80,6 +81,7 @@
     {"association_code":"POR","domestic_team":"Sporting CP","uefa_club":"Sporting CP Lisbon"},
     {"association_code":"POR","domestic_team":"Sporting Clube de Portugal","uefa_club":"Sporting CP Lisbon"},
     {"association_code":"POR","domestic_team":"Sport Lisboa e Benfica","uefa_club":"Benfica"},
-    {"association_code":"POR","domestic_team":"Sporting Clube de Braga","uefa_club":"Sporting Braga"}
+    {"association_code":"POR","domestic_team":"Sporting Clube de Braga","uefa_club":"Sporting Braga"},
+    {"association_code":"POR","domestic_team":"CS Marítimo","uefa_club":"Maritimo Funchal"}
   ]
 }
