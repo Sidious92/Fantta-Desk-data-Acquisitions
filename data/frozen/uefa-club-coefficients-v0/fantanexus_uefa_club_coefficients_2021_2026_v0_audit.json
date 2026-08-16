@@ -1,0 +1,353 @@
+{
+  "status": "PASS",
+  "generated_at": "2026-08-16T09:52:29.368Z",
+  "snapshots": {
+    "2021": {
+      "rows": 428,
+      "floor_used": 187,
+      "associations": 55
+    },
+    "2022": {
+      "rows": 433,
+      "floor_used": 181,
+      "associations": 55
+    },
+    "2023": {
+      "rows": 423,
+      "floor_used": 160,
+      "associations": 55
+    },
+    "2024": {
+      "rows": 421,
+      "floor_used": 146,
+      "associations": 55
+    },
+    "2025": {
+      "rows": 427,
+      "floor_used": 154,
+      "associations": 55
+    },
+    "2026": {
+      "rows": 415,
+      "floor_used": 147,
+      "associations": 55
+    }
+  },
+  "checks": [
+    {
+      "name": "rows_2021_gte_150",
+      "pass": true,
+      "details": {
+        "rows": 428
+      }
+    },
+    {
+      "name": "duplicates_2021_zero",
+      "pass": true,
+      "details": {
+        "duplicates": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "coefficient_formula_2021",
+      "pass": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "floor_flag_2021",
+      "pass": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "component_sum_2021",
+      "pass": true,
+      "details": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    {
+      "name": "ordering_2021",
+      "pass": true,
+      "details": {
+        "rows": 428
+      }
+    },
+    {
+      "name": "rows_2022_gte_150",
+      "pass": true,
+      "details": {
+        "rows": 433
+      }
+    },
+    {
+      "name": "duplicates_2022_zero",
+      "pass": true,
+      "details": {
+        "duplicates": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "coefficient_formula_2022",
+      "pass": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "floor_flag_2022",
+      "pass": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "component_sum_2022",
+      "pass": true,
+      "details": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    {
+      "name": "ordering_2022",
+      "pass": true,
+      "details": {
+        "rows": 433
+      }
+    },
+    {
+      "name": "rows_2023_gte_150",
+      "pass": true,
+      "details": {
+        "rows": 423
+      }
+    },
+    {
+      "name": "duplicates_2023_zero",
+      "pass": true,
+      "details": {
+        "duplicates": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "coefficient_formula_2023",
+      "pass": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "floor_flag_2023",
+      "pass": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "component_sum_2023",
+      "pass": true,
+      "details": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    {
+      "name": "ordering_2023",
+      "pass": true,
+      "details": {
+        "rows": 423
+      }
+    },
+    {
+      "name": "rows_2024_gte_150",
+      "pass": true,
+      "details": {
+        "rows": 421
+      }
+    },
+    {
+      "name": "duplicates_2024_zero",
+      "pass": true,
+      "details": {
+        "duplicates": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "coefficient_formula_2024",
+      "pass": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "floor_flag_2024",
+      "pass": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "component_sum_2024",
+      "pass": true,
+      "details": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    {
+      "name": "ordering_2024",
+      "pass": true,
+      "details": {
+        "rows": 421
+      }
+    },
+    {
+      "name": "rows_2025_gte_150",
+      "pass": true,
+      "details": {
+        "rows": 427
+      }
+    },
+    {
+      "name": "duplicates_2025_zero",
+      "pass": true,
+      "details": {
+        "duplicates": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "coefficient_formula_2025",
+      "pass": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "floor_flag_2025",
+      "pass": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "component_sum_2025",
+      "pass": true,
+      "details": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    {
+      "name": "ordering_2025",
+      "pass": true,
+      "details": {
+        "rows": 427
+      }
+    },
+    {
+      "name": "rows_2026_gte_150",
+      "pass": true,
+      "details": {
+        "rows": 415
+      }
+    },
+    {
+      "name": "duplicates_2026_zero",
+      "pass": true,
+      "details": {
+        "duplicates": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "coefficient_formula_2026",
+      "pass": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "floor_flag_2026",
+      "pass": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "component_sum_2026",
+      "pass": true,
+      "details": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    {
+      "name": "ordering_2026",
+      "pass": true,
+      "details": {
+        "rows": 415
+      }
+    },
+    {
+      "name": "top5_2026_official_crosscheck",
+      "pass": true,
+      "details": {
+        "expected": [
+          [
+            "Bayern München",
+            147.5
+          ],
+          [
+            "Real Madrid",
+            144.5
+          ],
+          [
+            "Paris Saint-Germain",
+            132
+          ],
+          [
+            "Liverpool",
+            130
+          ],
+          [
+            "Internazionale",
+            127
+          ]
+        ],
+        "actual": [
+          [
+            "Bayern München",
+            147.5
+          ],
+          [
+            "Real Madrid",
+            144.5
+          ],
+          [
+            "Paris Saint-Germain",
+            132
+          ],
+          [
+            "Liverpool",
+            130
+          ],
+          [
+            "Internazionale",
+            127
+          ]
+        ]
+      }
+    }
+  ],
+  "failures": []
+}

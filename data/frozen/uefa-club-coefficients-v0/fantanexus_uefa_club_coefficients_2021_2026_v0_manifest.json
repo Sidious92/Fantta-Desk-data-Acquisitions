@@ -1,0 +1,36 @@
+{
+  "dataset": "fantanexus_uefa_club_coefficients_2021_2026_v0",
+  "status": "PASS",
+  "generated_at": "2026-08-16T09:52:29.380Z",
+  "snapshot_years": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "rows": 2547,
+  "sources": [
+    "https://kassiesa.net/uefa/data/method5/trank2021.html",
+    "https://kassiesa.net/uefa/data/method5/trank2022.html",
+    "https://kassiesa.net/uefa/data/method5/trank2023.html",
+    "https://kassiesa.net/uefa/data/method5/trank2024.html",
+    "https://kassiesa.net/uefa/data/method5/trank2025.html",
+    "https://kassiesa.net/uefa/data/method5/trank2026.html"
+  ],
+  "files": {
+    "json": {
+      "path": ".nexus-uefa-club-coefficients-v0/acquisition/fantanexus_uefa_club_coefficients_2021_2026_v0.json",
+      "sha256": "252d664facb98a2c231329ebc3df039e69d58af13ca9e1f0a8d485ac204d1294"
+    },
+    "csv": {
+      "path": ".nexus-uefa-club-coefficients-v0/acquisition/fantanexus_uefa_club_coefficients_2021_2026_v0.csv",
+      "sha256": "fb15b7a3a0c8e314c89a130130741a47eb791c7b0fe47f9b88cfb49f8f573c0f"
+    },
+    "audit": {
+      "path": ".nexus-uefa-club-coefficients-v0/acquisition/fantanexus_uefa_club_coefficients_2021_2026_v0_audit.json",
+      "sha256": "a748ff1c06bf93c19e57ee617151267179b14e0fb305ef339e27ac6d89802780"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "dataset": "fantanexus_uefa_club_coefficients_2021_2026_v0",
+  "freeze_status": "FROZEN",
+  "acquisition_repository": "Sidious92/Fantta-Desk-data-Acquisitions",
+  "acquisition_commit": "538de7239a526fd568fa843eb975729992342fcf",
+  "github_actions_run_id": 31940177689,
+  "github_actions_run_attempt": 1,
+  "source_policy": "Kassiesa historical UEFA five-year club coefficient tables; audit PASS required before freeze",
+  "mutability_policy": "v0 is immutable. If reacquisition changes JSON or CSV hashes, workflow fails and a new dataset version is required."
+}
