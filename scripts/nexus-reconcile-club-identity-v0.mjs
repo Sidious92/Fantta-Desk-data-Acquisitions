@@ -4,6 +4,7 @@ import path from 'node:path';
 const DOMESTIC_PATH = 'data/frozen/domestic-strength-foreign-v0/fantanexus_domestic_strength_foreign_raw_2021_2026_v0.json';
 const UEFA_PATH = 'data/frozen/uefa-club-coefficients-v0/fantanexus_uefa_club_coefficients_2021_2026_v0.json';
 const ALIAS_PATH = 'data/mappings/club-identity-domestic-to-uefa-v0.json';
+const NO_HISTORY_PATH = 'data/mappings/club-identity-reviewed-no-uefa-history-v0.json';
 const OUT_DIR = '.nexus-club-identity-v0/reconciliation';
 
 function normalizeSurface(value) {
@@ -58,24 +59,40 @@ async function main() {
   const domestic = JSON.parse(await fs.readFile(DOMESTIC_PATH, 'utf8'));
   const uefa = JSON.parse(await fs.readFile(UEFA_PATH, 'utf8'));
   const aliasRegistry = JSON.parse(await fs.readFile(ALIAS_PATH, 'utf8'));
+  const noHistoryRegistry = JSON.parse(await fs.readFile(NO_HISTORY_PATH, 'utf8'));
 
   const aliases = new Map();
-  const allUefaTargets = new Map();
+  const reviewedNoHistory = new Set();
+  const allUefaTargets = new Set();
+  const globalByAssociation = new Map();
+
   for (const row of uefa) {
-    const key = `${row.association_code}|${row.club}`;
-    allUefaTargets.set(key, true);
+    allUefaTargets.add(`${row.association_code}|${row.club}`);
+    if (!globalByAssociation.has(row.association_code)) globalByAssociation.set(row.association_code, []);
+    globalByAssociation.get(row.association_code).push(row);
   }
 
-  const aliasErrors = [];
+  const registryErrors = [];
   for (const alias of aliasRegistry.aliases) {
     const key = `${alias.association_code}|${alias.domestic_team}`;
-    if (aliases.has(key)) aliasErrors.push(`duplicate alias ${key}`);
+    if (aliases.has(key)) registryErrors.push(`duplicate alias ${key}`);
     aliases.set(key, alias.uefa_club);
     if (!allUefaTargets.has(`${alias.association_code}|${alias.uefa_club}`)) {
-      aliasErrors.push(`target absent from frozen UEFA dataset: ${key} -> ${alias.uefa_club}`);
+      registryErrors.push(`alias target absent from frozen UEFA dataset: ${key} -> ${alias.uefa_club}`);
     }
   }
-  if (aliasErrors.length) throw new Error(aliasErrors.join('\n'));
+
+  for (const item of noHistoryRegistry.clubs) {
+    const key = `${item.association_code}|${item.domestic_team}`;
+    if (reviewedNoHistory.has(key)) registryErrors.push(`duplicate no-history review ${key}`);
+    if (aliases.has(key)) registryErrors.push(`identity is both alias and no-history review: ${key}`);
+    const globalExact = (globalByAssociation.get(item.association_code) ?? [])
+      .some((row) => normalizeSurface(row.club) === normalizeSurface(item.domestic_team));
+    if (globalExact) registryErrors.push(`no-history review has a global exact UEFA surface and should be handled automatically: ${key}`);
+    reviewedNoHistory.add(key);
+  }
+
+  if (registryErrors.length) throw new Error(registryErrors.join('\n'));
 
   const bySnapshotAssociation = new Map();
   for (const row of uefa) {
@@ -87,16 +104,20 @@ async function main() {
   const rows = [];
   for (const domesticRow of domestic) {
     const snapshotYear = snapshotYearForSeason(domesticRow.season);
-    const candidates = bySnapshotAssociation.get(`${snapshotYear}|${domesticRow.association_code}`) ?? [];
+    const association = domesticRow.association_code;
+    const identityKey = `${association}|${domesticRow.team}`;
+    const candidates = bySnapshotAssociation.get(`${snapshotYear}|${association}`) ?? [];
+    const globalCandidates = globalByAssociation.get(association) ?? [];
     const exact = candidates.find((item) => normalizeSurface(item.club) === normalizeSurface(domesticRow.team));
-    const aliasTarget = aliases.get(`${domesticRow.association_code}|${domesticRow.team}`) ?? null;
+    const aliasTarget = aliases.get(identityKey) ?? null;
     const aliasMatch = aliasTarget ? candidates.find((item) => item.club === aliasTarget) : null;
+    const globalExact = globalCandidates.find((item) => normalizeSurface(item.club) === normalizeSurface(domesticRow.team)) ?? null;
 
     if (exact) {
       rows.push({
         season: domesticRow.season,
         snapshot_year: snapshotYear,
-        association_code: domesticRow.association_code,
+        association_code: association,
         competition: domesticRow.competition,
         domestic_team: domesticRow.team,
         status: 'MATCHED',
@@ -114,7 +135,7 @@ async function main() {
       rows.push({
         season: domesticRow.season,
         snapshot_year: snapshotYear,
-        association_code: domesticRow.association_code,
+        association_code: association,
         competition: domesticRow.competition,
         domestic_team: domesticRow.team,
         status: 'MATCHED',
@@ -128,19 +149,52 @@ async function main() {
       continue;
     }
 
-    if (aliasTarget && !aliasMatch) {
-      // The identity relation is reviewed, but this club has no row in this
-      // preseason UEFA coefficient snapshot. That is true no-history for this
-      // snapshot, not an unresolved name match.
+    if (aliasTarget) {
       rows.push({
         season: domesticRow.season,
         snapshot_year: snapshotYear,
-        association_code: domesticRow.association_code,
+        association_code: association,
         competition: domesticRow.competition,
         domestic_team: domesticRow.team,
         status: 'NO_UEFA_HISTORY',
         match_method: 'REVIEWED_ALIAS_TARGET_ABSENT_IN_SNAPSHOT',
         uefa_club: aliasTarget,
+        uefa_club_key: null,
+        coefficient_5y: null,
+        club_points_5y: null,
+        uses_association_floor: null,
+      });
+      continue;
+    }
+
+    if (globalExact) {
+      rows.push({
+        season: domesticRow.season,
+        snapshot_year: snapshotYear,
+        association_code: association,
+        competition: domesticRow.competition,
+        domestic_team: domesticRow.team,
+        status: 'NO_UEFA_HISTORY',
+        match_method: 'GLOBAL_EXACT_SURFACE_ABSENT_IN_SNAPSHOT',
+        uefa_club: globalExact.club,
+        uefa_club_key: null,
+        coefficient_5y: null,
+        club_points_5y: null,
+        uses_association_floor: null,
+      });
+      continue;
+    }
+
+    if (reviewedNoHistory.has(identityKey)) {
+      rows.push({
+        season: domesticRow.season,
+        snapshot_year: snapshotYear,
+        association_code: association,
+        competition: domesticRow.competition,
+        domestic_team: domesticRow.team,
+        status: 'NO_UEFA_HISTORY',
+        match_method: 'REVIEWED_NO_HISTORY_IDENTITY',
+        uefa_club: null,
         uefa_club_key: null,
         coefficient_5y: null,
         club_points_5y: null,
@@ -157,7 +211,7 @@ async function main() {
     rows.push({
       season: domesticRow.season,
       snapshot_year: snapshotYear,
-      association_code: domesticRow.association_code,
+      association_code: association,
       competition: domesticRow.competition,
       domestic_team: domesticRow.team,
       status: 'REVIEW_REQUIRED',
@@ -183,7 +237,14 @@ async function main() {
   const unresolved = [...reviewGroups.values()].sort((a, b) => a.association_code.localeCompare(b.association_code) || a.domestic_team.localeCompare(b.domestic_team, 'en'));
   const counts = Object.fromEntries(['MATCHED','NO_UEFA_HISTORY','REVIEW_REQUIRED'].map((status) => [status, rows.filter((row) => row.status === status).length]));
   const methods = {};
-  for (const row of rows.filter((item) => item.status === 'MATCHED')) methods[row.match_method] = (methods[row.match_method] ?? 0) + 1;
+  for (const row of rows) methods[row.match_method ?? 'NONE'] = (methods[row.match_method ?? 'NONE'] ?? 0) + 1;
+
+  const identityCoverage = new Map();
+  for (const row of rows) {
+    const key = `${row.association_code}|${row.domestic_team}`;
+    if (!identityCoverage.has(key)) identityCoverage.set(key, new Set());
+    identityCoverage.get(key).add(row.status);
+  }
 
   const audit = {
     dataset: 'FantaNexus Club Identity Reconciliation v0',
@@ -193,19 +254,23 @@ async function main() {
       domestic: DOMESTIC_PATH,
       uefa: UEFA_PATH,
       aliases: ALIAS_PATH,
+      reviewed_no_history: NO_HISTORY_PATH,
       domestic_rows: domestic.length,
       uefa_rows: uefa.length,
       reviewed_aliases: aliasRegistry.aliases.length,
+      reviewed_no_history_identities: noHistoryRegistry.clubs.length,
     },
     policy: {
       automatic_match: 'same snapshot + same association + exact normalized surface only',
       alias_match: 'explicit reviewed alias registry only',
-      no_uefa_history: 'assigned automatically only when a reviewed alias target exists globally but is absent from the relevant snapshot; all other misses remain REVIEW_REQUIRED',
+      no_uefa_history: 'reviewed alias/global exact surface absent in relevant snapshot, or explicit reviewed-no-history registry; never inferred from fuzzy similarity',
+      no_history_semantics: 'absence of a usable UEFA coefficient signal in that preseason snapshot, not a claim of no European participation at any point in club history',
       fuzzy_candidates: 'diagnostic only and never promoted automatically',
     },
     rows: rows.length,
     counts,
-    matched_methods: methods,
+    methods,
+    unique_domestic_identities: identityCoverage.size,
     unique_unresolved_identities: unresolved.length,
     by_association: Object.fromEntries([...new Set(rows.map((row) => row.association_code))].sort().map((association) => {
       const subset = rows.filter((row) => row.association_code === association);
@@ -218,7 +283,8 @@ async function main() {
   await fs.writeFile(path.join(OUT_DIR, 'fantanexus_club_identity_reconciliation_v0_unresolved.json'), JSON.stringify(unresolved, null, 2) + '\n');
   await fs.writeFile(path.join(OUT_DIR, 'fantanexus_club_identity_reconciliation_v0_audit.json'), JSON.stringify(audit, null, 2) + '\n');
 
-  process.stderr.write(`Reconciliation: ${counts.MATCHED} MATCHED, ${counts.NO_UEFA_HISTORY} NO_UEFA_HISTORY, ${counts.REVIEW_REQUIRED} REVIEW_REQUIRED (${unresolved.length} unique).\n`);
+  process.stderr.write(`Reconciliation: ${counts.MATCHED} MATCHED, ${counts.NO_UEFA_HISTORY} NO_UEFA_HISTORY, ${counts.REVIEW_REQUIRED} REVIEW_REQUIRED (${unresolved.length} unique). Audit ${audit.status}.\n`);
+  if (audit.status !== 'PASS') process.exitCode = 1;
 }
 
 await main();
