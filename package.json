@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "acquire:uefa-club-coefficients": "node scripts/nexus-acquire-uefa-club-coefficients-v0.mjs"
+    "acquire:uefa-club-coefficients": "node scripts/nexus-acquire-uefa-club-coefficients-v0.mjs",
+    "acquire:domestic-strength": "node scripts/nexus-acquire-domestic-strength-v0.mjs"
   },
   "engines": {
     "node": ">=22"
