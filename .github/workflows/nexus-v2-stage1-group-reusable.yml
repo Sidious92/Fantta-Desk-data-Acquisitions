@@ -1,0 +1,106 @@
+name: Nexus v2 Stage 1 Missing Group
+
+on:
+  workflow_call:
+    inputs:
+      target:
+        required: true
+        type: string
+      group:
+        required: true
+        type: string
+      feature_set:
+        required: true
+        type: string
+    secrets:
+      FANTADESK_READ_TOKEN:
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  stage1-group:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout fixed private authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 360e68d79120038853ed6b330ba8ef95cce0b488
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Verify authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "360e68d79120038853ed6b330ba8ef95cce0b488"
+          test "$(git -C fantadesk-private ls-tree HEAD data/nexus/research-v2/predictive-model-tournament-protocol-v1.json | awk '{print $3}')" = "a4e31637ef855ac85cec90fd002377ceea72b191"
+          echo "fb8d1072498c072fc1e60ff330d97b83fc54849244f9ecf4ff39bbb7de83dab4  fantadesk-private/scripts/nexus-v2-stage1-shard.py" | sha256sum --check --strict
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+
+      - name: Setup exact Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+
+      - name: Install pinned Stage 1 environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --no-cache-dir \
+            numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 \
+            joblib==1.5.3 threadpoolctl==3.6.0 \
+            xgboost==3.1.3 lightgbm==4.6.0 catboost==1.2.8
+          python - <<'PY'
+          import sys,numpy,scipy,sklearn,pandas,joblib,threadpoolctl,xgboost,lightgbm,catboost
+          got={'python':'.'.join(map(str,sys.version_info[:3])),'numpy':numpy.__version__,'scipy':scipy.__version__,'scikit-learn':sklearn.__version__,'pandas':pandas.__version__,'joblib':joblib.__version__,'threadpoolctl':threadpoolctl.__version__,'xgboost':xgboost.__version__,'lightgbm':lightgbm.__version__,'catboost':catboost.__version__}
+          expected={'python':'3.13.5','numpy':'2.3.5','scipy':'1.17.0','scikit-learn':'1.8.0','pandas':'2.2.3','joblib':'1.5.3','threadpoolctl':'3.6.0','xgboost':'3.1.3','lightgbm':'4.6.0','catboost':'1.2.8'}
+          print(got)
+          if got!=expected: raise SystemExit(f'ENVIRONMENT MISMATCH {got} != {expected}')
+          PY
+
+      - name: Materialize exact private inputs
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+
+      - name: Run canonical Stage 1 block
+        shell: bash
+        run: |
+          set -euo pipefail
+          python fantadesk-private/scripts/nexus-v2-stage1-shard.py \
+            "${{ inputs.target }}" "${{ inputs.group }}" "${{ inputs.feature_set }}"
+
+      - name: Validate metrics only
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE="/mnt/data/nexus_v2_predictive_research/model_tournament_stage1_chunks/${{ inputs.target }}-${{ inputs.group }}-${{ inputs.feature_set }}-metrics.csv"
+          test -f "$FILE"
+          mkdir -p stage1-output
+          cp "$FILE" stage1-output/metrics.csv
+          TARGET="${{ inputs.target }}" GROUP="${{ inputs.group }}" FEATURE_SET="${{ inputs.feature_set }}" python - <<'PY'
+          import csv,os
+          target=os.environ['TARGET']; group=os.environ['GROUP']; fs=os.environ['FEATURE_SET']
+          rows=list(csv.DictReader(open('stage1-output/metrics.csv')))
+          expected={'RIDGE_EN':18,'POISSON':9,'BAGGING':18,'BOOST':27 if target=='AVERAGE_VOTE' else 54,'CAT':9 if target=='AVERAGE_VOTE' else 18}[group]
+          if len(rows)!=expected: raise SystemExit(f'ROW COUNT {len(rows)} != {expected}')
+          errors=[r for r in rows if r.get('error')]
+          if errors: raise SystemExit(f'FIT ERRORS: {errors[:3]}')
+          if any(r.get('target')!=target or r.get('feature_set')!=fs for r in rows): raise SystemExit('IDENTITY MISMATCH')
+          print(f'METRICS PASS rows={len(rows)} target={target} group={group} feature_set={fs}')
+          PY
+
+      - name: Upload metrics only
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage1-missing-${{ inputs.target }}-${{ inputs.group }}-${{ inputs.feature_set }}
+          path: stage1-output/metrics.csv
+          if-no-files-found: error
+          retention-days: 7
