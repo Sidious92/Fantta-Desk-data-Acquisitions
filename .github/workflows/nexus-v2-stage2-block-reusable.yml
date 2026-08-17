@@ -1,0 +1,109 @@
+name: Nexus v2 Stage 2 Fine Grid Block
+
+on:
+  workflow_call:
+    inputs:
+      target:
+        required: true
+        type: string
+      family:
+        required: true
+        type: string
+      feature_set:
+        required: true
+        type: string
+    secrets:
+      FANTADESK_READ_TOKEN:
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  block:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout fixed private authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 1ada021888c67c6abc769af138405cf2556baaf4
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Verify scientific authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "1ada021888c67c6abc769af138405cf2556baaf4"
+          echo "bc26953d0f80d386d109e577337cacfa8ba3f7fd5016a6cd48476a82e553e4b6  fantadesk-private/data/nexus/research-v2/stage1/nexus-v2-stage1-selection-summary-v1.json" | sha256sum --check --strict
+          echo "a819a8e894b927609956f47743297b3651d96ec959bfd2e9e27335468341ce96  fantadesk-private/data/nexus/research-v2/stage2/nexus-v2-stage2-fine-grid-protocol-v1.json" | sha256sum --check --strict
+          echo "0ff97273f6ad709dbcf18c5032b382b023423940d7c58e8445fb3f72ab4ac90e  fantadesk-private/scripts/nexus-v2-stage2-block.py" | sha256sum --check --strict
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+
+      - name: Setup exact Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+
+      - name: Install pinned Stage 2 environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --no-cache-dir \
+            numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 \
+            joblib==1.5.3 threadpoolctl==3.6.0 \
+            xgboost==3.1.3 lightgbm==4.6.0 catboost==1.2.8
+          python - <<'PY'
+          import sys,numpy,scipy,sklearn,pandas,joblib,threadpoolctl,xgboost,lightgbm,catboost
+          got={
+            'python':'.'.join(map(str,sys.version_info[:3])),'numpy':numpy.__version__,
+            'scipy':scipy.__version__,'sklearn':sklearn.__version__,'pandas':pandas.__version__,
+            'joblib':joblib.__version__,'threadpoolctl':threadpoolctl.__version__,
+            'xgboost':xgboost.__version__,'lightgbm':lightgbm.__version__,'catboost':catboost.__version__}
+          exp={'python':'3.13.5','numpy':'2.3.5','scipy':'1.17.0','sklearn':'1.8.0','pandas':'2.2.3','joblib':'1.5.3','threadpoolctl':'3.6.0','xgboost':'3.1.3','lightgbm':'4.6.0','catboost':'1.2.8'}
+          print(got)
+          if got!=exp: raise SystemExit(f'ENVIRONMENT MISMATCH {got} != {exp}')
+          PY
+
+      - name: Materialize exact private inputs
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+
+      - name: Run Stage 2 block
+        shell: bash
+        run: |
+          set -euo pipefail
+          python fantadesk-private/scripts/nexus-v2-stage2-block.py \
+            "${{ inputs.target }}" "${{ inputs.family }}" "${{ inputs.feature_set }}"
+
+      - name: Validate sanitized checkpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC="/mnt/data/nexus_v2_predictive_research/stage2_fine_grid/${{ inputs.target }}/${{ inputs.family }}/${{ inputs.feature_set }}.json"
+          test -f "$SRC"
+          mkdir -p stage2-output
+          cp "$SRC" stage2-output/checkpoint.json
+          python - <<'PY'
+          import json
+          p=json.load(open('stage2-output/checkpoint.json'))
+          assert p['status']=='COMPLETE'
+          assert p['no_individual_player_rows'] is True
+          assert 'predictions' not in p
+          assert len(p['results'])==p['fine_path_count']
+          print('checkpoint_validation=PASS')
+          PY
+
+      - name: Upload sanitized Stage 2 block
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage2-${{ inputs.target }}-${{ inputs.family }}-${{ inputs.feature_set }}
+          path: stage2-output/checkpoint.json
+          if-no-files-found: error
+          retention-days: 7
