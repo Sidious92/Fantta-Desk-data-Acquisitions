@@ -1,0 +1,34 @@
+name: Nexus v2 Stage 1 Complete Watch
+
+on:
+  workflow_run:
+    workflows: ["Nexus v2 Stage 1 Complete Missing Fits"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+jobs:
+  publish-status:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Record status only
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .nexus-v2-stage1-complete-status
+          cat > .nexus-v2-stage1-complete-status/RESULT.json <<EOF
+          {
+            "workflow":"Nexus v2 Stage 1 Complete Missing Fits",
+            "run_id":${{ github.event.workflow_run.id }},
+            "conclusion":"${{ github.event.workflow_run.conclusion }}",
+            "head_sha":"${{ github.event.workflow_run.head_sha }}",
+            "updated_at":"$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          EOF
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-v2-stage1-complete-status/RESULT.json
+          git commit -m "ci: record Stage 1 completion status" || exit 0
+          git push
