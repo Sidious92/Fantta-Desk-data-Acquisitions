@@ -1,0 +1,131 @@
+name: Nexus v2 Stage 2 Paired Development
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.nexus-v2-stage2-paired-launch/EXECUTE'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  paired:
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [AVERAGE_VOTE, GOALS, ASSISTS]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout fixed private paired authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 5aa319637f57aa166a7ba706fd2a465571197722
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Verify paired authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "5aa319637f57aa166a7ba706fd2a465571197722"
+          echo "7fc8908cad3d84c0bcbbc949850135f8b8e012a53fef4c84405422009b67a385  fantadesk-private/data/nexus/research-v2/stage2/nexus-v2-stage2-paired-development-protocol-v1.json" | sha256sum --check --strict
+          echo "8e76851382954af32968a7827bf9ac5fd02b2fcda58637048b7b4afee1d1a21b  fantadesk-private/scripts/nexus-v2-stage2-paired-target.py" | sha256sum --check --strict
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+
+      - name: Setup exact Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+
+      - name: Install pinned paired environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --no-cache-dir \
+            numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 \
+            joblib==1.5.3 threadpoolctl==3.6.0 \
+            xgboost==3.1.3 lightgbm==4.6.0 catboost==1.2.8
+
+      - name: Materialize exact private inputs
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+
+      - name: Run paired target comparison
+        shell: bash
+        run: |
+          set -euo pipefail
+          python fantadesk-private/scripts/nexus-v2-stage2-paired-target.py "${{ matrix.target }}"
+
+      - name: Validate sanitized paired summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC="/mnt/data/nexus_v2_predictive_research/stage2_paired/${{ matrix.target }}/summary.json"
+          test -f "$SRC"
+          mkdir -p paired-output
+          cp "$SRC" paired-output/summary.json
+          python - <<'PY'
+          import json
+          p=json.load(open('paired-output/summary.json'))
+          assert p['status']=='PAIRED_DEVELOPMENT_COMPLETE'
+          assert p['no_individual_player_rows'] is True
+          assert p['2025-26']=='NOT_USED'
+          assert len(p['ranking'])>=5
+          print('paired_checkpoint_validation=PASS')
+          PY
+
+      - name: Upload paired target summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: paired-${{ matrix.target }}
+          path: paired-output/summary.json
+          if-no-files-found: error
+          retention-days: 7
+
+  aggregate:
+    needs: paired
+    if: ${{ always() && needs.paired.result == 'success' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Download all paired summaries
+        uses: actions/download-artifact@v5
+        with:
+          pattern: paired-*
+          path: paired-artifacts
+          merge-multiple: false
+
+      - name: Validate 3/3 and aggregate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import glob,json,os
+          files=sorted(glob.glob('paired-artifacts/**/summary.json',recursive=True))
+          if len(files)!=3: raise SystemExit(f'PAIRED_STATUS=INCOMPLETE {len(files)}/3')
+          out={'status':'PAIRED_DEVELOPMENT_COMPLETE','targets':{},'validated_targets':3,'2025-26':'NOT_USED','no_player_rows':True}
+          for fn in files:
+              p=json.load(open(fn))
+              assert p['status']=='PAIRED_DEVELOPMENT_COMPLETE' and p['no_individual_player_rows'] is True
+              out['targets'][p['target']]=p
+          if set(out['targets'])!={'AVERAGE_VOTE','GOALS','ASSISTS'}: raise SystemExit('TARGET SET MISMATCH')
+          os.makedirs('paired-summary',exist_ok=True)
+          json.dump(out,open('paired-summary/paired-development-summary.json','w'),separators=(',',':'))
+          for t,p in out['targets'].items():
+              print(t,'best',p['best_candidate_id'],'tie_group',len(p['tie_group']))
+          PY
+
+      - name: Upload combined paired result
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-stage2-paired-development-summary
+          path: paired-summary/paired-development-summary.json
+          if-no-files-found: error
+          retention-days: 7
