@@ -1,0 +1,30 @@
+name: Nexus v2 Stage 2 Status Watcher
+
+on:
+  workflow_run:
+    workflows: ['Nexus v2 Stage 2 Fine Grid']
+    types: [completed]
+
+permissions:
+  contents: write
+
+jobs:
+  record:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Record Stage 2 status only
+        shell: bash
+        env:
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p .nexus-v2-stage2-status
+          printf '{"workflow":"Nexus v2 Stage 2 Fine Grid","run_id":%s,"conclusion":"%s","head_sha":"%s","updated_at":"%s"}\n' "$RUN_ID" "$CONCLUSION" "$HEAD_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > .nexus-v2-stage2-status/RESULT.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-v2-stage2-status/RESULT.json
+          git commit -m 'ci: record Nexus v2 Stage 2 status' || exit 0
+          git push
