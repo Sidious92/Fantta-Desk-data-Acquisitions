@@ -1,0 +1,124 @@
+name: Nexus v2 Huber Atomic Shard
+
+on:
+  workflow_call:
+    inputs:
+      target:
+        required: true
+        type: string
+      feature_set:
+        required: true
+        type: string
+      level:
+        required: true
+        type: string
+      fold:
+        required: true
+        type: string
+    secrets:
+      FANTADESK_READ_TOKEN:
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  atomic-huber-shard:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout fixed private scientific authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 55043866d86c73c2ac0376a2bef403f06dbbc4e3
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Verify authority and protocol
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "55043866d86c73c2ac0376a2bef403f06dbbc4e3"
+          test "$(git -C fantadesk-private ls-tree HEAD data/nexus/research-v2/predictive-model-tournament-protocol-v1.json | awk '{print $3}')" = "a4e31637ef855ac85cec90fd002377ceea72b191"
+          echo "fb8d1072498c072fc1e60ff330d97b83fc54849244f9ecf4ff39bbb7de83dab4  fantadesk-private/scripts/nexus-v2-stage1-shard.py" | sha256sum --check --strict
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+
+      - name: Setup exact Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+
+      - name: Install pinned Huber environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --no-cache-dir \
+            numpy==2.3.5 \
+            scipy==1.17.0 \
+            scikit-learn==1.8.0 \
+            pandas==2.2.3 \
+            joblib==1.5.3 \
+            threadpoolctl==3.6.0
+          python - <<'PY'
+          import sys, numpy, scipy, sklearn, pandas, joblib, threadpoolctl
+          got = {
+            'python': '.'.join(map(str, sys.version_info[:3])),
+            'numpy': numpy.__version__,
+            'scipy': scipy.__version__,
+            'scikit-learn': sklearn.__version__,
+            'pandas': pandas.__version__,
+            'joblib': joblib.__version__,
+            'threadpoolctl': threadpoolctl.__version__,
+          }
+          expected = {
+            'python':'3.13.5','numpy':'2.3.5','scipy':'1.17.0','scikit-learn':'1.8.0',
+            'pandas':'2.2.3','joblib':'1.5.3','threadpoolctl':'3.6.0'
+          }
+          print(got)
+          if got != expected:
+              raise SystemExit(f'ENVIRONMENT MISMATCH: {got} != {expected}')
+          PY
+
+      - name: Materialize exact private inputs
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+
+      - name: Run one Huber fit only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python fantadesk-private/scripts/nexus-v2-github-huber-shard.py \
+            "${{ inputs.target }}" \
+            "${{ inputs.feature_set }}" \
+            "${{ inputs.level }}" \
+            "${{ inputs.fold }}"
+
+      - name: Prepare sanitized checkpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC="/mnt/data/nexus_v2_predictive_research/model_tournament_stage1_atomic_shards/${{ inputs.target }}/HUBER/${{ inputs.feature_set }}/${{ inputs.level }}/${{ inputs.fold }}/checkpoint.json"
+          test -f "$SRC"
+          mkdir -p shard-output
+          cp "$SRC" shard-output/checkpoint.json
+          python - <<'PY'
+          import json
+          p=json.load(open('shard-output/checkpoint.json'))
+          assert p['status']=='COMPLETE'
+          assert 'predictions' not in p
+          assert p['audit']['no_individual_player_rows_in_checkpoint'] is True
+          print('checkpoint_validation=PASS')
+          PY
+
+      - name: Upload sanitized shard checkpoint
+        uses: actions/upload-artifact@v4
+        with:
+          name: huber-${{ inputs.target }}-${{ inputs.feature_set }}-${{ inputs.level }}-${{ inputs.fold }}
+          path: shard-output/checkpoint.json
+          if-no-files-found: error
+          retention-days: 7
