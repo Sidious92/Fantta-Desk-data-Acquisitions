@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: Sidious92/FantaDesk
-          ref: 9b0d9544366affc2db28a4897bbab190467bbd1f
+          ref: 88f82ed3a915c105e1694ef492ce818cf868b9f1
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: fantadesk-private
           persist-credentials: false
@@ -32,10 +32,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git -C fantadesk-private rev-parse HEAD)" = "9b0d9544366affc2db28a4897bbab190467bbd1f"
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "88f82ed3a915c105e1694ef492ce818cf868b9f1"
           echo "7fc8908cad3d84c0bcbbc949850135f8b8e012a53fef4c84405422009b67a385  fantadesk-private/data/nexus/research-v2/stage2/nexus-v2-stage2-paired-development-protocol-v1.json" | sha256sum --check --strict
           echo "8e76851382954af32968a7827bf9ac5fd02b2fcda58637048b7b4afee1d1a21b  fantadesk-private/scripts/nexus-v2-stage2-paired-target.py" | sha256sum --check --strict
-          test -f fantadesk-private/scripts/nexus-v2-stage2-paired-target-runner.py
+          test -f fantadesk-private/scripts/nexus-v2-stage2-paired-target-runner-v2.py
           sudo mkdir -p /mnt/data
           sudo chown "$USER":"$USER" /mnt/data
 
@@ -63,7 +63,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python fantadesk-private/scripts/nexus-v2-stage2-paired-target-runner.py "${{ matrix.target }}"
+          python fantadesk-private/scripts/nexus-v2-stage2-paired-target-runner-v2.py "${{ matrix.target }}"
 
       - name: Validate sanitized paired summary
         shell: bash
