@@ -1,0 +1,136 @@
+name: Nexus v2 Stage 2 Fine Grid
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.nexus-v2-stage2-launch/EXECUTE'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      expected_blocks: ${{ steps.plan.outputs.expected_blocks }}
+      expected_configs: ${{ steps.plan.outputs.expected_configs }}
+      expected_target_configs: ${{ steps.plan.outputs.expected_target_configs }}
+    steps:
+      - name: Checkout fixed private Stage 2 authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 1ada021888c67c6abc769af138405cf2556baaf4
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+      - id: plan
+        name: Build matrix only from private precommit
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os
+          p=json.load(open('fantadesk-private/data/nexus/research-v2/stage2/nexus-v2-stage2-fine-grid-protocol-v1.json'))
+          assert p['status']=='PRECOMMITTED_BEFORE_STAGE2_RESULTS'
+          rows=[]; counts={}; total=0
+          for target,fams in p['finalists'].items():
+              counts[target]=0
+              for fam in fams:
+                  ncfg=4 if fam in {'EXTRA_TREES','RANDOM_FOREST'} else 5
+                  for fs in p['feature_sets']:
+                      rows.append({'target':target,'family':fam,'feature_set':fs})
+                      counts[target]+=ncfg; total+=ncfg
+          assert len(rows)==72, len(rows)
+          assert counts=={'AVERAGE_VOTE':120,'GOALS':120,'ASSISTS':104}, counts
+          out=os.environ['GITHUB_OUTPUT']
+          with open(out,'a') as f:
+              f.write('matrix='+json.dumps(rows,separators=(',',':'))+'\n')
+              f.write('expected_blocks=72\n')
+              f.write(f'expected_configs={total}\n')
+              f.write('expected_target_configs='+json.dumps(counts,separators=(',',':'))+'\n')
+          print('STAGE2 PLAN PASS blocks=72 configs=',total)
+          PY
+
+  blocks:
+    needs: plan
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        include: ${{ fromJson(needs.plan.outputs.matrix) }}
+    uses: ./.github/workflows/nexus-v2-stage2-block-reusable.yml
+    with:
+      target: ${{ matrix.target }}
+      family: ${{ matrix.family }}
+      feature_set: ${{ matrix.feature_set }}
+    secrets:
+      FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+
+  aggregate:
+    needs: [plan, blocks]
+    if: ${{ always() && needs.plan.result == 'success' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Download every Stage 2 block
+        uses: actions/download-artifact@v5
+        with:
+          pattern: stage2-*
+          path: stage2-artifacts
+          merge-multiple: false
+
+      - name: Validate completeness and rank
+        env:
+          EXPECTED_BLOCKS: ${{ needs.plan.outputs.expected_blocks }}
+          EXPECTED_CONFIGS: ${{ needs.plan.outputs.expected_configs }}
+          EXPECTED_TARGET_CONFIGS: ${{ needs.plan.outputs.expected_target_configs }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import glob,json,os,math
+          files=sorted(glob.glob('stage2-artifacts/**/checkpoint.json',recursive=True))
+          eb=int(os.environ['EXPECTED_BLOCKS']); ec=int(os.environ['EXPECTED_CONFIGS']); etc=json.loads(os.environ['EXPECTED_TARGET_CONFIGS'])
+          if len(files)!=eb: raise SystemExit(f'BLOCK_STATUS=INCOMPLETE blocks={len(files)}/{eb}')
+          blocks=[]; flat=[]; identities=set(); target_counts={k:0 for k in etc}
+          for fn in files:
+              p=json.load(open(fn))
+              if p.get('status')!='COMPLETE' or p.get('no_individual_player_rows') is not True: raise SystemExit(f'INVALID BLOCK {fn}')
+              ident=(p['target'],p['family'],p['feature_set'])
+              if ident in identities: raise SystemExit(f'DUPLICATE BLOCK {ident}')
+              identities.add(ident); blocks.append(ident)
+              if len(p['results'])!=p['fine_path_count']: raise SystemExit(f'PARTIAL BLOCK {ident}')
+              for r in p['results']:
+                  q={'target':p['target'],'family':p['family'],'feature_set':p['feature_set'],'path_point':r['path_point'],'params':r['params'],'param_hash':r['param_hash'],'pooled':r['pooled'],'folds':r['folds'],'fold_mae_mean':r['fold_mae_mean'],'fold_mae_sd':r['fold_mae_sd'],'warning_count':r['warning_count']}
+                  flat.append(q); target_counts[p['target']]+=1
+          if len(flat)!=ec: raise SystemExit(f'CONFIG_STATUS=INCOMPLETE configs={len(flat)}/{ec}')
+          if target_counts!=etc: raise SystemExit(f'TARGET_CONFIG_MISMATCH {target_counts} != {etc}')
+          rankings={}; family_best={}; top10={}
+          for target in etc:
+              rr=[x for x in flat if x['target']==target]
+              rr.sort(key=lambda x:(x['pooled']['mae'],x['pooled']['rmse'],abs(x['pooled']['bias']),x['fold_mae_sd']))
+              for i,x in enumerate(rr,1): x['stage2_rank']=i
+              rankings[target]=rr
+              fb=[]
+              for fam in sorted({x['family'] for x in rr}):
+                  fb.append(next(x for x in rr if x['family']==fam))
+              fb.sort(key=lambda x:(x['pooled']['mae'],x['pooled']['rmse']))
+              family_best[target]=fb; top10[target]=rr[:10]
+          out={'status':'STAGE2_FINE_GRID_COMPLETE','expected_blocks':eb,'validated_blocks':len(files),'expected_configs':ec,'validated_configs':len(flat),'target_config_counts':target_counts,'top10':top10,'family_best':family_best,'rankings':rankings,'no_player_rows':True}
+          os.makedirs('stage2-summary',exist_ok=True)
+          json.dump(out,open('stage2-summary/stage2-summary.json','w'),separators=(',',':'))
+          print('STAGE2 AGGREGATE PASS blocks',len(files),'configs',len(flat))
+          for t in rankings:
+              w=rankings[t][0]
+              print(t,'#1',w['family'],w['feature_set'],w['path_point'],'MAE',w['pooled']['mae'],'RMSE',w['pooled']['rmse'])
+          PY
+
+      - name: Upload sanitized Stage 2 summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-stage2-fine-grid-summary
+          path: stage2-summary/stage2-summary.json
+          if-no-files-found: error
+          retention-days: 7
