@@ -1,0 +1,145 @@
+name: Nexus v2 Stage 1 Complete Missing Fits
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .nexus-v2-stage1-complete-launch/EXECUTE
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - id: plan
+        shell: python
+        run: |
+          import json,os
+          fs=['FC_LAG5','ALL_LEAGUE_LAG5','FC_PLUS_ALL_LAG5','FULL_SPLIT_LAG5','FULL_ALL_LAG5','FULL_LAG1','FULL_LAG12','FULL_LAG123']
+          include=[]
+          # AV: Ridge/ElasticNet/Huber/Bagging complete locally; BOOST complete only for first two feature sets.
+          for f in fs[2:]: include.append({'target':'AVERAGE_VOTE','group':'BOOST','feature_set':f})
+          for f in fs: include.append({'target':'AVERAGE_VOTE','group':'CAT','feature_set':f})
+          # GOALS/ASSISTS: Huber complete in run 32077595454; all remaining groups are missing.
+          for target in ['GOALS','ASSISTS']:
+              for group in ['RIDGE_EN','POISSON','BAGGING','BOOST','CAT']:
+                  for f in fs: include.append({'target':target,'group':group,'feature_set':f})
+          assert len(include)==94
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+              out.write('matrix='+json.dumps({'include':include},separators=(',',':'))+'\n')
+          print('missing_block_jobs=94')
+
+  missing:
+    needs: plan
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    uses: ./.github/workflows/nexus-v2-stage1-group-reusable.yml
+    with:
+      target: ${{ matrix.target }}
+      group: ${{ matrix.group }}
+      feature_set: ${{ matrix.feature_set }}
+    secrets: inherit
+
+  baselines:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout fixed private authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 360e68d79120038853ed6b330ba8ef95cce0b488
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+      - name: Setup exact Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+      - name: Install pinned baseline environment
+        shell: bash
+        run: python -m pip install --no-cache-dir numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 joblib==1.5.3 threadpoolctl==3.6.0
+      - name: Materialize exact private inputs
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+          bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+      - name: Run canonical baselines
+        shell: bash
+        run: python fantadesk-private/scripts/nexus-v2-stage1-baselines.py
+      - name: Validate baselines
+        shell: bash
+        run: |
+          mkdir -p baseline-output
+          cp /mnt/data/nexus_v2_predictive_research/model_tournament_stage1_baselines_metrics.json baseline-output/baselines.json
+          python - <<'PY'
+          import json
+          p=json.load(open('baseline-output/baselines.json'))
+          assert len(p)==18
+          assert {(r['target'],r['family'],r['test_season']) for r in p} and all(r['family'] in {'ROLE_MEAN','TARGET_PERSISTENCE'} for r in p)
+          print('BASELINE VALIDATION PASS rows=18')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stage1-baselines
+          path: baseline-output/baselines.json
+          if-no-files-found: error
+          retention-days: 7
+
+  aggregate:
+    if: ${{ always() }}
+    needs: [missing, baselines]
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Download missing-fit metrics
+        uses: actions/download-artifact@v4
+        with:
+          pattern: stage1-missing-*
+          path: missing-metrics
+      - name: Download baseline metrics
+        uses: actions/download-artifact@v4
+        with:
+          name: stage1-baselines
+          path: baseline-metrics
+      - name: Validate full missing surface
+        shell: python
+        run: |
+          import csv,json,pathlib,sys
+          files=list(pathlib.Path('missing-metrics').rglob('metrics.csv'))
+          rows=[]; errors=[]
+          for f in files:
+              try:
+                  rr=list(csv.DictReader(open(f)))
+                  rows.extend(rr)
+                  errors.extend([{'file':str(f),'row':r} for r in rr if r.get('error')])
+              except Exception as e: errors.append({'file':str(f),'error':repr(e)})
+          baselines=json.load(open('baseline-metrics/baselines.json')) if pathlib.Path('baseline-metrics/baselines.json').exists() else []
+          complete=(len(files)==94 and len(rows)==2106 and len(baselines)==18 and not errors)
+          pathlib.Path('stage1-complete-output').mkdir(exist_ok=True)
+          status={'block_status':'COMPLETE' if complete else 'INCOMPLETE','expected_metric_artifacts':94,'metric_artifacts':len(files),'expected_missing_fit_rows':2106,'missing_fit_rows':len(rows),'expected_baseline_rows':18,'baseline_rows':len(baselines),'errors':errors}
+          json.dump(status,open('stage1-complete-output/status.json','w'),indent=2)
+          if not complete:
+              print(json.dumps(status,indent=2)); raise SystemExit('STAGE1 MISSING SURFACE INCOMPLETE')
+          fields=list(rows[0].keys())
+          with open('stage1-complete-output/missing-fit-metrics.csv','w',newline='') as out:
+              w=csv.DictWriter(out,fieldnames=fields); w.writeheader(); w.writerows(rows)
+          json.dump(baselines,open('stage1-complete-output/baselines.json','w'),indent=2)
+          print('STAGE1 MISSING SURFACE COMPLETE rows=2106 baseline_rows=18 artifacts=94')
+      - name: Upload consolidated missing Stage 1 metrics
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-stage1-missing-complete
+          path: stage1-complete-output/
+          if-no-files-found: error
+          retention-days: 7
