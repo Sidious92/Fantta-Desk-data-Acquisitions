@@ -1,0 +1,137 @@
+name: Nexus v2 Huber Tournament
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .nexus-v2-huber-tournament-launch/EXECUTE
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  smoke:
+    uses: ./.github/workflows/nexus-v2-huber-single-reusable.yml
+    with:
+      target: GOALS
+      feature_set: FC_LAG5
+      level: LOW
+      fold: 2022-23
+    secrets: inherit
+
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - id: plan
+        shell: python
+        run: |
+          import json, os
+          targets=['GOALS','ASSISTS']
+          feature_sets=['FC_LAG5','ALL_LEAGUE_LAG5','FC_PLUS_ALL_LAG5','FULL_SPLIT_LAG5','FULL_ALL_LAG5','FULL_LAG1','FULL_LAG12','FULL_LAG123']
+          levels=['LOW','MEDIUM','HIGH']
+          folds=['2022-23','2023-24','2024-25']
+          smoke=('GOALS','FC_LAG5','LOW','2022-23')
+          include=[]
+          for t in targets:
+              for f in feature_sets:
+                  for l in levels:
+                      for s in folds:
+                          if (t,f,l,s) != smoke:
+                              include.append({'target':t,'feature_set':f,'level':l,'fold':s})
+          assert len(include)==143
+          matrix=json.dumps({'include':include},separators=(',',':'))
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+              out.write('matrix='+matrix+'\n')
+          print('planned_shards=143 plus smoke=1 total=144')
+
+  shards:
+    needs: [smoke, plan]
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    uses: ./.github/workflows/nexus-v2-huber-single-reusable.yml
+    with:
+      target: ${{ matrix.target }}
+      feature_set: ${{ matrix.feature_set }}
+      level: ${{ matrix.level }}
+      fold: ${{ matrix.fold }}
+    secrets: inherit
+
+  aggregate:
+    if: ${{ always() }}
+    needs: [smoke, shards]
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Download every completed shard checkpoint
+        uses: actions/download-artifact@v4
+        with:
+          pattern: huber-*
+          path: checkpoints
+
+      - name: Validate completeness and rank only if 144/144
+        shell: python
+        run: |
+          import json, math, pathlib, collections, sys
+          files=list(pathlib.Path('checkpoints').rglob('checkpoint.json'))
+          expected=144
+          payloads=[]
+          identities=set()
+          errors=[]
+          for f in files:
+              try:
+                  p=json.load(open(f))
+                  ident=p.get('identity',{})
+                  key=(ident.get('target'),ident.get('model'),ident.get('feature_set'),ident.get('level'),ident.get('fold'))
+                  if p.get('status')!='COMPLETE': errors.append(f'{f}: status != COMPLETE')
+                  if key in identities: errors.append(f'duplicate {key}')
+                  identities.add(key)
+                  payloads.append(p)
+              except Exception as e:
+                  errors.append(f'{f}: {e!r}')
+          complete=(len(files)==expected and len(payloads)==expected and len(identities)==expected and not errors)
+          summary={'block_status':'COMPLETE' if complete else 'INCOMPLETE','expected_shards':expected,'validated_complete_shards':len(payloads) if not errors else len(payloads)-len(errors),'errors':errors}
+          pathlib.Path('tournament-output').mkdir(exist_ok=True)
+          if not complete:
+              json.dump(summary,open('tournament-output/huber-tournament-status.json','w'),indent=2)
+              print(json.dumps(summary,indent=2))
+              raise SystemExit('BLOCK_STATUS=INCOMPLETE; ranking forbidden')
+
+          groups=collections.defaultdict(list)
+          for p in payloads:
+              i=p['identity']; groups[(i['target'],i['feature_set'],i['level'])].append(p)
+          rankings={}
+          for target in ['GOALS','ASSISTS']:
+              rows=[]
+              for (t,fs,level), ps in groups.items():
+                  if t!=target: continue
+                  if len(ps)!=3: raise SystemExit(f'Incomplete config {t}/{fs}/{level}: {len(ps)}/3')
+                  n=sum(x['metrics']['n'] for x in ps)
+                  mae=sum(x['metrics']['n']*x['metrics']['mae'] for x in ps)/n
+                  rmse=math.sqrt(sum(x['metrics']['n']*(x['metrics']['rmse']**2) for x in ps)/n)
+                  bias=sum(x['metrics']['n']*x['metrics']['bias'] for x in ps)/n
+                  warnings=sum(len(x.get('warnings',[])) for x in ps)
+                  conv_warn=sum(x.get('convergence',{}).get('convergence_warning_count',0) for x in ps)
+                  fit_seconds=sum(x['audit']['fit_elapsed_seconds'] for x in ps)
+                  rows.append({'target':target,'feature_set':fs,'level':level,'folds':3,'n':n,'mae':mae,'rmse':rmse,'bias':bias,'abs_bias':abs(bias),'warning_count':warnings,'convergence_warning_count':conv_warn,'fit_seconds_total':fit_seconds})
+              rows.sort(key=lambda r:(r['mae'],r['rmse'],r['abs_bias'],r['feature_set'],r['level']))
+              for idx,r in enumerate(rows,1): r['huber_rank']=idx
+              rankings[target]=rows
+          summary['rankings']=rankings
+          summary['winner_by_target']={t: rankings[t][0] for t in rankings}
+          json.dump(summary,open('tournament-output/huber-tournament-summary.json','w'),indent=2)
+          print('BLOCK_STATUS=COMPLETE')
+          print('validated_complete_shards=144')
+          print(json.dumps(summary['winner_by_target'],indent=2))
+
+      - name: Upload Huber tournament summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-huber-tournament-summary
+          path: tournament-output/
+          if-no-files-found: error
+          retention-days: 7
