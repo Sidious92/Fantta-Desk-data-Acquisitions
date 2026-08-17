@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: Sidious92/FantaDesk
-          ref: 9d24975d74eeaa78e56723889d22fb68b9e1d9aa
+          ref: d72a60e5768d5e6c6dda9b455a67cfea7cd671aa
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: fantadesk-private
           persist-credentials: false
@@ -40,7 +40,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git -C fantadesk-private rev-parse HEAD)" = "9d24975d74eeaa78e56723889d22fb68b9e1d9aa"
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "d72a60e5768d5e6c6dda9b455a67cfea7cd671aa"
           test "$(git -C fantadesk-private ls-tree HEAD data/nexus/research-v2/predictive-model-tournament-protocol-v1.json | awk '{print $3}')" = "a4e31637ef855ac85cec90fd002377ceea72b191"
           echo "fb8d1072498c072fc1e60ff330d97b83fc54849244f9ecf4ff39bbb7de83dab4  fantadesk-private/scripts/nexus-v2-stage1-shard.py" | sha256sum --check --strict
           sudo mkdir -p /mnt/data
@@ -92,7 +92,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python fantadesk-private/scripts/nexus-v2-github-huber-shard-v2.py \
+          python fantadesk-private/scripts/nexus-v2-github-huber-shard-v3.py \
             "${{ inputs.target }}" \
             "${{ inputs.feature_set }}" \
             "${{ inputs.level }}" \
