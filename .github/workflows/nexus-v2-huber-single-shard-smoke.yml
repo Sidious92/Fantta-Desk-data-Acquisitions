@@ -1,0 +1,217 @@
+name: Nexus v2 Huber Single-Shard Smoke
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  single-huber-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      AUTHORITY_REPO: Sidious92/FantaDesk
+      AUTHORITY_SHA: c715f12e24054653f4e0cbcc619ba561780755fb
+      SCRIPT_COMMIT_SHA: aa366f7a8def29941a682bc4fdc5f5ee596f5f17
+      SCRIPT_SHA256: fb8d1072498c072fc1e60ff330d97b83fc54849244f9ecf4ff39bbb7de83dab4
+      PROTOCOL_BLOB_SHA: 0392ed46325064d0e38c274c9c365b4283cf977c
+      DATASET_HASH: ff8e952e0e48015ef06a51ffacb5bb6d9ffc7e66d50b27e79acd51b69e93a385
+      SPLIT_HASH: 7cad8d589475e3899ae1d463707ed28e8be79feeba375a844a3d5feb52e9cb5c
+      FEATURE_HASH: dc7e6a406e3dfc3d5ca031d62ca9e2ab522293edeb4940abb161e30e5c520b32
+      CONFIG_HASH: 2eb8193fc6eac838cb97fc2cfe60d86ae354c0ad6adbeb801c37b414e356f6c7
+      ART_FULL_ID: '9162966124'
+      ART_FULL_SHA256: 1a47f252091004902578e88db37b04ea2eb1dc7e275326cd8b99f657cfdff27e
+      ART_PREP_ID: '9162967092'
+      ART_PREP_SHA256: 555e012b8e992d04a088aa5809c20b6efc023aa442bbf6a904435df17038d721
+      ART_BENCH_ID: '9120837492'
+      ART_BENCH_SHA256: 5031c4577d431d78091fb0c173548f238acd18811048fcbf1ccb7e5b94f07055
+      ART_C18_ID: '9177914691'
+      ART_C18_SHA256: 0a53a77b048e38dc86be2888d516f0db1dd95bc7648a4b73d9cba41e1740cb29
+      UNDERSTAT_COMMIT: 768b7ca0b977a5e6b4b429c7b0cf750e8269f2fc
+      UNDERSTAT_CSV_SHA256: b78fad5f01844a0fdab0d89474dafba9b86c586d2f0ce88f0ce2c9af70d2bc64
+
+    steps:
+      - name: Start job clock
+        shell: bash
+        run: echo "JOB_START_EPOCH=$(date +%s)" >> "$GITHUB_ENV"
+
+      - name: Checkout public runner
+        uses: actions/checkout@v6
+
+      - name: Checkout fixed private scientific authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: c715f12e24054653f4e0cbcc619ba561780755fb
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Verify scientific provenance before any data work
+        shell: bash
+        run: |
+          set -euo pipefail
+          ACTUAL_SHA=$(git -C fantadesk-private rev-parse HEAD)
+          test "$ACTUAL_SHA" = "$AUTHORITY_SHA"
+          PROTO_BLOB=$(git -C fantadesk-private ls-tree "$AUTHORITY_SHA" data/nexus/research-v2/predictive-model-tournament-protocol-v1.json | awk '{print $3}')
+          test "$PROTO_BLOB" = "$PROTOCOL_BLOB_SHA"
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+          cp fantadesk-private/scripts/nexus-v2-stage1-shard.py /mnt/data/nexus_v2_stage1_shard.py
+          echo "$SCRIPT_SHA256  /mnt/data/nexus_v2_stage1_shard.py" | sha256sum --check --strict
+          echo "repository_authority=$AUTHORITY_REPO"
+          echo "authority_commit_sha=$ACTUAL_SHA"
+          echo "script_commit_sha=$SCRIPT_COMMIT_SHA"
+          echo "script_sha256=$SCRIPT_SHA256"
+          echo "protocol_blob_sha=$PROTO_BLOB_SHA"
+
+      - name: Setup exact Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+          cache: 'pip'
+
+      - name: Install pinned scientific environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python --version
+          python -m pip install --no-cache-dir \
+            numpy==2.3.5 \
+            scipy==1.17.0 \
+            scikit-learn==1.8.0 \
+            pandas==2.2.3 \
+            joblib==1.5.3 \
+            threadpoolctl==3.6.0
+          python - <<'PY'
+          import sys, json, numpy, scipy, sklearn, pandas, joblib, threadpoolctl
+          got = {
+            'python': '.'.join(map(str, sys.version_info[:3])),
+            'numpy': numpy.__version__,
+            'scipy': scipy.__version__,
+            'scikit-learn': sklearn.__version__,
+            'pandas': pandas.__version__,
+            'joblib': joblib.__version__,
+            'threadpoolctl': threadpoolctl.__version__,
+          }
+          expected = {
+            'python': '3.13.5', 'numpy': '2.3.5', 'scipy': '1.17.0',
+            'scikit-learn': '1.8.0', 'pandas': '2.2.3',
+            'joblib': '1.5.3', 'threadpoolctl': '3.6.0',
+          }
+          print(json.dumps(got, sort_keys=True))
+          if got != expected:
+              raise SystemExit(f'ENVIRONMENT MISMATCH: {got} != {expected}')
+          print('threadpool_info=' + json.dumps(threadpoolctl.threadpool_info(), sort_keys=True))
+          PY
+          python -m pip freeze
+
+      - name: Download exact private source artifacts
+        shell: bash
+        env:
+          PRIVATE_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nexus-artifacts
+          fetch_artifact() {
+            local id="$1" expected="$2" out="$3"
+            curl --fail --silent --show-error --location \
+              -H "Authorization: Bearer ${PRIVATE_TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${AUTHORITY_REPO}/actions/artifacts/${id}/zip" \
+              -o "$out"
+            echo "${expected}  ${out}" | sha256sum --check --strict
+          }
+          fetch_artifact "$ART_FULL_ID" "$ART_FULL_SHA256" /tmp/nexus-artifacts/full.zip
+          fetch_artifact "$ART_PREP_ID" "$ART_PREP_SHA256" /tmp/nexus-artifacts/prepared.zip
+          fetch_artifact "$ART_BENCH_ID" "$ART_BENCH_SHA256" /tmp/nexus-artifacts/benchmark.zip
+          fetch_artifact "$ART_C18_ID" "$ART_C18_SHA256" /tmp/nexus-artifacts/c18.zip
+          unset PRIVATE_TOKEN
+
+      - name: Materialize private inputs on ephemeral runner only
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=/mnt/data/nexus_v2_predictive_research/source_artifacts
+          mkdir -p "$ROOT/nexus-fantasy-history-v2" \
+                   "$ROOT/nexus-fantasy-history-prepared-v1" \
+                   "$ROOT/nexus-legacy-preseason-benchmark" \
+                   "$ROOT/nexus-preseason-cutoff-2018-prepared-v2"
+          unzip -q /tmp/nexus-artifacts/full.zip -d "$ROOT/nexus-fantasy-history-v2"
+          unzip -q /tmp/nexus-artifacts/prepared.zip -d "$ROOT/nexus-fantasy-history-prepared-v1"
+          unzip -q /tmp/nexus-artifacts/benchmark.zip -d "$ROOT/nexus-legacy-preseason-benchmark"
+          unzip -q /tmp/nexus-artifacts/c18.zip -d "$ROOT/nexus-preseason-cutoff-2018-prepared-v2"
+
+          curl --fail --silent --show-error --location \
+            "https://raw.githubusercontent.com/vibedatascience/understat_players_aggregated/${UNDERSTAT_COMMIT}/understat_players_aggregated_2014_2024.csv" \
+            -o /tmp/understat_players_aggregated_2014_2024.csv
+          echo "$UNDERSTAT_CSV_SHA256  /tmp/understat_players_aggregated_2014_2024.csv" | sha256sum --check --strict
+          python - <<'PY'
+          import zipfile
+          src='/tmp/understat_players_aggregated_2014_2024.csv'
+          out='/mnt/data/understat_players_aggregated-main(1).zip'
+          with zipfile.ZipFile(out, 'w', compression=zipfile.ZIP_DEFLATED) as z:
+              z.write(src, arcname='understat_players_aggregated_2014_2024.csv')
+          PY
+
+      - name: Reproduce canonical panel and enforce dataset hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          python fantadesk-private/scripts/nexus-v2-rebuild-core-panel.py
+          PANEL=/mnt/data/nexus_v2_predictive_research/audit_v1/core-player-season-panel.csv
+          echo "$DATASET_HASH  $PANEL" | sha256sum --check --strict
+          echo "dataset_hash=PASS"
+
+      - name: Run exactly one atomic Huber fit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python fantadesk-private/scripts/nexus-v2-github-huber-smoke.py
+
+      - name: Validate sanitized checkpoint and record job timing
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHECKPOINT=/mnt/data/nexus_v2_predictive_research/model_tournament_stage1_atomic_shards/GOALS/HUBER/FC_LAG5/LOW/2022-23/checkpoint.json
+          test -f "$CHECKPOINT"
+          mkdir -p smoke-output
+          cp "$CHECKPOINT" smoke-output/checkpoint.json
+          python - <<'PY'
+          import json, os, time
+          p=json.load(open('smoke-output/checkpoint.json'))
+          assert p['status']=='COMPLETE'
+          assert 'predictions' not in p
+          assert p['audit']['no_individual_player_rows_in_checkpoint'] is True
+          assert p['audit']['train_rows']==432
+          assert p['audit']['test_rows']==494
+          assert p['audit']['feature_count_numeric']==20
+          assert p['hashes']['dataset_hash']==os.environ['DATASET_HASH']
+          assert p['hashes']['split_hash']==os.environ['SPLIT_HASH']
+          assert p['hashes']['feature_hash']==os.environ['FEATURE_HASH']
+          assert p['hashes']['config_hash']==os.environ['CONFIG_HASH']
+          assert p['hashes']['script_sha256']==os.environ['SCRIPT_SHA256']
+          total=int(time.time())-int(os.environ['JOB_START_EPOCH'])
+          summary={
+            'status':'PASS',
+            'total_job_seconds_at_validation':total,
+            'fit_elapsed_seconds':p['audit']['fit_elapsed_seconds'],
+            'convergence':p['convergence'],
+            'warnings':p['warnings'],
+            'checkpoint_contains_individual_rows':False,
+          }
+          json.dump(summary,open('smoke-output/job-summary.json','w'),indent=2)
+          print('checkpoint_validation=PASS')
+          print('warnings=' + json.dumps(p['warnings']))
+          print('total_job_seconds_at_validation=' + str(total))
+          PY
+
+      - name: Upload smoke verification only
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-huber-smoke-goals-fc-lag5-low-2022-23
+          path: smoke-output/
+          if-no-files-found: error
+          retention-days: 7
