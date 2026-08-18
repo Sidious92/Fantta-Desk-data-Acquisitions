@@ -1,0 +1,217 @@
+{
+  "workflow": "Nexus Fantasy EFL Public JSON v1",
+  "job_status": "success",
+  "run_id": 32184458243,
+  "manifest": {
+    "schema": "NEXUS_FANTASY_EFL_PUBLIC_JSON_V1",
+    "status": "PASS",
+    "capture_started": "2026-08-18T20:50:14.837020+00:00",
+    "capture_completed": "2026-08-18T20:52:31.284170+00:00",
+    "public_json_base": "https://fantasy.efl.com/json/",
+    "coverage": {
+      "players": 3461,
+      "squads": 72,
+      "competitions": 3,
+      "seasons": 3,
+      "rounds": 42,
+      "player_profiles_ok": 3461,
+      "player_profile_errors": 0,
+      "player_profile_success_rate": 1.0,
+      "player_profile_result_rows": 1978,
+      "live_rounds_ok": 42,
+      "live_round_errors": 0
+    },
+    "competition_codes_observed": [
+      "CH",
+      "L1",
+      "L2"
+    ],
+    "profile_top_level_fields": [
+      "results",
+      "stats"
+    ],
+    "surfaces": {
+      "countries": {
+        "path": "countries.json",
+        "error": "HTTP_403 https://fantasy.efl.com/json/countries.json '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\\n<Error><Code>AccessDenied</Code><Message>Access Denied</Message><RequestId>4MXYDXE7F89BXBJR</RequestId><HostId>3KMzxgD74q1iTLnZMh3JuFqQAR0JtpM59JS1cACZsvZO8qs9xm'"
+      },
+      "rounds": {
+        "path": "fantasy/rounds.json",
+        "url": "https://fantasy.efl.com/json/fantasy/rounds.json",
+        "status": 200,
+        "bytes": 504196,
+        "sha256": "e7f39f17e8ed6424b638af9cdc702ecbe45c6548ba1e7be6be521c482da65c50",
+        "json_type": "list",
+        "rows": 42,
+        "local_path": "raw/fantasy/rounds.json"
+      },
+      "tips_rounds": {
+        "path": "fantasy/creatives/rounds.json",
+        "url": "https://fantasy.efl.com/json/fantasy/creatives/rounds.json",
+        "status": 200,
+        "bytes": 5027,
+        "sha256": "40b3d62950d912058296708ce2b02ba5dfd5bebee24f8c4851b34c999450a88f",
+        "json_type": "list",
+        "rows": 2,
+        "local_path": "raw/fantasy/creatives/rounds.json"
+      },
+      "players": {
+        "path": "fantasy/players.json",
+        "url": "https://fantasy.efl.com/json/fantasy/players.json",
+        "status": 200,
+        "bytes": 1741616,
+        "sha256": "a1dd6c0358316d46b839271cc445638683a201ff3a157b02757a45170f906244",
+        "json_type": "list",
+        "rows": 3461,
+        "local_path": "raw/fantasy/players.json"
+      },
+      "squads": {
+        "path": "fantasy/squads.json",
+        "url": "https://fantasy.efl.com/json/fantasy/squads.json",
+        "status": 200,
+        "bytes": 41909,
+        "sha256": "eff1ac18107213a10f685ac0c907e498adc5ca7951e1f47233a36ff4d9cb813d",
+        "json_type": "list",
+        "rows": 72,
+        "local_path": "raw/fantasy/squads.json"
+      },
+      "competitions": {
+        "path": "fantasy/competitions.json",
+        "url": "https://fantasy.efl.com/json/fantasy/competitions.json",
+        "status": 200,
+        "bytes": 129,
+        "sha256": "ebf8025f8d7c3a030947bbea186d2a9bae5f18327d936b6e3e6c54510a692b69",
+        "json_type": "list",
+        "rows": 3,
+        "local_path": "raw/fantasy/competitions.json"
+      },
+      "checksums": {
+        "path": "checksums.json",
+        "url": "https://fantasy.efl.com/json/checksums.json",
+        "status": 200,
+        "bytes": 725,
+        "sha256": "69c24cee6ba5b784a063387663811b6f1ef41ac2b3b19dfbc6840708687f8d91",
+        "json_type": "dict",
+        "rows": 14,
+        "local_path": "raw/checksums.json"
+      },
+      "months": {
+        "path": "fantasy/months.json",
+        "url": "https://fantasy.efl.com/json/fantasy/months.json",
+        "status": 200,
+        "bytes": 466,
+        "sha256": "344c7d7b27433c577093946a3ebcc954069646be6642f77ad133d541174f1ad0",
+        "json_type": "list",
+        "rows": 10,
+        "local_path": "raw/fantasy/months.json"
+      },
+      "off_season": {
+        "path": "off_season.json",
+        "url": "https://fantasy.efl.com/json/off_season.json",
+        "status": 200,
+        "bytes": 102,
+        "sha256": "0ecdbac764c0e7e8103645759370a08ddff3eaa4002c22bb259e41a788a148eb",
+        "json_type": "dict",
+        "rows": 4,
+        "local_path": "raw/off_season.json"
+      },
+      "play_off_landing": {
+        "path": "fantasy/play_off_landing.json",
+        "url": "https://fantasy.efl.com/json/fantasy/play_off_landing.json",
+        "status": 200,
+        "bytes": 61,
+        "sha256": "945d9dd523b414b9032903e56e7ccdcbf7045758196e36cd3065da4072c9c9e2",
+        "json_type": "dict",
+        "rows": 2,
+        "local_path": "raw/fantasy/play_off_landing.json"
+      },
+      "news": {
+        "path": "fantasy/news.json",
+        "url": "https://fantasy.efl.com/json/fantasy/news.json",
+        "status": 200,
+        "bytes": 1858,
+        "sha256": "7951677ae5578a85b5882f3bcea4fe1ec9cdc84a2c56db5b1f57ff29d59d8621",
+        "json_type": "list",
+        "rows": 5,
+        "local_path": "raw/fantasy/news.json"
+      },
+      "stats_page": {
+        "path": "fantasy/stats_page.json",
+        "url": "https://fantasy.efl.com/json/fantasy/stats_page.json",
+        "status": 200,
+        "bytes": 1027,
+        "sha256": "524af8fa4f6a1d294b5e57e77aca38bb34db14dd093419f8dfbc46651b809444",
+        "json_type": "dict",
+        "rows": 7,
+        "local_path": "raw/fantasy/stats_page.json"
+      },
+      "ladders": {
+        "path": "fantasy/ladders.json",
+        "url": "https://fantasy.efl.com/json/fantasy/ladders.json",
+        "status": 200,
+        "bytes": 23565,
+        "sha256": "e54b2a2468441ef79e59de2ee0fd936e9156853983a51d67db7ad1434ff9fa07",
+        "json_type": "list",
+        "rows": 72,
+        "local_path": "raw/fantasy/ladders.json"
+      },
+      "seasons": {
+        "path": "fantasy/seasons.json",
+        "url": "https://fantasy.efl.com/json/fantasy/seasons.json",
+        "status": 200,
+        "bytes": 109,
+        "sha256": "baac55386dc2f152e86879e2691d0ce42c976ca01988630432ac952a055c9599",
+        "json_type": "list",
+        "rows": 3,
+        "local_path": "raw/fantasy/seasons.json"
+      }
+    },
+    "errors": [
+      {
+        "surface": "countries",
+        "path": "countries.json",
+        "error": "HTTP_403 https://fantasy.efl.com/json/countries.json '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\\n<Error><Code>AccessDenied</Code><Message>Access Denied</Message><RequestId>4MXYDXE7F89BXBJR</RequestId><HostId>3KMzxgD74q1iTLnZMh3JuFqQAR0JtpM59JS1cACZsvZO8qs9xm'"
+      }
+    ],
+    "governance": {
+      "authenticated_api_accessed": false,
+      "commercial_genius_api_accessed": false,
+      "cross_provider_normalization_performed": false,
+      "missing_values_filled": false,
+      "predictive_models_modified": false,
+      "decision_layer_started": false
+    }
+  },
+  "validation": {
+    "schema": "NEXUS_FANTASY_EFL_PUBLIC_JSON_V1_VALIDATION",
+    "status": "PASS",
+    "checks": {
+      "manifest_pass": true,
+      "players_gt_100": true,
+      "squads_gt_50": true,
+      "competitions_ge_3": true,
+      "profile_rate": true,
+      "no_authenticated_api": true,
+      "no_commercial_genius": true,
+      "no_model_mutation": true
+    },
+    "coverage": {
+      "players": 3461,
+      "squads": 72,
+      "competitions": 3,
+      "seasons": 3,
+      "rounds": 42,
+      "player_profiles_ok": 3461,
+      "player_profile_errors": 0,
+      "player_profile_success_rate": 1.0,
+      "player_profile_result_rows": 1978,
+      "live_rounds_ok": 42,
+      "live_round_errors": 0
+    },
+    "competition_codes": [
+      "CH",
+      "L1",
+      "L2"
+    ]
+  }
+}
