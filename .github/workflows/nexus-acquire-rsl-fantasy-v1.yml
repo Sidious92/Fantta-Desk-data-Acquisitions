@@ -1,0 +1,83 @@
+name: Nexus RSL Fantasy v1
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-rsl-fantasy-v1-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      AUTHORITY_SHA: 7099ec1a6bb3d3bfc9051e9acb057022bb4393ea
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.AUTHORITY_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+      - name: Verify governance
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "$AUTHORITY_SHA"
+          test -f fantadesk-private/data/nexus/research-v3/crossleague-fantasy/nexus-rsl-fantasy-acquisition-v1-protocol.json
+          test -f fantadesk-private/data/nexus/research-v2/final/nexus-v2-predictive-engine-freeze-v1.json
+          sudo mkdir -p /mnt/data && sudo chown "$USER":"$USER" /mnt/data
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+      - run: pip install requests==2.32.5
+      - run: python scripts/nexus-acquire-rsl-fantasy-v1.py
+      - name: Validate governance and coverage
+        run: |
+          python - <<'PY'
+          import json,sys
+          from pathlib import Path
+          m=json.load(open('/mnt/data/nexus-rsl-fantasy-v1/manifest.json')); c=m['coverage'];g=m['governance']
+          checks={'manifest_pass':m['status']=='PASS','players_gt_100':c['players']>100,'profile_rate':c['profile_success_rate']>=.95,'fixture_rate':c['fixture_success_rate']>=.90,'no_auth':g['authenticated_surface_accessed'] is False,'no_private':g['private_user_or_league_routes_accessed'] is False,'no_normalization':g['cross_provider_normalization_performed'] is False,'no_model_mutation':g['predictive_models_modified'] is False}
+          r={'schema':'NEXUS_RSL_FANTASY_V1_VALIDATION','status':'PASS' if all(checks.values()) else 'FAIL','checks':checks,'coverage':c}
+          Path('/mnt/data/nexus-rsl-fantasy-v1-validation.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r,indent=2));sys.exit(0 if r['status']=='PASS' else 1)
+          PY
+      - name: Package
+        if: always()
+        run: |
+          mkdir -p /mnt/data/package-rsl-fantasy-v1
+          test -d /mnt/data/nexus-rsl-fantasy-v1 && tar -C /mnt/data --zstd -cf /mnt/data/package-rsl-fantasy-v1/nexus-rsl-fantasy-v1.tar.zst nexus-rsl-fantasy-v1 || true
+          test -f /mnt/data/nexus-rsl-fantasy-v1/manifest.json && cp /mnt/data/nexus-rsl-fantasy-v1/manifest.json /mnt/data/package-rsl-fantasy-v1/ || true
+          test -f /mnt/data/nexus-rsl-fantasy-v1-validation.json && cp /mnt/data/nexus-rsl-fantasy-v1-validation.json /mnt/data/package-rsl-fantasy-v1/ || true
+      - name: Upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-rsl-fantasy-v1
+          path: /mnt/data/package-rsl-fantasy-v1/*
+          retention-days: 90
+      - name: Record terminal status
+        if: always()
+        run: |
+          set -euo pipefail
+          tmp=$(mktemp)
+          python - "$tmp" '${{ job.status }}' "$GITHUB_RUN_ID" <<'PY'
+          import json,sys
+          from pathlib import Path
+          out,status,run_id=sys.argv[1:];p={'workflow':'Nexus RSL Fantasy v1','job_status':status,'run_id':int(run_id)}
+          for k,path in [('manifest','/mnt/data/nexus-rsl-fantasy-v1/manifest.json'),('validation','/mnt/data/nexus-rsl-fantasy-v1-validation.json')]:
+              q=Path(path)
+              if q.is_file():p[k]=json.load(open(q))
+          Path(out).write_text(json.dumps(p,ensure_ascii=False,indent=2)+'\n')
+          PY
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-rsl-fantasy-v1-status
+          cp "$tmp" .nexus-rsl-fantasy-v1-status/RESULT.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-rsl-fantasy-v1-status/RESULT.json
+          git commit -m "ci: record RSL Fantasy ${{ job.status }}" || exit 0
+          git push origin HEAD:main
