@@ -1,0 +1,30 @@
+name: Nexus v2 Direct 2025 Confirmation Status Watcher
+
+on:
+  workflow_run:
+    workflows: ['Nexus v2 Direct 2025 Confirmation']
+    types: [completed]
+
+permissions:
+  contents: write
+
+jobs:
+  record:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Record confirmation status only
+        shell: bash
+        env:
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p .nexus-v2-direct-2025-confirm-status
+          printf '{"workflow":"Nexus v2 Direct 2025 Confirmation","run_id":%s,"conclusion":"%s","head_sha":"%s","updated_at":"%s"}\n' "$RUN_ID" "$CONCLUSION" "$HEAD_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > .nexus-v2-direct-2025-confirm-status/RESULT.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-v2-direct-2025-confirm-status/RESULT.json
+          git commit -m 'ci: record Nexus v2 direct 2025 confirmation status' || exit 0
+          git push
