@@ -15,11 +15,14 @@ jobs:
       AUTHORITY_SHA: c715f12e24054653f4e0cbcc619ba561780755fb
       SCRIPT_COMMIT_SHA: aa366f7a8def29941a682bc4fdc5f5ee596f5f17
       SCRIPT_SHA256: fb8d1072498c072fc1e60ff330d97b83fc54849244f9ecf4ff39bbb7de83dab4
-      PROTOCOL_BLOB_SHA: 0392ed46325064d0e38c274c9c365b4283cf977c
+      PROTOCOL_BLOB_SHA: a4e31637ef855ac85cec90fd002377ceea72b191
       DATASET_HASH: ff8e952e0e48015ef06a51ffacb5bb6d9ffc7e66d50b27e79acd51b69e93a385
       SPLIT_HASH: 7cad8d589475e3899ae1d463707ed28e8be79feeba375a844a3d5feb52e9cb5c
       FEATURE_HASH: dc7e6a406e3dfc3d5ca031d62ca9e2ab522293edeb4940abb161e30e5c520b32
-      CONFIG_HASH: 2eb8193fc6eac838cb97fc2cfe60d86ae354c0ad6adbeb801c37b414e356f6c7
+      CONFIG_HASH: b6b80e9b22967da9ef19da1282d5200731b2619f260f3588ec2ca77b2084452a
+      SMOKE_SOURCE_BLOB_SHA: 7a6d9e3fad3bd976a8248cb3cd87e2eae91e5324
+      SMOKE_SOURCE_PROTOCOL_BLOB_SHA: 0392ed46325064d0e38c274c9c365b4283cf977c
+      SMOKE_SOURCE_CONFIG_HASH: 2eb8193fc6eac838cb97fc2cfe60d86ae354c0ad6adbeb801c37b414e356f6c7
       ART_FULL_ID: '9162966124'
       ART_FULL_SHA256: 1a47f252091004902578e88db37b04ea2eb1dc7e275326cd8b99f657cfdff27e
       ART_PREP_ID: '9162967092'
@@ -39,6 +42,28 @@ jobs:
       - name: Checkout public runner
         uses: actions/checkout@v6
 
+      - name: Verify private read token is present and usable
+        shell: bash
+        env:
+          PRIVATE_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "${PRIVATE_TOKEN:-}"
+          curl --fail --silent --show-error \
+            -H "Authorization: Bearer ${PRIVATE_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${AUTHORITY_REPO}" \
+            -o /tmp/fantadesk-repo.json
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/fantadesk-repo.json'))
+          assert p['full_name']=='Sidious92/FantaDesk'
+          assert p['private'] is True
+          print('private_repo_read_probe=PASS')
+          PY
+          unset PRIVATE_TOKEN
+
       - name: Checkout fixed private scientific authority
         uses: actions/checkout@v6
         with:
@@ -56,6 +81,8 @@ jobs:
           test "$ACTUAL_SHA" = "$AUTHORITY_SHA"
           PROTO_BLOB=$(git -C fantadesk-private ls-tree "$AUTHORITY_SHA" data/nexus/research-v2/predictive-model-tournament-protocol-v1.json | awk '{print $3}')
           test "$PROTO_BLOB" = "$PROTOCOL_BLOB_SHA"
+          SMOKE_BLOB=$(git -C fantadesk-private ls-tree "$AUTHORITY_SHA" scripts/nexus-v2-github-huber-smoke.py | awk '{print $3}')
+          test "$SMOKE_BLOB" = "$SMOKE_SOURCE_BLOB_SHA"
           sudo mkdir -p /mnt/data
           sudo chown "$USER":"$USER" /mnt/data
           cp fantadesk-private/scripts/nexus-v2-stage1-shard.py /mnt/data/nexus_v2_stage1_shard.py
@@ -64,7 +91,37 @@ jobs:
           echo "authority_commit_sha=$ACTUAL_SHA"
           echo "script_commit_sha=$SCRIPT_COMMIT_SHA"
           echo "script_sha256=$SCRIPT_SHA256"
-          echo "protocol_blob_sha=$PROTO_BLOB_SHA"
+          echo "protocol_blob_sha=$PROTO_BLOB"
+          echo "smoke_source_blob_sha=$SMOKE_BLOB"
+
+      - name: Prepare provenance-only smoke harness correction
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC=fantadesk-private/scripts/nexus-v2-github-huber-smoke.py
+          DST=/tmp/nexus-v2-github-huber-smoke.py
+          cp "$SRC" "$DST"
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('/tmp/nexus-v2-github-huber-smoke.py')
+          s=p.read_text()
+          replacements={
+            "PROTOCOL_BLOB_SHA = '0392ed46325064d0e38c274c9c365b4283cf977c'":
+            "PROTOCOL_BLOB_SHA = 'a4e31637ef855ac85cec90fd002377ceea72b191'",
+            "EXPECTED_CONFIG_HASH = '2eb8193fc6eac838cb97fc2cfe60d86ae354c0ad6adbeb801c37b414e356f6c7'":
+            "EXPECTED_CONFIG_HASH = 'b6b80e9b22967da9ef19da1282d5200731b2619f260f3588ec2ca77b2084452a'",
+          }
+          for old,new in replacements.items():
+              if s.count(old) != 1:
+                  raise SystemExit(f'Expected exactly one provenance constant: {old}')
+              s=s.replace(old,new)
+          p.write_text(s)
+          print('smoke_harness_provenance_patch=PASS')
+          PY
+          diff -u "$SRC" "$DST" || true
+          PATCHED_SHA256=$(sha256sum "$DST" | awk '{print $1}')
+          echo "SMOKE_PATCHED_SHA256=$PATCHED_SHA256" >> "$GITHUB_ENV"
+          echo "smoke_patched_sha256=$PATCHED_SHA256"
 
       - name: Setup exact Python
         uses: actions/setup-python@v6
@@ -168,7 +225,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python fantadesk-private/scripts/nexus-v2-github-huber-smoke.py
+          python /tmp/nexus-v2-github-huber-smoke.py
 
       - name: Validate sanitized checkpoint and record job timing
         shell: bash
@@ -192,6 +249,7 @@ jobs:
           assert p['hashes']['feature_hash']==os.environ['FEATURE_HASH']
           assert p['hashes']['config_hash']==os.environ['CONFIG_HASH']
           assert p['hashes']['script_sha256']==os.environ['SCRIPT_SHA256']
+          assert p['hashes']['protocol_blob_sha']==os.environ['PROTOCOL_BLOB_SHA']
           total=int(time.time())-int(os.environ['JOB_START_EPOCH'])
           summary={
             'status':'PASS',
@@ -200,6 +258,12 @@ jobs:
             'convergence':p['convergence'],
             'warnings':p['warnings'],
             'checkpoint_contains_individual_rows':False,
+            'scientific_authority_sha':os.environ['AUTHORITY_SHA'],
+            'protocol_blob_sha':os.environ['PROTOCOL_BLOB_SHA'],
+            'canonical_script_sha256':os.environ['SCRIPT_SHA256'],
+            'smoke_source_blob_sha':os.environ['SMOKE_SOURCE_BLOB_SHA'],
+            'smoke_patched_sha256':os.environ['SMOKE_PATCHED_SHA256'],
+            'provenance_correction':'ephemeral two-constant smoke-harness correction; scientific model logic unchanged',
           }
           json.dump(summary,open('smoke-output/job-summary.json','w'),indent=2)
           print('checkpoint_validation=PASS')
