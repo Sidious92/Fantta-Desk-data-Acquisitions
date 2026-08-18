@@ -1,0 +1,87 @@
+name: Nexus Biwenger Universe v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-biwenger-universe-v1-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      AUTHORITY_SHA: f92bc46771ab7ba9249a484d31bc2e27c15d2972
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+      - uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.AUTHORITY_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+      - name: Verify governance
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "$AUTHORITY_SHA"
+          test -f fantadesk-private/data/nexus/research-v3/crossleague-fantasy/nexus-biwenger-universe-acquisition-v1-protocol.json
+          test -f fantadesk-private/data/nexus/research-v2/final/nexus-v2-predictive-engine-freeze-v1.json
+          sudo mkdir -p /mnt/data && sudo chown "$USER":"$USER" /mnt/data
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+      - run: python -m pip install --no-cache-dir requests==2.32.5
+      - run: python scripts/nexus-acquire-biwenger-universe-v1.py
+      - name: Validate
+        run: |
+          python - <<'PY'
+          import json,sys
+          from pathlib import Path
+          m=json.load(open('/mnt/data/nexus-biwenger-universe-v1/manifest.json')); c=m['coverage']; vm=m['valid_score_queries_by_competition']
+          checks={'manifest_pass':m.get('status')=='PASS','valid_competitions_ge_5':c.get('valid_competition_count',0)>=5,'metadata_rate':c.get('metadata_success_rate',0)>=0.95,'multiple_score_mode_somewhere':any(len(v)>=2 for v in vm.values()),'season_refs':c.get('season_references',0)>1000,'no_normalization':m['governance']['cross_score_mode_normalization_performed'] is False,'no_model_mutation':m['governance']['predictive_models_modified'] is False}
+          r={'status':'PASS' if all(checks.values()) else 'FAIL','checks':checks,'coverage':c,'valid_scores':vm}; Path('/mnt/data/nexus-biwenger-universe-v1-validation.json').write_text(json.dumps(r,indent=2)+'\n'); print(json.dumps(r,indent=2)); sys.exit(0 if r['status']=='PASS' else 1)
+          PY
+      - name: Package
+        if: always()
+        run: |
+          mkdir -p /mnt/data/package-biwenger-universe-v1
+          test -d /mnt/data/nexus-biwenger-universe-v1 && tar -C /mnt/data --zstd -cf /mnt/data/package-biwenger-universe-v1/nexus-biwenger-universe-v1.tar.zst nexus-biwenger-universe-v1 || true
+          test -f /mnt/data/nexus-biwenger-universe-v1/manifest.json && cp /mnt/data/nexus-biwenger-universe-v1/manifest.json /mnt/data/package-biwenger-universe-v1/ || true
+          test -f /mnt/data/nexus-biwenger-universe-v1-validation.json && cp /mnt/data/nexus-biwenger-universe-v1-validation.json /mnt/data/package-biwenger-universe-v1/ || true
+      - name: Upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-biwenger-universe-v1
+          path: /mnt/data/package-biwenger-universe-v1/*
+          if-no-files-found: warn
+          retention-days: 90
+      - name: Record terminal status
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp=$(mktemp)
+          python - "$tmp" '${{ job.status }}' "$GITHUB_RUN_ID" <<'PY'
+          import json,sys
+          from pathlib import Path
+          out,status,run_id=sys.argv[1:]; p={'workflow':'Nexus Biwenger Universe v1','job_status':status,'run_id':int(run_id)}
+          m=Path('/mnt/data/nexus-biwenger-universe-v1/manifest.json');v=Path('/mnt/data/nexus-biwenger-universe-v1-validation.json')
+          if m.is_file():p['manifest']=json.load(open(m))
+          if v.is_file():p['validation']=json.load(open(v))
+          Path(out).write_text(json.dumps(p,ensure_ascii=False,indent=2)+'\n')
+          PY
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-biwenger-universe-v1-status
+          cp "$tmp" .nexus-biwenger-universe-v1-status/RESULT.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-biwenger-universe-v1-status/RESULT.json
+          git commit -m "ci: record Biwenger universe ${{ job.status }}" || exit 0
+          git push origin HEAD:main
