@@ -1,0 +1,224 @@
+{
+  "schema": "NEXUS_CROSSLEAGUE_CAREER_PROVIDER_PROBE_V1",
+  "players": [
+    "Matija Frigan",
+    "Andrea Adorante",
+    "Kornel Lisman",
+    "Albion Rrahmani"
+  ],
+  "providers": {
+    "sofascore": {
+      "official_domain": "www.sofascore.com",
+      "tests": [
+        {
+          "player": "Matija Frigan",
+          "search": {
+            "label": "sofascore_search",
+            "requested": "https://www.sofascore.com/api/v1/search/all?q=Matija%20Frigan",
+            "url": "https://www.sofascore.com/api/v1/search/all?q=Matija%20Frigan",
+            "status": 403,
+            "content_type": "application/json",
+            "bytes": 48,
+            "sha256": "6b771bca0fe4271cc0baf29954f10c68be99102048e4df524b6d7d6bf38dad5d",
+            "preview": "{\"error\": {\"code\": 403, \"reason\": \"Forbidden\" }}",
+            "json_type": "dict",
+            "json_len": 1,
+            "json_keys": [
+              "error"
+            ],
+            "json": {
+              "error": {
+                "code": 403,
+                "reason": "Forbidden"
+              }
+            }
+          }
+        },
+        {
+          "player": "Andrea Adorante",
+          "search": {
+            "label": "sofascore_search",
+            "requested": "https://www.sofascore.com/api/v1/search/all?q=Andrea%20Adorante",
+            "url": "https://www.sofascore.com/api/v1/search/all?q=Andrea%20Adorante",
+            "status": 403,
+            "content_type": "application/json",
+            "bytes": 48,
+            "sha256": "6b771bca0fe4271cc0baf29954f10c68be99102048e4df524b6d7d6bf38dad5d",
+            "preview": "{\"error\": {\"code\": 403, \"reason\": \"Forbidden\" }}",
+            "json_type": "dict",
+            "json_len": 1,
+            "json_keys": [
+              "error"
+            ],
+            "json": {
+              "error": {
+                "code": 403,
+                "reason": "Forbidden"
+              }
+            }
+          }
+        },
+        {
+          "player": "Kornel Lisman",
+          "search": {
+            "label": "sofascore_search",
+            "requested": "https://www.sofascore.com/api/v1/search/all?q=Kornel%20Lisman",
+            "url": "https://www.sofascore.com/api/v1/search/all?q=Kornel%20Lisman",
+            "status": 403,
+            "content_type": "application/json",
+            "bytes": 48,
+            "sha256": "6b771bca0fe4271cc0baf29954f10c68be99102048e4df524b6d7d6bf38dad5d",
+            "preview": "{\"error\": {\"code\": 403, \"reason\": \"Forbidden\" }}",
+            "json_type": "dict",
+            "json_len": 1,
+            "json_keys": [
+              "error"
+            ],
+            "json": {
+              "error": {
+                "code": 403,
+                "reason": "Forbidden"
+              }
+            }
+          }
+        },
+        {
+          "player": "Albion Rrahmani",
+          "search": {
+            "label": "sofascore_search",
+            "requested": "https://www.sofascore.com/api/v1/search/all?q=Albion%20Rrahmani",
+            "url": "https://www.sofascore.com/api/v1/search/all?q=Albion%20Rrahmani",
+            "status": 403,
+            "content_type": "application/json",
+            "bytes": 48,
+            "sha256": "6b771bca0fe4271cc0baf29954f10c68be99102048e4df524b6d7d6bf38dad5d",
+            "preview": "{\"error\": {\"code\": 403, \"reason\": \"Forbidden\" }}",
+            "json_type": "dict",
+            "json_len": 1,
+            "json_keys": [
+              "error"
+            ],
+            "json": {
+              "error": {
+                "code": 403,
+                "reason": "Forbidden"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "fotmob": {
+      "official_domain": "www.fotmob.com",
+      "tests": [
+        {
+          "player": "Matija Frigan",
+          "search_tests": [
+            {
+              "label": "fotmob_search",
+              "requested": "https://www.fotmob.com/api/searchapi/suggest?term=Matija%20Frigan",
+              "url": "https://www.fotmob.com/api/searchapi/suggest?term=Matija%20Frigan",
+              "status": 404,
+              "content_type": "text/html; charset=utf-8",
+              "bytes": 210211,
+              "sha256": "8ebf5e3982d3050148b5843afdf5e2adfa7bb905d5a408d64b812d530155bd46",
+              "preview": "<!DOCTYPE html><html lang=\"en\" dir=\"ltr\"><head><meta name=\"apple-itunes-app\" content=\"app-id=488575683\"/><link rel=\"alternate\" href=\"android-app://com.mobilefootie.wc2010/http\"/><link rel=\"apple-touch-icon\" href=\"/img/android-icon-192x192.png\"/><link rel=\"manifest\" href=\"/manifest.json\"/><link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\"/><link rel=\"icon\" type=\"image/png\" href=\"/favicon.png\"/><link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"/img/favicon-96x96.png\"/><link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\"/><meta name=\"apple-mobile-web-app-title\" content=\"FotMob\"/><meta name=\"color-scheme\" content=\"dark light\"/><title>FotMob - Football Live Scores</title><meta name=\"robots\" content=\"all\"/><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=5.0\"/><meta property=\"og:site_name\" content=\"FotMob\"/><meta property=\"og:title\" content=\"FotMob\"/><meta name=\"description\" content=\"FotMob is the essential app for matchday. Get live scores, fixtures, tables, match stats, and personalised news from over 500 football leagues around the world.\"/><meta property=\"og:description\" content=\"FotMob is the essential app for "
+            },
+            {
+              "label": "fotmob_search",
+              "requested": "https://www.fotmob.com/api/search/suggest?term=Matija%20Frigan",
+              "url": "https://www.fotmob.com/api/search/suggest?term=Matija%20Frigan",
+              "status": 404,
+              "content_type": "text/html; charset=utf-8",
+              "bytes": 210211,
+              "sha256": "8ebf5e3982d3050148b5843afdf5e2adfa7bb905d5a408d64b812d530155bd46",
+              "preview": "<!DOCTYPE html><html lang=\"en\" dir=\"ltr\"><head><meta name=\"apple-itunes-app\" content=\"app-id=488575683\"/><link rel=\"alternate\" href=\"android-app://com.mobilefootie.wc2010/http\"/><link rel=\"apple-touch-icon\" href=\"/img/android-icon-192x192.png\"/><link rel=\"manifest\" href=\"/manifest.json\"/><link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\"/><link rel=\"icon\" type=\"image/png\" href=\"/favicon.png\"/><link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"/img/favicon-96x96.png\"/><link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\"/><meta name=\"apple-mobile-web-app-title\" content=\"FotMob\"/><meta name=\"color-scheme\" content=\"dark light\"/><title>FotMob - Football Live Scores</title><meta name=\"robots\" content=\"all\"/><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=5.0\"/><meta property=\"og:site_name\" content=\"FotMob\"/><meta property=\"og:title\" content=\"FotMob\"/><meta name=\"description\" content=\"FotMob is the essential app for matchday. Get live scores, fixtures, tables, match stats, and personalised news from over 500 football leagues around the world.\"/><meta property=\"og:description\" content=\"FotMob is the essential app for "
+            }
+          ]
+        },
+        {
+          "player": "Andrea Adorante",
+          "search_tests": [
+            {
+              "label": "fotmob_search",
+              "requested": "https://www.fotmob.com/api/searchapi/suggest?term=Andrea%20Adorante",
+              "url": "https://www.fotmob.com/api/searchapi/suggest?term=Andrea%20Adorante",
+              "status": 404,
+              "content_type": "text/html; charset=utf-8",
+              "bytes": 210211,
+              "sha256": "8ebf5e3982d3050148b5843afdf5e2adfa7bb905d5a408d64b812d530155bd46",
+              "preview": "<!DOCTYPE html><html lang=\"en\" dir=\"ltr\"><head><meta name=\"apple-itunes-app\" content=\"app-id=488575683\"/><link rel=\"alternate\" href=\"android-app://com.mobilefootie.wc2010/http\"/><link rel=\"apple-touch-icon\" href=\"/img/android-icon-192x192.png\"/><link rel=\"manifest\" href=\"/manifest.json\"/><link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\"/><link rel=\"icon\" type=\"image/png\" href=\"/favicon.png\"/><link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"/img/favicon-96x96.png\"/><link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\"/><meta name=\"apple-mobile-web-app-title\" content=\"FotMob\"/><meta name=\"color-scheme\" content=\"dark light\"/><title>FotMob - Football Live Scores</title><meta name=\"robots\" content=\"all\"/><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=5.0\"/><meta property=\"og:site_name\" content=\"FotMob\"/><meta property=\"og:title\" content=\"FotMob\"/><meta name=\"description\" content=\"FotMob is the essential app for matchday. Get live scores, fixtures, tables, match stats, and personalised news from over 500 football leagues around the world.\"/><meta property=\"og:description\" content=\"FotMob is the essential app for "
+            },
+            {
+              "label": "fotmob_search",
+              "requested": "https://www.fotmob.com/api/search/suggest?term=Andrea%20Adorante",
+              "url": "https://www.fotmob.com/api/search/suggest?term=Andrea%20Adorante",
+              "status": 404,
+              "content_type": "text/html; charset=utf-8",
+              "bytes": 210211,
+              "sha256": "8ebf5e3982d3050148b5843afdf5e2adfa7bb905d5a408d64b812d530155bd46",
+              "preview": "<!DOCTYPE html><html lang=\"en\" dir=\"ltr\"><head><meta name=\"apple-itunes-app\" content=\"app-id=488575683\"/><link rel=\"alternate\" href=\"android-app://com.mobilefootie.wc2010/http\"/><link rel=\"apple-touch-icon\" href=\"/img/android-icon-192x192.png\"/><link rel=\"manifest\" href=\"/manifest.json\"/><link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\"/><link rel=\"icon\" type=\"image/png\" href=\"/favicon.png\"/><link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"/img/favicon-96x96.png\"/><link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\"/><meta name=\"apple-mobile-web-app-title\" content=\"FotMob\"/><meta name=\"color-scheme\" content=\"dark light\"/><title>FotMob - Football Live Scores</title><meta name=\"robots\" content=\"all\"/><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=5.0\"/><meta property=\"og:site_name\" content=\"FotMob\"/><meta property=\"og:title\" content=\"FotMob\"/><meta name=\"description\" content=\"FotMob is the essential app for matchday. Get live scores, fixtures, tables, match stats, and personalised news from over 500 football leagues around the world.\"/><meta property=\"og:description\" content=\"FotMob is the essential app for "
+            }
+          ]
+        },
+        {
+          "player": "Kornel Lisman",
+          "search_tests": [
+            {
+              "label": "fotmob_search",
+              "requested": "https://www.fotmob.com/api/searchapi/suggest?term=Kornel%20Lisman",
+              "url": "https://www.fotmob.com/api/searchapi/suggest?term=Kornel%20Lisman",
+              "status": 404,
+              "content_type": "text/html; charset=utf-8",
+              "bytes": 210211,
+              "sha256": "8ebf5e3982d3050148b5843afdf5e2adfa7bb905d5a408d64b812d530155bd46",
+              "preview": "<!DOCTYPE html><html lang=\"en\" dir=\"ltr\"><head><meta name=\"apple-itunes-app\" content=\"app-id=488575683\"/><link rel=\"alternate\" href=\"android-app://com.mobilefootie.wc2010/http\"/><link rel=\"apple-touch-icon\" href=\"/img/android-icon-192x192.png\"/><link rel=\"manifest\" href=\"/manifest.json\"/><link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\"/><link rel=\"icon\" type=\"image/png\" href=\"/favicon.png\"/><link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"/img/favicon-96x96.png\"/><link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\"/><meta name=\"apple-mobile-web-app-title\" content=\"FotMob\"/><meta name=\"color-scheme\" content=\"dark light\"/><title>FotMob - Football Live Scores</title><meta name=\"robots\" content=\"all\"/><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=5.0\"/><meta property=\"og:site_name\" content=\"FotMob\"/><meta property=\"og:title\" content=\"FotMob\"/><meta name=\"description\" content=\"FotMob is the essential app for matchday. Get live scores, fixtures, tables, match stats, and personalised news from over 500 football leagues around the world.\"/><meta property=\"og:description\" content=\"FotMob is the essential app for "
+            },
+            {
+              "label": "fotmob_search",
+              "requested": "https://www.fotmob.com/api/search/suggest?term=Kornel%20Lisman",
+              "url": "https://www.fotmob.com/api/search/suggest?term=Kornel%20Lisman",
+              "status": 404,
+              "content_type": "text/html; charset=utf-8",
+              "bytes": 210211,
+              "sha256": "8ebf5e3982d3050148b5843afdf5e2adfa7bb905d5a408d64b812d530155bd46",
+              "preview": "<!DOCTYPE html><html lang=\"en\" dir=\"ltr\"><head><meta name=\"apple-itunes-app\" content=\"app-id=488575683\"/><link rel=\"alternate\" href=\"android-app://com.mobilefootie.wc2010/http\"/><link rel=\"apple-touch-icon\" href=\"/img/android-icon-192x192.png\"/><link rel=\"manifest\" href=\"/manifest.json\"/><link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\"/><link rel=\"icon\" type=\"image/png\" href=\"/favicon.png\"/><link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"/img/favicon-96x96.png\"/><link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\"/><meta name=\"apple-mobile-web-app-title\" content=\"FotMob\"/><meta name=\"color-scheme\" content=\"dark light\"/><title>FotMob - Football Live Scores</title><meta name=\"robots\" content=\"all\"/><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=5.0\"/><meta property=\"og:site_name\" content=\"FotMob\"/><meta property=\"og:title\" content=\"FotMob\"/><meta name=\"description\" content=\"FotMob is the essential app for matchday. Get live scores, fixtures, tables, match stats, and personalised news from over 500 football leagues around the world.\"/><meta property=\"og:description\" content=\"FotMob is the essential app for "
+            }
+          ]
+        },
+        {
+          "player": "Albion Rrahmani",
+          "search_tests": [
+            {
+              "label": "fotmob_search",
+              "requested": "https://www.fotmob.com/api/searchapi/suggest?term=Albion%20Rrahmani",
+              "url": "https://www.fotmob.com/api/searchapi/suggest?term=Albion%20Rrahmani",
+              "status": 404,
+              "content_type": "text/html; charset=utf-8",
+              "bytes": 210211,
+              "sha256": "8ebf5e3982d3050148b5843afdf5e2adfa7bb905d5a408d64b812d530155bd46",
+              "preview": "<!DOCTYPE html><html lang=\"en\" dir=\"ltr\"><head><meta name=\"apple-itunes-app\" content=\"app-id=488575683\"/><link rel=\"alternate\" href=\"android-app://com.mobilefootie.wc2010/http\"/><link rel=\"apple-touch-icon\" href=\"/img/android-icon-192x192.png\"/><link rel=\"manifest\" href=\"/manifest.json\"/><link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\"/><link rel=\"icon\" type=\"image/png\" href=\"/favicon.png\"/><link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"/img/favicon-96x96.png\"/><link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\"/><meta name=\"apple-mobile-web-app-title\" content=\"FotMob\"/><meta name=\"color-scheme\" content=\"dark light\"/><title>FotMob - Football Live Scores</title><meta name=\"robots\" content=\"all\"/><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=5.0\"/><meta property=\"og:site_name\" content=\"FotMob\"/><meta property=\"og:title\" content=\"FotMob\"/><meta name=\"description\" content=\"FotMob is the essential app for matchday. Get live scores, fixtures, tables, match stats, and personalised news from over 500 football leagues around the world.\"/><meta property=\"og:description\" content=\"FotMob is the essential app for "
+            },
+            {
+              "label": "fotmob_search",
+              "requested": "https://www.fotmob.com/api/search/suggest?term=Albion%20Rrahmani",
+              "url": "https://www.fotmob.com/api/search/suggest?term=Albion%20Rrahmani",
+              "status": 404,
+              "content_type": "text/html; charset=utf-8",
+              "bytes": 210211,
+              "sha256": "8ebf5e3982d3050148b5843afdf5e2adfa7bb905d5a408d64b812d530155bd46",
+              "preview": "<!DOCTYPE html><html lang=\"en\" dir=\"ltr\"><head><meta name=\"apple-itunes-app\" content=\"app-id=488575683\"/><link rel=\"alternate\" href=\"android-app://com.mobilefootie.wc2010/http\"/><link rel=\"apple-touch-icon\" href=\"/img/android-icon-192x192.png\"/><link rel=\"manifest\" href=\"/manifest.json\"/><link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\"/><link rel=\"icon\" type=\"image/png\" href=\"/favicon.png\"/><link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"/img/favicon-96x96.png\"/><link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\"/><meta name=\"apple-mobile-web-app-title\" content=\"FotMob\"/><meta name=\"color-scheme\" content=\"dark light\"/><title>FotMob - Football Live Scores</title><meta name=\"robots\" content=\"all\"/><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=5.0\"/><meta property=\"og:site_name\" content=\"FotMob\"/><meta property=\"og:title\" content=\"FotMob\"/><meta name=\"description\" content=\"FotMob is the essential app for matchday. Get live scores, fixtures, tables, match stats, and personalised news from over 500 football leagues around the world.\"/><meta property=\"og:description\" content=\"FotMob is the essential app for "
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "governance": {
+    "authenticated_surface_accessed": false,
+    "private_routes_accessed": false,
+    "bruteforce_ids": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
