@@ -1,0 +1,16 @@
+{
+  "workflow": "Nexus Cross-League Fantasy Open Acquisition v1.6",
+  "run_id": 32175690948,
+  "conclusion": "success",
+  "head_sha": "dddf86d7fa7580a4a62432ce70293565079ab19d",
+  "authority_sha": "7b54f67dac781e4aef96ec2af9e14daf6867a61a",
+  "provider_counts": {
+    "MPG": 29856,
+    "COMUNIO": 20954,
+    "BIWENGER": 18549,
+    "FPL_ARCHIVE": 4592
+  },
+  "total_rows": 73951,
+  "validation_status": "PASS",
+  "failed_checks": []
+}
