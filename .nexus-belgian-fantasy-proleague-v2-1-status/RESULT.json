@@ -1,20 +1,20 @@
 {
   "workflow": "Nexus Belgian Fantasy Pro League v2.1",
   "job_status": "failure",
-  "run_id": 32186423613,
+  "run_id": 32186646416,
   "manifest": {
     "schema": "NEXUS_BELGIAN_FANTASY_PROLEAGUE_V2_1",
     "status": "FAIL_VALIDATION",
-    "capture_started": "2026-08-18T21:11:54.735312+00:00",
-    "capture_completed": "2026-08-18T21:21:16.072566+00:00",
+    "capture_started": "2026-08-18T21:14:22.478713+00:00",
+    "capture_completed": "2026-08-18T21:24:32.547962+00:00",
     "competitionFeed": "JPL",
     "seasonId": 2027,
     "sources": {
       "excel_optional_diagnostic": {
         "url": "https://fanarena.s3.eu-west-1.amazonaws.com/files/spelers_JPL_2027.xlsx",
         "status": 403,
-        "bytes": 243,
-        "sha256": "c205df98ac6beb5bf673c1add628f02b93caae91198a37d65c6b20421855df0b",
+        "bytes": 263,
+        "sha256": "d256742732afa5aeafb301574c3d3a112f460d48e50445156dc39f9576e2d0ba",
         "valid_xlsx": false
       },
       "fdr_json": {
