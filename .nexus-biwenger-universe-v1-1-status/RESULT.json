@@ -1,0 +1,344 @@
+{
+  "workflow": "Nexus Biwenger Universe v1.1 Bounded",
+  "job_status": "success",
+  "run_id": 32195565723,
+  "scientific_protocol": "NEXUS_BIWENGER_UNIVERSE_ACQUISITION_PROTOCOL_V1",
+  "authority_sha": "f92bc46771ab7ba9249a484d31bc2e27c15d2972",
+  "manifest": {
+    "schema": "NEXUS_BIWENGER_UNIVERSE_V1",
+    "execution_profile": "V1_1_BOUNDED_CONCURRENT_SAME_PROTOCOL",
+    "status": "PASS",
+    "capture_started": "2026-08-18T23:04:25.474672+00:00",
+    "capture_completed": "2026-08-18T23:13:45.105885+00:00",
+    "coverage": {
+      "candidate_competitions": 22,
+      "valid_competitions": [
+        "bundesliga",
+        "champions-league",
+        "club-world-cup",
+        "copa-america",
+        "copa-del-rey",
+        "euro",
+        "europa-league",
+        "la-liga",
+        "liga-mx",
+        "ligue-1",
+        "premier-league",
+        "primeira-liga",
+        "segunda-division",
+        "serie-a",
+        "supercopa",
+        "supercup",
+        "world-cup"
+      ],
+      "valid_competition_count": 17,
+      "catalog_score_rows": 22499,
+      "unique_competition_player_identities": 5858,
+      "metadata_ok": 5858,
+      "metadata_errors": 0,
+      "metadata_success_rate": 1.0,
+      "season_references": 46384
+    },
+    "valid_score_queries_by_competition": {
+      "la-liga": [
+        null,
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8
+      ],
+      "premier-league": [
+        null,
+        1,
+        2,
+        3
+      ],
+      "segunda-division": [
+        null,
+        1,
+        2,
+        3
+      ],
+      "serie-a": [
+        null,
+        1,
+        3
+      ],
+      "ligue-1": [
+        null,
+        1,
+        3
+      ],
+      "primeira-liga": [
+        null,
+        1
+      ],
+      "liga-mx": [
+        null,
+        1
+      ],
+      "champions-league": [
+        null,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "copa-del-rey": [
+        null,
+        1,
+        2,
+        3
+      ],
+      "world-cup": [
+        null,
+        1,
+        2,
+        3,
+        4
+      ],
+      "euro": [
+        null,
+        1,
+        2,
+        3,
+        4
+      ],
+      "club-world-cup": [
+        null,
+        1,
+        2,
+        3,
+        4
+      ],
+      "supercopa": [
+        null,
+        1,
+        2,
+        3
+      ],
+      "copa-america": [
+        null,
+        2
+      ],
+      "supercup": [
+        null,
+        1,
+        2,
+        3
+      ],
+      "brasileirao": [],
+      "europa-league": [
+        null,
+        1
+      ],
+      "conference-league": [],
+      "bundesliga": [
+        null,
+        1
+      ],
+      "eredivisie": [],
+      "belgian-pro-league": [],
+      "ekstraklasa": []
+    },
+    "governance": {
+      "same_protocol_candidate_competitions": true,
+      "same_protocol_score_queries": true,
+      "same_protocol_metadata_fields": true,
+      "cross_score_mode_normalization_performed": false,
+      "cross_competition_normalization_performed": false,
+      "missing_values_filled": false,
+      "predictive_models_modified": false,
+      "decision_layer_started": false,
+      "history_reports_downloaded": false
+    }
+  },
+  "validation": {
+    "status": "PASS",
+    "checks": {
+      "manifest_pass": true,
+      "valid_competitions_ge_5": true,
+      "metadata_rate": true,
+      "multiple_score_mode_somewhere": true,
+      "season_refs": true,
+      "same_candidates": true,
+      "same_scores": true,
+      "no_normalization": true,
+      "no_model_mutation": true
+    },
+    "coverage": {
+      "candidate_competitions": 22,
+      "valid_competitions": [
+        "bundesliga",
+        "champions-league",
+        "club-world-cup",
+        "copa-america",
+        "copa-del-rey",
+        "euro",
+        "europa-league",
+        "la-liga",
+        "liga-mx",
+        "ligue-1",
+        "premier-league",
+        "primeira-liga",
+        "segunda-division",
+        "serie-a",
+        "supercopa",
+        "supercup",
+        "world-cup"
+      ],
+      "valid_competition_count": 17,
+      "catalog_score_rows": 22499,
+      "unique_competition_player_identities": 5858,
+      "metadata_ok": 5858,
+      "metadata_errors": 0,
+      "metadata_success_rate": 1.0,
+      "season_references": 46384
+    },
+    "valid_scores": {
+      "la-liga": [
+        null,
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8
+      ],
+      "premier-league": [
+        null,
+        1,
+        2,
+        3
+      ],
+      "segunda-division": [
+        null,
+        1,
+        2,
+        3
+      ],
+      "serie-a": [
+        null,
+        1,
+        3
+      ],
+      "ligue-1": [
+        null,
+        1,
+        3
+      ],
+      "primeira-liga": [
+        null,
+        1
+      ],
+      "liga-mx": [
+        null,
+        1
+      ],
+      "champions-league": [
+        null,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "copa-del-rey": [
+        null,
+        1,
+        2,
+        3
+      ],
+      "world-cup": [
+        null,
+        1,
+        2,
+        3,
+        4
+      ],
+      "euro": [
+        null,
+        1,
+        2,
+        3,
+        4
+      ],
+      "club-world-cup": [
+        null,
+        1,
+        2,
+        3,
+        4
+      ],
+      "supercopa": [
+        null,
+        1,
+        2,
+        3
+      ],
+      "copa-america": [
+        null,
+        2
+      ],
+      "supercup": [
+        null,
+        1,
+        2,
+        3
+      ],
+      "brasileirao": [],
+      "europa-league": [
+        null,
+        1
+      ],
+      "conference-league": [],
+      "bundesliga": [
+        null,
+        1
+      ],
+      "eredivisie": [],
+      "belgian-pro-league": [],
+      "ekstraklasa": []
+    }
+  },
+  "progress": {
+    "schema": "NEXUS_BIWENGER_UNIVERSE_V1_1_PROGRESS",
+    "phase": "COMPLETE",
+    "updated": "2026-08-18T23:13:45.370631+00:00",
+    "status": "PASS",
+    "coverage": {
+      "candidate_competitions": 22,
+      "valid_competitions": [
+        "bundesliga",
+        "champions-league",
+        "club-world-cup",
+        "copa-america",
+        "copa-del-rey",
+        "euro",
+        "europa-league",
+        "la-liga",
+        "liga-mx",
+        "ligue-1",
+        "premier-league",
+        "primeira-liga",
+        "segunda-division",
+        "serie-a",
+        "supercopa",
+        "supercup",
+        "world-cup"
+      ],
+      "valid_competition_count": 17,
+      "catalog_score_rows": 22499,
+      "unique_competition_player_identities": 5858,
+      "metadata_ok": 5858,
+      "metadata_errors": 0,
+      "metadata_success_rate": 1.0,
+      "season_references": 46384
+    }
+  }
+}
