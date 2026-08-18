@@ -1,0 +1,87 @@
+name: Nexus v2 Event Surface Audit
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.nexus-v2-event-surface-launch/EXECUTE'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout fixed private authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 0b27050777fcd460558a3a5c1d5f3cf7fbc5015d
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Prepare environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "0b27050777fcd460558a3a5c1d5f3cf7fbc5015d"
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+
+      - name: Install pinned dependencies
+        shell: bash
+        run: |
+          python -m pip install --no-cache-dir numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 joblib==1.5.3 threadpoolctl==3.6.0 orjson==3.11.9
+
+      - name: Materialize exact base inputs
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+
+      - name: Rebuild exact Minutes surface
+        shell: bash
+        run: |
+          cp fantadesk-private/scripts/nexus-v2-minutes-surface-one.py /mnt/data/minutes_surface_one.py
+          for season in 2021-22 2022-23 2023-24 2024-25 2025-26; do
+            python fantadesk-private/scripts/nexus-v2-precompute-usage-cache.py "$season"
+          done
+          python fantadesk-private/scripts/nexus-v2-build-minutes-surface-cached.py
+          echo "5898b2c01490e9a1ab21e19c159c4ba51fadbd300470f19e31f6384da13d4f2c  /mnt/data/nexus_v2_minutes_roster_surface.csv" | sha256sum --check --strict
+
+      - name: Build event surface and audit
+        shell: bash
+        run: python fantadesk-private/scripts/nexus-v2-build-event-roster-surface.py
+
+      - name: Validate sanitized audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f /mnt/data/nexus_v2_event_roster_surface_audit.json
+          mkdir -p audit-output
+          cp /mnt/data/nexus_v2_event_roster_surface_audit.json audit-output/audit.json
+          python - <<'PY'
+          import json
+          p=json.load(open('audit-output/audit.json'))
+          assert p['status']=='PASS'
+          assert p['rows']==2090
+          assert 'surface_sha256' in p
+          assert 'seasons' in p
+          print('EVENT_SURFACE_AUDIT=PASS',p['surface_sha256'])
+          PY
+
+      - name: Upload audit only
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-event-surface-audit
+          path: audit-output/audit.json
+          if-no-files-found: error
+          retention-days: 7
