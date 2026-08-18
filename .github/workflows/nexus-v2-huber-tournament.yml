@@ -76,9 +76,23 @@ jobs:
       - name: Validate completeness and rank only if 144/144
         shell: python
         run: |
-          import json, math, pathlib, collections, sys
+          import json, math, pathlib, collections
+
+          targets=['GOALS','ASSISTS']
+          feature_sets=['FC_LAG5','ALL_LEAGUE_LAG5','FC_PLUS_ALL_LAG5','FULL_SPLIT_LAG5','FULL_ALL_LAG5','FULL_LAG1','FULL_LAG12','FULL_LAG123']
+          levels=['LOW','MEDIUM','HIGH']
+          folds=['2022-23','2023-24','2024-25']
+          expected_identities={
+              (t,'HUBER',fs,level,fold)
+              for t in targets for fs in feature_sets for level in levels for fold in folds
+          }
+          assert len(expected_identities)==144
+
+          expected_dataset='ff8e952e0e48015ef06a51ffacb5bb6d9ffc7e66d50b27e79acd51b69e93a385'
+          expected_script='fb8d1072498c072fc1e60ff330d97b83fc54849244f9ecf4ff39bbb7de83dab4'
+          expected_protocol='a4e31637ef855ac85cec90fd002377ceea72b191'
+
           files=list(pathlib.Path('checkpoints').rglob('checkpoint.json'))
-          expected=144
           payloads=[]
           identities=set()
           errors=[]
@@ -87,14 +101,40 @@ jobs:
                   p=json.load(open(f))
                   ident=p.get('identity',{})
                   key=(ident.get('target'),ident.get('model'),ident.get('feature_set'),ident.get('level'),ident.get('fold'))
-                  if p.get('status')!='COMPLETE': errors.append(f'{f}: status != COMPLETE')
-                  if key in identities: errors.append(f'duplicate {key}')
-                  identities.add(key)
-                  payloads.append(p)
+                  local=[]
+                  if p.get('status')!='COMPLETE': local.append('status != COMPLETE')
+                  if key not in expected_identities: local.append(f'unexpected identity {key}')
+                  if key in identities: local.append(f'duplicate identity {key}')
+                  if 'predictions' in p: local.append('predictions field present')
+                  if p.get('audit',{}).get('no_individual_player_rows_in_checkpoint') is not True: local.append('player-level audit flag != true')
+                  if p.get('convergence',{}).get('pass') is not True: local.append(f'convergence failed {p.get("convergence")}')
+                  if p.get('configuration',{}).get('seed') != 20260817: local.append('seed provenance mismatch')
+                  if p.get('configuration',{}).get('protocol_blob_sha') != expected_protocol: local.append('protocol provenance mismatch')
+                  hashes=p.get('hashes',{})
+                  if hashes.get('dataset_hash') != expected_dataset: local.append('dataset hash mismatch')
+                  if hashes.get('script_sha256') != expected_script: local.append('script hash mismatch')
+                  if hashes.get('authority_protocol_blob_sha') != expected_protocol: local.append('authority protocol hash mismatch')
+                  if local:
+                      errors.extend(f'{f}: {e}' for e in local)
+                  else:
+                      identities.add(key)
+                      payloads.append(p)
               except Exception as e:
                   errors.append(f'{f}: {e!r}')
-          complete=(len(files)==expected and len(payloads)==expected and len(identities)==expected and not errors)
-          summary={'block_status':'COMPLETE' if complete else 'INCOMPLETE','expected_shards':expected,'validated_complete_shards':len(payloads) if not errors else len(payloads)-len(errors),'errors':errors}
+
+          missing=sorted(expected_identities-identities)
+          unexpected=sorted(identities-expected_identities)
+          if missing: errors.append(f'missing identities: {missing}')
+          if unexpected: errors.append(f'unexpected identities: {unexpected}')
+
+          complete=(len(files)==144 and len(payloads)==144 and identities==expected_identities and not errors)
+          summary={
+              'block_status':'COMPLETE' if complete else 'INCOMPLETE',
+              'expected_shards':144,
+              'discovered_checkpoint_files':len(files),
+              'validated_complete_shards':len(payloads),
+              'errors':errors,
+          }
           pathlib.Path('tournament-output').mkdir(exist_ok=True)
           if not complete:
               json.dump(summary,open('tournament-output/huber-tournament-status.json','w'),indent=2)
@@ -105,7 +145,7 @@ jobs:
           for p in payloads:
               i=p['identity']; groups[(i['target'],i['feature_set'],i['level'])].append(p)
           rankings={}
-          for target in ['GOALS','ASSISTS']:
+          for target in targets:
               rows=[]
               for (t,fs,level), ps in groups.items():
                   if t!=target: continue
@@ -129,6 +169,7 @@ jobs:
           print(json.dumps(summary['winner_by_target'],indent=2))
 
       - name: Upload Huber tournament summary
+        if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
           name: nexus-v2-huber-tournament-summary
