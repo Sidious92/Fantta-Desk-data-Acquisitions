@@ -1,0 +1,36 @@
+name: Nexus Ligue 1 Official Fantasy Public Probe v1
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-ligue1-official-fantasy-probe-v1-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - run: sudo mkdir -p /mnt/data/nexus-ligue1-official-fantasy-probe-v1 && sudo chown -R $USER:$USER /mnt/data
+      - run: python scripts/probe_ligue1_official_fantasy_v1.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexus-ligue1-official-fantasy-probe-v1
+          path: /mnt/data/nexus-ligue1-official-fantasy-probe-v1
+      - name: Record result
+        if: always()
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-ligue1-official-fantasy-probe-v1-status
+          cp /mnt/data/nexus-ligue1-official-fantasy-probe-v1/RESULT.json .nexus-ligue1-official-fantasy-probe-v1-status/RESULT.json
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .nexus-ligue1-official-fantasy-probe-v1-status/RESULT.json
+          git commit -m 'ci: record official Ligue 1 fantasy public probe' || exit 0
+          git push origin HEAD:main
