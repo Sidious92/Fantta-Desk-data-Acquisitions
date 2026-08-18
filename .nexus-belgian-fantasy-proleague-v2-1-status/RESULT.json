@@ -1,20 +1,20 @@
 {
   "workflow": "Nexus Belgian Fantasy Pro League v2.1",
   "job_status": "failure",
-  "run_id": 32184609588,
+  "run_id": 32186423613,
   "manifest": {
     "schema": "NEXUS_BELGIAN_FANTASY_PROLEAGUE_V2_1",
     "status": "FAIL_VALIDATION",
-    "capture_started": "2026-08-18T20:51:52.659867+00:00",
-    "capture_completed": "2026-08-18T21:01:15.952881+00:00",
+    "capture_started": "2026-08-18T21:11:54.735312+00:00",
+    "capture_completed": "2026-08-18T21:21:16.072566+00:00",
     "competitionFeed": "JPL",
     "seasonId": 2027,
     "sources": {
       "excel_optional_diagnostic": {
         "url": "https://fanarena.s3.eu-west-1.amazonaws.com/files/spelers_JPL_2027.xlsx",
         "status": 403,
-        "bytes": 263,
-        "sha256": "1172af41eaf2a779e4ebbc7ea03aece1887cc5e37bd27f8b4166fec93283099f",
+        "bytes": 243,
+        "sha256": "c205df98ac6beb5bf673c1add628f02b93caae91198a37d65c6b20421855df0b",
         "valid_xlsx": false
       },
       "fdr_json": {
@@ -153,20 +153,29 @@
       "additional_public_reads": [
         {
           "endpoint": "points-confirmation",
-          "error": "HTTP_400 https://proleague.code.brussels/points-confirmation '{\\n  \"code\": \"E_MISSING_OR_INVALID_PARAMS\",\\n  \"problems\": [\\n    \"\\\\\"competitionFeed\\\\\" is required, but it was not defined.\",\\n    \"\\\\\"seasonId\\\\\" is required, but it was not defined.\"\\n  ],\\n  \"message\": \"Th'"
+          "status": 200,
+          "url": "https://proleague.code.brussels/points-confirmation?competitionFeed=JPL&seasonId=2027",
+          "bytes": 262,
+          "sha256": "089625d127c6caa0c7caac8f9ab35b6c00e2ad3256b30133987cea104d3d451a",
+          "local_path": "raw/points-confirmation.json"
         },
         {
           "endpoint": "matches/info",
-          "error": "HTTP_404 https://proleague.code.brussels/matches/info 'undefined'"
+          "error": "HTTP_404 https://proleague.code.brussels/matches/info?competitionFeed=JPL&seasonId=2027 'undefined'"
         },
         {
           "endpoint": "clubs",
-          "error": "HTTP_400 https://proleague.code.brussels/clubs '{\\n  \"code\": \"E_MISSING_OR_INVALID_PARAMS\",\\n  \"problems\": [\\n    \"\\\\\"competitionFeed\\\\\" is required, but it was not defined.\",\\n    \"\\\\\"seasonId\\\\\" is required, but it was not defined.\"\\n  ],\\n  \"message\": \"Th'"
+          "status": 200,
+          "url": "https://proleague.code.brussels/clubs?competitionFeed=JPL&seasonId=2027",
+          "bytes": 2963,
+          "sha256": "72709dd813d96c8e06231bd88af1bbca67c593e2cca06ee74496d8cfc86335bc",
+          "local_path": "raw/clubs.json"
         }
       ]
     },
     "governance": {
       "opaque_string_player_ids_preserved": true,
+      "numeric_player_ids_preserved": true,
       "excel_access_bypass_attempted": false,
       "authenticated_surface_accessed": false,
       "private_team_or_user_endpoints_accessed": false,
