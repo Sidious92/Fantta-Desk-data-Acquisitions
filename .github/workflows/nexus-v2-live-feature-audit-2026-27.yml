@@ -1,0 +1,94 @@
+name: Nexus v2 Live Feature Audit 2026-27
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.nexus-v2-live-feature-audit-launch/EXECUTE'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: b4ee1f645885f7403694859bc50514622b62aa8a
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+      - name: Verify private authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "b4ee1f645885f7403694859bc50514622b62aa8a"
+          test -f fantadesk-private/scripts/nexus-v2-build-live-feature-surface-2026-27.py
+          test -f fantadesk-private/scripts/nexus-v2-acquire-understat-2025-all-leagues.mjs
+          sudo mkdir -p /mnt/data && sudo chown "$USER":"$USER" /mnt/data
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Install repository Node dependencies
+        working-directory: fantadesk-private
+        run: npm ci
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+      - name: Install pinned Python dependencies
+        shell: bash
+        run: python -m pip install --no-cache-dir numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 joblib==1.5.3 threadpoolctl==3.6.0 orjson==3.11.9
+      - name: Materialize frozen historical inputs
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+      - name: Build historical usage caches required by Minutes v2
+        shell: bash
+        run: |
+          set -euo pipefail
+          for season in 2023-24 2024-25 2025-26; do
+            python fantadesk-private/scripts/nexus-v2-precompute-usage-cache.py "$season"
+          done
+      - name: Acquire current official Listone 2026-27
+        working-directory: fantadesk-private
+        env:
+          NEXUS_LIVE_LISTONE_OUTPUT_ROOT: /mnt/data/current-listone-capture
+        run: node scripts/nexus-acquire-current-listone-2026-27.mjs
+      - name: Acquire foreign Understat 2025-26
+        working-directory: fantadesk-private
+        env:
+          NEXUS_V2_UNDERSTAT_2025_OUTPUT_ROOT: /mnt/data/understat-2025-capture
+        run: node scripts/nexus-v2-acquire-understat-2025-all-leagues.mjs
+      - name: Build frozen v2 live feature surface
+        shell: bash
+        env:
+          NEXUS_V2_CURRENT_LISTONE: /mnt/data/current-listone-capture/current-listone.json
+          NEXUS_V2_UNDERSTAT_2025_FOREIGN: /mnt/data/understat-2025-capture/understat-foreign-2025.json
+          NEXUS_V2_LIVE_FEATURE_OUT: /mnt/data/nexus_v2_live_feature_surface_2026_27.csv
+          NEXUS_V2_LIVE_FEATURE_AUDIT: /mnt/data/nexus_v2_live_feature_surface_2026_27_audit.json
+        run: python fantadesk-private/scripts/nexus-v2-build-live-feature-surface-2026-27.py
+      - name: Validate sanitized audit only
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f /mnt/data/nexus_v2_live_feature_surface_2026_27_audit.json
+          mkdir -p audit-output
+          cp /mnt/data/nexus_v2_live_feature_surface_2026_27_audit.json audit-output/audit.json
+          python - <<'PY'
+          import json
+          p=json.load(open('audit-output/audit.json'))
+          assert p['status']=='PASS'
+          assert p['roster_rows']>0
+          assert p['forbidden_economic_columns_present'] is False
+          assert p['feature_coverage']['AVERAGE_VOTE_FULL_ALL_LAG5']['features']>0
+          assert p['feature_coverage']['MINUTES_COMBINED_LAG123']['features']>0
+          print('LIVE_FEATURE_AUDIT=PASS',p['roster_rows'],p['understat_resolved'],p['understat_unresolved'],p['surface_sha256'])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-live-feature-audit-2026-27
+          path: audit-output/audit.json
+          if-no-files-found: error
+          retention-days: 7
