@@ -1,0 +1,231 @@
+name: Nexus Cross-League Fantasy Open Acquisition v1.6
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-crossleague-fantasy-open-v1-6-launch/EXECUTE'
+
+permissions:
+  contents: write
+
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      AUTHORITY_SHA: 7b54f67dac781e4aef96ec2af9e14daf6867a61a
+      OUT_ROOT: /mnt/data/nexus-crossleague-fantasy-open-v1
+      PROBE_ROOT: /mnt/data/nexus-additional-fantasy-public-probes-v1
+      VALIDATION_JSON: /mnt/data/nexus-crossleague-fantasy-open-v1-6-validation.json
+
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+
+      - name: Checkout fixed private scientific authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.AUTHORITY_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Verify authority and governance
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "$AUTHORITY_SHA"
+          test -f fantadesk-private/data/nexus/research-v3/crossleague-fantasy/nexus-crossleague-fantasy-open-acquisition-v1-3-protocol.json
+          test -f fantadesk-private/data/nexus/research-v2/final/nexus-v2-predictive-engine-freeze-v1.json
+          test -f scripts/nexus-acquire-crossleague-fantasy-open-v1-6.py
+          test -f scripts/nexus-probe-additional-fantasy-public-sources-v1.py
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+
+      - name: Install acquisition dependencies
+        shell: bash
+        run: python -m pip install --no-cache-dir pandas==2.2.3 requests==2.32.5 beautifulsoup4==4.13.5 lxml==6.0.1 html5lib==1.1
+
+      - name: Probe supplemental anonymous sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/nexus-probe-additional-fantasy-public-sources-v1.py
+          test -s "$PROBE_ROOT/probe-results.json"
+
+      - name: Acquire corrected public fantasy snapshot
+        shell: bash
+        env:
+          NEXUS_CROSSLEAGUE_FANTASY_OUT: ${{ env.OUT_ROOT }}
+        run: python scripts/nexus-acquire-crossleague-fantasy-open-v1-6.py
+
+      - name: Validate canonical snapshot
+        id: validate
+        shell: bash
+        run: |
+          set -uo pipefail
+          python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          import pandas as pd
+
+          root=Path('/mnt/data/nexus-crossleague-fantasy-open-v1')
+          probe=Path('/mnt/data/nexus-additional-fantasy-public-probes-v1/probe-results.json')
+          validation_path=Path('/mnt/data/nexus-crossleague-fantasy-open-v1-6-validation.json')
+          checks=[]
+          def check(name, condition, detail=None):
+              ok=bool(condition)
+              checks.append({'name':name,'pass':ok,'detail':detail})
+              return ok
+
+          m=json.load(open(root/'manifest.json'))
+          check('schema', m.get('schema')=='NEXUS_CROSSLEAGUE_FANTASY_OPEN_ACQUISITION_V1_1', m.get('schema'))
+          check('acquisition_status', m.get('status')=='PASS', m.get('status'))
+          g=m.get('governance',{})
+          check('no_cross_provider_normalization', g.get('cross_provider_normalization_performed') is False)
+          check('no_missing_fill', g.get('missing_values_filled') is False)
+          check('no_predictive_model_mutation', g.get('predictive_models_modified') is False)
+
+          pc=m.get('normalized',{}).get('provider_counts',{})
+          check('FPL_rows', pc.get('FPL_ARCHIVE',0)>1000, pc.get('FPL_ARCHIVE',0))
+          check('COMUNIO_rows', pc.get('COMUNIO',0)>1000, pc.get('COMUNIO',0))
+          check('MPG_rows', pc.get('MPG',0)>1000, pc.get('MPG',0))
+          check('BIWENGER_rows', pc.get('BIWENGER',0)>1000, pc.get('BIWENGER',0))
+
+          comunio=m.get('providers',{}).get('COMUNIO',{})
+          expected_competitions=['bundesliga','bundesliga2','laliga','superlig']
+          expected_seasons=['2021-22','2022-23','2023-24','2024-25','2025-26']
+          missing_scopes=[]
+          low_scopes=[]
+          for comp in expected_competitions:
+              for season in expected_seasons:
+                  key=f'{comp}:{season}'
+                  rows=int(comunio.get(key,{}).get('search_rows_ok',0) or 0)
+                  if key not in comunio or rows==0:
+                      missing_scopes.append(key)
+                  elif rows<50:
+                      low_scopes.append({'scope':key,'rows':rows})
+          check('COMUNIO_all_20_scopes_present', not missing_scopes, missing_scopes)
+          check('COMUNIO_scope_size_sanity', not low_scopes, low_scopes)
+
+          mpg=m.get('providers',{}).get('MPG',{})
+          check('MPG_no_fake_history_flag', mpg.get('fake_historical_seasons_created') is False, mpg.get('fake_historical_seasons_created'))
+          check('MPG_season_semantics_unverified', mpg.get('season_parameter_semantics_verified') is False, mpg.get('season_parameter_semantics_verified'))
+          check('MPG_unique_payload_groups', int(mpg.get('unique_payload_group_count',0) or 0)>0, mpg.get('unique_payload_group_count'))
+
+          idx=root/'normalized/provider-player-season-index.csv'
+          df=pd.read_csv(idx,low_memory=False)
+          mpg_seasons=set(df.loc[df['provider'].eq('MPG'),'season'].dropna().astype(str))
+          forbidden={'2021','2022','2023','2024','2025','2026','2021-22','2022-23','2023-24','2024-25','2025-26'}
+          check('MPG_no_verified_season_labels', not (mpg_seasons & forbidden), sorted(mpg_seasons))
+
+          biw=m.get('providers',{}).get('BIWENGER',{})
+          check('BIWENGER_multiple_score_modes', len(biw.get('valid_scores',[]))>=2, biw.get('valid_scores'))
+          check('BIWENGER_player_metadata', int(biw.get('metadata_ok',0) or 0)>100, biw.get('metadata_ok'))
+          check('BIWENGER_historical_rows', int(biw.get('historical_rows_ok',0) or 0)>1000, biw.get('historical_rows_ok'))
+          nonempty=sum(int(v or 0) for v in biw.get('nonempty_historical_rows_by_season',{}).values())
+          check('BIWENGER_nonempty_historical_reports', nonempty>500, {'total':nonempty,'by_season':biw.get('nonempty_historical_rows_by_season',{})})
+
+          required=[root/'manifest.json',root/'field-inventory.json',root/'file-inventory.json',idx,probe]
+          check('required_files', all(p.is_file() and p.stat().st_size>0 for p in required), [str(p) for p in required if not (p.is_file() and p.stat().st_size>0)])
+
+          probes=json.load(open(probe))
+          check('probe_schema', probes.get('schema')=='NEXUS_ADDITIONAL_FANTASY_PUBLIC_PROBES_V1', probes.get('schema'))
+
+          passed=all(x['pass'] for x in checks)
+          result={
+              'schema':'NEXUS_CROSSLEAGUE_FANTASY_OPEN_V1_6_VALIDATION',
+              'status':'PASS' if passed else 'FAIL',
+              'provider_counts':pc,
+              'total_rows':m.get('normalized',{}).get('provider_player_season_rows'),
+              'checks':checks,
+              'comunio_scopes':{k:v.get('search_rows_ok') for k,v in comunio.items()},
+              'mpg_unique_payload_groups':mpg.get('unique_payload_group_count'),
+              'mpg_normalized_seasons':sorted(mpg_seasons),
+              'biwenger_valid_scores':biw.get('valid_scores'),
+              'biwenger_metadata_ok':biw.get('metadata_ok'),
+              'biwenger_historical_rows_ok':biw.get('historical_rows_ok'),
+              'biwenger_nonempty_historical_rows_by_season':biw.get('nonempty_historical_rows_by_season'),
+              'supplemental_probes':[{k:r.get(k) for k in ['name','status','final_url','error']} for r in probes.get('results',[])],
+          }
+          validation_path.write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
+          print(json.dumps(result,ensure_ascii=False,indent=2))
+          sys.exit(0 if passed else 1)
+          PY
+
+      - name: Package snapshot and diagnostics
+        if: always()
+        shell: bash
+        run: |
+          set -u
+          mkdir -p /mnt/data/package-v1-6
+          test -f "$OUT_ROOT/manifest.json" && cp "$OUT_ROOT/manifest.json" /mnt/data/package-v1-6/nexus-crossleague-fantasy-open-v1-6-manifest.json || true
+          test -f "$OUT_ROOT/field-inventory.json" && cp "$OUT_ROOT/field-inventory.json" /mnt/data/package-v1-6/nexus-crossleague-fantasy-open-v1-6-field-inventory.json || true
+          test -f "$OUT_ROOT/file-inventory.json" && cp "$OUT_ROOT/file-inventory.json" /mnt/data/package-v1-6/nexus-crossleague-fantasy-open-v1-6-file-inventory.json || true
+          test -f "$VALIDATION_JSON" && cp "$VALIDATION_JSON" /mnt/data/package-v1-6/nexus-crossleague-fantasy-open-v1-6-validation.json || true
+          test -f "$PROBE_ROOT/probe-results.json" && cp "$PROBE_ROOT/probe-results.json" /mnt/data/package-v1-6/nexus-additional-fantasy-public-probes-v1.json || true
+          if test -d "$OUT_ROOT"; then
+            tar -C /mnt/data --zstd -cf /mnt/data/package-v1-6/nexus-crossleague-fantasy-open-v1-6.tar.zst nexus-crossleague-fantasy-open-v1
+            sha256sum /mnt/data/package-v1-6/nexus-crossleague-fantasy-open-v1-6.tar.zst > /mnt/data/package-v1-6/nexus-crossleague-fantasy-open-v1-6.tar.zst.sha256
+          fi
+          ls -lah /mnt/data/package-v1-6
+
+      - name: Upload snapshot and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-crossleague-fantasy-open-v1-6
+          path: /mnt/data/package-v1-6/*
+          if-no-files-found: warn
+          retention-days: 90
+          compression-level: 0
+
+      - name: Record terminal status safely
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          conclusion='${{ job.status }}'
+          tmp=$(mktemp)
+          python - "$tmp" "$conclusion" "$GITHUB_RUN_ID" "$GITHUB_SHA" "$AUTHORITY_SHA" <<'PY'
+          import json,sys
+          from pathlib import Path
+          out,conclusion,run_id,head_sha,authority_sha=sys.argv[1:]
+          root=Path('/mnt/data/nexus-crossleague-fantasy-open-v1')
+          validation=Path('/mnt/data/nexus-crossleague-fantasy-open-v1-6-validation.json')
+          payload={
+              'workflow':'Nexus Cross-League Fantasy Open Acquisition v1.6',
+              'run_id':int(run_id),
+              'conclusion':conclusion,
+              'head_sha':head_sha,
+              'authority_sha':authority_sha,
+          }
+          if (root/'manifest.json').is_file():
+              m=json.load(open(root/'manifest.json'))
+              payload['provider_counts']=m.get('normalized',{}).get('provider_counts',{})
+              payload['total_rows']=m.get('normalized',{}).get('provider_player_season_rows')
+          if validation.is_file():
+              v=json.load(open(validation))
+              payload['validation_status']=v.get('status')
+              payload['failed_checks']=[x for x in v.get('checks',[]) if not x.get('pass')]
+          Path(out).write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-crossleague-fantasy-open-v1-6-status
+          cp "$tmp" .nexus-crossleague-fantasy-open-v1-6-status/RESULT.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-crossleague-fantasy-open-v1-6-status/RESULT.json
+          git commit -m "ci: record cross-league fantasy v1.6 ${conclusion}" || exit 0
+          git push origin HEAD:main
