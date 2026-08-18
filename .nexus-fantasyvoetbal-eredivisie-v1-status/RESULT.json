@@ -1,5 +1,62 @@
 {
   "workflow": "Nexus FantasyVoetbal Eredivisie v1",
-  "job_status": "failure",
-  "run_id": 32181178783
+  "job_status": "success",
+  "run_id": 32181736628,
+  "manifest": {
+    "schema": "NEXUS_FANTASYVOETBAL_EREDIVISIE_V1",
+    "status": "PASS",
+    "capture_started": "2026-08-18T20:21:10.266892+00:00",
+    "capture_completed": "2026-08-18T20:21:41.188705+00:00",
+    "bootstrap": {
+      "url": "https://fantasy.espngoal.nl/api/bootstrap-static/",
+      "status": 200,
+      "sha256": "4f2ceeb65a1448a6c9129384ec6b9c135ffc4459c6fe0da01f7e7acf12b185fe",
+      "players": 539,
+      "teams": 18
+    },
+    "fixtures": {
+      "url": "https://fantasy.espngoal.nl/api/fixtures/",
+      "status": 200,
+      "sha256": "89884b045cd9bb995aad8af3e4577a201787e4f0b93d5cea8b376ae61b3d7ec7",
+      "rows": 306
+    },
+    "coverage": {
+      "summary_ok": 533,
+      "summary_errors": 6,
+      "summary_success_rate": 0.9888682745825603,
+      "current_history_rows": 1061,
+      "past_history_rows": 386
+    },
+    "governance": {
+      "provider_native_fields_preserved": true,
+      "cross_provider_normalization_performed": false,
+      "missing_values_filled": false,
+      "predictive_models_modified": false,
+      "decision_layer_started": false
+    }
+  },
+  "validation": {
+    "status": "PASS",
+    "checks": {
+      "manifest_pass": true,
+      "players_gt_300": true,
+      "summary_rate": true,
+      "no_model_mutation": true,
+      "no_normalization": true
+    },
+    "coverage": {
+      "summary_ok": 533,
+      "summary_errors": 6,
+      "summary_success_rate": 0.9888682745825603,
+      "current_history_rows": 1061,
+      "past_history_rows": 386
+    },
+    "bootstrap": {
+      "url": "https://fantasy.espngoal.nl/api/bootstrap-static/",
+      "status": 200,
+      "sha256": "4f2ceeb65a1448a6c9129384ec6b9c135ffc4459c6fe0da01f7e7acf12b185fe",
+      "players": 539,
+      "teams": 18
+    }
+  }
 }
