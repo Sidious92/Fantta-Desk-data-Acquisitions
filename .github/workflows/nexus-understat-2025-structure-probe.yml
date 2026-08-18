@@ -10,25 +10,24 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - name: Probe Understat EPL 2025 request contract
+      - name: Probe Understat EPL 2025 JSON endpoint
         shell: bash
         run: |
           node <<'NODE'
-          const pageUrl='https://understat.com/league/EPL/2025';
-          const assetUrl='https://understat.com/js/league.min.js?t=1765269520';
-          const headers={'user-agent':'Mozilla/5.0 FantaNexus/2.0 acquisition-structure-probe'};
-          const page=await fetch(pageUrl,{headers}); const html=await page.text();
-          const asset=await fetch(assetUrl,{headers}); const js=await asset.text();
-          console.log(JSON.stringify({pageStatus:page.status,pageBytes:Buffer.byteLength(html),assetStatus:asset.status,assetBytes:Buffer.byteLength(js)}));
-          function contexts(label,text,needle,max=12,radius=900){
-            let at=0,count=0;
-            while(count<max){ const p=text.indexOf(needle,at); if(p<0) break; console.log(`${label}[${count}] ${needle} @${p} ${JSON.stringify(text.slice(Math.max(0,p-radius),p+radius))}`); at=p+needle.length; count++; }
-            console.log(`${label}_count_${needle}=${count}`);
+          const headers={'user-agent':'Mozilla/5.0 FantaNexus/2.0 acquisition-structure-probe','accept':'application/json,text/plain,*/*','referer':'https://understat.com/league/EPL/2025'};
+          const urls=[
+            'https://understat.com/getLeagueData/EPL/2025',
+            'https://understat.com/league/getLeagueData/EPL/2025',
+            'https://understat.com/league/EPL/getLeagueData/EPL/2025'
+          ];
+          for (const url of urls) {
+            try {
+              const r=await fetch(url,{headers}); const text=await r.text();
+              const out={url,status:r.status,contentType:r.headers.get('content-type'),bytes:Buffer.byteLength(text)};
+              try {
+                const data=JSON.parse(text); out.keys=Object.keys(data); out.playerCount=Array.isArray(data.players)?data.players.length:null; out.firstPlayerKeys=Array.isArray(data.players)&&data.players[0]?Object.keys(data.players[0]):[];
+              } catch { out.prefix=text.slice(0,120).replace(/\s+/g,' '); }
+              console.log(JSON.stringify(out));
+            } catch(e) { console.log(JSON.stringify({url,error:e.message})); }
           }
-          for (const n of ['playersData','datesData','teamsData','$.ajax','$.get','$.post','ajax(','BASE_URL+','league/','getLeague','leagueData','loadData']) contexts('js',js,n,20,1000);
-          const strings=[...js.matchAll(/["']([^"']{1,160})["']/g)].map(m=>m[1]);
-          const interesting=[...new Set(strings.filter(s=>/(league|player|ajax|stat|data|year|season|date)/i.test(s)))];
-          console.log('interesting_strings='+JSON.stringify(interesting.slice(0,250)));
-          const htmlVars=[...html.matchAll(/(?:var|let|const)\s+([A-Za-z_$][\w$]*)\s*=\s*([^;]{0,400});/g)].map(m=>[m[1],m[2]]).filter(([k,v])=>/(league|season|year|date|id|url)/i.test(k));
-          console.log('html_vars='+JSON.stringify(htmlVars.slice(0,100)));
           NODE
