@@ -1,0 +1,21 @@
+name: V2 V1 Common Audit Status
+on:
+  workflow_run:
+    workflows: ["Nexus v2 V1 Common Subset Audit"]
+    types: [completed]
+permissions:
+  contents: write
+jobs:
+  record:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - shell: bash
+        run: |
+          mkdir -p .nexus-v2-v1-common-audit-status
+          printf '%s\n' '{"run_id":${{ github.event.workflow_run.id }},"conclusion":"${{ github.event.workflow_run.conclusion }}","head_sha":"${{ github.event.workflow_run.head_sha }}"}' > .nexus-v2-v1-common-audit-status/RESULT.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-v2-v1-common-audit-status/RESULT.json
+          git commit -m 'ci: record common subset audit status' || exit 0
+          git push
