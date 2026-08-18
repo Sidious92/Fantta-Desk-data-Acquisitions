@@ -587,6 +587,8 @@ def biwenger_capture_historical(root: Path):
         "catalog_fields": sorted(catalog_fields),
         "metadata_fields": sorted(metadata_fields),
         "historical_data_fields": sorted(history_fields),
+        "detail_fields": sorted(metadata_fields | history_fields),
+        "detail_profiles_ok": len(metadata_rows),
         "rows": current_catalog_rows + metadata_rows + historical_rows,
     }
 
