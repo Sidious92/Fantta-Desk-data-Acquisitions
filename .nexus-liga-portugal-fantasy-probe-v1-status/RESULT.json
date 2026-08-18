@@ -1,0 +1,229 @@
+{
+  "schema": "NEXUS_LIGA_PORTUGAL_FANTASY_PUBLIC_PROBE_V1",
+  "base": "https://fantasy.ligaportugal.pt/",
+  "pages": {
+    "home": {
+      "url": "https://fantasy.ligaportugal.pt/",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 3951,
+      "sha256": "f200109b0a8d00e317ee3979f542d36a7c682cf2fe8cce771072c994c971b38b",
+      "preview": "<!DOCTYPE html>\n<html lang=\"pt\" class=\"notranslate\" translate=\"no\">\n    <head>\n        <meta name=\"google\" content=\"notranslate\" />\n        <meta charset=\"utf-8\" />\n        <meta\n            name=\"viewport\"\n            content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"\n        />\n        <title>Fantasy Liga Portugal Betclic</title>\n        <link rel=\"home\" href=\"https://fantasy.ligaportugal.pt\" />\n\n        <meta property=\"locale\" content=\"ar\" />\n\n        <!-- favicons -->\n        <link\n            href=\"/img/favicons/180x180.png\"\n            rel=\"apple-touch-icon\"\n            sizes=\"180x180\"\n        />\n        <link\n            href=\"/img/favicons/32x32.png\"\n            rel=\"icon\"\n            sizes=\"32x32\"\n            type=\"image/png\"\n        />\n        <link\n            href=\"/img/favicons/16x16.png\"\n            rel=\"icon\"\n            sizes=\"16x16\"\n            type=\"image/png\"\n        />\n        <link\n            rel=\"mask-icon\"\n            href=\"/img/favicons/favicon.svg"
+    },
+    "player_list": {
+      "url": "https://fantasy.ligaportugal.pt/player-list",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 3951,
+      "sha256": "f200109b0a8d00e317ee3979f542d36a7c682cf2fe8cce771072c994c971b38b",
+      "preview": "<!DOCTYPE html>\n<html lang=\"pt\" class=\"notranslate\" translate=\"no\">\n    <head>\n        <meta name=\"google\" content=\"notranslate\" />\n        <meta charset=\"utf-8\" />\n        <meta\n            name=\"viewport\"\n            content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"\n        />\n        <title>Fantasy Liga Portugal Betclic</title>\n        <link rel=\"home\" href=\"https://fantasy.ligaportugal.pt\" />\n\n        <meta property=\"locale\" content=\"ar\" />\n\n        <!-- favicons -->\n        <link\n            href=\"/img/favicons/180x180.png\"\n            rel=\"apple-touch-icon\"\n            sizes=\"180x180\"\n        />\n        <link\n            href=\"/img/favicons/32x32.png\"\n            rel=\"icon\"\n            sizes=\"32x32\"\n            type=\"image/png\"\n        />\n        <link\n            href=\"/img/favicons/16x16.png\"\n            rel=\"icon\"\n            sizes=\"16x16\"\n            type=\"image/png\"\n        />\n        <link\n            rel=\"mask-icon\"\n            href=\"/img/favicons/favicon.svg"
+    },
+    "rules": {
+      "url": "https://fantasy.ligaportugal.pt/help/rules",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 3951,
+      "sha256": "f200109b0a8d00e317ee3979f542d36a7c682cf2fe8cce771072c994c971b38b",
+      "preview": "<!DOCTYPE html>\n<html lang=\"pt\" class=\"notranslate\" translate=\"no\">\n    <head>\n        <meta name=\"google\" content=\"notranslate\" />\n        <meta charset=\"utf-8\" />\n        <meta\n            name=\"viewport\"\n            content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"\n        />\n        <title>Fantasy Liga Portugal Betclic</title>\n        <link rel=\"home\" href=\"https://fantasy.ligaportugal.pt\" />\n\n        <meta property=\"locale\" content=\"ar\" />\n\n        <!-- favicons -->\n        <link\n            href=\"/img/favicons/180x180.png\"\n            rel=\"apple-touch-icon\"\n            sizes=\"180x180\"\n        />\n        <link\n            href=\"/img/favicons/32x32.png\"\n            rel=\"icon\"\n            sizes=\"32x32\"\n            type=\"image/png\"\n        />\n        <link\n            href=\"/img/favicons/16x16.png\"\n            rel=\"icon\"\n            sizes=\"16x16\"\n            type=\"image/png\"\n        />\n        <link\n            rel=\"mask-icon\"\n            href=\"/img/favicons/favicon.svg"
+    }
+  },
+  "scripts": [
+    {
+      "url": "https://platform.twitter.com/widgets.js",
+      "status": 200,
+      "content_type": "application/javascript; charset=utf-8",
+      "bytes": 93967,
+      "sha256": "2ba02cd55d865d24d23534d6f33db4654634d5ecaea53e2e5c2df6c8e9700e6f",
+      "preview": "",
+      "requested": "https://platform.twitter.com/widgets.js",
+      "contexts": {
+        "api": [
+          " Promises/A+.\n * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)\n * @license   Licensed under MIT license\n *            See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE\n * @version   v4.2.5+7f2b526d\n */var r;r=function(){\"use strict\";fu"
+        ],
+        "bootstrap": [],
+        "element-summary": [],
+        "player": []
+      }
+    },
+    {
+      "url": "https://fantasy.ligaportugal.pt/assets/index-CMNgcfw3.js",
+      "status": 200,
+      "content_type": "application/x-javascript",
+      "bytes": 2507969,
+      "sha256": "00a4d918e4f8146fb06b53dc041d7408231de6cbe6d80c78cccce4541ada79e0",
+      "preview": "",
+      "requested": "https://fantasy.ligaportugal.pt/assets/index-CMNgcfw3.js",
+      "contexts": {
+        "api": [
+          "on\",ADFS:\"adfs\",DSTS:\"dstsv2\",AAD_INSTANCE_DISCOVERY_ENDPT:\"https://login.microsoftonline.com/common/discovery/instance?api-version=1.1&authorization_endpoint=\",CIAM_AUTH_URL:\".ciamlogin.com\",AAD_TENANT_DOMAIN_SUFFIX:\".onmicrosoft.com\",RESOURCE_DELIM:\"|\",NO_ACCOUNT:\"NO_ACCOUNT\",CLAIMS:\"claims\",CONSUMER_UTID:\"9188040d-6c67-4c5b-b112-36a304b66",
+          "2.0/authorize\",end_session_endpoint:\"https://login.microsoftonline.com/{tenantid}/oauth2/v2.0/logout\"},\"login.chinacloudapi.cn\":{token_endpoint:\"https://login.chinacloudapi.cn/{tenantid}/oauth2/v2.0/token\",jwks_uri:\"https://login.chinacloudapi.cn/{tenantid}/discovery/v2.0/keys\",issuer:\"https://login.partner.microsoftonline.cn/{tenantid}/v2.0",
+          "n.microsoftonline.com/{tenantid}/oauth2/v2.0/logout\"},\"login.chinacloudapi.cn\":{token_endpoint:\"https://login.chinacloudapi.cn/{tenantid}/oauth2/v2.0/token\",jwks_uri:\"https://login.chinacloudapi.cn/{tenantid}/discovery/v2.0/keys\",issuer:\"https://login.partner.microsoftonline.cn/{tenantid}/v2.0\",authorization_endpoint:\"https://login.chinaclou",
+          "api.cn\":{token_endpoint:\"https://login.chinacloudapi.cn/{tenantid}/oauth2/v2.0/token\",jwks_uri:\"https://login.chinacloudapi.cn/{tenantid}/discovery/v2.0/keys\",issuer:\"https://login.partner.microsoftonline.cn/{tenantid}/v2.0\",authorization_endpoint:\"https://login.chinacloudapi.cn/{tenantid}/oauth2/v2.0/authorize\",end_session_endpoint:\"https:/",
+          "keys\",issuer:\"https://login.partner.microsoftonline.cn/{tenantid}/v2.0\",authorization_endpoint:\"https://login.chinacloudapi.cn/{tenantid}/oauth2/v2.0/authorize\",end_session_endpoint:\"https://login.chinacloudapi.cn/{tenantid}/oauth2/v2.0/logout\"},\"login.microsoftonline.us\":{token_endpoint:\"https://login.microsoftonline.us/{tenantid}/oauth2/v2",
+          "ndpoint:\"https://login.chinacloudapi.cn/{tenantid}/oauth2/v2.0/authorize\",end_session_endpoint:\"https://login.chinacloudapi.cn/{tenantid}/oauth2/v2.0/logout\"},\"login.microsoftonline.us\":{token_endpoint:\"https://login.microsoftonline.us/{tenantid}/oauth2/v2.0/token\",jwks_uri:\"https://login.microsoftonline.us/{tenantid}/discovery/v2.0/keys\",is",
+          "ine.cn\",preferred_cache:\"login.partner.microsoftonline.cn\",aliases:[\"login.partner.microsoftonline.cn\",\"login.chinacloudapi.cn\"]},{preferred_network:\"login.microsoftonline.de\",preferred_cache:\"login.microsoftonline.de\",aliases:[\"login.microsoftonline.de\"]},{preferred_network:\"login.microsoftonline.us\",preferred_cache:\"login.microsoftonline.u",
+          "gin.microsoftonline.us\",preferred_cache:\"login.microsoftonline.us\",aliases:[\"login.microsoftonline.us\",\"login.usgovcloudapi.net\"]},{preferred_network:\"login-us.microsoftonline.com\",preferred_cache:\"login-us.microsoftonline.com\",aliases:[\"login-us.microsoftonline.com\"]}]}},HC=tB.endpointMetadata,nW=tB.instanceDiscoveryMetadata,nB=new Set;nW.m"
+        ],
+        "bootstrap": [
+          ",e=>t=>e(t)),kF=na(\"ADD_WATCHED\",e=>t=>e(t)),IF=na(\"ADD_TEAMS\",e=>t=>e(t)),jF=na(\"ADD_TOTAL_PLAYERS\",e=>t=>e(t)),Xu=w0(\"BOOTSTRAP_START\",\"BOOTSTRAP_SUCCESS\",\"BOOTSTRAP_FAILURE\")(),Da1=w0(\"BOOTSTRAP_ME_START\",\"BOOTSTRAP_ME_SUCCESS\",\"BOOTSTRAP_ME_FAILURE\")(),Fa1=w0(\"BOOTSTRAP_STATIC_START\",\"BOOTSTRAP_STATIC_SUCCESS\",\"BOOTSTRAP_STATIC_FAILURE\")(),BF=",
+          "(\"ADD_WATCHED\",e=>t=>e(t)),IF=na(\"ADD_TEAMS\",e=>t=>e(t)),jF=na(\"ADD_TOTAL_PLAYERS\",e=>t=>e(t)),Xu=w0(\"BOOTSTRAP_START\",\"BOOTSTRAP_SUCCESS\",\"BOOTSTRAP_FAILURE\")(),Da1=w0(\"BOOTSTRAP_ME_START\",\"BOOTSTRAP_ME_SUCCESS\",\"BOOTSTRAP_ME_FAILURE\")(),Fa1=w0(\"BOOTSTRAP_STATIC_START\",\"BOOTSTRAP_STATIC_SUCCESS\",\"BOOTSTRAP_STATIC_FAILURE\")(),BF=()=>Math.round(new",
+          ">e(t)),IF=na(\"ADD_TEAMS\",e=>t=>e(t)),jF=na(\"ADD_TOTAL_PLAYERS\",e=>t=>e(t)),Xu=w0(\"BOOTSTRAP_START\",\"BOOTSTRAP_SUCCESS\",\"BOOTSTRAP_FAILURE\")(),Da1=w0(\"BOOTSTRAP_ME_START\",\"BOOTSTRAP_ME_SUCCESS\",\"BOOTSTRAP_ME_FAILURE\")(),Fa1=w0(\"BOOTSTRAP_STATIC_START\",\"BOOTSTRAP_STATIC_SUCCESS\",\"BOOTSTRAP_STATIC_FAILURE\")(),BF=()=>Math.round(new Date().getTime()/1e",
+          ">e(t)),jF=na(\"ADD_TOTAL_PLAYERS\",e=>t=>e(t)),Xu=w0(\"BOOTSTRAP_START\",\"BOOTSTRAP_SUCCESS\",\"BOOTSTRAP_FAILURE\")(),Da1=w0(\"BOOTSTRAP_ME_START\",\"BOOTSTRAP_ME_SUCCESS\",\"BOOTSTRAP_ME_FAILURE\")(),Fa1=w0(\"BOOTSTRAP_STATIC_START\",\"BOOTSTRAP_STATIC_SUCCESS\",\"BOOTSTRAP_STATIC_FAILURE\")(),BF=()=>Math.round(new Date().getTime()/1e3),Ha1=Cn({loading:(e=!1,t)=>{",
+          "AL_PLAYERS\",e=>t=>e(t)),Xu=w0(\"BOOTSTRAP_START\",\"BOOTSTRAP_SUCCESS\",\"BOOTSTRAP_FAILURE\")(),Da1=w0(\"BOOTSTRAP_ME_START\",\"BOOTSTRAP_ME_SUCCESS\",\"BOOTSTRAP_ME_FAILURE\")(),Fa1=w0(\"BOOTSTRAP_STATIC_START\",\"BOOTSTRAP_STATIC_SUCCESS\",\"BOOTSTRAP_STATIC_FAILURE\")(),BF=()=>Math.round(new Date().getTime()/1e3),Ha1=Cn({loading:(e=!1,t)=>{switch(t.type){case I",
+          ",Xu=w0(\"BOOTSTRAP_START\",\"BOOTSTRAP_SUCCESS\",\"BOOTSTRAP_FAILURE\")(),Da1=w0(\"BOOTSTRAP_ME_START\",\"BOOTSTRAP_ME_SUCCESS\",\"BOOTSTRAP_ME_FAILURE\")(),Fa1=w0(\"BOOTSTRAP_STATIC_START\",\"BOOTSTRAP_STATIC_SUCCESS\",\"BOOTSTRAP_STATIC_FAILURE\")(),BF=()=>Math.round(new Date().getTime()/1e3),Ha1=Cn({loading:(e=!1,t)=>{switch(t.type){case I1(Xu.request):return!0;",
+          "AP_SUCCESS\",\"BOOTSTRAP_FAILURE\")(),Da1=w0(\"BOOTSTRAP_ME_START\",\"BOOTSTRAP_ME_SUCCESS\",\"BOOTSTRAP_ME_FAILURE\")(),Fa1=w0(\"BOOTSTRAP_STATIC_START\",\"BOOTSTRAP_STATIC_SUCCESS\",\"BOOTSTRAP_STATIC_FAILURE\")(),BF=()=>Math.round(new Date().getTime()/1e3),Ha1=Cn({loading:(e=!1,t)=>{switch(t.type){case I1(Xu.request):return!0;case I1(Xu.failure):case I1(Xu.su",
+          "ILURE\")(),Da1=w0(\"BOOTSTRAP_ME_START\",\"BOOTSTRAP_ME_SUCCESS\",\"BOOTSTRAP_ME_FAILURE\")(),Fa1=w0(\"BOOTSTRAP_STATIC_START\",\"BOOTSTRAP_STATIC_SUCCESS\",\"BOOTSTRAP_STATIC_FAILURE\")(),BF=()=>Math.round(new Date().getTime()/1e3),Ha1=Cn({loading:(e=!1,t)=>{switch(t.type){case I1(Xu.request):return!0;case I1(Xu.failure):case I1(Xu.success):return!1;default:r"
+        ],
+        "element-summary": [
+          "xR(r,e.filter,G5(n())))}))},Im=e=>(t,n)=>{t(B3({...Zc(n()),filter:K5(n())[e-1].value}))},b71=e=>async t=>{try{await nn(`element-summary/${e}/`,t,S4,{id:e})}catch{return}},qi=e=>async t=>{t(mH(e)),t(b71(e))},Y_=e=>async t=>{try{await nn(`event/${e}/live/`,t,qH,{id:e})}catch{return}},s5=e=>async t=>{try{await nn(`fixtures/?event=${e}`,t,z$,{event:e})}catc"
+        ],
+        "player": [
+          ")),SF=na(\"ADD_GAME_SCORING\",e=>t=>e(t)),TF=na(\"ADD_GAME_SETTINGS\",e=>t=>e(t)),EF=na(\"ADD_PHASES\",e=>t=>e(t)),NF=na(\"ADD_PLAYER\",e=>t=>e(t)),kF=na(\"ADD_WATCHED\",e=>t=>e(t)),IF=na(\"ADD_TEAMS\",e=>t=>e(t)),jF=na(\"ADD_TOTAL_PLAYERS\",e=>t=>e(t)),Xu=w0(\"BOOTSTRAP_START\",\"BOOTSTRAP_SUCCESS\",\"BOOTSTRAP_FAILURE\")(),Da1=w0(\"BOOTSTRAP_ME_START\",\"BOOTSTRAP_",
+          ">t=>e(t)),NF=na(\"ADD_PLAYER\",e=>t=>e(t)),kF=na(\"ADD_WATCHED\",e=>t=>e(t)),IF=na(\"ADD_TEAMS\",e=>t=>e(t)),jF=na(\"ADD_TOTAL_PLAYERS\",e=>t=>e(t)),Xu=w0(\"BOOTSTRAP_START\",\"BOOTSTRAP_SUCCESS\",\"BOOTSTRAP_FAILURE\")(),Da1=w0(\"BOOTSTRAP_ME_START\",\"BOOTSTRAP_ME_SUCCESS\",\"BOOTSTRAP_ME_FAILURE\")(),Fa1=w0(\"BOOTSTRAP_STATIC_START\",\"BOOTSTRAP_STATIC_SUCCESS\",\"B",
+          "ER_START\",\"RECOVER_SUCCESS\",\"RECOVER_FAILURE\")(),RH=w0(\"REGISTER_START\",\"REGISTER_SUCCESS\",\"REGISTER_FAILURE\")(),_H=w0(\"PLAYER_UPDATE_START\",\"PLAYER_UPDATE_SUCCESS\",\"PLAYER_UPDATE_FAILURE\")();w0(\"PLAYER_VERIFY_START\",\"PLAYER_VERIFY_SUCCESS\",\"PLAYER_VERIFY_FAILURE\")();const CH=w0(\"PASSWORD_CHANGE_START\",\"PASSWORD_CHANGE_SUCCESS\",\"PASSWORD_CHANGE",
+          "CESS\",\"RECOVER_FAILURE\")(),RH=w0(\"REGISTER_START\",\"REGISTER_SUCCESS\",\"REGISTER_FAILURE\")(),_H=w0(\"PLAYER_UPDATE_START\",\"PLAYER_UPDATE_SUCCESS\",\"PLAYER_UPDATE_FAILURE\")();w0(\"PLAYER_VERIFY_START\",\"PLAYER_VERIFY_SUCCESS\",\"PLAYER_VERIFY_FAILURE\")();const CH=w0(\"PASSWORD_CHANGE_START\",\"PASSWORD_CHANGE_SUCCESS\",\"PASSWORD_CHANGE_FAILURE\")(),LH=w0(\"PA",
+          "(),RH=w0(\"REGISTER_START\",\"REGISTER_SUCCESS\",\"REGISTER_FAILURE\")(),_H=w0(\"PLAYER_UPDATE_START\",\"PLAYER_UPDATE_SUCCESS\",\"PLAYER_UPDATE_FAILURE\")();w0(\"PLAYER_VERIFY_START\",\"PLAYER_VERIFY_SUCCESS\",\"PLAYER_VERIFY_FAILURE\")();const CH=w0(\"PASSWORD_CHANGE_START\",\"PASSWORD_CHANGE_SUCCESS\",\"PASSWORD_CHANGE_FAILURE\")(),LH=w0(\"PASSWORD_RESET_START\",\"PAS",
+          "ISTER_SUCCESS\",\"REGISTER_FAILURE\")(),_H=w0(\"PLAYER_UPDATE_START\",\"PLAYER_UPDATE_SUCCESS\",\"PLAYER_UPDATE_FAILURE\")();w0(\"PLAYER_VERIFY_START\",\"PLAYER_VERIFY_SUCCESS\",\"PLAYER_VERIFY_FAILURE\")();const CH=w0(\"PASSWORD_CHANGE_START\",\"PASSWORD_CHANGE_SUCCESS\",\"PASSWORD_CHANGE_FAILURE\")(),LH=w0(\"PASSWORD_RESET_START\",\"PASSWORD_RESET_SUCCESS\",\"PASSWORD",
+          "ER_FAILURE\")(),_H=w0(\"PLAYER_UPDATE_START\",\"PLAYER_UPDATE_SUCCESS\",\"PLAYER_UPDATE_FAILURE\")();w0(\"PLAYER_VERIFY_START\",\"PLAYER_VERIFY_SUCCESS\",\"PLAYER_VERIFY_FAILURE\")();const CH=w0(\"PASSWORD_CHANGE_START\",\"PASSWORD_CHANGE_SUCCESS\",\"PASSWORD_CHANGE_FAILURE\")(),LH=w0(\"PASSWORD_RESET_START\",\"PASSWORD_RESET_SUCCESS\",\"PASSWORD_RESET_FAILURE\")(),wH=",
+          "AYER_UPDATE_START\",\"PLAYER_UPDATE_SUCCESS\",\"PLAYER_UPDATE_FAILURE\")();w0(\"PLAYER_VERIFY_START\",\"PLAYER_VERIFY_SUCCESS\",\"PLAYER_VERIFY_FAILURE\")();const CH=w0(\"PASSWORD_CHANGE_START\",\"PASSWORD_CHANGE_SUCCESS\",\"PASSWORD_CHANGE_FAILURE\")(),LH=w0(\"PASSWORD_RESET_START\",\"PASSWORD_RESET_SUCCESS\",\"PASSWORD_RESET_FAILURE\")(),wH=w0(\"PASSWORD_SET_START\","
+        ]
+      }
+    },
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/postscribe/2.0.8/postscribe.min.js",
+      "status": 200,
+      "content_type": "application/javascript; charset=utf-8",
+      "bytes": 17908,
+      "sha256": "c4e20f53f5ef0ed44b783437aa3f4638a9a56cc4aa29ae83ed9212eb2807052a",
+      "preview": "",
+      "requested": "https://cdnjs.cloudflare.com/ajax/libs/postscribe/2.0.8/postscribe.min.js",
+      "contexts": {
+        "api": [],
+        "bootstrap": [],
+        "element-summary": [],
+        "player": []
+      }
+    }
+  ],
+  "known_endpoint_tests": [
+    {
+      "url": "https://fantasy.ligaportugal.pt/api/bootstrap-static/",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 970284,
+      "sha256": "60dd7c0d5c48b1db5f3ff74b0f14ea6bc9d99c141529406cc6cbcd4769d40f5b",
+      "preview": "{\"chips\":[{\"id\":1,\"name\":\"wildcard\",\"number\":1,\"start_event\":2,\"stop_event\":17,\"chip_type\":\"transfer\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":2,\"name\":\"wildcard\",\"number\":1,\"start_event\":18,\"stop_event\":34,\"chip_type\":\"transfer\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":3,\"name\":\"pdbus\",\"number\":1,\"start_event\":1,\"stop_event\":17,\"chip_type\":\"team\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":4,\"name\":\"pdbus\",\"number\":1,\"start_event\":18,\"stop_event\":34,\"chip_type\":\"team\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":5,\"name\":\"2capt\",\"number\":1,\"start_event\":1,\"stop_event\":17,\"chip_type\":\"team\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":6,\"name\":\"2capt\",\"number\":1,\"start_event\":18,\"stop_event\":34,\"chip_type\":\"team\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"p",
+      "requested": "https://fantasy.ligaportugal.pt/api/bootstrap-static/",
+      "json_type": "dict",
+      "json_keys": [
+        "chips",
+        "events",
+        "game_settings",
+        "game_config",
+        "phases",
+        "teams",
+        "total_players",
+        "element_stats",
+        "element_types",
+        "elements"
+      ],
+      "json_len": 10
+    },
+    {
+      "url": "https://fantasy.ligaportugal.pt/api/fixtures/",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 96801,
+      "sha256": "00dc35816e34ac714e36522fbac0c85d8e154f58e2dacb04aa8efc3623c8a2b6",
+      "preview": "[{\"code\":2654445,\"event\":null,\"finished\":false,\"finished_provisional\":false,\"id\":17,\"kickoff_time\":null,\"minutes\":0,\"provisional_start_time\":false,\"started\":null,\"team_a\":8,\"team_a_score\":null,\"team_h\":12,\"team_h_score\":null,\"stats\":[]},{\"code\":2654434,\"event\":1,\"finished\":true,\"finished_provisional\":true,\"id\":1,\"kickoff_time\":\"2026-08-07T19:15:00Z\",\"minutes\":90,\"provisional_start_time\":false,\"started\":true,\"team_a\":7,\"team_a_score\":1,\"team_h\":5,\"team_h_score\":1,\"stats\":[{\"identifier\":\"goals_scored\",\"a\":[{\"value\":1,\"element\":241}],\"h\":[{\"value\":1,\"element\":91}]},{\"identifier\":\"assists\",\"a\":[{\"value\":1,\"element\":220}],\"h\":[{\"value\":1,\"element\":90}]},{\"identifier\":\"penalties_saved\",\"a\":[],\"h\":[]},{\"identifier\":\"penalties_missed\",\"a\":[],\"h\":[]},{\"identifier\":\"yellow_cards\",\"a\":[{\"value\":1,\"element\":218},{\"value\":1,\"element\":228}],\"h\":[{\"value\":1,\"element\":107}]},{\"identifier\":\"red_cards\",\"a\":[],\"h\":[]},{\"identifier\":\"saves\",\"a\":[{\"value\":2,\"element\":214}],\"h\":[]},{\"identifier\":\"own_goals\"",
+      "requested": "https://fantasy.ligaportugal.pt/api/fixtures/",
+      "json_type": "list",
+      "json_keys": null,
+      "json_len": 306
+    },
+    {
+      "url": "https://fantasy.ligaportugal.pt/api/event/1/live/",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 332788,
+      "sha256": "b189e14d0a85908ee6e385c4ae6842c51e3ec63d148639213aad4f27a314362e",
+      "preview": "{\"elements\":[{\"id\":1,\"stats\":{\"minutes\":0,\"goals_scored\":0,\"assists\":0,\"clean_sheets\":0,\"goals_conceded\":0,\"penalties_saved\":0,\"penalties_missed\":0,\"yellow_cards\":0,\"red_cards\":0,\"saves\":0,\"own_goals\":0,\"attacking_bonus\":0,\"defending_bonus\":0,\"winning_goals\":0,\"key_passes\":0,\"clearances_blocks_interceptions\":0,\"recoveries\":0,\"shots_on_target\":0,\"total_points\":0,\"in_dreamteam\":false,\"played\":false},\"explain\":[{\"fixture\":5,\"stats\":[{\"identifier\":\"minutes\",\"points\":0,\"value\":0,\"points_modification\":0}]}],\"modified\":false},{\"id\":2,\"stats\":{\"minutes\":90,\"goals_scored\":0,\"assists\":0,\"clean_sheets\":0,\"goals_conceded\":2,\"penalties_saved\":0,\"penalties_missed\":0,\"yellow_cards\":1,\"red_cards\":0,\"saves\":0,\"own_goals\":0,\"attacking_bonus\":0,\"defending_bonus\":0,\"winning_goals\":0,\"key_passes\":0,\"clearances_blocks_interceptions\":5,\"recoveries\":2,\"shots_on_target\":0,\"total_points\":0,\"in_dreamteam\":false,\"played\":true},\"explain\":[{\"fixture\":5,\"stats\":[{\"identifier\":\"minutes\",\"points\":2,\"value\":90,\"points_",
+      "requested": "https://fantasy.ligaportugal.pt/api/event/1/live/",
+      "json_type": "dict",
+      "json_keys": [
+        "elements"
+      ],
+      "json_len": 1
+    },
+    {
+      "url": "https://fantasy.ligaportugal.pt/api/element-summary/1/",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 8828,
+      "sha256": "c1786dd34656b6f3e6ea7cb76a7f94b37b9e2e7357c41ce715d0add7abd4c5f0",
+      "preview": "{\"fixtures\":[{\"id\":23,\"code\":2654454,\"team_h\":17,\"team_h_score\":null,\"team_a\":18,\"team_a_score\":null,\"event\":3,\"finished\":false,\"minutes\":0,\"provisional_start_time\":false,\"kickoff_time\":\"2026-08-22T14:30:00Z\",\"event_name\":\"Jornada 3\",\"is_home\":false},{\"id\":28,\"code\":2654460,\"team_h\":18,\"team_h_score\":null,\"team_a\":15,\"team_a_score\":null,\"event\":4,\"finished\":false,\"minutes\":0,\"provisional_start_time\":false,\"kickoff_time\":\"2026-08-29T17:00:00Z\",\"event_name\":\"Jornada 4\",\"is_home\":true},{\"id\":41,\"code\":2654472,\"team_h\":8,\"team_h_score\":null,\"team_a\":18,\"team_a_score\":null,\"event\":5,\"finished\":false,\"minutes\":0,\"provisional_start_time\":true,\"kickoff_time\":\"2026-09-06T17:00:00Z\",\"event_name\":\"Jornada 5\",\"is_home\":false},{\"id\":46,\"code\":2654478,\"team_h\":18,\"team_h_score\":null,\"team_a\":14,\"team_a_score\":null,\"event\":6,\"finished\":false,\"minutes\":0,\"provisional_start_time\":true,\"kickoff_time\":\"2026-09-13T17:00:00Z\",\"event_name\":\"Jornada 6\",\"is_home\":true},{\"id\":58,\"code\":2654488,\"team_h\":6,\"team",
+      "requested": "https://fantasy.ligaportugal.pt/api/element-summary/1/",
+      "json_type": "dict",
+      "json_keys": [
+        "fixtures",
+        "history",
+        "history_past"
+      ],
+      "json_len": 3
+    },
+    {
+      "url": "https://fantasy.ligaportugal.pt/api/players/",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 179,
+      "sha256": "5547992afdadb59737c5c0feb1a35dff294cd27145bf290c031737ecf8a2577d",
+      "preview": "\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <title>Not Found</title>\n</head>\n<body>\n  <h1>Not Found</h1><p>The requested resource was not found on this server.</p>\n</body>\n</html>\n",
+      "requested": "https://fantasy.ligaportugal.pt/api/players/"
+    },
+    {
+      "url": "https://fantasy.ligaportugal.pt/api/player-list/",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 179,
+      "sha256": "5547992afdadb59737c5c0feb1a35dff294cd27145bf290c031737ecf8a2577d",
+      "preview": "\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <title>Not Found</title>\n</head>\n<body>\n  <h1>Not Found</h1><p>The requested resource was not found on this server.</p>\n</body>\n</html>\n",
+      "requested": "https://fantasy.ligaportugal.pt/api/player-list/"
+    }
+  ],
+  "discovered_api_candidates": [
+    "&&r&&a.jsx(vC1,{})]})})},Fm=xe()(CC1),LC1=async(e,t,n)=>{await fetch(`/api/${e}`,{method:n,credentials:",
+    ")!==-1};async function JX(e,t,n,r,o,i={}){let s;try{t(n.request()),s=await fetch(`/api/${e}`,{...r,credentials:",
+    ")})}),p[m+1]&&a.jsx(_f,{children:r?a.jsx(e0,{width:1,to:`/fixtures/${m+1}`,onClick:()=>v(m+1),variant:",
+    ",b1=Z_({elementsById:u,elementsDataById:b,fixturesById:m,teamsById:S}),R1={11:a.jsx(",
+    ",{children:a.jsxs(l3,{children:[p[m-1]&&a.jsx(nO,{children:r?a.jsx(e0,{width:1,to:`/fixtures/${m-1}`,onClick:()=>v(m-1),variant:",
+    ",{}),fixtures:n[u.team],element:u,teamsById:p})})]})},Fw1=({t:e,elementType:t,elementTypesByPosition:n,positions:r,...o})=>n?a.jsx(jO,{children:a.jsxs(Ul,{elementType:t,children:[a.jsx(",
+    ",{}),fixtures:o[n.team],element:n,teamsById:s})})]}),PS1=({t:e,elementsById:t,picks:n,title:r,...o})=>a.jsx(jO,{children:a.jsxs(Ul,{children:[a.jsx(",
+    ",{}),fixtures:s[u.team],element:u,teamsById:i})})]}):a.jsx(a.Fragment,{children:a.jsx(",
+    "/fixtures",
+    "/fixtures/:eventId",
+    "/player-list",
+    "ADD_FIXTURES_EVENT_FAILURE",
+    "ADD_FIXTURES_EVENT_START",
+    "ADD_FIXTURES_EVENT_SUCCESS",
+    "ADD_FIXTURES_FAILURE",
+    "ADD_FIXTURES_START",
+    "ADD_FIXTURES_SUCCESS",
+    "Fixtures",
+    "Fixtures will be determined at the end of Round {{ round }}",
+    "bootstrap-static/",
+    "cupNotStarted.fixtures",
+    "fixtures.localTimes",
+    "fixtures.next",
+    "fixtures.previous",
+    "fixtures.title",
+    "navigation.fixtures",
+    "}/api/`}function Qn1(e){return`${qD(e)}${e.projectId}/envelope/`}function er1(e,t){return ut1({sentry_key:e.publicKey,sentry_version:Jn1,...t&&{sentry_client:`${t.name}/${t.version}`}})}function tr1(e,t={}){const n=typeof t==",
+    "}};if(!m||!L.length)return null;const _1=$S1({elementsById:A,teamsById:S,fixturesForNextEventByTeam:_}),N1={11:a.jsx(ot,{content:"
+  ],
+  "player_list_html": {
+    "has_table": false,
+    "player_tokens": 0,
+    "next_data": false,
+    "nuxt": false
+  }
+}
