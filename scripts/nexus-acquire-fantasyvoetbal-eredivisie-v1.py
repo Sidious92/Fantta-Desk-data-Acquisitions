@@ -89,7 +89,7 @@ def main():
             for x in arr:
                 if not isinstance(x,dict): continue
                 summary_fields[section].update(x.keys())
-                target.append({'provider':'ESPN_FANTASY_VOETBAL','competition':'Eredivisie','provider_player_id':r['id'],'web_name':meta.get('web_name'),'team_name':meta.get('team_name'),'source_url':r['url'],'source_sha256':r['sha256'],'source_local_path':str(r['path'].relative_to(OUT)),'provider_fields_json':json.dumps(x,ensure_ascii=False,default=str,separators=(',',':')),...x})
+                target.append({'provider':'ESPN_FANTASY_VOETBAL','competition':'Eredivisie','provider_player_id':r['id'],'web_name':meta.get('web_name'),'team_name':meta.get('team_name'),'source_url':r['url'],'source_sha256':r['sha256'],'source_local_path':str(r['path'].relative_to(OUT)),'provider_fields_json':json.dumps(x,ensure_ascii=False,default=str,separators=(',',':')),**x})
         arr=obj.get('fixtures') or []
         if isinstance(arr,list):
             for x in arr:
