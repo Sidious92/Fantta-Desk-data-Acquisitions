@@ -1,0 +1,36 @@
+name: Nexus Chance Liga Fantasy Public Probe v3
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-chance-liga-fantasy-probe-v3-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - run: sudo mkdir -p /mnt/data/nexus-chance-liga-fantasy-probe-v3 && sudo chown -R $USER:$USER /mnt/data
+      - run: python scripts/probe_chance_liga_fantasy_v3.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexus-chance-liga-fantasy-probe-v3
+          path: /mnt/data/nexus-chance-liga-fantasy-probe-v3
+      - name: Record result
+        if: always()
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-chance-liga-fantasy-probe-v3-status
+          cp /mnt/data/nexus-chance-liga-fantasy-probe-v3/RESULT.json .nexus-chance-liga-fantasy-probe-v3-status/RESULT.json
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .nexus-chance-liga-fantasy-probe-v3-status/RESULT.json
+          git commit -m 'ci: record Chance Liga fantasy read API probe v3' || exit 0
+          git push origin HEAD:main
