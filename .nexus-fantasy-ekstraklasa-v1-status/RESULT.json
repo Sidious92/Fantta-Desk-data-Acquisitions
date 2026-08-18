@@ -1,0 +1,109 @@
+{
+  "workflow": "Nexus Fantasy Ekstraklasa v1",
+  "job_status": "success",
+  "run_id": 32182465543,
+  "manifest": {
+    "schema": "NEXUS_FANTASY_EKSTRAKLASA_V1",
+    "status": "PASS",
+    "capture_started": "2026-08-18T20:28:59.590508+00:00",
+    "capture_completed": "2026-08-18T20:30:58.106782+00:00",
+    "stats_page": {
+      "url": "https://fantasy.ekstraklasa.org/stats",
+      "status": 200,
+      "sha256": "b378330675614d14fc1bc2b75659a4d9176a32c4bc0f05fbe753a9b22f64a05c"
+    },
+    "coverage": {
+      "rounds_discovered": 19,
+      "snapshots": 20,
+      "season_total_rows": 594,
+      "flattened_scope_rows": 11374,
+      "unique_player_ids_discovered": 594,
+      "player_details_ok": 594,
+      "player_detail_errors": 0,
+      "public_match_reports_discovered": 0,
+      "public_match_reports_ok": 0
+    },
+    "field_inventory": [
+      "assists",
+      "assistsPlus",
+      "firstSquad",
+      "goals",
+      "goalsReceived",
+      "id",
+      "mvp",
+      "name",
+      "nname",
+      "opponentsScores",
+      "ownGoals",
+      "penaltyCaused",
+      "penaltySaved",
+      "penaltyTaken",
+      "penaltyWasted",
+      "penaltyWon",
+      "playTime",
+      "points",
+      "position",
+      "price",
+      "redCards",
+      "shotsCleared",
+      "team",
+      "yellowCards"
+    ],
+    "governance": {
+      "premium_surface_accessed": false,
+      "authenticated_surface_accessed": false,
+      "cross_provider_normalization_performed": false,
+      "missing_values_filled": false,
+      "predictive_models_modified": false,
+      "decision_layer_started": false
+    }
+  },
+  "validation": {
+    "status": "PASS",
+    "checks": {
+      "manifest_pass": true,
+      "season_rows_gt_100": true,
+      "fields_goals_assists": true,
+      "no_auth": true,
+      "no_premium": true,
+      "no_model_mutation": true
+    },
+    "coverage": {
+      "rounds_discovered": 19,
+      "snapshots": 20,
+      "season_total_rows": 594,
+      "flattened_scope_rows": 11374,
+      "unique_player_ids_discovered": 594,
+      "player_details_ok": 594,
+      "player_detail_errors": 0,
+      "public_match_reports_discovered": 0,
+      "public_match_reports_ok": 0
+    },
+    "fields": [
+      "assists",
+      "assistsPlus",
+      "firstSquad",
+      "goals",
+      "goalsReceived",
+      "id",
+      "mvp",
+      "name",
+      "nname",
+      "opponentsScores",
+      "ownGoals",
+      "penaltyCaused",
+      "penaltySaved",
+      "penaltyTaken",
+      "penaltyWasted",
+      "penaltyWon",
+      "playTime",
+      "points",
+      "position",
+      "price",
+      "redCards",
+      "shotsCleared",
+      "team",
+      "yellowCards"
+    ]
+  }
+}
