@@ -1,0 +1,97 @@
+name: Nexus v2 Minutes Paired Development
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.nexus-v2-minutes-paired-launch/EXECUTE'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  paired:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout fixed private authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: c47acd41782824998ff0d43a623ca6a981a19fb1
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Verify authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "c47acd41782824998ff0d43a623ca6a981a19fb1"
+          test -f fantadesk-private/data/nexus/research-v2/minutes/nexus-v2-minutes-paired-development-protocol-v1.json
+          test -f fantadesk-private/scripts/nexus-v2-minutes-paired-development.py
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+
+      - name: Setup exact Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+
+      - name: Install pinned environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --no-cache-dir \
+            numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 \
+            joblib==1.5.3 threadpoolctl==3.6.0 orjson==3.11.9 \
+            xgboost==3.1.3 lightgbm==4.6.0 catboost==1.2.8
+
+      - name: Materialize exact private base inputs
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+
+      - name: Rebuild exact Minutes surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp fantadesk-private/scripts/nexus-v2-minutes-surface-one.py /mnt/data/minutes_surface_one.py
+          for season in 2021-22 2022-23 2023-24 2024-25 2025-26; do
+            python fantadesk-private/scripts/nexus-v2-precompute-usage-cache.py "$season"
+          done
+          python fantadesk-private/scripts/nexus-v2-build-minutes-surface-cached.py
+          echo "5898b2c01490e9a1ab21e19c159c4ba51fadbd300470f19e31f6384da13d4f2c  /mnt/data/nexus_v2_minutes_roster_surface.csv" | sha256sum --check --strict
+
+      - name: Run frozen paired comparison
+        shell: bash
+        run: python fantadesk-private/scripts/nexus-v2-minutes-paired-development.py
+
+      - name: Validate sanitized result
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC=/mnt/data/nexus_v2_minutes_paired_development.json
+          test -f "$SRC"
+          mkdir -p paired-output
+          cp "$SRC" paired-output/summary.json
+          python - <<'PY'
+          import json
+          p=json.load(open('paired-output/summary.json'))
+          assert p['status']=='PAIRED_DEVELOPMENT_COMPLETE'
+          assert p['surface_hash']=='5898b2c01490e9a1ab21e19c159c4ba51fadbd300470f19e31f6384da13d4f2c'
+          assert p['2025-26']=='NOT_USED'
+          assert len(p['ranking'])==13
+          assert p['no_player_rows'] is True
+          print('MINUTES_PAIRED_VALIDATION=PASS tie_n=',len(p['tie_group']))
+          PY
+
+      - name: Upload paired summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-minutes-paired-development-summary
+          path: paired-output/summary.json
+          if-no-files-found: error
+          retention-days: 7
