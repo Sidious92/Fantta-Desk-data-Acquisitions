@@ -1,0 +1,26 @@
+name: Nexus FotMob NEXT_DATA Career v3 Summarize
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-fotmob-nextdata-career-v3-summarize-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python scripts/summarize_fotmob_nextdata_career_v3.py
+      - name: Commit summary
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .nexus-fotmob-nextdata-career-v3-status/SUMMARY.json
+          git commit -m 'ci: summarize FotMob NEXT_DATA career probe v3' || exit 0
+          git push origin HEAD:main
