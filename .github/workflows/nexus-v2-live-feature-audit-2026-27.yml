@@ -30,9 +30,16 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
-      - name: Install pinned jsdom only
-        working-directory: fantadesk-private
-        run: npm install --no-save --ignore-scripts --no-audit --no-fund jsdom@30.0.1
+      - name: Install pinned jsdom in isolated temp prefix
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nexus-node
+          cd /tmp/nexus-node
+          npm init -y >/dev/null 2>&1
+          npm install --ignore-scripts --no-audit --no-fund jsdom@30.0.1
+          mkdir -p "$GITHUB_WORKSPACE/fantadesk-private/node_modules"
+          ln -s /tmp/nexus-node/node_modules/jsdom "$GITHUB_WORKSPACE/fantadesk-private/node_modules/jsdom"
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13.5'
