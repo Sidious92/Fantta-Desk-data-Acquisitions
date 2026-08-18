@@ -1,0 +1,284 @@
+{
+  "schema": "NEXUS_LIGUE1_OFFICIAL_FANTASY_API_PUBLIC_PROBE_V9",
+  "source_summary_schema": "NEXUS_LIGUE1_OFFICIAL_FANTASY_API_PUBLIC_PROBE_V8_SUMMARY",
+  "base": "https://api.mpg.football/fantasy",
+  "frontend_proven_public_get_routes": [
+    "/championship-player-stats/${e}/championship/${t}",
+    "/championship-players-pool/${e}/best-players${a.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}",
+    "/championship-players-pool/${e}/best-players${i.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}",
+    "/championship-players-pool/${e}/best-players${r.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}",
+    "/championship-players-pool/${e}/best-players${s.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}",
+    "/championship-players-pool/1?addPlayersStatuses=true",
+    "/championships-clubs",
+    "/championships-settings",
+    "/debug/user/ids?identifier=${ec}",
+    "/result/layout-tile${tB.default.stringify({pageTemplateType:e},{addQueryPrefix:!0})}",
+    "/rules",
+    "season-team-image"
+  ],
+  "tested_literal_routes": [
+    "/championship-players-pool/1?addPlayersStatuses=true",
+    "/championships-clubs",
+    "/championships-settings",
+    "/rules"
+  ],
+  "tests": [
+    {
+      "route": "/championship-players-pool/1?addPlayersStatuses=true",
+      "url": "https://api.mpg.football/fantasy/championship-players-pool/1?addPlayersStatuses=true",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 1513028,
+      "sha256": "f057c354e3d0671a41e53e07b5e37efac96052dc7ba22edce5eb5c379107e9c1",
+      "json_type": "dict",
+      "json_len": 9,
+      "json_keys": [
+        "id",
+        "type",
+        "players",
+        "clubsData",
+        "matchesData",
+        "assets",
+        "assetsBaseUrl",
+        "assetsBaseUrlL1",
+        "defaultAssets"
+      ]
+    },
+    {
+      "route": "/championships-clubs",
+      "url": "https://api.mpg.football/fantasy/championships-clubs",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 120370,
+      "sha256": "57733c06a669d1668dcc67a02d952a824d9ef24104c75f1f4574b4ab4328e463",
+      "json_type": "dict",
+      "json_len": 18,
+      "json_keys": [
+        "mpg_championship_club_138",
+        "mpg_championship_club_1395",
+        "mpg_championship_club_141",
+        "mpg_championship_club_142",
+        "mpg_championship_club_143",
+        "mpg_championship_club_144",
+        "mpg_championship_club_146",
+        "mpg_championship_club_149",
+        "mpg_championship_club_150",
+        "mpg_championship_club_153",
+        "mpg_championship_club_154",
+        "mpg_championship_club_2128",
+        "mpg_championship_club_2338",
+        "mpg_championship_club_427",
+        "mpg_championship_club_429",
+        "mpg_championship_club_694",
+        "mpg_championship_club_862",
+        "mpg_championship_club_920"
+      ]
+    },
+    {
+      "route": "/championships-settings",
+      "url": "https://api.mpg.football/fantasy/championships-settings",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 792,
+      "sha256": "8a842ac07d5b8bea428eb88b047dae6d798620ae9b4c0602921464dfeaeddb38",
+      "json_type": "dict",
+      "json_len": 1,
+      "json_keys": [
+        "championshipsSettings"
+      ]
+    },
+    {
+      "route": "/rules",
+      "url": "https://api.mpg.football/fantasy/rules",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 286,
+      "sha256": "cf71080b79e35cec6109b892e491f971474022357f5448bf172e9c4add1e3c8f",
+      "json_type": "dict",
+      "json_len": 4,
+      "json_keys": [
+        "id",
+        "type",
+        "locales",
+        "championships"
+      ]
+    }
+  ],
+  "pool_summary": {
+    "candidate_player_lists": [
+      {
+        "path": "players",
+        "rows": 483,
+        "field_inventory": [
+          "availableSince",
+          "birthDate",
+          "clubId",
+          "countryCode",
+          "firstName",
+          "id",
+          "joinDate",
+          "lastName",
+          "playerLevel",
+          "position",
+          "price",
+          "quotation",
+          "shortId",
+          "stats",
+          "status",
+          "ultraPosition"
+        ]
+      }
+    ],
+    "selected_rows": 483
+  },
+  "parameterized_tests": [
+    {
+      "route": "/championship-player-stats/mpg_championship_player_100952/championship/1",
+      "url": "https://api.mpg.football/fantasy/championship-player-stats/mpg_championship_player_100952/championship/1",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 2146,
+      "sha256": "ff3e78fe7942ad1881ea3a5442cf98be1cad8217290f8af31968ea81caadf035",
+      "json_type": "dict",
+      "json_len": 15,
+      "json_keys": [
+        "id",
+        "firstName",
+        "lastName",
+        "clubId",
+        "price",
+        "totalMatches",
+        "totalPlayedMatches",
+        "totalStartedMatches",
+        "totalYellowCards",
+        "totalRedCards",
+        "totalCleanSheets",
+        "totalGoalsConceded",
+        "previousMatches",
+        "nextMatch",
+        "assets"
+      ],
+      "resolved_from_template": "/championship-player-stats/${e}/championship/${t}",
+      "sample_player_id": "mpg_championship_player_100952"
+    }
+  ],
+  "successful_reads": [
+    {
+      "route": "/championship-players-pool/1?addPlayersStatuses=true",
+      "url": "https://api.mpg.football/fantasy/championship-players-pool/1?addPlayersStatuses=true",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 1513028,
+      "sha256": "f057c354e3d0671a41e53e07b5e37efac96052dc7ba22edce5eb5c379107e9c1",
+      "json_type": "dict",
+      "json_len": 9,
+      "json_keys": [
+        "id",
+        "type",
+        "players",
+        "clubsData",
+        "matchesData",
+        "assets",
+        "assetsBaseUrl",
+        "assetsBaseUrlL1",
+        "defaultAssets"
+      ]
+    },
+    {
+      "route": "/championships-clubs",
+      "url": "https://api.mpg.football/fantasy/championships-clubs",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 120370,
+      "sha256": "57733c06a669d1668dcc67a02d952a824d9ef24104c75f1f4574b4ab4328e463",
+      "json_type": "dict",
+      "json_len": 18,
+      "json_keys": [
+        "mpg_championship_club_138",
+        "mpg_championship_club_1395",
+        "mpg_championship_club_141",
+        "mpg_championship_club_142",
+        "mpg_championship_club_143",
+        "mpg_championship_club_144",
+        "mpg_championship_club_146",
+        "mpg_championship_club_149",
+        "mpg_championship_club_150",
+        "mpg_championship_club_153",
+        "mpg_championship_club_154",
+        "mpg_championship_club_2128",
+        "mpg_championship_club_2338",
+        "mpg_championship_club_427",
+        "mpg_championship_club_429",
+        "mpg_championship_club_694",
+        "mpg_championship_club_862",
+        "mpg_championship_club_920"
+      ]
+    },
+    {
+      "route": "/championships-settings",
+      "url": "https://api.mpg.football/fantasy/championships-settings",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 792,
+      "sha256": "8a842ac07d5b8bea428eb88b047dae6d798620ae9b4c0602921464dfeaeddb38",
+      "json_type": "dict",
+      "json_len": 1,
+      "json_keys": [
+        "championshipsSettings"
+      ]
+    },
+    {
+      "route": "/rules",
+      "url": "https://api.mpg.football/fantasy/rules",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 286,
+      "sha256": "cf71080b79e35cec6109b892e491f971474022357f5448bf172e9c4add1e3c8f",
+      "json_type": "dict",
+      "json_len": 4,
+      "json_keys": [
+        "id",
+        "type",
+        "locales",
+        "championships"
+      ]
+    },
+    {
+      "route": "/championship-player-stats/mpg_championship_player_100952/championship/1",
+      "url": "https://api.mpg.football/fantasy/championship-player-stats/mpg_championship_player_100952/championship/1",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 2146,
+      "sha256": "ff3e78fe7942ad1881ea3a5442cf98be1cad8217290f8af31968ea81caadf035",
+      "json_type": "dict",
+      "json_len": 15,
+      "json_keys": [
+        "id",
+        "firstName",
+        "lastName",
+        "clubId",
+        "price",
+        "totalMatches",
+        "totalPlayedMatches",
+        "totalStartedMatches",
+        "totalYellowCards",
+        "totalRedCards",
+        "totalCleanSheets",
+        "totalGoalsConceded",
+        "previousMatches",
+        "nextMatch",
+        "assets"
+      ],
+      "resolved_from_template": "/championship-player-stats/${e}/championship/${t}",
+      "sample_player_id": "mpg_championship_player_100952"
+    }
+  ],
+  "governance": {
+    "only_frontend_proven_get_routes_tested": true,
+    "authenticated_surface_accessed": false,
+    "private_user_or_coach_routes_accessed": false,
+    "bruteforce_endpoint_dictionary_used": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
