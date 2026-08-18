@@ -1,0 +1,26 @@
+name: Nexus SLGR v2 Summarize
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-slgr-v2-summarize-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python scripts/summarize_slgr_fantasy_probe_v2.py
+      - name: Commit summary
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .nexus-slgr-fantasy-public-probe-v2-status/SUMMARY.json
+          git commit -m 'ci: summarize SLGR Fantasy public probe v2' || exit 0
+          git push origin HEAD:main
