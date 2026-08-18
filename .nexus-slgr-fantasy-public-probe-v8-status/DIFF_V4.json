@@ -1,0 +1,86 @@
+{
+  "schema": "NEXUS_SLGR_FANTASY_PUBLIC_PROBE_V8_DIFF_V4",
+  "v8_count": 72,
+  "v4_count": 64,
+  "new_contract_count": 8,
+  "new_contracts": [
+    {
+      "class": "c6y",
+      "gaJ_body": "return\"/user/avatar\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/user/avatar"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bVP",
+      "gaJ_body": "return\"/matchpredictor/matchups/\"+this.d+\"/predictions\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchpredictor/matchups/",
+        "/predictions"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bO0",
+      "gaJ_body": "return\"/user/paywall/offers\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/user/paywall/offers"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "c6W",
+      "gaJ_body": "return\"/logout\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/logout"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "c6k",
+      "gaJ_body": "return\"/user/config\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/user/config"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "c6m",
+      "gaJ_body": "return\"/user/notification-token\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/user/notification-token"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "c6n",
+      "gaJ_body": "return\"/user/profile-information\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/user/profile-information"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "c6o",
+      "gaJ_body": "return\"/user/password\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/user/password"
+      ],
+      "query_keys": []
+    }
+  ],
+  "governance": {
+    "api_requests_made": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
