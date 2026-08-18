@@ -1,0 +1,211 @@
+{
+  "schema": "NEXUS_LIGUE1_OFFICIAL_FANTASY_API_PUBLIC_PROBE_V4",
+  "site": "https://ligue1.com/en/fantasy",
+  "api_base": "https://api.mpg.football/fantasy",
+  "build_manifest": {
+    "url": "https://ligue1.com/_next/static/CAIb4ImxIBzih-hh8Zh3G/_buildManifest.js",
+    "status": 200,
+    "content_type": "application/javascript",
+    "bytes": 6587,
+    "sha256": "e00f73ae36e6ea822078aeff3fb47366ef0db61941718813cd1172e549634612",
+    "preview": "self.__BUILD_MANIFEST = {\n  \"/\": [\n    \"static/chunks/2yf54z6lr_77d.js\"\n  ],\n  \"/404\": [\n    \"static/chunks/2p5qarnkqbxex.js\"\n  ],\n  \"/_error\": [\n    \"static/chunks/0h0i_u-sizjw5.js\"\n  ],\n  \"/accessibility\": [\n    \"static/chunks/3z6pfxym_vzhm.js\"\n  ],\n  \"/articles\": [\n    \"static/chunks/08868sds9g2jc.js\"\n  ],\n  \"/articles/[idAndSlug]\": [\n    \"static/chunks/12efg7tgg7560.js\"\n  ],\n  \"/articles/mercato\": [\n    \"static/chunks/3i8_ecsgbh2og.js\"\n  ],\n  \"/articles/preview/[strapiArticleId]\": [\n    \"static/chunks/2qozk8mmlhqet.js\"\n  ],\n  \"/articles/squads-overview\": [\n    \"static/chunks/18df-ep3wcwal.js\"\n  ],\n  \"/ball\": [\n    \"static/chunks/3286mzaokot65.js\"\n  ],\n  \"/broadcasters\": [\n    \"static/chunks/1hb99emvt8_ko.js\"\n  ],\n  \"/calendar/[competition]\": [\n    \"static/chunks/1mwpejr0yuypl.js\"\n  ],\n  \"/club-sheet/[id]\": [\n    \"static/chunks/1zwm83hqh0_2u.js\"\n  ],\n  \"/club-sheet/[id]/[tab]\": [\n    \"static/chunks/31b1h9y9w-u5c.js\"\n  ],\n  \"/club-sheet/[id]/club-players-ranking\": [\n    \"static/chunk"
+  },
+  "route_chunks": [
+    {
+      "route": "/fantasy",
+      "url": "https://ligue1.com/_next/static/chunks/12-lldi4hr2cc.js",
+      "bytes": 633,
+      "sha256": "7ec6a52956d80076e6e686bc6faf903d5faf3d577253be69dd91e89560c7f455",
+      "local_path": "chunk-7ec6a52956d80076.js"
+    },
+    {
+      "route": "/fantasy/captain",
+      "url": "https://ligue1.com/_next/static/chunks/0-hluuc_8qsdc.js",
+      "bytes": 533,
+      "sha256": "2aeeeb72c675c189e578c8e83a4d4bcfcdf4aafb42513ad5bb014c9fbb9a9b12",
+      "local_path": "chunk-2aeeeb72c675c189.js"
+    },
+    {
+      "route": "/fantasy/line-up",
+      "url": "https://ligue1.com/_next/static/chunks/31ihihlauyr89.js",
+      "bytes": 569,
+      "sha256": "15c39a9088a52caec600d012859ba08cb3c047e83d2da283fccce53e3a30e5cd",
+      "local_path": "chunk-15c39a9088a52cae.js"
+    },
+    {
+      "route": "/fantasy/mercato",
+      "url": "https://ligue1.com/_next/static/chunks/08rztfczqsv0q.js",
+      "bytes": 497,
+      "sha256": "0ae6a9da3968221cb38184b7af51318883f619de980bf85e0647a5a62eff0738",
+      "local_path": "chunk-0ae6a9da3968221c.js"
+    },
+    {
+      "route": "/fantasy/my-team",
+      "url": "https://ligue1.com/_next/static/chunks/1v-oed-umfv7x.js",
+      "bytes": 641,
+      "sha256": "09e1b80762e4f30148545ce3f4a6e4396730e5eb9d3e649c59912c077a00ad8b",
+      "local_path": "chunk-09e1b80762e4f301.js"
+    },
+    {
+      "route": "/fantasy/ranking",
+      "url": "https://ligue1.com/_next/static/chunks/0txbbizxm6a91.js",
+      "bytes": 533,
+      "sha256": "2a21ec936681d50c2be8c5f12808b0414c1cc304ce71d7da690fd66362cbcc20",
+      "local_path": "chunk-2a21ec936681d50c.js"
+    },
+    {
+      "route": "/fantasy/rules",
+      "url": "https://ligue1.com/_next/static/chunks/0nk968sq2jhh8.js",
+      "bytes": 675,
+      "sha256": "f8c2d9b3b99c9247f234768b407ff0de5ecec1debb4a6836b7aa86d56163a3a4",
+      "local_path": "chunk-f8c2d9b3b99c9247.js"
+    },
+    {
+      "route": "/fantasy/tuto-video",
+      "url": "https://ligue1.com/_next/static/chunks/2f8clbsig4xty.js",
+      "bytes": 644,
+      "sha256": "05f65a4cc33b5c6bfa06c5d6b3f0ec71cdd56ee2bfa242a41274b52cb9e08a30",
+      "local_path": "chunk-05f65a4cc33b5c6b.js"
+    },
+    {
+      "route": "manifest-context",
+      "url": "https://ligue1.com/_next/static/chunks/0-hluuc_8qsdc.js",
+      "bytes": 533,
+      "sha256": "2aeeeb72c675c189e578c8e83a4d4bcfcdf4aafb42513ad5bb014c9fbb9a9b12",
+      "local_path": "chunk-2aeeeb72c675c189.js"
+    },
+    {
+      "route": "manifest-context",
+      "url": "https://ligue1.com/_next/static/chunks/08rztfczqsv0q.js",
+      "bytes": 497,
+      "sha256": "0ae6a9da3968221cb38184b7af51318883f619de980bf85e0647a5a62eff0738",
+      "local_path": "chunk-0ae6a9da3968221c.js"
+    },
+    {
+      "route": "manifest-context",
+      "url": "https://ligue1.com/_next/static/chunks/0nk968sq2jhh8.js",
+      "bytes": 675,
+      "sha256": "f8c2d9b3b99c9247f234768b407ff0de5ecec1debb4a6836b7aa86d56163a3a4",
+      "local_path": "chunk-f8c2d9b3b99c9247.js"
+    },
+    {
+      "route": "manifest-context",
+      "url": "https://ligue1.com/_next/static/chunks/0txbbizxm6a91.js",
+      "bytes": 533,
+      "sha256": "2a21ec936681d50c2be8c5f12808b0414c1cc304ce71d7da690fd66362cbcc20",
+      "local_path": "chunk-2a21ec936681d50c.js"
+    },
+    {
+      "route": "manifest-context",
+      "url": "https://ligue1.com/_next/static/chunks/12-lldi4hr2cc.js",
+      "bytes": 633,
+      "sha256": "7ec6a52956d80076e6e686bc6faf903d5faf3d577253be69dd91e89560c7f455",
+      "local_path": "chunk-7ec6a52956d80076.js"
+    },
+    {
+      "route": "manifest-context",
+      "url": "https://ligue1.com/_next/static/chunks/1v-oed-umfv7x.js",
+      "bytes": 641,
+      "sha256": "09e1b80762e4f30148545ce3f4a6e4396730e5eb9d3e649c59912c077a00ad8b",
+      "local_path": "chunk-09e1b80762e4f301.js"
+    },
+    {
+      "route": "manifest-context",
+      "url": "https://ligue1.com/_next/static/chunks/2f8clbsig4xty.js",
+      "bytes": 644,
+      "sha256": "05f65a4cc33b5c6bfa06c5d6b3f0ec71cdd56ee2bfa242a41274b52cb9e08a30",
+      "local_path": "chunk-05f65a4cc33b5c6b.js"
+    },
+    {
+      "route": "manifest-context",
+      "url": "https://ligue1.com/_next/static/chunks/31ihihlauyr89.js",
+      "bytes": 569,
+      "sha256": "15c39a9088a52caec600d012859ba08cb3c047e83d2da283fccce53e3a30e5cd",
+      "local_path": "chunk-15c39a9088a52cae.js"
+    }
+  ],
+  "literal_gets": [],
+  "template_gets": [],
+  "candidate_count": 3,
+  "tests": [
+    {
+      "path": "/championships-settings",
+      "url": "https://api.mpg.football/fantasy/championships-settings",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 792,
+      "sha256": "8a842ac07d5b8bea428eb88b047dae6d798620ae9b4c0602921464dfeaeddb38",
+      "preview": "{\"championshipsSettings\":{\"1\":{\"optaId\":24,\"mpgId\":1,\"code\":\"fr_l1\",\"logoUrl\":\"https://s3.eu-west-1.amazonaws.com/image.mpg/fr_l1_2022.png\",\"gameWeeks\":34,\"firstGameWeekNumber\":1,\"lastGameWeekNumber\":34,\"brand\":\"Ligue 1 McDonald's\",\"shortBrand\":\"L1\",\"season\":2026,\"firstSeason\":2025,\"seasonOpensAt\":\"2026-08-09T10:00:00Z\",\"availableAssets\":{\"clubs\":true,\"players\":true},\"startDate\":\"2021-06-01T09:00:00Z\",\"endDate\":\"2027-08-22T22:00:00Z\",\"lang\":{\"fr-FR\":{\"name\":\"Ligue 1 McDonald's\",\"shortName\":\"Ligue 1\"},\"en-GB\":{\"name\":\"Ligue 1 McDonald's\",\"shortName\":\"Ligue 1\"},\"es-ES\":{\"name\":\"Ligue 1 McDonald's\",\"shortName\":\"Ligue 1\"}},\"seasonsHistory\":{\"2015\":{\"firstGameWeekNumber\":1,\"lastGameWeekNumber\":38,\"gameWeeks\":38},\"2021\":{\"firstGameWeekNumber\":1,\"lastGameWeekNumber\":38,\"gameWeeks\":38}}}}}",
+      "json_type": "dict",
+      "json_keys": [
+        "championshipsSettings"
+      ],
+      "json_len": 1
+    },
+    {
+      "path": "/fantasy",
+      "url": "https://api.mpg.football/fantasy/fantasy",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 146,
+      "sha256": "b092b86f0ffc177dfdea430de14426124f8b6a051115adecb0a378cd808ffe2e",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /fantasy</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/rules",
+      "url": "https://api.mpg.football/fantasy/rules",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 286,
+      "sha256": "cf71080b79e35cec6109b892e491f971474022357f5448bf172e9c4add1e3c8f",
+      "preview": "{\"id\":\"fl1_rules\",\"type\":\"fl1_rules\",\"locales\":[\"fr-FR\",\"en-GB\",\"es-ES\"],\"championships\":{\"1\":{\"budget\":200,\"tacticalSubsPointsIntervals\":[3.5,4,4.5,5,5.5,6,6.5,7,7.5,8],\"playersByClub\":3,\"minimumGameWeekToCareAboutTenure\":4,\"randomCoachMinimumTenure\":0.65,\"defaultComposition\":\"433\"}}}",
+      "json_type": "dict",
+      "json_keys": [
+        "id",
+        "type",
+        "locales",
+        "championships"
+      ],
+      "json_len": 4
+    }
+  ],
+  "non_404_tests": [
+    {
+      "path": "/championships-settings",
+      "url": "https://api.mpg.football/fantasy/championships-settings",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 792,
+      "sha256": "8a842ac07d5b8bea428eb88b047dae6d798620ae9b4c0602921464dfeaeddb38",
+      "preview": "{\"championshipsSettings\":{\"1\":{\"optaId\":24,\"mpgId\":1,\"code\":\"fr_l1\",\"logoUrl\":\"https://s3.eu-west-1.amazonaws.com/image.mpg/fr_l1_2022.png\",\"gameWeeks\":34,\"firstGameWeekNumber\":1,\"lastGameWeekNumber\":34,\"brand\":\"Ligue 1 McDonald's\",\"shortBrand\":\"L1\",\"season\":2026,\"firstSeason\":2025,\"seasonOpensAt\":\"2026-08-09T10:00:00Z\",\"availableAssets\":{\"clubs\":true,\"players\":true},\"startDate\":\"2021-06-01T09:00:00Z\",\"endDate\":\"2027-08-22T22:00:00Z\",\"lang\":{\"fr-FR\":{\"name\":\"Ligue 1 McDonald's\",\"shortName\":\"Ligue 1\"},\"en-GB\":{\"name\":\"Ligue 1 McDonald's\",\"shortName\":\"Ligue 1\"},\"es-ES\":{\"name\":\"Ligue 1 McDonald's\",\"shortName\":\"Ligue 1\"}},\"seasonsHistory\":{\"2015\":{\"firstGameWeekNumber\":1,\"lastGameWeekNumber\":38,\"gameWeeks\":38},\"2021\":{\"firstGameWeekNumber\":1,\"lastGameWeekNumber\":38,\"gameWeeks\":38}}}}}",
+      "json_type": "dict",
+      "json_keys": [
+        "championshipsSettings"
+      ],
+      "json_len": 1
+    },
+    {
+      "path": "/rules",
+      "url": "https://api.mpg.football/fantasy/rules",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 286,
+      "sha256": "cf71080b79e35cec6109b892e491f971474022357f5448bf172e9c4add1e3c8f",
+      "preview": "{\"id\":\"fl1_rules\",\"type\":\"fl1_rules\",\"locales\":[\"fr-FR\",\"en-GB\",\"es-ES\"],\"championships\":{\"1\":{\"budget\":200,\"tacticalSubsPointsIntervals\":[3.5,4,4.5,5,5.5,6,6.5,7,7.5,8],\"playersByClub\":3,\"minimumGameWeekToCareAboutTenure\":4,\"randomCoachMinimumTenure\":0.65,\"defaultComposition\":\"433\"}}}",
+      "json_type": "dict",
+      "json_keys": [
+        "id",
+        "type",
+        "locales",
+        "championships"
+      ],
+      "json_len": 4
+    }
+  ],
+  "governance": {
+    "authenticated_surface_accessed": false,
+    "bruteforce_endpoint_dictionary_used": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
