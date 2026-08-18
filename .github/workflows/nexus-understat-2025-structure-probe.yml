@@ -10,36 +10,25 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - name: Probe Understat EPL 2025 response structure
+      - name: Probe Understat EPL 2025 request contract
         shell: bash
         run: |
           node <<'NODE'
           const pageUrl='https://understat.com/league/EPL/2025';
-          const baseUrl='https://understat.com/';
+          const assetUrl='https://understat.com/js/league.min.js?t=1765269520';
           const headers={'user-agent':'Mozilla/5.0 FantaNexus/2.0 acquisition-structure-probe'};
-          const r=await fetch(pageUrl,{headers});
-          const html=await r.text();
-          console.log(JSON.stringify({url:pageUrl,status:r.status,contentType:r.headers.get('content-type'),bytes:Buffer.byteLength(html)}));
-          const needles=['playersData','datesData','teamsData','JSON.parse','ajax','leagueData','get_stats','statistics'];
-          for (const n of needles) {
-            const p=html.indexOf(n);
-            console.log(`html_hit ${JSON.stringify(n)} => ${p}`);
-            if (p>=0) console.log(`html_snippet ${n} => ${JSON.stringify(html.slice(Math.max(0,p-350),p+700))}`);
+          const page=await fetch(pageUrl,{headers}); const html=await page.text();
+          const asset=await fetch(assetUrl,{headers}); const js=await asset.text();
+          console.log(JSON.stringify({pageStatus:page.status,pageBytes:Buffer.byteLength(html),assetStatus:asset.status,assetBytes:Buffer.byteLength(js)}));
+          function contexts(label,text,needle,max=12,radius=900){
+            let at=0,count=0;
+            while(count<max){ const p=text.indexOf(needle,at); if(p<0) break; console.log(`${label}[${count}] ${needle} @${p} ${JSON.stringify(text.slice(Math.max(0,p-radius),p+radius))}`); at=p+needle.length; count++; }
+            console.log(`${label}_count_${needle}=${count}`);
           }
-          const srcs=[...html.matchAll(/<script[^>]+src=["']([^"']+)["']/gi)].map(m=>m[1]);
-          console.log('script_srcs='+JSON.stringify(srcs));
-          for (const src of srcs) {
-            if (/^(?:https?:)?\/\//.test(src) && !src.includes('understat.com')) continue;
-            const abs=new URL(src,baseUrl).href;
-            try {
-              const rr=await fetch(abs,{headers}); const js=await rr.text();
-              const tokens=['/ajax','ajax/','/api','playersData','getStats','get_stats','statistics','league'];
-              const hits=tokens.filter(n=>js.includes(n));
-              console.log(`asset=${abs} status=${rr.status} bytes=${Buffer.byteLength(js)} hits=${JSON.stringify(hits)}`);
-              for (const h of hits) {
-                const p=js.indexOf(h);
-                console.log(`asset_hit ${h} => ${JSON.stringify(js.slice(Math.max(0,p-500),p+1200))}`);
-              }
-            } catch(e) { console.log(`asset_error=${abs} ${e.message}`); }
-          }
+          for (const n of ['playersData','datesData','teamsData','$.ajax','$.get','$.post','ajax(','BASE_URL+','league/','getLeague','leagueData','loadData']) contexts('js',js,n,20,1000);
+          const strings=[...js.matchAll(/["']([^"']{1,160})["']/g)].map(m=>m[1]);
+          const interesting=[...new Set(strings.filter(s=>/(league|player|ajax|stat|data|year|season|date)/i.test(s)))];
+          console.log('interesting_strings='+JSON.stringify(interesting.slice(0,250)));
+          const htmlVars=[...html.matchAll(/(?:var|let|const)\s+([A-Za-z_$][\w$]*)\s*=\s*([^;]{0,400});/g)].map(m=>[m[1],m[2]]).filter(([k,v])=>/(league|season|year|date|id|url)/i.test(k));
+          console.log('html_vars='+JSON.stringify(htmlVars.slice(0,100)));
           NODE
