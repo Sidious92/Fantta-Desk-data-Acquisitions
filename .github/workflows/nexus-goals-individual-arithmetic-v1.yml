@@ -40,6 +40,7 @@ jobs:
           test "$(git -C fantadesk-private rev-parse HEAD)" = "$AUTHORITY_SHA"
           test -f fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
           test -f fantadesk-private/scripts/nexus-v2-build-live-feature-surface-2026-27.py
+          test -f fantadesk-private/scripts/nexus-v2-minutes-surface-one.py
           test -f fantadesk-private/scripts/nexus-acquire-current-listone-2026-27.mjs
           test -f runner-public/scripts/nexus-v2-acquire-understat-2025-all-leagues-ajax.mjs
           test -f runner-public/.nexus-v2-public/goals-trajectory-review-cert.pem
@@ -91,6 +92,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          cp fantadesk-private/scripts/nexus-v2-minutes-surface-one.py /mnt/data/minutes_surface_one.py
           for season in 2023-24 2024-25 2025-26; do
             python fantadesk-private/scripts/nexus-v2-precompute-usage-cache.py "$season"
           done
