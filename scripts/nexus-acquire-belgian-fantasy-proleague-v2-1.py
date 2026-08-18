@@ -41,15 +41,12 @@ def scalar(d):return {k:v for k,v in d.items() if not isinstance(v,(dict,list))}
 def main():
     if OUT.exists():shutil.rmtree(OUT)
     raw=mkdir(OUT/'raw');norm=mkdir(OUT/'normalized');started=now()
-    # S3 Excel is diagnostic only; never bypass a 403.
     er=get(EXCEL,require_200=False);excel={'url':er.url,'status':er.status_code,'bytes':len(er.content),'sha256':sha(er.content),'valid_xlsx':er.status_code==200 and er.content[:4]==b'PK\x03\x04'}
     (raw/'excel-response.bin').write_bytes(er.content)
     if excel['valid_xlsx']:(raw/'spelers_JPL_2027.xlsx').write_bytes(er.content)
-    # FDR JSON is verified public and required.
     fr=get(FDR);fb=fr.content;fdr=fr.json();(raw/'players_JPL_2027.json').write_bytes(fb)
     fdr_meta={'url':fr.url,'status':fr.status_code,'bytes':len(fb),'sha256':sha(fb),'valid_json':isinstance(fdr,dict)}
 
-    # Season player totals. Preserve both the opaque document id and numeric playerId.
     page=1;page_size=1000;pages=[];players={};occurrences=[];field_set=set();total_records=None
     for _ in range(50):
         params={'competitionFeed':FEED,'seasonId':SEASON,'pageNumber':page,'pageRecords':page_size}
@@ -70,14 +67,14 @@ def main():
         page+=1
     dump(OUT/'players-stats-pages.json',pages);write_csv(norm/'players-stats.csv',occurrences)
 
-    # Public player details: frontend API uses numeric playerId, not the opaque document id.
     details=mkdir(raw/'player-details');detail_rows=[];detail_errors=[];detail_top_fields=set();stat_fields=set()
     def one(opaque,p):
         numeric=p.get('playerId')
         if numeric in (None,''):
             return {'id':opaque,'numeric_id':numeric,'error':'MISSING_playerId'}
         try:
-            r=get(f'{API}/player/{numeric}',{'withAggregatedWeekStats':1,'withStats':1});b=r.content;o=r.json();lp=details/f'{opaque}.json';lp.write_bytes(b);return {'id':opaque,'numeric_id':numeric,'obj':o,'url':r.url,'sha256':sha(b),'path':lp}
+            params={'competitionFeed':FEED,'seasonId':SEASON,'withAggregatedWeekStats':1,'withStats':1}
+            r=get(f'{API}/player/{numeric}',params);b=r.content;o=r.json();lp=details/f'{opaque}.json';lp.write_bytes(b);return {'id':opaque,'numeric_id':numeric,'obj':o,'url':r.url,'sha256':sha(b),'path':lp}
         except Exception as exc:return {'id':opaque,'numeric_id':numeric,'error':str(exc)}
     with ThreadPoolExecutor(max_workers=6) as ex:
         futs=[ex.submit(one,opaque,p) for opaque,p in players.items()]
@@ -102,7 +99,6 @@ def main():
             detail_rows.append({'provider':'FANTASY_PRO_LEAGUE','competition':'Jupiler Pro League','season_id':SEASON,'provider_player_id':opaque,'provider_numeric_player_id':numeric,'source_url':x['url'],'source_sha256':x['sha256'],'source_local_path':str(x['path'].relative_to(OUT)),'provider_fields_json':json.dumps(o,ensure_ascii=False,default=str,separators=(',',':'))})
     write_csv(norm/'player-detail-index.csv',detail_rows);dump(OUT/'player-detail-errors.json',detail_errors)
 
-    # Public read endpoints referenced by frontend; pass required competition/season params.
     public_reads=[]
     for path,params in [('points-confirmation',{'competitionFeed':FEED,'seasonId':SEASON}),('matches/info',{'competitionFeed':FEED,'seasonId':SEASON}),('clubs',{'competitionFeed':FEED,'seasonId':SEASON})]:
         try:
