@@ -1,0 +1,95 @@
+name: Nexus FantasyVoetbal Eredivisie v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-fantasyvoetbal-eredivisie-v1-launch/EXECUTE'
+
+permissions:
+  contents: write
+
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      AUTHORITY_SHA: dd3f834e602284e6d7e14745d3d36ecb9f65dc78
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+      - uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.AUTHORITY_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+      - name: Verify governance
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "$AUTHORITY_SHA"
+          test -f fantadesk-private/data/nexus/research-v3/crossleague-fantasy/nexus-fantasyvoetbal-eredivisie-acquisition-v1-protocol.json
+          test -f fantadesk-private/data/nexus/research-v2/final/nexus-v2-predictive-engine-freeze-v1.json
+          sudo mkdir -p /mnt/data && sudo chown "$USER":"$USER" /mnt/data
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+      - run: python -m pip install --no-cache-dir requests==2.32.5
+      - run: python scripts/nexus-acquire-fantasyvoetbal-eredivisie-v1.py
+      - name: Validate
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,sys
+          from pathlib import Path
+          p=Path('/mnt/data/nexus-fantasyvoetbal-eredivisie-v1/manifest.json')
+          m=json.load(open(p))
+          checks={'manifest_pass':m.get('status')=='PASS','players_gt_300':m['bootstrap']['players']>300,'summary_rate':m['coverage']['summary_success_rate']>=0.95,'no_model_mutation':m['governance']['predictive_models_modified'] is False,'no_normalization':m['governance']['cross_provider_normalization_performed'] is False}
+          r={'status':'PASS' if all(checks.values()) else 'FAIL','checks':checks,'coverage':m['coverage'],'bootstrap':m['bootstrap']}
+          Path('/mnt/data/nexus-fantasyvoetbal-eredivisie-v1-validation.json').write_text(json.dumps(r,indent=2)+'\n')
+          print(json.dumps(r,indent=2)); sys.exit(0 if r['status']=='PASS' else 1)
+          PY
+      - name: Package
+        if: always()
+        run: |
+          mkdir -p /mnt/data/package-fantasyvoetbal-v1
+          test -d /mnt/data/nexus-fantasyvoetbal-eredivisie-v1 && tar -C /mnt/data --zstd -cf /mnt/data/package-fantasyvoetbal-v1/nexus-fantasyvoetbal-eredivisie-v1.tar.zst nexus-fantasyvoetbal-eredivisie-v1 || true
+          test -f /mnt/data/nexus-fantasyvoetbal-eredivisie-v1-validation.json && cp /mnt/data/nexus-fantasyvoetbal-eredivisie-v1-validation.json /mnt/data/package-fantasyvoetbal-v1/ || true
+          test -f /mnt/data/nexus-fantasyvoetbal-eredivisie-v1/manifest.json && cp /mnt/data/nexus-fantasyvoetbal-eredivisie-v1/manifest.json /mnt/data/package-fantasyvoetbal-v1/ || true
+      - name: Upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-fantasyvoetbal-eredivisie-v1
+          path: /mnt/data/package-fantasyvoetbal-v1/*
+          if-no-files-found: warn
+          retention-days: 90
+      - name: Record terminal status
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp=$(mktemp)
+          python - "$tmp" '${{ job.status }}' "$GITHUB_RUN_ID" <<'PY'
+          import json,sys
+          from pathlib import Path
+          out,status,run_id=sys.argv[1:]
+          p={'workflow':'Nexus FantasyVoetbal Eredivisie v1','job_status':status,'run_id':int(run_id)}
+          m=Path('/mnt/data/nexus-fantasyvoetbal-eredivisie-v1/manifest.json'); v=Path('/mnt/data/nexus-fantasyvoetbal-eredivisie-v1-validation.json')
+          if m.is_file(): p['manifest']=json.load(open(m))
+          if v.is_file(): p['validation']=json.load(open(v))
+          Path(out).write_text(json.dumps(p,ensure_ascii=False,indent=2)+'\n')
+          PY
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-fantasyvoetbal-eredivisie-v1-status
+          cp "$tmp" .nexus-fantasyvoetbal-eredivisie-v1-status/RESULT.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-fantasyvoetbal-eredivisie-v1-status/RESULT.json
+          git commit -m "ci: record FantasyVoetbal Eredivisie ${{ job.status }}" || exit 0
+          git push origin HEAD:main
