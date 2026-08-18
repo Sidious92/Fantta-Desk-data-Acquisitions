@@ -82,7 +82,7 @@ jobs:
           NEXUS_LIVE_LISTONE_OUTPUT_ROOT: /mnt/data/current-listone-capture
         run: node scripts/nexus-acquire-current-listone-2026-27.mjs
 
-      - name: Acquire foreign 2025-26 identity support
+      - name: Acquire foreign 2025-26 identity and cross-league support
         working-directory: runner-public
         env:
           NEXUS_V2_UNDERSTAT_2025_OUTPUT_ROOT: /mnt/data/understat-2025-capture
@@ -97,7 +97,7 @@ jobs:
             python fantadesk-private/scripts/nexus-v2-precompute-usage-cache.py "$season"
           done
 
-      - name: Build current identity surface
+      - name: Build canonical current feature surface
         shell: bash
         env:
           NEXUS_V2_CURRENT_LISTONE: /mnt/data/current-listone-capture/current-listone.json
@@ -106,116 +106,94 @@ jobs:
           NEXUS_V2_LIVE_FEATURE_AUDIT: /mnt/data/live_identity_surface_audit.json
         run: python fantadesk-private/scripts/nexus-v2-build-live-feature-surface-2026-27.py
 
-      - name: Acquire cross-league player-season/stint source
-        shell: bash
-        run: |
-          set -euo pipefail
-          curl --fail --location --retry 3 \
-            https://raw.githubusercontent.com/vibedatascience/understat_players_aggregated/main/understat_players_aggregated_2014_td.csv \
-            -o /mnt/data/understat_players_aggregated_2014_td.csv
-          sha256sum /mnt/data/understat_players_aggregated_2014_td.csv | tee /mnt/data/understat_source_sha256.txt
-
       - name: Calculate player-only GOALS arithmetic
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
-          import json, re, unicodedata, hashlib
+          import json, hashlib
           from pathlib import Path
           import numpy as np
           import pandas as pd
 
-          YEARS=[2021,2022,2023,2024,2025]
-          SEASON={2021:'2021-22',2022:'2022-23',2023:'2023-24',2024:'2024-25',2025:'2025-26'}
-
-          def norm(s):
-              s=unicodedata.normalize('NFKD',str(s or ''))
-              s=''.join(c for c in s if not unicodedata.combining(c)).lower()
-              s=re.sub(r'\b(ac|fc|ssc|us|as|calcio|1909|1913|1907|1908|1920)\b',' ',s)
-              s=re.sub(r'[^a-z0-9]+',' ',s).strip()
-              return re.sub(r'\s+',' ',s)
-
-          aliases={
-            'milan':{'milan'}, 'inter':{'inter','internazionale'}, 'roma':{'roma'},
-            'juventus':{'juventus'}, 'napoli':{'napoli'}, 'atalanta':{'atalanta'},
-            'bologna':{'bologna'}, 'fiorentina':{'fiorentina'}, 'lazio':{'lazio'},
-            'torino':{'torino'}, 'udinese':{'udinese'}, 'genoa':{'genoa'},
-            'cagliari':{'cagliari'}, 'parma':{'parma'}, 'sassuolo':{'sassuolo'},
-            'como':{'como'}, 'lecce':{'lecce'}, 'verona':{'verona','hellas verona'},
-            'hellas verona':{'verona','hellas verona'},
-          }
-
-          def team_match(current, historic):
-              a=norm(current); b=norm(historic)
-              if not a or not b: return False
-              if a==b: return True
-              aa=aliases.get(a,{a})
-              bb=aliases.get(b,{b})
-              if aa & bb: return True
-              return a in b or b in a
+          # All numbers below come only from each player's own lag1..lag5 history.
+          # No other player's data, no normalisation, no ML, no expected minutes.
+          LAGS=[5,4,3,2,1]
+          SEASON={5:'2021-22',4:'2022-23',3:'2023-24',2:'2024-25',1:'2025-26'}
 
           roster=json.load(open('/mnt/data/current-listone-capture/current-listone.json'))['players']
-          identity=pd.read_csv('/mnt/data/live_identity_surface.csv',low_memory=False)
-          us=pd.read_csv('/mnt/data/understat_players_aggregated_2014_td.csv',low_memory=False)
-          us['id']=us['id'].astype(str)
-          us['year']=pd.to_numeric(us['year'],errors='coerce').astype('Int64')
-          us['games']=pd.to_numeric(us['games'],errors='coerce').fillna(0.0)
-          us['goals']=pd.to_numeric(us['goals'],errors='coerce').fillna(0.0)
-          us=us[us.year.isin(YEARS)].copy()
-
-          by_fid={int(r.fantacalcio_id):r for _,r in identity.iterrows()}
+          surf=pd.read_csv('/mnt/data/live_identity_surface.csv',low_memory=False)
+          by_fid={int(r.fantacalcio_id):r for _,r in surf.iterrows()}
           rows=[]
+
+          def num(r,key):
+              v=pd.to_numeric(pd.Series([r.get(key,np.nan)]),errors='coerce').iloc[0]
+              return None if pd.isna(v) else float(v)
+
+          def pace(goals,games):
+              return goals/games*38.0 if goals is not None and games is not None and games>0 else None
+
           for p in roster:
               fid=int(p.get('playerId') or p.get('fantacalcioId'))
               name=str(p.get('name') or '')
               team=str(p.get('club') or p.get('team') or '')
               role=str(p.get('classicRole') or p.get('role') or '')
-              ir=by_fid.get(fid)
-              uid=''
-              method='UNRESOLVED'
-              if ir is not None:
-                  raw=ir.get('understat_id','')
-                  if pd.notna(raw): uid=str(raw).strip().replace('.0','')
-                  method=str(ir.get('understat_resolution_method','UNRESOLVED'))
-              pu=us[us.id.eq(uid)].copy() if uid else us.iloc[0:0].copy()
-
+              r=by_fid.get(fid)
               seasons=[]
-              for y in YEARS:
-                  z=pu[pu.year.eq(y)]
-                  games=float(z.games.sum())
-                  goals=float(z.goals.sum())
-                  clubs=sorted(set(str(x) for x in z.get('team_title',pd.Series([],dtype=str)).dropna().tolist()))
-                  pace=goals/games*38.0 if games>0 else None
-                  seasons.append({'season':SEASON[y],'games':games,'goals':goals,'goals_per_game':goals/games if games>0 else None,'pace_38':pace,'clubs':clubs})
+              if r is None:
+                  uid=None; method='UNRESOLVED'
+              else:
+                  raw=r.get('understat_id','')
+                  uid=None if pd.isna(raw) or str(raw).strip()=='' else str(raw).strip().replace('.0','')
+                  method=str(r.get('understat_resolution_method','UNRESOLVED'))
 
-              z5=pu[pu.year.isin(YEARS)]
-              g5=float(z5.games.sum()); go5=float(z5.goals.sum())
-              pace5=go5/g5*38.0 if g5>0 else None
+              for lag in LAGS:
+                  if r is None:
+                      games=goals=None
+                  else:
+                      games=num(r,f'lag{lag}_all_games')
+                      goals=num(r,f'lag{lag}_all_goals')
+                  seasons.append({
+                    'season':SEASON[lag],
+                    'games':games,
+                    'goals':goals,
+                    'goals_per_game':goals/games if goals is not None and games is not None and games>0 else None,
+                    'pace_38':pace(goals,games),
+                  })
 
-              z3=pu[pu.year.isin([2023,2024,2025])]
-              g3=float(z3.games.sum()); go3=float(z3.goals.sum())
-              pace3=go3/g3*38.0 if g3>0 else None
+              # 5-year pace: total goals / total games across available 2021-22..2025-26 data.
+              s5=[s for s in seasons if s['games'] is not None and s['games']>0 and s['goals'] is not None]
+              games5=sum(s['games'] for s in s5); goals5=sum(s['goals'] for s in s5)
+              pace5=pace(goals5,games5)
 
+              # 3-year pace: same arithmetic, only 2023-24..2025-26.
+              s3=[s for s in seasons if s['season'] in {'2023-24','2024-25','2025-26'} and s['games'] is not None and s['games']>0 and s['goals'] is not None]
+              games3=sum(s['games'] for s in s3); goals3=sum(s['goals'] for s in s3)
+              pace3=pace(goals3,games3)
+
+              # Recent pace: 2025-26 Serie A stint when present. This gives Malen's Roma-only
+              # Serie A spell while the all-league season above still contains Villa+Roma.
               recent=None; recent_source=None; recent_games=None; recent_goals=None
-              z25=pu[pu.year.eq(2025)].copy()
-              if len(z25) and 'team_title' in z25.columns:
-                  cur=z25[z25.team_title.map(lambda x: team_match(team,x))]
-                  cg=float(cur.games.sum()); cgo=float(cur.goals.sum())
-                  if cg>0:
-                      recent=cgo/cg*38.0; recent_source='CURRENT_CLUB_2025_26'; recent_games=cg; recent_goals=cgo
+              if r is not None:
+                  sa_games=num(r,'lag1_sa_games'); sa_goals=num(r,'lag1_sa_goals')
+                  if sa_games is not None and sa_games>0 and sa_goals is not None:
+                      recent=pace(sa_goals,sa_games); recent_games=sa_games; recent_goals=sa_goals
+                      recent_source='SERIE_A_2025_26'
+
+              # If there was no Serie A evidence in 2025-26, use that player's latest available
+              # all-league season. No conversion between leagues is applied.
               if recent is None:
-                  for y in [2025,2024,2023,2022,2021]:
-                      z=pu[pu.year.eq(y)]
-                      gg=float(z.games.sum()); ggo=float(z.goals.sum())
-                      if gg>0:
-                          recent=ggo/gg*38.0; recent_source=f'LATEST_AVAILABLE_{SEASON[y]}'; recent_games=gg; recent_goals=ggo
+                  for s in reversed(seasons):
+                      if s['games'] is not None and s['games']>0 and s['goals'] is not None:
+                          recent=s['pace_38']; recent_games=s['games']; recent_goals=s['goals']
+                          recent_source=f"LATEST_AVAILABLE_{s['season']}"
                           break
 
               refs=[x for x in [pace5,pace3,recent] if x is not None and np.isfinite(x)]
               pred=float(np.mean(refs)) if refs else None
               rows.append({
                 'fantacalcio_id':fid,'player_name':name,'team':team,'role':role,
-                'understat_id':uid or None,'identity_method':method,
+                'understat_id':uid,'identity_method':method,
                 'seasons':seasons,
                 'pace_5y_38':pace5,'pace_last3_38':pace3,
                 'pace_recent_38':recent,'recent_source':recent_source,
@@ -223,33 +201,24 @@ jobs:
                 'goals_prediction':pred,'reference_count':len(refs),
               })
 
-          def clean(v):
-              if isinstance(v,float) and (np.isnan(v) or np.isinf(v)): return None
-              return v
-          for r in rows:
-              for k,v in list(r.items()):
-                  if k!='seasons': r[k]=clean(v)
-              for s in r['seasons']:
-                  for k,v in list(s.items()): s[k]=clean(v)
-
           ranked=sorted([r for r in rows if r['goals_prediction'] is not None],key=lambda r:(-r['goals_prediction'],r['fantacalcio_id']))
           for i,r in enumerate(ranked,1): r['rank']=i
           rankmap={r['fantacalcio_id']:r['rank'] for r in ranked}
           for r in rows: r['rank']=rankmap.get(r['fantacalcio_id'])
 
-          source_sha=hashlib.sha256(Path('/mnt/data/understat_players_aggregated_2014_td.csv').read_bytes()).hexdigest()
+          surface_sha=hashlib.sha256(Path('/mnt/data/live_identity_surface.csv').read_bytes()).hexdigest()
           out={
-            'schema':'NEXUS_GOALS_INDIVIDUAL_ARITHMETIC_V1',
+            'schema':'NEXUS_GOALS_INDIVIDUAL_ARITHMETIC_V1_CANONICAL_SURFACE',
             'status':'DIAGNOSTIC_ARITHMETIC_NO_MODEL',
             'target_season':'2026-27',
             'formula':{
-              'pace_5y_38':'sum(goals 2021-22..2025-26) / sum(games) * 38',
-              'pace_last3_38':'sum(goals 2023-24..2025-26) / sum(games) * 38',
-              'pace_recent_38':'2025-26 current-club goals/games * 38 when available, otherwise latest available season goals/games * 38',
+              'pace_5y_38':'sum own all-league goals 2021-22..2025-26 / sum own all-league games * 38',
+              'pace_last3_38':'sum own all-league goals 2023-24..2025-26 / sum own all-league games * 38',
+              'pace_recent_38':'own 2025-26 Serie A goals/games * 38 when present; otherwise own latest available all-league season goals/games * 38',
               'goals_prediction':'arithmetic mean of available pace_5y_38, pace_last3_38, pace_recent_38',
             },
-            'explicitly_not_used':['xG','npxG','xA','shots','minutes','expected_minutes','role_normalization','league_normalization','other_players','ML'],
-            'understat_source_sha256':source_sha,
+            'explicitly_not_used':['xG','npxG','xA','shots','minutes','expected_minutes','role_normalization','league_normalization','other_players','ML','reliability_weights'],
+            'live_surface_sha256':surface_sha,
             'roster_rows':len(rows),
             'predicted_rows':sum(r['goals_prediction'] is not None for r in rows),
             'no_prediction_rows':sum(r['goals_prediction'] is None for r in rows),
@@ -269,7 +238,7 @@ jobs:
 
           print('CALCULATION=PASS')
           print('ROSTER',len(rows),'PREDICTED',len(ranked),'NO_PRED',len(rows)-len(ranked))
-          for r in ranked[:20]:
+          for r in ranked[:30]:
               print(r['rank'],r['player_name'],r['team'],round(r['goals_prediction'],2),round(r['pace_5y_38'],2) if r['pace_5y_38'] is not None else None,round(r['pace_last3_38'],2) if r['pace_last3_38'] is not None else None,round(r['pace_recent_38'],2) if r['pace_recent_38'] is not None else None,r['recent_source'])
           PY
 
