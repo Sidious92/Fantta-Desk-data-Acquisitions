@@ -1,0 +1,28 @@
+name: Nexus v2 Live Serving Anchor GOALS Status
+
+on:
+  workflow_run:
+    workflows: ["Nexus v2 Live Serving Anchor GOALS 2026-27"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+jobs:
+  publish-status:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Record status only
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .nexus-v2-live-anchor-goals-status
+          cat > .nexus-v2-live-anchor-goals-status/RESULT.json <<EOF
+          {"workflow":"Nexus v2 Live Serving Anchor GOALS 2026-27","run_id":${{ github.event.workflow_run.id }},"conclusion":"${{ github.event.workflow_run.conclusion }}","head_sha":"${{ github.event.workflow_run.head_sha }}","updated_at":"$(date -u +%Y-%m-%dT%H:%M:%SZ)"}
+          EOF
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-v2-live-anchor-goals-status/RESULT.json
+          git commit -m "ci: record anchor-GOALS live serving status" || exit 0
+          git push
