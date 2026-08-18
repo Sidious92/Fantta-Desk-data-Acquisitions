@@ -1,0 +1,280 @@
+{
+  "schema": "NEXUS_RSL_FANTASY_API_PUBLIC_PROBE_V3",
+  "main_bundle": {
+    "url": "https://fantasy.spl.com.sa/assets/index-DQhhpGWl.js",
+    "bytes": 2866811,
+    "sha256": "2df129013bcc2dee801cc1559a6550c5eb331dd364415e7aea6098cd1b482ca9"
+  },
+  "wrapper_routes": {
+    "GET_Yn_double": [
+      "bootstrap-static/",
+      "dream-team/",
+      "leagues-renewable/",
+      "me/",
+      "player/logout/",
+      "regions/"
+    ],
+    "GET_Yn_single": [],
+    "GET_Yn_template": [
+      "dream-team/${e}/",
+      "element-summary/${e}/",
+      "entry/${e}/",
+      "entry/${e}/event/${t}/picks/",
+      "entry/${e}/history/",
+      "entry/${e}/transfers/",
+      "entry/${n.entry}/transfers-latest/",
+      "event/${e}/live/",
+      "fixtures/?event=${e}",
+      "league/${e}/code/",
+      "league/${e}/cup-status/",
+      "league/${e}/entries/",
+      "leagues-classic/${e}/",
+      "leagues-classic/${e}/standings/?page_new_entries=${t}&page_standings=${n}&phase=${r}",
+      "leagues-h2h/${e}/",
+      "leagues-h2h/${e}/standings/?page_new_entries=${t}&page_standings=${n}",
+      "my-team/${n.entry}/"
+    ],
+    "IU_literal": [],
+    "IU_template": [],
+    "POST_yi_double": [
+      "entry-create/",
+      "entry/unsubscribe/",
+      "league/code-check/",
+      "leagues-classic/",
+      "leagues-h2h/",
+      "leagues-private/delete/",
+      "leagues-private/join/",
+      "leagues-public/join/",
+      "player/create/",
+      "player/password-reset/",
+      "player/recovery/",
+      "transfers/"
+    ],
+    "POST_yi_template": [
+      "league/${e}/bans/ban/",
+      "league/${e}/bans/unban/",
+      "league/${e}/code/regenerate/",
+      "league/${e}/leave/",
+      "leagues-renewable/${e}/renew/",
+      "my-team/${n.entry}/",
+      "watchlist/${e}/"
+    ]
+  },
+  "contexts": {
+    "Yn": [
+      "code:s.status,details:await s.text()}));t(n.failure(p));const d=new Error(s.statusText);throw d.badRequest=p.badRequest,d}const c=sj(s)?Z9(s)?{}:await s.json():Z9(s)?\"\":await s.json();return t(n.success(i?{...i,data:c}:c)),c}async function Yn(e,t,n,r){return IU(e,t,n,{},r)}async function _w(e,t,n,r,i,o,s){return IU(t,r,i,{body:JSON.stringify(n),headers:{\"Content-Type\":\"application/json\",\"X-CSRFToken\":BU(\"csrftoken\")},method:e},o,s)}async function yi(e,t,n,r,i,o){return _w(\"POST\",e,t,n,r,i,o)}async function Uf(e,t,n,r,i){return _w(\"PUT\",e,t,n,r,i)}async function PU(e,t,n,r,i){return _w(\"DELETE\",e,t,n,r,i)}const S2=e=>async t=>{try{await Yn(`entry/${e}/`,t,PW,{id:e})}catch{return}},Ob0=e=>async t=>{try{await Yn(`entry/${e}/history/`,t,",
+      "BU(\"csrftoken\")},method:e},o,s)}async function yi(e,t,n,r,i,o){return _w(\"POST\",e,t,n,r,i,o)}async function Uf(e,t,n,r,i){return _w(\"PUT\",e,t,n,r,i)}async function PU(e,t,n,r,i){return _w(\"DELETE\",e,t,n,r,i)}const S2=e=>async t=>{try{await Yn(`entry/${e}/`,t,PW,{id:e})}catch{return}},Ob0=e=>async t=>{try{await Yn(`entry/${e}/history/`,t,i6,{id:e})}catch{return}},Ab0=(e,t)=>async n=>{try{await Yn(`entry/${e}/event/${t}/picks/`,n,xF,{entry:e,event:t})}catch{return}},mb0=e=>async t=>{await Uf(\"entry-update/\",e,t,pa0),t(A3())},gb0=e=>async t=>{try{await Yn(`entry/${e}/transfers/`,t,SF,{id:e})}catch{return}},qb0=e=>async t=>{await yi(\"entry/unsubscribe/\",{signature:e},t,da0),t(A3())},A3=()=>async e=>{e(iM.request());const t=Yn(\"bootstrap-",
+      "(\"POST\",e,t,n,r,i,o)}async function Uf(e,t,n,r,i){return _w(\"PUT\",e,t,n,r,i)}async function PU(e,t,n,r,i){return _w(\"DELETE\",e,t,n,r,i)}const S2=e=>async t=>{try{await Yn(`entry/${e}/`,t,PW,{id:e})}catch{return}},Ob0=e=>async t=>{try{await Yn(`entry/${e}/history/`,t,i6,{id:e})}catch{return}},Ab0=(e,t)=>async n=>{try{await Yn(`entry/${e}/event/${t}/picks/`,n,xF,{entry:e,event:t})}catch{return}},mb0=e=>async t=>{await Uf(\"entry-update/\",e,t,pa0),t(A3())},gb0=e=>async t=>{try{await Yn(`entry/${e}/transfers/`,t,SF,{id:e})}catch{return}},qb0=e=>async t=>{await yi(\"entry/unsubscribe/\",{signature:e},t,da0),t(A3())},A3=()=>async e=>{e(iM.request());const t=Yn(\"bootstrap-static/\",e,si0),n=o=>o.map(s=>({...s,overrides:{...s.overrides,element_t",
+      "unction PU(e,t,n,r,i){return _w(\"DELETE\",e,t,n,r,i)}const S2=e=>async t=>{try{await Yn(`entry/${e}/`,t,PW,{id:e})}catch{return}},Ob0=e=>async t=>{try{await Yn(`entry/${e}/history/`,t,i6,{id:e})}catch{return}},Ab0=(e,t)=>async n=>{try{await Yn(`entry/${e}/event/${t}/picks/`,n,xF,{entry:e,event:t})}catch{return}},mb0=e=>async t=>{await Uf(\"entry-update/\",e,t,pa0),t(A3())},gb0=e=>async t=>{try{await Yn(`entry/${e}/transfers/`,t,SF,{id:e})}catch{return}},qb0=e=>async t=>{await yi(\"entry/unsubscribe/\",{signature:e},t,da0),t(A3())},A3=()=>async e=>{e(iM.request());const t=Yn(\"bootstrap-static/\",e,si0),n=o=>o.map(s=>({...s,overrides:{...s.overrides,element_types:{byId:s.overrides.element_types.length?Object.fromEntries(s.overrides.element_t",
+      "entry/${e}/history/`,t,i6,{id:e})}catch{return}},Ab0=(e,t)=>async n=>{try{await Yn(`entry/${e}/event/${t}/picks/`,n,xF,{entry:e,event:t})}catch{return}},mb0=e=>async t=>{await Uf(\"entry-update/\",e,t,pa0),t(A3())},gb0=e=>async t=>{try{await Yn(`entry/${e}/transfers/`,t,SF,{id:e})}catch{return}},qb0=e=>async t=>{await yi(\"entry/unsubscribe/\",{signature:e},t,da0),t(A3())},A3=()=>async e=>{e(iM.request());const t=Yn(\"bootstrap-static/\",e,si0),n=o=>o.map(s=>({...s,overrides:{...s.overrides,element_types:{byId:s.overrides.element_types.length?Object.fromEntries(s.overrides.element_types.map(c=>[c.id,{...c}])):{}}}})),r=o=>o.map(s=>({...s,overrides:{...s.overrides,element_types:{byId:s.overrides.element_types.length?Object.fromEntries(s.ove",
+      "it Uf(\"entry-update/\",e,t,pa0),t(A3())},gb0=e=>async t=>{try{await Yn(`entry/${e}/transfers/`,t,SF,{id:e})}catch{return}},qb0=e=>async t=>{await yi(\"entry/unsubscribe/\",{signature:e},t,da0),t(A3())},A3=()=>async e=>{e(iM.request());const t=Yn(\"bootstrap-static/\",e,si0),n=o=>o.map(s=>({...s,overrides:{...s.overrides,element_types:{byId:s.overrides.element_types.length?Object.fromEntries(s.overrides.element_types.map(c=>[c.id,{...c}])):{}}}})),r=o=>o.map(s=>({...s,overrides:{...s.overrides,element_types:{byId:s.overrides.element_types.length?Object.fromEntries(s.overrides.element_types.map(c=>[c.id,{...c}])):{}}}})),i=Yn(\"me/\",e,ai0);await Promise.all([t,i]).then(([o,s])=>{s.player&&s.player.entry&&e(S2(s.player.entry)),e($$(n(o.chips)",
+      "ries(s.overrides.element_types.map(c=>[c.id,{...c}])):{}}}})),r=o=>o.map(s=>({...s,overrides:{...s.overrides,element_types:{byId:s.overrides.element_types.length?Object.fromEntries(s.overrides.element_types.map(c=>[c.id,{...c}])):{}}}})),i=Yn(\"me/\",e,ai0);await Promise.all([t,i]).then(([o,s])=>{s.player&&s.player.entry&&e(S2(s.player.entry)),e($$(n(o.chips))),e(F$(o.element_stats)),e(X$(o.element_types)),e(H$(o.elements)),e(U$(r(o.events))),e(V$(o.game_config.rules)),e(G$(o.game_config.scoring)),e(Y$(o.game_config.settings)),e(Z$(o.phases)),e(Q$(o.teams)),e(eF(o.total_players)),e(K$(s.player)),e(J$(s.watched)),e(iM.success({}))}).catch(o=>{e(iM.failure(o.message))})},yb0=()=>async(e,t)=>{const r=li0(t());r&&tF()-r>10*60&&e(A3())};var",
+      ".find(n=>n.startsWith(`${e}=`));return t?t.split(\"=\")[1]:null},c3=()=>{const e=new URLSearchParams(document.location.search).has(\"webview\"),t=document.getElementById(\"webview\")!==null,n=Z60(\"in_app_webview\")===\"1\";return e||t||n},S_=()=>e=>Yn(\"player/logout/\",e,Sa0),K60=e=>t=>yi(\"player/create/\",e,t,DF),J60=e=>t=>Uf(\"player/update/\",e,t,$F),Q60=e=>t=>Uf(\"player/password-change/\",e,t,FF),eA0=e=>t=>yi(\"player/password-reset/\",e,t,XF),tA0=e=>t=>Uf(\"player/password-set/\",e,t,HF),nA0=e=>async t=>(t(UF(e)),yi(`watchlist/${e}/`,{},t,La0)),rA0=e=>async t=>(t(VF(e)),PU(`watchlist/${e}/`,{},t,Ea0)),iA0=e=>async t=>{try{await yi(\"player/recovery/\",e,t,Bv)}catch{return}t(A3())};var vq,xk;function oA0(){if(xk)return vq;xk=1;function e(t,n){var r=",
+      "RW(t()),i=We(t());if(!(!n||!i||!i.entry))try{await yi(\"transfers/\",{chip:gi0(t()),entry:i.entry,event:n.id,transfers:ew(t(),void 0,r==null?void 0:r.id)},e,sH)}catch{return}},zA0=()=>async(e,t)=>{const n=We(t());if(!(!n||!n.entry))try{await Yn(`entry/${n.entry}/transfers-latest/`,e,cH)}catch{return}},RG=Intl.DateTimeFormat().resolvedOptions().timeZone,iC=e=>ZW(e,RG).toISOString(),hA0=(e,t,n=\"E d MMM HH:mm\")=>BX(e,RG,n,{locale:t}),Rm=e=>iC(new Date(e)),Zc=(e,t,n)=>hA0(new Date(e),t,n),OA0=e=>[\"cost_change_event\",\"cost_change_event_fall\",\"cost_change_start\",\"cost_change_start_fall\",\"now_cost\"].indexOf(e)>-1,hn=(e,t)=>(e/t).toFixed(1);var xq={},Gb={};const AA0=Pd(F40);var jk=function(t,n){var r=R2({},t,n);for(var i in t){var o;!t[i]||typ",
+      "nt from a specific team for a single round. At the next deadline your squad is returned to how it was at the start of the Round.\")}}),fC=(e,t)=>zY(t)[e].name,R90=e=>zY(e),zC=()=>async(e,t)=>{e(yb0());const n=We(t());if(n&&n.entry)try{await Yn(`my-team/${n.entry}/`,e,Cd,{elementsById:tn(t())})}catch{return}},hC=e=>(t,n)=>{const r=Hd(n()).reduce((s,c)=>c.element===e?c:s,null),i=Dd(n()),o=Zn(n(),void 0,i==null?void 0:i.id);r&&o&&(r.subStatus===\"\"?t(oF(r,Lc0(n(),r))):r.subStatus===\"instigator\"?t(aF()):r.subStatus===\"target\"&&t(sF(r,o.squad_squadplay+1)))},x90=()=>async(e,t)=>{try{const n=We(t());if(!n||!n.entry)return;await yi(`my-team/${n.entry}/`,{chip:xW(t()),picks:Nc0(t())},e,Vu,{elementsById:tn(t())})}catch{return}};class mh extends",
+      "]),r?a.jsx(Wv0,{player:n,entry:r,events:i,teams:o,updateEntry:s}):null},tz=e=>(t,n)=>{const r=h3(n());t(v5({...e,maxCost:XW(FW(r,e.filter,HA(n())))}))},i5=e=>(t,n)=>{t(tz({...xp(n()),filter:UA(n())[e-1].value}))},Cv0=e=>async t=>{try{await Yn(`element-summary/${e}/`,t,o6,{id:e})}catch{return}},jo=e=>async t=>{t(jF(e)),t(Cv0(e))},rZ=e=>async t=>{try{await Yn(`event/${e}/live/`,t,BF,{id:e})}catch{return}},K_=e=>async t=>{try{await Yn(`fixtures/?event=${e}`,t,wX,{event:e})}catch{return}},Rv0=e=>B.createElement(\"svg\",{xmlns:\"http://www.w3.org/2000/svg\",viewBox:\"0 0 14 8\",...e},B.createElement(\"g\",{fill:\"none\",fillRule:\"evenodd\"},B.createElement(\"path\",{fill:\"#ffffff\",fillRule:\"nonzero\",d:\"M7 3.05L11.95 8l1.414-1.414L7 .222.636 6.586 2.05",
+      "ost:XW(FW(r,e.filter,HA(n())))}))},i5=e=>(t,n)=>{t(tz({...xp(n()),filter:UA(n())[e-1].value}))},Cv0=e=>async t=>{try{await Yn(`element-summary/${e}/`,t,o6,{id:e})}catch{return}},jo=e=>async t=>{t(jF(e)),t(Cv0(e))},rZ=e=>async t=>{try{await Yn(`event/${e}/live/`,t,BF,{id:e})}catch{return}},K_=e=>async t=>{try{await Yn(`fixtures/?event=${e}`,t,wX,{event:e})}catch{return}},Rv0=e=>B.createElement(\"svg\",{xmlns:\"http://www.w3.org/2000/svg\",viewBox:\"0 0 14 8\",...e},B.createElement(\"g\",{fill:\"none\",fillRule:\"evenodd\"},B.createElement(\"path\",{fill:\"#ffffff\",fillRule:\"nonzero\",d:\"M7 3.05L11.95 8l1.414-1.414L7 .222.636 6.586 2.05 8z\"}))),xv0=e=>({total_points:{description:e(\"stats.total_points.description\",\"Total points earned this season.\"),la",
+      "n())[e-1].value}))},Cv0=e=>async t=>{try{await Yn(`element-summary/${e}/`,t,o6,{id:e})}catch{return}},jo=e=>async t=>{t(jF(e)),t(Cv0(e))},rZ=e=>async t=>{try{await Yn(`event/${e}/live/`,t,BF,{id:e})}catch{return}},K_=e=>async t=>{try{await Yn(`fixtures/?event=${e}`,t,wX,{event:e})}catch{return}},Rv0=e=>B.createElement(\"svg\",{xmlns:\"http://www.w3.org/2000/svg\",viewBox:\"0 0 14 8\",...e},B.createElement(\"g\",{fill:\"none\",fillRule:\"evenodd\"},B.createElement(\"path\",{fill:\"#ffffff\",fillRule:\"nonzero\",d:\"M7 3.05L11.95 8l1.414-1.414L7 .222.636 6.586 2.05 8z\"}))),xv0=e=>({total_points:{description:e(\"stats.total_points.description\",\"Total points earned this season.\"),label:e(\"stats.total_points.label\",\"Total points\")},event_points:{description:",
+      "llenge your friends in Fantasy RSL and have the chance to win both honour and great prizes every round!\")})]}),a.jsx(g_0,{})]}),a.jsx(v_0,{children:a.jsx(q_0,{src:$B,srcSet:`${$B} 1x, ${O_0} 2x`,alt:\"\"})})]})]})},uZ=()=>async e=>{try{await Yn(\"dream-team/\",e,LF)}catch{return}},dZ=e=>async t=>{try{await Yn(`dream-team/${e}/`,t,EF,{event:e})}catch{return}},bZ=f1`\n  display: flex;\n  width: 100%;\n  justify-content: space-between;\n  gap: ${({theme:e})=>e.space[2]};\n  padding: ${({theme:e})=>e.space[3]};\n  border: 0;\n  border-radius: 4px;\n  font-size: ${({theme:e})=>e.fontSizes[2]};\n  background-color: ${({theme:e})=>e.colors.cyan};\n  color: ${({theme:e})=>e.colors.primary};\n  text-decoration: none;\n\n  ${e=>e.variant===\"secondary\"&&f1`\n   ",
+      "th honour and great prizes every round!\")})]}),a.jsx(g_0,{})]}),a.jsx(v_0,{children:a.jsx(q_0,{src:$B,srcSet:`${$B} 1x, ${O_0} 2x`,alt:\"\"})})]})]})},uZ=()=>async e=>{try{await Yn(\"dream-team/\",e,LF)}catch{return}},dZ=e=>async t=>{try{await Yn(`dream-team/${e}/`,t,EF,{event:e})}catch{return}},bZ=f1`\n  display: flex;\n  width: 100%;\n  justify-content: space-between;\n  gap: ${({theme:e})=>e.space[2]};\n  padding: ${({theme:e})=>e.space[3]};\n  border: 0;\n  border-radius: 4px;\n  font-size: ${({theme:e})=>e.fontSizes[2]};\n  background-color: ${({theme:e})=>e.colors.cyan};\n  color: ${({theme:e})=>e.colors.primary};\n  text-decoration: none;\n\n  ${e=>e.variant===\"secondary\"&&f1`\n      background-color: transparent;\n      color: ${({theme:t})=>t.",
+      "=>({elements:h3(e),elementTypes:Bf(e),teamsById:pr(e)}),rC0=ur(nC0)(tC0),iC0=e=>async t=>{try{await yi(\"leagues-classic/\",e,t,Iv)}catch{return}},oC0=e=>async t=>{try{await yi(\"leagues-h2h/\",e,t,Pv)}catch{return}},aC0=e=>async t=>{try{await Yn(`leagues-classic/${e}/`,t,aX)}catch{return}},sC0=e=>async t=>{try{await Yn(`leagues-h2h/${e}/`,t,sX)}catch{return}},IZ=(e,t)=>async n=>{try{await Uf(`leagues-classic/${e}/`,t,n,Dv)}catch{return}},PZ=(e,t)=>async n=>{try{await Uf(`leagues-h2h/${e}/`,t,n,$v)}catch{return}},cC0=(e,t)=>async n=>{try{await yi(`league/${e}/bans/ban/`,t,n,ds0)}catch{return}},lC0=(e,t)=>async n=>{try{await yi(`league/${e}/bans/unban/`,t,n,bs0)}catch{return}},TC=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(",
+      "0=e=>async t=>{try{await yi(\"leagues-classic/\",e,t,Iv)}catch{return}},oC0=e=>async t=>{try{await yi(\"leagues-h2h/\",e,t,Pv)}catch{return}},aC0=e=>async t=>{try{await Yn(`leagues-classic/${e}/`,t,aX)}catch{return}},sC0=e=>async t=>{try{await Yn(`leagues-h2h/${e}/`,t,sX)}catch{return}},IZ=(e,t)=>async n=>{try{await Uf(`leagues-classic/${e}/`,t,n,Dv)}catch{return}},PZ=(e,t)=>async n=>{try{await Uf(`leagues-h2h/${e}/`,t,n,$v)}catch{return}},cC0=(e,t)=>async n=>{try{await yi(`league/${e}/bans/ban/`,t,n,ds0)}catch{return}},lC0=(e,t)=>async n=>{try{await yi(`league/${e}/bans/unban/`,t,n,bs0)}catch{return}},TC=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-private/join/\",e,t,B6,{entry:r.entry})}catch{return}},pC0=e=>async",
+      "f(r&&r.entry)try{await yi(\"leagues-private/join/\",e,t,B6,{entry:r.entry})}catch{return}},pC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-public/join/\",e,t,nX,{entry:r.entry})}catch{return}},NC=e=>async t=>{try{await Yn(`league/${e}/code/`,t,cX,{league:e})}catch{return}},uC0=e=>async t=>{try{await yi(`league/${e}/code/regenerate/`,{},t,lX,{league:e})}catch{return}},dC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(`league/${e}/leave/`,{},t,pX,{entry:r.entry,league:e})}catch{return}},bC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-private/delete/\",{league:e},t,J4,{entry:r.entry,league:e})}catch{return}},MC0=()=>async e=>Yn(\"leagues-renewable/\",e,uX),fC0=e=>async t=>yi(`league",
+      "ait yi(`league/${e}/leave/`,{},t,pX,{entry:r.entry,league:e})}catch{return}},bC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-private/delete/\",{league:e},t,J4,{entry:r.entry,league:e})}catch{return}},MC0=()=>async e=>Yn(\"leagues-renewable/\",e,uX),fC0=e=>async t=>yi(`leagues-renewable/${e}/renew/`,{},t,dX,{id:e}),zC0=e=>async t=>PU(`leagues-renewable/${e}/`,{},t,bX,{id:e}),DZ=(e,t,n,r)=>async i=>{try{await Yn(`leagues-classic/${e}/standings/?page_new_entries=${t}&page_standings=${n}&phase=${r}`,i,rX,{phaseId:r})}catch{return}},$Z=(e,t,n)=>async r=>{try{await Yn(`leagues-h2h/${e}/standings/?page_new_entries=${t}&page_standings=${n}`,r,iX)}catch{return}},FZ=(e,t,n,r)=>{let i=`leagues-h2h-matches/league/${e}/?page=",
+      "ntry,league:e})}catch{return}},MC0=()=>async e=>Yn(\"leagues-renewable/\",e,uX),fC0=e=>async t=>yi(`leagues-renewable/${e}/renew/`,{},t,dX,{id:e}),zC0=e=>async t=>PU(`leagues-renewable/${e}/`,{},t,bX,{id:e}),DZ=(e,t,n,r)=>async i=>{try{await Yn(`leagues-classic/${e}/standings/?page_new_entries=${t}&page_standings=${n}&phase=${r}`,i,rX,{phaseId:r})}catch{return}},$Z=(e,t,n)=>async r=>{try{await Yn(`leagues-h2h/${e}/standings/?page_new_entries=${t}&page_standings=${n}`,r,iX)}catch{return}},FZ=(e,t,n,r)=>{let i=`leagues-h2h-matches/league/${e}/?page=${r}`;return t&&(i+=`&entry=${t}`),n&&(i+=`&event=${n}`),async o=>{try{await Yn(i,o,oX,{entryId:t,eventId:n,leagueId:e})}catch{return}}},hC0=e=>async t=>{try{await yi(\"league/code-check/\",{cod",
+      "nc t=>PU(`leagues-renewable/${e}/`,{},t,bX,{id:e}),DZ=(e,t,n,r)=>async i=>{try{await Yn(`leagues-classic/${e}/standings/?page_new_entries=${t}&page_standings=${n}&phase=${r}`,i,rX,{phaseId:r})}catch{return}},$Z=(e,t,n)=>async r=>{try{await Yn(`leagues-h2h/${e}/standings/?page_new_entries=${t}&page_standings=${n}`,r,iX)}catch{return}},FZ=(e,t,n,r)=>{let i=`leagues-h2h-matches/league/${e}/?page=${r}`;return t&&(i+=`&entry=${t}`),n&&(i+=`&event=${n}`),async o=>{try{await Yn(i,o,oX,{entryId:t,eventId:n,leagueId:e})}catch{return}}},hC0=e=>async t=>{try{await yi(\"league/code-check/\",{code:e},t,MX,{code:e})}catch{t(jC())}},XZ=e=>t=>{pc0(JW,e),t(fX(e))},jC=()=>e=>{dc0(JW),e(zX())},HZ=e=>async t=>{try{await Yn(`league/${e}/entries/`,t,Fv,{lea",
+      "{await Yn(`leagues-h2h/${e}/standings/?page_new_entries=${t}&page_standings=${n}`,r,iX)}catch{return}},FZ=(e,t,n,r)=>{let i=`leagues-h2h-matches/league/${e}/?page=${r}`;return t&&(i+=`&entry=${t}`),n&&(i+=`&event=${n}`),async o=>{try{await Yn(i,o,oX,{entryId:t,eventId:n,leagueId:e})}catch{return}}},hC0=e=>async t=>{try{await yi(\"league/code-check/\",{code:e},t,MX,{code:e})}catch{t(jC())}},XZ=e=>t=>{pc0(JW,e),t(fX(e))},jC=()=>e=>{dc0(JW),e(zX())},HZ=e=>async t=>{try{await Yn(`league/${e}/entries/`,t,Fv,{leagueId:e})}catch{return}},UZ=e=>async t=>Yn(`league/${e}/cup-status/`,t,hX);var ay={exports:{}},Jt={};/**\n * @license React\n * react-is.production.min.js\n *\n * Copyright (c) Facebook, Inc. and its affiliates.\n *\n * This source code is",
+      "wait Yn(i,o,oX,{entryId:t,eventId:n,leagueId:e})}catch{return}}},hC0=e=>async t=>{try{await yi(\"league/code-check/\",{code:e},t,MX,{code:e})}catch{t(jC())}},XZ=e=>t=>{pc0(JW,e),t(fX(e))},jC=()=>e=>{dc0(JW),e(zX())},HZ=e=>async t=>{try{await Yn(`league/${e}/entries/`,t,Fv,{leagueId:e})}catch{return}},UZ=e=>async t=>Yn(`league/${e}/cup-status/`,t,hX);var ay={exports:{}},Jt={};/**\n * @license React\n * react-is.production.min.js\n *\n * Copyright (c) Facebook, Inc. and its affiliates.\n *\n * This source code is licensed under the MIT license found in the\n * LICENSE file in the root directory of this source tree.\n */var tI;function OC0(){if(tI)return Jt;tI=1;var e=Symbol.for(\"react.element\"),t=Symbol.for(\"react.portal\"),n=Symbol.for(\"react.fr",
+      "nc t=>{try{await yi(\"league/code-check/\",{code:e},t,MX,{code:e})}catch{t(jC())}},XZ=e=>t=>{pc0(JW,e),t(fX(e))},jC=()=>e=>{dc0(JW),e(zX())},HZ=e=>async t=>{try{await Yn(`league/${e}/entries/`,t,Fv,{leagueId:e})}catch{return}},UZ=e=>async t=>Yn(`league/${e}/cup-status/`,t,hX);var ay={exports:{}},Jt={};/**\n * @license React\n * react-is.production.min.js\n *\n * Copyright (c) Facebook, Inc. and its affiliates.\n *\n * This source code is licensed under the MIT license found in the\n * LICENSE file in the root directory of this source tree.\n */var tI;function OC0(){if(tI)return Jt;tI=1;var e=Symbol.for(\"react.element\"),t=Symbol.for(\"react.portal\"),n=Symbol.for(\"react.fragment\"),r=Symbol.for(\"react.strict_mode\"),i=Symbol.for(\"react.profiler\"),o",
+      "newPassword2}),a.jsx(zn.Box,{mt:2,mb:8,children:a.jsx(z1,{type:\"submit\",disabled:x,children:i(\"passwordSet.button\",\"Change my password\")})})]})]})]})})},xS0=()=>async(e,t)=>{const{byId:n}=t().regions;if(!(Object.keys(n).length>0))try{await Yn(\"regions/\",e,iH)}catch{return}};async function SS0(e){const t=await fetch(e);if(!t.ok)throw new Error(t.statusText);return await t.json()}async function LS0(){return SS0(\"api/residences/\")}const ES0=()=>{const e=O0(ja0),t=Me(),n=Pn(),{t:r}=I1(),[i,o]=B.useState(\"\"),[s,c]=B.useState(\"\"),[p,d]=B.useState({password:\"\",oldPassword:\"\"});async function M(A){A.preventDefault();try{await t(Q60({old_password:i,password:s}))}catch{return}await t(A3()),n(\"/\")}const h=()=>{s.length<=6&&(p.password=r(\"passwo"
+    ],
+    "IU": [
+      ".substring(e.length+1));break}}return t},Z9=e=>{const t=e.headers.get(\"content-length\");return e.status===204||t&&parseInt(t,10)===0},sj=e=>{const t=e.headers.get(\"content-type\");return t&&t.indexOf(\"application/json\")!==-1};async function IU(e,t,n,r,i,o={}){let s;try{t(n.request()),s=await fetch(`/api/${e}`,{...r,credentials:\"same-origin\"})}catch(p){const d={errorText:p.message,url:e};throw t(n.failure(d)),p}if(!s.ok){const p={statusText:s.statusText,url:e};if(s.status===400)p.badRequest=await s.json();else if(o.handleErrorsLocally){if(sj(s)&&!Z9(s))try{p.badRequest=await s.json()}catch{}}else t($X({code:s.status,details:await s.text()}));t(n.failure(p));const d=new Error(s.statusText);throw d.badRequest=p.badRequest,d}const c=sj(s)",
+      "ls:await s.text()}));t(n.failure(p));const d=new Error(s.statusText);throw d.badRequest=p.badRequest,d}const c=sj(s)?Z9(s)?{}:await s.json():Z9(s)?\"\":await s.json();return t(n.success(i?{...i,data:c}:c)),c}async function Yn(e,t,n,r){return IU(e,t,n,{},r)}async function _w(e,t,n,r,i,o,s){return IU(t,r,i,{body:JSON.stringify(n),headers:{\"Content-Type\":\"application/json\",\"X-CSRFToken\":BU(\"csrftoken\")},method:e},o,s)}async function yi(e,t,n,r,i,o){return _w(\"POST\",e,t,n,r,i,o)}async function Uf(e,t,n,r,i){return _w(\"PUT\",e,t,n,r,i)}async function PU(e,t,n,r,i){return _w(\"DELETE\",e,t,n,r,i)}const S2=e=>async t=>{try{await Yn(`entry/${e}/`,t,PW,{id:e})}catch{return}},Ob0=e=>async t=>{try{await Yn(`entry/${e}/history/`,t,i6,{id:e})}catch{re",
+      "s.statusText);throw d.badRequest=p.badRequest,d}const c=sj(s)?Z9(s)?{}:await s.json():Z9(s)?\"\":await s.json();return t(n.success(i?{...i,data:c}:c)),c}async function Yn(e,t,n,r){return IU(e,t,n,{},r)}async function _w(e,t,n,r,i,o,s){return IU(t,r,i,{body:JSON.stringify(n),headers:{\"Content-Type\":\"application/json\",\"X-CSRFToken\":BU(\"csrftoken\")},method:e},o,s)}async function yi(e,t,n,r,i,o){return _w(\"POST\",e,t,n,r,i,o)}async function Uf(e,t,n,r,i){return _w(\"PUT\",e,t,n,r,i)}async function PU(e,t,n,r,i){return _w(\"DELETE\",e,t,n,r,i)}const S2=e=>async t=>{try{await Yn(`entry/${e}/`,t,PW,{id:e})}catch{return}},Ob0=e=>async t=>{try{await Yn(`entry/${e}/history/`,t,i6,{id:e})}catch{return}},Ab0=(e,t)=>async n=>{try{await Yn(`entry/${e}/ev"
+    ],
+    "yi": [
+      "data:c}:c)),c}async function Yn(e,t,n,r){return IU(e,t,n,{},r)}async function _w(e,t,n,r,i,o,s){return IU(t,r,i,{body:JSON.stringify(n),headers:{\"Content-Type\":\"application/json\",\"X-CSRFToken\":BU(\"csrftoken\")},method:e},o,s)}async function yi(e,t,n,r,i,o){return _w(\"POST\",e,t,n,r,i,o)}async function Uf(e,t,n,r,i){return _w(\"PUT\",e,t,n,r,i)}async function PU(e,t,n,r,i){return _w(\"DELETE\",e,t,n,r,i)}const S2=e=>async t=>{try{await Yn(`entry/${e}/`,t,PW,{id:e})}catch{return}},Ob0=e=>async t=>{try{await Yn(`entry/${e}/history/`,t,i6,{id:e})}catch{return}},Ab0=(e,t)=>async n=>{try{await Yn(`entry/${e}/event/${t}/picks/`,n,xF,{entry:e,event:t})}catch{return}},mb0=e=>async t=>{await Uf(\"entry-update/\",e,t,pa0),t(A3())},gb0=e=>async t=>{try{",
+      "t Yn(`entry/${e}/event/${t}/picks/`,n,xF,{entry:e,event:t})}catch{return}},mb0=e=>async t=>{await Uf(\"entry-update/\",e,t,pa0),t(A3())},gb0=e=>async t=>{try{await Yn(`entry/${e}/transfers/`,t,SF,{id:e})}catch{return}},qb0=e=>async t=>{await yi(\"entry/unsubscribe/\",{signature:e},t,da0),t(A3())},A3=()=>async e=>{e(iM.request());const t=Yn(\"bootstrap-static/\",e,si0),n=o=>o.map(s=>({...s,overrides:{...s.overrides,element_types:{byId:s.overrides.element_types.length?Object.fromEntries(s.overrides.element_types.map(c=>[c.id,{...c}])):{}}}})),r=o=>o.map(s=>({...s,overrides:{...s.overrides,element_types:{byId:s.overrides.element_types.length?Object.fromEntries(s.overrides.element_types.map(c=>[c.id,{...c}])):{}}}})),i=Yn(\"me/\",e,ai0);await Pr",
+      "n t?t.split(\"=\")[1]:null},c3=()=>{const e=new URLSearchParams(document.location.search).has(\"webview\"),t=document.getElementById(\"webview\")!==null,n=Z60(\"in_app_webview\")===\"1\";return e||t||n},S_=()=>e=>Yn(\"player/logout/\",e,Sa0),K60=e=>t=>yi(\"player/create/\",e,t,DF),J60=e=>t=>Uf(\"player/update/\",e,t,$F),Q60=e=>t=>Uf(\"player/password-change/\",e,t,FF),eA0=e=>t=>yi(\"player/password-reset/\",e,t,XF),tA0=e=>t=>Uf(\"player/password-set/\",e,t,HF),nA0=e=>async t=>(t(UF(e)),yi(`watchlist/${e}/`,{},t,La0)),rA0=e=>async t=>(t(VF(e)),PU(`watchlist/${e}/`,{},t,Ea0)),iA0=e=>async t=>{try{await yi(\"player/recovery/\",e,t,Bv)}catch{return}t(A3())};var vq,xk;function oA0(){if(xk)return vq;xk=1;function e(t,n){var r=-1,i=t.length;for(n||(n=Array(i));++r",
+      "tById(\"webview\")!==null,n=Z60(\"in_app_webview\")===\"1\";return e||t||n},S_=()=>e=>Yn(\"player/logout/\",e,Sa0),K60=e=>t=>yi(\"player/create/\",e,t,DF),J60=e=>t=>Uf(\"player/update/\",e,t,$F),Q60=e=>t=>Uf(\"player/password-change/\",e,t,FF),eA0=e=>t=>yi(\"player/password-reset/\",e,t,XF),tA0=e=>t=>Uf(\"player/password-set/\",e,t,HF),nA0=e=>async t=>(t(UF(e)),yi(`watchlist/${e}/`,{},t,La0)),rA0=e=>async t=>(t(VF(e)),PU(`watchlist/${e}/`,{},t,Ea0)),iA0=e=>async t=>{try{await yi(\"player/recovery/\",e,t,Bv)}catch{return}t(A3())};var vq,xk;function oA0(){if(xk)return vq;xk=1;function e(t,n){var r=-1,i=t.length;for(n||(n=Array(i));++r<i;)n[r]=t[r];return n}return vq=e,vq}var _q,Sk;function aA0(){if(Sk)return _q;Sk=1;var e=Math.floor,t=Math.random;function",
+      ",K60=e=>t=>yi(\"player/create/\",e,t,DF),J60=e=>t=>Uf(\"player/update/\",e,t,$F),Q60=e=>t=>Uf(\"player/password-change/\",e,t,FF),eA0=e=>t=>yi(\"player/password-reset/\",e,t,XF),tA0=e=>t=>Uf(\"player/password-set/\",e,t,HF),nA0=e=>async t=>(t(UF(e)),yi(`watchlist/${e}/`,{},t,La0)),rA0=e=>async t=>(t(VF(e)),PU(`watchlist/${e}/`,{},t,Ea0)),iA0=e=>async t=>{try{await yi(\"player/recovery/\",e,t,Bv)}catch{return}t(A3())};var vq,xk;function oA0(){if(xk)return vq;xk=1;function e(t,n){var r=-1,i=t.length;for(n||(n=Array(i));++r<i;)n[r]=t[r];return n}return vq=e,vq}var _q,Sk;function aA0(){if(Sk)return _q;Sk=1;var e=Math.floor,t=Math.random;function n(r,i){return r+e(t()*(i-r+1))}return _q=n,_q}var Wq,Lk;function WG(){if(Lk)return Wq;Lk=1;var e=aA0();fu",
+      ",t,FF),eA0=e=>t=>yi(\"player/password-reset/\",e,t,XF),tA0=e=>t=>Uf(\"player/password-set/\",e,t,HF),nA0=e=>async t=>(t(UF(e)),yi(`watchlist/${e}/`,{},t,La0)),rA0=e=>async t=>(t(VF(e)),PU(`watchlist/${e}/`,{},t,Ea0)),iA0=e=>async t=>{try{await yi(\"player/recovery/\",e,t,Bv)}catch{return}t(A3())};var vq,xk;function oA0(){if(xk)return vq;xk=1;function e(t,n){var r=-1,i=t.length;for(n||(n=Array(i));++r<i;)n[r]=t[r];return n}return vq=e,vq}var _q,Sk;function aA0(){if(Sk)return _q;Sk=1;var e=Math.floor,t=Math.random;function n(r,i){return r+e(t()*(i-r+1))}return _q=n,_q}var Wq,Lk;function WG(){if(Lk)return Wq;Lk=1;var e=aA0();function t(n,r){var i=-1,o=n.length,s=o-1;for(r=r===void 0?o:r;++i<r;){var c=e(i,s),p=n[c];n[c]=n[i],n[i]=p}return n.le",
+      "tatus===\"a\"&&w.indexOf(W.team)===-1);if(_.length){const W=uA0(_).sort((x,S)=>parseFloat(S.form)-parseFloat(x.form)||S.now_cost-x.now_cost)[0];e(bf(W.id,parseInt(M,10))),c.push(W.id),p[W.team]++}else d++}}),!d},MA0=e=>async(t,n)=>{try{await yi(\"entry-create/\",{...e,picks:nl0(n())},t,aH)}catch{return}await t(A3())},fA0=()=>async(e,t)=>{const n=pa(t()),r=RW(t()),i=We(t());if(!(!n||!i||!i.entry))try{await yi(\"transfers/\",{chip:gi0(t()),entry:i.entry,event:n.id,transfers:ew(t(),void 0,r==null?void 0:r.id)},e,sH)}catch{return}},zA0=()=>async(e,t)=>{const n=We(t());if(!(!n||!n.entry))try{await Yn(`entry/${n.entry}/transfers-latest/`,e,cH)}catch{return}},RG=Intl.DateTimeFormat().resolvedOptions().timeZone,iC=e=>ZW(e,RG).toISOString(),hA0=(e,",
+      "))),c.push(W.id),p[W.team]++}else d++}}),!d},MA0=e=>async(t,n)=>{try{await yi(\"entry-create/\",{...e,picks:nl0(n())},t,aH)}catch{return}await t(A3())},fA0=()=>async(e,t)=>{const n=pa(t()),r=RW(t()),i=We(t());if(!(!n||!i||!i.entry))try{await yi(\"transfers/\",{chip:gi0(t()),entry:i.entry,event:n.id,transfers:ew(t(),void 0,r==null?void 0:r.id)},e,sH)}catch{return}},zA0=()=>async(e,t)=>{const n=We(t());if(!(!n||!n.entry))try{await Yn(`entry/${n.entry}/transfers-latest/`,e,cH)}catch{return}},RG=Intl.DateTimeFormat().resolvedOptions().timeZone,iC=e=>ZW(e,RG).toISOString(),hA0=(e,t,n=\"E d MMM HH:mm\")=>BX(e,RG,n,{locale:t}),Rm=e=>iC(new Date(e)),Zc=(e,t,n)=>hA0(new Date(e),t,n),OA0=e=>[\"cost_change_event\",\"cost_change_event_fall\",\"cost_change_",
+      "=Zn(n(),void 0,i==null?void 0:i.id);r&&o&&(r.subStatus===\"\"?t(oF(r,Lc0(n(),r))):r.subStatus===\"instigator\"?t(aF()):r.subStatus===\"target\"&&t(sF(r,o.squad_squadplay+1)))},x90=()=>async(e,t)=>{try{const n=We(t());if(!n||!n.entry)return;await yi(`my-team/${n.entry}/`,{chip:xW(t()),picks:Nc0(t())},e,Vu,{elementsById:tn(t())})}catch{return}};class mh extends Error{}mh.prototype.name=\"InvalidTokenError\";function S90(e){return decodeURIComponent(atob(e).replace(/(.)/g,(t,n)=>{let r=n.charCodeAt(0).toString(16).toUpperCase();return r.length<2&&(r=\"0\"+r),\"%\"+r}))}function L90(e){let t=e.replace(/-/g,\"+\").replace(/_/g,\"/\");switch(t.length%4){case 0:break;case 2:t+=\"==\";break;case 3:t+=\"=\";break;default:throw new Error(\"base64 string is not of ",
+      "t.map(r=>a.jsx(eC0,{elements:e.filter(i=>i.element_type===r.id).sort((i,o)=>o.now_cost-i.now_cost),elementType:r,teamsById:n},r.id))}),nC0=e=>({elements:h3(e),elementTypes:Bf(e),teamsById:pr(e)}),rC0=ur(nC0)(tC0),iC0=e=>async t=>{try{await yi(\"leagues-classic/\",e,t,Iv)}catch{return}},oC0=e=>async t=>{try{await yi(\"leagues-h2h/\",e,t,Pv)}catch{return}},aC0=e=>async t=>{try{await Yn(`leagues-classic/${e}/`,t,aX)}catch{return}},sC0=e=>async t=>{try{await Yn(`leagues-h2h/${e}/`,t,sX)}catch{return}},IZ=(e,t)=>async n=>{try{await Uf(`leagues-classic/${e}/`,t,n,Dv)}catch{return}},PZ=(e,t)=>async n=>{try{await Uf(`leagues-h2h/${e}/`,t,n,$v)}catch{return}},cC0=(e,t)=>async n=>{try{await yi(`league/${e}/bans/ban/`,t,n,ds0)}catch{return}},lC0=(e",
+      "o)=>o.now_cost-i.now_cost),elementType:r,teamsById:n},r.id))}),nC0=e=>({elements:h3(e),elementTypes:Bf(e),teamsById:pr(e)}),rC0=ur(nC0)(tC0),iC0=e=>async t=>{try{await yi(\"leagues-classic/\",e,t,Iv)}catch{return}},oC0=e=>async t=>{try{await yi(\"leagues-h2h/\",e,t,Pv)}catch{return}},aC0=e=>async t=>{try{await Yn(`leagues-classic/${e}/`,t,aX)}catch{return}},sC0=e=>async t=>{try{await Yn(`leagues-h2h/${e}/`,t,sX)}catch{return}},IZ=(e,t)=>async n=>{try{await Uf(`leagues-classic/${e}/`,t,n,Dv)}catch{return}},PZ=(e,t)=>async n=>{try{await Uf(`leagues-h2h/${e}/`,t,n,$v)}catch{return}},cC0=(e,t)=>async n=>{try{await yi(`league/${e}/bans/ban/`,t,n,ds0)}catch{return}},lC0=(e,t)=>async n=>{try{await yi(`league/${e}/bans/unban/`,t,n,bs0)}catch{ret",
+      "ry{await Yn(`leagues-h2h/${e}/`,t,sX)}catch{return}},IZ=(e,t)=>async n=>{try{await Uf(`leagues-classic/${e}/`,t,n,Dv)}catch{return}},PZ=(e,t)=>async n=>{try{await Uf(`leagues-h2h/${e}/`,t,n,$v)}catch{return}},cC0=(e,t)=>async n=>{try{await yi(`league/${e}/bans/ban/`,t,n,ds0)}catch{return}},lC0=(e,t)=>async n=>{try{await yi(`league/${e}/bans/unban/`,t,n,bs0)}catch{return}},TC=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-private/join/\",e,t,B6,{entry:r.entry})}catch{return}},pC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-public/join/\",e,t,nX,{entry:r.entry})}catch{return}},NC=e=>async t=>{try{await Yn(`league/${e}/code/`,t,cX,{league:e})}catch{return}},uC0=e=>async t=>{try{await yi(`league",
+      " Uf(`leagues-classic/${e}/`,t,n,Dv)}catch{return}},PZ=(e,t)=>async n=>{try{await Uf(`leagues-h2h/${e}/`,t,n,$v)}catch{return}},cC0=(e,t)=>async n=>{try{await yi(`league/${e}/bans/ban/`,t,n,ds0)}catch{return}},lC0=(e,t)=>async n=>{try{await yi(`league/${e}/bans/unban/`,t,n,bs0)}catch{return}},TC=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-private/join/\",e,t,B6,{entry:r.entry})}catch{return}},pC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-public/join/\",e,t,nX,{entry:r.entry})}catch{return}},NC=e=>async t=>{try{await Yn(`league/${e}/code/`,t,cX,{league:e})}catch{return}},uC0=e=>async t=>{try{await yi(`league/${e}/code/regenerate/`,{},t,lX,{league:e})}catch{return}},dC0=e=>async(t,n)=>{con",
+      "catch{return}},cC0=(e,t)=>async n=>{try{await yi(`league/${e}/bans/ban/`,t,n,ds0)}catch{return}},lC0=(e,t)=>async n=>{try{await yi(`league/${e}/bans/unban/`,t,n,bs0)}catch{return}},TC=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-private/join/\",e,t,B6,{entry:r.entry})}catch{return}},pC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-public/join/\",e,t,nX,{entry:r.entry})}catch{return}},NC=e=>async t=>{try{await Yn(`league/${e}/code/`,t,cX,{league:e})}catch{return}},uC0=e=>async t=>{try{await yi(`league/${e}/code/regenerate/`,{},t,lX,{league:e})}catch{return}},dC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(`league/${e}/leave/`,{},t,pX,{entry:r.entry,league:e})}catch{return}},bC",
+      "t yi(`league/${e}/bans/unban/`,t,n,bs0)}catch{return}},TC=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-private/join/\",e,t,B6,{entry:r.entry})}catch{return}},pC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-public/join/\",e,t,nX,{entry:r.entry})}catch{return}},NC=e=>async t=>{try{await Yn(`league/${e}/code/`,t,cX,{league:e})}catch{return}},uC0=e=>async t=>{try{await yi(`league/${e}/code/regenerate/`,{},t,lX,{league:e})}catch{return}},dC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(`league/${e}/leave/`,{},t,pX,{entry:r.entry,league:e})}catch{return}},bC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-private/delete/\",{league:e},t,J4,{entry:r.entry,league:e",
+      "turn}},pC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-public/join/\",e,t,nX,{entry:r.entry})}catch{return}},NC=e=>async t=>{try{await Yn(`league/${e}/code/`,t,cX,{league:e})}catch{return}},uC0=e=>async t=>{try{await yi(`league/${e}/code/regenerate/`,{},t,lX,{league:e})}catch{return}},dC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(`league/${e}/leave/`,{},t,pX,{entry:r.entry,league:e})}catch{return}},bC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-private/delete/\",{league:e},t,J4,{entry:r.entry,league:e})}catch{return}},MC0=()=>async e=>Yn(\"leagues-renewable/\",e,uX),fC0=e=>async t=>yi(`leagues-renewable/${e}/renew/`,{},t,dX,{id:e}),zC0=e=>async t=>PU(`leagues-renewable/${e",
+      "}},NC=e=>async t=>{try{await Yn(`league/${e}/code/`,t,cX,{league:e})}catch{return}},uC0=e=>async t=>{try{await yi(`league/${e}/code/regenerate/`,{},t,lX,{league:e})}catch{return}},dC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(`league/${e}/leave/`,{},t,pX,{entry:r.entry,league:e})}catch{return}},bC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-private/delete/\",{league:e},t,J4,{entry:r.entry,league:e})}catch{return}},MC0=()=>async e=>Yn(\"leagues-renewable/\",e,uX),fC0=e=>async t=>yi(`leagues-renewable/${e}/renew/`,{},t,dX,{id:e}),zC0=e=>async t=>PU(`leagues-renewable/${e}/`,{},t,bX,{id:e}),DZ=(e,t,n,r)=>async i=>{try{await Yn(`leagues-classic/${e}/standings/?page_new_entries=${t}&page_standings=${",
+      "egenerate/`,{},t,lX,{league:e})}catch{return}},dC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(`league/${e}/leave/`,{},t,pX,{entry:r.entry,league:e})}catch{return}},bC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-private/delete/\",{league:e},t,J4,{entry:r.entry,league:e})}catch{return}},MC0=()=>async e=>Yn(\"leagues-renewable/\",e,uX),fC0=e=>async t=>yi(`leagues-renewable/${e}/renew/`,{},t,dX,{id:e}),zC0=e=>async t=>PU(`leagues-renewable/${e}/`,{},t,bX,{id:e}),DZ=(e,t,n,r)=>async i=>{try{await Yn(`leagues-classic/${e}/standings/?page_new_entries=${t}&page_standings=${n}&phase=${r}`,i,rX,{phaseId:r})}catch{return}},$Z=(e,t,n)=>async r=>{try{await Yn(`leagues-h2h/${e}/standings/?page_new_entries=${t}",
+      "ntry,league:e})}catch{return}},bC0=e=>async(t,n)=>{const r=We(n());if(r&&r.entry)try{await yi(\"leagues-private/delete/\",{league:e},t,J4,{entry:r.entry,league:e})}catch{return}},MC0=()=>async e=>Yn(\"leagues-renewable/\",e,uX),fC0=e=>async t=>yi(`leagues-renewable/${e}/renew/`,{},t,dX,{id:e}),zC0=e=>async t=>PU(`leagues-renewable/${e}/`,{},t,bX,{id:e}),DZ=(e,t,n,r)=>async i=>{try{await Yn(`leagues-classic/${e}/standings/?page_new_entries=${t}&page_standings=${n}&phase=${r}`,i,rX,{phaseId:r})}catch{return}},$Z=(e,t,n)=>async r=>{try{await Yn(`leagues-h2h/${e}/standings/?page_new_entries=${t}&page_standings=${n}`,r,iX)}catch{return}},FZ=(e,t,n,r)=>{let i=`leagues-h2h-matches/league/${e}/?page=${r}`;return t&&(i+=`&entry=${t}`),n&&(i+=`&ev",
+      "}catch{return}},FZ=(e,t,n,r)=>{let i=`leagues-h2h-matches/league/${e}/?page=${r}`;return t&&(i+=`&entry=${t}`),n&&(i+=`&event=${n}`),async o=>{try{await Yn(i,o,oX,{entryId:t,eventId:n,leagueId:e})}catch{return}}},hC0=e=>async t=>{try{await yi(\"league/code-check/\",{code:e},t,MX,{code:e})}catch{t(jC())}},XZ=e=>t=>{pc0(JW,e),t(fX(e))},jC=()=>e=>{dc0(JW),e(zX())},HZ=e=>async t=>{try{await Yn(`league/${e}/entries/`,t,Fv,{leagueId:e})}catch{return}},UZ=e=>async t=>Yn(`league/${e}/cup-status/`,t,hX);var ay={exports:{}},Jt={};/**\n * @license React\n * react-is.production.min.js\n *\n * Copyright (c) Facebook, Inc. and its affiliates.\n *\n * This source code is licensed under the MIT license found in the\n * LICENSE file in the root directory of t"
+    ],
+    "_w": [
+      "re(p));const d=new Error(s.statusText);throw d.badRequest=p.badRequest,d}const c=sj(s)?Z9(s)?{}:await s.json():Z9(s)?\"\":await s.json();return t(n.success(i?{...i,data:c}:c)),c}async function Yn(e,t,n,r){return IU(e,t,n,{},r)}async function _w(e,t,n,r,i,o,s){return IU(t,r,i,{body:JSON.stringify(n),headers:{\"Content-Type\":\"application/json\",\"X-CSRFToken\":BU(\"csrftoken\")},method:e},o,s)}async function yi(e,t,n,r,i,o){return _w(\"POST\",e,t,n,r,i,o)}async function Uf(e,t,n,r,i){return _w(\"PUT\",e,t,n,r,i)}async function PU(e,t,n,r,i){return _w(\"DELETE\",e,t,n,r,i)}const S2=e=>async t=>{try{await Yn(`entry/${e}/`,t,PW,{id:e})}catch{return}},Ob0=e=>async t=>{try{await Yn(`entry/${e}/history/`,t,i6,{id:e})}catch{return}},Ab0=(e,t)=>async n=>{tr",
+      "ction Yn(e,t,n,r){return IU(e,t,n,{},r)}async function _w(e,t,n,r,i,o,s){return IU(t,r,i,{body:JSON.stringify(n),headers:{\"Content-Type\":\"application/json\",\"X-CSRFToken\":BU(\"csrftoken\")},method:e},o,s)}async function yi(e,t,n,r,i,o){return _w(\"POST\",e,t,n,r,i,o)}async function Uf(e,t,n,r,i){return _w(\"PUT\",e,t,n,r,i)}async function PU(e,t,n,r,i){return _w(\"DELETE\",e,t,n,r,i)}const S2=e=>async t=>{try{await Yn(`entry/${e}/`,t,PW,{id:e})}catch{return}},Ob0=e=>async t=>{try{await Yn(`entry/${e}/history/`,t,i6,{id:e})}catch{return}},Ab0=(e,t)=>async n=>{try{await Yn(`entry/${e}/event/${t}/picks/`,n,xF,{entry:e,event:t})}catch{return}},mb0=e=>async t=>{await Uf(\"entry-update/\",e,t,pa0),t(A3())},gb0=e=>async t=>{try{await Yn(`entry/${e}/tr",
+      ",t,n,r,i,o,s){return IU(t,r,i,{body:JSON.stringify(n),headers:{\"Content-Type\":\"application/json\",\"X-CSRFToken\":BU(\"csrftoken\")},method:e},o,s)}async function yi(e,t,n,r,i,o){return _w(\"POST\",e,t,n,r,i,o)}async function Uf(e,t,n,r,i){return _w(\"PUT\",e,t,n,r,i)}async function PU(e,t,n,r,i){return _w(\"DELETE\",e,t,n,r,i)}const S2=e=>async t=>{try{await Yn(`entry/${e}/`,t,PW,{id:e})}catch{return}},Ob0=e=>async t=>{try{await Yn(`entry/${e}/history/`,t,i6,{id:e})}catch{return}},Ab0=(e,t)=>async n=>{try{await Yn(`entry/${e}/event/${t}/picks/`,n,xF,{entry:e,event:t})}catch{return}},mb0=e=>async t=>{await Uf(\"entry-update/\",e,t,pa0),t(A3())},gb0=e=>async t=>{try{await Yn(`entry/${e}/transfers/`,t,SF,{id:e})}catch{return}},qb0=e=>async t=>{awai",
+      "aders:{\"Content-Type\":\"application/json\",\"X-CSRFToken\":BU(\"csrftoken\")},method:e},o,s)}async function yi(e,t,n,r,i,o){return _w(\"POST\",e,t,n,r,i,o)}async function Uf(e,t,n,r,i){return _w(\"PUT\",e,t,n,r,i)}async function PU(e,t,n,r,i){return _w(\"DELETE\",e,t,n,r,i)}const S2=e=>async t=>{try{await Yn(`entry/${e}/`,t,PW,{id:e})}catch{return}},Ob0=e=>async t=>{try{await Yn(`entry/${e}/history/`,t,i6,{id:e})}catch{return}},Ab0=(e,t)=>async n=>{try{await Yn(`entry/${e}/event/${t}/picks/`,n,xF,{entry:e,event:t})}catch{return}},mb0=e=>async t=>{await Uf(\"entry-update/\",e,t,pa0),t(A3())},gb0=e=>async t=>{try{await Yn(`entry/${e}/transfers/`,t,SF,{id:e})}catch{return}},qb0=e=>async t=>{await yi(\"entry/unsubscribe/\",{signature:e},t,da0),t(A3())},"
+    ]
+  },
+  "safe_literal_get_routes": [
+    "bootstrap-static/",
+    "dream-team/",
+    "leagues-renewable/",
+    "me/",
+    "regions/"
+  ],
+  "tests": [
+    {
+      "route": "bootstrap-static/",
+      "url": "https://fantasy.spl.com.sa/api/bootstrap-static/",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 1064277,
+      "sha256": "d3b3d8ae0189b5cc54809afd0df21009b9c0c41bab3b5f2447990f0d20dc018f",
+      "preview": "{\"chips\":[{\"id\":1,\"name\":\"wildcard\",\"number\":1,\"start_event\":2,\"stop_event\":18,\"chip_type\":\"transfer\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":2,\"name\":\"wildcard\",\"number\":1,\"start_event\":20,\"stop_event\":34,\"chip_type\":\"transfer\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":3,\"name\":\"pdbus\",\"number\":1,\"start_event\":1,\"stop_event\":18,\"chip_type\":\"team\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":4,\"name\":\"pdbus\",\"number\":1,\"start_event\":19,\"stop_event\":34,\"chip_type\":\"team\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":5,\"name\":\"2capt\",\"number\":1,\"start_event\":1,\"stop_event\":18,\"chip_type\":\"team\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":6,\"name\":\"2capt\",\"number\":1,\"start_event\":19,\"stop_event\":34,\"chip_type\":\"team\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":7,\"name\":\"uteam\",\"number\":1,\"start_event\":2,\"stop_event\":18,\"chip_type\":\"transfer\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":8",
+      "json_type": "dict",
+      "json_keys": [
+        "chips",
+        "events",
+        "game_settings",
+        "game_config",
+        "phases",
+        "teams",
+        "total_players",
+        "element_stats",
+        "element_types",
+        "elements"
+      ],
+      "json_len": 10
+    },
+    {
+      "route": "dream-team/",
+      "url": "https://fantasy.spl.com.sa/api/dream-team/",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 497,
+      "sha256": "cecfbe9c59fdacf0d2dad1a1a3565340824c00bc9e0d140f6b8408c2bbc21142",
+      "preview": "{\"top_player\":{\"id\":240,\"points\":21},\"team\":[{\"element\":438,\"points\":14,\"position\":1},{\"element\":360,\"points\":11,\"position\":2},{\"element\":465,\"points\":11,\"position\":3},{\"element\":83,\"points\":11,\"position\":4},{\"element\":200,\"points\":20,\"position\":5},{\"element\":332,\"points\":15,\"position\":6},{\"element\":77,\"points\":15,\"position\":7},{\"element\":571,\"points\":14,\"position\":8},{\"element\":554,\"points\":14,\"position\":9},{\"element\":240,\"points\":21,\"position\":10},{\"element\":649,\"points\":12,\"position\":11}]}",
+      "json_type": "dict",
+      "json_keys": [
+        "top_player",
+        "team"
+      ],
+      "json_len": 2
+    },
+    {
+      "route": "leagues-renewable/",
+      "url": "https://fantasy.spl.com.sa/api/leagues-renewable/",
+      "status": 403,
+      "content_type": "application/json",
+      "bytes": 62,
+      "sha256": "42e62ce7981f24f56c030b317f574a1935cd9d8aac7ebd36035240e47f8e780d",
+      "preview": "{\"detail\":\"لم يتم تزويد بيانات الدخول.\"}",
+      "json_type": "dict",
+      "json_keys": [
+        "detail"
+      ],
+      "json_len": 1
+    },
+    {
+      "route": "me/",
+      "url": "https://fantasy.spl.com.sa/api/me/",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 28,
+      "sha256": "0c05c388da5af47800892479e6830c1326860193f4da8b1f26addce709c2f29b",
+      "preview": "{\"player\":null,\"watched\":[]}",
+      "json_type": "dict",
+      "json_keys": [
+        "player",
+        "watched"
+      ],
+      "json_len": 2
+    },
+    {
+      "route": "regions/",
+      "url": "https://fantasy.spl.com.sa/api/regions/",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 23915,
+      "sha256": "9eadb2047fd84b1dc40fa4a03691acafa3908e1583dc2fc9fb78d2eec8f310fd",
+      "preview": "[{\"id\":1,\"name\":\" أفغانستان \",\"code\":1,\"iso_code_short\":\"AF\",\"iso_code_long\":\"AFG\"},{\"id\":2,\"name\":\" ألبانيا \",\"code\":2,\"iso_code_short\":\"AL\",\"iso_code_long\":\"ALB\"},{\"id\":3,\"name\":\" الجزائر \",\"code\":3,\"iso_code_short\":\"DZ\",\"iso_code_long\":\"DZA\"},{\"id\":4,\"name\":\" أندورا \",\"code\":4,\"iso_code_short\":\"AD\",\"iso_code_long\":\"AND\"},{\"id\":5,\"name\":\" أنجولا \",\"code\":5,\"iso_code_short\":\"AO\",\"iso_code_long\":\"AGO\"},{\"id\":6,\"name\":\" أنجويلا \",\"code\":6,\"iso_code_short\":\"AI\",\"iso_code_long\":\"AIA\"},{\"id\":7,\"name\":\" أنتاركتيكا \",\"code\":7,\"iso_code_short\":\"AQ\",\"iso_code_long\":\"ATA\"},{\"id\":8,\"name\":\" انتيغا وباربودا \",\"code\":8,\"iso_code_short\":\"AG\",\"iso_code_long\":\"ATG\"},{\"id\":9,\"name\":\" الأرجنتين \",\"code\":9,\"iso_code_short\":\"AR\",\"iso_code_long\":\"ARG\"},{\"id\":10,\"name\":\" أرمينيا \",\"code\":10,\"iso_code_short\":\"AM\",\"iso_code_long\":\"ARM\"},{\"id\":11,\"name\":\" أروبا \",\"code\":11,\"iso_code_short\":\"AW\",\"iso_code_long\":\"ABW\"},{\"id\":12,\"name\":\" أستراليا \",\"code\":12,\"iso_code_short\":\"AU\",\"iso_code_long\":\"AUS\"},{\"id\":13,\"name\":\" النمسا \",\"code\":13,\"iso_code_short\":\"AT\",\"iso_code_long\":\"AUT\"},{\"id\":14,\"name\":\" أذربيجان \",\"code\":14,\"iso_code_short\":\"AZ\",\"iso_code_long\":\"AZE\"},{\"id\":15,\"name\":\" البهاما \",\"code\":15,\"iso_",
+      "json_type": "list",
+      "json_keys": null,
+      "json_len": 251
+    }
+  ],
+  "successful_anonymous_reads": [
+    {
+      "route": "bootstrap-static/",
+      "url": "https://fantasy.spl.com.sa/api/bootstrap-static/",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 1064277,
+      "sha256": "d3b3d8ae0189b5cc54809afd0df21009b9c0c41bab3b5f2447990f0d20dc018f",
+      "preview": "{\"chips\":[{\"id\":1,\"name\":\"wildcard\",\"number\":1,\"start_event\":2,\"stop_event\":18,\"chip_type\":\"transfer\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":2,\"name\":\"wildcard\",\"number\":1,\"start_event\":20,\"stop_event\":34,\"chip_type\":\"transfer\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":3,\"name\":\"pdbus\",\"number\":1,\"start_event\":1,\"stop_event\":18,\"chip_type\":\"team\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":4,\"name\":\"pdbus\",\"number\":1,\"start_event\":19,\"stop_event\":34,\"chip_type\":\"team\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":5,\"name\":\"2capt\",\"number\":1,\"start_event\":1,\"stop_event\":18,\"chip_type\":\"team\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":6,\"name\":\"2capt\",\"number\":1,\"start_event\":19,\"stop_event\":34,\"chip_type\":\"team\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":7,\"name\":\"uteam\",\"number\":1,\"start_event\":2,\"stop_event\":18,\"chip_type\":\"transfer\",\"overrides\":{\"rules\":{},\"scoring\":{},\"element_types\":[],\"pick_multiplier\":null}},{\"id\":8",
+      "json_type": "dict",
+      "json_keys": [
+        "chips",
+        "events",
+        "game_settings",
+        "game_config",
+        "phases",
+        "teams",
+        "total_players",
+        "element_stats",
+        "element_types",
+        "elements"
+      ],
+      "json_len": 10
+    },
+    {
+      "route": "dream-team/",
+      "url": "https://fantasy.spl.com.sa/api/dream-team/",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 497,
+      "sha256": "cecfbe9c59fdacf0d2dad1a1a3565340824c00bc9e0d140f6b8408c2bbc21142",
+      "preview": "{\"top_player\":{\"id\":240,\"points\":21},\"team\":[{\"element\":438,\"points\":14,\"position\":1},{\"element\":360,\"points\":11,\"position\":2},{\"element\":465,\"points\":11,\"position\":3},{\"element\":83,\"points\":11,\"position\":4},{\"element\":200,\"points\":20,\"position\":5},{\"element\":332,\"points\":15,\"position\":6},{\"element\":77,\"points\":15,\"position\":7},{\"element\":571,\"points\":14,\"position\":8},{\"element\":554,\"points\":14,\"position\":9},{\"element\":240,\"points\":21,\"position\":10},{\"element\":649,\"points\":12,\"position\":11}]}",
+      "json_type": "dict",
+      "json_keys": [
+        "top_player",
+        "team"
+      ],
+      "json_len": 2
+    },
+    {
+      "route": "me/",
+      "url": "https://fantasy.spl.com.sa/api/me/",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 28,
+      "sha256": "0c05c388da5af47800892479e6830c1326860193f4da8b1f26addce709c2f29b",
+      "preview": "{\"player\":null,\"watched\":[]}",
+      "json_type": "dict",
+      "json_keys": [
+        "player",
+        "watched"
+      ],
+      "json_len": 2
+    },
+    {
+      "route": "regions/",
+      "url": "https://fantasy.spl.com.sa/api/regions/",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 23915,
+      "sha256": "9eadb2047fd84b1dc40fa4a03691acafa3908e1583dc2fc9fb78d2eec8f310fd",
+      "preview": "[{\"id\":1,\"name\":\" أفغانستان \",\"code\":1,\"iso_code_short\":\"AF\",\"iso_code_long\":\"AFG\"},{\"id\":2,\"name\":\" ألبانيا \",\"code\":2,\"iso_code_short\":\"AL\",\"iso_code_long\":\"ALB\"},{\"id\":3,\"name\":\" الجزائر \",\"code\":3,\"iso_code_short\":\"DZ\",\"iso_code_long\":\"DZA\"},{\"id\":4,\"name\":\" أندورا \",\"code\":4,\"iso_code_short\":\"AD\",\"iso_code_long\":\"AND\"},{\"id\":5,\"name\":\" أنجولا \",\"code\":5,\"iso_code_short\":\"AO\",\"iso_code_long\":\"AGO\"},{\"id\":6,\"name\":\" أنجويلا \",\"code\":6,\"iso_code_short\":\"AI\",\"iso_code_long\":\"AIA\"},{\"id\":7,\"name\":\" أنتاركتيكا \",\"code\":7,\"iso_code_short\":\"AQ\",\"iso_code_long\":\"ATA\"},{\"id\":8,\"name\":\" انتيغا وباربودا \",\"code\":8,\"iso_code_short\":\"AG\",\"iso_code_long\":\"ATG\"},{\"id\":9,\"name\":\" الأرجنتين \",\"code\":9,\"iso_code_short\":\"AR\",\"iso_code_long\":\"ARG\"},{\"id\":10,\"name\":\" أرمينيا \",\"code\":10,\"iso_code_short\":\"AM\",\"iso_code_long\":\"ARM\"},{\"id\":11,\"name\":\" أروبا \",\"code\":11,\"iso_code_short\":\"AW\",\"iso_code_long\":\"ABW\"},{\"id\":12,\"name\":\" أستراليا \",\"code\":12,\"iso_code_short\":\"AU\",\"iso_code_long\":\"AUS\"},{\"id\":13,\"name\":\" النمسا \",\"code\":13,\"iso_code_short\":\"AT\",\"iso_code_long\":\"AUT\"},{\"id\":14,\"name\":\" أذربيجان \",\"code\":14,\"iso_code_short\":\"AZ\",\"iso_code_long\":\"AZE\"},{\"id\":15,\"name\":\" البهاما \",\"code\":15,\"iso_",
+      "json_type": "list",
+      "json_keys": null,
+      "json_len": 251
+    }
+  ]
+}
