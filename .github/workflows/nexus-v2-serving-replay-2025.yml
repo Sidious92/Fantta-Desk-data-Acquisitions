@@ -1,0 +1,108 @@
+name: Nexus v2 Serving Replay 2025
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.nexus-v2-serving-replay-launch/EXECUTE'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout fixed private serving authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 68e0d0cee3e85fed3145c1124969ade9bcc0a23a
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Verify serving authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "68e0d0cee3e85fed3145c1124969ade9bcc0a23a"
+          test -f fantadesk-private/scripts/nexus-v2-serving-core.py
+          test -f fantadesk-private/scripts/nexus-v2-serving-replay-2025.py
+          test -f fantadesk-private/data/nexus/research-v2/final/nexus-v2-predictive-engine-freeze-v1.json
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+
+      - name: Setup exact Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+
+      - name: Install pinned frozen environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --no-cache-dir \
+            numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 \
+            joblib==1.5.3 threadpoolctl==3.6.0 orjson==3.11.9 \
+            xgboost==3.1.3 lightgbm==4.6.0 catboost==1.2.8
+
+      - name: Materialize exact frozen inputs
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+
+      - name: Rebuild exact Minutes and Event surfaces
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp fantadesk-private/scripts/nexus-v2-minutes-surface-one.py /mnt/data/minutes_surface_one.py
+          for season in 2021-22 2022-23 2023-24 2024-25 2025-26; do
+            python fantadesk-private/scripts/nexus-v2-precompute-usage-cache.py "$season"
+          done
+          python fantadesk-private/scripts/nexus-v2-build-minutes-surface-cached.py
+          echo "5898b2c01490e9a1ab21e19c159c4ba51fadbd300470f19e31f6384da13d4f2c  /mnt/data/nexus_v2_minutes_roster_surface.csv" | sha256sum --check --strict
+          python fantadesk-private/scripts/nexus-v2-build-event-roster-surface.py
+          echo "09022f38648708268e424877e7f2f473f48a84ecaa7a399afbc9fb372c36dfd2  /mnt/data/nexus_v2_event_roster_surface.csv" | sha256sum --check --strict
+
+      - name: Run independent frozen serving replay
+        shell: bash
+        run: |
+          set -euo pipefail
+          python fantadesk-private/scripts/nexus-v2-serving-replay-2025.py
+
+      - name: Validate sanitized replay audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC=/mnt/data/nexus_v2_serving_replay_2025_audit.json
+          test -f "$SRC"
+          mkdir -p replay-output
+          cp "$SRC" replay-output/audit.json
+          python - <<'PY'
+          import json
+          p=json.load(open('replay-output/audit.json'))
+          assert p['schema']=='NEXUS_V2_SERVING_REPLAY_2025_AUDIT_V1'
+          assert p['status']=='PASS'
+          assert p['retuning'] is False
+          assert p['selection_change'] is False
+          assert p['no_player_rows'] is True
+          assert p['replay']['AVERAGE_VOTE']['metrics']['n']==441
+          assert p['replay']['EXPECTED_TOTAL_MINUTES']['metrics']['n']==517
+          assert p['replay']['GOALS']['metrics']['n']==517
+          assert p['replay']['ASSISTS']['metrics']['n']==517
+          for target in ['AVERAGE_VOTE','EXPECTED_TOTAL_MINUTES','GOALS','ASSISTS']:
+              assert all(x['pass'] for x in p['replay'][target]['comparison'].values())
+          print('SERVING_REPLAY_VALIDATION=PASS')
+          PY
+
+      - name: Upload replay audit only
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-serving-replay-2025-audit
+          path: replay-output/audit.json
+          if-no-files-found: error
+          retention-days: 7
