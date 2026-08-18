@@ -7,15 +7,44 @@ on:
     paths:
       - '.nexus-probe-fantasy-provider-shapes-v1-launch/EXECUTE'
 
+permissions:
+  contents: write
+
 jobs:
   probe:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: true
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13.5'
       - run: python -m pip install --no-cache-dir requests==2.32.5 beautifulsoup4==4.13.5 lxml==6.0.1
       - name: Probe provider response shapes
-        run: python scripts/nexus-probe-fantasy-provider-shapes-v1.py
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .nexus-probe-fantasy-provider-shapes-v1-status
+          python scripts/nexus-probe-fantasy-provider-shapes-v1.py | tee .nexus-probe-fantasy-provider-shapes-v1-status/RESULT.json
+      - name: Persist probe result safely
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp=$(mktemp)
+          if test -s .nexus-probe-fantasy-provider-shapes-v1-status/RESULT.json; then
+            cp .nexus-probe-fantasy-provider-shapes-v1-status/RESULT.json "$tmp"
+          else
+            printf '{"error":"probe did not produce a result"}\n' > "$tmp"
+          fi
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-probe-fantasy-provider-shapes-v1-status
+          cp "$tmp" .nexus-probe-fantasy-provider-shapes-v1-status/RESULT.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-probe-fantasy-provider-shapes-v1-status/RESULT.json
+          git commit -m 'ci: record fantasy provider shape probe' || exit 0
+          git push origin HEAD:main
