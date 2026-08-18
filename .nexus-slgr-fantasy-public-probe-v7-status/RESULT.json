@@ -1,0 +1,255 @@
+{
+  "schema": "NEXUS_SLGR_FANTASY_PUBLIC_PROBE_V7",
+  "api_base": "https://fantaking-api.dunkest.com/api/v1",
+  "provider_ids": {
+    "league_id": 14,
+    "matchday_id": 1469,
+    "player_id": 5660
+  },
+  "id_provenance": {
+    "league_id": "compiled app config [14, slgr]",
+    "matchday_id": "public /leagues/14/fantasy-leaders?lang=en response",
+    "player_id": "same public fantasy-leaders response (Ayoub El Kaabi)"
+  },
+  "tests": [
+    {
+      "route": "/players/5660/profile",
+      "params": {
+        "league": 14
+      },
+      "url": "https://fantaking-api.dunkest.com/api/v1/players/5660/profile?league=14",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 324,
+      "sha256": "1b0a1b00e641b12888843964285f816e3226dcb960806fae0426c71c7bfd10fc",
+      "preview": "{\"data\":{\"id\":5660,\"first_name\":\"Ayoub\",\"last_name\":\"El Kaabi\",\"position\":{\"id\":45,\"name\":\"Attacker\"},\"team\":{\"id\":275,\"name\":\"OLYMPIACOS\",\"abbreviation\":\"OLY\"},\"jersey\":null,\"face_path\":null,\"quotation\":20,\"avg_fantasy_pts\":0,\"total_plus\":0,\"popularity\":0.35,\"is_on_fire\":null,\"is_injured\":false,\"started_from_bench\":true}}",
+      "json_type": "dict",
+      "json_len": 1,
+      "json_keys": [
+        "data"
+      ]
+    },
+    {
+      "route": "/players/5660/fantasy-pts",
+      "params": {
+        "league": 14,
+        "matchday": 1469
+      },
+      "url": "https://fantaking-api.dunkest.com/api/v1/players/5660/fantasy-pts?league=14&matchday=1469",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 379,
+      "sha256": "db3b1c154a01dc50060628a7af338cd2518d92a182f783dbfa90522dbaffec2a",
+      "preview": "{\"data\":{\"matchday\":{\"id\":1469,\"number\":1},\"round\":{\"id\":2480,\"number\":1},\"match\":{\"id\":11702,\"status\":\"scheduled\",\"ot\":false,\"started_at\":\"2026-08-22T18:30:00.000000Z\",\"home_team\":{\"id\":275,\"name\":\"OLYMPIACOS\",\"abbreviation\":\"OLY\",\"score\":null},\"away_team\":{\"id\":271,\"name\":\"ATROMITOS\",\"abbreviation\":\"ATR\",\"score\":null}},\"fantasy_pts\":null,\"stats_items\":[],\"label\":\"opponent\"}}",
+      "json_type": "dict",
+      "json_len": 1,
+      "json_keys": [
+        "data"
+      ]
+    }
+  ],
+  "response_shape_inventory": {
+    "/players/5660/profile": [
+      {
+        "path": "$",
+        "keys": [
+          "data"
+        ],
+        "scalar_sample": {}
+      },
+      {
+        "path": "data",
+        "keys": [
+          "avg_fantasy_pts",
+          "face_path",
+          "first_name",
+          "id",
+          "is_injured",
+          "is_on_fire",
+          "jersey",
+          "last_name",
+          "popularity",
+          "position",
+          "quotation",
+          "started_from_bench",
+          "team",
+          "total_plus"
+        ],
+        "scalar_sample": {
+          "id": 5660,
+          "first_name": "Ayoub",
+          "last_name": "El Kaabi",
+          "quotation": 20,
+          "avg_fantasy_pts": 0,
+          "total_plus": 0,
+          "popularity": 0.35,
+          "is_injured": false,
+          "started_from_bench": true
+        }
+      },
+      {
+        "path": "data.position",
+        "keys": [
+          "id",
+          "name"
+        ],
+        "scalar_sample": {
+          "id": 45,
+          "name": "Attacker"
+        }
+      },
+      {
+        "path": "data.team",
+        "keys": [
+          "abbreviation",
+          "id",
+          "name"
+        ],
+        "scalar_sample": {
+          "id": 275,
+          "name": "OLYMPIACOS",
+          "abbreviation": "OLY"
+        }
+      }
+    ],
+    "/players/5660/fantasy-pts": [
+      {
+        "path": "$",
+        "keys": [
+          "data"
+        ],
+        "scalar_sample": {}
+      },
+      {
+        "path": "data",
+        "keys": [
+          "fantasy_pts",
+          "label",
+          "match",
+          "matchday",
+          "round",
+          "stats_items"
+        ],
+        "scalar_sample": {
+          "label": "opponent"
+        }
+      },
+      {
+        "path": "data.matchday",
+        "keys": [
+          "id",
+          "number"
+        ],
+        "scalar_sample": {
+          "id": 1469,
+          "number": 1
+        }
+      },
+      {
+        "path": "data.round",
+        "keys": [
+          "id",
+          "number"
+        ],
+        "scalar_sample": {
+          "id": 2480,
+          "number": 1
+        }
+      },
+      {
+        "path": "data.match",
+        "keys": [
+          "away_team",
+          "home_team",
+          "id",
+          "ot",
+          "started_at",
+          "status"
+        ],
+        "scalar_sample": {
+          "id": 11702,
+          "status": "scheduled",
+          "ot": false,
+          "started_at": "2026-08-22T18:30:00.000000Z"
+        }
+      },
+      {
+        "path": "data.match.home_team",
+        "keys": [
+          "abbreviation",
+          "id",
+          "name",
+          "score"
+        ],
+        "scalar_sample": {
+          "id": 275,
+          "name": "OLYMPIACOS",
+          "abbreviation": "OLY"
+        }
+      },
+      {
+        "path": "data.match.away_team",
+        "keys": [
+          "abbreviation",
+          "id",
+          "name",
+          "score"
+        ],
+        "scalar_sample": {
+          "id": 271,
+          "name": "ATROMITOS",
+          "abbreviation": "ATR"
+        }
+      },
+      {
+        "path": "data.stats_items",
+        "list_len": 0
+      }
+    ]
+  },
+  "successful_reads": [
+    {
+      "route": "/players/5660/profile",
+      "params": {
+        "league": 14
+      },
+      "url": "https://fantaking-api.dunkest.com/api/v1/players/5660/profile?league=14",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 324,
+      "sha256": "1b0a1b00e641b12888843964285f816e3226dcb960806fae0426c71c7bfd10fc",
+      "preview": "{\"data\":{\"id\":5660,\"first_name\":\"Ayoub\",\"last_name\":\"El Kaabi\",\"position\":{\"id\":45,\"name\":\"Attacker\"},\"team\":{\"id\":275,\"name\":\"OLYMPIACOS\",\"abbreviation\":\"OLY\"},\"jersey\":null,\"face_path\":null,\"quotation\":20,\"avg_fantasy_pts\":0,\"total_plus\":0,\"popularity\":0.35,\"is_on_fire\":null,\"is_injured\":false,\"started_from_bench\":true}}",
+      "json_type": "dict",
+      "json_len": 1,
+      "json_keys": [
+        "data"
+      ]
+    },
+    {
+      "route": "/players/5660/fantasy-pts",
+      "params": {
+        "league": 14,
+        "matchday": 1469
+      },
+      "url": "https://fantaking-api.dunkest.com/api/v1/players/5660/fantasy-pts?league=14&matchday=1469",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 379,
+      "sha256": "db3b1c154a01dc50060628a7af338cd2518d92a182f783dbfa90522dbaffec2a",
+      "preview": "{\"data\":{\"matchday\":{\"id\":1469,\"number\":1},\"round\":{\"id\":2480,\"number\":1},\"match\":{\"id\":11702,\"status\":\"scheduled\",\"ot\":false,\"started_at\":\"2026-08-22T18:30:00.000000Z\",\"home_team\":{\"id\":275,\"name\":\"OLYMPIACOS\",\"abbreviation\":\"OLY\",\"score\":null},\"away_team\":{\"id\":271,\"name\":\"ATROMITOS\",\"abbreviation\":\"ATR\",\"score\":null}},\"fantasy_pts\":null,\"stats_items\":[],\"label\":\"opponent\"}}",
+      "json_type": "dict",
+      "json_len": 1,
+      "json_keys": [
+        "data"
+      ]
+    }
+  ],
+  "governance": {
+    "only_compiled_app_contracts_with_provider_returned_ids_tested": true,
+    "authenticated_surface_accessed": false,
+    "user_team_private_routes_accessed": false,
+    "bruteforce_endpoint_dictionary_used": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
