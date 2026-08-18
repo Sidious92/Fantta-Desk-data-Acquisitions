@@ -1,0 +1,48 @@
+name: Nexus v2 Smoke Dispatch Once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/nexus-v2-smoke-dispatch-once.yml
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+  dispatch-once:
+    if: github.event.head_commit.message == 'ci: one-shot dispatch Nexus v2 smoke'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dispatcher state
+        uses: actions/checkout@v6
+
+      - name: Dispatch only Nexus v2 atomic smoke
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          RESPONSE=$(curl --fail --silent --show-error --location \
+            -X POST \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/nexus-v2-huber-single-shard-smoke.yml/dispatches" \
+            -d '{"ref":"main"}')
+          printf '%s\n' "$RESPONSE" > nexus-v2-smoke-dispatch.json
+          python - <<'PY'
+          import json
+          p=json.load(open('nexus-v2-smoke-dispatch.json'))
+          rid=p.get('workflow_run_id')
+          if not isinstance(rid, int) or rid <= 0:
+              raise SystemExit(f'workflow dispatch did not return a run id: {p}')
+          print(f'workflow_run_id={rid}')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nexus-v2-smoke-dispatch.json
+          git commit -m "ci: record Nexus v2 smoke dispatch"
+          git push
