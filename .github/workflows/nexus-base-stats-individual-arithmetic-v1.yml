@@ -79,6 +79,21 @@ jobs:
           FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
         run: bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
 
+      - name: Audit normalized Fantacalcio source schema
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('/mnt/data/nexus_v2_predictive_research/source_artifacts/nexus-fantasy-history-v2/normalized/fantacalcio')
+          keys=set()
+          for season in ['2021-22','2022-23','2023-24','2024-25','2025-26']:
+              rows=json.load(open(root/season/'season-summary.json'))['rows']
+              for row in rows[:50]: keys.update(row.keys())
+          print('FANTACALCIO_NORMALIZED_FIELDS=' + ','.join(sorted(keys)))
+          PY
+
       - name: Acquire current Listone 2026-27
         working-directory: fantadesk-private
         env:
@@ -131,14 +146,12 @@ jobs:
           import json
           import numpy as np
           import pandas as pd
-
           root='/mnt/data/nexus-base-stats-arithmetic-v1'
           report=json.load(open(f'{root}/nexus-base-stats-individual-arithmetic-v1-report.json'))
           long=pd.read_csv(f'{root}/nexus-base-stats-individual-arithmetic-v1-review-long.csv',low_memory=False)
           summary=pd.read_csv(f'{root}/nexus-base-stats-individual-arithmetic-v1-summary.csv',low_memory=False)
           surface=pd.read_csv('/mnt/data/live_identity_surface.csv',low_memory=False)
           roster=json.load(open('/mnt/data/current-listone-capture/current-listone.json'))['players']
-
           assert report['schema']=='NEXUS_BASE_STATS_INDIVIDUAL_ARITHMETIC_V1'
           assert report['status']=='DIAGNOSTIC_ARITHMETIC_NO_MODEL'
           assert len(report['statistics'])==12
@@ -148,44 +161,29 @@ jobs:
           assert 'league_normalization' in report['explicitly_forbidden']
           assert 'reliability_weights' in report['explicitly_forbidden']
           assert 'machine_learning' in report['explicitly_forbidden']
-
-          # Independent reimplementation of the already-approved GOALS arithmetic.
           by_fid={int(r.fantacalcio_id):r for _,r in surface.iterrows()}
           goals={int(r.fantacalcio_id):r for _,r in long[long.statistic.eq('GOALS')].iterrows()}
           def n(r,k):
               if r is None or k not in r.index: return None
               v=pd.to_numeric(pd.Series([r.get(k,np.nan)]),errors='coerce').iloc[0]
               return None if pd.isna(v) else float(v)
-          def pace(g,m):
-              return g/m*38.0 if g is not None and m is not None and m>0 else None
+          def pace(g,m): return g/m*38.0 if g is not None and m is not None and m>0 else None
           for p in roster:
-              fid=int(p.get('playerId') or p.get('fantacalcioId'))
-              r=by_fid.get(fid)
-              obs=[]
-              for lag in [5,4,3,2,1]:
-                  games=n(r,f'lag{lag}_all_games'); value=n(r,f'lag{lag}_all_goals')
-                  obs.append((lag,value,games))
-              five=[x for x in obs if x[1] is not None and x[2] is not None and x[2]>0]
-              three=[x for x in five if x[0] in {3,2,1}]
+              fid=int(p.get('playerId') or p.get('fantacalcioId')); r=by_fid.get(fid); obs=[]
+              for lag in [5,4,3,2,1]: obs.append((lag,n(r,f'lag{lag}_all_goals'),n(r,f'lag{lag}_all_games')))
+              five=[x for x in obs if x[1] is not None and x[2] is not None and x[2]>0]; three=[x for x in five if x[0] in {3,2,1}]
               c5=pace(sum(x[1] for x in five),sum(x[2] for x in five)) if five else None
               c3=pace(sum(x[1] for x in three),sum(x[2] for x in three)) if three else None
-              recent=None
-              sg=n(r,'lag1_sa_games'); sv=n(r,'lag1_sa_goals')
-              if sg is not None and sg>0 and sv is not None:
-                  recent=pace(sv,sg)
+              recent=None; sg=n(r,'lag1_sa_games'); sv=n(r,'lag1_sa_goals')
+              if sg is not None and sg>0 and sv is not None: recent=pace(sv,sg)
               else:
                   for lag in [1,2,3,4,5]:
                       g=n(r,f'lag{lag}_all_games'); v=n(r,f'lag{lag}_all_goals')
-                      if g is not None and g>0 and v is not None:
-                          recent=pace(v,g); break
-              refs=[x for x in [c5,c3,recent] if x is not None and np.isfinite(x)]
-              expected=float(np.mean(refs)) if refs else None
-              got=pd.to_numeric(pd.Series([goals[fid].prediction]),errors='coerce').iloc[0]
-              got=None if pd.isna(got) else float(got)
-              if expected is None or got is None:
-                  assert expected is None and got is None, (fid,expected,got)
-              else:
-                  assert abs(expected-got)<=1e-12, (fid,expected,got)
+                      if g is not None and g>0 and v is not None: recent=pace(v,g); break
+              refs=[x for x in [c5,c3,recent] if x is not None and np.isfinite(x)]; expected=float(np.mean(refs)) if refs else None
+              got=pd.to_numeric(pd.Series([goals[fid].prediction]),errors='coerce').iloc[0]; got=None if pd.isna(got) else float(got)
+              if expected is None or got is None: assert expected is None and got is None, (fid,expected,got)
+              else: assert abs(expected-got)<=1e-12, (fid,expected,got)
           print('BASE_STATS_VALIDATION=PASS',len(roster),len(long))
           PY
 
