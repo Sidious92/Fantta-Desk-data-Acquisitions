@@ -1,0 +1,647 @@
+{
+  "schema": "NEXUS_SLGR_FANTASY_PUBLIC_PROBE_V4_ENDPOINT_INVENTORY",
+  "api_base": "https://fantaking-api.dunkest.com/api/v1",
+  "league_config_evidence": {
+    "provider_league_id_candidate": 14,
+    "slug": "slgr",
+    "basis": "compiled app config adjacent to API base"
+  },
+  "endpoint_count": 64,
+  "endpoints": [
+    {
+      "class": "baZ",
+      "gaJ_body": "return\"/fantasy-brackets\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-brackets"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bgA",
+      "gaJ_body": "return\"/fantasy-brackets/\"+this.d+\"/share\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-brackets/",
+        "/share"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bhn",
+      "gaJ_body": "return\"/user/bracket-tournament/join-info\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/user/bracket-tournament/join-info"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bhD",
+      "gaJ_body": "return\"/bracket-tournaments/\"+this.d+\"/standings\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/bracket-tournaments/",
+        "/standings"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bjd",
+      "gaJ_body": "return\"/fantasy-brackets/celebrities\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-brackets/celebrities"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bjh",
+      "gaJ_body": "return\"/fantasy-brackets/\"+this.d",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-brackets/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "blx",
+      "gaJ_body": "return\"/bracket-tournaments\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/bracket-tournaments"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "btD",
+      "gaJ_body": "return\"/users/\"+this.d+\"/fantasy-brackets/overview\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-brackets/overview",
+        "/users/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bDi",
+      "gaJ_body": "return\"/bracket-tournaments/join\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/bracket-tournaments/join"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bKk",
+      "gaJ_body": "return\"/fantasy-brackets/most-picked-champs\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-brackets/most-picked-champs"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bVM",
+      "gaJ_body": "return\"/fantasy-brackets/\"+this.d+\"/bracket-rounds/\"+this.e+\"/bracket-groups/\"+this.f",
+      "gbD_body": null,
+      "string_literals": [
+        "/bracket-groups/",
+        "/bracket-rounds/",
+        "/fantasy-brackets/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bVR",
+      "gaJ_body": "return\"/fantasy-brackets/\"+this.e+\"/bracket-rounds/\"+this.f+\"/series/\"+this.d+\"/predictions\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/bracket-rounds/",
+        "/fantasy-brackets/",
+        "/predictions",
+        "/series/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bWX",
+      "gaJ_body": "return\"/bracket-tournaments/public\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/bracket-tournaments/public"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "c6i",
+      "gaJ_body": "return\"/bracket-tournaments/\"+this.d",
+      "gbD_body": null,
+      "string_literals": [
+        "/bracket-tournaments/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "aS_",
+      "gaJ_body": "return\"/my-fantasy-brackets\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/my-fantasy-brackets"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bEd",
+      "gaJ_body": "return\"/leagues/\"+this.d+\"/layers\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/layers",
+        "/leagues/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "c2h",
+      "gaJ_body": "return\"/fantasy-teams/\"+this.d+\"/jersey\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams/",
+        "/jersey"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bp8",
+      "gaJ_body": "return\"/fantasy-leagues\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-leagues"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bDk",
+      "gaJ_body": "return\"/fantasy-leagues/join\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-leagues/join"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bVN",
+      "gaJ_body": "return\"/fantasy-leagues/\"+this.d+\"/config\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/config",
+        "/fantasy-leagues/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bpm",
+      "gaJ_body": "return\"/fantasy-leagues/\"+this.d",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-leagues/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bux",
+      "gaJ_body": "return\"/tournaments/\"+this.d+\"/standings\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/standings",
+        "/tournaments/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "btK",
+      "gaJ_body": "return\"/fantasy-matches/\"+this.d",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-matches/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "btW",
+      "gaJ_body": "return\"/tournaments/\"+this.d",
+      "gbD_body": null,
+      "string_literals": [
+        "/tournaments/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "but",
+      "gaJ_body": "return\"/tournaments/\"+this.d+\"/fantasy-teams/\"+this.e+\"/position\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams/",
+        "/position",
+        "/tournaments/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bDT",
+      "gaJ_body": "return\"/fantasy-teams/\"+this.d+\"/tournaments/\"+this.e+\"/matchdays/\"+this.f+\"/fantasy-match\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-match",
+        "/fantasy-teams/",
+        "/matchdays/",
+        "/tournaments/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bzr",
+      "gaJ_body": "return\"/predictions/players/competitions/\"+this.d+\"/standings/my-position\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/predictions/players/competitions/",
+        "/standings/my-position"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bzs",
+      "gaJ_body": "return\"/predictions/players/competitions/\"+this.d+\"/standings\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/predictions/players/competitions/",
+        "/standings"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bzw",
+      "gaJ_body": "return\"/predictions/competitions/\"+this.e+\"/matchdays\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchdays",
+        "/predictions/competitions/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "c6L",
+      "gaJ_body": "return\"/predictions/players/competitions/\"+this.e+\"/matchdays/\"+this.d",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchdays/",
+        "/predictions/players/competitions/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "c6T",
+      "gaJ_body": "return\"/predictions/players/competitions/\"+this.e+\"/matchdays/\"+this.d+\"/preview\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchdays/",
+        "/predictions/players/competitions/",
+        "/preview"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bEp",
+      "gaJ_body": "return\"/leagues/\"+this.d+\"/fantasy-leaders\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-leaders",
+        "/leagues/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bCw",
+      "gaJ_body": "return\"/leagues/\"+this.d+\"/injuries\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/injuries",
+        "/leagues/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bGl",
+      "gaJ_body": "return\"/matchpredictor/competitions/\"+this.d+\"/standings/my-position\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchpredictor/competitions/",
+        "/standings/my-position"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bGe",
+      "gaJ_body": "return\"/matchpredictor/competitions/\"+this.e+\"/matchdays\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchdays",
+        "/matchpredictor/competitions/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bGr",
+      "gaJ_body": "return\"/matchpredictor/competitions/\"+this.d+\"/standings\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchpredictor/competitions/",
+        "/standings"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bGw",
+      "gaJ_body": "return\"/schedules/\"+this.d+\"/matchdays/\"+this.e",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchdays/",
+        "/schedules/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bKf",
+      "gaJ_body": "return\"/tournaments/monthly\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/tournaments/monthly"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bLc",
+      "gaJ_body": "return\"/leagues/\"+this.e+\"/mvp-votings/\"+this.f+\"/vote\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/leagues/",
+        "/mvp-votings/",
+        "/vote"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bNx",
+      "gaJ_body": "return\"/leagues/\"+this.d+\"/seasons/\"+this.e+\"/fantasy-teams/\"+this.f+\"/palmares\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams/",
+        "/leagues/",
+        "/palmares",
+        "/seasons/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bRv",
+      "gaJ_body": "return\"/gazzetta/league/\"+this.d+\"/purchase\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/gazzetta/league/",
+        "/purchase"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bGB",
+      "gaJ_body": "return\"/players/\"+this.d+\"/fantasy-pts\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-pts",
+        "/players/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bPf",
+      "gaJ_body": "return\"/players/\"+this.d+\"/profile\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/players/",
+        "/profile"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bPw",
+      "gaJ_body": "return\"/players/\"+this.d+\"/trend\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/players/",
+        "/trend"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bPz",
+      "gaJ_body": "return\"/competitions/\"+this.d+\"/stats/players/table/download\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/competitions/",
+        "/stats/players/table/download"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bPB",
+      "gaJ_body": "return\"/competitions/\"+this.d+\"/stats/players/table\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/competitions/",
+        "/stats/players/table"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "c6d",
+      "gaJ_body": "return\"/players/\"+this.d+\"/upcoming-matches\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/players/",
+        "/upcoming-matches"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "c6l",
+      "gaJ_body": "return\"/user/favourite-team\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/user/favourite-team"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bp7",
+      "gaJ_body": "return\"/fantasy-leagues/\"+this.d+\"/fantasy-trades\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-leagues/",
+        "/fantasy-trades"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bqv",
+      "gaJ_body": "return\"/fantasy-leagues/\"+this.d+\"/tournaments\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-leagues/",
+        "/tournaments"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bqo",
+      "gaJ_body": "return\"/fantasy-leagues/\"+this.d+\"/rosters\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-leagues/",
+        "/rosters"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bYN",
+      "gaJ_body": "return\"/fantasy-teams/\"+this.d+\"/fantasy-trades\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams/",
+        "/fantasy-trades"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "blG",
+      "gaJ_body": "return\"/fantasy-teams\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bRS",
+      "gaJ_body": "return\"/fantasy-teams/\"+this.d+\"/matchdays/\"+this.e+\"/roster/random\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams/",
+        "/matchdays/",
+        "/roster/random"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bVU",
+      "gaJ_body": "return\"/fantasy-teams/\"+this.d+\"/matchdays/\"+this.e+\"/roster\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams/",
+        "/matchdays/",
+        "/roster"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bPy",
+      "gaJ_body": "return\"/players-lists/\"+this.d+\"/matchdays/\"+this.e+\"/players\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchdays/",
+        "/players",
+        "/players-lists/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bRp",
+      "gaJ_body": "return\"/users/\"+this.d+\"/fantasy-teams/overview\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams/overview",
+        "/users/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bly",
+      "gaJ_body": "return\"/tournaments\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/tournaments"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bDs",
+      "gaJ_body": "return\"/tournaments/join\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/tournaments/join"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bEJ",
+      "gaJ_body": "return\"/user/tournament/join-info\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/user/tournament/join-info"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bXc",
+      "gaJ_body": "return\"/tournaments/public\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/tournaments/public"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "c7D",
+      "gaJ_body": "return\"/tournaments/\"+this.d+\"/reader-code\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/reader-code",
+        "/tournaments/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "bjq",
+      "gaJ_body": "return\"/fantasy-teams/\"+this.d",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams/"
+      ],
+      "query_keys": []
+    },
+    {
+      "class": "c7p",
+      "gaJ_body": "return\"/user/fantasy-teams\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/user/fantasy-teams"
+      ],
+      "query_keys": []
+    }
+  ],
+  "governance": {
+    "api_requests_made": false,
+    "authenticated_surface_accessed": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
