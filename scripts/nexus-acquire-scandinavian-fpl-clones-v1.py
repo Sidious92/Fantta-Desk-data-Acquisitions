@@ -36,7 +36,7 @@ def write_csv(p,rows):
     with p.open('w',newline='',encoding='utf-8') as f:
         w=csv.DictWriter(f,fieldnames=fs); w.writeheader(); w.writerows(rows)
 def flatten_history(provider,element,team,section,row,url,digest,local):
-    return {'provider':provider['key'],'provider_name':provider['name'],'competition':provider['competition'],'provider_player_id':element.get('id'),'player_code':element.get('code'),'web_name':element.get('web_name'),'team_id':element.get('team'),'team_name':team.get('name'),'history_section':section,'source_url':url,'source_sha256':digest,'source_local_path':local,'provider_fields_json':json.dumps(row,ensure_ascii=False,default=str,separators=(',',':')),...row}
+    return {'provider':provider['key'],'provider_name':provider['name'],'competition':provider['competition'],'provider_player_id':element.get('id'),'player_code':element.get('code'),'web_name':element.get('web_name'),'team_id':element.get('team'),'team_name':team.get('name'),'history_section':section,'source_url':url,'source_sha256':digest,'source_local_path':local,'provider_fields_json':json.dumps(row,ensure_ascii=False,default=str,separators=(',',':')),**row}
 def acquire(p):
     root=mkdir(OUT/p['key'].lower()); raw=mkdir(root/'raw'); sums=mkdir(raw/'element-summaries'); norm=mkdir(root/'normalized')
     boot,bb,bu,bs=req(p['base'],'bootstrap-static/'); (raw/'bootstrap-static.json').write_bytes(bb)
