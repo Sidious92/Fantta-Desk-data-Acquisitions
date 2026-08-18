@@ -1,0 +1,264 @@
+{
+  "schema": "NEXUS_LIGUE1_OFFICIAL_FANTASY_API_PUBLIC_PROBE_V2",
+  "base": "https://api.mpg.football/fantasy",
+  "tests": [
+    {
+      "path": "/",
+      "requested": "https://api.mpg.football/fantasy",
+      "url": "https://api.mpg.football/fantasy",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 139,
+      "sha256": "52c1e7a2c36be28c42455fe1572d7d7918c3180cad99a2b82daa2a38a7e7bb23",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/",
+      "requested": "https://api.mpg.football/fantasy/",
+      "url": "https://api.mpg.football/fantasy/",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 139,
+      "sha256": "52c1e7a2c36be28c42455fe1572d7d7918c3180cad99a2b82daa2a38a7e7bb23",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/health",
+      "requested": "https://api.mpg.football/fantasy/health",
+      "url": "https://api.mpg.football/fantasy/health",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 145,
+      "sha256": "1d19012f89fe0550cda475cc8d0e3e80128453cc9ff2c37915136a75631b1993",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /health</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/version",
+      "requested": "https://api.mpg.football/fantasy/version",
+      "url": "https://api.mpg.football/fantasy/version",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 146,
+      "sha256": "c62073d70c366bfeba61bc11feddd89a8fb3964e1a1750a8aa78d2ba1c6d395e",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /version</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/openapi.json",
+      "requested": "https://api.mpg.football/fantasy/openapi.json",
+      "url": "https://api.mpg.football/fantasy/openapi.json",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 151,
+      "sha256": "b4fc3f47aac74a3152d5486d264a19332fc7972b70fea8710b5dbf2f3dc82e9e",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /openapi.json</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/swagger.json",
+      "requested": "https://api.mpg.football/fantasy/swagger.json",
+      "url": "https://api.mpg.football/fantasy/swagger.json",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 151,
+      "sha256": "954e0ca875510c1f370ade3a9a9dc7b258838bc00b15031c327a7d598666e85a",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /swagger.json</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/docs",
+      "requested": "https://api.mpg.football/fantasy/docs",
+      "url": "https://api.mpg.football/fantasy/docs",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 143,
+      "sha256": "a02783f8de71c88ee0b99abe5d283a20c8d4fe71f49b02b0c118b1809717bfbf",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /docs</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/players",
+      "requested": "https://api.mpg.football/fantasy/players",
+      "url": "https://api.mpg.football/fantasy/players",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 146,
+      "sha256": "40e394050b3cfb5083dc629f24cd36a2a548d49d7a9790d7ebab778fe168818e",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /players</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/clubs",
+      "requested": "https://api.mpg.football/fantasy/clubs",
+      "url": "https://api.mpg.football/fantasy/clubs",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 144,
+      "sha256": "1b087bdd995900925661171a5aa629da664770f355ab4628b4af6b58801a5a36",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /clubs</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/teams",
+      "requested": "https://api.mpg.football/fantasy/teams",
+      "url": "https://api.mpg.football/fantasy/teams",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 144,
+      "sha256": "de25a2b3812daf26b970d216a089a5ff18840f03782506cfe0422164a5515a92",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /teams</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/gameweeks",
+      "requested": "https://api.mpg.football/fantasy/gameweeks",
+      "url": "https://api.mpg.football/fantasy/gameweeks",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 148,
+      "sha256": "32e62d3bfb2022010cfa6893e8f5a04e1b1501f483efd00cc6f987591accc2e6",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /gameweeks</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/rounds",
+      "requested": "https://api.mpg.football/fantasy/rounds",
+      "url": "https://api.mpg.football/fantasy/rounds",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 145,
+      "sha256": "9ccbab859e988edce2ff6138ce0439ba57fd6e659931ff5bfe07ba9f99585750",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /rounds</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/matchdays",
+      "requested": "https://api.mpg.football/fantasy/matchdays",
+      "url": "https://api.mpg.football/fantasy/matchdays",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 148,
+      "sha256": "f6b6772523e93a0660fc89f92ec41717ed5dd90ca1017c39766b733bfee0dde1",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /matchdays</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/ratings",
+      "requested": "https://api.mpg.football/fantasy/ratings",
+      "url": "https://api.mpg.football/fantasy/ratings",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 146,
+      "sha256": "0f10d0872852cbe8c1029b798df687439af9ca102da34e0f7c74cd845a5f5011",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /ratings</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/standings",
+      "requested": "https://api.mpg.football/fantasy/standings",
+      "url": "https://api.mpg.football/fantasy/standings",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 148,
+      "sha256": "75619d29fd3f66384a6bdf09d618348becdcc95de85c58fa597f7d11025c6aee",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /standings</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/ranking",
+      "requested": "https://api.mpg.football/fantasy/ranking",
+      "url": "https://api.mpg.football/fantasy/ranking",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 146,
+      "sha256": "534b1c07742a60e4ef50e786e59146f0e09704ec944088fbf2063268ad156c7c",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /ranking</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/rules",
+      "requested": "https://api.mpg.football/fantasy/rules",
+      "url": "https://api.mpg.football/fantasy/rules",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 286,
+      "sha256": "cf71080b79e35cec6109b892e491f971474022357f5448bf172e9c4add1e3c8f",
+      "preview": "{\"id\":\"fl1_rules\",\"type\":\"fl1_rules\",\"locales\":[\"fr-FR\",\"en-GB\",\"es-ES\"],\"championships\":{\"1\":{\"budget\":200,\"tacticalSubsPointsIntervals\":[3.5,4,4.5,5,5.5,6,6.5,7,7.5,8],\"playersByClub\":3,\"minimumGameWeekToCareAboutTenure\":4,\"randomCoachMinimumTenure\":0.65,\"defaultComposition\":\"433\"}}}",
+      "json_type": "dict",
+      "json_keys": [
+        "id",
+        "type",
+        "locales",
+        "championships"
+      ],
+      "json_len": 4
+    },
+    {
+      "path": "/config",
+      "requested": "https://api.mpg.football/fantasy/config",
+      "url": "https://api.mpg.football/fantasy/config",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 145,
+      "sha256": "c5460ce7960f19899e0166334569a901359649d27efd69edf14f893c5a5b8824",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /config</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/settings",
+      "requested": "https://api.mpg.football/fantasy/settings",
+      "url": "https://api.mpg.football/fantasy/settings",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 147,
+      "sha256": "707316610acbe9ece9582029ae42221a52caaca2388f7c8e5ac8ec2928a9d0ef",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /settings</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/public/players",
+      "requested": "https://api.mpg.football/fantasy/public/players",
+      "url": "https://api.mpg.football/fantasy/public/players",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 153,
+      "sha256": "1ca17a0c2de5d99bcf8f346a75768edcb85cc4ae9a535f48906f3c82001d6a81",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /public/players</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/public/clubs",
+      "requested": "https://api.mpg.football/fantasy/public/clubs",
+      "url": "https://api.mpg.football/fantasy/public/clubs",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 151,
+      "sha256": "e92a7a8b11a233f337e045b4ba42b47dc79f5a1a115eb52c055b70be3ffc8dc5",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /public/clubs</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/public/gameweeks",
+      "requested": "https://api.mpg.football/fantasy/public/gameweeks",
+      "url": "https://api.mpg.football/fantasy/public/gameweeks",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 155,
+      "sha256": "45d38b71b0ebe47e7941fdef8ebf87e08f75213a126c2ec71b27e7c4f028b0e9",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /public/gameweeks</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/v1/players",
+      "requested": "https://api.mpg.football/fantasy/v1/players",
+      "url": "https://api.mpg.football/fantasy/v1/players",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 149,
+      "sha256": "3d05a619198630e812676a97459af98f562b68078e4bc3839c62322c4a0fd4a2",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /v1/players</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/v1/clubs",
+      "requested": "https://api.mpg.football/fantasy/v1/clubs",
+      "url": "https://api.mpg.football/fantasy/v1/clubs",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 147,
+      "sha256": "a4991c9a39ec7e580fabd8ed9e9a5919b8f7f51e9ff0289692b7d3ca1850e0db",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /v1/clubs</pre>\n</body>\n</html>\n"
+    },
+    {
+      "path": "/v1/gameweeks",
+      "requested": "https://api.mpg.football/fantasy/v1/gameweeks",
+      "url": "https://api.mpg.football/fantasy/v1/gameweeks",
+      "status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 151,
+      "sha256": "bbb810f12dd1364b88b29f416edbf63e972cdf91b5aae7bdaec713593b2544bc",
+      "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /v1/gameweeks</pre>\n</body>\n</html>\n"
+    }
+  ]
+}
