@@ -1,0 +1,34 @@
+{
+  "schema": "NEXUS_SLGR_FANTASY_PUBLIC_PROBE_V14",
+  "api_base": "https://fantaking-api.dunkest.com/api/v1",
+  "competition_id": 46,
+  "competition_id_provenance": "public /leagues/14/config current_competition_id",
+  "test": {
+    "route": "/competitions/46/stats/players/table",
+    "params": {},
+    "url": "https://fantaking-api.dunkest.com/api/v1/competitions/46/stats/players/table",
+    "status": 401,
+    "content_type": "application/json",
+    "bytes": 55,
+    "sha256": "5ecfc7230e49571adeed732a516edb3be4efc75062e38ac5cb948f5200f802f9",
+    "preview": "{\"code\":\"UNAUTHENTICATED\",\"message\":\"Unauthenticated.\"}",
+    "json_type": "dict",
+    "json_len": 2,
+    "json_keys": [
+      "code",
+      "message"
+    ],
+    "json": {
+      "code": "UNAUTHENTICATED",
+      "message": "Unauthenticated."
+    }
+  },
+  "governance": {
+    "exact_compiled_app_get_contract_tested": true,
+    "parameters_invented": false,
+    "authenticated_surface_accessed": false,
+    "user_team_private_routes_accessed": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
