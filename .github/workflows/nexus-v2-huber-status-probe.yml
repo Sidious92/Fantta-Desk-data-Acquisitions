@@ -15,34 +15,57 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
-      - name: Record target tournament run state
+      - name: Record target tournament failed jobs
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TARGET_SHA: 6ef62909075b5b0da83db5449d486c9119458dde
+          TARGET_RUN_ID: '32141501811'
         run: |
           set -euo pipefail
-          curl --fail --silent --show-error \
-            -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/nexus-v2-huber-tournament.yml/runs?per_page=20" \
-            -o /tmp/runs.json
-          mkdir -p .nexus-v2-huber-status-probe
           python - <<'PY'
-          import json, os
-          runs=json.load(open('/tmp/runs.json')).get('workflow_runs',[])
-          target=os.environ['TARGET_SHA']
-          matches=[r for r in runs if r.get('head_sha')==target]
-          if len(matches)!=1:
-              raise SystemExit(f'expected exactly one target run for {target}, got {len(matches)}')
-          r=matches[0]
-          out={k:r.get(k) for k in ['id','name','event','status','conclusion','head_sha','run_number','run_attempt','created_at','run_started_at','updated_at','html_url']}
-          json.dump(out,open('.nexus-v2-huber-status-probe/LIVE.json','w'),indent=2)
+          import json, os, urllib.request
+          repo=os.environ['GITHUB_REPOSITORY']
+          run=os.environ['TARGET_RUN_ID']
+          token=os.environ['GH_TOKEN']
+          headers={
+            'Authorization':f'Bearer {token}',
+            'Accept':'application/vnd.github+json',
+            'X-GitHub-Api-Version':'2022-11-28',
+            'User-Agent':'nexus-v2-status-probe',
+          }
+          jobs=[]
+          page=1
+          while True:
+              url=f'https://api.github.com/repos/{repo}/actions/runs/{run}/jobs?per_page=100&page={page}'
+              req=urllib.request.Request(url,headers=headers)
+              with urllib.request.urlopen(req) as r:
+                  payload=json.load(r)
+              batch=payload.get('jobs',[])
+              jobs.extend(batch)
+              if len(batch)<100: break
+              page+=1
+          failed=[]
+          for j in jobs:
+              if j.get('conclusion')!='success':
+                  failed.append({
+                    'id':j.get('id'),
+                    'name':j.get('name'),
+                    'status':j.get('status'),
+                    'conclusion':j.get('conclusion'),
+                    'started_at':j.get('started_at'),
+                    'completed_at':j.get('completed_at'),
+                    'steps':[
+                      {'name':s.get('name'),'number':s.get('number'),'status':s.get('status'),'conclusion':s.get('conclusion')}
+                      for s in j.get('steps',[])
+                    ],
+                  })
+          out={'run_id':int(run),'job_count':len(jobs),'non_success_jobs':failed}
+          os.makedirs('.nexus-v2-huber-status-probe',exist_ok=True)
+          json.dump(out,open('.nexus-v2-huber-status-probe/JOBS.json','w'),indent=2)
           print(json.dumps(out,indent=2))
           PY
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add .nexus-v2-huber-status-probe/LIVE.json
-          git commit -m "ci: record live Huber tournament status" || exit 0
+          git add .nexus-v2-huber-status-probe/JOBS.json
+          git commit -m "ci: record Huber tournament failed jobs" || exit 0
           git push
