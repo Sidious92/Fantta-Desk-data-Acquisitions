@@ -1,0 +1,2759 @@
+{
+  "schema": "NEXUS_LIGUE1_OFFICIAL_FANTASY_API_PUBLIC_PROBE_V8_SUMMARY",
+  "source_schema": "NEXUS_LIGUE1_OFFICIAL_FANTASY_API_PUBLIC_PROBE_V8",
+  "crawl": {
+    "max_files": 500,
+    "max_depth": 5,
+    "files_scanned": 466,
+    "seed_files": 65,
+    "discovered_edges": 2328
+  },
+  "call_site_count": 128,
+  "classification_counts": {
+    "AUTH_CONTEXT": 76,
+    "PUBLIC_CONTEXT_CANDIDATE": 52
+  },
+  "method_counts": {
+    "GET": 70,
+    "PUT": 4,
+    "null": 54
+  },
+  "public_context_candidates": [
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-player-stats/${e}/championship/${t}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/35_y1nobwr35d.js",
+      "depth": 1,
+      "argument_excerpt": "`/championship-player-stats/${e}/championship/${t}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "season-team-image"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/2kzxrypn7prj4.js",
+      "depth": 1,
+      "argument_excerpt": "\"season-team-image\")},u[0]=m):m=u[0],(0,s.useQuery)(m)),{styles:y}=(0,r.useStyles)(d)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championships-settings"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/2kzxrypn7prj4.js",
+      "depth": 1,
+      "argument_excerpt": "\"/championships-settings\")"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "season-team-image"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/29j7s0byr0bh0.js",
+      "depth": 1,
+      "argument_excerpt": "\"season-team-image\")},u[0]=m):m=u[0],(0,s.useQuery)(m)),{styles:y}=(0,r.useStyles)(d)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championships-settings"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/29j7s0byr0bh0.js",
+      "depth": 1,
+      "argument_excerpt": "\"/championships-settings\")"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championships-clubs"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/1e6vhl8-p30zb.js",
+      "depth": 1,
+      "argument_excerpt": "\"/championships-clubs\")"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-players-pool/1?addPlayersStatuses=true"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/1e6vhl8-p30zb.js",
+      "depth": 1,
+      "argument_excerpt": "\"/championship-players-pool/1?addPlayersStatuses=true\")"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championships-clubs"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/43jyf1luyirsl.js",
+      "depth": 1,
+      "argument_excerpt": "\"/championships-clubs\")"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-players-pool/1?addPlayersStatuses=true"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/43jyf1luyirsl.js",
+      "depth": 1,
+      "argument_excerpt": "\"/championship-players-pool/1?addPlayersStatuses=true\")"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championships-clubs"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/33ian29a4sbbb.js",
+      "depth": 1,
+      "argument_excerpt": "\"/championships-clubs\")"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-players-pool/1?addPlayersStatuses=true"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/33ian29a4sbbb.js",
+      "depth": 1,
+      "argument_excerpt": "\"/championship-players-pool/1?addPlayersStatuses=true\")"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-player-stats/${e}/championship/${t}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0gi8-ftc4j_z_.js",
+      "depth": 1,
+      "argument_excerpt": "`/championship-player-stats/${e}/championship/${t}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/rules"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0gi8-ftc4j_z_.js",
+      "depth": 1,
+      "argument_excerpt": "\"/rules\")).championships[1]"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championships-clubs"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0oqnp4321a9q0.js",
+      "depth": 1,
+      "argument_excerpt": "\"/championships-clubs\")"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-players-pool/1?addPlayersStatuses=true"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0oqnp4321a9q0.js",
+      "depth": 1,
+      "argument_excerpt": "\"/championship-players-pool/1?addPlayersStatuses=true\")"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championships-clubs"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/205ilkfpbnx7i.js",
+      "depth": 1,
+      "argument_excerpt": "\"/championships-clubs\")"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-players-pool/1?addPlayersStatuses=true"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/205ilkfpbnx7i.js",
+      "depth": 1,
+      "argument_excerpt": "\"/championship-players-pool/1?addPlayersStatuses=true\")"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-players-pool/1?addPlayersStatuses=true"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0sx8jur9ui-mr.js",
+      "depth": 1,
+      "argument_excerpt": "\"/championship-players-pool/1?addPlayersStatuses=true\")"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championships-clubs"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0sx8jur9ui-mr.js",
+      "depth": 1,
+      "argument_excerpt": "\"/championships-clubs\")"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-player-stats/${e}/championship/${t}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0db122dgmlqa9.js",
+      "depth": 1,
+      "argument_excerpt": "`/championship-player-stats/${e}/championship/${t}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/rules"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0db122dgmlqa9.js",
+      "depth": 1,
+      "argument_excerpt": "\"/rules\")).championships[1]"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/debug/user/ids?identifier=${ec}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/2mfoiz8yewris.js",
+      "depth": 2,
+      "argument_excerpt": "`/debug/user/ids?identifier=${ec}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/result/layout-tile${tB.default.stringify({pageTemplateType:e},{addQueryPrefix:!0})}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/2x_jkidbr66-_.js",
+      "depth": 2,
+      "argument_excerpt": "`/result/layout-tile${tB.default.stringify({pageTemplateType:e},{addQueryPrefix:!0})}`)}catch(e){return null}}"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-players-pool/${e}/best-players${s.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0wkwqqclgkvzv.js",
+      "depth": 2,
+      "argument_excerpt": "`/championship-players-pool/${e}/best-players${s.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-players-pool/${e}/best-players${a.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/32zfrxsawjtw0.js",
+      "depth": 2,
+      "argument_excerpt": "`/championship-players-pool/${e}/best-players${a.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-players-pool/${e}/best-players${i.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0lqa_es846hqk.js",
+      "depth": 2,
+      "argument_excerpt": "`/championship-players-pool/${e}/best-players${i.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-players-pool/${e}/best-players${r.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/007f-j37mogp2.js",
+      "depth": 2,
+      "argument_excerpt": "`/championship-players-pool/${e}/best-players${r.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-player-stats/${e}/championship/${t}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/3d3_7461hvolq.js",
+      "depth": 2,
+      "argument_excerpt": "`/championship-player-stats/${e}/championship/${t}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-players-pool/${e}/best-players${s.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/06mw_tm9jtu-b.js",
+      "depth": 3,
+      "argument_excerpt": "`/championship-players-pool/${e}/best-players${s.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-players-pool/${e}/best-players${s.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/1d63qxlyqj7fh.js",
+      "depth": 3,
+      "argument_excerpt": "`/championship-players-pool/${e}/best-players${s.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}`)"
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/35_y1nobwr35d.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/championships-settings"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/2kzxrypn7prj4.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/ "
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/29j7s0byr0bh0.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/championships-settings"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/29j7s0byr0bh0.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/championship-players-pool/1?addPlayersStatuses=true",
+        "/championships-clubs"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/1e6vhl8-p30zb.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/championship-players-pool/1?addPlayersStatuses=true",
+        "/championships-clubs"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/43jyf1luyirsl.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/championship-players-pool/1?addPlayersStatuses=true",
+        "/championships-clubs"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/33ian29a4sbbb.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0gi8-ftc4j_z_.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/rules"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0gi8-ftc4j_z_.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/championship-players-pool/1?addPlayersStatuses=true",
+        "/championships-clubs"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0oqnp4321a9q0.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/championship-players-pool/1?addPlayersStatuses=true",
+        "/championships-clubs"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/205ilkfpbnx7i.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/championship-players-pool/1?addPlayersStatuses=true",
+        "/championships-clubs"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0sx8jur9ui-mr.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0db122dgmlqa9.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/rules"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0db122dgmlqa9.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/2mfoiz8yewris.js",
+      "depth": 2,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/2x_jkidbr66-_.js",
+      "depth": 2,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/32zfrxsawjtw0.js",
+      "depth": 2,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/0lqa_es846hqk.js",
+      "depth": 2,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/007f-j37mogp2.js",
+      "depth": 2,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/3d3_7461hvolq.js",
+      "depth": 2,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/06mw_tm9jtu-b.js",
+      "depth": 3,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "PUBLIC_CONTEXT_CANDIDATE",
+      "auth_context_markers": [],
+      "url": "https://ligue1.com/_next/static/chunks/1d63qxlyqj7fh.js",
+      "depth": 3,
+      "argument_excerpt": null
+    }
+  ],
+  "auth_context_calls": [
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/coach/championship/${r.CHAMPIONSHIP_ID}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "/api/auth/login",
+        "coach/championship",
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3citu4seo8bsy.js",
+      "depth": 0,
+      "argument_excerpt": "`/coach/championship/${r.CHAMPIONSHIP_ID}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/coach/championship/${r.CHAMPIONSHIP_ID}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship",
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/35_y1nobwr35d.js",
+      "depth": 1,
+      "argument_excerpt": "`/coach/championship/${r.CHAMPIONSHIP_ID}`)"
+    },
+    {
+      "method": "PUT",
+      "route_candidates": [
+        "/coach/championship/${r.CHAMPIONSHIP_ID}/game-week/${e}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/35_y1nobwr35d.js",
+      "depth": 1,
+      "argument_excerpt": "`/coach/championship/${r.CHAMPIONSHIP_ID}/game-week/${e}`,t)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/rules"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/35_y1nobwr35d.js",
+      "depth": 1,
+      "argument_excerpt": "\"/rules\")).championships[1]"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/coach/championship/${r.CHAMPIONSHIP_ID}/best"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship",
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3c9itwilizul5.js",
+      "depth": 1,
+      "argument_excerpt": "`/coach/championship/${r.CHAMPIONSHIP_ID}/best`)}),a[0]=e):e=a[0],(0,o.useQuery)(e)}],624119)},109566,e=>{\"use strict\""
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/result/championship/${e}/game-week/${t}${n.default.stringify({userId:i,season:o},{addQueryPrefix:!0})}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship",
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3c9itwilizul5.js",
+      "depth": 1,
+      "argument_excerpt": "`/result/championship/${e}/game-week/${t}${n.default.stringify({userId:i,season:o},{addQueryPrefix:!0})}`)}catch(e){if(e&&\"object\"==typeof e&&\"message\"in e&&\"resultNotFound\"===e.message)return null"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-calendar/${i.CHAMPIONSHIP_ID}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship",
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3c9itwilizul5.js",
+      "depth": 1,
+      "argument_excerpt": "`/championship-calendar/${i.CHAMPIONSHIP_ID}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/prizes-pools/championship/1/game-week/${e}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3c9itwilizul5.js",
+      "depth": 1,
+      "argument_excerpt": "`/prizes-pools/championship/1/game-week/${e}`)}catch(e){return null}}"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/user-ranking/championship/${i.CHAMPIONSHIP_ID}/recent-game-weeks-results",
+        "formatRecentGameWeekResultsToHistory"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/2kzxrypn7prj4.js",
+      "depth": 1,
+      "argument_excerpt": "`/user-ranking/championship/${i.CHAMPIONSHIP_ID}/recent-game-weeks-results`)},r[0]=e):e=r[0],(0,n.useAuthenticatedQuery)(e)}],989661),e.s([\"RECENT_GAME_WEEKS_HISTORY_LENGTH\",0,3],731379),e.s([\"formatRecentGameWeekResultsToHistory\",0,e=>Object.entries(e).map(([e,t])=>({gameWeekNumber:Number(e),points:t?.points,isAutoSaved:t?.isAutoSaved})).slice(-3)],235945)},610224,(e,t,a)=>{\"use strict\""
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/user-ranking/championship/${e}/all-ranks?${k.default.stringify(t)}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/2kzxrypn7prj4.js",
+      "depth": 1,
+      "argument_excerpt": "`/user-ranking/championship/${e}/all-ranks?${k.default.stringify(t)}`),l[5]=e,l[6]=t,l[7]=o):o=l[7],l[8]!==i||l[9]!==r||l[10]!==o?(s={queryKey:r,queryFn:o,...i},l[8]=i,l[9]=r,l[10]=o,l[11]=s):s=l[11],(0,w.useAuthenticatedQuery)(s)}"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/user-ranking/championship/${i.CHAMPIONSHIP_ID}/recent-game-weeks-results",
+        "formatRecentGameWeekResultsToHistory"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/29j7s0byr0bh0.js",
+      "depth": 1,
+      "argument_excerpt": "`/user-ranking/championship/${i.CHAMPIONSHIP_ID}/recent-game-weeks-results`)},r[0]=e):e=r[0],(0,n.useAuthenticatedQuery)(e)}],989661),e.s([\"RECENT_GAME_WEEKS_HISTORY_LENGTH\",0,3],731379),e.s([\"formatRecentGameWeekResultsToHistory\",0,e=>Object.entries(e).map(([e,t])=>({gameWeekNumber:Number(e),points:t?.points,isAutoSaved:t?.isAutoSaved})).slice(-3)],235945)},441063,e=>{\"use strict\""
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/user-ranking/championship/${e}/all-ranks?${k.default.stringify(t)}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/29j7s0byr0bh0.js",
+      "depth": 1,
+      "argument_excerpt": "`/user-ranking/championship/${e}/all-ranks?${k.default.stringify(t)}`),l[5]=e,l[6]=t,l[7]=o):o=l[7],l[8]!==i||l[9]!==r||l[10]!==o?(s={queryKey:r,queryFn:o,...i},l[8]=i,l[9]=r,l[10]=o,l[11]=s):s=l[11],(0,w.useAuthenticatedQuery)(s)}"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "favorite-club-standings/${s}/top-standings?${z.default.stringify(l)}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0puol0ym_wxwm.js",
+      "depth": 1,
+      "argument_excerpt": "`favorite-club-standings/${s}/top-standings?${z.default.stringify(l)}`),o[5]=s,o[6]=l,o[7]=i):i=o[7]"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0puol0ym_wxwm.js",
+      "depth": 1,
+      "argument_excerpt": "`general-standings?${a.default.stringify(e)}`),d[0]=e,d[1]=o,d[2]=s):(o=d[1],s=d[2])"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0puol0ym_wxwm.js",
+      "depth": 1,
+      "argument_excerpt": "`friends-standings?${ew.default.stringify(a)}`),p[0]=a,p[1]=g,p[2]=m):(g=p[1],m=p[2]),void 0!==p[3]||p[4]!==g||p[5]!==m?(h={queryKey:g,queryFn:m,...void 0},p[3]=void 0,p[4]=g,p[5]=m,p[6]=h):h=p[6],(0,eC.useAuthenticatedQuery)(h)),j=(0,en.useAnimatedRef)(),T=k?.userRanking?.userId,[L,R]=(0,I.useState)(!1)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/coach/championship/${e$.CHAMPIONSHIP_ID}/random"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0bf_27vtswe5o.js",
+      "depth": 1,
+      "argument_excerpt": "`/coach/championship/${e$.CHAMPIONSHIP_ID}/random`)}function eX(e){return e.setFormation}function eq(e){return!!e}var eY=e.i(624127),eQ=e.i(323633),eZ=e.i(350312)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/coach/championship/${r.CHAMPIONSHIP_ID}/best"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0hi65g1k0y45p.js",
+      "depth": 1,
+      "argument_excerpt": "`/coach/championship/${r.CHAMPIONSHIP_ID}/best`)}),n[0]=e):e=n[0],(0,o.useQuery)(e)}],624119)},131171,(e,t,i)=>{\"use strict\""
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/result/championship/${e}/game-week/${t}${a.default.stringify({userId:i,season:o},{addQueryPrefix:!0})}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0hi65g1k0y45p.js",
+      "depth": 1,
+      "argument_excerpt": "`/result/championship/${e}/game-week/${t}${a.default.stringify({userId:i,season:o},{addQueryPrefix:!0})}`)}catch(e){if(e&&\"object\"==typeof e&&\"message\"in e&&\"resultNotFound\"===e.message)return null"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-calendar/${i.CHAMPIONSHIP_ID}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0hi65g1k0y45p.js",
+      "depth": 1,
+      "argument_excerpt": "`/championship-calendar/${i.CHAMPIONSHIP_ID}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/prizes-pools/championship/1/game-week/${e}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0hi65g1k0y45p.js",
+      "depth": 1,
+      "argument_excerpt": "`/prizes-pools/championship/1/game-week/${e}`)}catch(e){return null}}"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/coach/championship/${e$.CHAMPIONSHIP_ID}/random"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0v4xlugmsqglt.js",
+      "depth": 1,
+      "argument_excerpt": "`/coach/championship/${e$.CHAMPIONSHIP_ID}/random`)}function eX(e){return e.setFormation}function eq(e){return!!e}var eY=e.i(624127),eQ=e.i(323633),eZ=e.i(350312)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/coach/championship/${i.CHAMPIONSHIP_ID}/best"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3pjzq9ka46x9e.js",
+      "depth": 1,
+      "argument_excerpt": "`/coach/championship/${i.CHAMPIONSHIP_ID}/best`)}),s[0]=e):e=s[0],(0,o.useQuery)(e)}],624119)},818855,e=>{\"use strict\""
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/coach/championship/${r.CHAMPIONSHIP_ID}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship",
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0gi8-ftc4j_z_.js",
+      "depth": 1,
+      "argument_excerpt": "`/coach/championship/${r.CHAMPIONSHIP_ID}`)"
+    },
+    {
+      "method": "PUT",
+      "route_candidates": [
+        "/coach/championship/${r.CHAMPIONSHIP_ID}/game-week/${e}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0gi8-ftc4j_z_.js",
+      "depth": 1,
+      "argument_excerpt": "`/coach/championship/${r.CHAMPIONSHIP_ID}/game-week/${e}`,t)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/37vq8wtvqiq02.js",
+      "depth": 1,
+      "argument_excerpt": "`friends-standings?${ew.default.stringify(n)}`),y[0]=n,y[1]=m,y[2]=g):(m=y[1],g=y[2]),void 0!==y[3]||y[4]!==m||y[5]!==g?(p={queryKey:m,queryFn:g,...void 0},y[3]=void 0,y[4]=m,y[5]=g,y[6]=p):p=y[6],(0,ek.useAuthenticatedQuery)(p)),S=(0,ea.useAnimatedRef)(),T=j?.userRanking?.userId,[L,I]=(0,v.useState)(!1)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-calendar/${r.CHAMPIONSHIP_ID}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/032pumzzmuakb.js",
+      "depth": 1,
+      "argument_excerpt": "`/championship-calendar/${r.CHAMPIONSHIP_ID}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/result/championship/${e}/game-week/${t}${o.default.stringify({userId:r,season:i},{addQueryPrefix:!0})}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/032pumzzmuakb.js",
+      "depth": 1,
+      "argument_excerpt": "`/result/championship/${e}/game-week/${t}${o.default.stringify({userId:r,season:i},{addQueryPrefix:!0})}`)}catch(e){if(e&&\"object\"==typeof e&&\"message\"in e&&\"resultNotFound\"===e.message)return null"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/prizes-pools/championship/1/game-week/${e}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/032pumzzmuakb.js",
+      "depth": 1,
+      "argument_excerpt": "`/prizes-pools/championship/1/game-week/${e}`)}catch(e){return null}}"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "favorite-club-standings/${s}/top-standings?${O.default.stringify(l)}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/2z2vusyujp99c.js",
+      "depth": 1,
+      "argument_excerpt": "`favorite-club-standings/${s}/top-standings?${O.default.stringify(l)}`),o[5]=s,o[6]=l,o[7]=r):r=o[7]"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/2z2vusyujp99c.js",
+      "depth": 1,
+      "argument_excerpt": "`general-standings?${i.default.stringify(e)}`),c[0]=e,c[1]=o,c[2]=s):(o=c[1],s=c[2])"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/coach/championship/${r.CHAMPIONSHIP_ID}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship",
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0-62ot0w9j_67.js",
+      "depth": 1,
+      "argument_excerpt": "`/coach/championship/${r.CHAMPIONSHIP_ID}`)"
+    },
+    {
+      "method": "PUT",
+      "route_candidates": [
+        "/coach/championship/${r.CHAMPIONSHIP_ID}/game-week/${e}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0-62ot0w9j_67.js",
+      "depth": 1,
+      "argument_excerpt": "`/coach/championship/${r.CHAMPIONSHIP_ID}/game-week/${e}`,t)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/result/championship/${e}/game-week/${t}${a.default.stringify({userId:i,season:o},{addQueryPrefix:!0})}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3g0snhrbgftng.js",
+      "depth": 1,
+      "argument_excerpt": "`/result/championship/${e}/game-week/${t}${a.default.stringify({userId:i,season:o},{addQueryPrefix:!0})}`)}catch(e){if(e&&\"object\"==typeof e&&\"message\"in e&&\"resultNotFound\"===e.message)return null"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-calendar/${i.CHAMPIONSHIP_ID}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3g0snhrbgftng.js",
+      "depth": 1,
+      "argument_excerpt": "`/championship-calendar/${i.CHAMPIONSHIP_ID}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "favorite-club-standings/${s}/top-standings?${V.default.stringify(l)}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/1kdg81ydtkayj.js",
+      "depth": 1,
+      "argument_excerpt": "`favorite-club-standings/${s}/top-standings?${V.default.stringify(l)}`),a[5]=s,a[6]=l,a[7]=o):o=a[7]"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/1kdg81ydtkayj.js",
+      "depth": 1,
+      "argument_excerpt": "`general-standings?${n.default.stringify(e)}`),c[0]=e,c[1]=a,c[2]=s):(a=c[1],s=c[2])"
+    },
+    {
+      "method": "PUT",
+      "route_candidates": [
+        "/coach/championship/${i.CHAMPIONSHIP_ID}/game-week/${e}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/44n8r5ox_h4sy.js",
+      "depth": 1,
+      "argument_excerpt": "`/coach/championship/${i.CHAMPIONSHIP_ID}/game-week/${e}`,t)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/coach/championship/${r.CHAMPIONSHIP_ID}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship",
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0wkwqqclgkvzv.js",
+      "depth": 2,
+      "argument_excerpt": "`/coach/championship/${r.CHAMPIONSHIP_ID}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/result/championship/${e}/game-week/${t}${s.default.stringify({userId:r,season:a},{addQueryPrefix:!0})}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0wkwqqclgkvzv.js",
+      "depth": 2,
+      "argument_excerpt": "`/result/championship/${e}/game-week/${t}${s.default.stringify({userId:r,season:a},{addQueryPrefix:!0})}`)}catch(e){if(e&&\"object\"==typeof e&&\"message\"in e&&\"resultNotFound\"===e.message)return null"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-calendar/${r.CHAMPIONSHIP_ID}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0wkwqqclgkvzv.js",
+      "depth": 2,
+      "argument_excerpt": "`/championship-calendar/${r.CHAMPIONSHIP_ID}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/prizes-pools/championship/1/game-week/${e}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0wkwqqclgkvzv.js",
+      "depth": 2,
+      "argument_excerpt": "`/prizes-pools/championship/1/game-week/${e}`)}catch(e){return null}}"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-players-pool/${e}/best-players${i.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "/api/auth/login"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/21ozyjqugwtd9.js",
+      "depth": 2,
+      "argument_excerpt": "`/championship-players-pool/${e}/best-players${i.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-player/${e}/match/${t}/goals-videos"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3-9u-7-g3tx0r.js",
+      "depth": 3,
+      "argument_excerpt": "`/championship-player/${e}/match/${t}/goals-videos`)"
+    },
+    {
+      "method": "GET",
+      "route_candidates": [
+        "/championship-player/${e}/match/${t}/goals-videos"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3rzz1aimn433-.js",
+      "depth": 3,
+      "argument_excerpt": "`/championship-player/${e}/match/${t}/goals-videos`)"
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/api/auth/logout",
+        "/api/auth/refresh"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "/profile",
+        "Authorization=`Bearer"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/2c8mr4urbkupp.js",
+      "depth": 0,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/api/auth/logout",
+        "/api/auth/refresh"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "/profile",
+        "Authorization=`Bearer"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/09xqg2y0p2xgv.js",
+      "depth": 0,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/api/auth/logout"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "/api/auth/login",
+        "coach/championship",
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3citu4seo8bsy.js",
+      "depth": 0,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/rules"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/35_y1nobwr35d.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship",
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3c9itwilizul5.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/2kzxrypn7prj4.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/29j7s0byr0bh0.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0puol0ym_wxwm.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/fantasy/standing/friends"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0puol0ym_wxwm.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0bf_27vtswe5o.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/api/auth/logout",
+        "/api/auth/refresh"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "/profile",
+        "Authorization=`Bearer"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/255wld-2zqfti.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0hi65g1k0y45p.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0v4xlugmsqglt.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/fantasy/mercato"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3pjzq9ka46x9e.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/fantasy/standing/friends"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/37vq8wtvqiq02.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/032pumzzmuakb.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/2z2vusyujp99c.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/images/l1background.webp"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship",
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0-62ot0w9j_67.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0-62ot0w9j_67.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3g0snhrbgftng.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/1kdg81ydtkayj.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/44n8r5ox_h4sy.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3xggfsdsrids4.js",
+      "depth": 1,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/api/auth/logout",
+        "/api/auth/refresh"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "/profile",
+        "Authorization=`Bearer"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/2mfoiz8yewris.js",
+      "depth": 2,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/api/auth/logout",
+        "/api/auth/refresh"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "Authorization=`Bearer"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/2hqjpodwpn855.js",
+      "depth": 2,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/api/auth/logout",
+        "/api/auth/refresh"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "Authorization=`Bearer"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/1kc2vzyi1sq5b.js",
+      "depth": 2,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "coach/championship",
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0wkwqqclgkvzv.js",
+      "depth": 2,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/api/auth/login",
+        "/api/auth/me"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "/api/auth/login"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/21ozyjqugwtd9.js",
+      "depth": 2,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/api/auth/logout",
+        "/api/auth/refresh"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "/profile",
+        "Authorization=`Bearer"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/0da-c17_clgdw.js",
+      "depth": 3,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [
+        "/api/auth/logout",
+        "/api/auth/refresh"
+      ],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "/profile",
+        "Authorization=`Bearer"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/2gg4xp_t-s3mb.js",
+      "depth": 3,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3-9u-7-g3tx0r.js",
+      "depth": 3,
+      "argument_excerpt": null
+    },
+    {
+      "method": null,
+      "route_candidates": [],
+      "pages": [
+        "/en/fantasy",
+        "/en/fantasy/captain",
+        "/en/fantasy/line-up",
+        "/en/fantasy/mercato",
+        "/en/fantasy/my-team",
+        "/en/fantasy/ranking",
+        "/en/fantasy/rules"
+      ],
+      "classification": "AUTH_CONTEXT",
+      "auth_context_markers": [
+        "useAuthenticatedQuery"
+      ],
+      "url": "https://ligue1.com/_next/static/chunks/3rzz1aimn433-.js",
+      "depth": 3,
+      "argument_excerpt": null
+    }
+  ],
+  "route_inventory": [
+    "/ ",
+    "/api/auth/login",
+    "/api/auth/logout",
+    "/api/auth/me",
+    "/api/auth/refresh",
+    "/championship-calendar/${i.CHAMPIONSHIP_ID}",
+    "/championship-calendar/${r.CHAMPIONSHIP_ID}",
+    "/championship-player-stats/${e}/championship/${t}",
+    "/championship-player/${e}/match/${t}/goals-videos",
+    "/championship-players-pool/${e}/best-players${a.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}",
+    "/championship-players-pool/${e}/best-players${i.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}",
+    "/championship-players-pool/${e}/best-players${r.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}",
+    "/championship-players-pool/${e}/best-players${s.default.stringify({shortOptaClubsIds:t},{addQueryPrefix:!0})}",
+    "/championship-players-pool/1?addPlayersStatuses=true",
+    "/championships-clubs",
+    "/championships-settings",
+    "/coach/championship/${e$.CHAMPIONSHIP_ID}/random",
+    "/coach/championship/${i.CHAMPIONSHIP_ID}/best",
+    "/coach/championship/${i.CHAMPIONSHIP_ID}/game-week/${e}",
+    "/coach/championship/${r.CHAMPIONSHIP_ID}",
+    "/coach/championship/${r.CHAMPIONSHIP_ID}/best",
+    "/coach/championship/${r.CHAMPIONSHIP_ID}/game-week/${e}",
+    "/debug/user/ids?identifier=${ec}",
+    "/fantasy/mercato",
+    "/fantasy/standing/friends",
+    "/images/l1background.webp",
+    "/prizes-pools/championship/1/game-week/${e}",
+    "/result/championship/${e}/game-week/${t}${a.default.stringify({userId:i,season:o},{addQueryPrefix:!0})}",
+    "/result/championship/${e}/game-week/${t}${n.default.stringify({userId:i,season:o},{addQueryPrefix:!0})}",
+    "/result/championship/${e}/game-week/${t}${o.default.stringify({userId:r,season:i},{addQueryPrefix:!0})}",
+    "/result/championship/${e}/game-week/${t}${s.default.stringify({userId:r,season:a},{addQueryPrefix:!0})}",
+    "/result/layout-tile${tB.default.stringify({pageTemplateType:e},{addQueryPrefix:!0})}",
+    "/rules",
+    "/user-ranking/championship/${e}/all-ranks?${k.default.stringify(t)}",
+    "/user-ranking/championship/${i.CHAMPIONSHIP_ID}/recent-game-weeks-results",
+    "favorite-club-standings/${s}/top-standings?${O.default.stringify(l)}",
+    "favorite-club-standings/${s}/top-standings?${V.default.stringify(l)}",
+    "favorite-club-standings/${s}/top-standings?${z.default.stringify(l)}",
+    "formatRecentGameWeekResultsToHistory",
+    "season-team-image"
+  ],
+  "errors_count": 0,
+  "governance": {
+    "network_calls_limited_to_public_ligue1_pages_and_frontend_declared_js_dependencies": true,
+    "fantasy_api_endpoint_requests_made": false,
+    "authenticated_surface_accessed": false,
+    "private_endpoint_bypass_attempted": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
