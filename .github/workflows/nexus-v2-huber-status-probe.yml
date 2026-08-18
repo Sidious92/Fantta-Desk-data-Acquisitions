@@ -1,0 +1,48 @@
+name: Nexus v2 Huber Status Probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .nexus-v2-huber-status-probe/TRIGGER
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Record target tournament run state
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_SHA: 6ef62909075b5b0da83db5449d486c9119458dde
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/nexus-v2-huber-tournament.yml/runs?per_page=20" \
+            -o /tmp/runs.json
+          mkdir -p .nexus-v2-huber-status-probe
+          python - <<'PY'
+          import json, os
+          runs=json.load(open('/tmp/runs.json')).get('workflow_runs',[])
+          target=os.environ['TARGET_SHA']
+          matches=[r for r in runs if r.get('head_sha')==target]
+          if len(matches)!=1:
+              raise SystemExit(f'expected exactly one target run for {target}, got {len(matches)}')
+          r=matches[0]
+          out={k:r.get(k) for k in ['id','name','event','status','conclusion','head_sha','run_number','run_attempt','created_at','run_started_at','updated_at','html_url']}
+          json.dump(out,open('.nexus-v2-huber-status-probe/LIVE.json','w'),indent=2)
+          print(json.dumps(out,indent=2))
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-v2-huber-status-probe/LIVE.json
+          git commit -m "ci: record live Huber tournament status" || exit 0
+          git push
