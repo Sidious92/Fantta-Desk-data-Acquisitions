@@ -1,7 +1,7 @@
 {
   "workflow": "Nexus Cartola FC Brasileirão v1",
   "job_status": "success",
-  "run_id": 32187242804,
+  "run_id": 32187812256,
   "manifest": {
     "schema": "NEXUS_CARTOLA_FC_BRASILEIRAO_V1",
     "status": "PASS",
@@ -21,20 +21,61 @@
       ],
       "year_stats": {
         "2021": {
-          "round_files": 0,
-          "rows": 0,
-          "unique_player_ids": 0,
-          "round_min": null,
-          "round_max": null,
-          "columns": []
+          "source_format": "LEGACY_MARKET_JSON_TXT",
+          "source_files": 39,
+          "rows": 30843,
+          "unique_player_ids": 979,
+          "round_min": 1,
+          "round_max": 39,
+          "athlete_or_csv_columns": [
+            "apelido",
+            "apelido_abreviado",
+            "atleta_id",
+            "clube_id",
+            "foto",
+            "jogos_num",
+            "media_num",
+            "nome",
+            "pontos_num",
+            "posicao_id",
+            "preco_num",
+            "rodada_id",
+            "scout",
+            "slug",
+            "status_id",
+            "variacao_num"
+          ],
+          "scout_fields": [
+            "A",
+            "CA",
+            "CV",
+            "DE",
+            "DP",
+            "DS",
+            "FC",
+            "FD",
+            "FF",
+            "FS",
+            "FT",
+            "G",
+            "GC",
+            "GS",
+            "I",
+            "PC",
+            "PI",
+            "PP",
+            "PS",
+            "SG"
+          ]
         },
         "2022": {
-          "round_files": 39,
+          "source_format": "CSV_ROUND_SNAPSHOT",
+          "source_files": 39,
           "rows": 30773,
           "unique_player_ids": 1412,
           "round_min": 0,
           "round_max": 38,
-          "columns": [
+          "athlete_or_csv_columns": [
             "",
             "A",
             "CA",
@@ -77,15 +118,17 @@
             "atletas.slug",
             "atletas.status_id",
             "atletas.variacao_num"
-          ]
+          ],
+          "scout_fields": []
         },
         "2023": {
-          "round_files": 38,
+          "source_format": "CSV_ROUND_SNAPSHOT",
+          "source_files": 38,
           "rows": 29088,
           "unique_player_ids": 957,
           "round_min": 1,
           "round_max": 38,
-          "columns": [
+          "athlete_or_csv_columns": [
             "",
             "A",
             "CA",
@@ -127,15 +170,17 @@
             "atletas.status_id",
             "atletas.temporada_id",
             "atletas.variacao_num"
-          ]
+          ],
+          "scout_fields": []
         },
         "2024": {
-          "round_files": 38,
+          "source_format": "CSV_ROUND_SNAPSHOT",
+          "source_files": 38,
           "rows": 28499,
           "unique_player_ids": 947,
           "round_min": 1,
           "round_max": 38,
-          "columns": [
+          "athlete_or_csv_columns": [
             "",
             "A",
             "CA",
@@ -176,15 +221,17 @@
             "atletas.slug",
             "atletas.status_id",
             "atletas.variacao_num"
-          ]
+          ],
+          "scout_fields": []
         },
         "2025": {
-          "round_files": 38,
+          "source_format": "CSV_ROUND_SNAPSHOT",
+          "source_files": 38,
           "rows": 28589,
           "unique_player_ids": 980,
           "round_min": 1,
           "round_max": 38,
-          "columns": [
+          "athlete_or_csv_columns": [
             "",
             "A",
             "CA",
@@ -224,15 +271,17 @@
             "atletas.slug",
             "atletas.status_id",
             "atletas.variacao_num"
-          ]
+          ],
+          "scout_fields": []
         },
         "2026": {
-          "round_files": 22,
+          "source_format": "CSV_ROUND_SNAPSHOT",
+          "source_files": 22,
           "rows": 16291,
           "unique_player_ids": 926,
           "round_min": 1,
           "round_max": 22,
-          "columns": [
+          "athlete_or_csv_columns": [
             "A",
             "CA",
             "CV",
@@ -271,11 +320,12 @@
             "atletas.slug",
             "atletas.status_id",
             "atletas.variacao_num"
-          ]
+          ],
+          "scout_fields": []
         }
       },
-      "total_round_files": 175,
-      "total_rows": 133240,
+      "total_source_files": 214,
+      "total_rows": 164083,
       "column_inventory": [
         "",
         "A",
@@ -319,6 +369,7 @@
         "atletas.posicao_id",
         "atletas.preco_num",
         "atletas.rodada_id",
+        "atletas.scout",
         "atletas.slug",
         "atletas.status_id",
         "atletas.temporada_id",
@@ -332,7 +383,7 @@
           "url": "https://api.cartola.globo.com/mercado/status",
           "status": 200,
           "bytes": 864,
-          "sha256": "02057dbe05f1c271c24615cc70ccf7129e58a3019fe66737372c26d364bd4ebb",
+          "sha256": "91b257f74f58de4a2f8700377edf1450f1c304ad8023b138dc66ae3a438b46de",
           "json_type": "dict",
           "rows": 29
         },
@@ -364,7 +415,7 @@
           "url": "https://api.cartola.globo.com/atletas/mercado",
           "status": 200,
           "bytes": 365603,
-          "sha256": "856dbfc8871ce8a52513d5490ad695b1b3f3473fce50f283868549afd45b0a50",
+          "sha256": "63b8374a8929d36184bef2c5ded50c6067d1e8cb765086312698d524ddda0110",
           "json_type": "dict",
           "rows": 4
         },
@@ -435,7 +486,8 @@
       "checks": {
         "archive_pin": true,
         "all_years": true,
-        "round_files_gt_100": true,
+        "each_year_nonempty": true,
+        "source_files_gt_100": true,
         "historical_rows_gt_10000": true,
         "current_market_players_gt_100": true,
         "no_auth": true,
