@@ -1,0 +1,130 @@
+name: Nexus GOALS Simple v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-goals-simple-v1-launch/EXECUTE'
+
+permissions:
+  contents: read
+
+jobs:
+  goals-simple:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      AUTHORITY_SHA: 95461b9d81d6bb5003313f234d9d88a1ed45e39e
+
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v6
+        with:
+          path: runner-public
+          persist-credentials: false
+
+      - name: Checkout fixed private research authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.AUTHORITY_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Verify authority and governance files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "$AUTHORITY_SHA"
+          test -f fantadesk-private/scripts/nexus-goals-simple-v1.py
+          test -f fantadesk-private/data/nexus/research-v3/goals-simple/nexus-goals-simple-v1-protocol.json
+          test -f fantadesk-private/data/nexus/research-v2/final/nexus-v2-predictive-engine-freeze-v1.json
+          test -f runner-public/.nexus-v2-public/goals-trajectory-review-cert.pem
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install pinned jsdom for Listone acquisition
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nexus-node
+          cd /tmp/nexus-node
+          npm init -y >/dev/null 2>&1
+          npm install --ignore-scripts --no-audit --no-fund jsdom@30.0.1
+          mkdir -p "$GITHUB_WORKSPACE/fantadesk-private/node_modules"
+          ln -s /tmp/nexus-node/node_modules/jsdom "$GITHUB_WORKSPACE/fantadesk-private/node_modules/jsdom"
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+
+      - name: Install pinned Python environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --no-cache-dir \
+            numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 \
+            joblib==1.5.3 threadpoolctl==3.6.0 catboost==1.2.8
+
+      - name: Materialize canonical historical inputs
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+
+      - name: Acquire current Listone 2026-27
+        working-directory: fantadesk-private
+        env:
+          NEXUS_LIVE_LISTONE_OUTPUT_ROOT: /mnt/data/current-listone-capture
+        run: node scripts/nexus-acquire-current-listone-2026-27.mjs
+
+      - name: Run simple direct GOALS challenger
+        shell: bash
+        env:
+          NEXUS_GOALS_SIMPLE_CURRENT_LISTONE: /mnt/data/current-listone-capture/current-listone.json
+          NEXUS_GOALS_SIMPLE_OUT: /mnt/data/nexus_goals_simple_v1_report.json
+        run: |
+          set -euo pipefail
+          python fantadesk-private/scripts/nexus-goals-simple-v1.py
+          test -s /mnt/data/nexus_goals_simple_v1_report.json
+          python - <<'PY'
+          import json
+          p='/mnt/data/nexus_goals_simple_v1_report.json'
+          d=json.load(open(p))
+          assert d['schema']=='NEXUS_GOALS_SIMPLE_V1_REPORT'
+          assert d['status']=='CHALLENGER_RESEARCH_ONLY'
+          assert d['architecture']=='DIRECT_TOTAL'
+          assert d['frozen_v2_modified'] is False
+          assert d['production_routing_authorized'] is False
+          assert d['candidate_policy']['automatic_winner'] is False
+          forbidden=set(d['feature_contract']['explicitly_excluded'])
+          for key in ['expected_minutes','minutes','xG','npxG','xA','shots']:
+              assert key in forbidden
+          print('GOALS_SIMPLE_REPORT=PASS', d['historical_panel']['rows'], d['live_metadata'])
+          PY
+
+      - name: Encrypt player-level report before upload
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p encrypted-review
+          openssl cms -encrypt -binary -aes256 \
+            -in /mnt/data/nexus_goals_simple_v1_report.json \
+            -outform DER -out encrypted-review/goals-simple-v1-report.p7m \
+            runner-public/.nexus-v2-public/goals-trajectory-review-cert.pem
+          rm -f /mnt/data/nexus_goals_simple_v1_report.json
+          test -s encrypted-review/goals-simple-v1-report.p7m
+
+      - name: Upload encrypted report only
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-goals-simple-v1-2026-27-encrypted
+          path: encrypted-review/goals-simple-v1-report.p7m
+          if-no-files-found: error
+          retention-days: 1
