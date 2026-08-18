@@ -12,21 +12,27 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout public runner
+        uses: actions/checkout@v6
+        with:
+          path: runner-public
+          persist-credentials: false
+      - name: Checkout frozen private authority
+        uses: actions/checkout@v6
         with:
           repository: Sidious92/FantaDesk
           ref: b4ee1f645885f7403694859bc50514622b62aa8a
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: fantadesk-private
           persist-credentials: false
-      - name: Verify private authority
+      - name: Verify private authority and runner adapter
         shell: bash
         run: |
           set -euo pipefail
           test "$(git -C fantadesk-private rev-parse HEAD)" = "b4ee1f645885f7403694859bc50514622b62aa8a"
           test -f fantadesk-private/scripts/nexus-v2-build-live-feature-surface-2026-27.py
-          test -f fantadesk-private/scripts/nexus-v2-acquire-understat-2025-all-leagues.mjs
           test -f fantadesk-private/scripts/nexus-v2-minutes-surface-one.py
+          test -f runner-public/scripts/nexus-v2-acquire-understat-2025-all-leagues-ajax.mjs
           sudo mkdir -p /mnt/data && sudo chown "$USER":"$USER" /mnt/data
       - uses: actions/setup-node@v6
         with:
@@ -68,11 +74,11 @@ jobs:
         env:
           NEXUS_LIVE_LISTONE_OUTPUT_ROOT: /mnt/data/current-listone-capture
         run: node scripts/nexus-acquire-current-listone-2026-27.mjs
-      - name: Acquire foreign Understat 2025-26
-        working-directory: fantadesk-private
+      - name: Acquire foreign Understat 2025-26 via current AJAX contract
+        working-directory: runner-public
         env:
           NEXUS_V2_UNDERSTAT_2025_OUTPUT_ROOT: /mnt/data/understat-2025-capture
-        run: node scripts/nexus-v2-acquire-understat-2025-all-leagues.mjs
+        run: node scripts/nexus-v2-acquire-understat-2025-all-leagues-ajax.mjs
       - name: Build frozen v2 live feature surface
         shell: bash
         env:
