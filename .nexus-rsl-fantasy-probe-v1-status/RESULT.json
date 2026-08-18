@@ -1,0 +1,189 @@
+{
+  "schema": "NEXUS_RSL_FANTASY_PUBLIC_PROBE_V1",
+  "pages": {
+    "home": {
+      "requested": "https://fantasy.spl.com.sa/",
+      "url": "https://fantasy.spl.com.sa/",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 2412,
+      "sha256": "c5adc032c45e4b9c035011ff575fceb16e3410ac40c8fd75ea4364413b4e33b9",
+      "preview": "<!DOCTYPE html>\n<html lang=\"ar\" class=\"notranslate\" translate=\"no\">\n    <head>\n        <meta name=\"google\" content=\"notranslate\" />\n        <meta charset=\"utf-8\" />\n        <meta\n            name=\"viewport\"\n            content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"\n        />\n        <title>SPL Fantasy</title>\n        <link rel=\"home\" href=\"https://fantasy.spl.com.sa\" />\n\n        <meta property=\"locale\" content=\"ar\" />\n\n        <!-- favicons -->\n        <link\n            href=\"/img/favicons/180x180.png\"\n            rel=\"apple-touch-icon\"\n            sizes=\"180x180\"\n        />\n        <link\n            href=\"/img/favicons/32x32.png\"\n            rel=\"icon\"\n            sizes=\"32x32\"\n            type=\"image/png\"\n        />\n        <link\n            href=\"/img/favicons/16x16.png\"\n            rel=\"icon\"\n            sizes=\"16x16\"\n            type=\"image/png\"\n        />\n        <link\n            rel=\"mask-icon\"\n            href=\"/img/favicons/favicon.svg\"\n            type=\"image/svg+xml\"\n        />\n        <link href=\"/img/favicons/manifest.json\" rel=\"manifest\" />\n\n        <link href=\"https://fantasy.spl.com.sa\" rel=\"canonical\" />\n        <meta name=\"description\" content=\""
+    },
+    "player_list": {
+      "requested": "https://fantasy.spl.com.sa/player-list",
+      "url": "https://fantasy.spl.com.sa/player-list",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 2412,
+      "sha256": "c5adc032c45e4b9c035011ff575fceb16e3410ac40c8fd75ea4364413b4e33b9",
+      "preview": "<!DOCTYPE html>\n<html lang=\"ar\" class=\"notranslate\" translate=\"no\">\n    <head>\n        <meta name=\"google\" content=\"notranslate\" />\n        <meta charset=\"utf-8\" />\n        <meta\n            name=\"viewport\"\n            content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"\n        />\n        <title>SPL Fantasy</title>\n        <link rel=\"home\" href=\"https://fantasy.spl.com.sa\" />\n\n        <meta property=\"locale\" content=\"ar\" />\n\n        <!-- favicons -->\n        <link\n            href=\"/img/favicons/180x180.png\"\n            rel=\"apple-touch-icon\"\n            sizes=\"180x180\"\n        />\n        <link\n            href=\"/img/favicons/32x32.png\"\n            rel=\"icon\"\n            sizes=\"32x32\"\n            type=\"image/png\"\n        />\n        <link\n            href=\"/img/favicons/16x16.png\"\n            rel=\"icon\"\n            sizes=\"16x16\"\n            type=\"image/png\"\n        />\n        <link\n            rel=\"mask-icon\"\n            href=\"/img/favicons/favicon.svg\"\n            type=\"image/svg+xml\"\n        />\n        <link href=\"/img/favicons/manifest.json\" rel=\"manifest\" />\n\n        <link href=\"https://fantasy.spl.com.sa\" rel=\"canonical\" />\n        <meta name=\"description\" content=\""
+    },
+    "statistics": {
+      "requested": "https://fantasy.spl.com.sa/statistics",
+      "url": "https://fantasy.spl.com.sa/statistics",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 2412,
+      "sha256": "c5adc032c45e4b9c035011ff575fceb16e3410ac40c8fd75ea4364413b4e33b9",
+      "preview": "<!DOCTYPE html>\n<html lang=\"ar\" class=\"notranslate\" translate=\"no\">\n    <head>\n        <meta name=\"google\" content=\"notranslate\" />\n        <meta charset=\"utf-8\" />\n        <meta\n            name=\"viewport\"\n            content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"\n        />\n        <title>SPL Fantasy</title>\n        <link rel=\"home\" href=\"https://fantasy.spl.com.sa\" />\n\n        <meta property=\"locale\" content=\"ar\" />\n\n        <!-- favicons -->\n        <link\n            href=\"/img/favicons/180x180.png\"\n            rel=\"apple-touch-icon\"\n            sizes=\"180x180\"\n        />\n        <link\n            href=\"/img/favicons/32x32.png\"\n            rel=\"icon\"\n            sizes=\"32x32\"\n            type=\"image/png\"\n        />\n        <link\n            href=\"/img/favicons/16x16.png\"\n            rel=\"icon\"\n            sizes=\"16x16\"\n            type=\"image/png\"\n        />\n        <link\n            rel=\"mask-icon\"\n            href=\"/img/favicons/favicon.svg\"\n            type=\"image/svg+xml\"\n        />\n        <link href=\"/img/favicons/manifest.json\" rel=\"manifest\" />\n\n        <link href=\"https://fantasy.spl.com.sa\" rel=\"canonical\" />\n        <meta name=\"description\" content=\""
+    }
+  },
+  "scripts": [
+    {
+      "requested": "https://platform.twitter.com/widgets.js",
+      "url": "https://platform.twitter.com/widgets.js",
+      "status": 200,
+      "content_type": "application/javascript; charset=utf-8",
+      "bytes": 93967,
+      "sha256": "2ba02cd55d865d24d23534d6f33db4654634d5ecaea53e2e5c2df6c8e9700e6f",
+      "preview": "Function&&Function.prototype&&Function.prototype.bind&&(/(MSIE ([6789]|10|11))|Trident/.test(navigator.userAgent)||(window.__twttr&&window.__twttr.widgets&&window.__twttr.widgets.loaded&&window.twttr.widgets.load&&window.twttr.widgets.load(),window.__twttr&&window.__twttr.widgets&&window.__twttr.widgets.init||function(t){function e(e){for(var n,i,o=e[0],s=e[1],a=0,c=[];a<o.length;a++)i=o[a],r[i]&&c.push(r[i][0]),r[i]=0;for(n in s)Object.prototype.hasOwnProperty.call(s,n)&&(t[n]=s[n]);for(u&&u(e);c.length;)c.shift()()}var n={},r={0:0};function i(e){if(n[e])return n[e].exports;var r=n[e]={i:e,l:!1,exports:{}};return t[e].call(r.exports,r,r.exports,i),r.l=!0,r.exports}i.e=function(t){var e=[],n=r[t];if(0!==n)if(n)e.push(n[2]);else{var o=new Promise(function(e,i){n=r[t]=[e,i]});e.push(n[2]=o);var s,a=document.getElementsByTagName(\"head\")[0],u=document.createElement(\"script\");u.charset=\"utf-8\",u.timeout=120,i.nc&&u.setAttribute(\"nonce\",i.nc),u.src=function(t){return i.p+\"js/\"+({1:\"broadcast\",2:\"dm_button\",3:\"button\",4:\"moment\",5:\"periscope_on_air\",6:\"timeline\",7:\"tweet\"}[t]||t)+\".\"+{1:\"32f7abac95f95f4b72697654e422bf03\",2:\"82e934513bb92e5e48c40f0a5dba5ac3\",3:\"2276a045429f6681b56da5eb1dcf",
+      "contexts": {
+        "api": [
+          "ny implementation of Promises/A+.\n * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)\n * @license   Licensed under MIT license\n *            See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE\n * @version   v4.2.5+7f2b526d\n */var r;r=function(){\"use strict\";function t(t){return\"function\"==typeof t}var e=Array.isArray?Array.isArray:functio"
+        ],
+        "player": [],
+        "statistics": [],
+        "baseurl": [
+          "kie/consent\"),h(l(),e)},embedIframe:function(t,e){var n=t||[],o=s,a=r.get(\"embedIframeURL\");return a&&d(c,a)?h(a,n)+\".html\":(n.unshift(i.getBaseURLPath(e)),h(o,n)+\".html\")},embedService:function(t){var e=t||[],n=o;return e.unshift(\"srv\"),h(n,e)},eventVideo:function(t){var e=t||[];return e.unshift(\"video/event\"),h(f(),e)},grid:function(t){var e=t||[];return e.unshift(\"grid/collection\"),h(f(),e)},moment:function(t){var e=t||[];return e.unshift(\"",
+          ".{{lang}}.html\",hubHtmlPath:\"/widgets/hub.html\",widgetIframeHtmlPath:\"/widgets/widget_iframe.1227a5674072e080ffb1ba14ac0c1079.html\",resourceBaseUrl:\"https://platform.twitter.com\"}},function(t,e,n){var r=n(3),i=n(8),o=n(4);function s(t,e){var n,r;return e=e||i,/^https?:\\/\\//.test(t)?t:/^\\/\\//.test(t)?e.protocol+t:(n=e.host+(e.port.length?\":\"+e.port:\"\"),0!==t.indexOf(\"/\")&&((r=e.pathname.split(\"/\")).pop(),r.push(t),t=\"/\"+r.join(\"/\")),[e.protocol",
+          "his._updateCachedDimensions()})})},function(t,e){t.exports=function(){throw new Error(\"unimplemented method\")}},function(t,e){t.exports={getBaseURLPath:function(t){switch(t&&t.tfw_team_holdback_11929&&t.tfw_team_holdback_11929.bucket){case\"control\":return\"embed-holdback\";case\"holdback_prod\":return\"embed-holdback-prod\";default:return\"embed\"}}}},function(t,e,n){var r=n(2),i=n(7),o=100,s=3e3;function a(t,e){this._inputsQueue=[],this._task=t,this.",
+          " browser or protocol.\"),void y().resolve();t={origin:d.origin},a.settings().indexOf(\"localhost\")>-1&&(t.localSettings=!0),e=m.url(r.resourceBaseUrl+r.widgetIframeHtmlPath,t),n=function(t){var n,r,i,o;if(r=v.isTwitterURL(t.origin),i=e.substr(0,t.origin.length)===t.origin,o=v.isTwimgURL(t.origin),i&&r||o)try{(n=\"string\"==typeof t.data?c.parse(t.data):t.data).namespace===l.settings&&(b=g.aug(b,{features:n.settings.features,sessionId:n.sessionId})"
+        ],
+        "axios": [],
+        "graphql": []
+      }
+    },
+    {
+      "requested": "https://sync.ecal.com/v2/ecal.widget.js",
+      "url": "https://sync.ecal.com/v2/ecal.widget.js",
+      "status": 200,
+      "content_type": "application/javascript",
+      "bytes": 2191,
+      "sha256": "784c137948772b8fd47ab6892504992103dfc5b4258a08b7a484f16161132f35",
+      "preview": "function ecalWidgetBootstrap () {\n    /* update version whenever we updated something related to the embed scripts functionality */\n    var version = '2.011';\n    var script = document.querySelector(\"script[data-ecal-apikey]\");\n    var apiKey = script.getAttribute('data-ecal-apikey');\n    var bootSrc = script.getAttribute('src');\n    var ecalAlias = script.getAttribute('data-ecal-alias');\n    // var shouldBoot = script.getAttribute('data-ecal-boot');\n    var scriptOnLoad = script.getAttribute('data-ecal-script-onload');\n    var autoBoot = script.getAttribute('data-ecal-autoboot');\n    autoBoot = (autoBoot && autoBoot.toLowerCase() === 'false') ? false : true;\n\n    bootSrc = bootSrc.split('/v2/ecal.widget')[0];\n    window.EcalWidgetAPIKey = apiKey;\n    // console.log(`BootSource ${bootSrc} Apikey: ${apiKey}`);\n   \n    function initialized () {\n        window.EcalWidget.host = bootSrc;\n        // console.log('Ecal Widget Host: ',  window.EcalWidget.host);\n        window[ecalAlias] =  window.EcalWidget;\n        // if (shouldBoot === 'false')  return;\n        if (scriptOnLoad && typeof window[scriptOnLoad] === 'function') {\n            window[scriptOnLoad](window.EcalWidget, { apiKey: ",
+      "contexts": {
+        "api": [
+          "omething related to the embed scripts functionality */\n    var version = '2.011';\n    var script = document.querySelector(\"script[data-ecal-apikey]\");\n    var apiKey = script.getAttribute('data-ecal-apikey');\n    var bootSrc = script.getAttribute('src');\n    var ecalAlias = script.getAttribute('data-ecal-alias');\n    // var shouldBoot = script.getAttribute('data-ecal-boot');\n    var scriptOnLoad = script.getAttribute('data-ecal-script-onlo",
+          " the embed scripts functionality */\n    var version = '2.011';\n    var script = document.querySelector(\"script[data-ecal-apikey]\");\n    var apiKey = script.getAttribute('data-ecal-apikey');\n    var bootSrc = script.getAttribute('src');\n    var ecalAlias = script.getAttribute('data-ecal-alias');\n    // var shouldBoot = script.getAttribute('data-ecal-boot');\n    var scriptOnLoad = script.getAttribute('data-ecal-script-onload');\n    var autoB",
+          "var version = '2.011';\n    var script = document.querySelector(\"script[data-ecal-apikey]\");\n    var apiKey = script.getAttribute('data-ecal-apikey');\n    var bootSrc = script.getAttribute('src');\n    var ecalAlias = script.getAttribute('data-ecal-alias');\n    // var shouldBoot = script.getAttribute('data-ecal-boot');\n    var scriptOnLoad = script.getAttribute('data-ecal-script-onload');\n    var autoBoot = script.getAttribute('data-ecal-aut",
+          "= (autoBoot && autoBoot.toLowerCase() === 'false') ? false : true;\n\n    bootSrc = bootSrc.split('/v2/ecal.widget')[0];\n    window.EcalWidgetAPIKey = apiKey;\n    // console.log(`BootSource ${bootSrc} Apikey: ${apiKey}`);\n   \n    function initialized () {\n        window.EcalWidget.host = bootSrc;\n        // console.log('Ecal Widget Host: ',  window.EcalWidget.host);\n        window[ecalAlias] =  window.EcalWidget;\n        // if (shouldBoot ==",
+          "ot && autoBoot.toLowerCase() === 'false') ? false : true;\n\n    bootSrc = bootSrc.split('/v2/ecal.widget')[0];\n    window.EcalWidgetAPIKey = apiKey;\n    // console.log(`BootSource ${bootSrc} Apikey: ${apiKey}`);\n   \n    function initialized () {\n        window.EcalWidget.host = bootSrc;\n        // console.log('Ecal Widget Host: ',  window.EcalWidget.host);\n        window[ecalAlias] =  window.EcalWidget;\n        // if (shouldBoot === 'false'",
+          ": true;\n\n    bootSrc = bootSrc.split('/v2/ecal.widget')[0];\n    window.EcalWidgetAPIKey = apiKey;\n    // console.log(`BootSource ${bootSrc} Apikey: ${apiKey}`);\n   \n    function initialized () {\n        window.EcalWidget.host = bootSrc;\n        // console.log('Ecal Widget Host: ',  window.EcalWidget.host);\n        window[ecalAlias] =  window.EcalWidget;\n        // if (shouldBoot === 'false')  return;\n        if (scriptOnLoad && typeof wind",
+          "   bootSrc = bootSrc.split('/v2/ecal.widget')[0];\n    window.EcalWidgetAPIKey = apiKey;\n    // console.log(`BootSource ${bootSrc} Apikey: ${apiKey}`);\n   \n    function initialized () {\n        window.EcalWidget.host = bootSrc;\n        // console.log('Ecal Widget Host: ',  window.EcalWidget.host);\n        window[ecalAlias] =  window.EcalWidget;\n        // if (shouldBoot === 'false')  return;\n        if (scriptOnLoad && typeof window[scriptO",
+          "')  return;\n        if (scriptOnLoad && typeof window[scriptOnLoad] === 'function') {\n            window[scriptOnLoad](window.EcalWidget, { apiKey: apiKey });\n        }\n        if (!autoBoot) return;\n        window.EcalWidget.boot(apiKey);\n    }\n\n    function loadScript () {\n        var escr = document.createElement('script');\n        escr.onload = function (e) {\n            initialized();\n        }\n        var src = `${bootSrc}/v2/widget.",
+          "rn;\n        if (scriptOnLoad && typeof window[scriptOnLoad] === 'function') {\n            window[scriptOnLoad](window.EcalWidget, { apiKey: apiKey });\n        }\n        if (!autoBoot) return;\n        window.EcalWidget.boot(apiKey);\n    }\n\n    function loadScript () {\n        var escr = document.createElement('script');\n        escr.onload = function (e) {\n            initialized();\n        }\n        var src = `${bootSrc}/v2/widget.min.js?v",
+          "       window[scriptOnLoad](window.EcalWidget, { apiKey: apiKey });\n        }\n        if (!autoBoot) return;\n        window.EcalWidget.boot(apiKey);\n    }\n\n    function loadScript () {\n        var escr = document.createElement('script');\n        escr.onload = function (e) {\n            initialized();\n        }\n        var src = `${bootSrc}/v2/widget.min.js?v=${version}`;\n        escr.setAttribute('src', src);\n        escr.setAttribute('typ"
+        ],
+        "player": [],
+        "statistics": [],
+        "baseurl": [],
+        "axios": [],
+        "graphql": []
+      }
+    },
+    {
+      "requested": "https://fantasy.spl.com.sa/assets/index-DQhhpGWl.js",
+      "url": "https://fantasy.spl.com.sa/assets/index-DQhhpGWl.js",
+      "status": 200,
+      "content_type": "application/x-javascript",
+      "bytes": 2866811,
+      "sha256": "2df129013bcc2dee801cc1559a6550c5eb331dd364415e7aea6098cd1b482ca9",
+      "preview": "const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[\"assets/Help-DURUd9bI.js\",\"assets/HelpNav-DlEgG9MJ.js\",\"assets/Rules-ChG5QkV0.js\",\"assets/Terms-P31VbiTC.js\",\"assets/New-BLfAz8Yz.js\"])))=>i.map(i=>d[i]);\nvar l00=Object.defineProperty;var p00=(e,t,n)=>t in e?l00(e,t,{enumerable:!0,configurable:!0,writable:!0,value:n}):e[t]=n;var gs=(e,t,n)=>p00(e,typeof t!=\"symbol\"?t+\"\":t,n);(function(){const t=document.createElement(\"link\").relList;if(t&&t.supports&&t.supports(\"modulepreload\"))return;for(const i of document.querySelectorAll('link[rel=\"modulepreload\"]'))r(i);new MutationObserver(i=>{for(const o of i)if(o.type===\"childList\")for(const s of o.addedNodes)s.tagName===\"LINK\"&&s.rel===\"modulepreload\"&&r(s)}).observe(document,{childList:!0,subtree:!0});function n(i){const o={};return i.integrity&&(o.integrity=i.integrity),i.referrerPolicy&&(o.referrerPolicy=i.referrerPolicy),i.crossOrigin===\"use-credentials\"?o.credentials=\"include\":i.crossOrigin===\"anonymous\"?o.credentials=\"omit\":o.credentials=\"same-origin\",o}function r(i){if(i.ep)return;i.ep=!0;const o=n(i);fetch(i.href,o)}})();var w2=typeof globalThis<\"u\"?globalThis:typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"",
+      "contexts": {
+        "api": [
+          " he0=\"7\";function BD(e){const t=e.protocol?`${e.protocol}:`:\"\",n=e.port?`:${e.port}`:\"\";return`${t}//${e.host}${n}${e.path?`/${e.path}`:\"\"}/api/`}function Oe0(e){return`${BD(e)}${e.projectId}/envelope/`}function Ae0(e,t){return x00({sentry_key:e.publicKey,sentry_version:he0,...t&&{sentry_client:`${t.name}/${t.version}`}})}function me0(e,t={}){const n=typeof t==\"string\"?t:t.tunnel,r=typeof t==\"string\"||!t._metadata?void 0:t._metadata.sdk;re",
+          "function Et0(e){const t=zW();if(!t||!ke.performance.getEntries||!Ia)return;En&&p1.log(\"[Tracing] Adding & adjusting spans using Performance API\");const n=Oi(Ia),r=t.getEntries(),{op:i,start_timestamp:o}=Ai(e);if(r.slice($R).forEach(s=>{const c=Oi(s.startTime),p=Oi(s.duration);if(!(e.op===\"navigation\"&&o&&n+c<o))switch(s.entryType){case\"navigation\":{Nt0(e,s,n);break}case\"mark\":case\"paint\":case\"measure\":{Tt0(e,s,c,p,n);const d=fW(),M=s.start",
+          "jectDeep=c4,o0.zipWith=lz,o0.entries=ZC,o0.entriesIn=KC,o0.extend=VC,o0.extendWith=J5,Qm(o0,o0),o0.add=GQ,o0.attempt=tR,o0.camelCase=JJ,o0.capitalize=JC,o0.ceil=YQ,o0.clamp=YJ,o0.clone=ti,o0.cloneDeep=Wa,o0.cloneDeepWith=Pt,o0.cloneWith=ni,o0.conformsTo=_u,o0.deburr=QC,o0.defaultTo=wQ,o0.divide=ZQ,o0.endsWith=QJ,o0.eq=to,o0.escape=eQ,o0.escapeRegExp=tQ,o0.every=_b,o0.find=Au,o0.findIndex=wc,o0.findKey=yJ,o0.findLast=Ec,o0.findLastIndex=ds,",
+          "an happen if you are navigating outside the router via `window.history.pushState`/`window.location.hash` instead of using router navigation APIs.  This can also happen if you are using createHashRouter and the user manually changes the URL.\");let s1=g1({currentLocation:N.location,nextLocation:D0,historyAction:g0});if(s1&&H0!=null){let u1=new Promise($1=>{M0=$1});e.history.go(H0*-1),W0(s1,{state:\"blocked\",location:D0,proceed(){W0(s1,{state:",
+          "rgstr]:\"https://prodregistryv2.org/v1\",[e.Endpoint._initialize]:\"https://featureassets.org/v1\",[e.Endpoint._download_config_specs]:\"https://api.statsigcdn.com/v1\"},e.NetworkParam={EventCount:\"ec\",SdkKey:\"k\",SdkType:\"st\",SdkVersion:\"sv\",Time:\"t\",SessionID:\"sid\",StatsigEncoded:\"se\",IsGzipped:\"gz\"}}(C9)),C9}var wz={},CT;function am(){if(CT)return wz;CT=1,Object.defineProperty(wz,\"__esModule\",{value:!0}),wz.SDKType=void 0;const e={};let t;retu",
+          "l?void 0:X.networkConfig;this._logEventUrlConfig=new A.UrlConfiguration(c.Endpoint._rgstr,r0==null?void 0:r0.logEventUrl,r0==null?void 0:r0.api,r0==null?void 0:r0.logEventFallbackUrls)}setLogEventCompressionMode(T){this._flushCoordinator?this._flushCoordinator.setLogEventCompressionMode(T):this._pendingCompressionMode=T}setLoggingEnabled(T){const P=this._loggingEnabled===\"disabled\",N=T!==\"disabled\";if(this._loggingEnabled=T,this._flushCoor",
+          "erty(e,\"__esModule\",{value:!0}),e.ErrorBoundary=e.EXCEPTION_ENDPOINT=void 0;const n=si(),r=am(),i=Xh();e.EXCEPTION_ENDPOINT=\"https://statsigapi.net/v1/sdk_exception\";const o=\"[Statsig] UnknownError\";let s=class{constructor(g,A,w,_){this._sdkKey=g,this._options=A,this._emitter=w,this._lastSeenError=_,this._seen=new Set}wrap(g,A){try{const w=g;d(w).forEach(_=>{const W=w[_];\"$EB\"in W||(w[_]=(...x)=>this._capture(A?`${A}:${_}`:_,()=>W.apply(g,",
+          "null&&P!==void 0?P:fetch)((N=U0==null?void 0:U0.sdkExceptionUrl)!==null&&N!==void 0?N:e.EXCEPTION_ENDPOINT,{method:\"POST\",headers:{\"STATSIG-API-KEY\":this._sdkKey,\"STATSIG-SDK-TYPE\":String(j0),\"STATSIG-SDK-VERSION\":String(_0.sdkVersion),\"Content-Type\":\"application/json\"},body:JSON.stringify(x0)}),(X=this._emitter)===null||X===void 0||X.call(this,{name:\"error\",error:A,tag:g})}).then(()=>{}).catch(()=>{})}catch{}}};e.ErrorBoundary=s;function ",
+          "nfig;this._option=o,this._initializeUrlConfig=new t.UrlConfiguration(t.Endpoint._initialize,c==null?void 0:c.initializeUrl,c==null?void 0:c.api,c==null?void 0:c.initializeFallbackUrls)}fetchEvaluations(o,s,c,p,d){return e(this,void 0,void 0,function*(){var M,h,g,A,w,_;const W=s?(0,t._typedJsonParse)(s,\"has_updates\",\"InitializeResponse\"):null;let x={user:p,hash:(g=(h=(M=this._option)===null||M===void 0?void 0:M.networkConfig)===null||h===vo",
+          "ClientFactoryBootstrap=n,Gz}var SN;function Bd0(){if(SN)return Vz;SN=1,Object.defineProperty(Vz,\"__esModule\",{value:!0}),Vz.useClientBootstrapInit=void 0;const e=mw(),t=_U();function n(r,i,o,s=null,c){return(0,t.useStatsigInternalClientFactoryBootstrap)(p=>new e.StatsigClient(p.sdkKey,p.initialUser,p.statsigOptions),{sdkKey:r,initialUser:i,initialValues:o,statsigOptions:s,useLegacyFormat:c})}return Vz.useClientBootstrapInit=n,Vz}var hO={},",
+          "kKey,p.initialUser,p.statsigOptions),{sdkKey:r,initialUser:i,initialValues:o,statsigOptions:s,useLegacyFormat:c})}return Vz.useClientBootstrapInit=n,Vz}var hO={},LN;function Id0(){if(LN)return hO;LN=1,Object.defineProperty(hO,\"__esModule\",{value:!0});const e=ci(),t=dt(),n=Ud(),r=Lp();function i(o,s){const{client:c,renderVersion:p}=(0,e.useContext)(r.default);return(0,e.useMemo)(()=>(0,n.isNoopClient)(c)?(t.Log.warn(`useDynamicConfig hook f",
+          "sync=e.useStatsigClient=e.useParameterStore=e.useLayer=e.useGateValue=e.useFeatureGate=e.useExperiment=e.useDynamicConfig=e.useClientBootstrapInit=e.useClientAsyncInit=e.StatsigProvider=e.StatsigContext=void 0;const r=dt(),i=Lp();e.StatsigContext=i.default;const o=kd0();Object.defineProperty(e,\"StatsigProvider\",{enumerable:!0,get:function(){return o.StatsigProvider}});const s=vU();Object.defineProperty(e,\"useClientAsyncInit\",{enumerable:!0"
+        ],
+        "player": [
+          "AME_RULES\",e=>t=>e(t)),G$=Es(\"ADD_GAME_SCORING\",e=>t=>e(t)),Y$=Es(\"ADD_GAME_SETTINGS\",e=>t=>e(t)),Z$=Es(\"ADD_PHASES\",e=>t=>e(t)),K$=Es(\"ADD_PLAYER\",e=>t=>e(t)),J$=Es(\"ADD_WATCHED\",e=>t=>e(t)),Q$=Es(\"ADD_TEAMS\",e=>t=>e(t)),eF=Es(\"ADD_TOTAL_PLAYERS\",e=>t=>e(t)),iM=Y1(\"BOOTSTRAP_START\",\"BOOTSTRAP_SUCCESS\",\"BOOTSTRAP_FAILURE\")(),ai0=Y1(\"BOOTSTRAP_ME_START\",\"BOOTSTRAP_ME_SUCCESS\",\"BOOTSTRAP_ME_FAILURE\")(),si0=Y1(\"BOOTSTRAP_STATIC_START\",\"BOOTSTRAP",
+          "$=Es(\"ADD_PHASES\",e=>t=>e(t)),K$=Es(\"ADD_PLAYER\",e=>t=>e(t)),J$=Es(\"ADD_WATCHED\",e=>t=>e(t)),Q$=Es(\"ADD_TEAMS\",e=>t=>e(t)),eF=Es(\"ADD_TOTAL_PLAYERS\",e=>t=>e(t)),iM=Y1(\"BOOTSTRAP_START\",\"BOOTSTRAP_SUCCESS\",\"BOOTSTRAP_FAILURE\")(),ai0=Y1(\"BOOTSTRAP_ME_START\",\"BOOTSTRAP_ME_SUCCESS\",\"BOOTSTRAP_ME_FAILURE\")(),si0=Y1(\"BOOTSTRAP_STATIC_START\",\"BOOTSTRAP_STATIC_SUCCESS\",\"BOOTSTRAP_STATIC_FAILURE\")(),tF=()=>Math.round(new Date().getTime()/1e3),ci0=lr({",
+          "URE\")(),Bv=Y1(\"RECOVER_START\",\"RECOVER_SUCCESS\",\"RECOVER_FAILURE\")(),DF=Y1(\"REGISTER_START\",\"REGISTER_SUCCESS\",\"REGISTER_FAILURE\")(),$F=Y1(\"PLAYER_UPDATE_START\",\"PLAYER_UPDATE_SUCCESS\",\"PLAYER_UPDATE_FAILURE\")();Y1(\"PLAYER_VERIFY_START\",\"PLAYER_VERIFY_SUCCESS\",\"PLAYER_VERIFY_FAILURE\")();const FF=Y1(\"PASSWORD_CHANGE_START\",\"PASSWORD_CHANGE_SUCCESS\",\"PASSWORD_CHANGE_FAILURE\")(),XF=Y1(\"PASSWORD_RESET_START\",\"PASSWORD_RESET_SUCCESS\",\"PASSWORD_RES",
+          "_START\",\"RECOVER_SUCCESS\",\"RECOVER_FAILURE\")(),DF=Y1(\"REGISTER_START\",\"REGISTER_SUCCESS\",\"REGISTER_FAILURE\")(),$F=Y1(\"PLAYER_UPDATE_START\",\"PLAYER_UPDATE_SUCCESS\",\"PLAYER_UPDATE_FAILURE\")();Y1(\"PLAYER_VERIFY_START\",\"PLAYER_VERIFY_SUCCESS\",\"PLAYER_VERIFY_FAILURE\")();const FF=Y1(\"PASSWORD_CHANGE_START\",\"PASSWORD_CHANGE_SUCCESS\",\"PASSWORD_CHANGE_FAILURE\")(),XF=Y1(\"PASSWORD_RESET_START\",\"PASSWORD_RESET_SUCCESS\",\"PASSWORD_RESET_FAILURE\")(),HF=Y1(\"",
+          "\",\"RECOVER_FAILURE\")(),DF=Y1(\"REGISTER_START\",\"REGISTER_SUCCESS\",\"REGISTER_FAILURE\")(),$F=Y1(\"PLAYER_UPDATE_START\",\"PLAYER_UPDATE_SUCCESS\",\"PLAYER_UPDATE_FAILURE\")();Y1(\"PLAYER_VERIFY_START\",\"PLAYER_VERIFY_SUCCESS\",\"PLAYER_VERIFY_FAILURE\")();const FF=Y1(\"PASSWORD_CHANGE_START\",\"PASSWORD_CHANGE_SUCCESS\",\"PASSWORD_CHANGE_FAILURE\")(),XF=Y1(\"PASSWORD_RESET_START\",\"PASSWORD_RESET_SUCCESS\",\"PASSWORD_RESET_FAILURE\")(),HF=Y1(\"PASSWORD_SET_START\",\"PAS",
+          "REGISTER_START\",\"REGISTER_SUCCESS\",\"REGISTER_FAILURE\")(),$F=Y1(\"PLAYER_UPDATE_START\",\"PLAYER_UPDATE_SUCCESS\",\"PLAYER_UPDATE_FAILURE\")();Y1(\"PLAYER_VERIFY_START\",\"PLAYER_VERIFY_SUCCESS\",\"PLAYER_VERIFY_FAILURE\")();const FF=Y1(\"PASSWORD_CHANGE_START\",\"PASSWORD_CHANGE_SUCCESS\",\"PASSWORD_CHANGE_FAILURE\")(),XF=Y1(\"PASSWORD_RESET_START\",\"PASSWORD_RESET_SUCCESS\",\"PASSWORD_RESET_FAILURE\")(),HF=Y1(\"PASSWORD_SET_START\",\"PASSWORD_SET_SUCCESS\",\"PASSWORD_S",
+          "TER_SUCCESS\",\"REGISTER_FAILURE\")(),$F=Y1(\"PLAYER_UPDATE_START\",\"PLAYER_UPDATE_SUCCESS\",\"PLAYER_UPDATE_FAILURE\")();Y1(\"PLAYER_VERIFY_START\",\"PLAYER_VERIFY_SUCCESS\",\"PLAYER_VERIFY_FAILURE\")();const FF=Y1(\"PASSWORD_CHANGE_START\",\"PASSWORD_CHANGE_SUCCESS\",\"PASSWORD_CHANGE_FAILURE\")(),XF=Y1(\"PASSWORD_RESET_START\",\"PASSWORD_RESET_SUCCESS\",\"PASSWORD_RESET_FAILURE\")(),HF=Y1(\"PASSWORD_SET_START\",\"PASSWORD_SET_SUCCESS\",\"PASSWORD_SET_FAILURE\")(),UF=PF(\"",
+          "AILURE\")(),$F=Y1(\"PLAYER_UPDATE_START\",\"PLAYER_UPDATE_SUCCESS\",\"PLAYER_UPDATE_FAILURE\")();Y1(\"PLAYER_VERIFY_START\",\"PLAYER_VERIFY_SUCCESS\",\"PLAYER_VERIFY_FAILURE\")();const FF=Y1(\"PASSWORD_CHANGE_START\",\"PASSWORD_CHANGE_SUCCESS\",\"PASSWORD_CHANGE_FAILURE\")(),XF=Y1(\"PASSWORD_RESET_START\",\"PASSWORD_RESET_SUCCESS\",\"PASSWORD_RESET_FAILURE\")(),HF=Y1(\"PASSWORD_SET_START\",\"PASSWORD_SET_SUCCESS\",\"PASSWORD_SET_FAILURE\")(),UF=PF(\"ADD_TO_WATCHED\",e=>t=>e(",
+          "):return t.payload;default:return null}},passwordSetError:(e,t)=>{switch(t.type){case l1(HF.failure):return t.payload;default:return null}},playerUpdateError:(e,t)=>{switch(t.type){case l1($F.failure):return t.payload;default:return null}},registerError:(e,t)=>{switch(t.type){case l1(DF.failure):return t.payload;default:return null}},watched:(e=[],t)=>{switch(t.type){case l1(J$):return t.payload;case l1(UF):return e.indexOf(t.payload)===-1?[.",
+          "n t.payload;default:return e}},recoveryStatus:(e=null,t)=>{switch(t.type){case l1(Bv.success):return t.payload;default:return e}}}),We=e=>e.player.data,HA=e=>e.player.watched,Na0=e=>e.player.loginError,ja0=e=>e.player.passwordChangeError,ka0=e=>e.player.passwordSetError,Ba0=e=>e.player.playerUpdateError,Ia0=e=>e.player.registerError,Pa0=e=>e.player.recoveryError,Da0=e=>e.player.recoveryStatus;j1([We,(e,t)=>t],(e,t)=>(e==null?void 0:e.entry)==",
+          "return e}},recoveryStatus:(e=null,t)=>{switch(t.type){case l1(Bv.success):return t.payload;default:return e}}}),We=e=>e.player.data,HA=e=>e.player.watched,Na0=e=>e.player.loginError,ja0=e=>e.player.passwordChangeError,ka0=e=>e.player.passwordSetError,Ba0=e=>e.player.playerUpdateError,Ia0=e=>e.player.registerError,Pa0=e=>e.player.recoveryError,Da0=e=>e.player.recoveryStatus;j1([We,(e,t)=>t],(e,t)=>(e==null?void 0:e.entry)===t);const $a0=lr({by",
+          "s:(e=null,t)=>{switch(t.type){case l1(Bv.success):return t.payload;default:return e}}}),We=e=>e.player.data,HA=e=>e.player.watched,Na0=e=>e.player.loginError,ja0=e=>e.player.passwordChangeError,ka0=e=>e.player.passwordSetError,Ba0=e=>e.player.playerUpdateError,Ia0=e=>e.player.registerError,Pa0=e=>e.player.recoveryError,Da0=e=>e.player.recoveryStatus;j1([We,(e,t)=>t],(e,t)=>(e==null?void 0:e.entry)===t);const $a0=lr({byId:(e={},t)=>{switch(t.t"
+        ],
+        "statistics": [
+          "eagues\",text:t(\"navigation.leagues\",\"Leagues\")},{useRouter:p,href:\"/fixtures\",text:t(\"navigation.fixtures\",\"Fixtures\")},{useRouter:p,href:\"/statistics\",text:t(\"navigation.statistics\",\"Statistics\")}),c.push({useRouter:p,href:\"/help\",text:t(\"navigation.help\",\"Help\")}),!c3()&&e&&c.push({useRouter:!1,href:e,text:t(\"navigation.signOut\",\"Sign out\")})):n?(c=[{useRouter:p,href:\"/\",text:t(\"navigation.home\",\"Home\")},{useRouter:p,href:\"/squad-selection\",tex",
+          "ues\",\"Leagues\")},{useRouter:p,href:\"/fixtures\",text:t(\"navigation.fixtures\",\"Fixtures\")},{useRouter:p,href:\"/statistics\",text:t(\"navigation.statistics\",\"Statistics\")}),c.push({useRouter:p,href:\"/help\",text:t(\"navigation.help\",\"Help\")}),!c3()&&e&&c.push({useRouter:!1,href:e,text:t(\"navigation.signOut\",\"Sign out\")})):n?(c=[{useRouter:p,href:\"/\",text:t(\"navigation.home\",\"Home\")},{useRouter:p,href:\"/squad-selection\",text:t(\"navigation.squadSelection\"",
+          "\")},{useRouter:p,href:\"/fixtures\",text:t(\"navigation.fixtures\",\"Fixtures\")},{useRouter:p,href:\"/statistics\",text:t(\"navigation.statistics\",\"Statistics\")}),c.push({useRouter:p,href:\"/help\",text:t(\"navigation.help\",\"Help\")}),!c3()&&e&&c.push({useRouter:!1,href:e,text:t(\"navigation.signOut\",\"Sign out\")})):n?(c=[{useRouter:p,href:\"/\",text:t(\"navigation.home\",\"Home\")},{useRouter:p,href:\"/squad-selection\",text:t(\"navigation.squadSelection\",\"Squad Selec",
+          "Router:p,href:\"/\",text:t(\"navigation.home\",\"Home\")}],c.push({useRouter:p,href:\"/help\",text:t(\"navigation.help\",\"Help\")},{useRouter:p,href:\"/statistics\",text:t(\"navigation.statistics\",\"Statistics\")})),a.jsx(c90,{links:c})},l90=e=>B.createElement(\"svg\",{width:1037,height:167,viewBox:\"0 0 1037 167\",fill:\"none\",xmlns:\"http://www.w3.org/2000/svg\",...e},B.createElement(\"g\",{clipPath:\"url(#clip0_3229_2)\"},B.createElement(\"path\",{d:\"M0.25 164.6V3.31982H1",
+          "ation.home\",\"Home\")}],c.push({useRouter:p,href:\"/help\",text:t(\"navigation.help\",\"Help\")},{useRouter:p,href:\"/statistics\",text:t(\"navigation.statistics\",\"Statistics\")})),a.jsx(c90,{links:c})},l90=e=>B.createElement(\"svg\",{width:1037,height:167,viewBox:\"0 0 1037 167\",fill:\"none\",xmlns:\"http://www.w3.org/2000/svg\",...e},B.createElement(\"g\",{clipPath:\"url(#clip0_3229_2)\"},B.createElement(\"path\",{d:\"M0.25 164.6V3.31982H115.76V31.5398H35.12V76.1298H107",
+          "Home\")}],c.push({useRouter:p,href:\"/help\",text:t(\"navigation.help\",\"Help\")},{useRouter:p,href:\"/statistics\",text:t(\"navigation.statistics\",\"Statistics\")})),a.jsx(c90,{links:c})},l90=e=>B.createElement(\"svg\",{width:1037,height:167,viewBox:\"0 0 1037 167\",fill:\"none\",xmlns:\"http://www.w3.org/2000/svg\",...e},B.createElement(\"g\",{clipPath:\"url(#clip0_3229_2)\"},B.createElement(\"path\",{d:\"M0.25 164.6V3.31982H115.76V31.5398H35.12V76.1298H107.22L111.02 10",
+          ":e(\"stats.performance_index.description\",\"SPL Performance Index is a measure of a player’s overall performance in a match, based on various statistics such as goals, assists, shots, passes, and defensive actions.\"),label:e(\"stats.performance_index.label\",\"SPL Performance Index\")},form:{description:e(\"stats.form.description\",\"Form is a player’s average score per match, calculated from all matches played by his club in the last 30 days.\"),label:e(\"",
+          "rs_in_event\",s=e?t(\"transfersPanel.out\",\"Out\"):t(\"transfersPanel.in\",\"In\");return a.jsxs(Uc,{children:[a.jsx(Uc.Header,{link:a.jsx(b3,{to:`/statistics/${o}`,variant:\"light\",children:t(\"transfersPanel.more\",\"More\")}),children:a.jsx(ow0,{children:t(\"transfersPanel.heading\",\"Top Transfers {{ inOut }}\",{inOut:s})})}),a.jsx(Uc.Body,{children:a.jsxs(cw0,{children:[a.jsx(\"thead\",{children:a.jsxs(\"tr\",{children:[a.jsx(lw0,{children:\" \"}),a.jsx(pw0,{child",
+          "mentMenu:()=>o(p),team:d})}),a.jsxs(jZ,{children:[p.selected_by_percent,\"%\"]})]},p.id)})})]},s.id):null}),a.jsx(kZ,{children:a.jsx(b3,{to:\"/statistics/selected_by_percent\",children:i(\"status.viewMore\",\"View more\")})})]})]})},Lw0=20,Ew0=()=>{const e=O0(xp),t=Me(),{t:n}=I1(),r=O0(pr),i=O0(HW);B.useEffect(()=>{t(tz({...e,filter:\"all\",sort:\"news_added\",search:\"\"}))},[]);const o=c=>t(jo(c.id)),s=i.data.slice(0,Lw0);return a.jsxs(Uc,{children:[a.jsx(Uc",
+          "==-1?o.sort:\"\",A=Bm(String(o.sort),e);return a.jsx(ve,{children:a.jsxs(_e,{children:[a.jsx(G0.Box,{mx:2,mb:4,children:a.jsx(Xt,{children:e(\"statistics.title\",\"Statistics\")})}),a.jsx(QK,{initialSort:n||\"total_points\"}),a.jsx(G0.Box,{mb:\"4\",mt:4,children:a.jsx(tt,{type:\"info\",textAlign:\"start\",children:A?A.description:\"\"})}),a.jsx(de,{children:a.jsx(P5,{children:a.jsxs(Gd,{children:[a.jsx(\"thead\",{children:a.jsxs(\"tr\",{children:[a.jsx(dT0,{children",
+          "(String(o.sort),e);return a.jsx(ve,{children:a.jsxs(_e,{children:[a.jsx(G0.Box,{mx:2,mb:4,children:a.jsx(Xt,{children:e(\"statistics.title\",\"Statistics\")})}),a.jsx(QK,{initialSort:n||\"total_points\"}),a.jsx(G0.Box,{mb:\"4\",mt:4,children:a.jsx(tt,{type:\"info\",textAlign:\"start\",children:A?A.description:\"\"})}),a.jsx(de,{children:a.jsx(P5,{children:a.jsxs(Gd,{children:[a.jsx(\"thead\",{children:a.jsxs(\"tr\",{children:[a.jsx(dT0,{children:\" \"}),a.jsx(bT0,{c",
+          "ren:a.jsx(P5,{children:a.jsxs(Gd,{children:[a.jsx(\"thead\",{children:a.jsxs(\"tr\",{children:[a.jsx(dT0,{children:\" \"}),a.jsx(bT0,{children:e(\"statistics.player\",\"Player\")}),a.jsx(MT0,{children:e(\"statistics.currency\",\"M SAR\")}),a.jsx(fT0,{children:a.jsx(Lt,{content:e(\"statistics.selectedByLong\",\"Selected by %\"),children:a.jsx(Yt,{children:e(\"statistics.selectedByShort\",\"Sel.\")})})}),a.jsx(zT0,{children:e(\"statistics.form\",\"Form\")}),a.jsx(hT0,{child"
+        ],
+        "baseurl": [],
+        "axios": [],
+        "graphql": []
+      }
+    },
+    {
+      "requested": "https://cdnjs.cloudflare.com/ajax/libs/postscribe/2.0.8/postscribe.min.js",
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/postscribe/2.0.8/postscribe.min.js",
+      "status": 200,
+      "content_type": "application/javascript; charset=utf-8",
+      "bytes": 17908,
+      "sha256": "c4e20f53f5ef0ed44b783437aa3f4638a9a56cc4aa29ae83ed9212eb2807052a",
+      "preview": "/**\n * @file postscribe\n * @description Asynchronously write javascript, even with document.write.\n * @version v2.0.8\n * @see {@link https://krux.github.io/postscribe}\n * @license MIT\n * @author Derek Brans\n * @copyright 2016 Krux Digital, Inc\n */\n!function(t,e){\"object\"==typeof exports&&\"object\"==typeof module?module.exports=e():\"function\"==typeof define&&define.amd?define([],e):\"object\"==typeof exports?exports[\"postscribe\"]=e():t[\"postscribe\"]=e()}(this,function(){return function(t){function e(n){if(r[n])return r[n].exports;var o=r[n]={\"exports\":{},\"id\":n,\"loaded\":!1};return t[n].call(o.exports,o,o.exports,e),o.loaded=!0,o.exports}var r={};return e.m=t,e.c=r,e.p=\"\",e(0)}([function(t,e,r){\"use strict\";function n(t){return t&&t.__esModule?t:{\"default\":t}}var o=r(1),i=n(o);t.exports=i[\"default\"]},function(t,e,r){\"use strict\";function n(t){if(t&&t.__esModule)return t;var e={};if(null!=t)for(var r in t)Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r]);return e[\"default\"]=t,e}function o(t){return t&&t.__esModule?t:{\"default\":t}}function i(){}function a(){var t=m.shift();if(t){var e=h.last(t);e.afterDequeue(),t.stream=s.apply(void 0,t),e.afterStreamStart()}}function s(t,e,r){functi",
+      "contexts": {
+        "api": [],
+        "player": [],
+        "statistics": [],
+        "baseurl": [],
+        "axios": [],
+        "graphql": []
+      }
+    }
+  ],
+  "api_candidates": [
+    "/api/",
+    "/api/auth/firebase/",
+    "/api/auth/oidc/token/",
+    "/api/player/logout/",
+    "/assets/pitch-dream-team-BhC0ITp5.svg",
+    "/dream-team",
+    "/dream-team/",
+    "/dream-team/:eventId",
+    "/fixtures",
+    "/fixtures/:eventId",
+    "/my-team",
+    "/player",
+    "/player-list",
+    "/player/logged-in",
+    "/player/logout",
+    "/player/logout/",
+    "/player/password-reset/",
+    "/player/password-set/:uidb64/",
+    "/player/password-set/:uidb64/:token/",
+    "/player/verify-otp-delete",
+    "/statistics",
+    "/statistics/:statName",
+    "/statistics/selected_by_percent",
+    "/the-scout/player-news",
+    "https://api.statsigcdn.com/v1",
+    "https://en.fantasy.spl.com.sa/",
+    "https://fantasy.spl.com.sa/",
+    "https://statsigapi.net/v1/sdk_exception"
+  ]
+}
