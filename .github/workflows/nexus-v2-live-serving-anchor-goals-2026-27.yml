@@ -1,0 +1,225 @@
+name: Nexus v2 Live Serving Anchor GOALS 2026-27
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-v2-live-anchor-goals-launch/EXECUTE'
+
+permissions:
+  contents: read
+
+jobs:
+  sanity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      AUTHORITY_SHA: b073280ce57b66a6c0a0338d7ad36659ff512c31
+      SERVING_SCRIPT_BLOB_SHA: 7a4999b6fd7b2b5797863f0c1695612e37ada1e6
+      GOALS_POLICY_BLOB_SHA: 0533ec57bdd6246bbaa0ca6fbb05a63d2f56bd85
+      EXPECTED_LIVE_SURFACE_SHA256: 668b22b7cedd27301b1cdac7a22448b2b9fbe44b1323c013603988ec63275d89
+      EXPECTED_MINUTES_SURFACE_SHA256: 5898b2c01490e9a1ab21e19c159c4ba51fadbd300470f19e31f6384da13d4f2c
+      EXPECTED_EVENT_SURFACE_SHA256: 09022f38648708268e424877e7f2f473f48a84ecaa7a399afbc9fb372c36dfd2
+
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v6
+        with:
+          path: runner-public
+          persist-credentials: false
+
+      - name: Checkout fixed private serving authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.AUTHORITY_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Verify authority and serving policy provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "$AUTHORITY_SHA"
+          test "$(git -C fantadesk-private ls-tree HEAD scripts/nexus-v2-serving-live-2026-27.py | awk '{print $3}')" = "$SERVING_SCRIPT_BLOB_SHA"
+          test "$(git -C fantadesk-private ls-tree HEAD data/nexus/research-v2/serving/nexus-v2-goals-serving-policy-gate-2026-27-v1.json | awk '{print $3}')" = "$GOALS_POLICY_BLOB_SHA"
+          test -f fantadesk-private/scripts/nexus-v2-serving-core.py
+          test -f fantadesk-private/scripts/nexus-v2-live-player-sanity-report-2026-27.py
+          test -f runner-public/scripts/nexus-v2-acquire-understat-2025-all-leagues-ajax.mjs
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install pinned jsdom in isolated temp prefix
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nexus-node
+          cd /tmp/nexus-node
+          npm init -y >/dev/null 2>&1
+          npm install --ignore-scripts --no-audit --no-fund jsdom@30.0.1
+          mkdir -p "$GITHUB_WORKSPACE/fantadesk-private/node_modules"
+          ln -s /tmp/nexus-node/node_modules/jsdom "$GITHUB_WORKSPACE/fantadesk-private/node_modules/jsdom"
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+
+      - name: Install pinned frozen Python environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --no-cache-dir \
+            numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 \
+            joblib==1.5.3 threadpoolctl==3.6.0 orjson==3.11.9 \
+            xgboost==3.1.3 lightgbm==4.6.0 catboost==1.2.8
+
+      - name: Materialize exact frozen historical inputs
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+
+      - name: Rebuild exact historical Minutes and Event surfaces
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp fantadesk-private/scripts/nexus-v2-minutes-surface-one.py /mnt/data/minutes_surface_one.py
+          for season in 2021-22 2022-23 2023-24 2024-25 2025-26; do
+            python fantadesk-private/scripts/nexus-v2-precompute-usage-cache.py "$season"
+          done
+          python fantadesk-private/scripts/nexus-v2-build-minutes-surface-cached.py
+          echo "$EXPECTED_MINUTES_SURFACE_SHA256  /mnt/data/nexus_v2_minutes_roster_surface.csv" | sha256sum --check --strict
+          python fantadesk-private/scripts/nexus-v2-build-event-roster-surface.py
+          echo "$EXPECTED_EVENT_SURFACE_SHA256  /mnt/data/nexus_v2_event_roster_surface.csv" | sha256sum --check --strict
+
+      - name: Acquire current official Listone 2026-27
+        working-directory: fantadesk-private
+        env:
+          NEXUS_LIVE_LISTONE_OUTPUT_ROOT: /mnt/data/current-listone-capture
+        run: node scripts/nexus-acquire-current-listone-2026-27.mjs
+
+      - name: Acquire foreign Understat 2025-26 via current AJAX contract
+        working-directory: runner-public
+        env:
+          NEXUS_V2_UNDERSTAT_2025_OUTPUT_ROOT: /mnt/data/understat-2025-capture
+        run: node scripts/nexus-v2-acquire-understat-2025-all-leagues-ajax.mjs
+
+      - name: Rebuild exact audited live feature surface
+        shell: bash
+        env:
+          NEXUS_V2_CURRENT_LISTONE: /mnt/data/current-listone-capture/current-listone.json
+          NEXUS_V2_UNDERSTAT_2025_FOREIGN: /mnt/data/understat-2025-capture/understat-foreign-2025.json
+          NEXUS_V2_LIVE_FEATURE_OUT: /mnt/data/nexus_v2_live_feature_surface_2026_27.csv
+          NEXUS_V2_LIVE_FEATURE_AUDIT: /mnt/data/nexus_v2_live_feature_surface_2026_27_audit.json
+        run: |
+          set -euo pipefail
+          python fantadesk-private/scripts/nexus-v2-build-live-feature-surface-2026-27.py
+          echo "$EXPECTED_LIVE_SURFACE_SHA256  /mnt/data/nexus_v2_live_feature_surface_2026_27.csv" | sha256sum --check --strict
+
+      - name: Run frozen live serving with anchor GOALS rate
+        shell: bash
+        env:
+          NEXUS_V2_LIVE_FEATURE_SURFACE: /mnt/data/nexus_v2_live_feature_surface_2026_27.csv
+          NEXUS_V2_LIVE_FEATURE_AUDIT: /mnt/data/nexus_v2_live_feature_surface_2026_27_audit.json
+          NEXUS_V2_EXPECTED_LIVE_SURFACE_SHA256: ${{ env.EXPECTED_LIVE_SURFACE_SHA256 }}
+          NEXUS_V2_LIVE_PREDICTIONS_OUT: /mnt/data/nexus_v2_live_predictions_2026_27.csv
+          NEXUS_V2_LIVE_SERVING_AUDIT: /mnt/data/nexus_v2_live_serving_2026_27_audit.json
+        run: python fantadesk-private/scripts/nexus-v2-serving-live-2026-27.py
+
+      - name: Build player-level sanity report in ephemeral workspace
+        shell: bash
+        env:
+          NEXUS_V2_LIVE_FEATURE_SURFACE: /mnt/data/nexus_v2_live_feature_surface_2026_27.csv
+          NEXUS_V2_LIVE_PREDICTIONS_OUT: /mnt/data/nexus_v2_live_predictions_2026_27.csv
+          NEXUS_V2_PLAYER_SANITY_REPORT: /mnt/data/nexus_v2_live_player_sanity_anchor_goals_2026_27.json
+          NEXUS_V2_EXPECTED_LIVE_SURFACE_SHA256: ${{ env.EXPECTED_LIVE_SURFACE_SHA256 }}
+        run: python fantadesk-private/scripts/nexus-v2-live-player-sanity-report-2026-27.py
+
+      - name: Validate anchor GOALS live serving invariants
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p sanitized-output encrypted-review
+          cp /mnt/data/nexus_v2_live_serving_2026_27_audit.json sanitized-output/audit.json
+          python - <<'PY'
+          import json
+          p=json.load(open('sanitized-output/audit.json'))
+          r=json.load(open('/mnt/data/nexus_v2_live_player_sanity_anchor_goals_2026_27.json'))
+          assert p['schema']=='NEXUS_V2_LIVE_SERVING_2026_27_AUDIT_V2'
+          assert p['status']=='PASS' and p['roster_rows']==519
+          assert p['prospective_target_labels_used'] is False
+          assert p['retuning'] is False and p['selection_change'] is False
+          assert p['serving_policy_change'] is True
+          assert p['refit_policy']['GOALS_RATE']=='ANCHOR_2025_CONFIRMATION'
+          assert p['refit_policy']['GOALS_OPPORTUNITY']=='ROLLING_PRE_TARGET_2026_EXPECTED_MINUTES'
+          assert p['goals_policy_gate']['actions_run_id']==32144863686
+          assert p['sanity']['GOALS']['max'] <= 20.0
+          assert p['sanity']['GOALS']['p99'] <= 12.0
+          assert p['sanity']['GOALS_PER90_COMPONENT']['max'] <= 1.0
+          assert p['sanity']['GOALS_PER90_COMPONENT']['p99'] <= 0.75
+          assert p['no_player_rows_in_audit'] is True
+          assert r['schema']=='NEXUS_V2_LIVE_PLAYER_SANITY_REPORT_2026_27_V2'
+          assert r['status']=='REVIEW_REQUIRED_NO_MODEL_CHANGE' and r['roster_rows']==519
+          assert r['retuning'] is False and r['selection_change'] is False
+          assert r['predictions_sha256']==p['predictions_sha256']
+          print('ANCHOR_GOALS_LIVE_SANITY=PASS',p['predictions_sha256'],p['sanity']['GOALS'],p['sanity']['GOALS_PER90_COMPONENT'])
+          PY
+
+      - name: Encrypt player-level review before artifact upload
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/nexus-goals-review-cert.pem <<'CERT'
+          -----BEGIN CERTIFICATE-----
+          MIIEGzCCAoOgAwIBAgIUTBUWu6udEJp2t3TVk2jwgnpEGJAwDQYJKoZIhvcNAQEL
+          BQAwHTEbMBkGA1UEAwwSTmV4dXNWMkdvYWxzUmV2aWV3MB4XDTI2MDgxODEzNTYy
+          M1oXDTI2MDgxOTEzNTYyM1owHTEbMBkGA1UEAwwSTmV4dXNWMkdvYWxzUmV2aWV3
+          MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA2dN5PToO9IVARyZWPfpk
+          U0QEfnNyVzLXGWu8iNinXHTtzKk7ZwpXeSQG6DuFeAm3uAOQwtaneWxWVE8+luX4
+          9ztmcOMKkRQnMGESG+OTBbwq8D6xY3sHWexaq97FSD5qWffR4ptdWzkN1FDyWtGZ
+          aTWBXDGNWAwewi2PbFUfNbT/uTUmRIW1nV2dXauGCCH2XO5GL4zUsP4Tj6eF9ewk
+          +qwtmBCnYm0VZ8qRMS3BAy0mQnI5sNT5kNJ+aLTgQ9J3w+S+P6EY1cBa0lxzuYUN
+          YJNkC3Q52PQGNdCkae8YVqihIXJGmVvVinhpU9ds2CuW7Ex3hCVZquS9nHhm8dx9
+          M1wP8BcH9Mz2ZyqPatN5nbDNhEk9F3t1UE799Ay+HpoXZJfcWLHi8FvfmA8jfy/9
+          r43SHBrjN+ba3eQqkUurvcpO0YnD54NW0hgCuq61rU0ds+35NymzkfJmQj1KO9Jr
+          1zuW00mNfTAQKyOaMk3WHmRaBPwdwUViUGj/2eX630kvAgMBAAGjUzBRMB0GA1Ud
+          DgQWBBRo4FOvfFQ/jbh20YxWcqg4+xYxnDAfBgNVHSMEGDAWgBRo4FOvfFQ/jbh2
+          0YxWcqg4+xYxnDAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBgQAv
+          /zNe5yC9iQ2aNKCrDswASda6ousKHNyXfj3QfRXxB94eQSPo7eaLpwzqy8Mo6T0B
+          wMmsb1/tFG6Pg/7lcAO2wLp+CQK2aorZmHZY9dHwUPTen3btGm1NPqbFdYfzzVrE
+          b9yYGzcblS+jAWFvfo6Fqpf1m2v2NMrp25+OMhzb9i1pE7DR0bDZ9j1YtwL8KXEo
+          BIYWuEUUnLTn3o0uMIFjtPGk85hRkdqBGPdn7bAivyEhIaeOX52gykwaWv4TYGSR
+          X2yt7y47Vi7lwZx4WVhj4+BVTnaCmJ1uWhNnha8shwkz2FBhf3aKaXDTjaeKoppd
+          okPh9ltOsDzWbK3nZQc0sxzCD7pnFlLcbl9jjWUPTIf2ekLDTX/8d3X+j8NJmRYa
+          FwiII+5yBR41e9Dg2MPLe9lFKLyd3UJVvYJKXtMX6MK3vDSSAUdgUjNnkN7qI97R
+          B2miQO9d9DenyXnDOljADr1T6v23OtsyQTE3f251xCT3Y62/QAown5DJg/IN9Oc=
+          -----END CERTIFICATE-----
+          CERT
+          openssl cms -encrypt -binary -aes256 \
+            -in /mnt/data/nexus_v2_live_player_sanity_anchor_goals_2026_27.json \
+            -outform DER -out encrypted-review/player-sanity.p7m \
+            /tmp/nexus-goals-review-cert.pem
+          rm -f /mnt/data/nexus_v2_live_player_sanity_anchor_goals_2026_27.json
+          test -s encrypted-review/player-sanity.p7m
+
+      - name: Upload sanitized live serving audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-live-serving-anchor-goals-2026-27-audit
+          path: sanitized-output/audit.json
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload encrypted player review only
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-live-player-sanity-anchor-goals-2026-27-encrypted
+          path: encrypted-review/player-sanity.p7m
+          if-no-files-found: error
+          retention-days: 1
