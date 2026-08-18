@@ -11,6 +11,10 @@ permissions:
   actions: write
   contents: write
 
+concurrency:
+  group: nexus-v2-smoke-dispatch-once
+  cancel-in-progress: false
+
 jobs:
   dispatch-once:
     if: github.event.head_commit.message == 'ci: one-shot dispatch Nexus v2 smoke'
@@ -25,6 +29,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
+          if test -f nexus-v2-smoke-dispatch.json; then
+            echo "dispatch_marker_already_present=STOP"
+            exit 0
+          fi
           RESPONSE=$(curl --fail --silent --show-error --location \
             -X POST \
             -H "Authorization: Bearer ${GH_TOKEN}" \
