@@ -1,0 +1,4969 @@
+{
+  "schema": "NEXUS_FOTMOB_PUBLIC_NEXTDATA_CAREER_PROBE_V3_SUMMARY",
+  "players": [
+    {
+      "name": "Matija Frigan",
+      "id": 1190371,
+      "status": 200,
+      "next_data_present": true,
+      "next_hit_count": 121,
+      "career_hits": [
+        {
+          "path": "$.props.pageProps.data",
+          "interesting_keys": [
+            "careerHistory",
+            "firstSeasonStats",
+            "statSeasons"
+          ],
+          "object_keys": [
+            "id",
+            "name",
+            "birthDate",
+            "contractEnd",
+            "isCoach",
+            "isCaptain",
+            "gender",
+            "primaryTeam",
+            "positionDescription",
+            "injuryInformation",
+            "internationalDuty",
+            "playerInformation",
+            "mainLeague",
+            "trophies",
+            "recentMatches",
+            "careerHistory",
+            "traits",
+            "meta",
+            "coachStats",
+            "statSeasons",
+            "firstSeasonStats",
+            "status",
+            "marketValues",
+            "relatedLinksData",
+            "nextMatch",
+            "dataProvider",
+            "ssr"
+          ],
+          "target_values": {
+            "statSeasons": {
+              "type": "list",
+              "len": 7,
+              "sample": [
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2026/2027",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 1,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2025/2026",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 2,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2024/2025",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 1,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2023/2024",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 2,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2022/2023",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 1,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2021/2022",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 1,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2020/2021",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 1,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "firstSeasonStats": {
+              "type": "dict",
+              "keys": [
+                "sectionOrder",
+                "shotmap",
+                "topStatCard",
+                "heatmap",
+                "keeperShotmap"
+              ],
+              "data": {
+                "sectionOrder": {
+                  "type": "list",
+                  "len": 3,
+                  "sample": [
+                    "top-stat-card",
+                    "shotmap",
+                    "stats-section"
+                  ]
+                },
+                "shotmap": {
+                  "type": "list",
+                  "len": 1,
+                  "sample": [
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    }
+                  ]
+                },
+                "topStatCard": {
+                  "type": "dict",
+                  "keys": [
+                    "display",
+                    "id",
+                    "items",
+                    "type"
+                  ],
+                  "data": {}
+                },
+                "heatmap": {
+                  "type": "dict",
+                  "keys": [
+                    "coordinates"
+                  ],
+                  "data": {}
+                },
+                "keeperShotmap": null
+              }
+            },
+            "careerHistory": {
+              "type": "dict",
+              "keys": [
+                "showFootnote",
+                "careerItems",
+                "fullCareer"
+              ],
+              "data": {
+                "showFootnote": false,
+                "careerItems": {
+                  "type": "dict",
+                  "keys": [
+                    "senior",
+                    "national team"
+                  ],
+                  "data": {}
+                },
+                "fullCareer": true
+              }
+            }
+          }
+        },
+        {
+          "path": "$.props.pageProps.fallback.player:1190371",
+          "interesting_keys": [
+            "careerHistory",
+            "firstSeasonStats",
+            "statSeasons"
+          ],
+          "object_keys": [
+            "id",
+            "name",
+            "birthDate",
+            "contractEnd",
+            "isCoach",
+            "isCaptain",
+            "gender",
+            "primaryTeam",
+            "positionDescription",
+            "injuryInformation",
+            "internationalDuty",
+            "playerInformation",
+            "mainLeague",
+            "trophies",
+            "recentMatches",
+            "careerHistory",
+            "traits",
+            "meta",
+            "coachStats",
+            "statSeasons",
+            "firstSeasonStats",
+            "status",
+            "marketValues",
+            "relatedLinksData",
+            "nextMatch",
+            "dataProvider",
+            "ssr"
+          ],
+          "target_values": {
+            "statSeasons": {
+              "type": "list",
+              "len": 7,
+              "sample": [
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2026/2027",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 1,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2025/2026",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 2,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2024/2025",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 1,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2023/2024",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 2,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2022/2023",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 1,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2021/2022",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 1,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2020/2021",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 1,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "firstSeasonStats": {
+              "type": "dict",
+              "keys": [
+                "sectionOrder",
+                "shotmap",
+                "topStatCard",
+                "heatmap",
+                "keeperShotmap"
+              ],
+              "data": {
+                "sectionOrder": {
+                  "type": "list",
+                  "len": 3,
+                  "sample": [
+                    "top-stat-card",
+                    "shotmap",
+                    "stats-section"
+                  ]
+                },
+                "shotmap": {
+                  "type": "list",
+                  "len": 1,
+                  "sample": [
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    }
+                  ]
+                },
+                "topStatCard": {
+                  "type": "dict",
+                  "keys": [
+                    "display",
+                    "id",
+                    "items",
+                    "type"
+                  ],
+                  "data": {}
+                },
+                "heatmap": {
+                  "type": "dict",
+                  "keys": [
+                    "coordinates"
+                  ],
+                  "data": {}
+                },
+                "keeperShotmap": null
+              }
+            },
+            "careerHistory": {
+              "type": "dict",
+              "keys": [
+                "showFootnote",
+                "careerItems",
+                "fullCareer"
+              ],
+              "data": {
+                "showFootnote": false,
+                "careerItems": {
+                  "type": "dict",
+                  "keys": [
+                    "senior",
+                    "national team"
+                  ],
+                  "data": {}
+                },
+                "fullCareer": true
+              }
+            }
+          }
+        },
+        {
+          "path": "$.props.pageProps.translations",
+          "interesting_keys": [
+            "career",
+            "goals",
+            "matches",
+            "seasons",
+            "tournaments"
+          ],
+          "object_keys": [
+            "footnote_goals_and_appearances",
+            "senior_career",
+            "youth_career",
+            "national_team",
+            "transfer_type_free_transfer",
+            "transfer_type_free_agent",
+            "transfer_type_back_from_loan",
+            "transfer_type_player_swap",
+            "transfer_type_trial",
+            "role_referee",
+            "role_staff",
+            "role_asst_coach",
+            "by_team",
+            "accurate_forward_zone_pass",
+            "accurate_back_zone_pass",
+            "error_led_to_shot",
+            "support",
+            "restart",
+            "team_play",
+            "defense",
+            "attack",
+            "cards",
+            "penalties_won",
+            "calendar",
+            "injured_and_suspended_players",
+            "info",
+            "player_substitution",
+            "player_sub_in_short",
+            "player_sub_out_short",
+            "categories",
+            "following",
+            "touches",
+            "albania",
+            "austria",
+            "azerbaijan",
+            "belarus",
+            "belgium",
+            "bosnia",
+            "bulgaria",
+            "croatia",
+            "cyprus",
+            "czech",
+            "estonia",
+            "finland",
+            "france",
+            "greece",
+            "hungary",
+            "iceland",
+            "ireland",
+            "israel",
+            "italy",
+            "kazakhstan",
+            "latvia",
+            "lithuania",
+            "macedonia",
+            "netherlands",
+            "poland",
+            "portugal",
+            "romania",
+            "russia",
+            "serbia",
+            "slovakia",
+            "switzerland",
+            "south_africa",
+            "turkey",
+            "ukraine",
+            "india",
+            "brazil",
+            "australia",
+            "winner",
+            "runner_up",
+            "goals_freekick",
+            "goals_inside_box",
+            "goals_outside_box",
+            "goals_headedGoals",
+            "goals_leftFootedGoals",
+            "goals_rightFootedGoals",
+            "big_chance_missed_title",
+            "big_chance_missed_subtitle",
+            "big_chance_created_team_title",
+            "big_chance_created_team_subtitle",
+            "big_chance_created_subtitle",
+            "big_chance_missed_team_title",
+            "big_chance_missed_team_subtitle",
+            "rating_team_title",
+            "rating_team_subtitle",
+            "trophies",
+            "night_mode",
+            "on",
+            "off",
+            "automatic",
+            "sort_by_time",
+            "sorted_by_time",
+            "media",
+            "suspended",
+            "injured",
+            "injury_1",
+            "injury_2",
+            "injury_5",
+            "injury_6",
+            "injury_7",
+            "injury_8",
+            "injury_9",
+            "injury_10",
+            "injury_11",
+            "injury_12",
+            "injury_13",
+            "injury_14",
+            "injury_15",
+            "injury_16",
+            "injury_17",
+            "injury_20",
+            "injury_21",
+            "injury_22",
+            "injury_23",
+            "injury_25",
+            "injury_29",
+            "injury_30",
+            "injury_31",
+            "injury_32",
+            "injury_33",
+            "injury_34",
+            "injury_35",
+            "injury_36",
+            "injury_37",
+            "injury_38",
+            "injury_39",
+            "injury_40",
+            "injury_41",
+            "injury_42",
+            "injury_43",
+            "injury_44",
+            "injury_45",
+            "injury_47",
+            "injury_51",
+            "injury_52",
+            "injury_53",
+            "injury_61",
+            "injury_69",
+            "injury_70",
+            "injury_71",
+            "injury_73",
+            "injury_74",
+            "injury_75",
+            "injury_76",
+            "injury_77",
+            "injury_78",
+            "injury_79",
+            "injury_80",
+            "injury_81",
+            "injury_82",
+            "injury_83",
+            "injury_84",
+            "injury_85",
+            "injury_86",
+            "injury_87",
+            "injury_89",
+            "injury_90",
+            "injury_91",
+            "injury_92"
+          ],
+          "target_values": {
+            "seasons": "Seasons",
+            "tournaments": "Tables & news",
+            "goals": "Goals",
+            "matches": "matches"
+          }
+        },
+        {
+          "path": "$.props.translations",
+          "interesting_keys": [
+            "career",
+            "goals",
+            "matches",
+            "seasons",
+            "tournaments"
+          ],
+          "object_keys": [
+            "footnote_goals_and_appearances",
+            "senior_career",
+            "youth_career",
+            "national_team",
+            "transfer_type_free_transfer",
+            "transfer_type_free_agent",
+            "transfer_type_back_from_loan",
+            "transfer_type_player_swap",
+            "transfer_type_trial",
+            "role_referee",
+            "role_staff",
+            "role_asst_coach",
+            "by_team",
+            "accurate_forward_zone_pass",
+            "accurate_back_zone_pass",
+            "error_led_to_shot",
+            "support",
+            "restart",
+            "team_play",
+            "defense",
+            "attack",
+            "cards",
+            "penalties_won",
+            "calendar",
+            "injured_and_suspended_players",
+            "info",
+            "player_substitution",
+            "player_sub_in_short",
+            "player_sub_out_short",
+            "categories",
+            "following",
+            "touches",
+            "albania",
+            "austria",
+            "azerbaijan",
+            "belarus",
+            "belgium",
+            "bosnia",
+            "bulgaria",
+            "croatia",
+            "cyprus",
+            "czech",
+            "estonia",
+            "finland",
+            "france",
+            "greece",
+            "hungary",
+            "iceland",
+            "ireland",
+            "israel",
+            "italy",
+            "kazakhstan",
+            "latvia",
+            "lithuania",
+            "macedonia",
+            "netherlands",
+            "poland",
+            "portugal",
+            "romania",
+            "russia",
+            "serbia",
+            "slovakia",
+            "switzerland",
+            "south_africa",
+            "turkey",
+            "ukraine",
+            "india",
+            "brazil",
+            "australia",
+            "winner",
+            "runner_up",
+            "goals_freekick",
+            "goals_inside_box",
+            "goals_outside_box",
+            "goals_headedGoals",
+            "goals_leftFootedGoals",
+            "goals_rightFootedGoals",
+            "big_chance_missed_title",
+            "big_chance_missed_subtitle",
+            "big_chance_created_team_title",
+            "big_chance_created_team_subtitle",
+            "big_chance_created_subtitle",
+            "big_chance_missed_team_title",
+            "big_chance_missed_team_subtitle",
+            "rating_team_title",
+            "rating_team_subtitle",
+            "trophies",
+            "night_mode",
+            "on",
+            "off",
+            "automatic",
+            "sort_by_time",
+            "sorted_by_time",
+            "media",
+            "suspended",
+            "injured",
+            "injury_1",
+            "injury_2",
+            "injury_5",
+            "injury_6",
+            "injury_7",
+            "injury_8",
+            "injury_9",
+            "injury_10",
+            "injury_11",
+            "injury_12",
+            "injury_13",
+            "injury_14",
+            "injury_15",
+            "injury_16",
+            "injury_17",
+            "injury_20",
+            "injury_21",
+            "injury_22",
+            "injury_23",
+            "injury_25",
+            "injury_29",
+            "injury_30",
+            "injury_31",
+            "injury_32",
+            "injury_33",
+            "injury_34",
+            "injury_35",
+            "injury_36",
+            "injury_37",
+            "injury_38",
+            "injury_39",
+            "injury_40",
+            "injury_41",
+            "injury_42",
+            "injury_43",
+            "injury_44",
+            "injury_45",
+            "injury_47",
+            "injury_51",
+            "injury_52",
+            "injury_53",
+            "injury_61",
+            "injury_69",
+            "injury_70",
+            "injury_71",
+            "injury_73",
+            "injury_74",
+            "injury_75",
+            "injury_76",
+            "injury_77",
+            "injury_78",
+            "injury_79",
+            "injury_80",
+            "injury_81",
+            "injury_82",
+            "injury_83",
+            "injury_84",
+            "injury_85",
+            "injury_86",
+            "injury_87",
+            "injury_89",
+            "injury_90",
+            "injury_91",
+            "injury_92"
+          ],
+          "target_values": {
+            "seasons": "Seasons",
+            "tournaments": "Tables & news",
+            "goals": "Goals",
+            "matches": "matches"
+          }
+        }
+      ],
+      "flight_payload_count": 0
+    },
+    {
+      "name": "Andrea Adorante",
+      "id": 1024432,
+      "status": 200,
+      "next_data_present": true,
+      "next_hit_count": 161,
+      "career_hits": [
+        {
+          "path": "$.props.pageProps.data",
+          "interesting_keys": [
+            "careerHistory",
+            "firstSeasonStats",
+            "statSeasons"
+          ],
+          "object_keys": [
+            "id",
+            "name",
+            "birthDate",
+            "contractEnd",
+            "isCoach",
+            "isCaptain",
+            "gender",
+            "primaryTeam",
+            "positionDescription",
+            "injuryInformation",
+            "internationalDuty",
+            "playerInformation",
+            "mainLeague",
+            "trophies",
+            "recentMatches",
+            "careerHistory",
+            "traits",
+            "meta",
+            "coachStats",
+            "statSeasons",
+            "firstSeasonStats",
+            "status",
+            "marketValues",
+            "relatedLinksData",
+            "nextMatch",
+            "dataProvider",
+            "ssr"
+          ],
+          "target_values": {
+            "statSeasons": {
+              "type": "list",
+              "len": 3,
+              "sample": [
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2025/2026",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 2,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2024/2025",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 1,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2020/2021",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 2,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "firstSeasonStats": {
+              "type": "dict",
+              "keys": [
+                "sectionOrder",
+                "shotmap",
+                "statsSection",
+                "topStatCard",
+                "heatmap",
+                "keeperShotmap"
+              ],
+              "data": {
+                "sectionOrder": {
+                  "type": "list",
+                  "len": 3,
+                  "sample": [
+                    "top-stat-card",
+                    "shotmap",
+                    "stats-section"
+                  ]
+                },
+                "shotmap": {
+                  "type": "list",
+                  "len": 72,
+                  "sample": [
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    }
+                  ]
+                },
+                "statsSection": {
+                  "type": "dict",
+                  "keys": [
+                    "id",
+                    "items",
+                    "localizedTitleId",
+                    "title",
+                    "type"
+                  ],
+                  "data": {}
+                },
+                "topStatCard": {
+                  "type": "dict",
+                  "keys": [
+                    "display",
+                    "id",
+                    "items",
+                    "type"
+                  ],
+                  "data": {}
+                },
+                "heatmap": {
+                  "type": "dict",
+                  "keys": [
+                    "coordinates"
+                  ],
+                  "data": {}
+                },
+                "keeperShotmap": null
+              }
+            },
+            "careerHistory": {
+              "type": "dict",
+              "keys": [
+                "showFootnote",
+                "careerItems",
+                "fullCareer"
+              ],
+              "data": {
+                "showFootnote": false,
+                "careerItems": {
+                  "type": "dict",
+                  "keys": [
+                    "senior",
+                    "youth"
+                  ],
+                  "data": {}
+                },
+                "fullCareer": true
+              }
+            }
+          }
+        },
+        {
+          "path": "$.props.pageProps.fallback.player:1024432",
+          "interesting_keys": [
+            "careerHistory",
+            "firstSeasonStats",
+            "statSeasons"
+          ],
+          "object_keys": [
+            "id",
+            "name",
+            "birthDate",
+            "contractEnd",
+            "isCoach",
+            "isCaptain",
+            "gender",
+            "primaryTeam",
+            "positionDescription",
+            "injuryInformation",
+            "internationalDuty",
+            "playerInformation",
+            "mainLeague",
+            "trophies",
+            "recentMatches",
+            "careerHistory",
+            "traits",
+            "meta",
+            "coachStats",
+            "statSeasons",
+            "firstSeasonStats",
+            "status",
+            "marketValues",
+            "relatedLinksData",
+            "nextMatch",
+            "dataProvider",
+            "ssr"
+          ],
+          "target_values": {
+            "statSeasons": {
+              "type": "list",
+              "len": 3,
+              "sample": [
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2025/2026",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 2,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2024/2025",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 1,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2020/2021",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 2,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "firstSeasonStats": {
+              "type": "dict",
+              "keys": [
+                "sectionOrder",
+                "shotmap",
+                "statsSection",
+                "topStatCard",
+                "heatmap",
+                "keeperShotmap"
+              ],
+              "data": {
+                "sectionOrder": {
+                  "type": "list",
+                  "len": 3,
+                  "sample": [
+                    "top-stat-card",
+                    "shotmap",
+                    "stats-section"
+                  ]
+                },
+                "shotmap": {
+                  "type": "list",
+                  "len": 72,
+                  "sample": [
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    }
+                  ]
+                },
+                "statsSection": {
+                  "type": "dict",
+                  "keys": [
+                    "id",
+                    "items",
+                    "localizedTitleId",
+                    "title",
+                    "type"
+                  ],
+                  "data": {}
+                },
+                "topStatCard": {
+                  "type": "dict",
+                  "keys": [
+                    "display",
+                    "id",
+                    "items",
+                    "type"
+                  ],
+                  "data": {}
+                },
+                "heatmap": {
+                  "type": "dict",
+                  "keys": [
+                    "coordinates"
+                  ],
+                  "data": {}
+                },
+                "keeperShotmap": null
+              }
+            },
+            "careerHistory": {
+              "type": "dict",
+              "keys": [
+                "showFootnote",
+                "careerItems",
+                "fullCareer"
+              ],
+              "data": {
+                "showFootnote": false,
+                "careerItems": {
+                  "type": "dict",
+                  "keys": [
+                    "senior",
+                    "youth"
+                  ],
+                  "data": {}
+                },
+                "fullCareer": true
+              }
+            }
+          }
+        },
+        {
+          "path": "$.props.pageProps.translations",
+          "interesting_keys": [
+            "career",
+            "goals",
+            "matches",
+            "seasons",
+            "tournaments"
+          ],
+          "object_keys": [
+            "footnote_goals_and_appearances",
+            "senior_career",
+            "youth_career",
+            "national_team",
+            "transfer_type_free_transfer",
+            "transfer_type_free_agent",
+            "transfer_type_back_from_loan",
+            "transfer_type_player_swap",
+            "transfer_type_trial",
+            "role_referee",
+            "role_staff",
+            "role_asst_coach",
+            "by_team",
+            "accurate_forward_zone_pass",
+            "accurate_back_zone_pass",
+            "error_led_to_shot",
+            "support",
+            "restart",
+            "team_play",
+            "defense",
+            "attack",
+            "cards",
+            "penalties_won",
+            "calendar",
+            "injured_and_suspended_players",
+            "info",
+            "player_substitution",
+            "player_sub_in_short",
+            "player_sub_out_short",
+            "categories",
+            "following",
+            "touches",
+            "albania",
+            "austria",
+            "azerbaijan",
+            "belarus",
+            "belgium",
+            "bosnia",
+            "bulgaria",
+            "croatia",
+            "cyprus",
+            "czech",
+            "estonia",
+            "finland",
+            "france",
+            "greece",
+            "hungary",
+            "iceland",
+            "ireland",
+            "israel",
+            "italy",
+            "kazakhstan",
+            "latvia",
+            "lithuania",
+            "macedonia",
+            "netherlands",
+            "poland",
+            "portugal",
+            "romania",
+            "russia",
+            "serbia",
+            "slovakia",
+            "switzerland",
+            "south_africa",
+            "turkey",
+            "ukraine",
+            "india",
+            "brazil",
+            "australia",
+            "winner",
+            "runner_up",
+            "goals_freekick",
+            "goals_inside_box",
+            "goals_outside_box",
+            "goals_headedGoals",
+            "goals_leftFootedGoals",
+            "goals_rightFootedGoals",
+            "big_chance_missed_title",
+            "big_chance_missed_subtitle",
+            "big_chance_created_team_title",
+            "big_chance_created_team_subtitle",
+            "big_chance_created_subtitle",
+            "big_chance_missed_team_title",
+            "big_chance_missed_team_subtitle",
+            "rating_team_title",
+            "rating_team_subtitle",
+            "trophies",
+            "night_mode",
+            "on",
+            "off",
+            "automatic",
+            "sort_by_time",
+            "sorted_by_time",
+            "media",
+            "suspended",
+            "injured",
+            "injury_1",
+            "injury_2",
+            "injury_5",
+            "injury_6",
+            "injury_7",
+            "injury_8",
+            "injury_9",
+            "injury_10",
+            "injury_11",
+            "injury_12",
+            "injury_13",
+            "injury_14",
+            "injury_15",
+            "injury_16",
+            "injury_17",
+            "injury_20",
+            "injury_21",
+            "injury_22",
+            "injury_23",
+            "injury_25",
+            "injury_29",
+            "injury_30",
+            "injury_31",
+            "injury_32",
+            "injury_33",
+            "injury_34",
+            "injury_35",
+            "injury_36",
+            "injury_37",
+            "injury_38",
+            "injury_39",
+            "injury_40",
+            "injury_41",
+            "injury_42",
+            "injury_43",
+            "injury_44",
+            "injury_45",
+            "injury_47",
+            "injury_51",
+            "injury_52",
+            "injury_53",
+            "injury_61",
+            "injury_69",
+            "injury_70",
+            "injury_71",
+            "injury_73",
+            "injury_74",
+            "injury_75",
+            "injury_76",
+            "injury_77",
+            "injury_78",
+            "injury_79",
+            "injury_80",
+            "injury_81",
+            "injury_82",
+            "injury_83",
+            "injury_84",
+            "injury_85",
+            "injury_86",
+            "injury_87",
+            "injury_89",
+            "injury_90",
+            "injury_91",
+            "injury_92"
+          ],
+          "target_values": {
+            "seasons": "Seasons",
+            "tournaments": "Tables & news",
+            "goals": "Goals",
+            "matches": "matches"
+          }
+        },
+        {
+          "path": "$.props.translations",
+          "interesting_keys": [
+            "career",
+            "goals",
+            "matches",
+            "seasons",
+            "tournaments"
+          ],
+          "object_keys": [
+            "footnote_goals_and_appearances",
+            "senior_career",
+            "youth_career",
+            "national_team",
+            "transfer_type_free_transfer",
+            "transfer_type_free_agent",
+            "transfer_type_back_from_loan",
+            "transfer_type_player_swap",
+            "transfer_type_trial",
+            "role_referee",
+            "role_staff",
+            "role_asst_coach",
+            "by_team",
+            "accurate_forward_zone_pass",
+            "accurate_back_zone_pass",
+            "error_led_to_shot",
+            "support",
+            "restart",
+            "team_play",
+            "defense",
+            "attack",
+            "cards",
+            "penalties_won",
+            "calendar",
+            "injured_and_suspended_players",
+            "info",
+            "player_substitution",
+            "player_sub_in_short",
+            "player_sub_out_short",
+            "categories",
+            "following",
+            "touches",
+            "albania",
+            "austria",
+            "azerbaijan",
+            "belarus",
+            "belgium",
+            "bosnia",
+            "bulgaria",
+            "croatia",
+            "cyprus",
+            "czech",
+            "estonia",
+            "finland",
+            "france",
+            "greece",
+            "hungary",
+            "iceland",
+            "ireland",
+            "israel",
+            "italy",
+            "kazakhstan",
+            "latvia",
+            "lithuania",
+            "macedonia",
+            "netherlands",
+            "poland",
+            "portugal",
+            "romania",
+            "russia",
+            "serbia",
+            "slovakia",
+            "switzerland",
+            "south_africa",
+            "turkey",
+            "ukraine",
+            "india",
+            "brazil",
+            "australia",
+            "winner",
+            "runner_up",
+            "goals_freekick",
+            "goals_inside_box",
+            "goals_outside_box",
+            "goals_headedGoals",
+            "goals_leftFootedGoals",
+            "goals_rightFootedGoals",
+            "big_chance_missed_title",
+            "big_chance_missed_subtitle",
+            "big_chance_created_team_title",
+            "big_chance_created_team_subtitle",
+            "big_chance_created_subtitle",
+            "big_chance_missed_team_title",
+            "big_chance_missed_team_subtitle",
+            "rating_team_title",
+            "rating_team_subtitle",
+            "trophies",
+            "night_mode",
+            "on",
+            "off",
+            "automatic",
+            "sort_by_time",
+            "sorted_by_time",
+            "media",
+            "suspended",
+            "injured",
+            "injury_1",
+            "injury_2",
+            "injury_5",
+            "injury_6",
+            "injury_7",
+            "injury_8",
+            "injury_9",
+            "injury_10",
+            "injury_11",
+            "injury_12",
+            "injury_13",
+            "injury_14",
+            "injury_15",
+            "injury_16",
+            "injury_17",
+            "injury_20",
+            "injury_21",
+            "injury_22",
+            "injury_23",
+            "injury_25",
+            "injury_29",
+            "injury_30",
+            "injury_31",
+            "injury_32",
+            "injury_33",
+            "injury_34",
+            "injury_35",
+            "injury_36",
+            "injury_37",
+            "injury_38",
+            "injury_39",
+            "injury_40",
+            "injury_41",
+            "injury_42",
+            "injury_43",
+            "injury_44",
+            "injury_45",
+            "injury_47",
+            "injury_51",
+            "injury_52",
+            "injury_53",
+            "injury_61",
+            "injury_69",
+            "injury_70",
+            "injury_71",
+            "injury_73",
+            "injury_74",
+            "injury_75",
+            "injury_76",
+            "injury_77",
+            "injury_78",
+            "injury_79",
+            "injury_80",
+            "injury_81",
+            "injury_82",
+            "injury_83",
+            "injury_84",
+            "injury_85",
+            "injury_86",
+            "injury_87",
+            "injury_89",
+            "injury_90",
+            "injury_91",
+            "injury_92"
+          ],
+          "target_values": {
+            "seasons": "Seasons",
+            "tournaments": "Tables & news",
+            "goals": "Goals",
+            "matches": "matches"
+          }
+        }
+      ],
+      "flight_payload_count": 0
+    },
+    {
+      "name": "Kornel Lisman",
+      "id": 1529483,
+      "status": 200,
+      "next_data_present": true,
+      "next_hit_count": 97,
+      "career_hits": [
+        {
+          "path": "$.props.pageProps.data",
+          "interesting_keys": [
+            "careerHistory",
+            "firstSeasonStats",
+            "statSeasons"
+          ],
+          "object_keys": [
+            "id",
+            "name",
+            "birthDate",
+            "contractEnd",
+            "isCoach",
+            "isCaptain",
+            "gender",
+            "primaryTeam",
+            "positionDescription",
+            "injuryInformation",
+            "internationalDuty",
+            "playerInformation",
+            "mainLeague",
+            "trophies",
+            "recentMatches",
+            "careerHistory",
+            "traits",
+            "meta",
+            "coachStats",
+            "statSeasons",
+            "firstSeasonStats",
+            "status",
+            "marketValues",
+            "relatedLinksData",
+            "nextMatch",
+            "dataProvider",
+            "ssr"
+          ],
+          "target_values": {
+            "statSeasons": {
+              "type": "list",
+              "len": 2,
+              "sample": [
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2025/2026",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 2,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2024/2025",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 1,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "firstSeasonStats": {
+              "type": "dict",
+              "keys": [
+                "sectionOrder",
+                "shotmap",
+                "statsSection",
+                "topStatCard",
+                "keeperShotmap"
+              ],
+              "data": {
+                "sectionOrder": {
+                  "type": "list",
+                  "len": 3,
+                  "sample": [
+                    "top-stat-card",
+                    "shotmap",
+                    "stats-section"
+                  ]
+                },
+                "shotmap": {
+                  "type": "list",
+                  "len": 6,
+                  "sample": [
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "minAdded",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    }
+                  ]
+                },
+                "statsSection": {
+                  "type": "dict",
+                  "keys": [
+                    "id",
+                    "items",
+                    "localizedTitleId",
+                    "title",
+                    "type"
+                  ],
+                  "data": {}
+                },
+                "topStatCard": {
+                  "type": "dict",
+                  "keys": [
+                    "display",
+                    "id",
+                    "items",
+                    "type"
+                  ],
+                  "data": {}
+                },
+                "keeperShotmap": null
+              }
+            },
+            "careerHistory": {
+              "type": "dict",
+              "keys": [
+                "showFootnote",
+                "careerItems",
+                "fullCareer"
+              ],
+              "data": {
+                "showFootnote": false,
+                "careerItems": {
+                  "type": "dict",
+                  "keys": [
+                    "senior",
+                    "youth"
+                  ],
+                  "data": {}
+                },
+                "fullCareer": true
+              }
+            }
+          }
+        },
+        {
+          "path": "$.props.pageProps.fallback.player:1529483",
+          "interesting_keys": [
+            "careerHistory",
+            "firstSeasonStats",
+            "statSeasons"
+          ],
+          "object_keys": [
+            "id",
+            "name",
+            "birthDate",
+            "contractEnd",
+            "isCoach",
+            "isCaptain",
+            "gender",
+            "primaryTeam",
+            "positionDescription",
+            "injuryInformation",
+            "internationalDuty",
+            "playerInformation",
+            "mainLeague",
+            "trophies",
+            "recentMatches",
+            "careerHistory",
+            "traits",
+            "meta",
+            "coachStats",
+            "statSeasons",
+            "firstSeasonStats",
+            "status",
+            "marketValues",
+            "relatedLinksData",
+            "nextMatch",
+            "dataProvider",
+            "ssr"
+          ],
+          "target_values": {
+            "statSeasons": {
+              "type": "list",
+              "len": 2,
+              "sample": [
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2025/2026",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 2,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2024/2025",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 1,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "firstSeasonStats": {
+              "type": "dict",
+              "keys": [
+                "sectionOrder",
+                "shotmap",
+                "statsSection",
+                "topStatCard",
+                "keeperShotmap"
+              ],
+              "data": {
+                "sectionOrder": {
+                  "type": "list",
+                  "len": 3,
+                  "sample": [
+                    "top-stat-card",
+                    "shotmap",
+                    "stats-section"
+                  ]
+                },
+                "shotmap": {
+                  "type": "list",
+                  "len": 6,
+                  "sample": [
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "minAdded",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "type": "dict",
+                      "keys": [
+                        "id",
+                        "playerName",
+                        "eventType",
+                        "shotType",
+                        "situation",
+                        "teamId",
+                        "playerId",
+                        "x",
+                        "y",
+                        "min",
+                        "period",
+                        "isOwnGoal",
+                        "isBlocked",
+                        "isOnTarget",
+                        "isSavedOffLine",
+                        "isFromInsideBox",
+                        "blockedX",
+                        "blockedY",
+                        "goalCrossedY",
+                        "goalCrossedZ",
+                        "expectedGoals",
+                        "expectedGoalsOnTarget",
+                        "onGoalShot",
+                        "box",
+                        "homeTeamId",
+                        "awayTeamId",
+                        "homeTeamName",
+                        "awayTeamName",
+                        "homeScore",
+                        "awayScore",
+                        "matchId",
+                        "matchDate",
+                        "teamColor",
+                        "teamColorDark"
+                      ],
+                      "data": {}
+                    }
+                  ]
+                },
+                "statsSection": {
+                  "type": "dict",
+                  "keys": [
+                    "id",
+                    "items",
+                    "localizedTitleId",
+                    "title",
+                    "type"
+                  ],
+                  "data": {}
+                },
+                "topStatCard": {
+                  "type": "dict",
+                  "keys": [
+                    "display",
+                    "id",
+                    "items",
+                    "type"
+                  ],
+                  "data": {}
+                },
+                "keeperShotmap": null
+              }
+            },
+            "careerHistory": {
+              "type": "dict",
+              "keys": [
+                "showFootnote",
+                "careerItems",
+                "fullCareer"
+              ],
+              "data": {
+                "showFootnote": false,
+                "careerItems": {
+                  "type": "dict",
+                  "keys": [
+                    "senior",
+                    "youth"
+                  ],
+                  "data": {}
+                },
+                "fullCareer": true
+              }
+            }
+          }
+        },
+        {
+          "path": "$.props.pageProps.translations",
+          "interesting_keys": [
+            "career",
+            "goals",
+            "matches",
+            "seasons",
+            "tournaments"
+          ],
+          "object_keys": [
+            "footnote_goals_and_appearances",
+            "senior_career",
+            "youth_career",
+            "national_team",
+            "transfer_type_free_transfer",
+            "transfer_type_free_agent",
+            "transfer_type_back_from_loan",
+            "transfer_type_player_swap",
+            "transfer_type_trial",
+            "role_referee",
+            "role_staff",
+            "role_asst_coach",
+            "by_team",
+            "accurate_forward_zone_pass",
+            "accurate_back_zone_pass",
+            "error_led_to_shot",
+            "support",
+            "restart",
+            "team_play",
+            "defense",
+            "attack",
+            "cards",
+            "penalties_won",
+            "calendar",
+            "injured_and_suspended_players",
+            "info",
+            "player_substitution",
+            "player_sub_in_short",
+            "player_sub_out_short",
+            "categories",
+            "following",
+            "touches",
+            "albania",
+            "austria",
+            "azerbaijan",
+            "belarus",
+            "belgium",
+            "bosnia",
+            "bulgaria",
+            "croatia",
+            "cyprus",
+            "czech",
+            "estonia",
+            "finland",
+            "france",
+            "greece",
+            "hungary",
+            "iceland",
+            "ireland",
+            "israel",
+            "italy",
+            "kazakhstan",
+            "latvia",
+            "lithuania",
+            "macedonia",
+            "netherlands",
+            "poland",
+            "portugal",
+            "romania",
+            "russia",
+            "serbia",
+            "slovakia",
+            "switzerland",
+            "south_africa",
+            "turkey",
+            "ukraine",
+            "india",
+            "brazil",
+            "australia",
+            "winner",
+            "runner_up",
+            "goals_freekick",
+            "goals_inside_box",
+            "goals_outside_box",
+            "goals_headedGoals",
+            "goals_leftFootedGoals",
+            "goals_rightFootedGoals",
+            "big_chance_missed_title",
+            "big_chance_missed_subtitle",
+            "big_chance_created_team_title",
+            "big_chance_created_team_subtitle",
+            "big_chance_created_subtitle",
+            "big_chance_missed_team_title",
+            "big_chance_missed_team_subtitle",
+            "rating_team_title",
+            "rating_team_subtitle",
+            "trophies",
+            "night_mode",
+            "on",
+            "off",
+            "automatic",
+            "sort_by_time",
+            "sorted_by_time",
+            "media",
+            "suspended",
+            "injured",
+            "injury_1",
+            "injury_2",
+            "injury_5",
+            "injury_6",
+            "injury_7",
+            "injury_8",
+            "injury_9",
+            "injury_10",
+            "injury_11",
+            "injury_12",
+            "injury_13",
+            "injury_14",
+            "injury_15",
+            "injury_16",
+            "injury_17",
+            "injury_20",
+            "injury_21",
+            "injury_22",
+            "injury_23",
+            "injury_25",
+            "injury_29",
+            "injury_30",
+            "injury_31",
+            "injury_32",
+            "injury_33",
+            "injury_34",
+            "injury_35",
+            "injury_36",
+            "injury_37",
+            "injury_38",
+            "injury_39",
+            "injury_40",
+            "injury_41",
+            "injury_42",
+            "injury_43",
+            "injury_44",
+            "injury_45",
+            "injury_47",
+            "injury_51",
+            "injury_52",
+            "injury_53",
+            "injury_61",
+            "injury_69",
+            "injury_70",
+            "injury_71",
+            "injury_73",
+            "injury_74",
+            "injury_75",
+            "injury_76",
+            "injury_77",
+            "injury_78",
+            "injury_79",
+            "injury_80",
+            "injury_81",
+            "injury_82",
+            "injury_83",
+            "injury_84",
+            "injury_85",
+            "injury_86",
+            "injury_87",
+            "injury_89",
+            "injury_90",
+            "injury_91",
+            "injury_92"
+          ],
+          "target_values": {
+            "seasons": "Seasons",
+            "tournaments": "Tables & news",
+            "goals": "Goals",
+            "matches": "matches"
+          }
+        },
+        {
+          "path": "$.props.translations",
+          "interesting_keys": [
+            "career",
+            "goals",
+            "matches",
+            "seasons",
+            "tournaments"
+          ],
+          "object_keys": [
+            "footnote_goals_and_appearances",
+            "senior_career",
+            "youth_career",
+            "national_team",
+            "transfer_type_free_transfer",
+            "transfer_type_free_agent",
+            "transfer_type_back_from_loan",
+            "transfer_type_player_swap",
+            "transfer_type_trial",
+            "role_referee",
+            "role_staff",
+            "role_asst_coach",
+            "by_team",
+            "accurate_forward_zone_pass",
+            "accurate_back_zone_pass",
+            "error_led_to_shot",
+            "support",
+            "restart",
+            "team_play",
+            "defense",
+            "attack",
+            "cards",
+            "penalties_won",
+            "calendar",
+            "injured_and_suspended_players",
+            "info",
+            "player_substitution",
+            "player_sub_in_short",
+            "player_sub_out_short",
+            "categories",
+            "following",
+            "touches",
+            "albania",
+            "austria",
+            "azerbaijan",
+            "belarus",
+            "belgium",
+            "bosnia",
+            "bulgaria",
+            "croatia",
+            "cyprus",
+            "czech",
+            "estonia",
+            "finland",
+            "france",
+            "greece",
+            "hungary",
+            "iceland",
+            "ireland",
+            "israel",
+            "italy",
+            "kazakhstan",
+            "latvia",
+            "lithuania",
+            "macedonia",
+            "netherlands",
+            "poland",
+            "portugal",
+            "romania",
+            "russia",
+            "serbia",
+            "slovakia",
+            "switzerland",
+            "south_africa",
+            "turkey",
+            "ukraine",
+            "india",
+            "brazil",
+            "australia",
+            "winner",
+            "runner_up",
+            "goals_freekick",
+            "goals_inside_box",
+            "goals_outside_box",
+            "goals_headedGoals",
+            "goals_leftFootedGoals",
+            "goals_rightFootedGoals",
+            "big_chance_missed_title",
+            "big_chance_missed_subtitle",
+            "big_chance_created_team_title",
+            "big_chance_created_team_subtitle",
+            "big_chance_created_subtitle",
+            "big_chance_missed_team_title",
+            "big_chance_missed_team_subtitle",
+            "rating_team_title",
+            "rating_team_subtitle",
+            "trophies",
+            "night_mode",
+            "on",
+            "off",
+            "automatic",
+            "sort_by_time",
+            "sorted_by_time",
+            "media",
+            "suspended",
+            "injured",
+            "injury_1",
+            "injury_2",
+            "injury_5",
+            "injury_6",
+            "injury_7",
+            "injury_8",
+            "injury_9",
+            "injury_10",
+            "injury_11",
+            "injury_12",
+            "injury_13",
+            "injury_14",
+            "injury_15",
+            "injury_16",
+            "injury_17",
+            "injury_20",
+            "injury_21",
+            "injury_22",
+            "injury_23",
+            "injury_25",
+            "injury_29",
+            "injury_30",
+            "injury_31",
+            "injury_32",
+            "injury_33",
+            "injury_34",
+            "injury_35",
+            "injury_36",
+            "injury_37",
+            "injury_38",
+            "injury_39",
+            "injury_40",
+            "injury_41",
+            "injury_42",
+            "injury_43",
+            "injury_44",
+            "injury_45",
+            "injury_47",
+            "injury_51",
+            "injury_52",
+            "injury_53",
+            "injury_61",
+            "injury_69",
+            "injury_70",
+            "injury_71",
+            "injury_73",
+            "injury_74",
+            "injury_75",
+            "injury_76",
+            "injury_77",
+            "injury_78",
+            "injury_79",
+            "injury_80",
+            "injury_81",
+            "injury_82",
+            "injury_83",
+            "injury_84",
+            "injury_85",
+            "injury_86",
+            "injury_87",
+            "injury_89",
+            "injury_90",
+            "injury_91",
+            "injury_92"
+          ],
+          "target_values": {
+            "seasons": "Seasons",
+            "tournaments": "Tables & news",
+            "goals": "Goals",
+            "matches": "matches"
+          }
+        }
+      ],
+      "flight_payload_count": 0
+    },
+    {
+      "name": "Albion Rrahmani",
+      "id": 1379468,
+      "status": 200,
+      "next_data_present": true,
+      "next_hit_count": 229,
+      "career_hits": [
+        {
+          "path": "$.props.pageProps.data",
+          "interesting_keys": [
+            "careerHistory",
+            "firstSeasonStats",
+            "statSeasons"
+          ],
+          "object_keys": [
+            "id",
+            "name",
+            "birthDate",
+            "contractEnd",
+            "isCoach",
+            "isCaptain",
+            "gender",
+            "primaryTeam",
+            "positionDescription",
+            "injuryInformation",
+            "internationalDuty",
+            "playerInformation",
+            "mainLeague",
+            "trophies",
+            "recentMatches",
+            "careerHistory",
+            "traits",
+            "meta",
+            "coachStats",
+            "statSeasons",
+            "firstSeasonStats",
+            "status",
+            "marketValues",
+            "relatedLinksData",
+            "nextMatch",
+            "dataProvider",
+            "ssr"
+          ],
+          "target_values": {
+            "statSeasons": {
+              "type": "list",
+              "len": 5,
+              "sample": [
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2026/2027",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 1,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2025/2026",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 3,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2024/2025",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 5,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2023/2024",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 3,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2022/2023",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 2,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "firstSeasonStats": {
+              "type": "dict",
+              "keys": [
+                "sectionOrder",
+                "topStatCard",
+                "heatmap",
+                "shotmap",
+                "keeperShotmap"
+              ],
+              "data": {
+                "sectionOrder": {
+                  "type": "list",
+                  "len": 3,
+                  "sample": [
+                    "top-stat-card",
+                    "shotmap",
+                    "stats-section"
+                  ]
+                },
+                "topStatCard": {
+                  "type": "dict",
+                  "keys": [
+                    "display",
+                    "id",
+                    "items",
+                    "type"
+                  ],
+                  "data": {}
+                },
+                "heatmap": {
+                  "type": "dict",
+                  "keys": [
+                    "coordinates"
+                  ],
+                  "data": {}
+                },
+                "shotmap": null,
+                "keeperShotmap": null
+              }
+            },
+            "careerHistory": {
+              "type": "dict",
+              "keys": [
+                "showFootnote",
+                "careerItems",
+                "fullCareer"
+              ],
+              "data": {
+                "showFootnote": false,
+                "careerItems": {
+                  "type": "dict",
+                  "keys": [
+                    "senior",
+                    "national team"
+                  ],
+                  "data": {}
+                },
+                "fullCareer": true
+              }
+            }
+          }
+        },
+        {
+          "path": "$.props.pageProps.fallback.player:1379468",
+          "interesting_keys": [
+            "careerHistory",
+            "firstSeasonStats",
+            "statSeasons"
+          ],
+          "object_keys": [
+            "id",
+            "name",
+            "birthDate",
+            "contractEnd",
+            "isCoach",
+            "isCaptain",
+            "gender",
+            "primaryTeam",
+            "positionDescription",
+            "injuryInformation",
+            "internationalDuty",
+            "playerInformation",
+            "mainLeague",
+            "trophies",
+            "recentMatches",
+            "careerHistory",
+            "traits",
+            "meta",
+            "coachStats",
+            "statSeasons",
+            "firstSeasonStats",
+            "status",
+            "marketValues",
+            "relatedLinksData",
+            "nextMatch",
+            "dataProvider",
+            "ssr"
+          ],
+          "target_values": {
+            "statSeasons": {
+              "type": "list",
+              "len": 5,
+              "sample": [
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2026/2027",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 1,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2025/2026",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 3,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2024/2025",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 5,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2023/2024",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 3,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "dict",
+                  "keys": [
+                    "seasonName",
+                    "tournaments"
+                  ],
+                  "data": {
+                    "seasonName": "2022/2023",
+                    "tournaments": {
+                      "type": "list",
+                      "len": 2,
+                      "sample": [
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        },
+                        {
+                          "type": "dict",
+                          "keys": [
+                            "name",
+                            "tournamentId",
+                            "entryId",
+                            "hasDeepStats"
+                          ],
+                          "data": {
+                            "tournamentId": {
+                              "type": "int"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "firstSeasonStats": {
+              "type": "dict",
+              "keys": [
+                "sectionOrder",
+                "topStatCard",
+                "heatmap",
+                "shotmap",
+                "keeperShotmap"
+              ],
+              "data": {
+                "sectionOrder": {
+                  "type": "list",
+                  "len": 3,
+                  "sample": [
+                    "top-stat-card",
+                    "shotmap",
+                    "stats-section"
+                  ]
+                },
+                "topStatCard": {
+                  "type": "dict",
+                  "keys": [
+                    "display",
+                    "id",
+                    "items",
+                    "type"
+                  ],
+                  "data": {}
+                },
+                "heatmap": {
+                  "type": "dict",
+                  "keys": [
+                    "coordinates"
+                  ],
+                  "data": {}
+                },
+                "shotmap": null,
+                "keeperShotmap": null
+              }
+            },
+            "careerHistory": {
+              "type": "dict",
+              "keys": [
+                "showFootnote",
+                "careerItems",
+                "fullCareer"
+              ],
+              "data": {
+                "showFootnote": false,
+                "careerItems": {
+                  "type": "dict",
+                  "keys": [
+                    "senior",
+                    "national team"
+                  ],
+                  "data": {}
+                },
+                "fullCareer": true
+              }
+            }
+          }
+        },
+        {
+          "path": "$.props.pageProps.translations",
+          "interesting_keys": [
+            "career",
+            "goals",
+            "matches",
+            "seasons",
+            "tournaments"
+          ],
+          "object_keys": [
+            "footnote_goals_and_appearances",
+            "senior_career",
+            "youth_career",
+            "national_team",
+            "transfer_type_free_transfer",
+            "transfer_type_free_agent",
+            "transfer_type_back_from_loan",
+            "transfer_type_player_swap",
+            "transfer_type_trial",
+            "role_referee",
+            "role_staff",
+            "role_asst_coach",
+            "by_team",
+            "accurate_forward_zone_pass",
+            "accurate_back_zone_pass",
+            "error_led_to_shot",
+            "support",
+            "restart",
+            "team_play",
+            "defense",
+            "attack",
+            "cards",
+            "penalties_won",
+            "calendar",
+            "injured_and_suspended_players",
+            "info",
+            "player_substitution",
+            "player_sub_in_short",
+            "player_sub_out_short",
+            "categories",
+            "following",
+            "touches",
+            "albania",
+            "austria",
+            "azerbaijan",
+            "belarus",
+            "belgium",
+            "bosnia",
+            "bulgaria",
+            "croatia",
+            "cyprus",
+            "czech",
+            "estonia",
+            "finland",
+            "france",
+            "greece",
+            "hungary",
+            "iceland",
+            "ireland",
+            "israel",
+            "italy",
+            "kazakhstan",
+            "latvia",
+            "lithuania",
+            "macedonia",
+            "netherlands",
+            "poland",
+            "portugal",
+            "romania",
+            "russia",
+            "serbia",
+            "slovakia",
+            "switzerland",
+            "south_africa",
+            "turkey",
+            "ukraine",
+            "india",
+            "brazil",
+            "australia",
+            "winner",
+            "runner_up",
+            "goals_freekick",
+            "goals_inside_box",
+            "goals_outside_box",
+            "goals_headedGoals",
+            "goals_leftFootedGoals",
+            "goals_rightFootedGoals",
+            "big_chance_missed_title",
+            "big_chance_missed_subtitle",
+            "big_chance_created_team_title",
+            "big_chance_created_team_subtitle",
+            "big_chance_created_subtitle",
+            "big_chance_missed_team_title",
+            "big_chance_missed_team_subtitle",
+            "rating_team_title",
+            "rating_team_subtitle",
+            "trophies",
+            "night_mode",
+            "on",
+            "off",
+            "automatic",
+            "sort_by_time",
+            "sorted_by_time",
+            "media",
+            "suspended",
+            "injured",
+            "injury_1",
+            "injury_2",
+            "injury_5",
+            "injury_6",
+            "injury_7",
+            "injury_8",
+            "injury_9",
+            "injury_10",
+            "injury_11",
+            "injury_12",
+            "injury_13",
+            "injury_14",
+            "injury_15",
+            "injury_16",
+            "injury_17",
+            "injury_20",
+            "injury_21",
+            "injury_22",
+            "injury_23",
+            "injury_25",
+            "injury_29",
+            "injury_30",
+            "injury_31",
+            "injury_32",
+            "injury_33",
+            "injury_34",
+            "injury_35",
+            "injury_36",
+            "injury_37",
+            "injury_38",
+            "injury_39",
+            "injury_40",
+            "injury_41",
+            "injury_42",
+            "injury_43",
+            "injury_44",
+            "injury_45",
+            "injury_47",
+            "injury_51",
+            "injury_52",
+            "injury_53",
+            "injury_61",
+            "injury_69",
+            "injury_70",
+            "injury_71",
+            "injury_73",
+            "injury_74",
+            "injury_75",
+            "injury_76",
+            "injury_77",
+            "injury_78",
+            "injury_79",
+            "injury_80",
+            "injury_81",
+            "injury_82",
+            "injury_83",
+            "injury_84",
+            "injury_85",
+            "injury_86",
+            "injury_87",
+            "injury_89",
+            "injury_90",
+            "injury_91",
+            "injury_92"
+          ],
+          "target_values": {
+            "seasons": "Seasons",
+            "tournaments": "Tables & news",
+            "goals": "Goals",
+            "matches": "matches"
+          }
+        },
+        {
+          "path": "$.props.translations",
+          "interesting_keys": [
+            "career",
+            "goals",
+            "matches",
+            "seasons",
+            "tournaments"
+          ],
+          "object_keys": [
+            "footnote_goals_and_appearances",
+            "senior_career",
+            "youth_career",
+            "national_team",
+            "transfer_type_free_transfer",
+            "transfer_type_free_agent",
+            "transfer_type_back_from_loan",
+            "transfer_type_player_swap",
+            "transfer_type_trial",
+            "role_referee",
+            "role_staff",
+            "role_asst_coach",
+            "by_team",
+            "accurate_forward_zone_pass",
+            "accurate_back_zone_pass",
+            "error_led_to_shot",
+            "support",
+            "restart",
+            "team_play",
+            "defense",
+            "attack",
+            "cards",
+            "penalties_won",
+            "calendar",
+            "injured_and_suspended_players",
+            "info",
+            "player_substitution",
+            "player_sub_in_short",
+            "player_sub_out_short",
+            "categories",
+            "following",
+            "touches",
+            "albania",
+            "austria",
+            "azerbaijan",
+            "belarus",
+            "belgium",
+            "bosnia",
+            "bulgaria",
+            "croatia",
+            "cyprus",
+            "czech",
+            "estonia",
+            "finland",
+            "france",
+            "greece",
+            "hungary",
+            "iceland",
+            "ireland",
+            "israel",
+            "italy",
+            "kazakhstan",
+            "latvia",
+            "lithuania",
+            "macedonia",
+            "netherlands",
+            "poland",
+            "portugal",
+            "romania",
+            "russia",
+            "serbia",
+            "slovakia",
+            "switzerland",
+            "south_africa",
+            "turkey",
+            "ukraine",
+            "india",
+            "brazil",
+            "australia",
+            "winner",
+            "runner_up",
+            "goals_freekick",
+            "goals_inside_box",
+            "goals_outside_box",
+            "goals_headedGoals",
+            "goals_leftFootedGoals",
+            "goals_rightFootedGoals",
+            "big_chance_missed_title",
+            "big_chance_missed_subtitle",
+            "big_chance_created_team_title",
+            "big_chance_created_team_subtitle",
+            "big_chance_created_subtitle",
+            "big_chance_missed_team_title",
+            "big_chance_missed_team_subtitle",
+            "rating_team_title",
+            "rating_team_subtitle",
+            "trophies",
+            "night_mode",
+            "on",
+            "off",
+            "automatic",
+            "sort_by_time",
+            "sorted_by_time",
+            "media",
+            "suspended",
+            "injured",
+            "injury_1",
+            "injury_2",
+            "injury_5",
+            "injury_6",
+            "injury_7",
+            "injury_8",
+            "injury_9",
+            "injury_10",
+            "injury_11",
+            "injury_12",
+            "injury_13",
+            "injury_14",
+            "injury_15",
+            "injury_16",
+            "injury_17",
+            "injury_20",
+            "injury_21",
+            "injury_22",
+            "injury_23",
+            "injury_25",
+            "injury_29",
+            "injury_30",
+            "injury_31",
+            "injury_32",
+            "injury_33",
+            "injury_34",
+            "injury_35",
+            "injury_36",
+            "injury_37",
+            "injury_38",
+            "injury_39",
+            "injury_40",
+            "injury_41",
+            "injury_42",
+            "injury_43",
+            "injury_44",
+            "injury_45",
+            "injury_47",
+            "injury_51",
+            "injury_52",
+            "injury_53",
+            "injury_61",
+            "injury_69",
+            "injury_70",
+            "injury_71",
+            "injury_73",
+            "injury_74",
+            "injury_75",
+            "injury_76",
+            "injury_77",
+            "injury_78",
+            "injury_79",
+            "injury_80",
+            "injury_81",
+            "injury_82",
+            "injury_83",
+            "injury_84",
+            "injury_85",
+            "injury_86",
+            "injury_87",
+            "injury_89",
+            "injury_90",
+            "injury_91",
+            "injury_92"
+          ],
+          "target_values": {
+            "seasons": "Seasons",
+            "tournaments": "Tables & news",
+            "goals": "Goals",
+            "matches": "matches"
+          }
+        }
+      ],
+      "flight_payload_count": 0
+    }
+  ],
+  "governance": {
+    "only_verified_public_player_pages_requested": true,
+    "api_endpoint_guessing_used": false,
+    "authenticated_surface_accessed": false,
+    "private_routes_accessed": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
