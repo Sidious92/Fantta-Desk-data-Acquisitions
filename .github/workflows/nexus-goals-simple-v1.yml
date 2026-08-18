@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     env:
-      AUTHORITY_SHA: 95461b9d81d6bb5003313f234d9d88a1ed45e39e
+      AUTHORITY_SHA: e3d495ceb078c4e3c66f841d438cc65a9e415377
 
     steps:
       - name: Checkout public runner
@@ -39,6 +39,7 @@ jobs:
           set -euo pipefail
           test "$(git -C fantadesk-private rev-parse HEAD)" = "$AUTHORITY_SHA"
           test -f fantadesk-private/scripts/nexus-goals-simple-v1.py
+          test -f fantadesk-private/scripts/nexus-goals-simple-v1-runner.py
           test -f fantadesk-private/data/nexus/research-v3/goals-simple/nexus-goals-simple-v1-protocol.json
           test -f fantadesk-private/data/nexus/research-v2/final/nexus-v2-predictive-engine-freeze-v1.json
           test -f runner-public/.nexus-v2-public/goals-trajectory-review-cert.pem
@@ -91,7 +92,7 @@ jobs:
           NEXUS_GOALS_SIMPLE_OUT: /mnt/data/nexus_goals_simple_v1_report.json
         run: |
           set -euo pipefail
-          python fantadesk-private/scripts/nexus-goals-simple-v1.py
+          python fantadesk-private/scripts/nexus-goals-simple-v1-runner.py
           test -s /mnt/data/nexus_goals_simple_v1_report.json
           python - <<'PY'
           import json
