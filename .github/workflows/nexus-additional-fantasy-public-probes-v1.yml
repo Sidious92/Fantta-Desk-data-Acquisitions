@@ -1,0 +1,45 @@
+name: Nexus Additional Fantasy Public Probes v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-additional-fantasy-public-probes-v1-launch/EXECUTE'
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+      - run: python -m pip install --no-cache-dir requests==2.32.5
+      - name: Probe anonymous source access
+        run: python scripts/nexus-probe-additional-fantasy-public-sources-v1.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexus-additional-fantasy-public-probes-v1
+          path: /mnt/data/nexus-additional-fantasy-public-probes-v1/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Record result
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .nexus-additional-fantasy-public-probes-v1-status
+          conclusion='${{ job.status }}'
+          printf '{"workflow":"Nexus Additional Fantasy Public Probes v1","run_id":%s,"conclusion":"%s","head_sha":"%s"}\n' "$GITHUB_RUN_ID" "$conclusion" "$GITHUB_SHA" > .nexus-additional-fantasy-public-probes-v1-status/RESULT.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-additional-fantasy-public-probes-v1-status/RESULT.json
+          git commit -m 'ci: record additional fantasy public probes' || exit 0
+          git push origin HEAD:main
