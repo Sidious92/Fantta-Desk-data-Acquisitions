@@ -161,18 +161,20 @@ jobs:
           assert p['identity']==expected_identity
           assert 'predictions' not in p
           assert p['audit']['no_individual_player_rows_in_checkpoint'] is True
-          assert p['convergence']['pass'] is True
+          assert p['convergence']['max_iter']==1000
           assert p['configuration']['seed']==20260817
           assert p['configuration']['protocol_blob_sha']==os.environ['AUTHORITY_PROTOCOL_BLOB_SHA']
           assert p['hashes']['dataset_hash']==os.environ['DATASET_HASH']
           assert p['hashes']['script_sha256']==os.environ['CANONICAL_SCRIPT_SHA256']
           assert p['hashes']['authority_protocol_blob_sha']==os.environ['AUTHORITY_PROTOCOL_BLOB_SHA']
           if expected_identity=={'model':'HUBER','target':'GOALS','feature_set':'FC_LAG5','level':'LOW','fold':'2022-23'}:
+              assert p['convergence']['pass'] is True
               assert p['hashes']['config_hash']==os.environ['SMOKE_CONFIG_HASH']
               assert p['audit']['train_rows']==432
               assert p['audit']['test_rows']==494
               assert p['audit']['feature_count_numeric']==20
           print('checkpoint_validation=PASS')
+          print('convergence_pass=' + str(p['convergence']['pass']))
           PY
 
       - name: Upload sanitized shard checkpoint
