@@ -1,0 +1,29 @@
+{
+  "workflow": "Nexus UEFA UCL Fantasy Public Probe v2.1",
+  "job_status": "success",
+  "run_id": 32195744666,
+  "result": {
+    "schema": "NEXUS_UEFA_UCL_FANTASY_PUBLIC_PROBE_V2_1",
+    "status": "RUNNER_EGRESS_BLOCKED",
+    "capture_started": "2026-08-18T23:06:40.867622+00:00",
+    "capture_completed": "2026-08-18T23:07:05.034018+00:00",
+    "landing_attempts": [
+      {
+        "url": "https://gaming.uefa.com/en/uclfantasy/fantasy-landing",
+        "error": "ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='gaming.uefa.com', port=443): Read timed out. (read timeout=12)\"))"
+      },
+      {
+        "url": "https://gaming.uefa.com/it/uclfantasy/fantasy-landing",
+        "error": "ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='gaming.uefa.com', port=443): Read timed out. (read timeout=12)\"))"
+      }
+    ],
+    "provider_conclusion": "NONE",
+    "notes": "GitHub-hosted runner could not retrieve either official UEFA Gaming locale landing. This is execution/network evidence, not a provider data-access verdict.",
+    "governance": {
+      "authenticated_surface_accessed": false,
+      "private_routes_accessed": false,
+      "predictive_models_modified": false,
+      "decision_layer_started": false
+    }
+  }
+}
