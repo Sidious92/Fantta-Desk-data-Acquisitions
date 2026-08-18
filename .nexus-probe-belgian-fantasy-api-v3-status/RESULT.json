@@ -1,0 +1,110 @@
+{
+  "schema": "NEXUS_BELGIAN_FANTASY_API_PROBE_V3",
+  "tests": [
+    {
+      "url": "https://proleague.code.brussels/players-stats",
+      "status": 200,
+      "final_url": "https://proleague.code.brussels/players-stats?competitionFeed=JPL&seasonId=2027&pageNumber=1&pageRecords=10",
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 27329,
+      "prefix_hex": "7b0a202022646174",
+      "preview": "{\n  \"data\": [\n    {\n      \"id\": \"6a82bb23655e1d5fa904efb7\",\n      \"name\": \"aaron bibout\",\n      \"short\": \"\",\n      \"firstName\": \"\",\n      \"lastName\": \"\",\n      \"clubId\": 5,\n      \"clubName\": \"KRC Genk\",\n      \"clubShort\": \"GNK\",\n      \"playerValue\": 6,\n      \"fieldOrder\": 0,\n      \"playerInfo\": \"\",\n      \"injury\": 0,\n      \"ban\": 0,\n      \"portraitUrl\": \"\",\n      \"competitionFeed\": \"JPL\",\n      \"seasonId\": 2027,\n      \"positionId\": 4,\n      \"goals\": 4,\n      \"ownGoal\": 0,\n      \"penaltyGoals\": 0,\n      \"penaltySave\": 0,\n      \"penaltyMiss\": 0,\n      \"strokeGoals\": 0,\n      \"awards\": 0,\n      \"playedUpTo60Min\": 2,\n      \"playedMoreThan60Min\": 0,\n      \"threeOrFourGoalsAgainst\": 0,\n      \"fiveOrMoreGoalsAgainst\": 0,\n      \"inStarting\": 0,\n      \"assists\": 0,\n      \"yellow\": 0,\n      \"green\": 0,\n      \"red\": 0,\n      \"cleanSheet\": 0,\n      \"conceeded\": -1,\n      \"halfTime\": 0,\n      \"teamResultPoints\": 0,\n      \"captain\": 0,\n      \"MotM\": 0,\n      \"skillBonus\": 0,\n      \"bigChanceCreated\": 0,\n      \"headClearance\": 0,\n      \"ballRecovery\": 0,\n      \"duels\": 1,\n      \"interception\": 0,\n      \"dispossessed\": 0,\n      \"shotOffTarget\": 0,\n      \"errorLeadToGoal\": 0,\n      \"saves\": 0,\n    ",
+      "json_type": "dict",
+      "json_keys": [
+        "data",
+        "totalRecords"
+      ],
+      "json_len": 2,
+      "shape_preview": {
+        "data": [
+          "list",
+          10
+        ],
+        "totalRecords": [
+          "int",
+          null
+        ]
+      }
+    },
+    {
+      "url": "https://proleague.code.brussels/points-confirmation",
+      "status": 200,
+      "final_url": "https://proleague.code.brussels/points-confirmation?competitionFeed=JPL&seasonId=2027",
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 262,
+      "prefix_hex": "5b0a20207b0a2020",
+      "preview": "[\n  {\n    \"id\": 161,\n    \"sort\": null,\n    \"weekId\": 1,\n    \"confirmed\": 1,\n    \"competitionFeed\": \"JPL\",\n    \"seasonId\": 2027\n  },\n  {\n    \"id\": 162,\n    \"sort\": null,\n    \"weekId\": 2,\n    \"confirmed\": 1,\n    \"competitionFeed\": \"JPL\",\n    \"seasonId\": 2027\n  }\n]",
+      "json_type": "list",
+      "json_keys": null,
+      "json_len": 2
+    },
+    {
+      "url": "https://fanarena.s3.eu-west-1.amazonaws.com/files/spelers_JPL_2027.xlsx",
+      "status": 403,
+      "final_url": "https://fanarena.s3.eu-west-1.amazonaws.com/files/spelers_JPL_2027.xlsx",
+      "content_type": "application/xml",
+      "bytes": 263,
+      "prefix_hex": "3c3f786d6c207665",
+      "preview": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error><Code>AccessDenied</Code><Message>Access Denied</Message><RequestId>6A8N260XWTF8NM7H</RequestId><HostId>NSeFb1FLqpUl+wXduGp3bmwbx7yhS3GVNf3Pr8pXY++GTaVTrLR9mZYLk0rlanz78kh2H0uB2wE1y0CATbJQvHI0F1wZ8XDk</HostId></Error>"
+    },
+    {
+      "url": "https://s3-eu-west-1.amazonaws.com/fanarena/files/spelers_JPL_2027.xlsx",
+      "status": 403,
+      "final_url": "https://s3-eu-west-1.amazonaws.com/fanarena/files/spelers_JPL_2027.xlsx",
+      "content_type": "application/xml",
+      "bytes": 263,
+      "prefix_hex": "3c3f786d6c207665",
+      "preview": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error><Code>AccessDenied</Code><Message>Access Denied</Message><RequestId>XNV4VKPZ9SJ1DPGR</RequestId><HostId>wnm5DdV8SAwJt0xCUsw1LT0ogHIstL1/Y++G5BZgVdBU0eq/8jJOqDaV3cNUurWMt5/0cHhM4bgHCLHorblEZoLQSYHR9WNw</HostId></Error>"
+    },
+    {
+      "url": "https://fanarena.s3.eu-west-1.amazonaws.com/players_JPL_2027.json",
+      "status": 200,
+      "final_url": "https://fanarena.s3.eu-west-1.amazonaws.com/players_JPL_2027.json",
+      "content_type": "application/json",
+      "bytes": 78108,
+      "prefix_hex": "7b0a202022636f6d",
+      "preview": "{\n  \"competitionInfo\": {\n    \"competitionFeed\": \"JPL\",\n    \"seasonId\": 2027,\n    \"lastUpdated\": \"2026-08-17T07:41:24.122Z\"\n  },\n  \"clubsWithFDR\": [\n    {\n      \"id\": 1,\n      \"name\": \"STVV\",\n      \"short\": \"STV\",\n      \"competitionFeed\": \"JPL\",\n      \"seasonId\": 2027,\n      \"styling\": null,\n      \"slug\": \"2989v3kho9h5jaboe1nr7lx21\",\n      \"externalId\": 229,\n      \"infostradaId\": 102513,\n      \"keyCode\": \"sint_truidense_vv\",\n      \"fdr\": [\n        {\n          \"clubId\": 581,\n          \"name\": \"Royal Antwerp FC\",\n          \"fdr\": 2.5,\n          \"venue\": \"away\"\n        },\n        {\n          \"clubId\": 580,\n          \"name\": \"Union SG\",\n          \"fdr\": 4,\n          \"venue\": \"home\"\n        },\n        {\n          \"clubId\": 788,\n          \"name\": \"RAAL La Louvière\",\n          \"fdr\": 1,\n          \"venue\": \"home\"\n        },\n        {\n          \"clubId\": 14,\n          \"name\": \"SK Beveren\",\n          \"fdr\": 1.5,\n          \"venue\": \"away\"\n        },\n        {\n          \"clubId\": 11,\n          \"name\": \"KVC Westerlo\",\n          \"fdr\": 1,\n          \"venue\": \"home\"\n        },\n        {\n          \"clubId\": 8,\n          \"name\": \"KV Mechelen\",\n          \"fdr\": 3,\n          \"venue\": \"away\"\n        },\n",
+      "json_type": "dict",
+      "json_keys": [
+        "clubsWithFDR",
+        "competitionInfo"
+      ],
+      "json_len": 2,
+      "shape_preview": {
+        "competitionInfo": [
+          "dict",
+          3
+        ],
+        "clubsWithFDR": [
+          "list",
+          18
+        ]
+      }
+    },
+    {
+      "url": "https://s3-eu-west-1.amazonaws.com/fanarena/players_JPL_2027.json",
+      "status": 200,
+      "final_url": "https://s3-eu-west-1.amazonaws.com/fanarena/players_JPL_2027.json",
+      "content_type": "application/json",
+      "bytes": 78108,
+      "prefix_hex": "7b0a202022636f6d",
+      "preview": "{\n  \"competitionInfo\": {\n    \"competitionFeed\": \"JPL\",\n    \"seasonId\": 2027,\n    \"lastUpdated\": \"2026-08-17T07:41:24.122Z\"\n  },\n  \"clubsWithFDR\": [\n    {\n      \"id\": 1,\n      \"name\": \"STVV\",\n      \"short\": \"STV\",\n      \"competitionFeed\": \"JPL\",\n      \"seasonId\": 2027,\n      \"styling\": null,\n      \"slug\": \"2989v3kho9h5jaboe1nr7lx21\",\n      \"externalId\": 229,\n      \"infostradaId\": 102513,\n      \"keyCode\": \"sint_truidense_vv\",\n      \"fdr\": [\n        {\n          \"clubId\": 581,\n          \"name\": \"Royal Antwerp FC\",\n          \"fdr\": 2.5,\n          \"venue\": \"away\"\n        },\n        {\n          \"clubId\": 580,\n          \"name\": \"Union SG\",\n          \"fdr\": 4,\n          \"venue\": \"home\"\n        },\n        {\n          \"clubId\": 788,\n          \"name\": \"RAAL La Louvière\",\n          \"fdr\": 1,\n          \"venue\": \"home\"\n        },\n        {\n          \"clubId\": 14,\n          \"name\": \"SK Beveren\",\n          \"fdr\": 1.5,\n          \"venue\": \"away\"\n        },\n        {\n          \"clubId\": 11,\n          \"name\": \"KVC Westerlo\",\n          \"fdr\": 1,\n          \"venue\": \"home\"\n        },\n        {\n          \"clubId\": 8,\n          \"name\": \"KV Mechelen\",\n          \"fdr\": 3,\n          \"venue\": \"away\"\n        },\n",
+      "json_type": "dict",
+      "json_keys": [
+        "clubsWithFDR",
+        "competitionInfo"
+      ],
+      "json_len": 2,
+      "shape_preview": {
+        "competitionInfo": [
+          "dict",
+          3
+        ],
+        "clubsWithFDR": [
+          "list",
+          18
+        ]
+      }
+    }
+  ]
+}
