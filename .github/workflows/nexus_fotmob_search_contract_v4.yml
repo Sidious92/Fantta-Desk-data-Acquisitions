@@ -1,0 +1,43 @@
+name: Nexus FotMob Search Contract Probe v4
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-fotmob-search-contract-v4-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - run: sudo mkdir -p /mnt/data/nexus-fotmob-search-contract-v4 && sudo chown -R $USER:$USER /mnt/data
+      - run: timeout 15m python scripts/probe_fotmob_search_contract_v4.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexus-fotmob-search-contract-v4
+          path: /mnt/data/nexus-fotmob-search-contract-v4
+          if-no-files-found: warn
+      - name: Record result
+        if: always()
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-fotmob-search-contract-v4-status
+          if [ -f /mnt/data/nexus-fotmob-search-contract-v4/RESULT.json ]; then
+            cp /mnt/data/nexus-fotmob-search-contract-v4/RESULT.json .nexus-fotmob-search-contract-v4-status/RESULT.json
+          else
+            printf '{"schema":"NEXUS_FOTMOB_PUBLIC_SEARCH_CONTRACT_PROBE_V4","status":"NO_RESULT_FILE","run_id":%s}\n' "$GITHUB_RUN_ID" > .nexus-fotmob-search-contract-v4-status/RESULT.json
+          fi
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .nexus-fotmob-search-contract-v4-status/RESULT.json
+          git commit -m 'ci: record FotMob public search-contract probe v4' || exit 0
+          git push origin HEAD:main
