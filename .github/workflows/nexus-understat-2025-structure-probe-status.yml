@@ -1,0 +1,28 @@
+name: Nexus Understat 2025 Structure Probe Status
+on:
+  workflow_run:
+    workflows: ['Nexus Understat 2025 Structure Probe']
+    types: [completed]
+permissions:
+  contents: write
+jobs:
+  record:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Record probe status
+        shell: bash
+        env:
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p .nexus-understat-2025-structure-probe-status
+          printf '{"run_id":%s,"conclusion":"%s","head_sha":"%s"}\n' "$RUN_ID" "$CONCLUSION" "$HEAD_SHA" > .nexus-understat-2025-structure-probe-status/RESULT.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-understat-2025-structure-probe-status/RESULT.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'ci: record Understat structure probe status'
+          git push
