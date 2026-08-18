@@ -1,0 +1,159 @@
+name: Nexus v2 Live Serving Sanity 2026-27
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.nexus-v2-live-serving-sanity-launch/EXECUTE'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  sanity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v6
+        with:
+          path: runner-public
+          persist-credentials: false
+
+      - name: Checkout fixed private serving authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: a56a986644eaf4793938ba1fe74bb2cdd879c75b
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Verify serving authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "a56a986644eaf4793938ba1fe74bb2cdd879c75b"
+          test -f fantadesk-private/scripts/nexus-v2-serving-core.py
+          test -f fantadesk-private/scripts/nexus-v2-serving-live-2026-27.py
+          test -f runner-public/scripts/nexus-v2-acquire-understat-2025-all-leagues-ajax.mjs
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install pinned jsdom in isolated temp prefix
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nexus-node
+          cd /tmp/nexus-node
+          npm init -y >/dev/null 2>&1
+          npm install --ignore-scripts --no-audit --no-fund jsdom@30.0.1
+          mkdir -p "$GITHUB_WORKSPACE/fantadesk-private/node_modules"
+          ln -s /tmp/nexus-node/node_modules/jsdom "$GITHUB_WORKSPACE/fantadesk-private/node_modules/jsdom"
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+
+      - name: Install pinned frozen Python environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --no-cache-dir \
+            numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 \
+            joblib==1.5.3 threadpoolctl==3.6.0 orjson==3.11.9 \
+            xgboost==3.1.3 lightgbm==4.6.0 catboost==1.2.8
+
+      - name: Materialize exact frozen historical inputs
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+
+      - name: Rebuild exact historical Minutes and Event surfaces
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp fantadesk-private/scripts/nexus-v2-minutes-surface-one.py /mnt/data/minutes_surface_one.py
+          for season in 2021-22 2022-23 2023-24 2024-25 2025-26; do
+            python fantadesk-private/scripts/nexus-v2-precompute-usage-cache.py "$season"
+          done
+          python fantadesk-private/scripts/nexus-v2-build-minutes-surface-cached.py
+          echo "5898b2c01490e9a1ab21e19c159c4ba51fadbd300470f19e31f6384da13d4f2c  /mnt/data/nexus_v2_minutes_roster_surface.csv" | sha256sum --check --strict
+          python fantadesk-private/scripts/nexus-v2-build-event-roster-surface.py
+          echo "09022f38648708268e424877e7f2f473f48a84ecaa7a399afbc9fb372c36dfd2  /mnt/data/nexus_v2_event_roster_surface.csv" | sha256sum --check --strict
+
+      - name: Acquire current official Listone 2026-27
+        working-directory: fantadesk-private
+        env:
+          NEXUS_LIVE_LISTONE_OUTPUT_ROOT: /mnt/data/current-listone-capture
+        run: node scripts/nexus-acquire-current-listone-2026-27.mjs
+
+      - name: Acquire foreign Understat 2025-26 via current AJAX contract
+        working-directory: runner-public
+        env:
+          NEXUS_V2_UNDERSTAT_2025_OUTPUT_ROOT: /mnt/data/understat-2025-capture
+        run: node scripts/nexus-v2-acquire-understat-2025-all-leagues-ajax.mjs
+
+      - name: Rebuild audited live feature surface
+        shell: bash
+        env:
+          NEXUS_V2_CURRENT_LISTONE: /mnt/data/current-listone-capture/current-listone.json
+          NEXUS_V2_UNDERSTAT_2025_FOREIGN: /mnt/data/understat-2025-capture/understat-foreign-2025.json
+          NEXUS_V2_LIVE_FEATURE_OUT: /mnt/data/nexus_v2_live_feature_surface_2026_27.csv
+          NEXUS_V2_LIVE_FEATURE_AUDIT: /mnt/data/nexus_v2_live_feature_surface_2026_27_audit.json
+        run: |
+          set -euo pipefail
+          python fantadesk-private/scripts/nexus-v2-build-live-feature-surface-2026-27.py
+          echo "668b22b7cedd27301b1cdac7a22448b2b9fbe44b1323c013603988ec63275d89  /mnt/data/nexus_v2_live_feature_surface_2026_27.csv" | sha256sum --check --strict
+
+      - name: Run prospective frozen live serving sanity
+        shell: bash
+        env:
+          NEXUS_V2_LIVE_FEATURE_SURFACE: /mnt/data/nexus_v2_live_feature_surface_2026_27.csv
+          NEXUS_V2_LIVE_FEATURE_AUDIT: /mnt/data/nexus_v2_live_feature_surface_2026_27_audit.json
+          NEXUS_V2_EXPECTED_LIVE_SURFACE_SHA256: 668b22b7cedd27301b1cdac7a22448b2b9fbe44b1323c013603988ec63275d89
+          NEXUS_V2_LIVE_PREDICTIONS_OUT: /mnt/data/nexus_v2_live_predictions_2026_27.csv
+          NEXUS_V2_LIVE_SERVING_AUDIT: /mnt/data/nexus_v2_live_serving_2026_27_audit.json
+        run: python fantadesk-private/scripts/nexus-v2-serving-live-2026-27.py
+
+      - name: Validate sanitized live serving audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC=/mnt/data/nexus_v2_live_serving_2026_27_audit.json
+          test -f "$SRC"
+          mkdir -p sanity-output
+          cp "$SRC" sanity-output/audit.json
+          python - <<'PY'
+          import json
+          p=json.load(open('sanity-output/audit.json'))
+          assert p['schema']=='NEXUS_V2_LIVE_SERVING_2026_27_AUDIT_V1'
+          assert p['status']=='PASS'
+          assert p['target_season']=='2026-27'
+          assert p['roster_rows']==519
+          assert p['prospective_target_labels_used'] is False
+          assert p['retuning'] is False
+          assert p['selection_change'] is False
+          assert p['no_player_rows_in_audit'] is True
+          assert p['live_feature_surface_sha256']=='668b22b7cedd27301b1cdac7a22448b2b9fbe44b1323c013603988ec63275d89'
+          assert p['sanity']['AVERAGE_VOTE']['outside_source_range_0_10']==0
+          assert p['sanity']['EXPECTED_TOTAL_MINUTES']['min']>=0
+          assert p['sanity']['EXPECTED_TOTAL_MINUTES']['max']<=3420
+          assert p['sanity']['GOALS']['min']>=0
+          assert p['sanity']['ASSISTS']['min']>=0
+          print('LIVE_SERVING_SANITY=PASS',p['predictions_sha256'])
+          PY
+
+      - name: Upload sanitized live serving audit only
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-live-serving-sanity-2026-27-audit
+          path: sanity-output/audit.json
+          if-no-files-found: error
+          retention-days: 7
