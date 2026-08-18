@@ -67,7 +67,7 @@ jobs:
 
       - name: Install Python dependencies
         shell: bash
-        run: python -m pip install --no-cache-dir pandas==2.2.3 numpy==2.3.5
+        run: python -m pip install --no-cache-dir pandas==2.2.3 numpy==2.3.5 orjson==3.11.9
 
       - name: Materialize canonical identity/history inputs
         shell: bash
@@ -265,10 +265,9 @@ jobs:
               flat.append(q)
           pd.DataFrame(flat).to_csv('/mnt/data/nexus_goals_individual_arithmetic_v1.csv',index=False)
 
-          top=ranked[:60]
           print('CALCULATION=PASS')
           print('ROSTER',len(rows),'PREDICTED',len(ranked),'NO_PRED',len(rows)-len(ranked))
-          for r in top[:20]:
+          for r in ranked[:20]:
               print(r['rank'],r['player_name'],r['team'],round(r['goals_prediction'],2),round(r['pace_5y_38'],2) if r['pace_5y_38'] is not None else None,round(r['pace_last3_38'],2) if r['pace_last3_38'] is not None else None,round(r['pace_recent_38'],2) if r['pace_recent_38'] is not None else None,r['recent_source'])
           PY
 
