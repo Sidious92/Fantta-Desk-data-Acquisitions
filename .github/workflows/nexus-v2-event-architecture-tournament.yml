@@ -1,0 +1,190 @@
+name: Nexus v2 Event Architecture Tournament
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.nexus-v2-event-architecture-launch/EXECUTE'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  block:
+    strategy:
+      fail-fast: false
+      matrix:
+        spec:
+          - {target: GOALS, architecture: DIRECT_TOTAL}
+          - {target: GOALS, architecture: EVENT_RATE_X_EXPECTED_MINUTES}
+          - {target: GOALS, architecture: XG_RATE_X_EXPECTED_MINUTES}
+          - {target: GOALS, architecture: NPXG_RATE_X_EXPECTED_MINUTES}
+          - {target: ASSISTS, architecture: DIRECT_TOTAL}
+          - {target: ASSISTS, architecture: EVENT_RATE_X_EXPECTED_MINUTES}
+          - {target: ASSISTS, architecture: XA_RATE_X_EXPECTED_MINUTES}
+        family:
+          - RIDGE
+          - ELASTIC_NET
+          - HUBER
+          - POISSON_REGRESSION
+          - RANDOM_FOREST
+          - EXTRA_TREES
+          - HIST_GRADIENT_BOOSTING
+          - HIST_GRADIENT_BOOSTING_POISSON
+          - XGBOOST
+          - XGBOOST_POISSON
+          - LIGHTGBM
+          - LIGHTGBM_POISSON
+          - CATBOOST
+          - CATBOOST_POISSON
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout fixed private authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 886fa7b4aea58bcf1ad2dad46cafb858b58bf2d6
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Verify authority and prepare filesystem
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "886fa7b4aea58bcf1ad2dad46cafb858b58bf2d6"
+          test -f fantadesk-private/data/nexus/research-v2/events/nexus-v2-event-architecture-tournament-protocol-v1.json
+          test -f fantadesk-private/scripts/nexus-v2-event-architecture-family.py
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+
+      - name: Setup exact Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+
+      - name: Install pinned environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --no-cache-dir \
+            numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 \
+            joblib==1.5.3 threadpoolctl==3.6.0 orjson==3.11.9 \
+            xgboost==3.1.3 lightgbm==4.6.0 catboost==1.2.8
+
+      - name: Materialize exact private base inputs
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+
+      - name: Rebuild exact Minutes and event surfaces
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp fantadesk-private/scripts/nexus-v2-minutes-surface-one.py /mnt/data/minutes_surface_one.py
+          for season in 2021-22 2022-23 2023-24 2024-25 2025-26; do
+            python fantadesk-private/scripts/nexus-v2-precompute-usage-cache.py "$season"
+          done
+          python fantadesk-private/scripts/nexus-v2-build-minutes-surface-cached.py
+          echo "5898b2c01490e9a1ab21e19c159c4ba51fadbd300470f19e31f6384da13d4f2c  /mnt/data/nexus_v2_minutes_roster_surface.csv" | sha256sum --check --strict
+          python fantadesk-private/scripts/nexus-v2-build-event-roster-surface.py
+          echo "09022f38648708268e424877e7f2f473f48a84ecaa7a399afbc9fb372c36dfd2  /mnt/data/nexus_v2_event_roster_surface.csv" | sha256sum --check --strict
+
+      - name: Run one architecture-family block
+        shell: bash
+        run: |
+          set -euo pipefail
+          python fantadesk-private/scripts/nexus-v2-event-architecture-family.py \
+            "${{ matrix.spec.target }}" "${{ matrix.spec.architecture }}" "${{ matrix.family }}"
+
+      - name: Validate sanitized block
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC="/mnt/data/event_arch_${{ matrix.spec.target }}_${{ matrix.spec.architecture }}_${{ matrix.family }}.json"
+          test -f "$SRC"
+          mkdir -p block-output
+          cp "$SRC" block-output/result.json
+          python - <<'PY'
+          import json
+          p=json.load(open('block-output/result.json'))
+          assert p['status']=='COMPLETE'
+          assert p['event_surface_hash']=='09022f38648708268e424877e7f2f473f48a84ecaa7a399afbc9fb372c36dfd2'
+          assert p['configs']==24 and len(p['results'])==24
+          assert p['no_player_rows'] is True
+          assert all(r['pooled']['n']==970 for r in p['results'])
+          print('EVENT_ARCH_BLOCK=PASS',p['target'],p['architecture'],p['family'],p['configs'])
+          PY
+
+      - name: Upload block metrics
+        uses: actions/upload-artifact@v4
+        with:
+          name: eventarch-${{ matrix.spec.target }}-${{ matrix.spec.architecture }}-${{ matrix.family }}
+          path: block-output/result.json
+          if-no-files-found: error
+          retention-days: 7
+
+  aggregate:
+    needs: block
+    if: ${{ always() && needs.block.result == 'success' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Download all blocks
+        uses: actions/download-artifact@v5
+        with:
+          pattern: eventarch-*
+          path: eventarch-artifacts
+          merge-multiple: false
+
+      - name: Validate 98/98 and rank
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import glob,json,os,collections
+          specs={
+            'GOALS':{'DIRECT_TOTAL','EVENT_RATE_X_EXPECTED_MINUTES','XG_RATE_X_EXPECTED_MINUTES','NPXG_RATE_X_EXPECTED_MINUTES'},
+            'ASSISTS':{'DIRECT_TOTAL','EVENT_RATE_X_EXPECTED_MINUTES','XA_RATE_X_EXPECTED_MINUTES'}}
+          families={'RIDGE','ELASTIC_NET','HUBER','POISSON_REGRESSION','RANDOM_FOREST','EXTRA_TREES','HIST_GRADIENT_BOOSTING','HIST_GRADIENT_BOOSTING_POISSON','XGBOOST','XGBOOST_POISSON','LIGHTGBM','LIGHTGBM_POISSON','CATBOOST','CATBOOST_POISSON'}
+          files=sorted(glob.glob('eventarch-artifacts/**/result.json',recursive=True))
+          if len(files)!=98: raise SystemExit(f'EVENT_ARCH_STATUS=INCOMPLETE {len(files)}/98')
+          seen=set();rows=[]
+          for fn in files:
+              p=json.load(open(fn));key=(p['target'],p['architecture'],p['family'])
+              assert p['status']=='COMPLETE' and p['event_surface_hash']=='09022f38648708268e424877e7f2f473f48a84ecaa7a399afbc9fb372c36dfd2'
+              assert p['configs']==24 and len(p['results'])==24 and p['no_player_rows'] is True
+              if key in seen: raise SystemExit(f'DUPLICATE BLOCK {key}')
+              seen.add(key);rows.extend(p['results'])
+          expected={(t,a,f) for t,aa in specs.items() for a in aa for f in families}
+          if seen!=expected:raise SystemExit(f'BLOCK SET MISMATCH missing={len(expected-seen)} extra={len(seen-expected)}')
+          if len(rows)!=2352:raise SystemExit(f'CONFIG COUNT MISMATCH {len(rows)}')
+          architecture_best=[];target_best={}
+          for target,arches in specs.items():
+              for arch in arches:
+                  rr=[r for r in rows if r['target']==target and r['architecture']==arch]
+                  rr.sort(key=lambda r:(r['pooled']['mae'],r['pooled']['rmse'],abs(r['pooled']['bias']),r['fold_mae_sd']))
+                  b=rr[0];architecture_best.append(b)
+              tb=[r for r in architecture_best if r['target']==target]
+              tb.sort(key=lambda r:(r['pooled']['mae'],r['pooled']['rmse'],abs(r['pooled']['bias']),r['fold_mae_sd']))
+              target_best[target]=tb[0]
+          rows.sort(key=lambda r:(r['target'],r['pooled']['mae'],r['pooled']['rmse'],abs(r['pooled']['bias'])))
+          out={'status':'EVENT_ARCHITECTURE_STAGE1_COMPLETE','event_surface_hash':'09022f38648708268e424877e7f2f473f48a84ecaa7a399afbc9fb372c36dfd2','validated_blocks':98,'validated_configs':2352,'architecture_best':architecture_best,'target_best':target_best,'ranking':rows,'2025-26':'NOT_USED','no_player_rows':True}
+          os.makedirs('eventarch-summary',exist_ok=True)
+          json.dump(out,open('eventarch-summary/event-architecture-stage1-summary.json','w'),separators=(',',':'))
+          print('EVENT_ARCHITECTURE_STAGE1_COMPLETE blocks=98 configs=2352')
+          for target in ['GOALS','ASSISTS']:
+              print('\n',target)
+              rr=sorted([r for r in architecture_best if r['target']==target],key=lambda r:r['pooled']['mae'])
+              for r in rr:print(r['architecture'],r['family'],r['feature_set'],r['level'],r['pooled']['mae'],r['pooled']['rmse'],r['pooled']['bias'])
+          PY
+
+      - name: Upload architecture tournament summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-event-architecture-stage1-summary
+          path: eventarch-summary/event-architecture-stage1-summary.json
+          if-no-files-found: error
+          retention-days: 7
