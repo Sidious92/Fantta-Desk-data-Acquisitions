@@ -1,0 +1,29 @@
+name: Nexus GOALS Individual Arithmetic v1 Status
+
+on:
+  workflow_run:
+    workflows: ["Nexus GOALS Individual Arithmetic v1"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+jobs:
+  record:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Record terminal status
+        env:
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p .nexus-goals-individual-arithmetic-v1-status
+          printf '{"workflow":"Nexus GOALS Individual Arithmetic v1","run_id":%s,"conclusion":"%s","head_sha":"%s"}\n' "$RUN_ID" "$CONCLUSION" "$HEAD_SHA" > .nexus-goals-individual-arithmetic-v1-status/RESULT.json
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .nexus-goals-individual-arithmetic-v1-status/RESULT.json
+          git commit -m 'ci: record individual arithmetic GOALS status' || exit 0
+          git push
