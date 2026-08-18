@@ -1,0 +1,61 @@
+name: Nexus v2 V1 Common Subset Audit
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.nexus-v2-v1-common-audit-launch/EXECUTE'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: c58fef5b73bc73c4814c42d4950d31dfcac5511c
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+      - shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "c58fef5b73bc73c4814c42d4950d31dfcac5511c"
+          sudo mkdir -p /mnt/data && sudo chown "$USER":"$USER" /mnt/data
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+      - shell: bash
+        run: python -m pip install --no-cache-dir numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 joblib==1.5.3 threadpoolctl==3.6.0 orjson==3.11.9 xgboost==3.1.3 lightgbm==4.6.0 catboost==1.2.8
+      - name: Materialize exact surfaces
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+          cp fantadesk-private/scripts/nexus-v2-minutes-surface-one.py /mnt/data/minutes_surface_one.py
+          for season in 2021-22 2022-23 2023-24 2024-25 2025-26; do python fantadesk-private/scripts/nexus-v2-precompute-usage-cache.py "$season"; done
+          python fantadesk-private/scripts/nexus-v2-build-minutes-surface-cached.py
+          python fantadesk-private/scripts/nexus-v2-build-event-roster-surface.py
+          echo "09022f38648708268e424877e7f2f473f48a84ecaa7a399afbc9fb372c36dfd2  /mnt/data/nexus_v2_event_roster_surface.csv" | sha256sum --check --strict
+      - name: Run comparison audit
+        shell: bash
+        run: python fantadesk-private/scripts/nexus-v2-v1-common-subset-audit.py
+      - name: Validate result
+        shell: bash
+        run: |
+          test -f /mnt/data/nexus_v2_v1_common_subset_audit.json;mkdir -p output;cp /mnt/data/nexus_v2_v1_common_subset_audit.json output/audit.json
+          python - <<'PY'
+          import json
+          p=json.load(open('output/audit.json'));assert p['status']=='PASS';assert p['selection_effect']=='NONE';assert p['targets']['GOALS']['common_n']==451;assert p['targets']['ASSISTS']['common_n']==451;assert p['no_player_rows'] is True
+          print('V2_V1_COMMON_AUDIT=PASS')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-v1-common-subset-audit
+          path: output/audit.json
+          if-no-files-found: error
+          retention-days: 7
