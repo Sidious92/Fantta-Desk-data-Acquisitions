@@ -1,0 +1,64 @@
+{
+  "schema": "NEXUS_SLGR_FANTASY_PUBLIC_PROBE_V5",
+  "api_base": "https://fantaking-api.dunkest.com/api/v1",
+  "league_id_tested": 14,
+  "league_id_basis": "compiled app config A.v([14,\"slgr\"]) adjacent to API base",
+  "tests": [
+    {
+      "route": "/leagues/14/fantasy-leaders",
+      "params": {
+        "lang": "en_US"
+      },
+      "url": "https://fantaking-api.dunkest.com/api/v1/leagues/14/fantasy-leaders?lang=en_US",
+      "status": 422,
+      "content_type": "application/json",
+      "bytes": 175,
+      "sha256": "fc0fb4a46df11df0595adabc437b30fff1739af4803c437a9e72ae240d9107a1",
+      "preview": "{\"code\":\"VALIDATION_ERROR\",\"message\":\"The provided language is not associated with the game.\",\"errors\":{\"language\":[\"The provided language is not associated with the game.\"]}}",
+      "json_type": "dict",
+      "json_len": 3,
+      "json_keys": [
+        "code",
+        "message",
+        "errors"
+      ]
+    },
+    {
+      "route": "/leagues/14/injuries",
+      "params": {},
+      "url": "https://fantaking-api.dunkest.com/api/v1/leagues/14/injuries",
+      "status": 401,
+      "content_type": "application/json",
+      "bytes": 55,
+      "sha256": "5ecfc7230e49571adeed732a516edb3be4efc75062e38ac5cb948f5200f802f9",
+      "preview": "{\"code\":\"UNAUTHENTICATED\",\"message\":\"Unauthenticated.\"}",
+      "json_type": "dict",
+      "json_len": 2,
+      "json_keys": [
+        "code",
+        "message"
+      ]
+    }
+  ],
+  "id_inventory": [
+    {
+      "route": "/leagues/14/fantasy-leaders",
+      "id_nodes": []
+    },
+    {
+      "route": "/leagues/14/injuries",
+      "id_nodes": []
+    }
+  ],
+  "provider_player_ids_discovered": [],
+  "resolved_player_tests": [],
+  "successful_reads": [],
+  "governance": {
+    "only_compiled_app_get_contracts_tested": true,
+    "authenticated_surface_accessed": false,
+    "user_team_private_routes_accessed": false,
+    "bruteforce_endpoint_dictionary_used": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
