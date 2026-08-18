@@ -1,0 +1,93 @@
+{
+  "schema": "NEXUS_FANTASYVOETBAL_PUBLIC_SURFACE_PROBE_V1",
+  "start_url": "https://fantasyvoetbal.nl/",
+  "homepage": {
+    "status": 200,
+    "final_url": "https://fantasy.espngoal.nl/",
+    "content_type": "text/html",
+    "bytes": 1476062,
+    "text_preview": "<!DOCTYPE html>\n\n<html class=\"notranslate\" lang=\"nl\" translate=\"nl\">\n    <head>\n        <meta content=\"notranslate\" name=\"google\" />\n        <meta charset=\"utf-8\" />\n        <meta\n            content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"\n            name=\"viewport\"\n        />\n        <title>ESPN Fantasy Voetbal</title>\n        <link href=\"https://fantasy.espngoal.nl\" rel=\"home\" />\n        <meta content=\"ar\" property=\"locale\" />\n        <!-- favicons -->\n        <link\n            href=\"/img/favicons/180x180.png\"\n            rel=\"apple-touch-icon\"\n            sizes=\"180x180\"\n        />\n        <link\n            href=\"/img/favicons/32x32.png\"\n            rel=\"icon\"\n            sizes=\"32x32\"\n            type=\"image/png\"\n        />\n        <link\n            href=\"/img/favicons/16x16.png\"\n            rel=\"icon\"\n            sizes=\"16x16\"\n            type=\"image/png\"\n        />\n        <link\n            href=\"/img/favicons/favicon.svg\"\n            rel=\"mask-icon\"\n            type=\"image/svg+xml\"\n        />\n        <link href=\"/img/favicons/manifest.json\" rel=\"manifest\" />\n        <link href=\"https://fantasy.espngoal.nl\" rel=\"canonical\" />\n        <meta content=\"\" name=\"description\" />\n        <meta content=\"ESPN Fantasy Voetbal\" property=\"og:title\" />\n        <meta content=\"ESPN Fantasy Voetbal\" property=\"og:description\" />\n        <meta content=\"ESPN Fantasy Voetbal\" property=\"og:site_name\" />\n        <meta content=\"https://fantasy.espngoal.nl\" property=\"og:url\" />"
+  },
+  "script_urls": [
+    "https://platform.twitter.com/widgets.js",
+    "https://cdn.registerdisney.go.com/v4/OneID.js",
+    "https://dcf.espn.com/TWDC-DTCI/prod/Bootstrap.js",
+    "https://fantasy.espngoal.nl/assets/index-D5CVo_vi.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/postscribe/2.0.8/postscribe.min.js"
+  ],
+  "link_urls": [
+    "https://fantasy.espngoal.nl/#main",
+    "https://www.espngoal.nl/",
+    "https://fantasy.espngoal.nl/",
+    "https://www.espngoal.nl/nieuws",
+    "https://www.espngoal.nl/samenvattingen",
+    "https://www.espngoal.nl/fantasy-voetbal-show",
+    "https://campagne.espn.nl/goal",
+    "https://disneytermsofuse.com/dutch-netherlands/",
+    "https://privacy.thewaltdisneycompany.com/nl/privacybeleid/",
+    "https://privacy.thewaltdisneycompany.com/nl/privacybeleid/privacybeleid-2/",
+    "https://privacy.thewaltdisneycompany.com/nl/privacybeleid/cookiesbeleid/",
+    "https://espnnl.zendesk.com/hc/nl-nl",
+    "https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/cookies-policy/",
+    "https://www.facebook.com/ESPNNL/",
+    "https://www.instagram.com/ESPNNL/",
+    "https://x.com/ESPNNL/",
+    "https://www.tiktok.com/@ESPNNL",
+    "https://www.youtube.com/playlist?list=PL_5dsSfLn2v_ZVE5NH1iOnP5h67S1d1r5",
+    "https://apps.apple.com/nl/app/espn-goal/id6472048722?l=en-GB",
+    "https://play.google.com/store/apps/details?id=com.espn.goalalert&hl=nl"
+  ],
+  "assets": [
+    {
+      "url": "https://fantasy.espngoal.nl/assets/index-D5CVo_vi.js",
+      "status": 200,
+      "bytes": 2138121,
+      "content_type": "application/x-javascript",
+      "api_hits": [
+        "/api/${e}",
+        "/api/league/${n}/search-entries/?search=${encodeURIComponent"
+      ]
+    }
+  ],
+  "api_candidates": [
+    "/api/${e}",
+    "/api/league/${n}/search-entries/?search=${encodeURIComponent"
+  ],
+  "interesting_urls": [
+    "https://acc-apigw-goalalert.espn.nl/v3/ism/media?userId=${r0}`;p0=`https://prod-apigw-goalalert.espn.nl/v3/ism/media?userId=${v0}`,Y.push({url:p0}",
+    "https://acc-www.espngoal.nl/videoembed?personId=p${e.code}`;V=`https://www.espngoal.nl/videoembed?personId=p${e.code}`;const",
+    "https://fantasyassets.espngoal.nl/players/${e.code}.PNG`,alt:n(",
+    "https://www.espngoal.nl/videoembed/?mediaId=${n.mediaId}`,title:n.title,allowFullScreen:!0,allow:"
+  ],
+  "graphql_hits": [],
+  "extras": [
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "final_url": "https://fantasy.espngoal.nl/robots.txt",
+      "bytes": 1476062,
+      "preview": "<!DOCTYPE html>\n\n<html class=\"notranslate\" lang=\"nl\" translate=\"nl\">\n    <head>\n        <meta content=\"notranslate\" name=\"google\" />\n        <meta charset=\"utf-8\" />\n        <meta\n            content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"\n            name=\"viewport\"\n        />\n        <title>ESPN Fantasy Voetbal</title>\n        <link href=\"https://fantasy.espngoal.nl\" rel=\"home\" />\n        <meta content=\"ar\" property=\"locale\" />\n        <!-- favicons -->\n        <link\n            href=\"/img/favicons/180x180.png\"\n            rel=\"apple-touch-icon\"\n            sizes=\"180x180\"\n        />\n        <link\n            href=\"/img/favicons/32x32.png\"\n            rel=\"icon\"\n            sizes=\"32x32\"\n            type=\"image/png\"\n        />\n        <link\n            href=\"/img/favicons/16x16.png\"\n            rel=\"icon\"\n            sizes=\"16x16\"\n            type=\"image/png\"\n        />\n        <link\n            href=\"/img/favicons/favicon.svg\"\n            rel=\"mask-icon\"\n            type=\"image/svg+xml\"\n        />\n        <link href=\"/img/favicons/manifest.json\" rel=\"manifest\" />\n        <link href=\"https://fantasy.espngoal.nl\" rel=\"canonical\" />\n        <meta content=\"\" name=\"description\" />\n        <meta content=\"ESPN Fantasy Voetbal\" property=\"og:title\" />\n        <meta content=\"ESPN Fantasy Voetbal\" property=\"og:description\" />\n        <meta content=\"ESPN Fantasy Voetbal\" property=\"og:site_name\" />\n        <meta content=\"https://fantasy.espngoal.nl\" property=\"og:url\" />\n        <meta content=\"website\" property=\"og:type\" />\n        <meta content=\"ar\" property=\"og:locale\" />\n        <meta content=\"#ffffff\" name=\"msapplication-TileColor\" />\n        <meta content=\"#ffffff\" name=\"theme-color\" />\n        <!-- Load Roboto font -->\n        <link href=\"https://fonts.googleapis.com\" rel=\"preconnect\" />\n        <link\n            crossorigin=\"\"\n            href=\"https://fonts.gstatic.com\"\n            rel=\"preconnect\"\n        />\n        <link\n            href=\"https://font"
+    },
+    {
+      "path": "/manifest.json",
+      "status": 404,
+      "final_url": "https://fantasy.espngoal.nl/manifest.json",
+      "bytes": 552,
+      "preview": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>openresty</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
+    },
+    {
+      "path": "/site.webmanifest",
+      "status": 200,
+      "final_url": "https://fantasy.espngoal.nl/site.webmanifest",
+      "bytes": 1476062,
+      "preview": "<!DOCTYPE html>\n\n<html class=\"notranslate\" lang=\"nl\" translate=\"nl\">\n    <head>\n        <meta content=\"notranslate\" name=\"google\" />\n        <meta charset=\"utf-8\" />\n        <meta\n            content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"\n            name=\"viewport\"\n        />\n        <title>ESPN Fantasy Voetbal</title>\n        <link href=\"https://fantasy.espngoal.nl\" rel=\"home\" />\n        <meta content=\"ar\" property=\"locale\" />\n        <!-- favicons -->\n        <link\n            href=\"/img/favicons/180x180.png\"\n            rel=\"apple-touch-icon\"\n            sizes=\"180x180\"\n        />\n        <link\n            href=\"/img/favicons/32x32.png\"\n            rel=\"icon\"\n            sizes=\"32x32\"\n            type=\"image/png\"\n        />\n        <link\n            href=\"/img/favicons/16x16.png\"\n            rel=\"icon\"\n            sizes=\"16x16\"\n            type=\"image/png\"\n        />\n        <link\n            href=\"/img/favicons/favicon.svg\"\n            rel=\"mask-icon\"\n            type=\"image/svg+xml\"\n        />\n        <link href=\"/img/favicons/manifest.json\" rel=\"manifest\" />\n        <link href=\"https://fantasy.espngoal.nl\" rel=\"canonical\" />\n        <meta content=\"\" name=\"description\" />\n        <meta content=\"ESPN Fantasy Voetbal\" property=\"og:title\" />\n        <meta content=\"ESPN Fantasy Voetbal\" property=\"og:description\" />\n        <meta content=\"ESPN Fantasy Voetbal\" property=\"og:site_name\" />\n        <meta content=\"https://fantasy.espngoal.nl\" property=\"og:url\" />\n        <meta content=\"website\" property=\"og:type\" />\n        <meta content=\"ar\" property=\"og:locale\" />\n        <meta content=\"#ffffff\" name=\"msapplication-TileColor\" />\n        <meta content=\"#ffffff\" name=\"theme-color\" />\n        <!-- Load Roboto font -->\n        <link href=\"https://fonts.googleapis.com\" rel=\"preconnect\" />\n        <link\n            crossorigin=\"\"\n            href=\"https://fonts.gstatic.com\"\n            rel=\"preconnect\"\n        />\n        <link\n            href=\"https://font"
+    },
+    {
+      "path": "/.well-known/assetlinks.json",
+      "status": 404,
+      "final_url": "https://fantasy.espngoal.nl/.well-known/assetlinks.json",
+      "bytes": 552,
+      "preview": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>openresty</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
+    }
+  ]
+}
