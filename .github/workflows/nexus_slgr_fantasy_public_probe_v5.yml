@@ -1,0 +1,43 @@
+name: Nexus SLGR Fantasy Public Probe v5
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-slgr-fantasy-public-probe-v5-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - run: sudo mkdir -p /mnt/data/nexus-slgr-fantasy-public-probe-v5 && sudo chown -R $USER:$USER /mnt/data
+      - run: python scripts/probe_slgr_fantasy_public_v5.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexus-slgr-fantasy-public-probe-v5
+          path: /mnt/data/nexus-slgr-fantasy-public-probe-v5
+          if-no-files-found: warn
+      - name: Record result
+        if: always()
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-slgr-fantasy-public-probe-v5-status
+          if [ -f /mnt/data/nexus-slgr-fantasy-public-probe-v5/RESULT.json ]; then
+            cp /mnt/data/nexus-slgr-fantasy-public-probe-v5/RESULT.json .nexus-slgr-fantasy-public-probe-v5-status/RESULT.json
+          else
+            printf '{"schema":"NEXUS_SLGR_FANTASY_PUBLIC_PROBE_V5","status":"NO_RESULT_FILE","run_id":%s}\n' "$GITHUB_RUN_ID" > .nexus-slgr-fantasy-public-probe-v5-status/RESULT.json
+          fi
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .nexus-slgr-fantasy-public-probe-v5-status/RESULT.json
+          git commit -m 'ci: record SLGR Fantasy public probe v5' || exit 0
+          git push origin HEAD:main
