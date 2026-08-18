@@ -1,0 +1,54 @@
+name: Nexus UEFA UCL Fantasy Public Probe v2
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-uefa-ucl-fantasy-probe-v2-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - run: sudo mkdir -p /mnt/data/nexus-uefa-ucl-fantasy-probe-v2 && sudo chown -R $USER:$USER /mnt/data
+      - name: Bounded probe
+        run: timeout 15m python scripts/probe_uefa_ucl_fantasy_v2.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexus-uefa-ucl-fantasy-probe-v2
+          path: /mnt/data/nexus-uefa-ucl-fantasy-probe-v2
+          if-no-files-found: warn
+      - name: Record terminal status
+        if: always()
+        run: |
+          set -euo pipefail
+          tmp=$(mktemp)
+          python - "$tmp" '${{ job.status }}' "$GITHUB_RUN_ID" <<'PY'
+          import json,sys
+          from pathlib import Path
+          out,status,run_id=sys.argv[1:]
+          p={'workflow':'Nexus UEFA UCL Fantasy Public Probe v2','job_status':status,'run_id':int(run_id)}
+          r=Path('/mnt/data/nexus-uefa-ucl-fantasy-probe-v2/RESULT.json')
+          q=Path('/mnt/data/nexus-uefa-ucl-fantasy-probe-v2/PROGRESS.json')
+          if r.is_file(): p['result']=json.load(open(r))
+          elif q.is_file(): p['progress']=json.load(open(q));p['result_missing']=True
+          else:p['result_missing']=True
+          Path(out).write_text(json.dumps(p,ensure_ascii=False,indent=2)+'\n')
+          PY
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-uefa-ucl-fantasy-probe-v2-status
+          cp "$tmp" .nexus-uefa-ucl-fantasy-probe-v2-status/RESULT.json
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .nexus-uefa-ucl-fantasy-probe-v2-status/RESULT.json
+          git commit -m 'ci: record UEFA UCL Fantasy public probe v2 terminal status' || exit 0
+          git push origin HEAD:main
