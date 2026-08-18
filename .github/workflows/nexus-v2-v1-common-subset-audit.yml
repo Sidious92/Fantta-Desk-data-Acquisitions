@@ -15,14 +15,14 @@ jobs:
       - uses: actions/checkout@v6
         with:
           repository: Sidious92/FantaDesk
-          ref: 48f901745bfb3dd09be049676fccf61ca8881aee
+          ref: 3d1ac912d2861fcbf5bcace8e1db86e9f1a6e924
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: fantadesk-private
           persist-credentials: false
       - shell: bash
         run: |
           set -euo pipefail
-          test "$(git -C fantadesk-private rev-parse HEAD)" = "48f901745bfb3dd09be049676fccf61ca8881aee"
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "3d1ac912d2861fcbf5bcace8e1db86e9f1a6e924"
           sudo mkdir -p /mnt/data && sudo chown "$USER":"$USER" /mnt/data
       - uses: actions/setup-python@v6
         with:
@@ -41,7 +41,7 @@ jobs:
           python fantadesk-private/scripts/nexus-v2-build-minutes-surface-cached.py
           python fantadesk-private/scripts/nexus-v2-build-event-roster-surface.py
           echo "09022f38648708268e424877e7f2f473f48a84ecaa7a399afbc9fb372c36dfd2  /mnt/data/nexus_v2_event_roster_surface.csv" | sha256sum --check --strict
-      - name: Run exact-key comparison audit
+      - name: Run exact serving-key comparison audit
         shell: bash
         run: python fantadesk-private/scripts/nexus-v2-v1-common-subset-audit.py
       - name: Validate result
@@ -50,7 +50,7 @@ jobs:
           test -f /mnt/data/nexus_v2_v1_common_subset_audit.json;mkdir -p output;cp /mnt/data/nexus_v2_v1_common_subset_audit.json output/audit.json
           python - <<'PY'
           import json
-          p=json.load(open('output/audit.json'));assert p['status']=='PASS';assert p['selection_effect']=='NONE';assert p['identity_rule']=='CORE_PANEL_CERTIFIED_SEASON_ID_TARGET_KEYS';assert p['targets']['GOALS']['common_n']==451;assert p['targets']['ASSISTS']['common_n']==451;assert p['no_player_rows'] is True
+          p=json.load(open('output/audit.json'));assert p['status']=='PASS';assert p['selection_effect']=='NONE';assert p['identity_rule']=='CORE_PANEL_CERTIFIED_SEASON_ID_TARGET_KEYS_TEST_MINUTES_NOT_REQUIRED';assert p['targets']['GOALS']['common_n']==451;assert p['targets']['ASSISTS']['common_n']==451;assert p['no_player_rows'] is True
           print('V2_V1_COMMON_AUDIT=PASS')
           PY
       - uses: actions/upload-artifact@v4
