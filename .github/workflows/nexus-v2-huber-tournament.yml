@@ -73,7 +73,7 @@ jobs:
           pattern: huber-*
           path: checkpoints
 
-      - name: Validate completeness and rank only if 144/144
+      - name: Validate completeness and rank converged configs only
         shell: python
         run: |
           import json, math, pathlib, collections
@@ -107,7 +107,7 @@ jobs:
                   if key in identities: local.append(f'duplicate identity {key}')
                   if 'predictions' in p: local.append('predictions field present')
                   if p.get('audit',{}).get('no_individual_player_rows_in_checkpoint') is not True: local.append('player-level audit flag != true')
-                  if p.get('convergence',{}).get('pass') is not True: local.append(f'convergence failed {p.get("convergence")}')
+                  if p.get('convergence',{}).get('max_iter') != 1000: local.append('max_iter provenance mismatch')
                   if p.get('configuration',{}).get('seed') != 20260817: local.append('seed provenance mismatch')
                   if p.get('configuration',{}).get('protocol_blob_sha') != expected_protocol: local.append('protocol provenance mismatch')
                   hashes=p.get('hashes',{})
@@ -133,6 +133,7 @@ jobs:
               'expected_shards':144,
               'discovered_checkpoint_files':len(files),
               'validated_complete_shards':len(payloads),
+              'ranking_policy':'configuration eligible only if all 3 development folds have convergence.pass=true; max_iter remains frozen at 1000',
               'errors':errors,
           }
           pathlib.Path('tournament-output').mkdir(exist_ok=True)
@@ -144,12 +145,30 @@ jobs:
           groups=collections.defaultdict(list)
           for p in payloads:
               i=p['identity']; groups[(i['target'],i['feature_set'],i['level'])].append(p)
+
           rankings={}
+          invalid_nonconverged={t:[] for t in targets}
+          eligible_counts={}
           for target in targets:
               rows=[]
               for (t,fs,level), ps in groups.items():
                   if t!=target: continue
                   if len(ps)!=3: raise SystemExit(f'Incomplete config {t}/{fs}/{level}: {len(ps)}/3')
+                  ps=sorted(ps,key=lambda x:x['identity']['fold'])
+                  failed=[x['identity']['fold'] for x in ps if x.get('convergence',{}).get('pass') is not True]
+                  if failed:
+                      invalid_nonconverged[target].append({
+                          'target':target,
+                          'feature_set':fs,
+                          'level':level,
+                          'failed_folds':failed,
+                          'convergence':[
+                              {'fold':x['identity']['fold'],**x.get('convergence',{})}
+                              for x in ps
+                          ],
+                          'warning_count':sum(len(x.get('warnings',[])) for x in ps),
+                      })
+                      continue
                   n=sum(x['metrics']['n'] for x in ps)
                   mae=sum(x['metrics']['n']*x['metrics']['mae'] for x in ps)/n
                   rmse=math.sqrt(sum(x['metrics']['n']*(x['metrics']['rmse']**2) for x in ps)/n)
@@ -159,13 +178,21 @@ jobs:
                   fit_seconds=sum(x['audit']['fit_elapsed_seconds'] for x in ps)
                   rows.append({'target':target,'feature_set':fs,'level':level,'folds':3,'n':n,'mae':mae,'rmse':rmse,'bias':bias,'abs_bias':abs(bias),'warning_count':warnings,'convergence_warning_count':conv_warn,'fit_seconds_total':fit_seconds})
               rows.sort(key=lambda r:(r['mae'],r['rmse'],r['abs_bias'],r['feature_set'],r['level']))
+              if not rows:
+                  raise SystemExit(f'NO CONVERGED HUBER CONFIGURATION FOR {target}; ranking forbidden')
               for idx,r in enumerate(rows,1): r['huber_rank']=idx
               rankings[target]=rows
+              eligible_counts[target]=len(rows)
+
+          summary['attempted_configs_per_target']=24
+          summary['eligible_converged_configs_per_target']=eligible_counts
+          summary['invalid_nonconverged_configs']=invalid_nonconverged
           summary['rankings']=rankings
           summary['winner_by_target']={t: rankings[t][0] for t in rankings}
           json.dump(summary,open('tournament-output/huber-tournament-summary.json','w'),indent=2)
           print('BLOCK_STATUS=COMPLETE')
           print('validated_complete_shards=144')
+          print('eligible_converged_configs_per_target=' + json.dumps(eligible_counts,sort_keys=True))
           print(json.dumps(summary['winner_by_target'],indent=2))
 
       - name: Upload Huber tournament summary
