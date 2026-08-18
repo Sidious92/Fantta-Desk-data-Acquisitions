@@ -13,12 +13,124 @@ HEADERS = {
 }
 
 
+def summarize_forms(soup):
+    forms = []
+    for idx, form in enumerate(soup.find_all("form")):
+        fields = []
+        for el in form.find_all(["input", "select", "button", "textarea"]):
+            rec = {
+                "tag": el.name,
+                "name": el.get("name"),
+                "type": el.get("type"),
+                "value": el.get("value"),
+            }
+            if el.name == "select":
+                rec["selected"] = [
+                    {"value": o.get("value"), "text": o.get_text(" ", strip=True)}
+                    for o in el.find_all("option") if o.has_attr("selected")
+                ]
+                rec["options_sample"] = [
+                    {"value": o.get("value"), "text": o.get_text(" ", strip=True)}
+                    for o in el.find_all("option")[:12]
+                ]
+            fields.append(rec)
+        forms.append({
+            "index": idx,
+            "method": (form.get("method") or "GET").upper(),
+            "action": form.get("action"),
+            "id": form.get("id"),
+            "class": form.get("class"),
+            "text_preview": re.sub(r"\s+", " ", form.get_text(" ", strip=True))[:1000],
+            "fields": fields,
+        })
+    return forms
+
+
 def probe_comunio():
     url = "https://stats.comunio.de/search.php"
-    params = {"lang":"en","season":2026,"orderBy":"points","direc":"DESC","startLimit":0}
-    r = requests.get(url, params=params, headers=HEADERS, timeout=30, allow_redirects=True)
+    base_params = {"lang":"en","season":2026,"orderBy":"points","direc":"DESC","startLimit":0}
+    r = requests.get(url, params=base_params, headers=HEADERS, timeout=30, allow_redirects=True)
     soup = BeautifulSoup(r.content, "lxml")
     hrefs = [a.get("href") for a in soup.find_all("a", href=True)]
+    forms = summarize_forms(soup)
+
+    # Try to submit the player-search form using the actual names discovered
+    # from the page. Blank-name searches are useful because the target is a
+    # complete ranked player table, not a single player lookup.
+    submit_tests = []
+    candidate_form = None
+    for f in forms:
+        names = {x.get("name") for x in f["fields"] if x.get("name")}
+        if "season" in names and ("name" in names or "playerName" in names or "search" in names):
+            candidate_form = f
+            break
+    if candidate_form is None:
+        for f in forms:
+            if "Player Search" in f.get("text_preview", ""):
+                candidate_form = f
+                break
+
+    if candidate_form:
+        defaults = {}
+        submit_names = []
+        for field in candidate_form["fields"]:
+            name = field.get("name")
+            if not name:
+                continue
+            tag = field.get("tag")
+            typ = (field.get("type") or "").lower()
+            if tag == "select":
+                selected = field.get("selected") or []
+                if selected:
+                    defaults[name] = selected[0].get("value")
+                elif field.get("options_sample"):
+                    defaults[name] = field["options_sample"][0].get("value")
+            elif typ in {"submit", "button"}:
+                submit_names.append((name, field.get("value") or "Search"))
+            elif typ not in {"checkbox", "radio"}:
+                defaults[name] = field.get("value") or ""
+        defaults["season"] = "2026"
+        for key in ["name", "playerName", "searchName"]:
+            if key in defaults:
+                defaults[key] = ""
+        # Explicitly request broad ranges if the form exposes them.
+        for key in ["minPoints", "minP", "pointsMin", "minValue", "mvMin"]:
+            if key in defaults:
+                defaults[key] = ""
+        tests = [("defaults", dict(defaults))]
+        for submit_name, submit_value in submit_names[:3]:
+            p = dict(defaults)
+            p[submit_name] = submit_value
+            tests.append((f"submit_{submit_name}", p))
+        # Common legacy submit conventions, harmless if ignored.
+        for extra in [
+            {"submit":"Search"}, {"search":"Search"}, {"doSearch":"1"}, {"send":"1"}
+        ]:
+            p = dict(defaults); p.update(extra)
+            tests.append(("extra_" + next(iter(extra)), p))
+
+        target = urljoin(r.url, candidate_form.get("action") or "")
+        for name, payload in tests:
+            try:
+                if candidate_form.get("method") == "POST":
+                    rr = requests.post(target, data=payload, headers=HEADERS, timeout=30, allow_redirects=True)
+                else:
+                    rr = requests.get(target, params=payload, headers=HEADERS, timeout=30, allow_redirects=True)
+                ss = BeautifulSoup(rr.content, "lxml")
+                hh = [a.get("href") for a in ss.find_all("a", href=True)]
+                submit_tests.append({
+                    "name": name,
+                    "status": rr.status_code,
+                    "final_url": rr.url,
+                    "bytes": len(rr.content),
+                    "title": ss.title.get_text(" ", strip=True) if ss.title else None,
+                    "profile_hrefs": [h for h in hh if h and ("profile" in h.lower() or "spieler" in h.lower())][:40],
+                    "row_count": len(ss.find_all("tr")),
+                    "text_tail": re.sub(r"\s+", " ", ss.get_text(" ", strip=True))[-1800:],
+                })
+            except Exception as exc:
+                submit_tests.append({"name":name,"error":str(exc)})
+
     return {
         "status": r.status_code,
         "final_url": r.url,
@@ -26,10 +138,10 @@ def probe_comunio():
         "bytes": len(r.content),
         "title": soup.title.get_text(" ", strip=True) if soup.title else None,
         "href_count": len(hrefs),
-        "href_sample": hrefs[:80],
-        "profile_like_hrefs": [h for h in hrefs if h and ("profile" in h.lower() or "player" in h.lower())][:80],
-        "text_preview": re.sub(r"\\s+", " ", soup.get_text(" ", strip=True))[:3000],
-        "html_preview": r.text[:5000],
+        "forms": forms,
+        "candidate_form": candidate_form,
+        "submit_tests": submit_tests,
+        "text_preview": re.sub(r"\s+", " ", soup.get_text(" ", strip=True))[:2600],
     }
 
 
@@ -63,30 +175,45 @@ def probe_biwenger_detail(sample):
     base = f"https://cf.biwenger.com/api/v2/players/la-liga/{slug}"
     referer_headers = dict(HEADERS)
     referer_headers.update({"Referer":"https://biwenger.as.com/players","Accept":"application/json, text/plain, */*"})
-    plain_fields = "*,team,fitness,reports(points,home,events,status(status,statusText),match(*,round,home,away),star),prices,competition,seasons,news,threads"
-    encoded_fields = "*%2Cteam%2Cfitness%2Creports(points%2Chome%2Cevents%2Cstatus(status%2CstatusText)%2Cmatch(*%2Cround%2Chome%2Caway)%2Cstar)%2Cprices%2Ccompetition%2Cseasons%2Cnews%2Cthreads"
-    tests = []
-    candidates = [
-        ("plain_params", {"fields":plain_fields,"score":2,"lang":"en"}, None),
-        ("encoded_params", {"fields":encoded_fields,"score":2,"lang":"en"}, None),
-        ("literal_query", None, f"{base}?fields={encoded_fields}&score=2&lang=en"),
-        ("minimal", {"score":2,"lang":"en"}, None),
+    field_values = [
+        None,
+        "*",
+        "team",
+        "reports",
+        "seasons",
+        "prices",
+        "fitness",
+        "*,team",
+        "*,reports",
+        "*,seasons",
+        "*,reports,seasons",
+        "*,team,reports,seasons,prices,fitness,competition",
     ]
-    for name, params, literal in candidates:
-        u = literal or base
+    tests = []
+    for fields in field_values:
+        params = {"score":2,"lang":"en"}
+        name = "minimal" if fields is None else "fields_" + fields.replace("*","star").replace(",","_")
+        if fields is not None:
+            params["fields"] = fields
         try:
-            r = requests.get(u, params=params, headers=referer_headers, timeout=30, allow_redirects=True)
-            rec = {"name":name,"status":r.status_code,"final_url":r.url,"content_type":r.headers.get("content-type"),"bytes":len(r.content),"body_preview":r.text[:1200]}
+            r = requests.get(base, params=params, headers=referer_headers, timeout=30, allow_redirects=True)
+            rec = {"name":name,"fields":fields,"status":r.status_code,"final_url":r.url,"content_type":r.headers.get("content-type"),"bytes":len(r.content),"body_preview":r.text[:900]}
             try:
                 obj=r.json()
                 data=(obj.get("data") or {}) if isinstance(obj,dict) else None
                 rec["top_keys"] = sorted(obj.keys()) if isinstance(obj,dict) else None
                 rec["data_keys"] = sorted(data.keys()) if isinstance(data,dict) else None
+                if isinstance(data,dict):
+                    for key in ["reports","seasons","prices","fitness","competition","team"]:
+                        if key in data:
+                            v=data[key]
+                            rec[key+"_type"] = type(v).__name__
+                            rec[key+"_len"] = len(v) if isinstance(v,(list,dict)) else None
             except Exception:
                 pass
             tests.append(rec)
         except Exception as exc:
-            tests.append({"name":name,"error":str(exc)})
+            tests.append({"name":name,"fields":fields,"error":str(exc)})
     return {"sample_slug":slug,"tests":tests}
 
 
