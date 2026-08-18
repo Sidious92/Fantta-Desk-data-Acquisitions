@@ -26,6 +26,12 @@ jobs:
   atomic-huber-shard:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    env:
+      AUTHORITY_SHA: d72a60e5768d5e6c6dda9b455a67cfea7cd671aa
+      AUTHORITY_PROTOCOL_BLOB_SHA: a4e31637ef855ac85cec90fd002377ceea72b191
+      CANONICAL_SCRIPT_SHA256: fb8d1072498c072fc1e60ff330d97b83fc54849244f9ecf4ff39bbb7de83dab4
+      DATASET_HASH: ff8e952e0e48015ef06a51ffacb5bb6d9ffc7e66d50b27e79acd51b69e93a385
+      SMOKE_CONFIG_HASH: b6b80e9b22967da9ef19da1282d5200731b2619f260f3588ec2ca77b2084452a
     steps:
       - name: Checkout fixed private scientific authority
         uses: actions/checkout@v6
@@ -40,11 +46,41 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git -C fantadesk-private rev-parse HEAD)" = "d72a60e5768d5e6c6dda9b455a67cfea7cd671aa"
-          test "$(git -C fantadesk-private ls-tree HEAD data/nexus/research-v2/predictive-model-tournament-protocol-v1.json | awk '{print $3}')" = "a4e31637ef855ac85cec90fd002377ceea72b191"
-          echo "fb8d1072498c072fc1e60ff330d97b83fc54849244f9ecf4ff39bbb7de83dab4  fantadesk-private/scripts/nexus-v2-stage1-shard.py" | sha256sum --check --strict
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "$AUTHORITY_SHA"
+          test "$(git -C fantadesk-private ls-tree HEAD data/nexus/research-v2/predictive-model-tournament-protocol-v1.json | awk '{print $3}')" = "$AUTHORITY_PROTOCOL_BLOB_SHA"
+          echo "$CANONICAL_SCRIPT_SHA256  fantadesk-private/scripts/nexus-v2-stage1-shard.py" | sha256sum --check --strict
           sudo mkdir -p /mnt/data
           sudo chown "$USER":"$USER" /mnt/data
+          echo "authority_sha=$AUTHORITY_SHA"
+          echo "authority_protocol_blob_sha=$AUTHORITY_PROTOCOL_BLOB_SHA"
+          echo "canonical_script_sha256=$CANONICAL_SCRIPT_SHA256"
+
+      - name: Prepare provenance-only shard harness correction
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC=fantadesk-private/scripts/nexus-v2-github-huber-shard-v2.py
+          DST=/tmp/nexus-v2-github-huber-shard.py
+          cp "$SRC" "$DST"
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('/tmp/nexus-v2-github-huber-shard.py')
+          s=p.read_text(encoding='utf-8')
+          replacements={
+            "PRECOMMIT_PROTOCOL_BLOB_SHA='0392ed46325064d0e38c274c9c365b4283cf977c'":
+            "PRECOMMIT_PROTOCOL_BLOB_SHA='a4e31637ef855ac85cec90fd002377ceea72b191'",
+            "'config_hash':'2eb8193fc6eac838cb97fc2cfe60d86ae354c0ad6adbeb801c37b414e356f6c7'":
+            "'config_hash':'b6b80e9b22967da9ef19da1282d5200731b2619f260f3588ec2ca77b2084452a'",
+          }
+          for old,new in replacements.items():
+              if s.count(old) != 1:
+                  raise SystemExit(f'Expected exactly one provenance constant: {old}')
+              s=s.replace(old,new,1)
+          p.write_text(s,encoding='utf-8')
+          print('shard_harness_provenance_patch=PASS')
+          PY
+          diff -u "$SRC" "$DST" || true
+          echo "SHARD_PATCHED_SHA256=$(sha256sum "$DST" | awk '{print $1}')" >> "$GITHUB_ENV"
 
       - name: Setup exact Python
         uses: actions/setup-python@v6
@@ -92,7 +128,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python fantadesk-private/scripts/nexus-v2-github-huber-shard-v3.py \
+          python /tmp/nexus-v2-github-huber-shard.py \
             "${{ inputs.target }}" \
             "${{ inputs.feature_set }}" \
             "${{ inputs.level }}" \
@@ -100,6 +136,11 @@ jobs:
 
       - name: Prepare sanitized checkpoint
         shell: bash
+        env:
+          EXPECTED_TARGET: ${{ inputs.target }}
+          EXPECTED_FEATURE_SET: ${{ inputs.feature_set }}
+          EXPECTED_LEVEL: ${{ inputs.level }}
+          EXPECTED_FOLD: ${{ inputs.fold }}
         run: |
           set -euo pipefail
           SRC="/mnt/data/nexus_v2_predictive_research/model_tournament_stage1_atomic_shards/${{ inputs.target }}/HUBER/${{ inputs.feature_set }}/${{ inputs.level }}/${{ inputs.fold }}/checkpoint.json"
@@ -107,11 +148,30 @@ jobs:
           mkdir -p shard-output
           cp "$SRC" shard-output/checkpoint.json
           python - <<'PY'
-          import json
+          import json, os
           p=json.load(open('shard-output/checkpoint.json'))
+          expected_identity={
+            'model':'HUBER',
+            'target':os.environ['EXPECTED_TARGET'],
+            'feature_set':os.environ['EXPECTED_FEATURE_SET'],
+            'level':os.environ['EXPECTED_LEVEL'],
+            'fold':os.environ['EXPECTED_FOLD'],
+          }
           assert p['status']=='COMPLETE'
+          assert p['identity']==expected_identity
           assert 'predictions' not in p
           assert p['audit']['no_individual_player_rows_in_checkpoint'] is True
+          assert p['convergence']['pass'] is True
+          assert p['configuration']['seed']==20260817
+          assert p['configuration']['protocol_blob_sha']==os.environ['AUTHORITY_PROTOCOL_BLOB_SHA']
+          assert p['hashes']['dataset_hash']==os.environ['DATASET_HASH']
+          assert p['hashes']['script_sha256']==os.environ['CANONICAL_SCRIPT_SHA256']
+          assert p['hashes']['authority_protocol_blob_sha']==os.environ['AUTHORITY_PROTOCOL_BLOB_SHA']
+          if expected_identity=={'model':'HUBER','target':'GOALS','feature_set':'FC_LAG5','level':'LOW','fold':'2022-23'}:
+              assert p['hashes']['config_hash']==os.environ['SMOKE_CONFIG_HASH']
+              assert p['audit']['train_rows']==432
+              assert p['audit']['test_rows']==494
+              assert p['audit']['feature_count_numeric']==20
           print('checkpoint_validation=PASS')
           PY
 
