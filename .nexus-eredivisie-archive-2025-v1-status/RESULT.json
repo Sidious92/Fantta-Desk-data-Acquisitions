@@ -1,0 +1,49 @@
+{
+  "workflow": "Nexus Eredivisie Archive 2025 v1",
+  "job_status": "success",
+  "run_id": 32183205275,
+  "manifest": {
+    "schema": "NEXUS_EREDIVISIE_ARCHIVE_2025_V1",
+    "status": "PASS",
+    "capture_completed": "2026-08-18T20:36:56.472029+00:00",
+    "archive_repository": "TopMarx/eredivisie",
+    "archive_git_sha": "f15cafbef174ed4263b8e05b4935f0b65aa5cda1",
+    "archive_path": "data/2025",
+    "season": "2025-26",
+    "coverage": {
+      "bootstrap_players": 693,
+      "teams": 18,
+      "player_files": 693,
+      "gameweek_files": 68,
+      "csv_files": 700,
+      "total_files": 1467
+    },
+    "governance": {
+      "current_2026_27_snapshot_overwritten": false,
+      "cross_provider_normalization_performed": false,
+      "missing_values_filled": false,
+      "predictive_models_modified": false,
+      "decision_layer_started": false
+    }
+  },
+  "validation": {
+    "status": "PASS",
+    "checks": {
+      "manifest_pass": true,
+      "players_gt_300": true,
+      "player_files_gt_100": true,
+      "gameweeks_gt_10": true,
+      "archive_sha_known": true,
+      "no_model_mutation": true
+    },
+    "coverage": {
+      "bootstrap_players": 693,
+      "teams": 18,
+      "player_files": 693,
+      "gameweek_files": 68,
+      "csv_files": 700,
+      "total_files": 1467
+    },
+    "archive_git_sha": "f15cafbef174ed4263b8e05b4935f0b65aa5cda1"
+  }
+}
