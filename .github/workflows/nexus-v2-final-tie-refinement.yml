@@ -1,0 +1,104 @@
+name: Nexus v2 Final Tie Refinement
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.nexus-v2-final-tie-refinement-launch/EXECUTE'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  refine:
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [GOALS, ASSISTS]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 5417bbff8f1f14d7f1de0db6ed0d54dff5b611a9
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+      - name: Verify authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "5417bbff8f1f14d7f1de0db6ed0d54dff5b611a9"
+          test -f fantadesk-private/data/nexus/research-v2/events/nexus-v2-final-tie-refinement-protocol-v1.json
+          test -f fantadesk-private/scripts/nexus-v2-final-tie-refinement.py
+          sudo mkdir -p /mnt/data && sudo chown "$USER":"$USER" /mnt/data
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+      - name: Install pinned environment
+        shell: bash
+        run: |
+          python -m pip install --no-cache-dir numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 joblib==1.5.3 threadpoolctl==3.6.0 orjson==3.11.9 xgboost==3.1.3 lightgbm==4.6.0 catboost==1.2.8
+      - name: Materialize exact surfaces
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+          cp fantadesk-private/scripts/nexus-v2-minutes-surface-one.py /mnt/data/minutes_surface_one.py
+          for season in 2021-22 2022-23 2023-24 2024-25 2025-26; do python fantadesk-private/scripts/nexus-v2-precompute-usage-cache.py "$season"; done
+          python fantadesk-private/scripts/nexus-v2-build-minutes-surface-cached.py
+          echo "5898b2c01490e9a1ab21e19c159c4ba51fadbd300470f19e31f6384da13d4f2c  /mnt/data/nexus_v2_minutes_roster_surface.csv" | sha256sum --check --strict
+          python fantadesk-private/scripts/nexus-v2-build-event-roster-surface.py
+          echo "09022f38648708268e424877e7f2f473f48a84ecaa7a399afbc9fb372c36dfd2  /mnt/data/nexus_v2_event_roster_surface.csv" | sha256sum --check --strict
+      - name: Run refinement and final paired
+        shell: bash
+        run: python fantadesk-private/scripts/nexus-v2-final-tie-refinement.py "${{ matrix.target }}"
+      - name: Validate sanitized result
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC="/mnt/data/final_tie_refinement_${{ matrix.target }}.json";test -f "$SRC";mkdir -p output;cp "$SRC" output/summary.json
+          python - <<'PY'
+          import json
+          p=json.load(open('output/summary.json'));assert p['status']=='FINAL_TIE_REFINEMENT_COMPLETE';assert p['event_surface_hash']=='09022f38648708268e424877e7f2f473f48a84ecaa7a399afbc9fb372c36dfd2';assert p['2025-26']=='NOT_USED';assert p['no_player_rows'] is True
+          expected=14 if p['target']=='GOALS' else 15;assert len(p['all_config_results'])==expected;assert len(p['architecture_root_best'])==3
+          print('FINAL_TIE_REFINEMENT=PASS',p['target'],p['best_candidate_id'],len(p['tie_group']))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: final-tie-refinement-${{ matrix.target }}
+          path: output/summary.json
+          if-no-files-found: error
+          retention-days: 7
+  aggregate:
+    needs: refine
+    if: ${{ always() && needs.refine.result == 'success' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          pattern: final-tie-refinement-*
+          path: artifacts
+          merge-multiple: false
+      - name: Validate 2/2
+        shell: bash
+        run: |
+          python - <<'PY'
+          import glob,json,os
+          ff=glob.glob('artifacts/**/summary.json',recursive=True)
+          if len(ff)!=2:raise SystemExit(f'INCOMPLETE {len(ff)}/2')
+          out={'status':'FINAL_TIE_REFINEMENT_COMPLETE','targets':{},'2025-26':'NOT_USED','no_player_rows':True}
+          for f in ff:
+              p=json.load(open(f));out['targets'][p['target']]=p
+          assert set(out['targets'])=={'GOALS','ASSISTS'}
+          os.makedirs('summary',exist_ok=True);json.dump(out,open('summary/final-tie-refinement-summary.json','w'),separators=(',',':'))
+          for t,p in out['targets'].items():print(t,p['best_candidate_id'],p['architecture_root_best'][0]['pooled']['mae'],'tie',len(p['tie_group']))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-final-tie-refinement-summary
+          path: summary/final-tie-refinement-summary.json
+          if-no-files-found: error
+          retention-days: 7
