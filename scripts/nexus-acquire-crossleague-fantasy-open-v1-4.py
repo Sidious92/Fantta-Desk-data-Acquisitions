@@ -20,11 +20,7 @@ def biwenger_capture(root: Path):
     provider_root = mod.mkdir(root / "biwenger")
     base_catalog = "https://cf.biwenger.com/api/v2/competitions/la-liga/data"
     base_player = "https://cf.biwenger.com/api/v2/players/la-liga"
-    headers = dict(mod.HEADERS)
-    headers.update({"Referer": "https://biwenger.as.com/players", "Accept": "application/json, text/plain, */*"})
 
-    # request_bytes uses the module's standard headers. Biwenger's public CDN
-    # endpoint currently accepts those; Referer is retained in provenance docs.
     catalogs = []
     catalog_fields = set()
     player_catalog_rows = []
@@ -79,7 +75,9 @@ def biwenger_capture(root: Path):
     detail_fields = set()
     detail_rows = []
     errors = []
-    fields = "*%2Cteam%2Cfitness%2Creports(points%2Chome%2Cevents%2Cstatus(status%2CstatusText)%2Cmatch(*%2Cround%2Chome%2Caway)%2Cstar)%2Cprices%2Ccompetition%2Cseasons%2Cnews%2Cthreads"
+    # Keep this unescaped: requests encodes the query parameter once. Passing
+    # an already percent-encoded value would double-encode the commas/parentheses.
+    fields = "*,team,fitness,reports(points,home,events,status(status,statusText),match(*,round,home,away),star),prices,competition,seasons,news,threads"
 
     def fetch_detail(p):
         slug = p.get("slug")
@@ -165,10 +163,10 @@ def main():
         df.to_csv(idx, index=False)
 
     fields_path = root / "field-inventory.json"
-    fields = json.load(open(fields_path, encoding="utf-8"))
-    fields["BIWENGER_CATALOG_FIELDS"] = biw["catalog_fields"]
-    fields["BIWENGER_PLAYER_DETAIL_FIELDS"] = biw["detail_fields"]
-    mod.write_json(fields_path, fields)
+    fields_inventory = json.load(open(fields_path, encoding="utf-8"))
+    fields_inventory["BIWENGER_CATALOG_FIELDS"] = biw["catalog_fields"]
+    fields_inventory["BIWENGER_PLAYER_DETAIL_FIELDS"] = biw["detail_fields"]
+    mod.write_json(fields_path, fields_inventory)
 
     manifest_path = root / "manifest.json"
     manifest = json.load(open(manifest_path, encoding="utf-8"))
