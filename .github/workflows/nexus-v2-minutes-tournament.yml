@@ -1,0 +1,173 @@
+name: Nexus v2 Minutes Tournament
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.nexus-v2-minutes-launch/EXECUTE'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  family:
+    strategy:
+      fail-fast: false
+      matrix:
+        family:
+          - RIDGE
+          - ELASTIC_NET
+          - HUBER
+          - POISSON_REGRESSION
+          - RANDOM_FOREST
+          - EXTRA_TREES
+          - HIST_GRADIENT_BOOSTING
+          - XGBOOST
+          - XGBOOST_POISSON
+          - LIGHTGBM
+          - LIGHTGBM_POISSON
+          - CATBOOST
+          - CATBOOST_POISSON
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout fixed private authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: bee88ce362ff04df8c076051baee53a62f660416
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Verify authority and prepare filesystem
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "bee88ce362ff04df8c076051baee53a62f660416"
+          test -f fantadesk-private/data/nexus/research-v2/minutes/nexus-v2-minutes-tournament-protocol-v1.json
+          test -f fantadesk-private/scripts/nexus-v2-minutes-surface-one.py
+          test -f fantadesk-private/scripts/nexus-v2-precompute-usage-cache.py
+          test -f fantadesk-private/scripts/nexus-v2-build-minutes-surface-cached.py
+          test -f fantadesk-private/scripts/nexus-v2-minutes-tournament-family.py
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+
+      - name: Setup exact Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+
+      - name: Install pinned environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --no-cache-dir \
+            numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 \
+            joblib==1.5.3 threadpoolctl==3.6.0 orjson==3.11.9 \
+            xgboost==3.1.3 lightgbm==4.6.0 catboost==1.2.8
+
+      - name: Materialize exact private base inputs
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+
+      - name: Rebuild roster-complete Minutes surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp fantadesk-private/scripts/nexus-v2-minutes-surface-one.py /mnt/data/minutes_surface_one.py
+          for season in 2021-22 2022-23 2023-24 2024-25 2025-26; do
+            python fantadesk-private/scripts/nexus-v2-precompute-usage-cache.py "$season"
+          done
+          python fantadesk-private/scripts/nexus-v2-build-minutes-surface-cached.py
+          echo "5898b2c01490e9a1ab21e19c159c4ba51fadbd300470f19e31f6384da13d4f2c  /mnt/data/nexus_v2_minutes_roster_surface.csv" | sha256sum --check --strict
+
+      - name: Run one complete family
+        shell: bash
+        run: |
+          set -euo pipefail
+          python fantadesk-private/scripts/nexus-v2-minutes-tournament-family.py "${{ matrix.family }}"
+
+      - name: Validate sanitized family checkpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC="/mnt/data/minutes_tournament_${{ matrix.family }}.json"
+          test -f "$SRC"
+          mkdir -p family-output
+          cp "$SRC" family-output/result.json
+          python - <<'PY'
+          import json
+          p=json.load(open('family-output/result.json'))
+          assert p['status']=='COMPLETE'
+          assert p['surface_hash']=='5898b2c01490e9a1ab21e19c159c4ba51fadbd300470f19e31f6384da13d4f2c'
+          assert len(p['results'])==27
+          assert all('pooled' in x and 'folds' in x and 'segments' in x for x in p['results'])
+          print('MINUTES_FAMILY_VALIDATION=PASS',p['family'],len(p['results']))
+          PY
+
+      - name: Upload family metrics
+        uses: actions/upload-artifact@v4
+        with:
+          name: minutes-${{ matrix.family }}
+          path: family-output/result.json
+          if-no-files-found: error
+          retention-days: 7
+
+  aggregate:
+    needs: family
+    if: ${{ always() && needs.family.result == 'success' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Download all family metrics
+        uses: actions/download-artifact@v5
+        with:
+          pattern: minutes-*
+          path: minutes-artifacts
+          merge-multiple: false
+
+      - name: Validate 13/13 and rank
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import glob,json,os
+          expected={'RIDGE','ELASTIC_NET','HUBER','POISSON_REGRESSION','RANDOM_FOREST','EXTRA_TREES','HIST_GRADIENT_BOOSTING','XGBOOST','XGBOOST_POISSON','LIGHTGBM','LIGHTGBM_POISSON','CATBOOST','CATBOOST_POISSON'}
+          files=sorted(glob.glob('minutes-artifacts/**/result.json',recursive=True))
+          if len(files)!=13: raise SystemExit(f'MINUTES_BLOCK_STATUS=INCOMPLETE {len(files)}/13')
+          fam={}
+          rows=[]
+          for fn in files:
+              p=json.load(open(fn))
+              assert p['status']=='COMPLETE'
+              assert p['surface_hash']=='5898b2c01490e9a1ab21e19c159c4ba51fadbd300470f19e31f6384da13d4f2c'
+              assert len(p['results'])==27
+              fam[p['family']]=p
+              for r in p['results']:
+                  rows.append({'family':p['family'],**r})
+          if set(fam)!=expected: raise SystemExit(f'FAMILY SET MISMATCH missing={sorted(expected-set(fam))} extra={sorted(set(fam)-expected)}')
+          rows.sort(key=lambda x:(x['pooled']['mae'],x['pooled']['rmse'],abs(x['pooled']['bias']),x['fold_mae_sd']))
+          family_best=[]
+          for f in sorted(expected):
+              rr=[x for x in rows if x['family']==f]
+              rr.sort(key=lambda x:(x['pooled']['mae'],x['pooled']['rmse'],abs(x['pooled']['bias']),x['fold_mae_sd']))
+              family_best.append(rr[0])
+          family_best.sort(key=lambda x:(x['pooled']['mae'],x['pooled']['rmse'],abs(x['pooled']['bias']),x['fold_mae_sd']))
+          out={'status':'MINUTES_STAGE1_COMPLETE','surface_hash':'5898b2c01490e9a1ab21e19c159c4ba51fadbd300470f19e31f6384da13d4f2c','validated_families':13,'validated_configs':351,'ranking':rows,'family_best':family_best,'best':rows[0],'no_player_rows':True}
+          os.makedirs('minutes-summary',exist_ok=True)
+          json.dump(out,open('minutes-summary/minutes-stage1-summary.json','w'),separators=(',',':'))
+          print('MINUTES_STAGE1_COMPLETE 13/13 configs=351')
+          for i,r in enumerate(family_best[:5],1):
+              print(i,r['family'],r['feature_set'],r['level'],r['pooled']['mae'],r['pooled']['rmse'],r['pooled']['spearman'])
+          PY
+
+      - name: Upload complete Minutes tournament summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-minutes-stage1-summary
+          path: minutes-summary/minutes-stage1-summary.json
+          if-no-files-found: error
+          retention-days: 7
