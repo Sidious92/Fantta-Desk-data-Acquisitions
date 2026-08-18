@@ -1,5 +1,53 @@
 {
   "workflow": "Nexus Belgian Fantasy Pro League Public v1.1",
-  "job_status": "failure",
-  "run_id": 32182703061
+  "job_status": "success",
+  "run_id": 32183051811,
+  "manifest": {
+    "schema": "NEXUS_BELGIAN_FANTASY_PROLEAGUE_PUBLIC_V1",
+    "start_url": "https://fantasy.proleague.be/stats",
+    "downloads": [],
+    "api_candidates": [],
+    "status": "PASS_PUBLIC_SURFACE",
+    "page": {
+      "status": 200,
+      "final_url": "https://fantasy.proleague.be/stats",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 6547,
+      "sha256": "1dadae0d44659cf40e74620d462e8f7f17a930d7d5b2a8bb6c6562d0becc4bcc"
+    },
+    "links": [],
+    "scripts": [
+      "https://fantasy.proleague.be/runtime.a0157df3fd5facc9.esm.js",
+      "https://fantasy.proleague.be/polyfills.909e4b0a7d8da3a1.esm.js",
+      "https://fantasy.proleague.be/main.73dd7476730dceb9.esm.js"
+    ],
+    "script_records": [
+      {
+        "url": "https://fantasy.proleague.be/runtime.a0157df3fd5facc9.esm.js",
+        "status": 200,
+        "bytes": 2072,
+        "sha256": "5fb2ecb6c2361892d58565fb0a9dec164a8616d22ce444d38fa79880cf83d13a",
+        "hits": []
+      },
+      {
+        "url": "https://fantasy.proleague.be/polyfills.909e4b0a7d8da3a1.esm.js",
+        "status": 200,
+        "bytes": 91988,
+        "sha256": "32ffea7c1e4f8de6607f22df7f4138066d5ec5c9c1f0e1ef507af04912bb5f48",
+        "hits": []
+      },
+      {
+        "url": "https://fantasy.proleague.be/main.73dd7476730dceb9.esm.js",
+        "status": 200,
+        "bytes": 5335994,
+        "sha256": "2844828dc90495013f0cf7e6ad0ae3c808ab5e323e75dc2915c3b0dae2830610",
+        "hits": [
+          "https://fanarena.s3.eu-west-1.amazonaws.com/files/spelers_${this.props.application.competition.competitionFeed}_${this.props.application.competition.seasonId}.xlsx`,children:(0,lo.jsxs",
+          "https://fanarena.s3.eu-west-1.amazonaws.com/rebranding/my-stats-bg.jpg",
+          "https://fantasy.proleague.be/stats"
+        ]
+      }
+    ],
+    "sheet_candidates": []
+  }
 }
