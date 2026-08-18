@@ -30,9 +30,9 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
-      - name: Install repository Node dependencies
+      - name: Install pinned jsdom only
         working-directory: fantadesk-private
-        run: npm ci
+        run: npm install --no-save --ignore-scripts --no-audit --no-fund jsdom@30.0.1
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13.5'
