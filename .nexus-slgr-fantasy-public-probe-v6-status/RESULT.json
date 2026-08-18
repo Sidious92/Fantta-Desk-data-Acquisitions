@@ -1,0 +1,334 @@
+{
+  "schema": "NEXUS_SLGR_FANTASY_PUBLIC_PROBE_V6",
+  "api_base": "https://fantaking-api.dunkest.com/api/v1",
+  "league_id": 14,
+  "language": "en",
+  "language_basis": "compiled app supported-language map [en, el]",
+  "fantasy_leaders": {
+    "route": "/leagues/14/fantasy-leaders",
+    "params": {
+      "lang": "en"
+    },
+    "url": "https://fantaking-api.dunkest.com/api/v1/leagues/14/fantasy-leaders?lang=en",
+    "status": 200,
+    "content_type": "application/json",
+    "bytes": 1371,
+    "sha256": "61716074ae997f0cdd2078db0ba5fc86bf00377e561ac6ad5f65f04e86051df0",
+    "preview": "{\"data\":{\"matchday\":{\"id\":1469,\"number\":1},\"fantasy_pts_leaders_of_the_night\":[{\"id\":5660,\"first_name\":\"Ayoub\",\"last_name\":\"El Kaabi\",\"face_path\":null,\"team\":{\"id\":275,\"abbreviation\":\"OLY\"},\"jersey\":null,\"value\":0},{\"id\":10342,\"first_name\":\"Levi\",\"last_name\":\"Garcia\",\"face_path\":null,\"team\":{\"id\":277,\"abbreviation\":\"PAO\"},\"jersey\":null,\"value\":0},{\"id\":5674,\"first_name\":\"Uros\",\"last_name\":\"Racic\",\"face_path\":null,\"team\":{\"id\":269,\"abbreviation\":\"ARIS\"},\"jersey\":null,\"value\":0}],\"fantasy_pts_leaders_of_the_matchday\":[{\"id\":5660,\"first_name\":\"Ayoub\",\"last_name\":\"El Kaabi\",\"face_path\":null,\"team\":{\"id\":275,\"abbreviation\":\"OLY\"},\"jersey\":null,\"value\":0},{\"id\":10342,\"first_name\":\"Levi\",\"last_name\":\"Garcia\",\"face_path\":null,\"team\":{\"id\":277,\"abbreviation\":\"PAO\"},\"jersey\":null,\"value\":0},{\"id\":56",
+    "json_type": "dict",
+    "json_len": 1,
+    "json_keys": [
+      "data"
+    ]
+  },
+  "id_nodes": [
+    {
+      "path": "data.matchday",
+      "ids": {
+        "id": 1469
+      },
+      "keys": [
+        "id",
+        "number"
+      ]
+    },
+    {
+      "path": "data.fantasy_pts_leaders_of_the_night[0]",
+      "ids": {
+        "id": 5660
+      },
+      "keys": [
+        "face_path",
+        "first_name",
+        "id",
+        "jersey",
+        "last_name",
+        "team",
+        "value"
+      ]
+    },
+    {
+      "path": "data.fantasy_pts_leaders_of_the_night[0].team",
+      "ids": {
+        "id": 275
+      },
+      "keys": [
+        "abbreviation",
+        "id"
+      ]
+    },
+    {
+      "path": "data.fantasy_pts_leaders_of_the_night[1]",
+      "ids": {
+        "id": 10342
+      },
+      "keys": [
+        "face_path",
+        "first_name",
+        "id",
+        "jersey",
+        "last_name",
+        "team",
+        "value"
+      ]
+    },
+    {
+      "path": "data.fantasy_pts_leaders_of_the_night[1].team",
+      "ids": {
+        "id": 277
+      },
+      "keys": [
+        "abbreviation",
+        "id"
+      ]
+    },
+    {
+      "path": "data.fantasy_pts_leaders_of_the_night[2]",
+      "ids": {
+        "id": 5674
+      },
+      "keys": [
+        "face_path",
+        "first_name",
+        "id",
+        "jersey",
+        "last_name",
+        "team",
+        "value"
+      ]
+    },
+    {
+      "path": "data.fantasy_pts_leaders_of_the_night[2].team",
+      "ids": {
+        "id": 269
+      },
+      "keys": [
+        "abbreviation",
+        "id"
+      ]
+    },
+    {
+      "path": "data.fantasy_pts_leaders_of_the_matchday[0]",
+      "ids": {
+        "id": 5660
+      },
+      "keys": [
+        "face_path",
+        "first_name",
+        "id",
+        "jersey",
+        "last_name",
+        "team",
+        "value"
+      ]
+    },
+    {
+      "path": "data.fantasy_pts_leaders_of_the_matchday[0].team",
+      "ids": {
+        "id": 275
+      },
+      "keys": [
+        "abbreviation",
+        "id"
+      ]
+    },
+    {
+      "path": "data.fantasy_pts_leaders_of_the_matchday[1]",
+      "ids": {
+        "id": 10342
+      },
+      "keys": [
+        "face_path",
+        "first_name",
+        "id",
+        "jersey",
+        "last_name",
+        "team",
+        "value"
+      ]
+    },
+    {
+      "path": "data.fantasy_pts_leaders_of_the_matchday[1].team",
+      "ids": {
+        "id": 277
+      },
+      "keys": [
+        "abbreviation",
+        "id"
+      ]
+    },
+    {
+      "path": "data.fantasy_pts_leaders_of_the_matchday[2]",
+      "ids": {
+        "id": 5674
+      },
+      "keys": [
+        "face_path",
+        "first_name",
+        "id",
+        "jersey",
+        "last_name",
+        "team",
+        "value"
+      ]
+    },
+    {
+      "path": "data.fantasy_pts_leaders_of_the_matchday[2].team",
+      "ids": {
+        "id": 269
+      },
+      "keys": [
+        "abbreviation",
+        "id"
+      ]
+    },
+    {
+      "path": "data.fantasy_plus_leaders_of_the_matchday[0]",
+      "ids": {
+        "id": 5660
+      },
+      "keys": [
+        "face_path",
+        "first_name",
+        "id",
+        "jersey",
+        "last_name",
+        "team",
+        "value"
+      ]
+    },
+    {
+      "path": "data.fantasy_plus_leaders_of_the_matchday[0].team",
+      "ids": {
+        "id": 275
+      },
+      "keys": [
+        "abbreviation",
+        "id"
+      ]
+    },
+    {
+      "path": "data.fantasy_plus_leaders_of_the_matchday[1]",
+      "ids": {
+        "id": 10342
+      },
+      "keys": [
+        "face_path",
+        "first_name",
+        "id",
+        "jersey",
+        "last_name",
+        "team",
+        "value"
+      ]
+    },
+    {
+      "path": "data.fantasy_plus_leaders_of_the_matchday[1].team",
+      "ids": {
+        "id": 277
+      },
+      "keys": [
+        "abbreviation",
+        "id"
+      ]
+    },
+    {
+      "path": "data.fantasy_plus_leaders_of_the_matchday[2]",
+      "ids": {
+        "id": 5674
+      },
+      "keys": [
+        "face_path",
+        "first_name",
+        "id",
+        "jersey",
+        "last_name",
+        "team",
+        "value"
+      ]
+    },
+    {
+      "path": "data.fantasy_plus_leaders_of_the_matchday[2].team",
+      "ids": {
+        "id": 269
+      },
+      "keys": [
+        "abbreviation",
+        "id"
+      ]
+    }
+  ],
+  "provider_player_ids_discovered": [
+    5660,
+    10342,
+    5674
+  ],
+  "resolved_player_tests": [
+    {
+      "route": "/players/5660/profile",
+      "params": {},
+      "url": "https://fantaking-api.dunkest.com/api/v1/players/5660/profile",
+      "status": 422,
+      "content_type": "application/json",
+      "bytes": 123,
+      "sha256": "79fa4d7128481c4bde81b338e0449da87cdc6c47544c01d722ae7b98d5b34ade",
+      "preview": "{\"code\":\"VALIDATION_ERROR\",\"message\":\"The league field is required.\",\"errors\":{\"league\":[\"The league field is required.\"]}}",
+      "json_type": "dict",
+      "json_len": 3,
+      "json_keys": [
+        "code",
+        "message",
+        "errors"
+      ],
+      "resolved_from_provider_player_id": 5660
+    },
+    {
+      "route": "/players/5660/fantasy-pts",
+      "params": {
+        "league": 14
+      },
+      "url": "https://fantaking-api.dunkest.com/api/v1/players/5660/fantasy-pts?league=14",
+      "status": 422,
+      "content_type": "application/json",
+      "bytes": 129,
+      "sha256": "0d21ecd9313e968fe47328c9ac3b7becaf27e0ca387c53193ecb6df46ac95d31",
+      "preview": "{\"code\":\"VALIDATION_ERROR\",\"message\":\"The matchday field is required.\",\"errors\":{\"matchday\":[\"The matchday field is required.\"]}}",
+      "json_type": "dict",
+      "json_len": 3,
+      "json_keys": [
+        "code",
+        "message",
+        "errors"
+      ],
+      "resolved_from_provider_player_id": 5660
+    }
+  ],
+  "successful_reads": [
+    {
+      "route": "/leagues/14/fantasy-leaders",
+      "params": {
+        "lang": "en"
+      },
+      "url": "https://fantaking-api.dunkest.com/api/v1/leagues/14/fantasy-leaders?lang=en",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 1371,
+      "sha256": "61716074ae997f0cdd2078db0ba5fc86bf00377e561ac6ad5f65f04e86051df0",
+      "preview": "{\"data\":{\"matchday\":{\"id\":1469,\"number\":1},\"fantasy_pts_leaders_of_the_night\":[{\"id\":5660,\"first_name\":\"Ayoub\",\"last_name\":\"El Kaabi\",\"face_path\":null,\"team\":{\"id\":275,\"abbreviation\":\"OLY\"},\"jersey\":null,\"value\":0},{\"id\":10342,\"first_name\":\"Levi\",\"last_name\":\"Garcia\",\"face_path\":null,\"team\":{\"id\":277,\"abbreviation\":\"PAO\"},\"jersey\":null,\"value\":0},{\"id\":5674,\"first_name\":\"Uros\",\"last_name\":\"Racic\",\"face_path\":null,\"team\":{\"id\":269,\"abbreviation\":\"ARIS\"},\"jersey\":null,\"value\":0}],\"fantasy_pts_leaders_of_the_matchday\":[{\"id\":5660,\"first_name\":\"Ayoub\",\"last_name\":\"El Kaabi\",\"face_path\":null,\"team\":{\"id\":275,\"abbreviation\":\"OLY\"},\"jersey\":null,\"value\":0},{\"id\":10342,\"first_name\":\"Levi\",\"last_name\":\"Garcia\",\"face_path\":null,\"team\":{\"id\":277,\"abbreviation\":\"PAO\"},\"jersey\":null,\"value\":0},{\"id\":56",
+      "json_type": "dict",
+      "json_len": 1,
+      "json_keys": [
+        "data"
+      ]
+    }
+  ],
+  "governance": {
+    "only_compiled_app_get_contracts_tested": true,
+    "authenticated_surface_accessed": false,
+    "auth_required_injuries_route_retried": false,
+    "user_team_private_routes_accessed": false,
+    "bruteforce_endpoint_dictionary_used": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
