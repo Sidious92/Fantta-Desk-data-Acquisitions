@@ -1,0 +1,80 @@
+name: Nexus Cartola FC Brasileirão v1
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-cartola-fc-v1-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      AUTHORITY_SHA: d4cb284fbcb4f345db3a977b72e9440037836685
+      CARTOLA_ARCHIVE_SHA: dec0b2d10aae1a1dff0b489b59fae4d2c8405ca3
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.AUTHORITY_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+      - name: Verify scientific contract
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "$AUTHORITY_SHA"
+          test -f fantadesk-private/data/nexus/research-v3/crossleague-fantasy/nexus-cartola-fc-brasileirao-acquisition-v1-protocol.json
+          test -f fantadesk-private/data/nexus/research-v2/final/nexus-v2-predictive-engine-freeze-v1.json
+      - name: Sparse checkout pinned public Cartola archive
+        run: |
+          set -euo pipefail
+          sudo mkdir -p /mnt/data && sudo chown "$USER":"$USER" /mnt/data
+          git clone --filter=blob:none --no-checkout https://github.com/henriquepgomide/caRtola.git /mnt/data/cartola-archive
+          git -C /mnt/data/cartola-archive sparse-checkout init --cone
+          git -C /mnt/data/cartola-archive sparse-checkout set data/01_raw/2021 data/01_raw/2022 data/01_raw/2023 data/01_raw/2024 data/01_raw/2025 data/01_raw/2026
+          git -C /mnt/data/cartola-archive checkout "$CARTOLA_ARCHIVE_SHA"
+          test "$(git -C /mnt/data/cartola-archive rev-parse HEAD)" = "$CARTOLA_ARCHIVE_SHA"
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+      - run: pip install requests==2.32.5
+      - run: python scripts/nexus-acquire-cartola-fc-v1.py
+      - name: Package
+        if: always()
+        run: |
+          mkdir -p /mnt/data/package-cartola-v1
+          test -d /mnt/data/nexus-cartola-fc-brasileirao-v1 && tar -C /mnt/data --zstd -cf /mnt/data/package-cartola-v1/nexus-cartola-fc-brasileirao-v1.tar.zst nexus-cartola-fc-brasileirao-v1 || true
+          test -f /mnt/data/nexus-cartola-fc-brasileirao-v1/manifest.json && cp /mnt/data/nexus-cartola-fc-brasileirao-v1/manifest.json /mnt/data/package-cartola-v1/ || true
+      - name: Upload artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-cartola-fc-brasileirao-v1
+          path: /mnt/data/package-cartola-v1/*
+          retention-days: 90
+      - name: Record terminal status
+        if: always()
+        run: |
+          set -euo pipefail
+          tmp=$(mktemp)
+          python - "$tmp" '${{ job.status }}' "$GITHUB_RUN_ID" <<'PY'
+          import json,sys
+          from pathlib import Path
+          out,status,run_id=sys.argv[1:]; p={'workflow':'Nexus Cartola FC Brasileirão v1','job_status':status,'run_id':int(run_id)}
+          q=Path('/mnt/data/nexus-cartola-fc-brasileirao-v1/manifest.json')
+          if q.is_file():p['manifest']=json.load(open(q))
+          Path(out).write_text(json.dumps(p,ensure_ascii=False,indent=2)+'\n')
+          PY
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-cartola-fc-v1-status
+          cp "$tmp" .nexus-cartola-fc-v1-status/RESULT.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-cartola-fc-v1-status/RESULT.json
+          git commit -m "ci: record Cartola FC ${{ job.status }}" || exit 0
+          git push origin HEAD:main
