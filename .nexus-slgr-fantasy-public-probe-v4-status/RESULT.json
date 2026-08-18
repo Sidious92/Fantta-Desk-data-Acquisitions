@@ -1,0 +1,717 @@
+{
+  "schema": "NEXUS_SLGR_FANTASY_PUBLIC_PROBE_V4",
+  "bundle": {
+    "url": "https://fantasy.slgr.gr/main.dart.js",
+    "status": 200,
+    "bytes": 7214571,
+    "sha256": "04cff4808f1518f0b9ac0f80aa54a0c54b20bd436d70e9230baf8c03a2f54b20"
+  },
+  "api_base": "https://fantaking-api.dunkest.com/api/v1",
+  "league_config_evidence": {
+    "provider_league_id_candidate": 14,
+    "slug": "slgr",
+    "basis": "compiled app config adjacent to API base"
+  },
+  "request_contract_count": 64,
+  "request_contracts": [
+    {
+      "class": "baZ",
+      "gaJ_body": "return\"/fantasy-brackets\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-brackets"
+      ],
+      "query_keys": [],
+      "context": "A.baZ.prototype={\ngaJ(a){return\"/fantasy-brackets\"},\ngeZ(a){return A.v([\"name\",this.e,\"competition_id\",this.d],t.N,t.z)}}"
+    },
+    {
+      "class": "bgA",
+      "gaJ_body": "return\"/fantasy-brackets/\"+this.d+\"/share\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-brackets/",
+        "/share"
+      ],
+      "query_keys": [],
+      "context": "A.bgA.prototype={\ngaJ(a){return\"/fantasy-brackets/\"+this.d+\"/share\"},\ngbD(){var s=A.v([\"format\",this.e],t.N,t.z)\nreturn s}}"
+    },
+    {
+      "class": "bhn",
+      "gaJ_body": "return\"/user/bracket-tournament/join-info\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/user/bracket-tournament/join-info"
+      ],
+      "query_keys": [],
+      "context": "A.bhn.prototype={\ngaJ(a){return\"/user/bracket-tournament/join-info\"},\ngbD(){return A.v([\"join_code\",this.d],t.N,t.z)}}"
+    },
+    {
+      "class": "bhD",
+      "gaJ_body": "return\"/bracket-tournaments/\"+this.d+\"/standings\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/bracket-tournaments/",
+        "/standings"
+      ],
+      "query_keys": [],
+      "context": "A.bhD.prototype={\ngaJ(a){return\"/bracket-tournaments/\"+this.d+\"/standings\"},\ngbD(){var s=A.K(t.N,t.z),r=this.e\nif(r!=null)s.n(0,\"cursor\",r)\nr=this.f\nif(r!=null&&r.length!==0)s.n(0,\"search\",r)\nreturn s}}"
+    },
+    {
+      "class": "bjd",
+      "gaJ_body": "return\"/fantasy-brackets/celebrities\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-brackets/celebrities"
+      ],
+      "query_keys": [],
+      "context": "A.bjd.prototype={\ngaJ(a){return\"/fantasy-brackets/celebrities\"},\ngbD(){return A.v([\"competition\",this.d],t.N,t.z)}}"
+    },
+    {
+      "class": "bjh",
+      "gaJ_body": "return\"/fantasy-brackets/\"+this.d",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-brackets/"
+      ],
+      "query_keys": [],
+      "context": "A.bjh.prototype={\ngaJ(a){return\"/fantasy-brackets/\"+this.d},\ngeZ(a){return A.v([\"name\",this.e],t.N,t.z)}}"
+    },
+    {
+      "class": "blx",
+      "gaJ_body": "return\"/bracket-tournaments\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/bracket-tournaments"
+      ],
+      "query_keys": [],
+      "context": "A.blx.prototype={\ngaJ(a){return\"/bracket-tournaments\"},\ngeZ(a){var s=this\nreturn A.v([\"name\",s.d,\"fantasy_bracket_id\",s.e,\"competition_id\",s.f,\"type_id\",s.r,\"is_public\",s.w,\"chat_url\",s.x],t.N,t.z)}}"
+    },
+    {
+      "class": "btD",
+      "gaJ_body": "return\"/users/\"+this.d+\"/fantasy-brackets/overview\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-brackets/overview",
+        "/users/"
+      ],
+      "query_keys": [],
+      "context": "A.btD.prototype={\ngaJ(a){return\"/users/\"+this.d+\"/fantasy-brackets/overview\"},\ngbD(){return A.v([\"competition\",this.e],t.N,t.z)}}"
+    },
+    {
+      "class": "bDi",
+      "gaJ_body": "return\"/bracket-tournaments/join\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/bracket-tournaments/join"
+      ],
+      "query_keys": [],
+      "context": "A.bDi.prototype={\ngaJ(a){return\"/bracket-tournaments/join\"},\ngeZ(a){return A.v([\"join_code\",this.d,\"fantasy_bracket_id\",this.e],t.N,t.z)}}"
+    },
+    {
+      "class": "bKk",
+      "gaJ_body": "return\"/fantasy-brackets/most-picked-champs\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-brackets/most-picked-champs"
+      ],
+      "query_keys": [],
+      "context": "A.bKk.prototype={\ngaJ(a){return\"/fantasy-brackets/most-picked-champs\"},\ngbD(){return A.v([\"competition\",this.d],t.N,t.z)}}"
+    },
+    {
+      "class": "bVM",
+      "gaJ_body": "return\"/fantasy-brackets/\"+this.d+\"/bracket-rounds/\"+this.e+\"/bracket-groups/\"+this.f",
+      "gbD_body": null,
+      "string_literals": [
+        "/bracket-groups/",
+        "/bracket-rounds/",
+        "/fantasy-brackets/"
+      ],
+      "query_keys": [],
+      "context": "A.bVM.prototype={\ngaJ(a){return\"/fantasy-brackets/\"+this.d+\"/bracket-rounds/\"+this.e+\"/bracket-groups/\"+this.f},\ngeZ(a){var s,r,q,p,o,n,m=A.b([],t.xN)\nfor(s=this.r,r=s.length,q=t.N,p=t.S,o=0;o<s.length;s.length===r||(0,A.V)(s),++o){n=s[o]\nm.push(A.v([\"team_id\",n.b.a,\"position\",B.b.dI(s,n)+1],q,p))}return A.v([\"placements\",m],q,t.z)}}"
+    },
+    {
+      "class": "bVR",
+      "gaJ_body": "return\"/fantasy-brackets/\"+this.e+\"/bracket-rounds/\"+this.f+\"/series/\"+this.d+\"/predictions\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/bracket-rounds/",
+        "/fantasy-brackets/",
+        "/predictions",
+        "/series/"
+      ],
+      "query_keys": [],
+      "context": "A.bVR.prototype={\ngaJ(a){return\"/fantasy-brackets/\"+this.e+\"/bracket-rounds/\"+this.f+\"/series/\"+this.d+\"/predictions\"},\ngeZ(a){var s=this.r,r=A.G(s).i(\"C<1,x<k,H>>\")\ns=A.D(new A.C(s,new A.bVS(),r),r.i(\"L.E\"))\nreturn A.v([\"predictions\",s],t.N,t.z)}}"
+    },
+    {
+      "class": "bWX",
+      "gaJ_body": "return\"/bracket-tournaments/public\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/bracket-tournaments/public"
+      ],
+      "query_keys": [],
+      "context": "A.bWX.prototype={\ngaJ(a){return\"/bracket-tournaments/public\"},\ngbD(){var s,r=this,q=t.N,p=t.z,o=A.K(q,p)\no.n(0,\"competition\",r.d)\ns=r.w\nif(s!=null&&s!==\"\")o.C(0,A.v([\"name\",s],q,p))\no.C(0,A.v([\"for_fantasy_bracket\",r.f],q,p))\ns=r.x\nif(s!=null)o.C(0,A.v([\"sort_by\",s.gnO()],q,p))\ns=r.y\nif(s!=null)o.C(0,A.v([\"sort_order\",s.gnO()],q,p))\no.C(0,A.v([\"page\",r.r],q,p))\nreturn o}}"
+    },
+    {
+      "class": "c6i",
+      "gaJ_body": "return\"/bracket-tournaments/\"+this.d",
+      "gbD_body": null,
+      "string_literals": [
+        "/bracket-tournaments/"
+      ],
+      "query_keys": [],
+      "context": "A.c6i.prototype={\ngaJ(a){return\"/bracket-tournaments/\"+this.d},\ngeZ(a){var s=A.v([\"name\",this.e,\"is_public\",this.f],t.N,t.z)\ns.n(0,\"chat_url\",this.r)\nreturn s}}"
+    },
+    {
+      "class": "aS_",
+      "gaJ_body": "return\"/my-fantasy-brackets\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/my-fantasy-brackets"
+      ],
+      "query_keys": [],
+      "context": "A.aS_.prototype={\ngaJ(a){return\"/my-fantasy-brackets\"},\ngbD(){return A.v([\"competition\",this.d],t.N,t.z)}}"
+    },
+    {
+      "class": "bEd",
+      "gaJ_body": "return\"/leagues/\"+this.d+\"/layers\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/layers",
+        "/leagues/"
+      ],
+      "query_keys": [],
+      "context": "A.bEd.prototype={\ngaJ(a){return\"/leagues/\"+this.d+\"/layers\"},\ngbD(){return A.v([\"category\",this.e.gq(0)],t.N,t.z)}}"
+    },
+    {
+      "class": "c2h",
+      "gaJ_body": "return\"/fantasy-teams/\"+this.d+\"/jersey\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams/",
+        "/jersey"
+      ],
+      "query_keys": [],
+      "context": "A.c2h.prototype={\ngaJ(a){return\"/fantasy-teams/\"+this.d+\"/jersey\"},\ngeZ(a){var s=this.e,r=A.G(s).i(\"C<1,x<k,@>>\")\ns=A.D(new A.C(s,new A.c2i(),r),r.i(\"L.E\"))\nreturn A.v([\"layers\",s],t.N,t.z)}}"
+    },
+    {
+      "class": "bp8",
+      "gaJ_body": "return\"/fantasy-leagues\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-leagues"
+      ],
+      "query_keys": [],
+      "context": "A.bp8.prototype={\ngaJ(a){return\"/fantasy-leagues\"},\ngeZ(a){return A.v([\"name\",this.e,\"fantasy_team_name\",this.f,\"league_id\",this.d],t.N,t.z)}}"
+    },
+    {
+      "class": "bDk",
+      "gaJ_body": "return\"/fantasy-leagues/join\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-leagues/join"
+      ],
+      "query_keys": [],
+      "context": "A.bDk.prototype={\ngaJ(a){return\"/fantasy-leagues/join\"},\ngeZ(a){return A.v([\"join_code\",this.d,\"fantasy_team_name\",this.e],t.N,t.z)}}"
+    },
+    {
+      "class": "bVN",
+      "gaJ_body": "return\"/fantasy-leagues/\"+this.d+\"/config\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/config",
+        "/fantasy-leagues/"
+      ],
+      "query_keys": [],
+      "context": "A.bVN.prototype={\ngaJ(a){return\"/fantasy-leagues/\"+this.d+\"/config\"},\ngeZ(a){var s=\"starting_credits\",r=A.K(t.N,t.z),q=this.e,p=q.a\nr.n(0,\"type_id\",p.c)\nif(p===B.fi)r.n(0,s,q.c)\nelse r.n(0,s,null)\nr.n(0,\"credits_for_trades\",q.d)\np=q.e\nif(p!=null)r.n(0,\"captain_multiplier\",p)\np=J.b1(q.b,new A.bVO(),t._P)\np=A.D(p,p.$ti.i(\"L.E\"))\nr.n(0,\"trades_closed_matchdays\",p)\nq=q.f\nif(q!=null)r.n(0,\"ending_phase\",q)\nreturn r}}"
+    },
+    {
+      "class": "bpm",
+      "gaJ_body": "return\"/fantasy-leagues/\"+this.d",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-leagues/"
+      ],
+      "query_keys": [],
+      "context": "A.bpm.prototype={\ngaJ(a){return\"/fantasy-leagues/\"+this.d},\ngeZ(a){return A.v([\"name\",this.e],t.N,t.z)}}"
+    },
+    {
+      "class": "bux",
+      "gaJ_body": "return\"/tournaments/\"+this.d+\"/standings\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/standings",
+        "/tournaments/"
+      ],
+      "query_keys": [],
+      "context": "A.bux.prototype={\ngaJ(a){return\"/tournaments/\"+this.d+\"/standings\"},\ngbD(){var s=this,r=A.v([\"matchday\",s.f],t.N,t.z),q=s.e\nif(q!=null)r.n(0,\"cursor\",q)\nq=s.r\nif(q!=null&&q.length!==0)r.n(0,\"search\",q)\nq=s.w\nif(q!=null)r.n(0,\"fantasy_pass\",q)\nreturn r}}"
+    },
+    {
+      "class": "btK",
+      "gaJ_body": "return\"/fantasy-matches/\"+this.d",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-matches/"
+      ],
+      "query_keys": [],
+      "context": "A.btK.prototype={\ngaJ(a){return\"/fantasy-matches/\"+this.d},\ngbD(){var s=A.cE()\nreturn A.v([\"lang\",s==null?$.cD=\"en_US\":s],t.N,t.z)}}"
+    },
+    {
+      "class": "btW",
+      "gaJ_body": "return\"/tournaments/\"+this.d",
+      "gbD_body": null,
+      "string_literals": [
+        "/tournaments/"
+      ],
+      "query_keys": [],
+      "context": "A.btW.prototype={\ngaJ(a){return\"/tournaments/\"+this.d},\ngbD(){var s=A.K(t.N,t.z),r=this.e\nif(r!=null)s.n(0,\"for_fantasy_team\",r)\nreturn s}}"
+    },
+    {
+      "class": "but",
+      "gaJ_body": "return\"/tournaments/\"+this.d+\"/fantasy-teams/\"+this.e+\"/position\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams/",
+        "/position",
+        "/tournaments/"
+      ],
+      "query_keys": [],
+      "context": "A.but.prototype={\ngaJ(a){return\"/tournaments/\"+this.d+\"/fantasy-teams/\"+this.e+\"/position\"},\ngbD(){return A.v([\"matchday\",this.f],t.N,t.z)}}"
+    },
+    {
+      "class": "bDT",
+      "gaJ_body": "return\"/fantasy-teams/\"+this.d+\"/tournaments/\"+this.e+\"/matchdays/\"+this.f+\"/fantasy-match\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-match",
+        "/fantasy-teams/",
+        "/matchdays/",
+        "/tournaments/"
+      ],
+      "query_keys": [],
+      "context": "A.bDT.prototype={\ngaJ(a){return\"/fantasy-teams/\"+this.d+\"/tournaments/\"+this.e+\"/matchdays/\"+this.f+\"/fantasy-match\"},\ngbD(){var s=A.cE()\nreturn A.v([\"lang\",s==null?$.cD=\"en_US\":s],t.N,t.z)}}"
+    },
+    {
+      "class": "bzr",
+      "gaJ_body": "return\"/predictions/players/competitions/\"+this.d+\"/standings/my-position\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/predictions/players/competitions/",
+        "/standings/my-position"
+      ],
+      "query_keys": [],
+      "context": "A.bzr.prototype={\ngaJ(a){return\"/predictions/players/competitions/\"+this.d+\"/standings/my-position\"},\ngbD(){return A.v([\"matchday\",this.e],t.N,t.z)}}"
+    },
+    {
+      "class": "bzs",
+      "gaJ_body": "return\"/predictions/players/competitions/\"+this.d+\"/standings\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/predictions/players/competitions/",
+        "/standings"
+      ],
+      "query_keys": [],
+      "context": "A.bzs.prototype={\ngaJ(a){return\"/predictions/players/competitions/\"+this.d+\"/standings\"},\ngbD(){var s,r=t.N,q=t.z,p=A.K(r,q)\np.n(0,\"matchday\",this.e)\ns=this.f\nif(s!=null)p.C(0,A.v([\"cursor\",s],r,q))\ns=this.r\nif(s!=null&&s.length!==0)p.C(0,A.v([\"search\",s],r,q))\nreturn p}}"
+    },
+    {
+      "class": "bzw",
+      "gaJ_body": "return\"/predictions/competitions/\"+this.e+\"/matchdays\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchdays",
+        "/predictions/competitions/"
+      ],
+      "query_keys": [],
+      "context": "A.bzw.prototype={\ngaJ(a){return\"/predictions/competitions/\"+this.e+\"/matchdays\"},\ngbD(){var s=A.K(t.N,t.z),r=this.d\nif(r!=null)s.n(0,\"as_user\",r)\nreturn s}}"
+    },
+    {
+      "class": "c6L",
+      "gaJ_body": "return\"/predictions/players/competitions/\"+this.e+\"/matchdays/\"+this.d",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchdays/",
+        "/predictions/players/competitions/"
+      ],
+      "query_keys": [],
+      "context": "A.c6L.prototype={\ngaJ(a){return\"/predictions/players/competitions/\"+this.e+\"/matchdays/\"+this.d},\ngeZ(a){return A.v([\"prediction_id\",this.f,\"choice\",this.r.j(0)],t.N,t.z)}}"
+    },
+    {
+      "class": "c6T",
+      "gaJ_body": "return\"/predictions/players/competitions/\"+this.e+\"/matchdays/\"+this.d+\"/preview\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchdays/",
+        "/predictions/players/competitions/",
+        "/preview"
+      ],
+      "query_keys": [],
+      "context": "A.c6T.prototype={\ngaJ(a){return\"/predictions/players/competitions/\"+this.e+\"/matchdays/\"+this.d+\"/preview\"},\ngbD(){return A.v([\"as_user\",this.f],t.N,t.z)}}"
+    },
+    {
+      "class": "bEp",
+      "gaJ_body": "return\"/leagues/\"+this.d+\"/fantasy-leaders\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-leaders",
+        "/leagues/"
+      ],
+      "query_keys": [],
+      "context": "A.bEp.prototype={\ngaJ(a){return\"/leagues/\"+this.d+\"/fantasy-leaders\"},\ngbD(){var s=A.cE()\nreturn A.v([\"lang\",s==null?$.cD=\"en_US\":s],t.N,t.z)}}"
+    },
+    {
+      "class": "bCw",
+      "gaJ_body": "return\"/leagues/\"+this.d+\"/injuries\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/injuries",
+        "/leagues/"
+      ],
+      "query_keys": [],
+      "context": "A.bCw.prototype={\ngaJ(a){return\"/leagues/\"+this.d+\"/injuries\"},\ngbD(){var s=this.e\ns=s===\"en\"||s===\"it\"\nif(s)return A.v([\"lang\",this.e],t.N,t.z)\nreturn this.a}}"
+    },
+    {
+      "class": "bGl",
+      "gaJ_body": "return\"/matchpredictor/competitions/\"+this.d+\"/standings/my-position\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchpredictor/competitions/",
+        "/standings/my-position"
+      ],
+      "query_keys": [],
+      "context": "A.bGl.prototype={\ngaJ(a){return\"/matchpredictor/competitions/\"+this.d+\"/standings/my-position\"},\ngbD(){return A.v([\"matchday\",this.e],t.N,t.z)}}"
+    },
+    {
+      "class": "bGe",
+      "gaJ_body": "return\"/matchpredictor/competitions/\"+this.e+\"/matchdays\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchdays",
+        "/matchpredictor/competitions/"
+      ],
+      "query_keys": [],
+      "context": "A.bGe.prototype={\ngaJ(a){return\"/matchpredictor/competitions/\"+this.e+\"/matchdays\"},\ngbD(){var s=A.K(t.N,t.z),r=this.d\nif(r!=null)s.n(0,\"as_user\",r)\nreturn s}}"
+    },
+    {
+      "class": "bGr",
+      "gaJ_body": "return\"/matchpredictor/competitions/\"+this.d+\"/standings\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchpredictor/competitions/",
+        "/standings"
+      ],
+      "query_keys": [],
+      "context": "A.bGr.prototype={\ngaJ(a){return\"/matchpredictor/competitions/\"+this.d+\"/standings\"},\ngbD(){var s,r=t.N,q=t.z,p=A.K(r,q)\np.n(0,\"matchday\",this.e)\ns=this.f\nif(s!=null)p.C(0,A.v([\"cursor\",s],r,q))\ns=this.r\nif(s!=null&&s.length!==0)p.C(0,A.v([\"search\",s],r,q))\nreturn p}}"
+    },
+    {
+      "class": "bGw",
+      "gaJ_body": "return\"/schedules/\"+this.d+\"/matchdays/\"+this.e",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchdays/",
+        "/schedules/"
+      ],
+      "query_keys": [],
+      "context": "A.bGw.prototype={\ngaJ(a){return\"/schedules/\"+this.d+\"/matchdays/\"+this.e},\ngbD(){var s=A.cE()\nreturn A.v([\"lang\",s==null?$.cD=\"en_US\":s],t.N,t.z)}}"
+    },
+    {
+      "class": "bKf",
+      "gaJ_body": "return\"/tournaments/monthly\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/tournaments/monthly"
+      ],
+      "query_keys": [],
+      "context": "A.bKf.prototype={\ngaJ(a){return\"/tournaments/monthly\"},\ngbD(){return A.v([\"competition_id\",this.d],t.N,t.z)}}"
+    },
+    {
+      "class": "bLc",
+      "gaJ_body": "return\"/leagues/\"+this.e+\"/mvp-votings/\"+this.f+\"/vote\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/leagues/",
+        "/mvp-votings/",
+        "/vote"
+      ],
+      "query_keys": [],
+      "context": "A.bLc.prototype={\ngaJ(a){return\"/leagues/\"+this.e+\"/mvp-votings/\"+this.f+\"/vote\"},\ngeZ(a){return A.v([\"candidate_id\",this.d],t.N,t.z)}}"
+    },
+    {
+      "class": "bNx",
+      "gaJ_body": "return\"/leagues/\"+this.d+\"/seasons/\"+this.e+\"/fantasy-teams/\"+this.f+\"/palmares\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams/",
+        "/leagues/",
+        "/palmares",
+        "/seasons/"
+      ],
+      "query_keys": [],
+      "context": "A.bNx.prototype={\ngaJ(a){return\"/leagues/\"+this.d+\"/seasons/\"+this.e+\"/fantasy-teams/\"+this.f+\"/palmares\"},\ngbD(){var s=A.K(t.N,t.z),r=this.r\nif(r!=null)s.n(0,\"userId\",r)\nreturn s}}"
+    },
+    {
+      "class": "bRv",
+      "gaJ_body": "return\"/gazzetta/league/\"+this.d+\"/purchase\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/gazzetta/league/",
+        "/purchase"
+      ],
+      "query_keys": [],
+      "context": "A.bRv.prototype={\ngaJ(a){return\"/gazzetta/league/\"+this.d+\"/purchase\"},\ngeZ(a){var s=this.e\nreturn A.v([\"item_id\",s.a,\"receipt\",s.b,\"platform\",s.c,\"udid\",this.f],t.N,t.z)}}"
+    },
+    {
+      "class": "bGB",
+      "gaJ_body": "return\"/players/\"+this.d+\"/fantasy-pts\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-pts",
+        "/players/"
+      ],
+      "query_keys": [],
+      "context": "A.bGB.prototype={\ngaJ(a){return\"/players/\"+this.d+\"/fantasy-pts\"},\ngbD(){var s,r,q=A.cE()\nif(q==null)q=$.cD=\"en_US\"\ns=A.K(t.N,t.z)\ns.n(0,\"league\",this.f)\ns.n(0,\"matchday\",this.e)\ns.n(0,\"lang\",q)\nr=this.r\nif(r!=null)s.n(0,\"match\",r)\nreturn s}}"
+    },
+    {
+      "class": "bPf",
+      "gaJ_body": "return\"/players/\"+this.d+\"/profile\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/players/",
+        "/profile"
+      ],
+      "query_keys": [],
+      "context": "A.bPf.prototype={\ngaJ(a){return\"/players/\"+this.d+\"/profile\"},\ngbD(){var s=A.cE()\nif(s==null)s=$.cD=\"en_US\"\nreturn A.v([\"league\",this.e,\"lang\",s],t.N,t.z)}}"
+    },
+    {
+      "class": "bPw",
+      "gaJ_body": "return\"/players/\"+this.d+\"/trend\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/players/",
+        "/trend"
+      ],
+      "query_keys": [],
+      "context": "A.bPw.prototype={\ngaJ(a){return\"/players/\"+this.d+\"/trend\"},\ngbD(){return A.v([\"league\",this.e],t.N,t.z)}}"
+    },
+    {
+      "class": "bPz",
+      "gaJ_body": "return\"/competitions/\"+this.d+\"/stats/players/table/download\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/competitions/",
+        "/stats/players/table/download"
+      ],
+      "query_keys": [],
+      "context": "A.bPz.prototype={\ngaJ(a){return\"/competitions/\"+this.d+\"/stats/players/table/download\"},\ngbD(){var s,r=A.K(t.N,t.z),q=this.e\nr.n(0,\"stats_type\",q.a.gnO())\ns=q.d\nr.n(0,\"positions\",s.gcz(s)?new A.hh(s,new A.bPA(),A.E(s).i(\"hh<dm.E,k>\")).bv(0,\",\"):null)\ns=q.c\nr.n(0,\"matchdays\",s.gcz(s)?s.bv(0,\",\"):null)\nr.n(0,\"search\",q.e)\ns=q.b\nr.n(0,\"teams\",s.gcz(s)?s.bv(0,\",\"):null)\nr.n(0,\"quotations\",A.e(q.f)+\",\"+A.e(q.r))\nr.n(0,\"sort_by\",q.y)\nr.n(0,\"sort_order\",q.z.gnO())\nreturn r}}"
+    },
+    {
+      "class": "bPB",
+      "gaJ_body": "return\"/competitions/\"+this.d+\"/stats/players/table\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/competitions/",
+        "/stats/players/table"
+      ],
+      "query_keys": [],
+      "context": "A.bPB.prototype={\ngaJ(a){return\"/competitions/\"+this.d+\"/stats/players/table\"},\ngbD(){var s,r=A.K(t.N,t.z),q=this.e\nr.n(0,\"stats_type\",q.a.gnO())\ns=q.d\nr.n(0,\"positions\",s.gcz(s)?new A.hh(s,new A.bPC(),A.E(s).i(\"hh<dm.E,k>\")).bv(0,\",\"):null)\ns=q.c\nr.n(0,\"matchdays\",s.gcz(s)?s.bv(0,\",\"):null)\nr.n(0,\"search\",q.e)\ns=q.b\nr.n(0,\"teams\",s.gcz(s)?s.bv(0,\",\"):null)\nr.n(0,\"quotations\",A.e(q.f)+\",\"+A.e(q.r))\ns=this.f\nr.n(0,\"page\",s==null?1:s)\nr.n(0,\"per_page\",this.r)\nr.n(0,\"sort_by\",q.y)\nr.n(0,\"sort_order\",q.z.gnO())\nreturn r}}"
+    },
+    {
+      "class": "c6d",
+      "gaJ_body": "return\"/players/\"+this.d+\"/upcoming-matches\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/players/",
+        "/upcoming-matches"
+      ],
+      "query_keys": [],
+      "context": "A.c6d.prototype={\ngaJ(a){return\"/players/\"+this.d+\"/upcoming-matches\"},\ngbD(){return A.v([\"league\",this.e],t.N,t.z)}}"
+    },
+    {
+      "class": "c6l",
+      "gaJ_body": "return\"/user/favourite-team\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/user/favourite-team"
+      ],
+      "query_keys": [],
+      "context": "A.c6l.prototype={\ngaJ(a){return\"/user/favourite-team\"},\ngeZ(a){return A.v([\"team_id\",this.e,\"league_id\",this.d],t.N,t.z)}}"
+    },
+    {
+      "class": "bp7",
+      "gaJ_body": "return\"/fantasy-leagues/\"+this.d+\"/fantasy-trades\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-leagues/",
+        "/fantasy-trades"
+      ],
+      "query_keys": [],
+      "context": "A.bp7.prototype={\ngaJ(a){return\"/fantasy-leagues/\"+this.d+\"/fantasy-trades\"},\ngbD(){return A.v([\"matchday\",this.e],t.N,t.z)}}"
+    },
+    {
+      "class": "bqv",
+      "gaJ_body": "return\"/fantasy-leagues/\"+this.d+\"/tournaments\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-leagues/",
+        "/tournaments"
+      ],
+      "query_keys": [],
+      "context": "A.bqv.prototype={\ngaJ(a){return\"/fantasy-leagues/\"+this.d+\"/tournaments\"},\ngeZ(a){return A.v([\"name\",this.r,\"starting_matchday_id\",this.e,\"type_id\",this.f],t.N,t.z)}}"
+    },
+    {
+      "class": "bqo",
+      "gaJ_body": "return\"/fantasy-leagues/\"+this.d+\"/rosters\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-leagues/",
+        "/rosters"
+      ],
+      "query_keys": [],
+      "context": "A.bqo.prototype={\ngaJ(a){return\"/fantasy-leagues/\"+this.d+\"/rosters\"},\ngeZ(a){return A.v([\"fantasy_teams\",this.e],t.N,t.z)}}"
+    },
+    {
+      "class": "bYN",
+      "gaJ_body": "return\"/fantasy-teams/\"+this.d+\"/fantasy-trades\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams/",
+        "/fantasy-trades"
+      ],
+      "query_keys": [],
+      "context": "A.bYN.prototype={\ngaJ(a){return\"/fantasy-teams/\"+this.d+\"/fantasy-trades\"},\ngeZ(a){var s=this.e,r=t.N,q=s.b\nreturn A.v([\"incoming_player\",A.v([\"id\",s.a],r,t.S),\"outgoing_player\",A.v([\"id\",q.a,\"credits\",q.b],r,t.R7)],r,t.z)}}"
+    },
+    {
+      "class": "blG",
+      "gaJ_body": "return\"/fantasy-teams\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams"
+      ],
+      "query_keys": [],
+      "context": "A.blG.prototype={\ngaJ(a){return\"/fantasy-teams\"},\ngeZ(a){var s=this\nreturn A.v([\"name\",s.d,\"competition_id\",s.e,\"game_mode_id\",s.f,\"favourite_team_id\",s.r],t.N,t.z)}}"
+    },
+    {
+      "class": "bRS",
+      "gaJ_body": "return\"/fantasy-teams/\"+this.d+\"/matchdays/\"+this.e+\"/roster/random\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams/",
+        "/matchdays/",
+        "/roster/random"
+      ],
+      "query_keys": [],
+      "context": "A.bRS.prototype={\ngaJ(a){return\"/fantasy-teams/\"+this.d+\"/matchdays/\"+this.e+\"/roster/random\"},\ngbD(){var s,r,q,p,o=A.v([\"remaining_credits\",this.f,\"formation_id\",this.r],t.N,t.z)\nfor(s=this.w,r=0;r<s.length;++r){q=s[r].a\nif(q!==-1){p=\"players[\"+r\no.n(0,p+\"][id]\",q)\no.n(0,p+\"][court_position]\",s[r].r)}}return o}}"
+    },
+    {
+      "class": "bVU",
+      "gaJ_body": "return\"/fantasy-teams/\"+this.d+\"/matchdays/\"+this.e+\"/roster\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams/",
+        "/matchdays/",
+        "/roster"
+      ],
+      "query_keys": [],
+      "context": "A.bVU.prototype={\ngaJ(a){return\"/fantasy-teams/\"+this.d+\"/matchdays/\"+this.e+\"/roster\"},\ngeZ(a){var s=A.acA(this.r,new A.bVV(),t.uJ),r=A.G(s).i(\"C<1,x<k,H>>\")\ns=A.D(new A.C(s,new A.bVW(),r),r.i(\"L.E\"))\nreturn A.v([\"formation_id\",this.f,\"players\",s],t.N,t.z)}}"
+    },
+    {
+      "class": "bPy",
+      "gaJ_body": "return\"/players-lists/\"+this.d+\"/matchdays/\"+this.e+\"/players\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/matchdays/",
+        "/players",
+        "/players-lists/"
+      ],
+      "query_keys": [],
+      "context": "A.bPy.prototype={\ngaJ(a){return\"/players-lists/\"+this.d+\"/matchdays/\"+this.e+\"/players\"},\ngbD(){var s,r=this,q=A.K(t.N,t.z)\nq.n(0,\"per_page\",r.r)\nq.n(0,\"page\",r.w)\ns=r.f\nif(s!=null)q.n(0,\"fantasy_league\",s)\nq.n(0,\"sort_by\",r.y.gnO())\nq.n(0,\"sort_order\",r.z.gnO())\nreturn q}}"
+    },
+    {
+      "class": "bRp",
+      "gaJ_body": "return\"/users/\"+this.d+\"/fantasy-teams/overview\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams/overview",
+        "/users/"
+      ],
+      "query_keys": [],
+      "context": "A.bRp.prototype={\ngaJ(a){return\"/users/\"+this.d+\"/fantasy-teams/overview\"},\ngbD(){var s=t.N,r=t.z,q=A.K(s,r)\nq.n(0,\"league\",this.e)\nq.C(0,A.v([\"game_mode\",this.f],s,r))\nreturn q}}"
+    },
+    {
+      "class": "bly",
+      "gaJ_body": "return\"/tournaments\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/tournaments"
+      ],
+      "query_keys": [],
+      "context": "A.bly.prototype={\ngaJ(a){return\"/tournaments\"},\ngeZ(a){var s=this\nreturn A.v([\"name\",s.d,\"competition_id\",s.e,\"game_mode_id\",s.f,\"starting_matchday_id\",s.r,\"type_id\",s.w,\"fantasy_team_id\",s.x,\"max_num_fantasy_teams\",s.y,\"chat_url\",s.z,\"is_public\",s.Q],t.N,t.z)}}"
+    },
+    {
+      "class": "bDs",
+      "gaJ_body": "return\"/tournaments/join\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/tournaments/join"
+      ],
+      "query_keys": [],
+      "context": "A.bDs.prototype={\ngaJ(a){return\"/tournaments/join\"},\ngeZ(a){return A.v([\"join_code\",this.d,\"fantasy_team_id\",this.e],t.N,t.z)}}"
+    },
+    {
+      "class": "bEJ",
+      "gaJ_body": "return\"/user/tournament/join-info\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/user/tournament/join-info"
+      ],
+      "query_keys": [],
+      "context": "A.bEJ.prototype={\ngaJ(a){return\"/user/tournament/join-info\"},\ngbD(){return A.v([\"join_code\",this.d],t.N,t.z)}}"
+    },
+    {
+      "class": "bXc",
+      "gaJ_body": "return\"/tournaments/public\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/tournaments/public"
+      ],
+      "query_keys": [],
+      "context": "A.bXc.prototype={\ngaJ(a){return\"/tournaments/public\"},\ngbD(){var s,r=this,q=t.N,p=t.z,o=A.K(q,p)\no.n(0,\"competition\",r.d)\ns=r.e\nif(s!=null)o.C(0,A.v([\"type\",s],q,p))\ns=r.w\nif(s!=null&&s!==\"\")o.C(0,A.v([\"name\",s],q,p))\no.C(0,A.v([\"for_fantasy_team\",r.f],q,p))\ns=r.x\nif(s!=null)o.C(0,A.v([\"sort_by\",s.gnO()],q,p))\ns=r.y\nif(s!=null)o.C(0,A.v([\"sort_order\",s.gnO()],q,p))\no.C(0,A.v([\"page\",r.r],q,p))\nreturn o}}"
+    },
+    {
+      "class": "c7D",
+      "gaJ_body": "return\"/tournaments/\"+this.d+\"/reader-code\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/reader-code",
+        "/tournaments/"
+      ],
+      "query_keys": [],
+      "context": "A.c7D.prototype={\ngaJ(a){return\"/tournaments/\"+this.d+\"/reader-code\"},\ngeZ(a){return A.v([\"code\",this.e],t.N,t.z)}}"
+    },
+    {
+      "class": "bjq",
+      "gaJ_body": "return\"/fantasy-teams/\"+this.d",
+      "gbD_body": null,
+      "string_literals": [
+        "/fantasy-teams/"
+      ],
+      "query_keys": [],
+      "context": "A.bjq.prototype={\ngaJ(a){return\"/fantasy-teams/\"+this.d},\ngeZ(a){return A.v([\"name\",this.e],t.N,t.z)}}"
+    },
+    {
+      "class": "c7p",
+      "gaJ_body": "return\"/user/fantasy-teams\"",
+      "gbD_body": null,
+      "string_literals": [
+        "/user/fantasy-teams"
+      ],
+      "query_keys": [],
+      "context": "A.c7p.prototype={\ngaJ(a){return\"/user/fantasy-teams\"},\ngbD(){return A.v([\"league\",this.d,\"game_mode\",this.e],t.N,t.z)}}"
+    }
+  ],
+  "governance": {
+    "api_requests_made": false,
+    "authenticated_surface_accessed": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
