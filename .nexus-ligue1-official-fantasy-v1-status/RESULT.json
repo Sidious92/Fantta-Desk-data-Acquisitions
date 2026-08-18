@@ -1,0 +1,186 @@
+{
+  "workflow": "Nexus Ligue 1 Official Fantasy v1",
+  "job_status": "success",
+  "run_id": 32192431576,
+  "manifest": {
+    "schema": "NEXUS_LIGUE1_OFFICIAL_FANTASY_ACQUISITION_V1",
+    "status": "PASS",
+    "provider": "Ligue 1 Official Fantasy",
+    "competition": "Ligue 1",
+    "championship_id": 1,
+    "capture_started": "2026-08-18T22:23:00.010524+00:00",
+    "capture_completed": "2026-08-18T22:23:49.183533+00:00",
+    "source": {
+      "official_frontend": "https://ligue1.com/en/fantasy",
+      "fantasy_api_base": "https://api.mpg.football/fantasy",
+      "surfaces": {
+        "players_pool": {
+          "route": "/championship-players-pool/1?addPlayersStatuses=true",
+          "url": "https://api.mpg.football/fantasy/championship-players-pool/1?addPlayersStatuses=true",
+          "status": 200,
+          "bytes": 1513028,
+          "sha256": "41c0286ab1903b4f630cf8f0c3ba191a22a1748ae1032fd7bd0c9ee7005f0b4c",
+          "json_type": "dict",
+          "json_len": 9
+        },
+        "clubs": {
+          "route": "/championships-clubs",
+          "url": "https://api.mpg.football/fantasy/championships-clubs",
+          "status": 200,
+          "bytes": 120370,
+          "sha256": "57733c06a669d1668dcc67a02d952a824d9ef24104c75f1f4574b4ab4328e463",
+          "json_type": "dict",
+          "json_len": 18
+        },
+        "settings": {
+          "route": "/championships-settings",
+          "url": "https://api.mpg.football/fantasy/championships-settings",
+          "status": 200,
+          "bytes": 792,
+          "sha256": "8a842ac07d5b8bea428eb88b047dae6d798620ae9b4c0602921464dfeaeddb38",
+          "json_type": "dict",
+          "json_len": 1
+        },
+        "rules": {
+          "route": "/rules",
+          "url": "https://api.mpg.football/fantasy/rules",
+          "status": 200,
+          "bytes": 286,
+          "sha256": "cf71080b79e35cec6109b892e491f971474022357f5448bf172e9c4add1e3c8f",
+          "json_type": "dict",
+          "json_len": 4
+        }
+      }
+    },
+    "coverage": {
+      "players": 483,
+      "clubs": 18,
+      "player_details_ok": 483,
+      "player_detail_errors": 0,
+      "player_detail_success_rate": 1.0,
+      "previous_match_rows": 0
+    },
+    "field_inventory": {
+      "player_pool_fields": [
+        "availableSince",
+        "birthDate",
+        "clubId",
+        "countryCode",
+        "firstName",
+        "id",
+        "joinDate",
+        "lastName",
+        "playerLevel",
+        "position",
+        "price",
+        "quotation",
+        "shortId",
+        "stats",
+        "status",
+        "ultraPosition"
+      ],
+      "player_pool_stats_fields": [
+        "lastRatings",
+        "nearestMatches",
+        "nextMatch",
+        "quotationTrend",
+        "totalMatches"
+      ],
+      "player_detail_fields": [
+        "assets",
+        "clubId",
+        "firstName",
+        "id",
+        "lastName",
+        "nextMatch",
+        "playerStatus",
+        "previousMatches",
+        "price",
+        "totalAssists",
+        "totalCleanSheets",
+        "totalGoals",
+        "totalGoalsConceded",
+        "totalMatches",
+        "totalPlayedMatches",
+        "totalRedCards",
+        "totalStartedMatches",
+        "totalYellowCards"
+      ],
+      "previous_match_fields": []
+    },
+    "season_context": {
+      "optaId": 24,
+      "mpgId": 1,
+      "code": "fr_l1",
+      "logoUrl": "https://s3.eu-west-1.amazonaws.com/image.mpg/fr_l1_2022.png",
+      "gameWeeks": 34,
+      "firstGameWeekNumber": 1,
+      "lastGameWeekNumber": 34,
+      "brand": "Ligue 1 McDonald's",
+      "shortBrand": "L1",
+      "season": 2026,
+      "firstSeason": 2025,
+      "seasonOpensAt": "2026-08-09T10:00:00Z",
+      "availableAssets": {
+        "clubs": true,
+        "players": true
+      },
+      "startDate": "2021-06-01T09:00:00Z",
+      "endDate": "2027-08-22T22:00:00Z",
+      "lang": {
+        "fr-FR": {
+          "name": "Ligue 1 McDonald's",
+          "shortName": "Ligue 1"
+        },
+        "en-GB": {
+          "name": "Ligue 1 McDonald's",
+          "shortName": "Ligue 1"
+        },
+        "es-ES": {
+          "name": "Ligue 1 McDonald's",
+          "shortName": "Ligue 1"
+        }
+      },
+      "seasonsHistory": {
+        "2015": {
+          "firstGameWeekNumber": 1,
+          "lastGameWeekNumber": 38,
+          "gameWeeks": 38
+        },
+        "2021": {
+          "firstGameWeekNumber": 1,
+          "lastGameWeekNumber": 38,
+          "gameWeeks": 38
+        }
+      }
+    },
+    "temporal_semantics": {
+      "bulk_and_player_detail": "CURRENT_PROVIDER_SEASON_AT_CAPTURE",
+      "historical_season_claim": "NONE_UNTIL_EMPIRICALLY_VERIFIED",
+      "previousMatches": "PROVIDER_NATIVE_CURRENT_SEASON_MATCH_EVIDENCE"
+    },
+    "governance": {
+      "authenticated_surface_accessed": false,
+      "private_user_or_coach_routes_accessed": false,
+      "cross_provider_normalization_performed": false,
+      "missing_values_filled": false,
+      "historical_seasons_merged_at_ingest": false,
+      "provider_native_fields_preserved": true,
+      "predictive_models_modified": false,
+      "decision_layer_started": false
+    },
+    "validation": {
+      "status": "PASS",
+      "checks": {
+        "players_ge_400": true,
+        "clubs_ge_16": true,
+        "player_detail_rate_ge_095": true,
+        "settings_200": true,
+        "rules_200": true,
+        "no_auth": true,
+        "no_model_mutation": true,
+        "no_decision_layer": true
+      }
+    }
+  }
+}
