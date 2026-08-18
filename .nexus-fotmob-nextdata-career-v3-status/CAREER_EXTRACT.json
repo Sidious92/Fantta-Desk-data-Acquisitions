@@ -1,0 +1,2763 @@
+{
+  "schema": "NEXUS_FOTMOB_PUBLIC_CAREER_PAYLOAD_EXTRACT_V3",
+  "players": [
+    {
+      "name": "Matija Frigan",
+      "id": 1190371,
+      "statSeasons": [
+        {
+          "seasonName": "2026/2027",
+          "tournaments": [
+            {
+              "name": "Coppa Italia",
+              "tournamentId": 141,
+              "entryId": "0-0",
+              "hasDeepStats": true
+            }
+          ]
+        },
+        {
+          "seasonName": "2025/2026",
+          "tournaments": [
+            {
+              "name": "Belgian Pro League",
+              "tournamentId": 40,
+              "entryId": "1-0",
+              "hasDeepStats": true
+            },
+            {
+              "name": "Coppa Italia",
+              "tournamentId": 141,
+              "entryId": "1-1",
+              "hasDeepStats": true
+            }
+          ]
+        },
+        {
+          "seasonName": "2024/2025",
+          "tournaments": [
+            {
+              "name": "Belgian Pro League",
+              "tournamentId": 40,
+              "entryId": "2-0",
+              "hasDeepStats": true
+            }
+          ]
+        },
+        {
+          "seasonName": "2023/2024",
+          "tournaments": [
+            {
+              "name": "Belgian Pro League",
+              "tournamentId": 40,
+              "entryId": "3-0",
+              "hasDeepStats": true
+            },
+            {
+              "name": "EURO U21",
+              "tournamentId": 288,
+              "entryId": "3-1",
+              "hasDeepStats": true
+            }
+          ]
+        },
+        {
+          "seasonName": "2022/2023",
+          "tournaments": [
+            {
+              "name": "HNL",
+              "tournamentId": 252,
+              "entryId": "4-0",
+              "hasDeepStats": true
+            }
+          ]
+        },
+        {
+          "seasonName": "2021/2022",
+          "tournaments": [
+            {
+              "name": "1. Division",
+              "tournamentId": 252,
+              "entryId": "5-0",
+              "hasDeepStats": true
+            }
+          ]
+        },
+        {
+          "seasonName": "2020/2021",
+          "tournaments": [
+            {
+              "name": "Europa League",
+              "tournamentId": 73,
+              "entryId": "6-0",
+              "hasDeepStats": true
+            }
+          ]
+        }
+      ],
+      "careerHistory": {
+        "showFootnote": false,
+        "careerItems": {
+          "senior": {
+            "teamEntries": [
+              {
+                "participantId": 1190371,
+                "teamId": 10167,
+                "team": "Parma",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2025-08-15T00:00:00",
+                "endDate": null,
+                "active": true,
+                "role": null,
+                "appearances": "2",
+                "goals": "0",
+                "assists": "0",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1190371,
+                "teamId": 10001,
+                "team": "Westerlo",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2023-07-24T00:00:00",
+                "endDate": "2025-08-15T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "75",
+                "goals": "20",
+                "assists": "2",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1190371,
+                "teamId": 10162,
+                "team": "Rijeka",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": {
+                  "text": "back from loan",
+                  "localizationKey": "transfer_type_back_from_loan"
+                },
+                "startDate": "2022-07-01T00:00:00",
+                "endDate": "2023-07-24T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "31",
+                "goals": "14",
+                "assists": "2",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1190371,
+                "teamId": 10160,
+                "team": "NK Hrvatski Dragovoljac",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": {
+                  "text": "on loan",
+                  "localizationKey": "on_loan"
+                },
+                "startDate": "2022-01-14T00:00:00",
+                "endDate": "2022-06-30T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "15",
+                "goals": "3",
+                "assists": "0",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1190371,
+                "teamId": 10162,
+                "team": "Rijeka",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": {
+                  "text": "back from loan",
+                  "localizationKey": "transfer_type_back_from_loan"
+                },
+                "startDate": "2022-01-01T00:00:00",
+                "endDate": "2022-01-13T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": null,
+                "goals": null,
+                "assists": null,
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1190371,
+                "teamId": 1066364,
+                "team": "HNK Orijent 1919",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": {
+                  "text": "on loan",
+                  "localizationKey": "on_loan"
+                },
+                "startDate": "2021-07-01T00:00:00",
+                "endDate": "2021-12-31T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "14",
+                "goals": "4",
+                "assists": "0",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1190371,
+                "teamId": 10162,
+                "team": "Rijeka",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2020-11-25T00:00:00",
+                "endDate": "2021-06-30T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "1",
+                "goals": "0",
+                "assists": "0",
+                "hasUncertainData": false
+              }
+            ],
+            "seasonEntries": [
+              {
+                "seasonName": "2026/2027",
+                "appearances": "1",
+                "goals": "0",
+                "assists": "0",
+                "rating": {
+                  "rating": "6.09"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 141,
+                    "leagueName": "Coppa Italia",
+                    "seasonName": "2026/2027",
+                    "tournamentId": 38626,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "1",
+                    "rating": {
+                      "rating": "6.09"
+                    }
+                  }
+                ],
+                "teamId": 10167,
+                "team": "Parma",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2025/2026",
+                "appearances": "1",
+                "goals": "0",
+                "assists": "0",
+                "rating": {
+                  "rating": "6.14"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 141,
+                    "leagueName": "Coppa Italia",
+                    "seasonName": "2025/2026",
+                    "tournamentId": 27177,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "1",
+                    "rating": {
+                      "rating": "6.14"
+                    }
+                  }
+                ],
+                "teamId": 10167,
+                "team": "Parma",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2025/2026",
+                "appearances": "3",
+                "goals": "1",
+                "assists": "0",
+                "rating": {
+                  "rating": "6.47"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 40,
+                    "leagueName": "First Division A",
+                    "seasonName": "2025/2026",
+                    "tournamentId": 27152,
+                    "goals": "1",
+                    "assists": "0",
+                    "appearances": "3",
+                    "rating": {
+                      "rating": "6.47"
+                    }
+                  }
+                ],
+                "teamId": 10001,
+                "team": "Westerlo",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2024/2025",
+                "appearances": "41",
+                "goals": "14",
+                "assists": "2",
+                "rating": {
+                  "rating": "6.83"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 40,
+                    "leagueName": "First Division A",
+                    "seasonName": "2024/2025",
+                    "tournamentId": 23650,
+                    "goals": "13",
+                    "assists": "2",
+                    "appearances": "39",
+                    "rating": {
+                      "rating": "6.83"
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueId": 149,
+                    "leagueName": "Cup",
+                    "seasonName": "2024/2025",
+                    "tournamentId": 24183,
+                    "goals": "1",
+                    "assists": "0",
+                    "appearances": "2",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 10001,
+                "team": "Westerlo",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2023/2024",
+                "appearances": "31",
+                "goals": "5",
+                "assists": "0",
+                "rating": {
+                  "rating": "6.30"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 40,
+                    "leagueName": "First Division A",
+                    "seasonName": "2023/2024",
+                    "tournamentId": 20957,
+                    "goals": "5",
+                    "assists": "0",
+                    "appearances": "30",
+                    "rating": {
+                      "rating": "6.30"
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueId": 149,
+                    "leagueName": "Cup",
+                    "seasonName": "2023/2024",
+                    "tournamentId": 22004,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "1",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 10001,
+                "team": "Westerlo",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2022/2023",
+                "appearances": "31",
+                "goals": "14",
+                "assists": "2",
+                "rating": {
+                  "rating": "6.99"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 252,
+                    "leagueName": "HNL",
+                    "seasonName": "2022/2023",
+                    "tournamentId": 17759,
+                    "goals": "13",
+                    "assists": "2",
+                    "appearances": "27",
+                    "rating": {
+                      "rating": "6.99"
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueId": 275,
+                    "leagueName": "Croatian Cup",
+                    "seasonName": "2022/2023",
+                    "tournamentId": -1,
+                    "goals": "1",
+                    "assists": "undefined",
+                    "appearances": "2",
+                    "rating": {
+                      "rating": null
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueId": 10216,
+                    "leagueName": "Conference League",
+                    "seasonName": "2022/2023",
+                    "tournamentId": 17778,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "2",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 10162,
+                "team": "Rijeka",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": {
+                  "text": "back from loan",
+                  "localizationKey": "transfer_type_back_from_loan"
+                }
+              },
+              {
+                "seasonName": "2021/2022",
+                "appearances": "15",
+                "goals": "3",
+                "assists": "0",
+                "rating": {
+                  "rating": "6.76"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 252,
+                    "leagueName": "HNL",
+                    "seasonName": "2021/2022",
+                    "tournamentId": 16422,
+                    "goals": "3",
+                    "assists": "0",
+                    "appearances": "15",
+                    "rating": {
+                      "rating": "6.76"
+                    }
+                  }
+                ],
+                "teamId": 10160,
+                "team": "NK Hrvatski Dragovoljac",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": {
+                  "text": "on loan",
+                  "localizationKey": "on_loan"
+                }
+              },
+              {
+                "seasonName": "2021/2022",
+                "appearances": "14",
+                "goals": "4",
+                "assists": "0",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 275,
+                    "leagueName": "Croatian Cup",
+                    "seasonName": "2021/2022",
+                    "tournamentId": -1,
+                    "goals": "0",
+                    "assists": "undefined",
+                    "appearances": "1",
+                    "rating": {
+                      "rating": null
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueName": "First NL",
+                    "seasonName": "2021/2022",
+                    "tournamentId": -1,
+                    "goals": "4",
+                    "assists": "undefined",
+                    "appearances": "13",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 1066364,
+                "team": "HNK Orijent 1919",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": {
+                  "text": "on loan",
+                  "localizationKey": "on_loan"
+                }
+              },
+              {
+                "seasonName": "2020/2021",
+                "appearances": "1",
+                "goals": "0",
+                "assists": "0",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 73,
+                    "leagueName": "Europa League",
+                    "seasonName": "2020/2021",
+                    "tournamentId": 15238,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "1",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 10162,
+                "team": "Rijeka",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              }
+            ]
+          },
+          "national team": {
+            "teamEntries": [
+              {
+                "participantId": 1190371,
+                "teamId": 10155,
+                "team": "Croatia",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2023-08-21T00:00:00",
+                "endDate": "2023-10-05T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": null,
+                "goals": null,
+                "assists": null,
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1190371,
+                "teamId": 5848,
+                "team": "Croatia U21",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2023-03-13T00:00:00",
+                "endDate": "2025-03-18T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "10",
+                "goals": "0",
+                "assists": "0",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1190371,
+                "teamId": 204263,
+                "team": "Croatia U19",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2021-11-08T00:00:00",
+                "endDate": "2022-10-31T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "6",
+                "goals": "4",
+                "assists": "0",
+                "hasUncertainData": false
+              }
+            ],
+            "seasonEntries": [
+              {
+                "seasonName": "2025",
+                "appearances": "6",
+                "goals": "0",
+                "assists": "0",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueName": "UEFA U21 Championship Qualificat",
+                    "seasonName": "2025",
+                    "tournamentId": -1,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "6",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 5848,
+                "team": "Croatia U21",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2023",
+                "appearances": "4",
+                "goals": "0",
+                "assists": "0",
+                "rating": {
+                  "rating": "6.68"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 288,
+                    "leagueName": "EURO U21",
+                    "seasonName": "2023",
+                    "tournamentId": 18334,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "3",
+                    "rating": {
+                      "rating": "6.68"
+                    }
+                  },
+                  {
+                    "isFriendly": true,
+                    "leagueName": "U21 National Team Friendlies",
+                    "seasonName": "2023",
+                    "tournamentId": -1,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "1",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 5848,
+                "team": "Croatia U21",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2022",
+                "appearances": "6",
+                "goals": "4",
+                "assists": "0",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueName": "UEFA U19 Championship Qualificat",
+                    "seasonName": "2022",
+                    "tournamentId": -1,
+                    "goals": "4",
+                    "assists": "undefined",
+                    "appearances": "6",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 204263,
+                "team": "Croatia U19",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              }
+            ]
+          }
+        },
+        "fullCareer": true
+      },
+      "firstSeasonTopStatCard": {
+        "display": "stats-group",
+        "id": "top-stat-card",
+        "items": [
+          {
+            "localizedTitleId": "goals",
+            "per90": 0,
+            "percentileRank": 0,
+            "percentileRankPer90": 0,
+            "statFormat": "number",
+            "statValue": "0",
+            "title": "Goals"
+          },
+          {
+            "localizedTitleId": "assists",
+            "per90": 0,
+            "percentileRank": 0,
+            "percentileRankPer90": 0,
+            "statFormat": "number",
+            "statValue": "0",
+            "title": "Assists"
+          },
+          {
+            "localizedTitleId": "rating",
+            "per90": 6.09,
+            "percentileRank": 30.39568345323741,
+            "percentileRankPer90": 30.39568345323741,
+            "statFormat": "fraction",
+            "statValue": "6.09",
+            "title": "Rating"
+          },
+          {
+            "localizedTitleId": "matches_uppercase",
+            "per90": 1,
+            "percentileRank": 100,
+            "percentileRankPer90": 100,
+            "statFormat": "number",
+            "statValue": "1",
+            "title": "Matches"
+          },
+          {
+            "localizedTitleId": "player_started_matches",
+            "per90": 0,
+            "percentileRank": 0,
+            "percentileRankPer90": 0,
+            "statFormat": "number",
+            "statValue": "0",
+            "title": "Started"
+          },
+          {
+            "localizedTitleId": "minutes_played",
+            "per90": 90,
+            "percentileRank": 25.179856115107913,
+            "percentileRankPer90": 100,
+            "statFormat": "number",
+            "statValue": "23",
+            "title": "Minutes"
+          }
+        ],
+        "type": "stat-values"
+      },
+      "primaryTeam": {
+        "teamId": 10167,
+        "teamName": "Parma",
+        "onLoan": false,
+        "teamColors": {
+          "color": "#000000",
+          "colorAlternate": "#ffffff",
+          "colorAway": "#2C3A82",
+          "colorAwayAlternate": "#2C3A82"
+        }
+      },
+      "mainLeague": {
+        "leagueId": 40,
+        "leagueName": "Belgian Pro League",
+        "season": "2025/2026",
+        "stats": [
+          {
+            "title": "Goals",
+            "localizedTitleId": "goals",
+            "value": 1
+          },
+          {
+            "title": "Assists",
+            "localizedTitleId": "assists",
+            "value": 0
+          },
+          {
+            "title": "Started",
+            "localizedTitleId": "started",
+            "value": 2
+          },
+          {
+            "title": "Matches",
+            "localizedTitleId": "matches_uppercase",
+            "value": 3
+          },
+          {
+            "title": "Minutes played",
+            "localizedTitleId": "minutes_played",
+            "value": 175
+          },
+          {
+            "title": "Rating",
+            "localizedTitleId": "rating",
+            "value": 6.47
+          },
+          {
+            "title": "Yellow cards",
+            "localizedTitleId": "yellow_cards",
+            "value": 0
+          },
+          {
+            "title": "Red cards",
+            "localizedTitleId": "red_cards",
+            "value": 0
+          }
+        ]
+      },
+      "dataProvider": "enet",
+      "ssr": true
+    },
+    {
+      "name": "Andrea Adorante",
+      "id": 1024432,
+      "statSeasons": [
+        {
+          "seasonName": "2025/2026",
+          "tournaments": [
+            {
+              "name": "Serie B",
+              "tournamentId": 86,
+              "entryId": "0-0",
+              "hasDeepStats": true
+            },
+            {
+              "name": "Coppa Italia",
+              "tournamentId": 141,
+              "entryId": "0-1",
+              "hasDeepStats": true
+            }
+          ]
+        },
+        {
+          "seasonName": "2024/2025",
+          "tournaments": [
+            {
+              "name": "Serie B",
+              "tournamentId": 86,
+              "entryId": "1-0",
+              "hasDeepStats": true
+            }
+          ]
+        },
+        {
+          "seasonName": "2020/2021",
+          "tournaments": [
+            {
+              "name": "Serie A",
+              "tournamentId": 55,
+              "entryId": "2-0",
+              "hasDeepStats": true
+            },
+            {
+              "name": "Coppa Italia",
+              "tournamentId": 141,
+              "entryId": "2-1",
+              "hasDeepStats": true
+            }
+          ]
+        }
+      ],
+      "careerHistory": {
+        "showFootnote": false,
+        "careerItems": {
+          "senior": {
+            "teamEntries": [
+              {
+                "participantId": 1024432,
+                "teamId": 7881,
+                "team": "Venezia",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2025-07-12T00:00:00",
+                "endDate": null,
+                "active": true,
+                "role": null,
+                "appearances": "35",
+                "goals": "17",
+                "assists": "1",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1024432,
+                "teamId": 6106,
+                "team": "Juve Stabia",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2024-07-01T00:00:00",
+                "endDate": "2025-07-12T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "36",
+                "goals": "17",
+                "assists": "2",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1024432,
+                "teamId": 6106,
+                "team": "Juve Stabia",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": {
+                  "text": "on loan",
+                  "localizationKey": "on_loan"
+                },
+                "startDate": "2024-01-04T00:00:00",
+                "endDate": "2024-06-30T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "20",
+                "goals": "13",
+                "assists": "0",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1024432,
+                "teamId": 9872,
+                "team": "Triestina",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2022-07-13T00:00:00",
+                "endDate": "2024-01-04T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "47",
+                "goals": "10",
+                "assists": "0",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1024432,
+                "teamId": 8538,
+                "team": "Messina",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": {
+                  "text": "on loan",
+                  "localizationKey": "on_loan"
+                },
+                "startDate": "2021-08-02T00:00:00",
+                "endDate": "2022-06-30T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "32",
+                "goals": "8",
+                "assists": "0",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1024432,
+                "teamId": 674806,
+                "team": "Virtus Francavilla",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": {
+                  "text": "on loan",
+                  "localizationKey": "on_loan"
+                },
+                "startDate": "2021-01-23T00:00:00",
+                "endDate": "2021-06-30T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "17",
+                "goals": "1",
+                "assists": "0",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1024432,
+                "teamId": 10167,
+                "team": "Parma",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2019-07-01T00:00:00",
+                "endDate": "2021-01-23T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "5",
+                "goals": "1",
+                "assists": "0",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1024432,
+                "teamId": 8636,
+                "team": "Inter",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2019-02-20T00:00:00",
+                "endDate": "2019-07-01T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": null,
+                "goals": null,
+                "assists": null,
+                "hasUncertainData": false
+              }
+            ],
+            "seasonEntries": [
+              {
+                "seasonName": "2025/2026",
+                "appearances": "35",
+                "goals": "17",
+                "assists": "1",
+                "rating": {
+                  "rating": "7.15"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 86,
+                    "leagueName": "Serie B",
+                    "seasonName": "2025/2026",
+                    "tournamentId": 27577,
+                    "goals": "17",
+                    "assists": "1",
+                    "appearances": "33",
+                    "rating": {
+                      "rating": "7.13"
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueId": 141,
+                    "leagueName": "Coppa Italia",
+                    "seasonName": "2025/2026",
+                    "tournamentId": 27177,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "2",
+                    "rating": {
+                      "rating": "7.51"
+                    }
+                  }
+                ],
+                "teamId": 7881,
+                "team": "Venezia",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2024/2025",
+                "appearances": "36",
+                "goals": "17",
+                "assists": "2",
+                "rating": {
+                  "rating": "6.96"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 86,
+                    "leagueName": "Serie B",
+                    "seasonName": "2024/2025",
+                    "tournamentId": 23861,
+                    "goals": "17",
+                    "assists": "2",
+                    "appearances": "36",
+                    "rating": {
+                      "rating": "6.96"
+                    }
+                  }
+                ],
+                "teamId": 6106,
+                "team": "Juve Stabia",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2023/2024",
+                "appearances": "20",
+                "goals": "13",
+                "assists": "0",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 147,
+                    "leagueName": "Serie C",
+                    "seasonName": "2023/2024",
+                    "tournamentId": 21361,
+                    "goals": "13",
+                    "assists": "undefined",
+                    "appearances": "20",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 6106,
+                "team": "Juve Stabia",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": {
+                  "text": "on loan",
+                  "localizationKey": "on_loan"
+                }
+              },
+              {
+                "seasonName": "2023/2024",
+                "appearances": "12",
+                "goals": "4",
+                "assists": "0",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 147,
+                    "leagueName": "Serie C",
+                    "seasonName": "2023/2024",
+                    "tournamentId": 21361,
+                    "goals": "4",
+                    "assists": "undefined",
+                    "appearances": "12",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 9872,
+                "team": "Triestina",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2022/2023",
+                "appearances": "35",
+                "goals": "6",
+                "assists": "0",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 147,
+                    "leagueName": "Serie C",
+                    "seasonName": "2022/2023",
+                    "tournamentId": 18024,
+                    "goals": "6",
+                    "assists": "undefined",
+                    "appearances": "35",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 9872,
+                "team": "Triestina",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2021/2022",
+                "appearances": "32",
+                "goals": "8",
+                "assists": "0",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 147,
+                    "leagueName": "Serie C",
+                    "seasonName": "2021/2022",
+                    "tournamentId": 16754,
+                    "goals": "8",
+                    "assists": "undefined",
+                    "appearances": "32",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 8538,
+                "team": "Messina",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": {
+                  "text": "on loan",
+                  "localizationKey": "on_loan"
+                }
+              },
+              {
+                "seasonName": "2020/2021",
+                "appearances": "17",
+                "goals": "1",
+                "assists": "0",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 147,
+                    "leagueName": "Serie C",
+                    "seasonName": "2020/2021",
+                    "tournamentId": 15673,
+                    "goals": "1",
+                    "assists": "undefined",
+                    "appearances": "17",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 674806,
+                "team": "Virtus Francavilla",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": {
+                  "text": "on loan",
+                  "localizationKey": "on_loan"
+                }
+              },
+              {
+                "seasonName": "2020/2021",
+                "appearances": "4",
+                "goals": "1",
+                "assists": "0",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 55,
+                    "leagueName": "Serie A",
+                    "seasonName": "2020/2021",
+                    "tournamentId": 15604,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "1",
+                    "rating": {
+                      "rating": null
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueId": 141,
+                    "leagueName": "Coppa Italia",
+                    "seasonName": "2020/2021",
+                    "tournamentId": 15629,
+                    "goals": "1",
+                    "assists": "0",
+                    "appearances": "3",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 10167,
+                "team": "Parma",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2019/2020",
+                "appearances": "1",
+                "goals": "0",
+                "assists": "0",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 141,
+                    "leagueName": "Coppa Italia",
+                    "seasonName": "2019/2020",
+                    "tournamentId": 14287,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "1",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 10167,
+                "team": "Parma",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              }
+            ]
+          },
+          "youth": {
+            "teamEntries": [
+              {
+                "participantId": 1024432,
+                "teamId": 0,
+                "team": "FC Internazionale Milano U19",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2018-07-01T00:00:00",
+                "endDate": "2019-06-30T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "5",
+                "goals": "1",
+                "assists": "1",
+                "hasUncertainData": false
+              }
+            ],
+            "seasonEntries": [
+              {
+                "seasonName": "2018/2019",
+                "appearances": "5",
+                "goals": "1",
+                "assists": "1",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 9741,
+                    "leagueName": "UEFA Youth League",
+                    "seasonName": "2018/2019",
+                    "tournamentId": -1,
+                    "goals": "1",
+                    "assists": "1",
+                    "appearances": "5",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 0,
+                "team": "FC Internazionale Milano U19",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              }
+            ]
+          }
+        },
+        "fullCareer": true
+      },
+      "firstSeasonTopStatCard": {
+        "display": "stats-group",
+        "id": "top-stat-card",
+        "items": [
+          {
+            "localizedTitleId": "goals",
+            "per90": 0.7099767981438515,
+            "percentileRank": 97.6470588235294,
+            "percentileRankPer90": 97.6470588235294,
+            "statFormat": "number",
+            "statValue": "17",
+            "title": "Goals"
+          },
+          {
+            "localizedTitleId": "assists",
+            "per90": 0.04176334106728538,
+            "percentileRank": 28.235294117647058,
+            "percentileRankPer90": 31.76470588235294,
+            "statFormat": "number",
+            "statValue": "1",
+            "title": "Assists"
+          },
+          {
+            "localizedTitleId": "rating",
+            "per90": 7.1253125,
+            "percentileRank": 95.29411764705881,
+            "percentileRankPer90": 95.29411764705881,
+            "statFormat": "fraction",
+            "statValue": "7.13",
+            "title": "Rating"
+          },
+          {
+            "localizedTitleId": "matches_uppercase",
+            "per90": 33,
+            "percentileRank": 77.64705882352942,
+            "percentileRankPer90": 77.64705882352942,
+            "statFormat": "number",
+            "statValue": "33",
+            "title": "Matches"
+          },
+          {
+            "localizedTitleId": "player_started_matches",
+            "per90": 30,
+            "percentileRank": 84.70588235294117,
+            "percentileRankPer90": 100,
+            "statFormat": "number",
+            "statValue": "30",
+            "title": "Started"
+          },
+          {
+            "localizedTitleId": "minutes_played",
+            "per90": 90,
+            "percentileRank": 84.70588235294117,
+            "percentileRankPer90": 100,
+            "statFormat": "number",
+            "statValue": "2155",
+            "title": "Minutes"
+          }
+        ],
+        "type": "stat-values"
+      },
+      "primaryTeam": {
+        "teamId": 7881,
+        "teamName": "Venezia",
+        "onLoan": false,
+        "teamColors": {
+          "color": "#101010",
+          "colorAlternate": "#006127",
+          "colorAway": "#a48c3e",
+          "colorAwayAlternate": "#a48c3e"
+        }
+      },
+      "mainLeague": {
+        "leagueId": 86,
+        "leagueName": "Serie B",
+        "season": "2025/2026",
+        "stats": [
+          {
+            "title": "Goals",
+            "localizedTitleId": "goals",
+            "value": 17
+          },
+          {
+            "title": "Assists",
+            "localizedTitleId": "assists",
+            "value": 1
+          },
+          {
+            "title": "Started",
+            "localizedTitleId": "started",
+            "value": 30
+          },
+          {
+            "title": "Matches",
+            "localizedTitleId": "matches_uppercase",
+            "value": 33
+          },
+          {
+            "title": "Minutes played",
+            "localizedTitleId": "minutes_played",
+            "value": 2155
+          },
+          {
+            "title": "Rating",
+            "localizedTitleId": "rating",
+            "value": 7.13
+          },
+          {
+            "title": "Yellow cards",
+            "localizedTitleId": "yellow_cards",
+            "value": 5
+          },
+          {
+            "title": "Red cards",
+            "localizedTitleId": "red_cards",
+            "value": 0
+          }
+        ]
+      },
+      "dataProvider": "enet",
+      "ssr": true
+    },
+    {
+      "name": "Kornel Lisman",
+      "id": 1529483,
+      "statSeasons": [
+        {
+          "seasonName": "2025/2026",
+          "tournaments": [
+            {
+              "name": "Ekstraklasa",
+              "tournamentId": 196,
+              "entryId": "0-0",
+              "hasDeepStats": true
+            },
+            {
+              "name": "Conference League",
+              "tournamentId": 10216,
+              "entryId": "0-1",
+              "hasDeepStats": true
+            }
+          ]
+        },
+        {
+          "seasonName": "2024/2025",
+          "tournaments": [
+            {
+              "name": "Ekstraklasa",
+              "tournamentId": 196,
+              "entryId": "1-0",
+              "hasDeepStats": true
+            }
+          ]
+        }
+      ],
+      "careerHistory": {
+        "showFootnote": false,
+        "careerItems": {
+          "senior": {
+            "teamEntries": [
+              {
+                "participantId": 1529483,
+                "teamId": 7881,
+                "team": "Venezia",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2026-06-29T00:00:00",
+                "endDate": null,
+                "active": true,
+                "role": null,
+                "appearances": null,
+                "goals": null,
+                "assists": null,
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1529483,
+                "teamId": -1,
+                "team": "KKS Lech Poznań II",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2024-10-28T00:00:00",
+                "endDate": "2026-06-29T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "1",
+                "goals": "0",
+                "assists": "0",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1529483,
+                "teamId": 2182,
+                "team": "Lech Poznań",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2024-01-19T00:00:00",
+                "endDate": "2026-06-29T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "33",
+                "goals": "2",
+                "assists": "1",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1529483,
+                "teamId": -1,
+                "team": "KKS Lech Poznań II",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2023-06-22T00:00:00",
+                "endDate": "2023-12-31T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "15",
+                "goals": "2",
+                "assists": "0",
+                "hasUncertainData": false
+              }
+            ],
+            "seasonEntries": [
+              {
+                "seasonName": "2024/2025",
+                "appearances": "1",
+                "goals": "0",
+                "assists": "0",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueName": "Cup",
+                    "seasonName": "2024/2025",
+                    "tournamentId": -1,
+                    "goals": "0",
+                    "assists": "undefined",
+                    "appearances": "1",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": -1,
+                "team": "KKS Lech Poznań II",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2025/2026",
+                "appearances": "20",
+                "goals": "1",
+                "assists": "1",
+                "rating": {
+                  "rating": "6.45"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 196,
+                    "leagueName": "Ekstraklasa",
+                    "seasonName": "2025/2026",
+                    "tournamentId": 27045,
+                    "goals": "0",
+                    "assists": "1",
+                    "appearances": "13",
+                    "rating": {
+                      "rating": "6.46"
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueId": 42,
+                    "leagueName": "Champions League",
+                    "seasonName": "2025/2026",
+                    "tournamentId": 28184,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "2",
+                    "rating": {
+                      "rating": null
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueId": 73,
+                    "leagueName": "Europa League",
+                    "seasonName": "2025/2026",
+                    "tournamentId": 28190,
+                    "goals": "1",
+                    "assists": "0",
+                    "appearances": "2",
+                    "rating": {
+                      "rating": null
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueId": 10216,
+                    "leagueName": "Conference League",
+                    "seasonName": "2025/2026",
+                    "tournamentId": 28191,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "3",
+                    "rating": {
+                      "rating": "6.44"
+                    }
+                  }
+                ],
+                "teamId": 2182,
+                "team": "Lech Poznań",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2024/2025",
+                "appearances": "13",
+                "goals": "1",
+                "assists": "0",
+                "rating": {
+                  "rating": "6.47"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 196,
+                    "leagueName": "Ekstraklasa",
+                    "seasonName": "2024/2025",
+                    "tournamentId": 23622,
+                    "goals": "1",
+                    "assists": "0",
+                    "appearances": "13",
+                    "rating": {
+                      "rating": "6.47"
+                    }
+                  }
+                ],
+                "teamId": 2182,
+                "team": "Lech Poznań",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2023/2024",
+                "appearances": "15",
+                "goals": "2",
+                "assists": "0",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueName": "II Liga",
+                    "seasonName": "2023/2024",
+                    "tournamentId": -1,
+                    "goals": "2",
+                    "assists": "undefined",
+                    "appearances": "15",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": -1,
+                "team": "KKS Lech Poznań II",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              }
+            ]
+          },
+          "youth": {
+            "teamEntries": [
+              {
+                "participantId": 1529483,
+                "teamId": -1,
+                "team": "KKS Lech Poznań Under 19",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2023-10-24T00:00:00",
+                "endDate": "2026-06-29T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "1",
+                "goals": "0",
+                "assists": "0",
+                "hasUncertainData": false
+              }
+            ],
+            "seasonEntries": [
+              {
+                "seasonName": "2023/2024",
+                "appearances": "1",
+                "goals": "0",
+                "assists": "0",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 9741,
+                    "leagueName": "UEFA Youth League",
+                    "seasonName": "2023/2024",
+                    "tournamentId": -1,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "1",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": -1,
+                "team": "KKS Lech Poznań Under 19",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              }
+            ]
+          }
+        },
+        "fullCareer": true
+      },
+      "firstSeasonTopStatCard": {
+        "display": "stats-group",
+        "id": "top-stat-card",
+        "items": [
+          {
+            "localizedTitleId": "goals",
+            "per90": 0,
+            "percentileRank": 0,
+            "percentileRankPer90": 0,
+            "statFormat": "number",
+            "statValue": "0",
+            "title": "Goals"
+          },
+          {
+            "localizedTitleId": "assists",
+            "per90": 0.24390243902439024,
+            "percentileRank": 35.65891472868217,
+            "percentileRankPer90": 89.92248062015504,
+            "statFormat": "number",
+            "statValue": "1",
+            "title": "Assists"
+          },
+          {
+            "localizedTitleId": "rating",
+            "per90": 6.455,
+            "percentileRank": 16.27906976744186,
+            "percentileRankPer90": 16.27906976744186,
+            "statFormat": "fraction",
+            "statValue": "6.46",
+            "title": "Rating"
+          },
+          {
+            "localizedTitleId": "matches_uppercase",
+            "per90": 13,
+            "percentileRank": 24.8062015503876,
+            "percentileRankPer90": 24.8062015503876,
+            "statFormat": "number",
+            "statValue": "13",
+            "title": "Matches"
+          },
+          {
+            "localizedTitleId": "player_started_matches",
+            "per90": 4,
+            "percentileRank": 14.728682170542637,
+            "percentileRankPer90": 32.55813953488372,
+            "statFormat": "number",
+            "statValue": "4",
+            "title": "Started"
+          },
+          {
+            "localizedTitleId": "minutes_played",
+            "per90": 90,
+            "percentileRank": 14.728682170542637,
+            "percentileRankPer90": 100,
+            "statFormat": "number",
+            "statValue": "369",
+            "title": "Minutes"
+          }
+        ],
+        "type": "stat-values"
+      },
+      "primaryTeam": {
+        "teamId": 7881,
+        "teamName": "Venezia",
+        "onLoan": false,
+        "teamColors": {
+          "color": "#101010",
+          "colorAlternate": "#006127",
+          "colorAway": "#a48c3e",
+          "colorAwayAlternate": "#a48c3e"
+        }
+      },
+      "mainLeague": {
+        "leagueId": 196,
+        "leagueName": "Ekstraklasa",
+        "season": "2025/2026",
+        "stats": [
+          {
+            "title": "Goals",
+            "localizedTitleId": "goals",
+            "value": 0
+          },
+          {
+            "title": "Assists",
+            "localizedTitleId": "assists",
+            "value": 1
+          },
+          {
+            "title": "Started",
+            "localizedTitleId": "started",
+            "value": 4
+          },
+          {
+            "title": "Matches",
+            "localizedTitleId": "matches_uppercase",
+            "value": 13
+          },
+          {
+            "title": "Minutes played",
+            "localizedTitleId": "minutes_played",
+            "value": 369
+          },
+          {
+            "title": "Rating",
+            "localizedTitleId": "rating",
+            "value": 6.46
+          },
+          {
+            "title": "Yellow cards",
+            "localizedTitleId": "yellow_cards",
+            "value": 0
+          },
+          {
+            "title": "Red cards",
+            "localizedTitleId": "red_cards",
+            "value": 0
+          }
+        ]
+      },
+      "dataProvider": "enet",
+      "ssr": true
+    },
+    {
+      "name": "Albion Rrahmani",
+      "id": 1379468,
+      "statSeasons": [
+        {
+          "seasonName": "2026/2027",
+          "tournaments": [
+            {
+              "name": "Coppa Italia",
+              "tournamentId": 141,
+              "entryId": "0-0",
+              "hasDeepStats": true
+            }
+          ]
+        },
+        {
+          "seasonName": "2025/2026",
+          "tournaments": [
+            {
+              "name": "1. Liga",
+              "tournamentId": 122,
+              "entryId": "1-0",
+              "hasDeepStats": true
+            },
+            {
+              "name": "World Cup UEFA qualification",
+              "tournamentId": 10195,
+              "entryId": "1-1",
+              "hasDeepStats": true
+            },
+            {
+              "name": "Conference League",
+              "tournamentId": 10216,
+              "entryId": "1-2",
+              "hasDeepStats": true
+            }
+          ]
+        },
+        {
+          "seasonName": "2024/2025",
+          "tournaments": [
+            {
+              "name": "Superliga",
+              "tournamentId": 189,
+              "entryId": "2-0",
+              "hasDeepStats": false
+            },
+            {
+              "name": "1. Liga",
+              "tournamentId": 122,
+              "entryId": "2-1",
+              "hasDeepStats": false
+            },
+            {
+              "name": "Champions League",
+              "tournamentId": 42,
+              "entryId": "2-2",
+              "hasDeepStats": true
+            },
+            {
+              "name": "Champions League Qualification qualification",
+              "tournamentId": 10611,
+              "entryId": "2-3",
+              "hasDeepStats": true
+            },
+            {
+              "name": "UEFA Nations League C",
+              "tournamentId": 9808,
+              "entryId": "2-4",
+              "hasDeepStats": true
+            }
+          ]
+        },
+        {
+          "seasonName": "2023/2024",
+          "tournaments": [
+            {
+              "name": "Superliga",
+              "tournamentId": 189,
+              "entryId": "3-0",
+              "hasDeepStats": false
+            },
+            {
+              "name": "EURO Qualification qualification",
+              "tournamentId": 10607,
+              "entryId": "3-1",
+              "hasDeepStats": true
+            },
+            {
+              "name": "Champions League Qualification qualification",
+              "tournamentId": 10611,
+              "entryId": "3-2",
+              "hasDeepStats": true
+            }
+          ]
+        },
+        {
+          "seasonName": "2022/2023",
+          "tournaments": [
+            {
+              "name": "Champions League Qualification qualification",
+              "tournamentId": 10611,
+              "entryId": "4-0",
+              "hasDeepStats": true
+            },
+            {
+              "name": "Conference League",
+              "tournamentId": 10216,
+              "entryId": "4-1",
+              "hasDeepStats": true
+            }
+          ]
+        }
+      ],
+      "careerHistory": {
+        "showFootnote": false,
+        "careerItems": {
+          "senior": {
+            "teamEntries": [
+              {
+                "participantId": 1379468,
+                "teamId": 7881,
+                "team": "Venezia",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2026-07-09T00:00:00",
+                "endDate": null,
+                "active": true,
+                "role": null,
+                "appearances": "1",
+                "goals": "0",
+                "assists": "0",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1379468,
+                "teamId": 132215,
+                "team": "Sparta Prague B",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2026-04-17T00:00:00",
+                "endDate": "2026-07-09T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": null,
+                "goals": null,
+                "assists": null,
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1379468,
+                "teamId": 10247,
+                "team": "Sparta Prague",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2024-08-19T00:00:00",
+                "endDate": "2026-07-09T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "83",
+                "goals": "26",
+                "assists": "5",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1379468,
+                "teamId": 9738,
+                "team": "Rapid Bucuresti",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2023-08-07T00:00:00",
+                "endDate": "2024-08-19T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "29",
+                "goals": "18",
+                "assists": "6",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1379468,
+                "teamId": 952668,
+                "team": "Ballkani",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": {
+                  "text": "free transfer",
+                  "localizationKey": "free_transfer"
+                },
+                "startDate": "2021-07-01T00:00:00",
+                "endDate": "2023-08-06T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": "18",
+                "goals": "9",
+                "assists": "2",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1379468,
+                "teamId": 1273410,
+                "team": "Malisheva",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2020-07-01T00:00:00",
+                "endDate": "2021-06-30T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": null,
+                "goals": null,
+                "assists": null,
+                "hasUncertainData": false
+              }
+            ],
+            "seasonEntries": [
+              {
+                "seasonName": "2026/2027",
+                "appearances": "1",
+                "goals": "0",
+                "assists": "0",
+                "rating": {
+                  "rating": "6.07"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 141,
+                    "leagueName": "Coppa Italia",
+                    "seasonName": "2026/2027",
+                    "tournamentId": 38626,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "1",
+                    "rating": {
+                      "rating": "6.07"
+                    }
+                  }
+                ],
+                "teamId": 7881,
+                "team": "Venezia",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2025/2026",
+                "appearances": "49",
+                "goals": "16",
+                "assists": "3",
+                "rating": {
+                  "rating": "6.57"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 122,
+                    "leagueName": "1. Liga",
+                    "seasonName": "2025/2026",
+                    "tournamentId": -1,
+                    "goals": "11",
+                    "assists": "3",
+                    "appearances": "34",
+                    "rating": {
+                      "rating": null
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueId": 254,
+                    "leagueName": "Czech Cup",
+                    "seasonName": "2025/2026",
+                    "tournamentId": 28034,
+                    "goals": "1",
+                    "assists": "undefined",
+                    "appearances": "2",
+                    "rating": {
+                      "rating": null
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueId": 10216,
+                    "leagueName": "Conference League",
+                    "seasonName": "2025/2026",
+                    "tournamentId": 28191,
+                    "goals": "4",
+                    "assists": "0",
+                    "appearances": "13",
+                    "rating": {
+                      "rating": "6.57"
+                    }
+                  }
+                ],
+                "teamId": 10247,
+                "team": "Sparta Prague",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2024/2025",
+                "appearances": "34",
+                "goals": "10",
+                "assists": "2",
+                "rating": {
+                  "rating": "6.39"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 122,
+                    "leagueName": "1. Liga",
+                    "seasonName": "2024/2025",
+                    "tournamentId": -1,
+                    "goals": "5",
+                    "assists": "2",
+                    "appearances": "23",
+                    "rating": {
+                      "rating": null
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueId": 254,
+                    "leagueName": "Czech Cup",
+                    "seasonName": "2024/2025",
+                    "tournamentId": 24180,
+                    "goals": "3",
+                    "assists": "undefined",
+                    "appearances": "4",
+                    "rating": {
+                      "rating": null
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueId": 42,
+                    "leagueName": "Champions League",
+                    "seasonName": "2024/2025",
+                    "tournamentId": 24110,
+                    "goals": "2",
+                    "assists": "0",
+                    "appearances": "7",
+                    "rating": {
+                      "rating": "6.39"
+                    }
+                  }
+                ],
+                "teamId": 10247,
+                "team": "Sparta Prague",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2024/2025",
+                "appearances": "3",
+                "goals": "1",
+                "assists": "1",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 189,
+                    "leagueName": "Liga I",
+                    "seasonName": "2024/2025",
+                    "tournamentId": 23796,
+                    "goals": "1",
+                    "assists": "1",
+                    "appearances": "3",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 9738,
+                "team": "Rapid Bucuresti",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2023/2024",
+                "appearances": "26",
+                "goals": "17",
+                "assists": "5",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 189,
+                    "leagueName": "Liga I",
+                    "seasonName": "2023/2024",
+                    "tournamentId": 21109,
+                    "goals": "17",
+                    "assists": "5",
+                    "appearances": "25",
+                    "rating": {
+                      "rating": null
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueName": "Cupa României",
+                    "seasonName": "2023/2024",
+                    "tournamentId": -1,
+                    "goals": "0",
+                    "assists": "undefined",
+                    "appearances": "1",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 9738,
+                "team": "Rapid Bucuresti",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2023/2024",
+                "appearances": "4",
+                "goals": "2",
+                "assists": "0",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 42,
+                    "leagueName": "Champions League",
+                    "seasonName": "2023/2024",
+                    "tournamentId": 20961,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "2",
+                    "rating": {
+                      "rating": null
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueId": 10216,
+                    "leagueName": "Conference League",
+                    "seasonName": "2023/2024",
+                    "tournamentId": 21016,
+                    "goals": "2",
+                    "assists": "0",
+                    "appearances": "2",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 952668,
+                "team": "Ballkani",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": {
+                  "text": "free transfer",
+                  "localizationKey": "free_transfer"
+                }
+              },
+              {
+                "seasonName": "2022/2023",
+                "appearances": "14",
+                "goals": "7",
+                "assists": "2",
+                "rating": {
+                  "rating": "6.57"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 42,
+                    "leagueName": "Champions League",
+                    "seasonName": "2022/2023",
+                    "tournamentId": 17697,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "2",
+                    "rating": {
+                      "rating": null
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueId": 10216,
+                    "leagueName": "Conference League",
+                    "seasonName": "2022/2023",
+                    "tournamentId": 17778,
+                    "goals": "7",
+                    "assists": "2",
+                    "appearances": "12",
+                    "rating": {
+                      "rating": "6.57"
+                    }
+                  }
+                ],
+                "teamId": 952668,
+                "team": "Ballkani",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": {
+                  "text": "free transfer",
+                  "localizationKey": "free_transfer"
+                }
+              }
+            ]
+          },
+          "national team": {
+            "teamEntries": [
+              {
+                "participantId": 1379468,
+                "teamId": 430156,
+                "team": "Kosovo",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2023-01-01T00:00:00",
+                "endDate": null,
+                "active": true,
+                "role": null,
+                "appearances": "25",
+                "goals": "7",
+                "assists": "1",
+                "hasUncertainData": false
+              },
+              {
+                "participantId": 1379468,
+                "teamId": 821847,
+                "team": "Kosovo U21",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null,
+                "startDate": "2021-05-22T00:00:00",
+                "endDate": "2021-08-24T00:00:00",
+                "active": false,
+                "role": null,
+                "appearances": null,
+                "goals": null,
+                "assists": null,
+                "hasUncertainData": false
+              }
+            ],
+            "seasonEntries": [
+              {
+                "seasonName": "2026",
+                "appearances": "10",
+                "goals": "1",
+                "assists": "1",
+                "rating": {
+                  "rating": "6.80"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 10195,
+                    "leagueName": "World Cup Qualification UEFA",
+                    "seasonName": "2026",
+                    "tournamentId": 24488,
+                    "goals": "0",
+                    "assists": "1",
+                    "appearances": "8",
+                    "rating": {
+                      "rating": "6.80"
+                    }
+                  },
+                  {
+                    "isFriendly": true,
+                    "leagueId": 114,
+                    "leagueName": "Friendlies",
+                    "seasonName": "2026",
+                    "tournamentId": 29822,
+                    "goals": "1",
+                    "assists": "0",
+                    "appearances": "2",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 430156,
+                "team": "Kosovo",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2025",
+                "appearances": "2",
+                "goals": "5",
+                "assists": "0",
+                "rating": {
+                  "rating": null
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": true,
+                    "leagueId": 114,
+                    "leagueName": "Friendlies",
+                    "seasonName": "2025",
+                    "tournamentId": 24481,
+                    "goals": "5",
+                    "assists": "0",
+                    "appearances": "2",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 430156,
+                "team": "Kosovo",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              },
+              {
+                "seasonName": "2024",
+                "appearances": "13",
+                "goals": "1",
+                "assists": "0",
+                "rating": {
+                  "rating": "6.04"
+                },
+                "tournamentStats": [
+                  {
+                    "isFriendly": false,
+                    "leagueId": 10607,
+                    "leagueName": "EURO Qualification",
+                    "seasonName": "2024",
+                    "tournamentId": -1,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "2",
+                    "rating": {
+                      "rating": null
+                    }
+                  },
+                  {
+                    "isFriendly": true,
+                    "leagueId": 114,
+                    "leagueName": "Friendlies",
+                    "seasonName": "2024",
+                    "tournamentId": 22275,
+                    "goals": "0",
+                    "assists": "0",
+                    "appearances": "3",
+                    "rating": {
+                      "rating": "6.04"
+                    }
+                  },
+                  {
+                    "isFriendly": false,
+                    "leagueId": 9806,
+                    "leagueName": "UEFA Nations League A",
+                    "seasonName": "2024/2025",
+                    "tournamentId": 22886,
+                    "goals": "1",
+                    "assists": "0",
+                    "appearances": "8",
+                    "rating": {
+                      "rating": null
+                    }
+                  }
+                ],
+                "teamId": 430156,
+                "team": "Kosovo",
+                "teamGender": "male",
+                "showTeamGender": false,
+                "transferType": null
+              }
+            ]
+          }
+        },
+        "fullCareer": true
+      },
+      "firstSeasonTopStatCard": {
+        "display": "stats-group",
+        "id": "top-stat-card",
+        "items": [
+          {
+            "localizedTitleId": "goals",
+            "per90": 0,
+            "percentileRank": 0,
+            "percentileRankPer90": 0,
+            "statFormat": "number",
+            "statValue": "0",
+            "title": "Goals"
+          },
+          {
+            "localizedTitleId": "assists",
+            "per90": 0,
+            "percentileRank": 0,
+            "percentileRankPer90": 0,
+            "statFormat": "number",
+            "statValue": "0",
+            "title": "Assists"
+          },
+          {
+            "localizedTitleId": "rating",
+            "per90": 6.07,
+            "percentileRank": 29.496402877697843,
+            "percentileRankPer90": 29.496402877697843,
+            "statFormat": "fraction",
+            "statValue": "6.07",
+            "title": "Rating"
+          },
+          {
+            "localizedTitleId": "matches_uppercase",
+            "per90": 1,
+            "percentileRank": 100,
+            "percentileRankPer90": 100,
+            "statFormat": "number",
+            "statValue": "1",
+            "title": "Matches"
+          },
+          {
+            "localizedTitleId": "player_started_matches",
+            "per90": 0,
+            "percentileRank": 0,
+            "percentileRankPer90": 0,
+            "statFormat": "number",
+            "statValue": "0",
+            "title": "Started"
+          },
+          {
+            "localizedTitleId": "minutes_played",
+            "per90": 90,
+            "percentileRank": 19.244604316546763,
+            "percentileRankPer90": 100,
+            "statFormat": "number",
+            "statValue": "16",
+            "title": "Minutes"
+          }
+        ],
+        "type": "stat-values"
+      },
+      "primaryTeam": {
+        "teamId": 7881,
+        "teamName": "Venezia",
+        "onLoan": false,
+        "teamColors": {
+          "color": "#101010",
+          "colorAlternate": "#006127",
+          "colorAway": "#a48c3e",
+          "colorAwayAlternate": "#a48c3e"
+        }
+      },
+      "mainLeague": {
+        "leagueId": 122,
+        "leagueName": "1. Liga",
+        "season": "2025/2026",
+        "stats": [
+          {
+            "title": "Goals",
+            "localizedTitleId": "goals",
+            "value": 11
+          },
+          {
+            "title": "Assists",
+            "localizedTitleId": "assists",
+            "value": 3
+          },
+          {
+            "title": "Started",
+            "localizedTitleId": "started",
+            "value": 20
+          },
+          {
+            "title": "Matches",
+            "localizedTitleId": "matches_uppercase",
+            "value": 34
+          },
+          {
+            "title": "Minutes played",
+            "localizedTitleId": "minutes_played",
+            "value": 1869
+          },
+          {
+            "title": "Rating",
+            "localizedTitleId": "rating",
+            "value": 6.95264705882353
+          },
+          {
+            "title": "Yellow cards",
+            "localizedTitleId": "yellow_cards",
+            "value": 3
+          },
+          {
+            "title": "Red cards",
+            "localizedTitleId": "red_cards",
+            "value": 0
+          }
+        ]
+      },
+      "dataProvider": "enet",
+      "ssr": true
+    }
+  ],
+  "governance": {
+    "only_verified_public_player_pages_requested": true,
+    "api_endpoint_guessing_used": false,
+    "authenticated_surface_accessed": false,
+    "private_routes_accessed": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
