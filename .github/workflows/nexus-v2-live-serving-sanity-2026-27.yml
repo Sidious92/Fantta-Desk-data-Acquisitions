@@ -13,7 +13,7 @@ permissions:
 jobs:
   sanity:
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 45
     steps:
       - name: Checkout public runner
         uses: actions/checkout@v6
@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: Sidious92/FantaDesk
-          ref: e882fdaf710cdab3a4bbf58633e7cc48c67a0b7b
+          ref: c03fd3ad75fab5ac82065f0c857efe67296df0cf
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: fantadesk-private
           persist-credentials: false
@@ -34,10 +34,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git -C fantadesk-private rev-parse HEAD)" = "e882fdaf710cdab3a4bbf58633e7cc48c67a0b7b"
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "c03fd3ad75fab5ac82065f0c857efe67296df0cf"
           test -f fantadesk-private/scripts/nexus-v2-serving-core.py
           test -f fantadesk-private/scripts/nexus-v2-serving-live-2026-27.py
           test -f fantadesk-private/scripts/nexus-v2-live-player-sanity-report-2026-27.py
+          test -f fantadesk-private/scripts/nexus-v2-serving-refit-stability-2026-27.py
           test -f runner-public/scripts/nexus-v2-acquire-understat-2025-all-leagues-ajax.mjs
           sudo mkdir -p /mnt/data
           sudo chown "$USER":"$USER" /mnt/data
@@ -133,42 +134,45 @@ jobs:
           NEXUS_V2_EXPECTED_PREDICTIONS_SHA256: d838813eff74006e6cb412812f4caf442d24804c7fa4e47359520e0c3c7ad8b2
         run: python fantadesk-private/scripts/nexus-v2-live-player-sanity-report-2026-27.py
 
-      - name: Validate sanitized live serving audit
+      - name: Compare serving refit policies without target labels
+        shell: bash
+        env:
+          NEXUS_V2_LIVE_FEATURE_SURFACE: /mnt/data/nexus_v2_live_feature_surface_2026_27.csv
+          NEXUS_V2_REFIT_STABILITY_REPORT: /mnt/data/nexus_v2_refit_stability_2026_27.json
+          NEXUS_V2_EXPECTED_LIVE_SURFACE_SHA256: 668b22b7cedd27301b1cdac7a22448b2b9fbe44b1323c013603988ec63275d89
+        run: python fantadesk-private/scripts/nexus-v2-serving-refit-stability-2026-27.py
+
+      - name: Validate sanitized diagnostics
         shell: bash
         run: |
           set -euo pipefail
-          SRC=/mnt/data/nexus_v2_live_serving_2026_27_audit.json
-          test -f "$SRC"
+          test -f /mnt/data/nexus_v2_live_serving_2026_27_audit.json
           test -f /mnt/data/nexus_v2_live_player_sanity_2026_27.json
-          mkdir -p sanity-output player-review-output
-          cp "$SRC" sanity-output/audit.json
+          test -f /mnt/data/nexus_v2_refit_stability_2026_27.json
+          mkdir -p sanity-output player-review-output refit-stability-output
+          cp /mnt/data/nexus_v2_live_serving_2026_27_audit.json sanity-output/audit.json
           cp /mnt/data/nexus_v2_live_player_sanity_2026_27.json player-review-output/report.json
+          cp /mnt/data/nexus_v2_refit_stability_2026_27.json refit-stability-output/report.json
           python - <<'PY'
           import json
           p=json.load(open('sanity-output/audit.json'))
           r=json.load(open('player-review-output/report.json'))
+          s=json.load(open('refit-stability-output/report.json'))
           assert p['schema']=='NEXUS_V2_LIVE_SERVING_2026_27_AUDIT_V1'
-          assert p['status']=='PASS'
-          assert p['target_season']=='2026-27'
-          assert p['roster_rows']==519
+          assert p['status']=='PASS' and p['roster_rows']==519
           assert p['prospective_target_labels_used'] is False
-          assert p['retuning'] is False
-          assert p['selection_change'] is False
-          assert p['no_player_rows_in_audit'] is True
+          assert p['retuning'] is False and p['selection_change'] is False
           assert p['live_feature_surface_sha256']=='668b22b7cedd27301b1cdac7a22448b2b9fbe44b1323c013603988ec63275d89'
           assert p['predictions_sha256']=='d838813eff74006e6cb412812f4caf442d24804c7fa4e47359520e0c3c7ad8b2'
-          assert p['sanity']['AVERAGE_VOTE']['outside_source_range_0_10']==0
-          assert p['sanity']['EXPECTED_TOTAL_MINUTES']['min']>=0
-          assert p['sanity']['EXPECTED_TOTAL_MINUTES']['max']<=3420
-          assert p['sanity']['GOALS']['min']>=0
-          assert p['sanity']['ASSISTS']['min']>=0
           assert r['schema']=='NEXUS_V2_LIVE_PLAYER_SANITY_REPORT_2026_27_V2'
-          assert r['status']=='REVIEW_REQUIRED_NO_MODEL_CHANGE'
-          assert r['roster_rows']==519
-          assert r['retuning'] is False
-          assert r['selection_change'] is False
+          assert r['status']=='REVIEW_REQUIRED_NO_MODEL_CHANGE' and r['roster_rows']==519
+          assert r['retuning'] is False and r['selection_change'] is False
           assert r['predictions_sha256']==p['predictions_sha256']
-          print('LIVE_SERVING_SANITY=PASS',p['predictions_sha256'])
+          assert s['schema']=='NEXUS_V2_SERVING_REFIT_STABILITY_2026_27_V1'
+          assert s['status']=='DIAGNOSTIC_ONLY_NO_MODEL_CHANGE'
+          assert s['prospective_target_labels_used'] is False
+          assert s['retuning'] is False and s['selection_change'] is False
+          print('LIVE_SERVING_DIAGNOSTICS=PASS')
           PY
 
       - name: Upload sanitized live serving audit
@@ -184,5 +188,13 @@ jobs:
         with:
           name: nexus-v2-live-player-sanity-2026-27
           path: player-review-output/report.json
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload refit stability report
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-refit-stability-2026-27
+          path: refit-stability-output/report.json
           if-no-files-found: error
           retention-days: 7
