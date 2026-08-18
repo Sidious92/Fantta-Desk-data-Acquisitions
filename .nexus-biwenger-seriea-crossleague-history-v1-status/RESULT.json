@@ -1,0 +1,46 @@
+{
+  "workflow": "Nexus Biwenger Serie A Cross-League History v1",
+  "run_id": 32180242314,
+  "conclusion": "success",
+  "head_sha": "4b278ef98936431fa0899a18b593362e33216266",
+  "authority_sha": "3035bd40499a3ba33b20ae36549426f29144a948",
+  "manifest_status": "PASS",
+  "coverage": {
+    "metadata_ok": 676,
+    "metadata_errors": 0,
+    "metadata_success_rate": 1.0,
+    "season_refs_in_window": 3044,
+    "season_refs_with_games": 2418,
+    "historical_requests_ok": 3044,
+    "historical_errors": 0,
+    "refs_with_games_and_nonempty_reports": 2418,
+    "nonempty_report_match_rate": 1.0,
+    "competition_mismatches": 0
+  },
+  "validation": {
+    "schema": "NEXUS_BIWENGER_SERIEA_CROSSLEAGUE_HISTORY_V1_VALIDATION",
+    "status": "PASS",
+    "checks": {
+      "manifest_pass": true,
+      "catalog_gt_500": true,
+      "metadata_rate_ge_95pct": true,
+      "season_refs_nonempty": true,
+      "history_nonempty": true,
+      "zero_competition_mismatch": true,
+      "no_model_mutation": true,
+      "no_normalization": true
+    },
+    "coverage": {
+      "metadata_ok": 676,
+      "metadata_errors": 0,
+      "metadata_success_rate": 1.0,
+      "season_refs_in_window": 3044,
+      "season_refs_with_games": 2418,
+      "historical_requests_ok": 3044,
+      "historical_errors": 0,
+      "refs_with_games_and_nonempty_reports": 2418,
+      "nonempty_report_match_rate": 1.0,
+      "competition_mismatches": 0
+    }
+  }
+}
