@@ -1,5 +1,95 @@
 {
   "workflow": "Nexus Scandinavian FPL Clones v1",
-  "job_status": "failure",
-  "run_id": 32181373988
+  "job_status": "success",
+  "run_id": 32181806248,
+  "manifest": {
+    "schema": "NEXUS_SCANDINAVIAN_FPL_CLONES_V1",
+    "status": "PASS",
+    "capture_started": "2026-08-18T20:21:48.812245+00:00",
+    "capture_completed": "2026-08-18T20:22:47.829437+00:00",
+    "providers": [
+      {
+        "provider": "ELITESERIEN",
+        "provider_name": "Fantasy Eliteserien",
+        "competition": "Eliteserien",
+        "base_api": "https://en.fantasy.eliteserien.no/api/",
+        "bootstrap_players": 499,
+        "teams": 32,
+        "summary_ok": 496,
+        "summary_errors": 3,
+        "summary_success_rate": 0.9939879759519038,
+        "current_history_rows": 7625,
+        "past_history_rows": 910,
+        "status": "PASS",
+        "bootstrap_sha256": "f64e3f29de6ca8ccab537c16010946cb3e99a215f42e72f9b2898180512a5435",
+        "fixtures_sha256": "8daf1e1be49a210fa4329b12a63f66f221e207b31122179409f0dca4bd22c65b"
+      },
+      {
+        "provider": "ALLSVENSKAN",
+        "provider_name": "Allsvenskan Fantasy",
+        "competition": "Allsvenskan",
+        "base_api": "https://en.fantasy.allsvenskan.se/api/",
+        "bootstrap_players": 476,
+        "teams": 32,
+        "summary_ok": 474,
+        "summary_errors": 2,
+        "summary_success_rate": 0.9957983193277311,
+        "current_history_rows": 7335,
+        "past_history_rows": 950,
+        "status": "PASS",
+        "bootstrap_sha256": "38e60dadcec7157758a17a51d2d0e3b2ec6936c03f03cddd21c27f3553a90638",
+        "fixtures_sha256": "d5d770d4dc7571b23e6d0c792374e1490edbe5efc6b6bbcdde5b305031e54564"
+      }
+    ],
+    "governance": {
+      "cross_provider_normalization_performed": false,
+      "missing_values_filled": false,
+      "predictive_models_modified": false,
+      "decision_layer_started": false
+    }
+  },
+  "validation": {
+    "status": "PASS",
+    "checks": {
+      "manifest_pass": true,
+      "two_providers": true,
+      "all_players_gt_300": true,
+      "all_summary_rate": true,
+      "no_model_mutation": true
+    },
+    "providers": [
+      {
+        "provider": "ELITESERIEN",
+        "provider_name": "Fantasy Eliteserien",
+        "competition": "Eliteserien",
+        "base_api": "https://en.fantasy.eliteserien.no/api/",
+        "bootstrap_players": 499,
+        "teams": 32,
+        "summary_ok": 496,
+        "summary_errors": 3,
+        "summary_success_rate": 0.9939879759519038,
+        "current_history_rows": 7625,
+        "past_history_rows": 910,
+        "status": "PASS",
+        "bootstrap_sha256": "f64e3f29de6ca8ccab537c16010946cb3e99a215f42e72f9b2898180512a5435",
+        "fixtures_sha256": "8daf1e1be49a210fa4329b12a63f66f221e207b31122179409f0dca4bd22c65b"
+      },
+      {
+        "provider": "ALLSVENSKAN",
+        "provider_name": "Allsvenskan Fantasy",
+        "competition": "Allsvenskan",
+        "base_api": "https://en.fantasy.allsvenskan.se/api/",
+        "bootstrap_players": 476,
+        "teams": 32,
+        "summary_ok": 474,
+        "summary_errors": 2,
+        "summary_success_rate": 0.9957983193277311,
+        "current_history_rows": 7335,
+        "past_history_rows": 950,
+        "status": "PASS",
+        "bootstrap_sha256": "38e60dadcec7157758a17a51d2d0e3b2ec6936c03f03cddd21c27f3553a90638",
+        "fixtures_sha256": "d5d770d4dc7571b23e6d0c792374e1490edbe5efc6b6bbcdde5b305031e54564"
+      }
+    ]
+  }
 }
