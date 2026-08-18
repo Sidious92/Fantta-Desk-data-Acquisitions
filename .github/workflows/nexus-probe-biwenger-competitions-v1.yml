@@ -1,0 +1,46 @@
+name: Nexus Biwenger Competition Probe v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-probe-biwenger-competitions-v1-launch/EXECUTE'
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+      - run: python -m pip install --no-cache-dir requests==2.32.5
+      - name: Probe Biwenger competitions
+        run: python scripts/nexus-probe-biwenger-competitions-v1.py
+      - name: Persist result safely
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp=$(mktemp)
+          if test -s .nexus-probe-biwenger-competitions-v1-status/RESULT.json; then
+            cp .nexus-probe-biwenger-competitions-v1-status/RESULT.json "$tmp"
+          else
+            printf '{"schema":"NEXUS_BIWENGER_COMPETITION_PROBE_V1","error":"NO_RESULT"}\n' > "$tmp"
+          fi
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-probe-biwenger-competitions-v1-status
+          cp "$tmp" .nexus-probe-biwenger-competitions-v1-status/RESULT.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-probe-biwenger-competitions-v1-status/RESULT.json
+          git commit -m 'ci: record Biwenger competition probe' || exit 0
+          git push origin HEAD:main
