@@ -1,0 +1,127 @@
+name: Nexus v2 Direct 2025 Confirmation
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.nexus-v2-direct-2025-confirm-launch/EXECUTE'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  confirm:
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [AVERAGE_VOTE, GOALS, ASSISTS]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout fixed private confirmation authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 2d7ea8ecc6e8b0d32cb9ae756ff8b6ba7da8267d
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Verify confirmation authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "2d7ea8ecc6e8b0d32cb9ae756ff8b6ba7da8267d"
+          echo "b5b15dc682fbad7c543b491806cd7bd708ad7074628e3c40d47fd374742e92fa  fantadesk-private/data/nexus/research-v2/stage2/nexus-v2-direct-2025-confirmation-protocol-v1.json" | sha256sum --check --strict
+          test -f fantadesk-private/scripts/nexus-v2-direct-2025-confirm-target.py
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+
+      - name: Setup exact Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+
+      - name: Install pinned environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --no-cache-dir \
+            numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 \
+            joblib==1.5.3 threadpoolctl==3.6.0 \
+            xgboost==3.1.3 lightgbm==4.6.0 catboost==1.2.8
+
+      - name: Materialize exact private inputs
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+
+      - name: Run frozen 2025 confirmation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python fantadesk-private/scripts/nexus-v2-direct-2025-confirm-target.py "${{ matrix.target }}"
+
+      - name: Validate sanitized confirmation
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC="/mnt/data/nexus_v2_predictive_research/direct_2025_confirmation/${{ matrix.target }}/summary.json"
+          test -f "$SRC"
+          mkdir -p confirm-output
+          cp "$SRC" confirm-output/summary.json
+          TARGET="${{ matrix.target }}" python - <<'PY'
+          import json,os
+          p=json.load(open('confirm-output/summary.json')); t=os.environ['TARGET']
+          assert p['confirmation_status']=='POST_SELECTION_HISTORICAL_CONFIRMATION_NOT_PRISTINE'
+          assert p['selection_effect']=='NONE_NO_RETUNING_NO_DEV_WINNER_REPLACEMENT'
+          assert p['no_individual_player_rows'] is True
+          expected=441 if t=='AVERAGE_VOTE' else 451
+          assert all(r['pooled']['n']==expected for r in p['ranking'])
+          print('confirmation_validation=PASS')
+          PY
+
+      - name: Upload target confirmation
+        uses: actions/upload-artifact@v4
+        with:
+          name: confirm-2025-${{ matrix.target }}
+          path: confirm-output/summary.json
+          if-no-files-found: error
+          retention-days: 7
+
+  aggregate:
+    needs: confirm
+    if: ${{ always() && needs.confirm.result == 'success' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          pattern: confirm-2025-*
+          path: confirm-artifacts
+          merge-multiple: false
+      - name: Validate 3/3 and aggregate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import glob,json,os
+          files=glob.glob('confirm-artifacts/**/summary.json',recursive=True)
+          if len(files)!=3: raise SystemExit(f'CONFIRM_INCOMPLETE {len(files)}/3')
+          out={'status':'DIRECT_2025_CONFIRMATION_COMPLETE','test_status':'NOT_PRISTINE','selection_effect':'NONE','targets':{},'no_player_rows':True}
+          for f in files:
+              p=json.load(open(f)); out['targets'][p['target']]=p
+          assert set(out['targets'])=={'AVERAGE_VOTE','GOALS','ASSISTS'}
+          os.makedirs('confirm-summary',exist_ok=True)
+          json.dump(out,open('confirm-summary/direct-2025-confirmation.json','w'),separators=(',',':'))
+          for t,p in out['targets'].items():
+              w=next(r for r in p['ranking'] if r['candidate_id']==p['frozen_dev_winner_id'])
+              print(t,'frozen_dev_winner_2025_mae',w['pooled']['mae'],'canonical',p['canonical_v1_2025']['mae'],'pct',w['vs_canonical_v1']['mae_pct'])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-direct-2025-confirmation-summary
+          path: confirm-summary/direct-2025-confirmation.json
+          if-no-files-found: error
+          retention-days: 7
