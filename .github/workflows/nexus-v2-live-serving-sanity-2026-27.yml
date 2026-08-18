@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: Sidious92/FantaDesk
-          ref: a3c07a980734f7fe5fd6f50d7383cfd0ff54eb7f
+          ref: e882fdaf710cdab3a4bbf58633e7cc48c67a0b7b
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: fantadesk-private
           persist-credentials: false
@@ -34,7 +34,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git -C fantadesk-private rev-parse HEAD)" = "a3c07a980734f7fe5fd6f50d7383cfd0ff54eb7f"
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "e882fdaf710cdab3a4bbf58633e7cc48c67a0b7b"
           test -f fantadesk-private/scripts/nexus-v2-serving-core.py
           test -f fantadesk-private/scripts/nexus-v2-serving-live-2026-27.py
           test -f fantadesk-private/scripts/nexus-v2-live-player-sanity-report-2026-27.py
@@ -162,6 +162,7 @@ jobs:
           assert p['sanity']['EXPECTED_TOTAL_MINUTES']['max']<=3420
           assert p['sanity']['GOALS']['min']>=0
           assert p['sanity']['ASSISTS']['min']>=0
+          assert r['schema']=='NEXUS_V2_LIVE_PLAYER_SANITY_REPORT_2026_27_V2'
           assert r['status']=='REVIEW_REQUIRED_NO_MODEL_CHANGE'
           assert r['roster_rows']==519
           assert r['retuning'] is False
