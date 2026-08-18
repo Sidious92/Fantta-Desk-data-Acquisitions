@@ -10,24 +10,25 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - name: Probe Understat EPL 2025 JSON endpoint
+      - name: Probe Understat EPL 2025 AJAX endpoint
         shell: bash
         run: |
           node <<'NODE'
-          const headers={'user-agent':'Mozilla/5.0 FantaNexus/2.0 acquisition-structure-probe','accept':'application/json,text/plain,*/*','referer':'https://understat.com/league/EPL/2025'};
-          const urls=[
-            'https://understat.com/getLeagueData/EPL/2025',
-            'https://understat.com/league/getLeagueData/EPL/2025',
-            'https://understat.com/league/EPL/getLeagueData/EPL/2025'
-          ];
-          for (const url of urls) {
-            try {
-              const r=await fetch(url,{headers}); const text=await r.text();
-              const out={url,status:r.status,contentType:r.headers.get('content-type'),bytes:Buffer.byteLength(text)};
-              try {
-                const data=JSON.parse(text); out.keys=Object.keys(data); out.playerCount=Array.isArray(data.players)?data.players.length:null; out.firstPlayerKeys=Array.isArray(data.players)&&data.players[0]?Object.keys(data.players[0]):[];
-              } catch { out.prefix=text.slice(0,120).replace(/\s+/g,' '); }
-              console.log(JSON.stringify(out));
-            } catch(e) { console.log(JSON.stringify({url,error:e.message})); }
+          const pageUrl='https://understat.com/league/EPL/2025';
+          const ua='Mozilla/5.0 FantaNexus/2.0 acquisition-structure-probe';
+          const page=await fetch(pageUrl,{headers:{'user-agent':ua}}); const html=await page.text();
+          const baseMatch=/<base[^>]+href=["']([^"']+)["']/i.exec(html);
+          const baseHref=baseMatch?baseMatch[1]:pageUrl;
+          console.log(JSON.stringify({pageStatus:page.status,baseHref,ajaxResolved:new URL('getLeagueData/EPL/2025',baseHref).href}));
+          const setCookie=page.headers.get('set-cookie');
+          const headers={'user-agent':ua,'accept':'application/json,text/javascript,*/*;q=0.01','referer':pageUrl,'x-requested-with':'XMLHttpRequest'};
+          if(setCookie) headers.cookie=setCookie.split(';')[0];
+          const candidates=[new URL('getLeagueData/EPL/2025',baseHref).href,'https://understat.com/getLeagueData/EPL/2025','https://understat.com/league/getLeagueData/EPL/2025','https://understat.com/league/EPL/getLeagueData/EPL/2025'];
+          for (const url of [...new Set(candidates)]) {
+            const r=await fetch(url,{headers}); const text=await r.text();
+            const out={url,status:r.status,contentType:r.headers.get('content-type'),bytes:Buffer.byteLength(text)};
+            try { const data=JSON.parse(text); out.keys=Object.keys(data); out.playerCount=Array.isArray(data.players)?data.players.length:null; out.firstPlayerKeys=data.players?.[0]?Object.keys(data.players[0]):[]; }
+            catch { out.prefix=text.slice(0,100).replace(/\s+/g,' '); }
+            console.log(JSON.stringify(out));
           }
           NODE
