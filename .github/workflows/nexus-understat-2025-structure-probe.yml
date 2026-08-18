@@ -1,0 +1,44 @@
+name: Nexus Understat 2025 Structure Probe
+on:
+  push:
+    paths:
+      - '.nexus-understat-2025-structure-probe/EXECUTE'
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Probe Understat EPL 2025 response structure
+        shell: bash
+        run: |
+          node <<'NODE'
+          const url='https://understat.com/league/EPL/2025';
+          const headers={'user-agent':'Mozilla/5.0 FantaNexus/2.0 acquisition-structure-probe'};
+          const r=await fetch(url,{headers});
+          const html=await r.text();
+          console.log(JSON.stringify({url,status:r.status,contentType:r.headers.get('content-type'),bytes:Buffer.byteLength(html)}));
+          const needles=['playersData','datesData','teamsData','JSON.parse','fetch(','XMLHttpRequest','ajax','leagueData','get_stats','statistics'];
+          for (const n of needles) console.log(`needle ${JSON.stringify(n)} => ${html.indexOf(n)}`);
+          const srcs=[...html.matchAll(/<script[^>]+src=["']([^"']+)["']/gi)].map(m=>m[1]);
+          console.log('script_srcs='+JSON.stringify(srcs));
+          const inline=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map(m=>m[1]).filter(Boolean);
+          for (let i=0;i<inline.length;i++) {
+            const text=inline[i];
+            const hits=needles.filter(n=>text.includes(n));
+            if (hits.length) console.log(`inline_script_${i}_hits=${JSON.stringify(hits)} snippet=${JSON.stringify(text.slice(0,800))}`);
+          }
+          for (const src of srcs) {
+            const abs=new URL(src,url).href;
+            try {
+              const rr=await fetch(abs,{headers}); const js=await rr.text();
+              const tokens=['/ajax','ajax/','/api','playersData','league','getStats','get_stats','statistics'];
+              const hits=tokens.filter(n=>js.includes(n));
+              if (hits.length) {
+                console.log(`asset=${abs} status=${rr.status} bytes=${Buffer.byteLength(js)} hits=${JSON.stringify(hits)}`);
+                for (const h of hits) { const p=js.indexOf(h); console.log(`asset_hit ${h} => ${JSON.stringify(js.slice(Math.max(0,p-250),p+500))}`); }
+              }
+            } catch(e) { console.log(`asset_error=${abs} ${e.message}`); }
+          }
+          NODE
