@@ -16,8 +16,8 @@ HEADERS={
     'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/151 Safari/537.36',
     'Accept-Language':'en-US,en;q=0.9,nl;q=0.7',
 }
-URL_RE=re.compile(r'https?://[^\"\'\s)]+')
-PATH_RE=re.compile(r'(?:(?:https?:)?//[^\"\'\s)]+|/[A-Za-z0-9_./?=&%{}:$-]+)')
+URL_RE=re.compile(r"https?://[^\"'\s)]+")
+PATH_RE=re.compile(r"(?:(?:https?:)?//[^\"'\s)]+|/[A-Za-z0-9_./?=&%{}:$-]+)")
 
 def sha(b): return hashlib.sha256(b).hexdigest()
 def mkdir(p): p.mkdir(parents=True,exist_ok=True); return p
