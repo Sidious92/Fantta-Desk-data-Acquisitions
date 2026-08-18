@@ -17,6 +17,7 @@ jobs:
     env:
       AUTHORITY_SHA: 18b1f0b2b1fe13c9bd1ee015d0cd9c1a4df1afe9
       OUT_ROOT: /mnt/data/nexus-crossleague-fantasy-open-v1
+      PROBE_ROOT: /mnt/data/nexus-additional-fantasy-public-probes-v1
 
     steps:
       - name: Checkout public runner
@@ -40,8 +41,9 @@ jobs:
           test "$(git -C fantadesk-private rev-parse HEAD)" = "$AUTHORITY_SHA"
           test -f fantadesk-private/data/nexus/research-v3/crossleague-fantasy/nexus-crossleague-fantasy-open-acquisition-v1-2-protocol.json
           test -f fantadesk-private/data/nexus/research-v2/final/nexus-v2-predictive-engine-freeze-v1.json
-          for s in 1 2 3 4 5; do test -f "scripts/nexus-acquire-crossleague-fantasy-open-v1-${s}.py" || test "$s" = 1; done
           test -f scripts/nexus-acquire-crossleague-fantasy-open-v1.py
+          for s in 1 2 3 4 5; do test -f "scripts/nexus-acquire-crossleague-fantasy-open-v1-${s}.py"; done
+          test -f scripts/nexus-probe-additional-fantasy-public-sources-v1.py
           sudo mkdir -p /mnt/data
           sudo chown "$USER":"$USER" /mnt/data
 
@@ -52,6 +54,13 @@ jobs:
       - name: Install acquisition dependencies
         shell: bash
         run: python -m pip install --no-cache-dir pandas==2.2.3 requests==2.32.5 beautifulsoup4==4.13.5 lxml==6.0.1 html5lib==1.1
+
+      - name: Probe additional anonymous fantasy sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/nexus-probe-additional-fantasy-public-sources-v1.py
+          test -s "$PROBE_ROOT/probe-results.json"
 
       - name: Acquire all verified anonymous bulk providers
         shell: bash
@@ -67,6 +76,7 @@ jobs:
           import json
           from pathlib import Path
           root=Path('/mnt/data/nexus-crossleague-fantasy-open-v1')
+          probe=Path('/mnt/data/nexus-additional-fantasy-public-probes-v1/probe-results.json')
           m=json.load(open(root/'manifest.json'))
           assert m['schema']=='NEXUS_CROSSLEAGUE_FANTASY_OPEN_ACQUISITION_V1_1'
           assert m['status']=='PASS'
@@ -96,12 +106,11 @@ jobs:
           assert biw.get('detail_profiles_ok',0)>0, biw
           assert set(map(str,valid_scores)).issubset(set(biw.get('detail_profiles_ok_by_score',{}))), biw
 
-          required=[
-              root/'manifest.json', root/'field-inventory.json', root/'file-inventory.json',
-              root/'normalized/provider-player-season-index.csv'
-          ]
+          required=[root/'manifest.json',root/'field-inventory.json',root/'file-inventory.json',root/'normalized/provider-player-season-index.csv',probe]
           for p in required: assert p.is_file() and p.stat().st_size>0, p
 
+          probes=json.load(open(probe))
+          assert probes['schema']=='NEXUS_ADDITIONAL_FANTASY_PUBLIC_PROBES_V1'
           print('CROSSLEAGUE_FANTASY_V1_5_VALIDATION=PASS')
           print(json.dumps({
               'provider_counts':pc,
@@ -111,6 +120,7 @@ jobs:
               'biwenger_valid_scores':valid_scores,
               'biwenger_unique_players':biw.get('unique_catalog_players'),
               'biwenger_detail_profiles_ok':biw.get('detail_profiles_ok'),
+              'probes':[{k:r.get(k) for k in ['name','status','final_url','error']} for r in probes['results']],
           },indent=2))
           PY
 
@@ -121,6 +131,7 @@ jobs:
           cp "$OUT_ROOT/manifest.json" /mnt/data/nexus-crossleague-fantasy-open-v1-2-manifest.json
           cp "$OUT_ROOT/field-inventory.json" /mnt/data/nexus-crossleague-fantasy-open-v1-2-field-inventory.json
           cp "$OUT_ROOT/file-inventory.json" /mnt/data/nexus-crossleague-fantasy-open-v1-2-file-inventory.json
+          cp "$PROBE_ROOT/probe-results.json" /mnt/data/nexus-crossleague-fantasy-open-v1-2-source-probes.json
           tar -C /mnt/data --zstd -cf /mnt/data/nexus-crossleague-fantasy-open-v1-2.tar.zst nexus-crossleague-fantasy-open-v1
           sha256sum /mnt/data/nexus-crossleague-fantasy-open-v1-2.tar.zst > /mnt/data/nexus-crossleague-fantasy-open-v1-2.tar.zst.sha256
 
@@ -134,6 +145,7 @@ jobs:
             /mnt/data/nexus-crossleague-fantasy-open-v1-2-manifest.json
             /mnt/data/nexus-crossleague-fantasy-open-v1-2-field-inventory.json
             /mnt/data/nexus-crossleague-fantasy-open-v1-2-file-inventory.json
+            /mnt/data/nexus-crossleague-fantasy-open-v1-2-source-probes.json
           if-no-files-found: error
           retention-days: 90
           compression-level: 0
