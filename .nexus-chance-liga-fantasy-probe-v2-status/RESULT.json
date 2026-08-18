@@ -1,0 +1,114 @@
+{
+  "schema": "NEXUS_CHANCE_LIGA_FANTASY_PUBLIC_PROBE_V2",
+  "base": "https://fantasy.chanceliga.cz/",
+  "tests": [
+    {
+      "requested": "https://fantasy.chanceliga.cz/",
+      "url": "https://fantasy.chanceliga.cz/",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 1460,
+      "sha256": "1bbf35e1fc6608e12b74ca4367c72107e28eb27042533013602793b937219a36",
+      "preview": "<!doctype html>\n<html lang=\"cs\" translate=\"no\">\n  <head>\n    <link rel=\"icon\" href=\"/assets/favicon-DvYX60gQ.ico\" />\n    <link rel=\"apple-touch-icon\" href=\"/assets/apple-touch-icon-BVOgk4cS.png\" />\n    <style>\n      @font-face {\n        font-family: \"Franci\";\n        src: url(\"assets/fonts/FranciA-Regular.woff2\") format(\"woff2\");\n        font-weight: 400;\n        font-style: normal;\n        font-display: fallback;\n      }\n\n      @font-face {\n        font-family: \"Franci\";\n        src: url(\"assets/fonts/FranciA-Bold.woff2\") format(\"woff2\");\n        font-weight: 700;\n        font-style: normal;\n        font-display: fallback;\n      }\n\n      @font-face {\n        font-family: \"Primera\";\n        src: url(\"assets/fonts/primera-regular.woff2\") format(\"woff2\");\n        font-weight: 400;\n        font-style: normal;\n        font-display: fallback;\n      }\n\n      @font-face {\n        font-family: \"Primera\";\n        src: url(\"assets/fonts/primera-bold.woff2\") format(\"woff2\");\n        font-weight: "
+    },
+    {
+      "requested": "https://fantasy.chanceliga.cz/api/bootstrap-static/",
+      "url": "https://fantasy.chanceliga.cz/api/bootstrap-static/",
+      "status": 405,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 88,
+      "sha256": "159c203d07216b2d6c7706fe5ddbc0b97f2bfc42bb8814f7565958eafa175f9d",
+      "preview": "{\"error\":\"UnknownError\",\"message\":\"Endpoint not found / unsupported method\",\"meta\":null}",
+      "json_type": "dict",
+      "json_keys": [
+        "error",
+        "message",
+        "meta"
+      ],
+      "json_len": 3
+    },
+    {
+      "requested": "https://fantasy.chanceliga.cz/api/fixtures/",
+      "url": "https://fantasy.chanceliga.cz/api/fixtures/",
+      "status": 405,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 88,
+      "sha256": "159c203d07216b2d6c7706fe5ddbc0b97f2bfc42bb8814f7565958eafa175f9d",
+      "preview": "{\"error\":\"UnknownError\",\"message\":\"Endpoint not found / unsupported method\",\"meta\":null}",
+      "json_type": "dict",
+      "json_keys": [
+        "error",
+        "message",
+        "meta"
+      ],
+      "json_len": 3
+    },
+    {
+      "requested": "https://fantasy.chanceliga.cz/api/event/1/live/",
+      "url": "https://fantasy.chanceliga.cz/api/event/1/live/",
+      "status": 405,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 88,
+      "sha256": "159c203d07216b2d6c7706fe5ddbc0b97f2bfc42bb8814f7565958eafa175f9d",
+      "preview": "{\"error\":\"UnknownError\",\"message\":\"Endpoint not found / unsupported method\",\"meta\":null}",
+      "json_type": "dict",
+      "json_keys": [
+        "error",
+        "message",
+        "meta"
+      ],
+      "json_len": 3
+    },
+    {
+      "requested": "https://fantasy.chanceliga.cz/api/element-summary/1/",
+      "url": "https://fantasy.chanceliga.cz/api/element-summary/1/",
+      "status": 405,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 88,
+      "sha256": "159c203d07216b2d6c7706fe5ddbc0b97f2bfc42bb8814f7565958eafa175f9d",
+      "preview": "{\"error\":\"UnknownError\",\"message\":\"Endpoint not found / unsupported method\",\"meta\":null}",
+      "json_type": "dict",
+      "json_keys": [
+        "error",
+        "message",
+        "meta"
+      ],
+      "json_len": 3
+    },
+    {
+      "requested": "https://fantasy.chanceliga.cz/player-list",
+      "url": "https://fantasy.chanceliga.cz/player-list",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 1460,
+      "sha256": "1bbf35e1fc6608e12b74ca4367c72107e28eb27042533013602793b937219a36",
+      "preview": "<!doctype html>\n<html lang=\"cs\" translate=\"no\">\n  <head>\n    <link rel=\"icon\" href=\"/assets/favicon-DvYX60gQ.ico\" />\n    <link rel=\"apple-touch-icon\" href=\"/assets/apple-touch-icon-BVOgk4cS.png\" />\n    <style>\n      @font-face {\n        font-family: \"Franci\";\n        src: url(\"assets/fonts/FranciA-Regular.woff2\") format(\"woff2\");\n        font-weight: 400;\n        font-style: normal;\n        font-display: fallback;\n      }\n\n      @font-face {\n        font-family: \"Franci\";\n        src: url(\"assets/fonts/FranciA-Bold.woff2\") format(\"woff2\");\n        font-weight: 700;\n        font-style: normal;\n        font-display: fallback;\n      }\n\n      @font-face {\n        font-family: \"Primera\";\n        src: url(\"assets/fonts/primera-regular.woff2\") format(\"woff2\");\n        font-weight: 400;\n        font-style: normal;\n        font-display: fallback;\n      }\n\n      @font-face {\n        font-family: \"Primera\";\n        src: url(\"assets/fonts/primera-bold.woff2\") format(\"woff2\");\n        font-weight: "
+    }
+  ],
+  "scripts": [
+    {
+      "requested": "https://fantasy.chanceliga.cz/assets/index-BemiCAop.js",
+      "url": "https://fantasy.chanceliga.cz/assets/index-BemiCAop.js",
+      "status": 200,
+      "content_type": "text/javascript",
+      "bytes": 1072246,
+      "sha256": "858192d90ab2274f401d00f30177fcdf0b9033fed48cd9aff6613bc76a972a6d",
+      "preview": "var GA=Object.defineProperty;var q9=e=>{throw TypeError(e)};var ZA=(e,t,n)=>t in e?GA(e,t,{enumerable:!0,configurable:!0,writable:!0,value:n}):e[t]=n;var nn=(e,t,n)=>ZA(e,typeof t!=\"symbol\"?t+\"\":t,n),ay=(e,t,n)=>t.has(e)||q9(\"Cannot \"+n);var K=(e,t,n)=>(ay(e,t,\"read from private field\"),n?n.call(e):t.get(e)),ct=(e,t,n)=>t.has(e)?q9(\"Cannot add the same private member more than once\"):t instanceof WeakSet?t.add(e):t.set(e,n),He=(e,t,n,r)=>(ay(e,t,\"write to private field\"),r?r.call(e,n):t.set(e,n),n),bt=(e,t,n)=>(ay(e,t,\"access private method\"),n);var xm=(e,t,n,r)=>({set _(o){He(e,t,o,n)},get _(){return K(e,t,r)}});function KA(e,t){for(var n=0;n<t.length;n++){const r=t[n];if(typeof r!=\"string\"&&!Array.isArray(r)){for(const o in r)if(o!==\"default\"&&!(o in e)){const s=Object.getOwnPropertyDescriptor(r,o);s&&Object.defineProperty(e,o,s.get?s:{enumerable:!0,get:()=>r[o]})}}}return Object.freeze(Object.defineProperty(e,Symbol.toStringTag,{value:\"Module\"}))}(function(){const t=document.createE",
+      "contexts": {
+        "bootstrap-static": [],
+        "element-summary": [],
+        "/api/": [
+          "=null?void 0:s.meta,this.name=this.constructor.name}}const qt=e=>async t=>{try{return(await Qi.get(`/api/v1/${e}`,{params:t})).data}catch(n){const r=n==null?void 0:n.response;throw r!=null&&r.status?new ci(`GET ${e} error: ${r.status}, ${r.data.error}`,r.status):new ci(`GET ${e} error: ${n}`)}},uG=()=>{const e=g.useMemo(()=",
+          "col?`${e.protocol}:`:\"\",n=e.port?`:${e.port}`:\"\";return`${t}//${e.host}${n}${e.path?`/${e.path}`:\"\"}/api/`}function NQ(e){return`${RQ(e)}${e.projectId}/envelope/`}function LQ(e,t){const n={sentry_version:PQ};return e.publicKey&&(n.sentry_key=e.publicKey),t&&(n.sentry_client=`${t.name}/${t.version}`),new URLSearchParams(n).t",
+          "0,Uf=null};let Uf=null;const VR=async({notifyOnFailure:e=!0}={})=>{try{const{data:t}=await voe.get(\"/api/v1/sessions/refresh\");return Xf(t.accessToken),t.accessToken}catch(t){throw Xf(null),Tp||(Tp=!0,e&&(F0==null||F0())),t}},WR=async()=>{try{return await VR({notifyOnFailure:!1}),{authenticated:!0}}catch{return{authenticate",
+          "}`,Qi(t)}finally{Uf=null}}return Promise.reject(e)});const _oe=async()=>{var e;try{await Qi.delete(\"/api/v1/sessions/me\")}catch(t){if(!_n.isAxiosError(t)||((e=t.response)==null?void 0:e.status)!==401)throw t}finally{HR()}},qR=[\"auth\"],woe=()=>Jt({queryKey:qR,queryFn:WR,staleTime:1/0,retry:!1}),Di=new _O({defaultOptions:{que",
+          "on:Foe,calendar__content:$oe},id=e=>async({path:t,...n})=>{const r=e??t;try{return(await Qi.delete(`/api/v1/${r}`,{params:n})).data}catch(o){const s=o==null?void 0:o.response;throw s!=null&&s.status?new ci(\"PoÅ¾adavek selhal.\",s.status,s.data):new ci(`DELETE ${r} error: ${o}`)}},mn=()=>{const[e,t]=g.useState(!1),[n,r]=g.use",
+          ",close:()=>{t(!1),r(void 0)}}},GR=e=>async({path:t,...n})=>{const r=e??t;try{return(await Qi.patch(`/api/v1/${r}`,n)).data}catch(o){const s=o==null?void 0:o.response;throw s!=null&&s.status?new ci(`PATCH ${r} error: ${s.status}, ${s.data.error}`,s.status):new ci(`PATCH ${r} error: ${o}`)}},NC=\"seasons/active\",zoe=({userTeam",
+          "ontracts\",Qo=(e,t=!0,n=!1)=>async({path:r,...o})=>{const s=e??r,a=t?Qi:BR;try{const c=await a.post(`/api/v1/${s}`,o,{withCredentials:n});return{data:c.data,status:c.status}}catch(c){const u=c==null?void 0:c.response;throw u!=null&&u.status?new ci(\"PoÅ¾adavek selhal.\",u.status,u.data):new ci(`POST ${s} error: ${c}`)}},fo=()=",
+          "mp:s??[]}},ese=(e,t=!0,n=!1)=>async({path:r,...o})=>{const s=e??r,a=t?Qi:BR;try{return(await a.put(`/api/v1/${s}`,o,{withCredentials:n})).data}catch(c){const u=c==null?void 0:c.response;throw u!=null&&u.status?new ci(\"PoÅ¾adavek selhal.\",u.status,u.data):new ci(`PUT ${s} error: ${c}`)}},IC={label:\"Celkem\",value:\"all\"},tse=["
+        ],
+        "fixtures": []
+      }
+    }
+  ]
+}
