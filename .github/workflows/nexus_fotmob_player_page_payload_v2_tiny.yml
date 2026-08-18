@@ -1,0 +1,26 @@
+name: Nexus FotMob Player Page Payload v2 Tiny Summary
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-fotmob-player-page-v2-tiny-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python scripts/summarize_fotmob_player_page_probe_v2_tiny.py
+      - name: Commit tiny summary
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .nexus-fotmob-player-page-probe-v2-status/TINY.json
+          git commit -m 'ci: write tiny FotMob player-page payload summary' || exit 0
+          git push origin HEAD:main
