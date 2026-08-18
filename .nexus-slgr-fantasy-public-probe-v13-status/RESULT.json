@@ -1,0 +1,239 @@
+{
+  "schema": "NEXUS_SLGR_FANTASY_PUBLIC_PROBE_V13",
+  "api_base": "https://fantaking-api.dunkest.com/api/v1",
+  "league_id": 14,
+  "league_id_basis": "compiled app config [14, slgr]",
+  "config_ids": {
+    "status_id": 1,
+    "current_competition_id": 46,
+    "current_schedule_id": 46,
+    "current_players_list_id": 46,
+    "current_matchday_id": 1469,
+    "current_matchday_number": 1,
+    "current_matchday_num_rounds": 2
+  },
+  "tests": [
+    {
+      "route": "/leagues/14/config",
+      "params": {},
+      "url": "https://fantaking-api.dunkest.com/api/v1/leagues/14/config",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 8905,
+      "sha256": "2d9b9222ec8c2c7db686674dd31599496113458e04e08ddf369ce101963202c3",
+      "preview": "{\"data\":{\"status_id\":1,\"maintenance\":false,\"players_list_limitations_enabled\":false,\"denied_free_agent_trade_creation_offset\":180,\"current_competition_id\":46,\"current_schedule_id\":46,\"current_players_list_id\":46,\"allows_head_to_head_tournaments\":true,\"current_matchday\":{\"id\":1469,\"number\":1,\"num_rounds\":2},\"current_round\":{\"id\":2480,\"number\":1,\"started_at\":\"2026-08-22T16:59:00.000000Z\"},\"previous_matchday\":null,\"current_bracket\":null,\"teams\":[{\"id\":267,\"name\":\"A.E.K.\",\"abbreviation\":\"AEK\",\"player_jersey_url\":\"https:\\/\\/fantaking-assets.dunkest.com\\/slgr\\/images\\/jerseys\\/players\\/slgr\\/AEK.png?v=3\",\"coach_jersey_url\":\"https:\\/\\/fantaking-assets.dunkest.com\\/slgr\\/images\\/jerseys\\/coaches\\/slgr\\/AEK.png?v=1\",\"logo_url\":\"https:\\/\\/fantaking-assets.dunkest.com\\/slgr\\/images\\/logos\\/teams\\/slgr\\/AEK.png\",\"font_url\":null,\"number_color\":null,\"number_border_color\":null},{\"id\":269,\"name\":\"ARIS\",\"abbreviation\":\"ARIS\",\"player_jersey_url\":\"https:\\/\\/fantaking-assets.dunkest.com\\/slgr\\/images\\/jer",
+      "json_type": "dict",
+      "json_len": 1,
+      "json_keys": [
+        "data"
+      ]
+    },
+    {
+      "route": "/players-lists/46/matchdays/1469/players",
+      "params": {
+        "per_page": -1,
+        "page": 1
+      },
+      "url": "https://fantaking-api.dunkest.com/api/v1/players-lists/46/matchdays/1469/players?per_page=-1&page=1",
+      "status": 401,
+      "content_type": "application/json",
+      "bytes": 55,
+      "sha256": "5ecfc7230e49571adeed732a516edb3be4efc75062e38ac5cb948f5200f802f9",
+      "preview": "{\"code\":\"UNAUTHENTICATED\",\"message\":\"Unauthenticated.\"}",
+      "json_type": "dict",
+      "json_len": 2,
+      "json_keys": [
+        "code",
+        "message"
+      ],
+      "resolved_from_config": {
+        "players_list_id": 46,
+        "matchday_id": 1469
+      }
+    },
+    {
+      "route": "/schedules/46/matchdays/1469",
+      "params": {},
+      "url": "https://fantaking-api.dunkest.com/api/v1/schedules/46/matchdays/1469",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 1864,
+      "sha256": "3237186e890f6e9f061cd6d49d3ee9492cb3e4cf791567cc0e39fe900339edf5",
+      "preview": "{\"data\":{\"id\":1469,\"number\":1,\"rounds\":[{\"id\":2480,\"number\":1,\"matches\":[{\"id\":11699,\"status\":\"scheduled\",\"ot\":false,\"started_at\":\"2026-08-22T17:00:00.000000Z\",\"home_team\":{\"id\":267,\"name\":\"A.E.K.\",\"abbreviation\":\"AEK\",\"score\":null,\"is_valid\":true},\"away_team\":{\"id\":371,\"name\":\"P.O.T. IRAKLIS\",\"abbreviation\":\"IRA\",\"score\":null,\"is_valid\":true}},{\"id\":11700,\"status\":\"scheduled\",\"ot\":false,\"started_at\":\"2026-08-22T17:00:00.000000Z\",\"home_team\":{\"id\":372,\"name\":\"KALAMATA\",\"abbreviation\":\"KAL\",\"score\":null,\"is_valid\":true},\"away_team\":{\"id\":269,\"name\":\"ARIS\",\"abbreviation\":\"ARIS\",\"score\":null,\"is_valid\":true}},{\"id\":11702,\"status\":\"scheduled\",\"ot\":false,\"started_at\":\"2026-08-22T18:30:00.000000Z\",\"home_team\":{\"id\":275,\"name\":\"OLYMPIACOS\",\"abbreviation\":\"OLY\",\"score\":null,\"is_valid\":true},\"away_team\":{\"id\":271,\"name\":\"ATROMITOS\",\"abbreviation\":\"ATR\",\"score\":null,\"is_valid\":true}}]},{\"id\":2506,\"number\":2,\"matches\":[{\"id\":11701,\"status\":\"scheduled\",\"ot\":false,\"started_at\":\"2026-08-23T16:30:00.",
+      "json_type": "dict",
+      "json_len": 1,
+      "json_keys": [
+        "data"
+      ],
+      "resolved_from_config": {
+        "schedule_id": 46,
+        "matchday_id": 1469
+      }
+    }
+  ],
+  "response_list_inventories": {
+    "config": [
+      {
+        "path": "data.teams",
+        "rows": 14,
+        "keys": [
+          "abbreviation",
+          "coach_jersey_url",
+          "font_url",
+          "id",
+          "logo_url",
+          "name",
+          "number_border_color",
+          "number_color",
+          "player_jersey_url"
+        ]
+      },
+      {
+        "path": "data.matchdays",
+        "rows": 26,
+        "keys": [
+          "display_name",
+          "id",
+          "number"
+        ]
+      },
+      {
+        "path": "data.game_modes_configs",
+        "rows": 1,
+        "keys": [
+          "additional_num_trades_per_matchday",
+          "captain_config",
+          "captain_multiplier",
+          "cost_per_trade",
+          "game_mode_id",
+          "max_extra_credits",
+          "max_num_teams_per_head_to_head_tournament",
+          "max_num_teams_per_user",
+          "num_bench_players",
+          "num_coach_players",
+          "num_players_per_team",
+          "num_reserve_players",
+          "num_starter_players",
+          "players_per_positions"
+        ]
+      },
+      {
+        "path": "data.game_modes_configs[0].players_per_positions",
+        "rows": 5,
+        "keys": [
+          "id",
+          "name",
+          "num_players"
+        ]
+      },
+      {
+        "path": "data.fantasy_pts_colors",
+        "rows": 3,
+        "keys": [
+          "color",
+          "range"
+        ]
+      },
+      {
+        "path": "data.match_predictor.configs.predictions",
+        "rows": 2,
+        "keys": [
+          "best_of",
+          "draw",
+          "expected_pts",
+          "type"
+        ]
+      }
+    ],
+    "roster": [],
+    "matchday": [
+      {
+        "path": "data.rounds",
+        "rows": 2,
+        "keys": [
+          "id",
+          "matches",
+          "number"
+        ]
+      },
+      {
+        "path": "data.rounds[0].matches",
+        "rows": 3,
+        "keys": [
+          "away_team",
+          "home_team",
+          "id",
+          "ot",
+          "started_at",
+          "status"
+        ]
+      },
+      {
+        "path": "data.rounds[1].matches",
+        "rows": 3,
+        "keys": [
+          "away_team",
+          "home_team",
+          "id",
+          "ot",
+          "started_at",
+          "status"
+        ]
+      },
+      {
+        "path": "data.resting_teams",
+        "rows": 2,
+        "keys": [
+          "abbreviation",
+          "id",
+          "name"
+        ]
+      }
+    ]
+  },
+  "successful_reads": [
+    {
+      "route": "/leagues/14/config",
+      "params": {},
+      "url": "https://fantaking-api.dunkest.com/api/v1/leagues/14/config",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 8905,
+      "sha256": "2d9b9222ec8c2c7db686674dd31599496113458e04e08ddf369ce101963202c3",
+      "preview": "{\"data\":{\"status_id\":1,\"maintenance\":false,\"players_list_limitations_enabled\":false,\"denied_free_agent_trade_creation_offset\":180,\"current_competition_id\":46,\"current_schedule_id\":46,\"current_players_list_id\":46,\"allows_head_to_head_tournaments\":true,\"current_matchday\":{\"id\":1469,\"number\":1,\"num_rounds\":2},\"current_round\":{\"id\":2480,\"number\":1,\"started_at\":\"2026-08-22T16:59:00.000000Z\"},\"previous_matchday\":null,\"current_bracket\":null,\"teams\":[{\"id\":267,\"name\":\"A.E.K.\",\"abbreviation\":\"AEK\",\"player_jersey_url\":\"https:\\/\\/fantaking-assets.dunkest.com\\/slgr\\/images\\/jerseys\\/players\\/slgr\\/AEK.png?v=3\",\"coach_jersey_url\":\"https:\\/\\/fantaking-assets.dunkest.com\\/slgr\\/images\\/jerseys\\/coaches\\/slgr\\/AEK.png?v=1\",\"logo_url\":\"https:\\/\\/fantaking-assets.dunkest.com\\/slgr\\/images\\/logos\\/teams\\/slgr\\/AEK.png\",\"font_url\":null,\"number_color\":null,\"number_border_color\":null},{\"id\":269,\"name\":\"ARIS\",\"abbreviation\":\"ARIS\",\"player_jersey_url\":\"https:\\/\\/fantaking-assets.dunkest.com\\/slgr\\/images\\/jer",
+      "json_type": "dict",
+      "json_len": 1,
+      "json_keys": [
+        "data"
+      ]
+    },
+    {
+      "route": "/schedules/46/matchdays/1469",
+      "params": {},
+      "url": "https://fantaking-api.dunkest.com/api/v1/schedules/46/matchdays/1469",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 1864,
+      "sha256": "3237186e890f6e9f061cd6d49d3ee9492cb3e4cf791567cc0e39fe900339edf5",
+      "preview": "{\"data\":{\"id\":1469,\"number\":1,\"rounds\":[{\"id\":2480,\"number\":1,\"matches\":[{\"id\":11699,\"status\":\"scheduled\",\"ot\":false,\"started_at\":\"2026-08-22T17:00:00.000000Z\",\"home_team\":{\"id\":267,\"name\":\"A.E.K.\",\"abbreviation\":\"AEK\",\"score\":null,\"is_valid\":true},\"away_team\":{\"id\":371,\"name\":\"P.O.T. IRAKLIS\",\"abbreviation\":\"IRA\",\"score\":null,\"is_valid\":true}},{\"id\":11700,\"status\":\"scheduled\",\"ot\":false,\"started_at\":\"2026-08-22T17:00:00.000000Z\",\"home_team\":{\"id\":372,\"name\":\"KALAMATA\",\"abbreviation\":\"KAL\",\"score\":null,\"is_valid\":true},\"away_team\":{\"id\":269,\"name\":\"ARIS\",\"abbreviation\":\"ARIS\",\"score\":null,\"is_valid\":true}},{\"id\":11702,\"status\":\"scheduled\",\"ot\":false,\"started_at\":\"2026-08-22T18:30:00.000000Z\",\"home_team\":{\"id\":275,\"name\":\"OLYMPIACOS\",\"abbreviation\":\"OLY\",\"score\":null,\"is_valid\":true},\"away_team\":{\"id\":271,\"name\":\"ATROMITOS\",\"abbreviation\":\"ATR\",\"score\":null,\"is_valid\":true}}]},{\"id\":2506,\"number\":2,\"matches\":[{\"id\":11701,\"status\":\"scheduled\",\"ot\":false,\"started_at\":\"2026-08-23T16:30:00.",
+      "json_type": "dict",
+      "json_len": 1,
+      "json_keys": [
+        "data"
+      ],
+      "resolved_from_config": {
+        "schedule_id": 46,
+        "matchday_id": 1469
+      }
+    }
+  ],
+  "governance": {
+    "only_compiled_app_get_contracts_tested": true,
+    "all_dynamic_ids_resolved_from_public_provider_config": true,
+    "authenticated_surface_accessed": false,
+    "user_team_private_routes_accessed": false,
+    "bruteforce_endpoint_dictionary_used": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
