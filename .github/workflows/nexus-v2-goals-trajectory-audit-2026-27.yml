@@ -1,0 +1,255 @@
+name: Nexus v2 GOALS Trajectory Audit 2026-27
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-v2-goals-trajectory-launch/EXECUTE'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      AUTHORITY_SHA: b073280ce57b66a6c0a0338d7ad36659ff512c31
+      EXPECTED_LIVE_SURFACE_SHA256: 668b22b7cedd27301b1cdac7a22448b2b9fbe44b1323c013603988ec63275d89
+      EXPECTED_MINUTES_SURFACE_SHA256: 5898b2c01490e9a1ab21e19c159c4ba51fadbd300470f19e31f6384da13d4f2c
+      EXPECTED_EVENT_SURFACE_SHA256: 09022f38648708268e424877e7f2f473f48a84ecaa7a399afbc9fb372c36dfd2
+      EXPECTED_PREDICTIONS_SHA256: ef7e7bcdd3c381a533ac9bef27533ff7bd2d02fd358127a5a5d5996e1d230762
+
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v6
+        with:
+          path: runner-public
+          persist-credentials: false
+
+      - name: Checkout fixed private serving authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.AUTHORITY_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Verify authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "$AUTHORITY_SHA"
+          test -f fantadesk-private/scripts/nexus-v2-serving-live-2026-27.py
+          test -f fantadesk-private/scripts/nexus-v2-serving-core.py
+          test -f runner-public/scripts/nexus-v2-acquire-understat-2025-all-leagues-ajax.mjs
+          test -f runner-public/.nexus-v2-public/goals-trajectory-review-cert.pem
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install pinned jsdom
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nexus-node
+          cd /tmp/nexus-node
+          npm init -y >/dev/null 2>&1
+          npm install --ignore-scripts --no-audit --no-fund jsdom@30.0.1
+          mkdir -p "$GITHUB_WORKSPACE/fantadesk-private/node_modules"
+          ln -s /tmp/nexus-node/node_modules/jsdom "$GITHUB_WORKSPACE/fantadesk-private/node_modules/jsdom"
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+
+      - name: Install pinned frozen Python environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --no-cache-dir \
+            numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pandas==2.2.3 \
+            joblib==1.5.3 threadpoolctl==3.6.0 orjson==3.11.9 \
+            xgboost==3.1.3 lightgbm==4.6.0 catboost==1.2.8
+
+      - name: Materialize exact frozen historical inputs
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: bash fantadesk-private/scripts/nexus-v2-actions-materialize-inputs.sh
+
+      - name: Rebuild exact historical Minutes and Event surfaces
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp fantadesk-private/scripts/nexus-v2-minutes-surface-one.py /mnt/data/minutes_surface_one.py
+          for season in 2021-22 2022-23 2023-24 2024-25 2025-26; do
+            python fantadesk-private/scripts/nexus-v2-precompute-usage-cache.py "$season"
+          done
+          python fantadesk-private/scripts/nexus-v2-build-minutes-surface-cached.py
+          echo "$EXPECTED_MINUTES_SURFACE_SHA256  /mnt/data/nexus_v2_minutes_roster_surface.csv" | sha256sum --check --strict
+          python fantadesk-private/scripts/nexus-v2-build-event-roster-surface.py
+          echo "$EXPECTED_EVENT_SURFACE_SHA256  /mnt/data/nexus_v2_event_roster_surface.csv" | sha256sum --check --strict
+
+      - name: Acquire exact current Listone 2026-27
+        working-directory: fantadesk-private
+        env:
+          NEXUS_LIVE_LISTONE_OUTPUT_ROOT: /mnt/data/current-listone-capture
+        run: node scripts/nexus-acquire-current-listone-2026-27.mjs
+
+      - name: Acquire foreign Understat 2025-26
+        working-directory: runner-public
+        env:
+          NEXUS_V2_UNDERSTAT_2025_OUTPUT_ROOT: /mnt/data/understat-2025-capture
+        run: node scripts/nexus-v2-acquire-understat-2025-all-leagues-ajax.mjs
+
+      - name: Rebuild exact audited live feature surface
+        shell: bash
+        env:
+          NEXUS_V2_CURRENT_LISTONE: /mnt/data/current-listone-capture/current-listone.json
+          NEXUS_V2_UNDERSTAT_2025_FOREIGN: /mnt/data/understat-2025-capture/understat-foreign-2025.json
+          NEXUS_V2_LIVE_FEATURE_OUT: /mnt/data/nexus_v2_live_feature_surface_2026_27.csv
+          NEXUS_V2_LIVE_FEATURE_AUDIT: /mnt/data/nexus_v2_live_feature_surface_2026_27_audit.json
+        run: |
+          set -euo pipefail
+          python fantadesk-private/scripts/nexus-v2-build-live-feature-surface-2026-27.py
+          echo "$EXPECTED_LIVE_SURFACE_SHA256  /mnt/data/nexus_v2_live_feature_surface_2026_27.csv" | sha256sum --check --strict
+
+      - name: Reproduce frozen live serving predictions
+        shell: bash
+        env:
+          NEXUS_V2_LIVE_FEATURE_SURFACE: /mnt/data/nexus_v2_live_feature_surface_2026_27.csv
+          NEXUS_V2_LIVE_FEATURE_AUDIT: /mnt/data/nexus_v2_live_feature_surface_2026_27_audit.json
+          NEXUS_V2_EXPECTED_LIVE_SURFACE_SHA256: ${{ env.EXPECTED_LIVE_SURFACE_SHA256 }}
+          NEXUS_V2_LIVE_PREDICTIONS_OUT: /mnt/data/nexus_v2_live_predictions_2026_27.csv
+          NEXUS_V2_LIVE_SERVING_AUDIT: /mnt/data/nexus_v2_live_serving_2026_27_audit.json
+        run: |
+          set -euo pipefail
+          python fantadesk-private/scripts/nexus-v2-serving-live-2026-27.py
+          echo "$EXPECTED_PREDICTIONS_SHA256  /mnt/data/nexus_v2_live_predictions_2026_27.csv" | sha256sum --check --strict
+
+      - name: Build trajectory review dataset
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p encrypted-review
+          python - <<'PY'
+          import json, math
+          import numpy as np
+          import pandas as pd
+
+          pred=pd.read_csv('/mnt/data/nexus_v2_live_predictions_2026_27.csv')
+          live=pd.read_csv('/mnt/data/nexus_v2_live_feature_surface_2026_27.csv',low_memory=False)
+          x=pred.merge(live,on=['fantacalcio_id','player_name','role'],how='left',validate='one_to_one',suffixes=('','_live'))
+          if len(x)!=519: raise SystemExit('TRAJECTORY JOIN FAILURE')
+          x['expected_goals_per90']=x['expected_goals']*90.0/x['expected_total_minutes'].where(x['expected_total_minutes']>0)
+          x['ceiling_goals_38']=x['expected_goals_per90']*38.0
+
+          seasons={5:'2021-22',4:'2022-23',3:'2023-24',2:'2024-25',1:'2025-26'}
+          rows=[]
+          for _,r in x.iterrows():
+            hist=[]; rates=[]
+            out={
+              'fantacalcio_id':int(r.fantacalcio_id),'player_name':str(r.player_name),
+              'team':str(r.team),'role':str(r.role),
+              'expected_goals_per90':None if pd.isna(r.expected_goals_per90) else float(r.expected_goals_per90),
+              'ceiling_goals_38':None if pd.isna(r.ceiling_goals_38) else float(r.ceiling_goals_38),
+            }
+            for lag in [5,4,3,2,1]:
+              s=seasons[lag]
+              g=r.get(f'lag{lag}_fc_goals',np.nan)
+              app=r.get(f'lag{lag}_fc_appearances_with_vote',np.nan)
+              rg=r.get(f'lag{lag}_all_goals_per90',np.nan)
+              xg90=r.get(f'lag{lag}_all_xG_per90',np.nan)
+              tm=r.get(f'lag{lag}_all_time',np.nan)
+              out[f'{s}_goals']=None if pd.isna(g) else float(g)
+              out[f'{s}_apps_vote']=None if pd.isna(app) else float(app)
+              out[f'{s}_goals_per90']=None if pd.isna(rg) else float(rg)
+              out[f'{s}_xg_per90']=None if pd.isna(xg90) else float(xg90)
+              out[f'{s}_minutes_all']=None if pd.isna(tm) else float(tm)
+              if not pd.isna(g): hist.append((6-lag,float(g)))
+              if not pd.isna(rg): rates.append((6-lag,float(rg)))
+            vals=[v for _,v in hist]
+            out['history_depth_goals']=len(vals)
+            out['history_min_goals']=min(vals) if vals else None
+            out['history_max_goals']=max(vals) if vals else None
+            out['history_median_goals']=float(np.median(vals)) if vals else None
+            last=out['2025-26_goals']
+            out['delta_vs_2025_26']=None if last is None or out['ceiling_goals_38'] is None else out['ceiling_goals_38']-last
+            if vals and out['ceiling_goals_38'] is not None:
+              c=out['ceiling_goals_38']; lo=min(vals); hi=max(vals)
+              out['outside_historical_range']=max(0.0,c-hi,lo-c)
+            else: out['outside_historical_range']=None
+            if len(hist)>=3:
+              xx=np.array([a for a,_ in hist],dtype=float); yy=np.array([b for _,b in hist],dtype=float)
+              m,b=np.polyfit(xx,yy,1); proj=float(m*(max(xx)+1)+b)
+              out['linear_history_projection']=proj
+              out['projection_residual']=None if out['ceiling_goals_38'] is None else out['ceiling_goals_38']-proj
+            else:
+              out['linear_history_projection']=None;out['projection_residual']=None
+            rvals=[v for _,v in rates]
+            out['history_min_goals_per90']=min(rvals) if rvals else None
+            out['history_max_goals_per90']=max(rvals) if rvals else None
+            if rvals and out['expected_goals_per90'] is not None:
+              cr=out['expected_goals_per90']; lo=min(rvals); hi=max(rvals)
+              out['rate_outside_historical_range']=max(0.0,cr-hi,lo-cr)
+            else: out['rate_outside_historical_range']=None
+            rows.append(out)
+
+          df=pd.DataFrame(rows)
+          df['ceiling_rank']=df['ceiling_goals_38'].rank(method='first',ascending=False).astype('Int64')
+          # Review views are rankings only, not automatic pass/fail gates.
+          top_ceiling=df.sort_values(['ceiling_goals_38','fantacalcio_id'],ascending=[False,True]).head(100)
+          range_breaks=df[df.history_depth_goals>=2].sort_values(['outside_historical_range','fantacalcio_id'],ascending=[False,True]).head(60)
+          trend_breaks=df[df.history_depth_goals>=3].assign(abs_projection_residual=lambda q:q.projection_residual.abs()).sort_values(['abs_projection_residual','fantacalcio_id'],ascending=[False,True]).head(60)
+          historical_scorers=df[df.history_max_goals.notna()].sort_values(['history_max_goals','fantacalcio_id'],ascending=[False,True]).head(100)
+          summary={
+            'roster_rows':int(len(df)),
+            'ceiling_counts':{str(k):int((df.ceiling_goals_38>=k).sum()) for k in [5,10,15,20]},
+            'ceiling_role_A':{
+              'n':int((df.role=='A').sum()),
+              'mean':float(df.loc[df.role=='A','ceiling_goals_38'].mean()),
+              'median':float(df.loc[df.role=='A','ceiling_goals_38'].median()),
+              'max':float(df.loc[df.role=='A','ceiling_goals_38'].max()),
+            },
+          }
+          def clean(records):
+            return json.loads(pd.DataFrame(records).replace({np.nan:None}).to_json(orient='records'))
+          out={
+            'schema':'NEXUS_V2_GOALS_TRAJECTORY_REVIEW_2026_27_V1',
+            'source_predictions_sha256':'ef7e7bcdd3c381a533ac9bef27533ff7bd2d02fd358127a5a5d5996e1d230762',
+            'interpretation':'DIAGNOSTIC_ONLY_NO_AUTOMATIC_GATE',
+            'summary':summary,
+            'top100_ceiling':clean(top_ceiling.to_dict('records')),
+            'top60_outside_historical_range':clean(range_breaks.to_dict('records')),
+            'top60_projection_breaks':clean(trend_breaks.to_dict('records')),
+            'top100_historical_scorers':clean(historical_scorers.to_dict('records')),
+            'all_players':clean(df.sort_values('fantacalcio_id').to_dict('records')),
+          }
+          open('/mnt/data/nexus_v2_goals_trajectory_review_2026_27.json','w').write(json.dumps(out,separators=(',',':')))
+          print('TRAJECTORY_REVIEW=PASS',summary)
+          PY
+
+      - name: Encrypt review before upload
+        shell: bash
+        run: |
+          set -euo pipefail
+          openssl cms -encrypt -binary -aes256 \
+            -in /mnt/data/nexus_v2_goals_trajectory_review_2026_27.json \
+            -outform DER -out encrypted-review/goals-trajectory-review.p7m \
+            runner-public/.nexus-v2-public/goals-trajectory-review-cert.pem
+          rm -f /mnt/data/nexus_v2_goals_trajectory_review_2026_27.json
+          test -s encrypted-review/goals-trajectory-review.p7m
+
+      - name: Upload encrypted trajectory review only
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v2-goals-trajectory-review-2026-27-encrypted
+          path: encrypted-review/goals-trajectory-review.p7m
+          if-no-files-found: error
+          retention-days: 1
