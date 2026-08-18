@@ -1,0 +1,157 @@
+name: Nexus Cross-League Fantasy Open Acquisition v1.5
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-crossleague-fantasy-open-v1-5-launch/EXECUTE'
+
+permissions:
+  contents: write
+
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      AUTHORITY_SHA: 18b1f0b2b1fe13c9bd1ee015d0cd9c1a4df1afe9
+      OUT_ROOT: /mnt/data/nexus-crossleague-fantasy-open-v1
+
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+
+      - name: Checkout fixed private scientific authority
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.AUTHORITY_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: fantadesk-private
+          persist-credentials: false
+
+      - name: Verify authority and governance
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "$AUTHORITY_SHA"
+          test -f fantadesk-private/data/nexus/research-v3/crossleague-fantasy/nexus-crossleague-fantasy-open-acquisition-v1-2-protocol.json
+          test -f fantadesk-private/data/nexus/research-v2/final/nexus-v2-predictive-engine-freeze-v1.json
+          for s in 1 2 3 4 5; do test -f "scripts/nexus-acquire-crossleague-fantasy-open-v1-${s}.py" || test "$s" = 1; done
+          test -f scripts/nexus-acquire-crossleague-fantasy-open-v1.py
+          sudo mkdir -p /mnt/data
+          sudo chown "$USER":"$USER" /mnt/data
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.5'
+
+      - name: Install acquisition dependencies
+        shell: bash
+        run: python -m pip install --no-cache-dir pandas==2.2.3 requests==2.32.5 beautifulsoup4==4.13.5 lxml==6.0.1 html5lib==1.1
+
+      - name: Acquire all verified anonymous bulk providers
+        shell: bash
+        env:
+          NEXUS_CROSSLEAGUE_FANTASY_OUT: ${{ env.OUT_ROOT }}
+        run: python scripts/nexus-acquire-crossleague-fantasy-open-v1-5.py
+
+      - name: Validate canonical snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('/mnt/data/nexus-crossleague-fantasy-open-v1')
+          m=json.load(open(root/'manifest.json'))
+          assert m['schema']=='NEXUS_CROSSLEAGUE_FANTASY_OPEN_ACQUISITION_V1_1'
+          assert m['status']=='PASS'
+          g=m['governance']
+          assert g['cross_provider_normalization_performed'] is False
+          assert g['missing_values_filled'] is False
+          assert g['predictive_models_modified'] is False
+
+          pc=m['normalized']['provider_counts']
+          for provider in ['FPL_ARCHIVE','MPG','COMUNIO','BIWENGER']:
+              assert pc.get(provider,0)>0, (provider,pc)
+          assert pc['FPL_ARCHIVE']>1000
+
+          comunio=m['providers']['COMUNIO']
+          scopes_ok=[k for k,v in comunio.items() if v.get('profiles_ok',0)>0]
+          assert len(scopes_ok)>=15, comunio
+          for competition_key in ['bundesliga','bundesliga2','laliga','superlig']:
+              assert any(k.startswith(competition_key+':') and comunio[k].get('profiles_ok',0)>0 for k in comunio), (competition_key,comunio)
+
+          mpg=m['providers']['MPG']
+          assert len(mpg.get('nonempty_pools',[]))>0, mpg
+
+          biw=m['providers']['BIWENGER']
+          valid_scores=biw.get('valid_scores',[])
+          assert len(valid_scores)>=2, biw
+          assert biw.get('unique_catalog_players',0)>100, biw
+          assert biw.get('detail_profiles_ok',0)>0, biw
+          assert set(map(str,valid_scores)).issubset(set(biw.get('detail_profiles_ok_by_score',{}))), biw
+
+          required=[
+              root/'manifest.json', root/'field-inventory.json', root/'file-inventory.json',
+              root/'normalized/provider-player-season-index.csv'
+          ]
+          for p in required: assert p.is_file() and p.stat().st_size>0, p
+
+          print('CROSSLEAGUE_FANTASY_V1_5_VALIDATION=PASS')
+          print(json.dumps({
+              'provider_counts':pc,
+              'total_rows':m['normalized']['provider_player_season_rows'],
+              'comunio_scopes_ok':len(scopes_ok),
+              'mpg_nonempty_pools':len(mpg.get('nonempty_pools',[])),
+              'biwenger_valid_scores':valid_scores,
+              'biwenger_unique_players':biw.get('unique_catalog_players'),
+              'biwenger_detail_profiles_ok':biw.get('detail_profiles_ok'),
+          },indent=2))
+          PY
+
+      - name: Package immutable acquisition snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp "$OUT_ROOT/manifest.json" /mnt/data/nexus-crossleague-fantasy-open-v1-2-manifest.json
+          cp "$OUT_ROOT/field-inventory.json" /mnt/data/nexus-crossleague-fantasy-open-v1-2-field-inventory.json
+          cp "$OUT_ROOT/file-inventory.json" /mnt/data/nexus-crossleague-fantasy-open-v1-2-file-inventory.json
+          tar -C /mnt/data --zstd -cf /mnt/data/nexus-crossleague-fantasy-open-v1-2.tar.zst nexus-crossleague-fantasy-open-v1
+          sha256sum /mnt/data/nexus-crossleague-fantasy-open-v1-2.tar.zst > /mnt/data/nexus-crossleague-fantasy-open-v1-2.tar.zst.sha256
+
+      - name: Upload canonical acquisition artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-crossleague-fantasy-open-v1-2
+          path: |
+            /mnt/data/nexus-crossleague-fantasy-open-v1-2.tar.zst
+            /mnt/data/nexus-crossleague-fantasy-open-v1-2.tar.zst.sha256
+            /mnt/data/nexus-crossleague-fantasy-open-v1-2-manifest.json
+            /mnt/data/nexus-crossleague-fantasy-open-v1-2-field-inventory.json
+            /mnt/data/nexus-crossleague-fantasy-open-v1-2-file-inventory.json
+          if-no-files-found: error
+          retention-days: 90
+          compression-level: 0
+
+      - name: Record terminal status safely
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          conclusion='${{ job.status }}'
+          tmp=$(mktemp)
+          printf '{"workflow":"Nexus Cross-League Fantasy Open Acquisition v1.5","run_id":%s,"conclusion":"%s","head_sha":"%s","authority_sha":"%s"}\n' "$GITHUB_RUN_ID" "$conclusion" "$GITHUB_SHA" "$AUTHORITY_SHA" > "$tmp"
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-crossleague-fantasy-open-v1-5-status
+          cp "$tmp" .nexus-crossleague-fantasy-open-v1-5-status/RESULT.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-crossleague-fantasy-open-v1-5-status/RESULT.json
+          git commit -m "ci: record cross-league fantasy v1.5 ${conclusion}" || exit 0
+          git push origin HEAD:main
