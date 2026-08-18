@@ -1,0 +1,26 @@
+name: Nexus SLGR v4 Endpoint Inventory
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-slgr-v4-all-endpoints-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python scripts/summarize_slgr_fantasy_probe_v4_all.py
+      - name: Commit endpoint inventory
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .nexus-slgr-fantasy-public-probe-v4-status/ENDPOINTS.json
+          git commit -m 'ci: inventory all SLGR Fantasy API contracts' || exit 0
+          git push origin HEAD:main
