@@ -1,0 +1,6564 @@
+{
+  "schema": "NEXUS_BIWENGER_SERIEA_CROSSLEAGUE_HISTORY_PROBE_V1",
+  "catalog_players": 676,
+  "selected": [
+    {
+      "catalog": {
+        "id": 38872,
+        "name": "Nkunku",
+        "slug": "c-nkunku",
+        "teamID": 149,
+        "points": 0,
+        "pointsLastSeason": 129
+      },
+      "seasons": [
+        {
+          "season_id": "2022",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2023",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2024",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2025",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2026",
+          "status": 200,
+          "reports_count": 36,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Como",
+            "Cremonese",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [
+            "metadata",
+            "period",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "home": true,
+              "match": {
+                "id": 47371,
+                "date": 1757875500,
+                "status": "finished",
+                "home": {
+                  "id": 149,
+                  "name": "Milan",
+                  "slug": "milan",
+                  "score": 1
+                },
+                "away": {
+                  "id": 137,
+                  "name": "Bologna",
+                  "slug": "bologna",
+                  "score": 0
+                },
+                "round": {
+                  "id": 4604,
+                  "name": "Round 3",
+                  "short": "R3"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 5,
+                  "period": "secondTime",
+                  "metadata": 85
+                }
+              ],
+              "points": {
+                "3": 2,
+                "1": 1
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 6770000,
+                "score3": 2,
+                "score1": 1,
+                "roundPhase": 3,
+                "home": true,
+                "homeScore": 1,
+                "awayScore": 0,
+                "win": true,
+                "cleanSheet": true,
+                "minutesPlayed": 5
+              }
+            },
+            {
+              "home": false,
+              "match": {
+                "id": 47376,
+                "date": 1758393900,
+                "status": "finished",
+                "home": {
+                  "id": 141,
+                  "name": "Udinese",
+                  "slug": "udinese",
+                  "score": 0
+                },
+                "away": {
+                  "id": 149,
+                  "name": "Milan",
+                  "slug": "milan",
+                  "score": 3
+                },
+                "round": {
+                  "id": 4605,
+                  "name": "Round 4",
+                  "short": "R4"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 5,
+                  "period": "secondTime",
+                  "metadata": 62
+                }
+              ],
+              "points": {
+                "3": 1,
+                "1": -1
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 6500000,
+                "score3": 1,
+                "score1": -1,
+                "roundPhase": 4,
+                "away": true,
+                "homeScore": 0,
+                "awayScore": 3,
+                "win": true,
+                "cleanSheet": true,
+                "minutesPlayed": 28
+              }
+            }
+          ]
+        }
+      ],
+      "metadata_status": 200,
+      "metadata_competition": {
+        "id": 5,
+        "name": "Serie A",
+        "slug": "serie-a",
+        "sport": "football",
+        "currency": "€"
+      },
+      "metadata_seasons": [
+        {
+          "id": "2027",
+          "name": "2026/2027 season",
+          "slug": "2026-2027",
+          "games": 0,
+          "points": {}
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026 season",
+          "slug": "2025-2026",
+          "games": 32,
+          "points": {
+            "3": 129,
+            "1": 101
+          },
+          "selected": true
+        },
+        {
+          "id": "2026",
+          "name": "2026",
+          "slug": "2026",
+          "games": 0,
+          "points": {
+            "3": null,
+            "1": null
+          },
+          "competition": {
+            "id": 53,
+            "name": "World Cup",
+            "slug": "world-cup"
+          },
+          "player": {
+            "id": 28332,
+            "slug": "c-nkunku"
+          }
+        },
+        {
+          "id": "2025",
+          "name": "2024/2025 season",
+          "slug": "2024-2025",
+          "games": 27,
+          "points": {
+            "3": 115,
+            "1": 58
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 30806,
+            "slug": "c-nkunku"
+          }
+        },
+        {
+          "id": "2025",
+          "name": "Club World Cup 2025",
+          "slug": "2025",
+          "games": 6,
+          "points": {
+            "3": 31,
+            "1": 18
+          },
+          "competition": {
+            "id": 22,
+            "name": "Club World Cup",
+            "slug": "club-world-cup"
+          },
+          "player": {
+            "id": 37017,
+            "slug": "c-nkunku"
+          }
+        },
+        {
+          "id": "2024",
+          "name": "2023/2024 season",
+          "slug": "2023-2024",
+          "games": 11,
+          "points": {
+            "3": 54,
+            "1": 36
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 30806,
+            "slug": "c-nkunku"
+          }
+        },
+        {
+          "id": "2023",
+          "name": "2022/2023",
+          "slug": "2022-2023",
+          "games": 7,
+          "points": {
+            "3": 47,
+            "1": 44
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 4151,
+            "slug": "nkunku"
+          }
+        },
+        {
+          "id": "2022",
+          "name": "2021/2022",
+          "slug": "2021-2022",
+          "games": 6,
+          "points": {
+            "3": 80,
+            "1": 61
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 4151,
+            "slug": "nkunku"
+          }
+        },
+        {
+          "id": "2022",
+          "name": "Qatar 2022",
+          "slug": "qatar-2022",
+          "games": 0,
+          "points": {
+            "3": null,
+            "1": null
+          },
+          "competition": {
+            "id": 53,
+            "name": "World Cup",
+            "slug": "world-cup"
+          },
+          "player": {
+            "id": 28332,
+            "slug": "c-nkunku"
+          }
+        },
+        {
+          "id": "2021",
+          "name": "2020/2021",
+          "slug": "2020-2021",
+          "games": 7,
+          "points": {
+            "3": 51,
+            "1": 44
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 4151,
+            "slug": "nkunku"
+          }
+        },
+        {
+          "id": "2020",
+          "name": "2019/2020",
+          "slug": "2019-2020",
+          "games": 9,
+          "points": {
+            "3": 33,
+            "1": 30
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 4151,
+            "slug": "nkunku"
+          }
+        },
+        {
+          "id": "2019",
+          "name": "2018/2019 season",
+          "slug": "2018-2019",
+          "games": 22,
+          "points": {
+            "3": 102,
+            "1": 85
+          },
+          "competition": {
+            "id": 6,
+            "name": "Ligue 1",
+            "slug": "ligue-1"
+          },
+          "player": {
+            "id": 4884,
+            "slug": "nkunku"
+          }
+        },
+        {
+          "id": "2018",
+          "name": "2017/2018 season",
+          "slug": "2017-2018",
+          "games": 20,
+          "points": {
+            "3": 73,
+            "1": 65
+          },
+          "competition": {
+            "id": 6,
+            "name": "Ligue 1",
+            "slug": "ligue-1"
+          },
+          "player": {
+            "id": 4884,
+            "slug": "nkunku"
+          }
+        },
+        {
+          "id": "2017",
+          "name": "2016/2017",
+          "slug": "2016-2017",
+          "games": 1,
+          "points": {
+            "3": 64,
+            "1": 2
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 4151,
+            "slug": "nkunku"
+          }
+        },
+        {
+          "id": "2017",
+          "name": "2016/2017 season",
+          "slug": "2016-2017",
+          "games": 8,
+          "points": {
+            "3": null,
+            "1": 21
+          },
+          "competition": {
+            "id": 6,
+            "name": "Ligue 1",
+            "slug": "ligue-1"
+          },
+          "player": {
+            "id": 4884,
+            "slug": "nkunku"
+          }
+        }
+      ]
+    },
+    {
+      "catalog": {
+        "id": 34537,
+        "name": "David de Gea",
+        "slug": "david-de-gea",
+        "teamID": 132,
+        "points": 0,
+        "pointsLastSeason": 167
+      },
+      "seasons": [
+        {
+          "season_id": "2022",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2023",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2024",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2025",
+          "status": 200,
+          "reports_count": 38,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Como",
+            "Empoli",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [
+            "metadata",
+            "period",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "match": {
+                "id": 42329,
+                "date": 1723912200,
+                "status": "finished",
+                "home": {
+                  "id": 415,
+                  "name": "Parma Calcio",
+                  "slug": "parma-calcio",
+                  "score": 1
+                },
+                "away": {
+                  "id": 132,
+                  "name": "Fiorentina",
+                  "slug": "fiorentina",
+                  "score": 1
+                },
+                "round": {
+                  "id": 4123,
+                  "name": "Round 1",
+                  "short": "R1"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "unknown"
+              },
+              "home": false
+            },
+            {
+              "match": {
+                "id": 42343,
+                "date": 1724603400,
+                "status": "finished",
+                "home": {
+                  "id": 132,
+                  "name": "Fiorentina",
+                  "slug": "fiorentina",
+                  "score": 0
+                },
+                "away": {
+                  "id": 594,
+                  "name": "Venezia",
+                  "slug": "venezia",
+                  "score": 0
+                },
+                "round": {
+                  "id": 4124,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "unknown"
+              },
+              "home": true
+            }
+          ]
+        },
+        {
+          "season_id": "2026",
+          "status": 200,
+          "reports_count": 38,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Como",
+            "Cremonese",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [
+            "metadata",
+            "period",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "home": false,
+              "match": {
+                "id": 47349,
+                "date": 1756053000,
+                "status": "finished",
+                "home": {
+                  "id": 134,
+                  "name": "Cagliari",
+                  "slug": "cagliari",
+                  "score": 1
+                },
+                "away": {
+                  "id": 132,
+                  "name": "Fiorentina",
+                  "slug": "fiorentina",
+                  "score": 1
+                },
+                "round": {
+                  "id": 4602,
+                  "name": "Round 1",
+                  "short": "R1"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [],
+              "points": {
+                "3": 0,
+                "1": 2
+              },
+              "rawStats": {
+                "pos1": true,
+                "price": 5820000,
+                "score3": 0,
+                "score1": 2,
+                "roundPhase": 1,
+                "away": true,
+                "homeScore": 1,
+                "awayScore": 1,
+                "tie": true,
+                "cleanSheet": false,
+                "minutesPlayed": 90
+              }
+            },
+            {
+              "home": false,
+              "match": {
+                "id": 47360,
+                "date": 1756657800,
+                "status": "finished",
+                "home": {
+                  "id": 143,
+                  "name": "Torino",
+                  "slug": "torino",
+                  "score": 0
+                },
+                "away": {
+                  "id": 132,
+                  "name": "Fiorentina",
+                  "slug": "fiorentina",
+                  "score": 0
+                },
+                "round": {
+                  "id": 4603,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [],
+              "points": {
+                "3": 11,
+                "1": 7
+              },
+              "star": [
+                1,
+                3
+              ],
+              "rawStats": {
+                "pos1": true,
+                "price": 5540000,
+                "score3": 11,
+                "score1": 7,
+                "roundPhase": 2,
+                "away": true,
+                "homeScore": 0,
+                "awayScore": 0,
+                "tie": true,
+                "cleanSheet": true,
+                "minutesPlayed": 90
+              }
+            }
+          ]
+        }
+      ],
+      "metadata_status": 200,
+      "metadata_competition": {
+        "id": 5,
+        "name": "Serie A",
+        "slug": "serie-a",
+        "sport": "football",
+        "currency": "€"
+      },
+      "metadata_seasons": [
+        {
+          "id": "2027",
+          "name": "2026/2027 season",
+          "slug": "2026-2027",
+          "games": 0,
+          "points": {}
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026 season",
+          "slug": "2025-2026",
+          "games": 37,
+          "points": {
+            "3": 167,
+            "1": 102
+          },
+          "selected": true
+        },
+        {
+          "id": "2025",
+          "name": "2024/2025 season",
+          "slug": "2024-2025",
+          "games": 35,
+          "points": {
+            "3": 194,
+            "1": 101
+          }
+        },
+        {
+          "id": "2023",
+          "name": "2022/2023 season",
+          "slug": "2022-2023",
+          "games": 38,
+          "points": {
+            "3": 170,
+            "1": 110
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 2380,
+            "slug": "de-gea"
+          }
+        },
+        {
+          "id": "2022",
+          "name": "2021/2022 season",
+          "slug": "2021-2022",
+          "games": 38,
+          "points": {
+            "3": 158,
+            "1": 99
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 2380,
+            "slug": "de-gea"
+          }
+        },
+        {
+          "id": "2022",
+          "name": "2021/2022",
+          "slug": "2021-2022",
+          "games": 7,
+          "points": {
+            "3": 23,
+            "1": 13
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 8847,
+            "slug": "de-gea"
+          }
+        },
+        {
+          "id": "2021",
+          "name": "2020/2021 season",
+          "slug": "2020-2021",
+          "games": 26,
+          "points": {
+            "3": 91,
+            "1": 53
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 2380,
+            "slug": "de-gea"
+          }
+        },
+        {
+          "id": "2021",
+          "name": "2020/2021",
+          "slug": "2020-2021",
+          "games": 5,
+          "points": {
+            "3": 18,
+            "1": 9
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 8847,
+            "slug": "de-gea"
+          }
+        },
+        {
+          "id": "2020",
+          "name": "2019/2020 season",
+          "slug": "2019-2020",
+          "games": 38,
+          "points": {
+            "3": 155,
+            "1": 94
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 2380,
+            "slug": "de-gea"
+          }
+        },
+        {
+          "id": "2019",
+          "name": "2018/2019 season",
+          "slug": "2018-2019",
+          "games": 38,
+          "points": {
+            "3": 106,
+            "1": 86
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 2380,
+            "slug": "de-gea"
+          }
+        },
+        {
+          "id": "2019",
+          "name": "2018/2019",
+          "slug": "2018-2019",
+          "games": 9,
+          "points": {
+            "3": 28,
+            "1": 25
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 8847,
+            "slug": "de-gea"
+          }
+        },
+        {
+          "id": "2018",
+          "name": "2017/2018 season",
+          "slug": "2017-2018",
+          "games": 37,
+          "points": {
+            "3": 171,
+            "1": 192
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 2380,
+            "slug": "de-gea"
+          }
+        },
+        {
+          "id": "2018",
+          "name": "2017/2018",
+          "slug": "2017-2018",
+          "games": 6,
+          "points": {
+            "3": 15,
+            "1": 44
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 8847,
+            "slug": "de-gea"
+          }
+        },
+        {
+          "id": "2018",
+          "name": "Russia 2018",
+          "slug": "russia-2018",
+          "games": 4,
+          "points": {
+            "3": 2,
+            "1": "-3"
+          },
+          "competition": {
+            "id": 53,
+            "name": "World Cup",
+            "slug": "world-cup"
+          },
+          "player": {
+            "id": 14306,
+            "slug": "david-de-gea"
+          }
+        },
+        {
+          "id": "2017",
+          "name": "2016/2017 season",
+          "slug": "2016-2017",
+          "games": 35,
+          "points": {
+            "3": null,
+            "1": 128
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 2380,
+            "slug": "de-gea"
+          }
+        },
+        {
+          "id": "2016",
+          "name": "Euro 2016",
+          "slug": "euro-2016",
+          "games": 4,
+          "points": {
+            "3": 256
+          },
+          "competition": {
+            "id": 50,
+            "name": "Euro",
+            "slug": "euro"
+          },
+          "player": {
+            "id": 102,
+            "slug": "david-de-gea"
+          }
+        },
+        {
+          "id": "2010",
+          "name": "2009/2010 season",
+          "slug": "2009-2010",
+          "games": 3,
+          "points": {
+            "1": 6
+          },
+          "competition": {
+            "id": 20,
+            "name": "La liga Nostálgica",
+            "slug": "la-liga-nostalgica"
+          },
+          "player": {
+            "id": 21798,
+            "slug": "de-gea"
+          }
+        }
+      ]
+    },
+    {
+      "catalog": {
+        "id": 34705,
+        "name": "David Neres",
+        "slug": "david-neres",
+        "teamID": 138,
+        "points": 0,
+        "pointsLastSeason": 84
+      },
+      "seasons": [
+        {
+          "season_id": "2022",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2023",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2024",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2025",
+          "status": 200,
+          "reports_count": 37,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Como",
+            "Empoli",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [
+            "metadata",
+            "period",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "home": true,
+              "match": {
+                "id": 42345,
+                "date": 1724611500,
+                "status": "finished",
+                "home": {
+                  "id": 138,
+                  "name": "Napoli",
+                  "slug": "napoli",
+                  "score": 3
+                },
+                "away": {
+                  "id": 137,
+                  "name": "Bologna",
+                  "slug": "bologna",
+                  "score": 0
+                },
+                "round": {
+                  "id": 4124,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 5,
+                  "period": "secondTime",
+                  "metadata": 88
+                },
+                {
+                  "type": 3
+                }
+              ],
+              "points": {
+                "3": 9,
+                "1": 2
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 7340000,
+                "score3": 9,
+                "score1": 2,
+                "roundPhase": 2,
+                "home": true,
+                "homeScore": 3,
+                "awayScore": 0,
+                "win": true,
+                "cleanSheet": true,
+                "assists": 1,
+                "minutesPlayed": 2
+              }
+            },
+            {
+              "home": true,
+              "match": {
+                "id": 42354,
+                "date": 1725129900,
+                "status": "finished",
+                "home": {
+                  "id": 138,
+                  "name": "Napoli",
+                  "slug": "napoli",
+                  "score": 2
+                },
+                "away": {
+                  "id": 415,
+                  "name": "Parma Calcio",
+                  "slug": "parma-calcio",
+                  "score": 1
+                },
+                "round": {
+                  "id": 4125,
+                  "name": "Round 3",
+                  "short": "R3"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 5,
+                  "period": "secondTime",
+                  "metadata": 69
+                },
+                {
+                  "type": 3
+                }
+              ],
+              "points": {
+                "3": 6,
+                "1": 3
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 7870000,
+                "score3": 6,
+                "score1": 3,
+                "roundPhase": 3,
+                "home": true,
+                "homeScore": 2,
+                "awayScore": 1,
+                "win": true,
+                "cleanSheet": true,
+                "assists": 1,
+                "minutesPlayed": 21
+              }
+            }
+          ]
+        },
+        {
+          "season_id": "2026",
+          "status": 200,
+          "reports_count": 38,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Como",
+            "Cremonese",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [
+            "metadata",
+            "period",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "home": false,
+              "match": {
+                "id": 47344,
+                "date": 1755966600,
+                "status": "finished",
+                "home": {
+                  "id": 146,
+                  "name": "Sassuolo",
+                  "slug": "sassuolo",
+                  "score": 0
+                },
+                "away": {
+                  "id": 138,
+                  "name": "Napoli",
+                  "slug": "napoli",
+                  "score": 2
+                },
+                "round": {
+                  "id": 4602,
+                  "name": "Round 1",
+                  "short": "R1"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 5,
+                  "period": "secondTime",
+                  "metadata": 76
+                }
+              ],
+              "points": {
+                "3": 1,
+                "1": -1
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 5470000,
+                "score3": 1,
+                "score1": -1,
+                "roundPhase": 1,
+                "away": true,
+                "homeScore": 0,
+                "awayScore": 2,
+                "win": true,
+                "cleanSheet": true,
+                "minutesPlayed": 15
+              }
+            },
+            {
+              "match": {
+                "id": 47359,
+                "date": 1756579500,
+                "status": "finished",
+                "home": {
+                  "id": 138,
+                  "name": "Napoli",
+                  "slug": "napoli",
+                  "score": 1
+                },
+                "away": {
+                  "id": 134,
+                  "name": "Cagliari",
+                  "slug": "cagliari",
+                  "score": 0
+                },
+                "round": {
+                  "id": 4603,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "unknown"
+              },
+              "home": true
+            }
+          ]
+        }
+      ],
+      "metadata_status": 200,
+      "metadata_competition": {
+        "id": 5,
+        "name": "Serie A",
+        "slug": "serie-a",
+        "sport": "football",
+        "currency": "€"
+      },
+      "metadata_seasons": [
+        {
+          "id": "2027",
+          "name": "2026/2027 season",
+          "slug": "2026-2027",
+          "games": 0,
+          "points": {}
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026 season",
+          "slug": "2025-2026",
+          "games": 16,
+          "points": {
+            "3": 84,
+            "1": 50
+          },
+          "selected": true
+        },
+        {
+          "id": "2025",
+          "name": "2024/2025 season",
+          "slug": "2024-2025",
+          "games": 28,
+          "points": {
+            "3": 134,
+            "1": 81
+          }
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026",
+          "slug": "2025-2026",
+          "games": 6,
+          "points": {
+            "3": 20,
+            "1": 15
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 11178,
+            "slug": "david-neres"
+          }
+        },
+        {
+          "id": "2024",
+          "name": "2023/2024",
+          "slug": "2023-2024",
+          "games": 3,
+          "points": {
+            "3": 9,
+            "1": 9
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 11178,
+            "slug": "david-neres"
+          }
+        },
+        {
+          "id": "2024",
+          "name": "2023/2024 season",
+          "slug": "2023-2024",
+          "games": 24,
+          "points": {
+            "3": 139
+          },
+          "competition": {
+            "id": 11,
+            "name": "Liga Portugal",
+            "slug": "primeira-liga"
+          },
+          "player": {
+            "id": 26657,
+            "slug": "david-neres"
+          }
+        },
+        {
+          "id": "2023",
+          "name": "2022/2023",
+          "slug": "2022-2023",
+          "games": 9,
+          "points": {
+            "3": 45,
+            "1": 38
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 11178,
+            "slug": "david-neres"
+          }
+        },
+        {
+          "id": "2023",
+          "name": "2022/2023 season",
+          "slug": "2022-2023",
+          "games": 31,
+          "points": {
+            "3": 177
+          },
+          "competition": {
+            "id": 11,
+            "name": "Liga Portugal",
+            "slug": "primeira-liga"
+          },
+          "player": {
+            "id": 26657,
+            "slug": "david-neres"
+          }
+        },
+        {
+          "id": "2022",
+          "name": "2021/2022",
+          "slug": "2021-2022",
+          "games": 5,
+          "points": {
+            "3": 20,
+            "1": 14
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 11178,
+            "slug": "david-neres"
+          }
+        },
+        {
+          "id": "2021",
+          "name": "2020/2021",
+          "slug": "2020-2021",
+          "games": 4,
+          "points": {
+            "3": 29,
+            "1": 22
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 11178,
+            "slug": "david-neres"
+          }
+        },
+        {
+          "id": "2020",
+          "name": "2019/2020",
+          "slug": "2019-2020",
+          "games": 4,
+          "points": {
+            "3": 9,
+            "1": 11
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 11178,
+            "slug": "david-neres"
+          }
+        },
+        {
+          "id": "2019",
+          "name": "2018/2019",
+          "slug": "2018-2019",
+          "games": 11,
+          "points": {
+            "3": 46,
+            "1": 51
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 11178,
+            "slug": "david-neres"
+          }
+        },
+        {
+          "id": "2019",
+          "name": "Brasil 2019",
+          "slug": "brasil-2019",
+          "games": 2,
+          "points": {
+            "3": 6
+          },
+          "competition": {
+            "id": 57,
+            "name": "Copa América",
+            "slug": "copa-america"
+          },
+          "player": {
+            "id": 18118,
+            "slug": "david-neres"
+          }
+        }
+      ]
+    },
+    {
+      "catalog": {
+        "id": 39004,
+        "name": "David Odogu",
+        "slug": "david-odogu",
+        "teamID": 149,
+        "points": 0,
+        "pointsLastSeason": 3
+      },
+      "seasons": [
+        {
+          "season_id": "2022",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2023",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2024",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2025",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2026",
+          "status": 200,
+          "reports_count": 36,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Como",
+            "Cremonese",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [
+            "metadata",
+            "period",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "match": {
+                "id": 47371,
+                "date": 1757875500,
+                "status": "finished",
+                "home": {
+                  "id": 149,
+                  "name": "Milan",
+                  "slug": "milan",
+                  "score": 1
+                },
+                "away": {
+                  "id": 137,
+                  "name": "Bologna",
+                  "slug": "bologna",
+                  "score": 0
+                },
+                "round": {
+                  "id": 4604,
+                  "name": "Round 3",
+                  "short": "R3"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "unknown"
+              },
+              "home": true
+            },
+            {
+              "match": {
+                "id": 47376,
+                "date": 1758393900,
+                "status": "finished",
+                "home": {
+                  "id": 141,
+                  "name": "Udinese",
+                  "slug": "udinese",
+                  "score": 0
+                },
+                "away": {
+                  "id": 149,
+                  "name": "Milan",
+                  "slug": "milan",
+                  "score": 3
+                },
+                "round": {
+                  "id": 4605,
+                  "name": "Round 4",
+                  "short": "R4"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "unknown"
+              },
+              "home": false
+            }
+          ]
+        }
+      ],
+      "metadata_status": 200,
+      "metadata_competition": {
+        "id": 5,
+        "name": "Serie A",
+        "slug": "serie-a",
+        "sport": "football",
+        "currency": "€"
+      },
+      "metadata_seasons": [
+        {
+          "id": "2027",
+          "name": "2026/2027 season",
+          "slug": "2026-2027",
+          "games": 0,
+          "points": {}
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026 season",
+          "slug": "2025-2026",
+          "games": 2,
+          "points": {
+            "3": 3,
+            "1": 0
+          },
+          "selected": true
+        }
+      ]
+    },
+    {
+      "catalog": {
+        "id": 26300,
+        "name": "David Pejičić",
+        "slug": "david-pejicic",
+        "teamID": 141,
+        "points": 0,
+        "pointsLastSeason": null
+      },
+      "seasons": [
+        {
+          "season_id": "2022",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2023",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2024",
+          "status": 200,
+          "reports_count": 36,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Empoli",
+            "Fiorentina",
+            "Frosinone",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [],
+          "reports_preview": [
+            {
+              "match": {
+                "id": 37543,
+                "date": 1693672200,
+                "status": "finished",
+                "home": {
+                  "id": 141,
+                  "name": "Udinese",
+                  "slug": "udinese",
+                  "score": 0
+                },
+                "away": {
+                  "id": 425,
+                  "name": "Frosinone",
+                  "slug": "frosinone",
+                  "score": 0
+                },
+                "round": {
+                  "id": 3666,
+                  "name": "Round 3",
+                  "short": "R3"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "unknown"
+              },
+              "home": true
+            },
+            {
+              "match": {
+                "id": 37553,
+                "date": 1694946600,
+                "status": "finished",
+                "home": {
+                  "id": 134,
+                  "name": "Cagliari",
+                  "slug": "cagliari",
+                  "score": 0
+                },
+                "away": {
+                  "id": 141,
+                  "name": "Udinese",
+                  "slug": "udinese",
+                  "score": 0
+                },
+                "round": {
+                  "id": 3667,
+                  "name": "Round 4",
+                  "short": "R4"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "unknown"
+              },
+              "home": false
+            }
+          ]
+        },
+        {
+          "season_id": "2025",
+          "status": 200,
+          "reports_count": 38,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Como",
+            "Empoli",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [],
+          "reports_preview": [
+            {
+              "match": {
+                "id": 42333,
+                "date": 1723998600,
+                "status": "finished",
+                "home": {
+                  "id": 137,
+                  "name": "Bologna",
+                  "slug": "bologna",
+                  "score": 1
+                },
+                "away": {
+                  "id": 141,
+                  "name": "Udinese",
+                  "slug": "udinese",
+                  "score": 1
+                },
+                "round": {
+                  "id": 4123,
+                  "name": "Round 1",
+                  "short": "R1"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "unknown"
+              },
+              "home": false
+            },
+            {
+              "match": {
+                "id": 42340,
+                "date": 1724517000,
+                "status": "finished",
+                "home": {
+                  "id": 141,
+                  "name": "Udinese",
+                  "slug": "udinese",
+                  "score": 2
+                },
+                "away": {
+                  "id": 140,
+                  "name": "Lazio",
+                  "slug": "lazio",
+                  "score": 1
+                },
+                "round": {
+                  "id": 4124,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "unknown"
+              },
+              "home": true
+            }
+          ]
+        },
+        {
+          "season_id": "2026",
+          "status": 200,
+          "reports_count": 2,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Inter",
+            "Udinese",
+            "Verona"
+          ],
+          "event_keys": [],
+          "reports_preview": [
+            {
+              "match": {
+                "id": 47352,
+                "date": 1756139400,
+                "status": "finished",
+                "home": {
+                  "id": 141,
+                  "name": "Udinese",
+                  "slug": "udinese",
+                  "score": 1
+                },
+                "away": {
+                  "id": 282,
+                  "name": "Verona",
+                  "slug": "verona",
+                  "score": 1
+                },
+                "round": {
+                  "id": 4602,
+                  "name": "Round 1",
+                  "short": "R1"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "unknown"
+              },
+              "home": true
+            },
+            {
+              "match": {
+                "id": 47363,
+                "date": 1756665900,
+                "status": "finished",
+                "home": {
+                  "id": 145,
+                  "name": "Inter",
+                  "slug": "inter",
+                  "score": 1
+                },
+                "away": {
+                  "id": 141,
+                  "name": "Udinese",
+                  "slug": "udinese",
+                  "score": 2
+                },
+                "round": {
+                  "id": 4603,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "unknown"
+              },
+              "home": false
+            }
+          ]
+        }
+      ],
+      "metadata_status": 200,
+      "metadata_competition": {
+        "id": 5,
+        "name": "Serie A",
+        "slug": "serie-a",
+        "sport": "football",
+        "currency": "€"
+      },
+      "metadata_seasons": [
+        {
+          "id": "2027",
+          "name": "2026/2027 season",
+          "slug": "2026-2027",
+          "games": 0,
+          "points": {
+            "3": null,
+            "1": null
+          }
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026 season",
+          "slug": "2025-2026",
+          "games": 0,
+          "points": {
+            "3": null,
+            "1": null
+          },
+          "selected": true
+        },
+        {
+          "id": "2025",
+          "name": "2024/2025 season",
+          "slug": "2024-2025",
+          "games": 0,
+          "points": {
+            "3": null,
+            "1": null
+          }
+        },
+        {
+          "id": "2024",
+          "name": "2023/2024 season",
+          "slug": "2023-2024",
+          "games": 0,
+          "points": {
+            "3": null,
+            "1": null
+          }
+        },
+        {
+          "id": "2023",
+          "name": "2022/2023 season",
+          "slug": "2022-2023",
+          "games": 0,
+          "points": {
+            "3": null,
+            "1": null
+          }
+        }
+      ]
+    },
+    {
+      "catalog": {
+        "id": 42340,
+        "name": "David Puczka",
+        "slug": "david-puczka",
+        "teamID": 142,
+        "points": 0,
+        "pointsLastSeason": null
+      },
+      "seasons": [
+        {
+          "season_id": "2022",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2023",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2024",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2025",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2026",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        }
+      ],
+      "metadata_status": 200,
+      "metadata_competition": {
+        "id": 5,
+        "name": "Serie A",
+        "slug": "serie-a",
+        "sport": "football",
+        "currency": "€"
+      },
+      "metadata_seasons": [
+        {
+          "id": "2027",
+          "name": "2026/2027 season",
+          "slug": "2026-2027",
+          "games": 0,
+          "points": {
+            "3": null,
+            "1": null
+          }
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026 season",
+          "slug": "2025-2026",
+          "games": 0,
+          "points": {
+            "3": null,
+            "1": null
+          },
+          "selected": true
+        }
+      ]
+    },
+    {
+      "catalog": {
+        "id": 42184,
+        "name": "David Romero",
+        "slug": "david-romero",
+        "teamID": 415,
+        "points": 0,
+        "pointsLastSeason": null
+      },
+      "seasons": [
+        {
+          "season_id": "2022",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2023",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2024",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2025",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2026",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        }
+      ],
+      "metadata_status": 200,
+      "metadata_competition": {
+        "id": 5,
+        "name": "Serie A",
+        "slug": "serie-a",
+        "sport": "football",
+        "currency": "€"
+      },
+      "metadata_seasons": [
+        {
+          "id": "2027",
+          "name": "2026/2027 season",
+          "slug": "2026-2027",
+          "games": 0,
+          "points": {
+            "3": null,
+            "1": null
+          }
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026 season",
+          "slug": "2025-2026",
+          "games": 0,
+          "points": {
+            "3": null,
+            "1": null
+          },
+          "selected": true
+        },
+        {
+          "id": "2022t",
+          "name": "Torneo de la Liga 2022",
+          "slug": "torneo-de-la-liga-2022",
+          "games": 5,
+          "points": {
+            "3": 16
+          },
+          "competition": {
+            "id": 8,
+            "name": "Primera División de Argentina",
+            "slug": "primera-division-argentina"
+          },
+          "player": {
+            "id": 24492,
+            "slug": "david-romero"
+          }
+        },
+        {
+          "id": "2022c",
+          "name": "Copa de la Liga 2022",
+          "slug": "copa-de-la-liga-2022",
+          "games": 6,
+          "points": {
+            "3": 13
+          },
+          "competition": {
+            "id": 8,
+            "name": "Primera División de Argentina",
+            "slug": "primera-division-argentina"
+          },
+          "player": {
+            "id": 24492,
+            "slug": "david-romero"
+          }
+        },
+        {
+          "id": "2021",
+          "name": "2020/2021 season",
+          "slug": "2020-2021",
+          "games": 7,
+          "points": {
+            "3": 17
+          },
+          "competition": {
+            "id": 8,
+            "name": "Primera División de Argentina",
+            "slug": "primera-division-argentina"
+          },
+          "player": {
+            "id": 24492,
+            "slug": "david-romero"
+          }
+        }
+      ]
+    },
+    {
+      "catalog": {
+        "id": 35146,
+        "name": "Davide Renzetti",
+        "slug": "davide-renzetti",
+        "teamID": 140,
+        "points": 0,
+        "pointsLastSeason": null
+      },
+      "seasons": [
+        {
+          "season_id": "2022",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2023",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2024",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2025",
+          "status": 200,
+          "reports_count": 35,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Como",
+            "Empoli",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [],
+          "reports_preview": [
+            {
+              "match": {
+                "id": 42364,
+                "date": 1726512300,
+                "status": "finished",
+                "home": {
+                  "id": 140,
+                  "name": "Lazio",
+                  "slug": "lazio",
+                  "score": 2
+                },
+                "away": {
+                  "id": 282,
+                  "name": "Verona",
+                  "slug": "verona",
+                  "score": 1
+                },
+                "round": {
+                  "id": 4126,
+                  "name": "Round 4",
+                  "short": "R4"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "unknown"
+              },
+              "home": true
+            },
+            {
+              "match": {
+                "id": 42371,
+                "date": 1727001000,
+                "status": "finished",
+                "home": {
+                  "id": 132,
+                  "name": "Fiorentina",
+                  "slug": "fiorentina",
+                  "score": 2
+                },
+                "away": {
+                  "id": 140,
+                  "name": "Lazio",
+                  "slug": "lazio",
+                  "score": 1
+                },
+                "round": {
+                  "id": 4127,
+                  "name": "Round 5",
+                  "short": "R5"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "unknown"
+              },
+              "home": false
+            }
+          ]
+        },
+        {
+          "season_id": "2026",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        }
+      ],
+      "metadata_status": 200,
+      "metadata_competition": {
+        "id": 5,
+        "name": "Serie A",
+        "slug": "serie-a",
+        "sport": "football",
+        "currency": "€"
+      },
+      "metadata_seasons": [
+        {
+          "id": "2027",
+          "name": "2026/2027 season",
+          "slug": "2026-2027",
+          "games": 0,
+          "points": {
+            "3": null,
+            "1": null
+          }
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026 season",
+          "slug": "2025-2026",
+          "games": 0,
+          "points": {
+            "3": null,
+            "1": null
+          },
+          "selected": true
+        },
+        {
+          "id": "2025",
+          "name": "2024/2025 season",
+          "slug": "2024-2025",
+          "games": 0,
+          "points": {
+            "3": null,
+            "1": null
+          }
+        },
+        {
+          "id": "2024",
+          "name": "2023/2024 season",
+          "slug": "2023-2024",
+          "games": 0,
+          "points": {
+            "3": null,
+            "1": null
+          }
+        }
+      ]
+    },
+    {
+      "catalog": {
+        "id": 39795,
+        "name": "Donyell Malen",
+        "slug": "donyell-malen",
+        "teamID": 150,
+        "points": 0,
+        "pointsLastSeason": 144
+      },
+      "seasons": [
+        {
+          "season_id": "2022",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2023",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2024",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2025",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2026",
+          "status": 200,
+          "reports_count": 18,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Como",
+            "Cremonese",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [
+            "metadata",
+            "period",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "home": false,
+              "match": {
+                "id": 47546,
+                "date": 1768755600,
+                "status": "finished",
+                "home": {
+                  "id": 143,
+                  "name": "Torino",
+                  "slug": "torino",
+                  "score": 0
+                },
+                "away": {
+                  "id": 150,
+                  "name": "Roma",
+                  "slug": "roma",
+                  "score": 2
+                },
+                "round": {
+                  "id": 4622,
+                  "name": "Round 21",
+                  "short": "R21"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 1,
+                  "period": "firstTime",
+                  "metadata": 26
+                },
+                {
+                  "type": 4,
+                  "period": "secondTime",
+                  "metadata": 76
+                }
+              ],
+              "points": {
+                "3": 8,
+                "1": 7
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 3410000,
+                "score3": 8,
+                "score1": 7,
+                "roundPhase": 21,
+                "away": true,
+                "homeScore": 0,
+                "awayScore": 2,
+                "win": true,
+                "cleanSheet": true,
+                "goals": 1,
+                "minutesPlayed": 76
+              }
+            },
+            {
+              "home": true,
+              "match": {
+                "id": 47555,
+                "date": 1769370300,
+                "status": "finished",
+                "home": {
+                  "id": 150,
+                  "name": "Roma",
+                  "slug": "roma",
+                  "score": 1
+                },
+                "away": {
+                  "id": 149,
+                  "name": "Milan",
+                  "slug": "milan",
+                  "score": 1
+                },
+                "round": {
+                  "id": 4623,
+                  "name": "Round 22",
+                  "short": "R22"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 4,
+                  "period": "secondTime",
+                  "metadata": 69
+                }
+              ],
+              "points": {
+                "3": -1,
+                "1": 6
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 4760000,
+                "score3": -1,
+                "score1": 6,
+                "roundPhase": 22,
+                "home": true,
+                "homeScore": 1,
+                "awayScore": 1,
+                "tie": true,
+                "cleanSheet": false,
+                "minutesPlayed": 69
+              }
+            }
+          ]
+        }
+      ],
+      "metadata_status": 200,
+      "metadata_competition": {
+        "id": 5,
+        "name": "Serie A",
+        "slug": "serie-a",
+        "sport": "football",
+        "currency": "€"
+      },
+      "metadata_seasons": [
+        {
+          "id": "2027",
+          "name": "2026/2027 season",
+          "slug": "2026-2027",
+          "games": 0,
+          "points": {}
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026 season",
+          "slug": "2025-2026",
+          "games": 18,
+          "points": {
+            "3": 144,
+            "1": 121
+          },
+          "selected": true
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026 season",
+          "slug": "2025-2026",
+          "games": 21,
+          "points": {
+            "3": 74,
+            "1": 42
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 32210,
+            "slug": "donyell-malen"
+          }
+        },
+        {
+          "id": "2026",
+          "name": "2026",
+          "slug": "2026",
+          "games": 3,
+          "points": {
+            "3": 9,
+            "1": 10
+          },
+          "competition": {
+            "id": 53,
+            "name": "World Cup",
+            "slug": "world-cup"
+          },
+          "player": {
+            "id": 40686,
+            "slug": "donyell-malen"
+          }
+        },
+        {
+          "id": "2025",
+          "name": "2024/2025",
+          "slug": "2024-2025",
+          "games": 5,
+          "points": {
+            "3": 32,
+            "1": 22
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 11456,
+            "slug": "donyell-malen"
+          }
+        },
+        {
+          "id": "2025",
+          "name": "2024/2025 season",
+          "slug": "2024-2025",
+          "games": 14,
+          "points": {
+            "3": 56,
+            "1": 34
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 32210,
+            "slug": "donyell-malen"
+          }
+        },
+        {
+          "id": "2024",
+          "name": "Euro 2024",
+          "slug": "euro-2024",
+          "games": 4,
+          "points": {
+            "3": 28
+          },
+          "competition": {
+            "id": 50,
+            "name": "Euro",
+            "slug": "euro"
+          },
+          "player": {
+            "id": 7497,
+            "slug": "donyell-malen"
+          }
+        },
+        {
+          "id": "2024",
+          "name": "2023/2024",
+          "slug": "2023-2024",
+          "games": 8,
+          "points": {
+            "3": 41,
+            "1": 32
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 11456,
+            "slug": "donyell-malen"
+          }
+        },
+        {
+          "id": "2023",
+          "name": "2022/2023",
+          "slug": "2022-2023",
+          "games": 6,
+          "points": {
+            "3": 12,
+            "1": 6
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 11456,
+            "slug": "donyell-malen"
+          }
+        },
+        {
+          "id": "2022",
+          "name": "2021/2022",
+          "slug": "2021-2022",
+          "games": 6,
+          "points": {
+            "3": 43,
+            "1": 31
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 11456,
+            "slug": "donyell-malen"
+          }
+        },
+        {
+          "id": "2020",
+          "name": "Euro 2020",
+          "slug": "euro-2020",
+          "games": 4,
+          "points": {
+            "3": 16
+          },
+          "competition": {
+            "id": 50,
+            "name": "Euro",
+            "slug": "euro"
+          },
+          "player": {
+            "id": 7497,
+            "slug": "donyell-malen"
+          }
+        },
+        {
+          "id": "2019",
+          "name": "2018/2019",
+          "slug": "2018-2019",
+          "games": 6,
+          "points": {
+            "3": 16,
+            "1": 10
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 11456,
+            "slug": "donyell-malen"
+          }
+        }
+      ]
+    },
+    {
+      "catalog": {
+        "id": 38118,
+        "name": "Jonathan David",
+        "slug": "jonathan-david",
+        "teamID": 151,
+        "points": 0,
+        "pointsLastSeason": 85
+      },
+      "seasons": [
+        {
+          "season_id": "2022",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2023",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2024",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2025",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2026",
+          "status": 200,
+          "reports_count": 38,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Como",
+            "Cremonese",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [
+            "metadata",
+            "period",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "home": true,
+              "match": {
+                "id": 47350,
+                "date": 1756061100,
+                "status": "finished",
+                "home": {
+                  "id": 151,
+                  "name": "Juventus",
+                  "slug": "juventus",
+                  "score": 2
+                },
+                "away": {
+                  "id": 415,
+                  "name": "Parma Calcio",
+                  "slug": "parma-calcio",
+                  "score": 0
+                },
+                "round": {
+                  "id": 4602,
+                  "name": "Round 1",
+                  "short": "R1"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 1,
+                  "period": "secondTime",
+                  "metadata": 59
+                },
+                {
+                  "type": 4,
+                  "period": "secondTime",
+                  "metadata": 80
+                }
+              ],
+              "points": {
+                "3": 7,
+                "1": 7
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 12460000,
+                "score3": 7,
+                "score1": 7,
+                "roundPhase": 1,
+                "home": true,
+                "homeScore": 2,
+                "awayScore": 0,
+                "win": true,
+                "cleanSheet": true,
+                "goals": 1,
+                "minutesPlayed": 80
+              }
+            },
+            {
+              "home": false,
+              "match": {
+                "id": 47361,
+                "date": 1756657800,
+                "status": "finished",
+                "home": {
+                  "id": 142,
+                  "name": "Genoa",
+                  "slug": "genoa",
+                  "score": 0
+                },
+                "away": {
+                  "id": 151,
+                  "name": "Juventus",
+                  "slug": "juventus",
+                  "score": 1
+                },
+                "round": {
+                  "id": 4603,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 4,
+                  "period": "secondTime",
+                  "metadata": 62
+                }
+              ],
+              "points": {
+                "3": 1,
+                "1": 3
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 12560000,
+                "score3": 1,
+                "score1": 3,
+                "roundPhase": 2,
+                "away": true,
+                "homeScore": 0,
+                "awayScore": 1,
+                "win": true,
+                "cleanSheet": true,
+                "minutesPlayed": 62
+              }
+            }
+          ]
+        }
+      ],
+      "metadata_status": 200,
+      "metadata_competition": {
+        "id": 5,
+        "name": "Serie A",
+        "slug": "serie-a",
+        "sport": "football",
+        "currency": "€"
+      },
+      "metadata_seasons": [
+        {
+          "id": "2027",
+          "name": "2026/2027 season",
+          "slug": "2026-2027",
+          "games": 0,
+          "points": {}
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026 season",
+          "slug": "2025-2026",
+          "games": 35,
+          "points": {
+            "3": 85,
+            "1": 106
+          },
+          "selected": true
+        },
+        {
+          "id": "2026",
+          "name": "2026",
+          "slug": "2026",
+          "games": 5,
+          "points": {
+            "3": 27,
+            "1": 28
+          },
+          "competition": {
+            "id": 53,
+            "name": "World Cup",
+            "slug": "world-cup"
+          },
+          "player": {
+            "id": 28846,
+            "slug": "jonathan-david"
+          }
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026",
+          "slug": "2025-2026",
+          "games": 9,
+          "points": {
+            "3": 20,
+            "1": 27
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 10896,
+            "slug": "jonathan-david"
+          }
+        },
+        {
+          "id": "2025",
+          "name": "2024/2025 season",
+          "slug": "2024-2025",
+          "games": 32,
+          "points": {
+            "3": 226,
+            "1": 179
+          },
+          "competition": {
+            "id": 6,
+            "name": "Ligue 1",
+            "slug": "ligue-1"
+          },
+          "player": {
+            "id": 19535,
+            "slug": "jonathan-david"
+          }
+        },
+        {
+          "id": "2025",
+          "name": "2024/2025",
+          "slug": "2024-2025",
+          "games": 10,
+          "points": {
+            "3": 80,
+            "1": 59
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 10896,
+            "slug": "jonathan-david"
+          }
+        },
+        {
+          "id": "2024",
+          "name": "2023/2024 season",
+          "slug": "2023-2024",
+          "games": 34,
+          "points": {
+            "3": 252,
+            "1": 214
+          },
+          "competition": {
+            "id": 6,
+            "name": "Ligue 1",
+            "slug": "ligue-1"
+          },
+          "player": {
+            "id": 19535,
+            "slug": "jonathan-david"
+          }
+        },
+        {
+          "id": "2024",
+          "name": "Copa América 2024",
+          "slug": "copa-america-2024",
+          "games": 6,
+          "points": {
+            "3": 34
+          },
+          "competition": {
+            "id": 57,
+            "name": "Copa América",
+            "slug": "copa-america"
+          },
+          "player": {
+            "id": 33124,
+            "slug": "jonathan-david"
+          }
+        },
+        {
+          "id": "2023",
+          "name": "2022/2023 season",
+          "slug": "2022-2023",
+          "games": 37,
+          "points": {
+            "3": 277,
+            "1": 247
+          },
+          "competition": {
+            "id": 6,
+            "name": "Ligue 1",
+            "slug": "ligue-1"
+          },
+          "player": {
+            "id": 19535,
+            "slug": "jonathan-david"
+          }
+        },
+        {
+          "id": "2022",
+          "name": "2021/2022 season",
+          "slug": "2021-2022",
+          "games": 38,
+          "points": {
+            "3": 203,
+            "1": 182
+          },
+          "competition": {
+            "id": 6,
+            "name": "Ligue 1",
+            "slug": "ligue-1"
+          },
+          "player": {
+            "id": 19535,
+            "slug": "jonathan-david"
+          }
+        },
+        {
+          "id": "2022",
+          "name": "Qatar 2022",
+          "slug": "qatar-2022",
+          "games": 3,
+          "points": {
+            "3": 6,
+            "1": 5
+          },
+          "competition": {
+            "id": 53,
+            "name": "World Cup",
+            "slug": "world-cup"
+          },
+          "player": {
+            "id": 28846,
+            "slug": "jonathan-david"
+          }
+        },
+        {
+          "id": "2022",
+          "name": "2021/2022",
+          "slug": "2021-2022",
+          "games": 8,
+          "points": {
+            "3": 42,
+            "1": 41
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 10896,
+            "slug": "jonathan-david"
+          }
+        },
+        {
+          "id": "2021",
+          "name": "2020/2021 season",
+          "slug": "2020-2021",
+          "games": 37,
+          "points": {
+            "3": 198,
+            "1": 166
+          },
+          "competition": {
+            "id": 6,
+            "name": "Ligue 1",
+            "slug": "ligue-1"
+          },
+          "player": {
+            "id": 19535,
+            "slug": "jonathan-david"
+          }
+        }
+      ]
+    },
+    {
+      "catalog": {
+        "id": 6771,
+        "name": "Kean",
+        "slug": "kean",
+        "teamID": 132,
+        "points": 0,
+        "pointsLastSeason": 108
+      },
+      "seasons": [
+        {
+          "season_id": "2022",
+          "status": 200,
+          "reports_count": 36,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Empoli",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Milan",
+            "Napoli",
+            "Roma"
+          ],
+          "event_keys": [
+            "metadata",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "home": false,
+              "match": {
+                "id": 24344,
+                "date": 1631376000,
+                "status": "finished",
+                "home": {
+                  "id": 138,
+                  "name": "Napoli",
+                  "slug": "napoli",
+                  "score": 2
+                },
+                "away": {
+                  "id": 151,
+                  "name": "Juventus",
+                  "slug": "juventus",
+                  "score": 1
+                },
+                "round": {
+                  "id": 2523,
+                  "name": "Round 3",
+                  "short": "R3"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 5,
+                  "metadata": 82
+                }
+              ],
+              "points": {
+                "3": -6,
+                "1": 0
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 8380000,
+                "score3": -6,
+                "score1": 0,
+                "roundPhase": 3,
+                "away": true,
+                "homeScore": 2,
+                "awayScore": 1,
+                "lost": true,
+                "cleanSheet": false,
+                "minutesPlayed": 8
+              }
+            },
+            {
+              "home": true,
+              "match": {
+                "id": 24353,
+                "date": 1632077100,
+                "status": "finished",
+                "home": {
+                  "id": 151,
+                  "name": "Juventus",
+                  "slug": "juventus",
+                  "score": 1
+                },
+                "away": {
+                  "id": 149,
+                  "name": "Milan",
+                  "slug": "milan",
+                  "score": 1
+                },
+                "round": {
+                  "id": 2524,
+                  "name": "Round 4",
+                  "short": "R4"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 5,
+                  "metadata": 66
+                }
+              ],
+              "points": {
+                "3": 1,
+                "1": 0
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 7460000,
+                "score3": 1,
+                "score1": 0,
+                "roundPhase": 4,
+                "home": true,
+                "homeScore": 1,
+                "awayScore": 1,
+                "tie": true,
+                "cleanSheet": false,
+                "minutesPlayed": 24
+              }
+            }
+          ]
+        },
+        {
+          "season_id": "2023",
+          "status": 200,
+          "reports_count": 38,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cremonese",
+            "Empoli",
+            "Fiorentina",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan",
+            "Monza",
+            "Napoli"
+          ],
+          "event_keys": [
+            "metadata",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "match": {
+                "id": 33953,
+                "date": 1660589100,
+                "status": "finished",
+                "home": {
+                  "id": 151,
+                  "name": "Juventus",
+                  "slug": "juventus",
+                  "score": 3
+                },
+                "away": {
+                  "id": 146,
+                  "name": "Sassuolo",
+                  "slug": "sassuolo",
+                  "score": 0
+                },
+                "round": {
+                  "id": 3292,
+                  "name": "Round 1",
+                  "short": "R1"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "sanctioned"
+              },
+              "home": true
+            },
+            {
+              "home": false,
+              "match": {
+                "id": 33963,
+                "date": 1661193900,
+                "status": "finished",
+                "home": {
+                  "id": 133,
+                  "name": "Sampdoria",
+                  "slug": "sampdoria",
+                  "score": 0
+                },
+                "away": {
+                  "id": 151,
+                  "name": "Juventus",
+                  "slug": "juventus",
+                  "score": 0
+                },
+                "round": {
+                  "id": 3293,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 5,
+                  "metadata": 77
+                }
+              ],
+              "points": {
+                "3": 5,
+                "1": 0
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 3070000,
+                "score3": 5,
+                "score1": 0,
+                "roundPhase": 2,
+                "away": true,
+                "homeScore": 0,
+                "awayScore": 0,
+                "tie": true,
+                "cleanSheet": true,
+                "minutesPlayed": 13
+              }
+            }
+          ]
+        },
+        {
+          "season_id": "2024",
+          "status": 200,
+          "reports_count": 38,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Empoli",
+            "Fiorentina",
+            "Frosinone",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [
+            "metadata",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "match": {
+                "id": 37527,
+                "date": 1692557100,
+                "status": "finished",
+                "home": {
+                  "id": 141,
+                  "name": "Udinese",
+                  "slug": "udinese",
+                  "score": 0
+                },
+                "away": {
+                  "id": 151,
+                  "name": "Juventus",
+                  "slug": "juventus",
+                  "score": 3
+                },
+                "round": {
+                  "id": 3664,
+                  "name": "Round 1",
+                  "short": "R1"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "unknown"
+              },
+              "home": false
+            },
+            {
+              "match": {
+                "id": 37535,
+                "date": 1693153800,
+                "status": "finished",
+                "home": {
+                  "id": 151,
+                  "name": "Juventus",
+                  "slug": "juventus",
+                  "score": 1
+                },
+                "away": {
+                  "id": 137,
+                  "name": "Bologna",
+                  "slug": "bologna",
+                  "score": 1
+                },
+                "round": {
+                  "id": 3665,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "unknown"
+              },
+              "home": true
+            }
+          ]
+        },
+        {
+          "season_id": "2025",
+          "status": 200,
+          "reports_count": 38,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Como",
+            "Empoli",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [
+            "metadata",
+            "period",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "home": false,
+              "match": {
+                "id": 42329,
+                "date": 1723912200,
+                "status": "finished",
+                "home": {
+                  "id": 415,
+                  "name": "Parma Calcio",
+                  "slug": "parma-calcio",
+                  "score": 1
+                },
+                "away": {
+                  "id": 132,
+                  "name": "Fiorentina",
+                  "slug": "fiorentina",
+                  "score": 1
+                },
+                "round": {
+                  "id": 4123,
+                  "name": "Round 1",
+                  "short": "R1"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [],
+              "points": {
+                "3": 3,
+                "1": 4
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 3470000,
+                "score3": 3,
+                "score1": 4,
+                "roundPhase": 1,
+                "away": true,
+                "homeScore": 1,
+                "awayScore": 1,
+                "tie": true,
+                "cleanSheet": false,
+                "minutesPlayed": 90
+              }
+            },
+            {
+              "home": true,
+              "match": {
+                "id": 42343,
+                "date": 1724603400,
+                "status": "finished",
+                "home": {
+                  "id": 132,
+                  "name": "Fiorentina",
+                  "slug": "fiorentina",
+                  "score": 0
+                },
+                "away": {
+                  "id": 594,
+                  "name": "Venezia",
+                  "slug": "venezia",
+                  "score": 0
+                },
+                "round": {
+                  "id": 4124,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 4,
+                  "period": "secondTime",
+                  "metadata": 79
+                }
+              ],
+              "points": {
+                "3": 7,
+                "1": 6
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 3340000,
+                "score3": 7,
+                "score1": 6,
+                "roundPhase": 2,
+                "home": true,
+                "homeScore": 0,
+                "awayScore": 0,
+                "tie": true,
+                "cleanSheet": true,
+                "minutesPlayed": 79
+              }
+            }
+          ]
+        },
+        {
+          "season_id": "2026",
+          "status": 200,
+          "reports_count": 38,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Como",
+            "Cremonese",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [
+            "metadata",
+            "period",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "home": false,
+              "match": {
+                "id": 47349,
+                "date": 1756053000,
+                "status": "finished",
+                "home": {
+                  "id": 134,
+                  "name": "Cagliari",
+                  "slug": "cagliari",
+                  "score": 1
+                },
+                "away": {
+                  "id": 132,
+                  "name": "Fiorentina",
+                  "slug": "fiorentina",
+                  "score": 1
+                },
+                "round": {
+                  "id": 4602,
+                  "name": "Round 1",
+                  "short": "R1"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [],
+              "points": {
+                "3": 0,
+                "1": 4
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 9690000,
+                "score3": 0,
+                "score1": 4,
+                "roundPhase": 1,
+                "away": true,
+                "homeScore": 1,
+                "awayScore": 1,
+                "tie": true,
+                "cleanSheet": false,
+                "minutesPlayed": 90
+              }
+            },
+            {
+              "home": false,
+              "match": {
+                "id": 47360,
+                "date": 1756657800,
+                "status": "finished",
+                "home": {
+                  "id": 143,
+                  "name": "Torino",
+                  "slug": "torino",
+                  "score": 0
+                },
+                "away": {
+                  "id": 132,
+                  "name": "Fiorentina",
+                  "slug": "fiorentina",
+                  "score": 0
+                },
+                "round": {
+                  "id": 4603,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [],
+              "points": {
+                "3": 1,
+                "1": 2
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 9420000,
+                "score3": 1,
+                "score1": 2,
+                "roundPhase": 2,
+                "away": true,
+                "homeScore": 0,
+                "awayScore": 0,
+                "tie": true,
+                "cleanSheet": true,
+                "minutesPlayed": 90
+              }
+            }
+          ]
+        }
+      ],
+      "metadata_status": 200,
+      "metadata_competition": {
+        "id": 5,
+        "name": "Serie A",
+        "slug": "serie-a",
+        "sport": "football",
+        "currency": "€"
+      },
+      "metadata_seasons": [
+        {
+          "id": "2027",
+          "name": "2026/2027 season",
+          "slug": "2026-2027",
+          "games": 0,
+          "points": {}
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026 season",
+          "slug": "2025-2026",
+          "games": 26,
+          "points": {
+            "3": 108,
+            "1": 111
+          },
+          "selected": true
+        },
+        {
+          "id": "2025",
+          "name": "2024/2025 season",
+          "slug": "2024-2025",
+          "games": 32,
+          "points": {
+            "3": 212,
+            "1": 185
+          }
+        },
+        {
+          "id": "2024",
+          "name": "2023/2024 season",
+          "slug": "2023-2024",
+          "games": 19,
+          "points": {
+            "3": 45,
+            "1": 27
+          }
+        },
+        {
+          "id": "2023",
+          "name": "2022/2023 season",
+          "slug": "2022-2023",
+          "games": 28,
+          "points": {
+            "3": 97,
+            "1": 60
+          }
+        },
+        {
+          "id": "2022",
+          "name": "2021/2022 season",
+          "slug": "2021-2022",
+          "games": 32,
+          "points": {
+            "3": 84,
+            "1": 58
+          }
+        },
+        {
+          "id": "2019",
+          "name": "2018/2019 season",
+          "slug": "2018-2019",
+          "games": 13,
+          "points": {
+            "3": 60,
+            "1": 39
+          }
+        },
+        {
+          "id": "2018",
+          "name": "2017/2018 season",
+          "slug": "2017-2018",
+          "games": 19,
+          "points": {
+            "3": 76,
+            "1": 56
+          }
+        },
+        {
+          "id": "2024",
+          "name": "Euro 2024",
+          "slug": "euro-2024",
+          "games": 0,
+          "points": {
+            "3": null
+          },
+          "competition": {
+            "id": 50,
+            "name": "Euro",
+            "slug": "euro"
+          },
+          "player": {
+            "id": 7702,
+            "slug": "moise-kean"
+          }
+        },
+        {
+          "id": "2023",
+          "name": "2022/2023",
+          "slug": "2022-2023",
+          "games": 5,
+          "points": {
+            "3": 16,
+            "1": 8
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 6782,
+            "slug": "kean"
+          }
+        },
+        {
+          "id": "2022",
+          "name": "2021/2022",
+          "slug": "2021-2022",
+          "games": 6,
+          "points": {
+            "3": 17,
+            "1": 10
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 6782,
+            "slug": "kean"
+          }
+        },
+        {
+          "id": "2022",
+          "name": "2021/2022 season",
+          "slug": "2021-2022",
+          "games": 1,
+          "points": {
+            "3": null,
+            "1": 0
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 9416,
+            "slug": "moise-kean"
+          }
+        },
+        {
+          "id": "2021",
+          "name": "2020/2021",
+          "slug": "2020-2021",
+          "games": 9,
+          "points": {
+            "3": 41,
+            "1": 29
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 6782,
+            "slug": "kean"
+          }
+        },
+        {
+          "id": "2021",
+          "name": "2020/2021 season",
+          "slug": "2020-2021",
+          "games": 2,
+          "points": {
+            "3": 1,
+            "1": 0
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 9416,
+            "slug": "moise-kean"
+          }
+        },
+        {
+          "id": "2021",
+          "name": "2020/2021 season",
+          "slug": "2020-2021",
+          "games": 26,
+          "points": {
+            "3": 143,
+            "1": 117
+          },
+          "competition": {
+            "id": 6,
+            "name": "Ligue 1",
+            "slug": "ligue-1"
+          },
+          "player": {
+            "id": 23033,
+            "slug": "moise-kean"
+          }
+        },
+        {
+          "id": "2020",
+          "name": "2019/2020 season",
+          "slug": "2019-2020",
+          "games": 29,
+          "points": {
+            "3": 93,
+            "1": 39
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 9416,
+            "slug": "moise-kean"
+          }
+        },
+        {
+          "id": "2019",
+          "name": "2018/2019",
+          "slug": "2018-2019",
+          "games": 3,
+          "points": {
+            "3": 6,
+            "1": 3
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 6782,
+            "slug": "kean"
+          }
+        }
+      ]
+    },
+    {
+      "catalog": {
+        "id": 37994,
+        "name": "De Bruyne",
+        "slug": "kevin-de-bruyne",
+        "teamID": 138,
+        "points": 0,
+        "pointsLastSeason": 104
+      },
+      "seasons": [
+        {
+          "season_id": "2022",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2023",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2024",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2025",
+          "status": 200,
+          "reports_count": 0,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [],
+          "event_keys": [],
+          "reports_preview": []
+        },
+        {
+          "season_id": "2026",
+          "status": 200,
+          "reports_count": 38,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Como",
+            "Cremonese",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [
+            "metadata",
+            "period",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "home": false,
+              "match": {
+                "id": 47344,
+                "date": 1755966600,
+                "status": "finished",
+                "home": {
+                  "id": 146,
+                  "name": "Sassuolo",
+                  "slug": "sassuolo",
+                  "score": 0
+                },
+                "away": {
+                  "id": 138,
+                  "name": "Napoli",
+                  "slug": "napoli",
+                  "score": 2
+                },
+                "round": {
+                  "id": 4602,
+                  "name": "Round 1",
+                  "short": "R1"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 1,
+                  "period": "secondTime",
+                  "metadata": 57
+                }
+              ],
+              "points": {
+                "3": 13,
+                "1": 8
+              },
+              "star": [
+                1,
+                3
+              ],
+              "rawStats": {
+                "pos3": true,
+                "price": 12970000,
+                "score3": 13,
+                "score1": 8,
+                "roundPhase": 1,
+                "away": true,
+                "homeScore": 0,
+                "awayScore": 2,
+                "win": true,
+                "cleanSheet": true,
+                "goals": 1,
+                "minutesPlayed": 90
+              }
+            },
+            {
+              "home": true,
+              "match": {
+                "id": 47359,
+                "date": 1756579500,
+                "status": "finished",
+                "home": {
+                  "id": 138,
+                  "name": "Napoli",
+                  "slug": "napoli",
+                  "score": 1
+                },
+                "away": {
+                  "id": 134,
+                  "name": "Cagliari",
+                  "slug": "cagliari",
+                  "score": 0
+                },
+                "round": {
+                  "id": 4603,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 6,
+                  "period": "secondTime",
+                  "metadata": 52
+                },
+                {
+                  "type": 4,
+                  "period": "secondTime",
+                  "metadata": 81
+                }
+              ],
+              "points": {
+                "3": 5,
+                "1": 4
+              },
+              "rawStats": {
+                "pos3": true,
+                "price": 14210000,
+                "score3": 5,
+                "score1": 4,
+                "roundPhase": 2,
+                "home": true,
+                "homeScore": 1,
+                "awayScore": 0,
+                "win": true,
+                "cleanSheet": true,
+                "yellowCard": 1,
+                "minutesPlayed": 81
+              }
+            }
+          ]
+        }
+      ],
+      "metadata_status": 200,
+      "metadata_competition": {
+        "id": 5,
+        "name": "Serie A",
+        "slug": "serie-a",
+        "sport": "football",
+        "currency": "€"
+      },
+      "metadata_seasons": [
+        {
+          "id": "2027",
+          "name": "2026/2027 season",
+          "slug": "2026-2027",
+          "games": 0,
+          "points": []
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026 season",
+          "slug": "2025-2026",
+          "games": 18,
+          "points": {
+            "3": 104,
+            "1": 81
+          },
+          "selected": true
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026",
+          "slug": "2025-2026",
+          "games": 3,
+          "points": {
+            "3": 18,
+            "1": 14
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 5824,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2026",
+          "name": "2026",
+          "slug": "2026",
+          "games": 5,
+          "points": {
+            "3": 31,
+            "1": 26
+          },
+          "competition": {
+            "id": 53,
+            "name": "World Cup",
+            "slug": "world-cup"
+          },
+          "player": {
+            "id": 14565,
+            "slug": "kevin-de-bruyne"
+          }
+        },
+        {
+          "id": "2025",
+          "name": "2024/2025 season",
+          "slug": "2024-2025",
+          "games": 28,
+          "points": {
+            "3": 199,
+            "1": 124
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 2300,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2025",
+          "name": "2024/2025",
+          "slug": "2024-2025",
+          "games": 7,
+          "points": {
+            "3": 30,
+            "1": 20
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 5824,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2025",
+          "name": "Club World Cup 2025",
+          "slug": "2025",
+          "games": 0,
+          "points": {
+            "3": null,
+            "1": null
+          },
+          "competition": {
+            "id": 22,
+            "name": "Club World Cup",
+            "slug": "club-world-cup"
+          },
+          "player": {
+            "id": 37384,
+            "slug": "kevin-de-bruyne"
+          }
+        },
+        {
+          "id": "2024",
+          "name": "Euro 2024",
+          "slug": "euro-2024",
+          "games": 4,
+          "points": {
+            "3": 37
+          },
+          "competition": {
+            "id": 50,
+            "name": "Euro",
+            "slug": "euro"
+          },
+          "player": {
+            "id": 1237,
+            "slug": "kevin-de-bruyne"
+          }
+        },
+        {
+          "id": "2024",
+          "name": "2023/2024 season",
+          "slug": "2023-2024",
+          "games": 18,
+          "points": {
+            "3": 184,
+            "1": 102
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 2300,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2024",
+          "name": "2023/2024",
+          "slug": "2023-2024",
+          "games": 2,
+          "points": {
+            "3": 33,
+            "1": 23
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 5824,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2023",
+          "name": "2022/2023 season",
+          "slug": "2022-2023",
+          "games": 32,
+          "points": {
+            "3": 307,
+            "1": 190
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 2300,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2023",
+          "name": "2022/2023",
+          "slug": "2022-2023",
+          "games": 10,
+          "points": {
+            "3": 89,
+            "1": 59
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 5824,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2022",
+          "name": "2021/2022 season",
+          "slug": "2021-2022",
+          "games": 30,
+          "points": {
+            "3": 310,
+            "1": 201
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 2300,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2022",
+          "name": "2021/2022",
+          "slug": "2021-2022",
+          "games": 10,
+          "points": {
+            "3": 72,
+            "1": 55
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 5824,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2022",
+          "name": "Qatar 2022",
+          "slug": "qatar-2022",
+          "games": 3,
+          "points": {
+            "3": 17,
+            "1": 14
+          },
+          "competition": {
+            "id": 53,
+            "name": "World Cup",
+            "slug": "world-cup"
+          },
+          "player": {
+            "id": 14565,
+            "slug": "kevin-de-bruyne"
+          }
+        },
+        {
+          "id": "2021",
+          "name": "2020/2021 season",
+          "slug": "2020-2021",
+          "games": 25,
+          "points": {
+            "3": 237,
+            "1": 176
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 2300,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2021",
+          "name": "2020/2021",
+          "slug": "2020-2021",
+          "games": 8,
+          "points": {
+            "3": 78,
+            "1": 54
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 5824,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2020",
+          "name": "Euro 2020",
+          "slug": "euro-2020",
+          "games": 4,
+          "points": {
+            "3": 38
+          },
+          "competition": {
+            "id": 50,
+            "name": "Euro",
+            "slug": "euro"
+          },
+          "player": {
+            "id": 1237,
+            "slug": "kevin-de-bruyne"
+          }
+        },
+        {
+          "id": "2020",
+          "name": "2019/2020 season",
+          "slug": "2019-2020",
+          "games": 35,
+          "points": {
+            "3": 378,
+            "1": 260
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 2300,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2020",
+          "name": "2019/2020",
+          "slug": "2019-2020",
+          "games": 7,
+          "points": {
+            "3": 69,
+            "1": 43
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 5824,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2019",
+          "name": "2018/2019 season",
+          "slug": "2018-2019",
+          "games": 19,
+          "points": {
+            "3": 128,
+            "1": 75
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 2300,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2019",
+          "name": "2018/2019",
+          "slug": "2018-2019",
+          "games": 4,
+          "points": {
+            "3": 33,
+            "1": 23
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 5824,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2018",
+          "name": "2017/2018 season",
+          "slug": "2017-2018",
+          "games": 37,
+          "points": {
+            "3": 360,
+            "1": 359
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 2300,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2018",
+          "name": "2017/2018",
+          "slug": "2017-2018",
+          "games": 8,
+          "points": {
+            "3": 22,
+            "1": 71
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 5824,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2018",
+          "name": "Russia 2018",
+          "slug": "russia-2018",
+          "games": 6,
+          "points": {
+            "3": 52,
+            "1": 36
+          },
+          "competition": {
+            "id": 53,
+            "name": "World Cup",
+            "slug": "world-cup"
+          },
+          "player": {
+            "id": 14565,
+            "slug": "kevin-de-bruyne"
+          }
+        },
+        {
+          "id": "2017",
+          "name": "2016/2017 season",
+          "slug": "2016-2017",
+          "games": 36,
+          "points": {
+            "3": null,
+            "1": 306
+          },
+          "competition": {
+            "id": 3,
+            "name": "Premier League",
+            "slug": "premier-league"
+          },
+          "player": {
+            "id": 2300,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2017",
+          "name": "2016/2017",
+          "slug": "2016-2017",
+          "games": 6,
+          "points": {
+            "3": 427,
+            "1": 39
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 5824,
+            "slug": "de-bruyne"
+          }
+        },
+        {
+          "id": "2016",
+          "name": "Euro 2016",
+          "slug": "euro-2016",
+          "games": 5,
+          "points": {
+            "3": 393
+          },
+          "competition": {
+            "id": 50,
+            "name": "Euro",
+            "slug": "euro"
+          },
+          "player": {
+            "id": 1237,
+            "slug": "kevin-de-bruyne"
+          }
+        }
+      ]
+    },
+    {
+      "catalog": {
+        "id": 15640,
+        "name": "Lautaro Martínez",
+        "slug": "l-martinez",
+        "teamID": 145,
+        "points": 0,
+        "pointsLastSeason": 211
+      },
+      "seasons": [
+        {
+          "season_id": "2022",
+          "status": 200,
+          "reports_count": 38,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Empoli",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Milan",
+            "Napoli",
+            "Roma"
+          ],
+          "event_keys": [
+            "metadata",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "match": {
+                "id": 24323,
+                "date": 1629563400,
+                "status": "finished",
+                "home": {
+                  "id": 145,
+                  "name": "Inter",
+                  "slug": "inter",
+                  "score": 4
+                },
+                "away": {
+                  "id": 142,
+                  "name": "Genoa",
+                  "slug": "genoa",
+                  "score": 0
+                },
+                "round": {
+                  "id": 2521,
+                  "name": "Round 1",
+                  "short": "R1"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "doubt"
+              },
+              "home": true
+            },
+            {
+              "home": false,
+              "match": {
+                "id": 24332,
+                "date": 1630089900,
+                "status": "finished",
+                "home": {
+                  "id": 282,
+                  "name": "Verona",
+                  "slug": "verona",
+                  "score": 1
+                },
+                "away": {
+                  "id": 145,
+                  "name": "Inter",
+                  "slug": "inter",
+                  "score": 3
+                },
+                "round": {
+                  "id": 2522,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 1,
+                  "metadata": 47
+                },
+                {
+                  "type": 6,
+                  "metadata": 57
+                },
+                {
+                  "type": 4,
+                  "metadata": 74
+                }
+              ],
+              "points": {
+                "3": 7,
+                "1": 7
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 11230000,
+                "score3": 7,
+                "score1": 7,
+                "roundPhase": 2,
+                "away": true,
+                "homeScore": 1,
+                "awayScore": 3,
+                "win": true,
+                "cleanSheet": false,
+                "goals": 1,
+                "yellowCard": 1,
+                "minutesPlayed": 74
+              }
+            }
+          ]
+        },
+        {
+          "season_id": "2023",
+          "status": 200,
+          "reports_count": 38,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cremonese",
+            "Empoli",
+            "Fiorentina",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan",
+            "Monza",
+            "Napoli"
+          ],
+          "event_keys": [
+            "metadata",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "home": false,
+              "match": {
+                "id": 33947,
+                "date": 1660416300,
+                "status": "finished",
+                "home": {
+                  "id": 470,
+                  "name": "Lecce",
+                  "slug": "lecce",
+                  "score": 1
+                },
+                "away": {
+                  "id": 145,
+                  "name": "Inter",
+                  "slug": "inter",
+                  "score": 2
+                },
+                "round": {
+                  "id": 3292,
+                  "name": "Round 1",
+                  "short": "R1"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 3
+                }
+              ],
+              "points": {
+                "3": 7,
+                "1": 5
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 12970000,
+                "score3": 7,
+                "score1": 5,
+                "roundPhase": 1,
+                "away": true,
+                "homeScore": 1,
+                "awayScore": 2,
+                "win": true,
+                "cleanSheet": false,
+                "assists": 1,
+                "minutesPlayed": 90
+              }
+            },
+            {
+              "home": true,
+              "match": {
+                "id": 33956,
+                "date": 1661021100,
+                "status": "finished",
+                "home": {
+                  "id": 145,
+                  "name": "Inter",
+                  "slug": "inter",
+                  "score": 3
+                },
+                "away": {
+                  "id": 541,
+                  "name": "Spezia",
+                  "slug": "spezia",
+                  "score": 0
+                },
+                "round": {
+                  "id": 3293,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 1,
+                  "metadata": 35
+                },
+                {
+                  "type": 4,
+                  "metadata": 76
+                }
+              ],
+              "points": {
+                "3": 11,
+                "1": 9
+              },
+              "star": [
+                1,
+                3
+              ],
+              "rawStats": {
+                "pos4": true,
+                "price": 12640000,
+                "score3": 11,
+                "score1": 9,
+                "roundPhase": 2,
+                "home": true,
+                "homeScore": 3,
+                "awayScore": 0,
+                "win": true,
+                "cleanSheet": true,
+                "goals": 1,
+                "minutesPlayed": 76
+              }
+            }
+          ]
+        },
+        {
+          "season_id": "2024",
+          "status": 200,
+          "reports_count": 38,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Empoli",
+            "Fiorentina",
+            "Frosinone",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [
+            "metadata",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "home": true,
+              "match": {
+                "id": 37523,
+                "date": 1692470700,
+                "status": "finished",
+                "home": {
+                  "id": 145,
+                  "name": "Inter",
+                  "slug": "inter",
+                  "score": 2
+                },
+                "away": {
+                  "id": 639,
+                  "name": "Monza",
+                  "slug": "monza",
+                  "score": 0
+                },
+                "round": {
+                  "id": 3664,
+                  "name": "Round 1",
+                  "short": "R1"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 1,
+                  "metadata": 8
+                },
+                {
+                  "type": 6,
+                  "metadata": 32
+                },
+                {
+                  "type": 1,
+                  "metadata": 76
+                },
+                {
+                  "type": 4,
+                  "metadata": 80
+                }
+              ],
+              "points": {
+                "3": 18,
+                "1": 11
+              },
+              "star": [
+                1,
+                3
+              ],
+              "rawStats": {
+                "pos4": true,
+                "price": 17430000,
+                "score3": 18,
+                "score1": 11,
+                "roundPhase": 1,
+                "home": true,
+                "homeScore": 2,
+                "awayScore": 0,
+                "win": true,
+                "cleanSheet": true,
+                "goals": 2,
+                "yellowCard": 1,
+                "minutesPlayed": 80
+              }
+            },
+            {
+              "home": false,
+              "match": {
+                "id": 37539,
+                "date": 1693248300,
+                "status": "finished",
+                "home": {
+                  "id": 134,
+                  "name": "Cagliari",
+                  "slug": "cagliari",
+                  "score": 0
+                },
+                "away": {
+                  "id": 145,
+                  "name": "Inter",
+                  "slug": "inter",
+                  "score": 2
+                },
+                "round": {
+                  "id": 3665,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 1,
+                  "metadata": 30
+                }
+              ],
+              "points": {
+                "3": 12,
+                "1": 7
+              },
+              "star": [
+                3
+              ],
+              "rawStats": {
+                "pos4": true,
+                "price": 17190000,
+                "score3": 12,
+                "score1": 7,
+                "roundPhase": 2,
+                "away": true,
+                "homeScore": 0,
+                "awayScore": 2,
+                "win": true,
+                "cleanSheet": true,
+                "goals": 1,
+                "minutesPlayed": 90
+              }
+            }
+          ]
+        },
+        {
+          "season_id": "2025",
+          "status": 200,
+          "reports_count": 38,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Como",
+            "Empoli",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [
+            "metadata",
+            "period",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "home": false,
+              "match": {
+                "id": 42330,
+                "date": 1723912200,
+                "status": "finished",
+                "home": {
+                  "id": 142,
+                  "name": "Genoa",
+                  "slug": "genoa",
+                  "score": 2
+                },
+                "away": {
+                  "id": 145,
+                  "name": "Inter",
+                  "slug": "inter",
+                  "score": 2
+                },
+                "round": {
+                  "id": 4123,
+                  "name": "Round 1",
+                  "short": "R1"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 4,
+                  "period": "secondTime",
+                  "metadata": 86
+                }
+              ],
+              "points": {
+                "3": 2,
+                "1": 3
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 19470000,
+                "score3": 2,
+                "score1": 3,
+                "roundPhase": 1,
+                "away": true,
+                "homeScore": 2,
+                "awayScore": 2,
+                "tie": true,
+                "cleanSheet": false,
+                "minutesPlayed": 86
+              }
+            },
+            {
+              "match": {
+                "id": 42341,
+                "date": 1724525100,
+                "status": "finished",
+                "home": {
+                  "id": 145,
+                  "name": "Inter",
+                  "slug": "inter",
+                  "score": 2
+                },
+                "away": {
+                  "id": 470,
+                  "name": "Lecce",
+                  "slug": "lecce",
+                  "score": 0
+                },
+                "round": {
+                  "id": 4124,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "status": {
+                "status": "unknown"
+              },
+              "home": true
+            }
+          ]
+        },
+        {
+          "season_id": "2026",
+          "status": 200,
+          "reports_count": 38,
+          "competition": {
+            "id": 5,
+            "name": "Serie A",
+            "slug": "serie-a",
+            "sport": "football",
+            "currency": "€"
+          },
+          "teams_sample": [
+            "Atalanta",
+            "Bologna",
+            "Cagliari",
+            "Como",
+            "Cremonese",
+            "Fiorentina",
+            "Genoa",
+            "Inter",
+            "Juventus",
+            "Lazio",
+            "Lecce",
+            "Milan"
+          ],
+          "event_keys": [
+            "metadata",
+            "period",
+            "type"
+          ],
+          "reports_preview": [
+            {
+              "home": true,
+              "match": {
+                "id": 47353,
+                "date": 1756147500,
+                "status": "finished",
+                "home": {
+                  "id": 145,
+                  "name": "Inter",
+                  "slug": "inter",
+                  "score": 5
+                },
+                "away": {
+                  "id": 143,
+                  "name": "Torino",
+                  "slug": "torino",
+                  "score": 0
+                },
+                "round": {
+                  "id": 4602,
+                  "name": "Round 1",
+                  "short": "R1"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 1,
+                  "period": "secondTime",
+                  "metadata": 51
+                },
+                {
+                  "type": 4,
+                  "period": "secondTime",
+                  "metadata": 79
+                },
+                {
+                  "type": 3
+                }
+              ],
+              "points": {
+                "3": 15,
+                "1": 9
+              },
+              "star": [
+                3
+              ],
+              "rawStats": {
+                "pos4": true,
+                "price": 15820000,
+                "score3": 15,
+                "score1": 9,
+                "roundPhase": 1,
+                "home": true,
+                "homeScore": 5,
+                "awayScore": 0,
+                "win": true,
+                "cleanSheet": true,
+                "goals": 1,
+                "assists": 1,
+                "minutesPlayed": 79
+              }
+            },
+            {
+              "home": true,
+              "match": {
+                "id": 47363,
+                "date": 1756665900,
+                "status": "finished",
+                "home": {
+                  "id": 145,
+                  "name": "Inter",
+                  "slug": "inter",
+                  "score": 1
+                },
+                "away": {
+                  "id": 141,
+                  "name": "Udinese",
+                  "slug": "udinese",
+                  "score": 2
+                },
+                "round": {
+                  "id": 4603,
+                  "name": "Round 2",
+                  "short": "R2"
+                },
+                "competition": {
+                  "id": 5,
+                  "name": "Serie A",
+                  "slug": "serie-a",
+                  "sport": "football",
+                  "currency": "€"
+                },
+                "preview": null,
+                "summary": null
+              },
+              "events": [
+                {
+                  "type": 6,
+                  "period": "secondTime",
+                  "metadata": 88
+                }
+              ],
+              "points": {
+                "3": 2,
+                "1": 1
+              },
+              "rawStats": {
+                "pos4": true,
+                "price": 16060000,
+                "score3": 2,
+                "score1": 1,
+                "roundPhase": 2,
+                "home": true,
+                "homeScore": 1,
+                "awayScore": 2,
+                "lost": true,
+                "cleanSheet": false,
+                "yellowCard": 1,
+                "minutesPlayed": 90
+              }
+            }
+          ]
+        }
+      ],
+      "metadata_status": 200,
+      "metadata_competition": {
+        "id": 5,
+        "name": "Serie A",
+        "slug": "serie-a",
+        "sport": "football",
+        "currency": "€"
+      },
+      "metadata_seasons": [
+        {
+          "id": "2027",
+          "name": "2026/2027 season",
+          "slug": "2026-2027",
+          "games": 0,
+          "points": {}
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026 season",
+          "slug": "2025-2026",
+          "games": 30,
+          "points": {
+            "3": 211,
+            "1": 183
+          },
+          "selected": true
+        },
+        {
+          "id": "2025",
+          "name": "2024/2025 season",
+          "slug": "2024-2025",
+          "games": 31,
+          "points": {
+            "3": 215,
+            "1": 165
+          }
+        },
+        {
+          "id": "2024",
+          "name": "2023/2024 season",
+          "slug": "2023-2024",
+          "games": 33,
+          "points": {
+            "3": 305,
+            "1": 224
+          }
+        },
+        {
+          "id": "2023",
+          "name": "2022/2023 season",
+          "slug": "2022-2023",
+          "games": 38,
+          "points": {
+            "3": 284,
+            "1": 213
+          }
+        },
+        {
+          "id": "2022",
+          "name": "2021/2022 season",
+          "slug": "2021-2022",
+          "games": 35,
+          "points": {
+            "3": 244,
+            "1": 190
+          }
+        },
+        {
+          "id": "2021",
+          "name": "2020/2021 season",
+          "slug": "2020-2021",
+          "games": 38,
+          "points": {
+            "3": 261,
+            "1": 185
+          }
+        },
+        {
+          "id": "2020",
+          "name": "2019/2020 season",
+          "slug": "2019-2020",
+          "games": 35,
+          "points": {
+            "3": 213,
+            "1": 149
+          }
+        },
+        {
+          "id": "2019",
+          "name": "2018/2019 season",
+          "slug": "2018-2019",
+          "games": 27,
+          "points": {
+            "3": 140,
+            "1": 72
+          }
+        },
+        {
+          "id": "2026",
+          "name": "2025/2026",
+          "slug": "2025-2026",
+          "games": 8,
+          "points": {
+            "3": 54,
+            "1": 44
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 8388,
+            "slug": "l-martinez"
+          }
+        },
+        {
+          "id": "2026",
+          "name": "2026",
+          "slug": "2026",
+          "games": 7,
+          "points": {
+            "3": 34,
+            "1": 25
+          },
+          "competition": {
+            "id": 53,
+            "name": "World Cup",
+            "slug": "world-cup"
+          },
+          "player": {
+            "id": 15078,
+            "slug": "lautaro-martinez"
+          }
+        },
+        {
+          "id": "2025",
+          "name": "2024/2025",
+          "slug": "2024-2025",
+          "games": 14,
+          "points": {
+            "3": 111,
+            "1": 75
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 8388,
+            "slug": "l-martinez"
+          }
+        },
+        {
+          "id": "2025",
+          "name": "Club World Cup 2025",
+          "slug": "2025",
+          "games": 4,
+          "points": {
+            "3": 35,
+            "1": 28
+          },
+          "competition": {
+            "id": 22,
+            "name": "Club World Cup",
+            "slug": "club-world-cup"
+          },
+          "player": {
+            "id": 36619,
+            "slug": "l-martinez"
+          }
+        },
+        {
+          "id": "2024",
+          "name": "2023/2024",
+          "slug": "2023-2024",
+          "games": 8,
+          "points": {
+            "3": 38,
+            "1": 36
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 8388,
+            "slug": "l-martinez"
+          }
+        },
+        {
+          "id": "2024",
+          "name": "Copa América 2024",
+          "slug": "copa-america-2024",
+          "games": 6,
+          "points": {
+            "3": 47
+          },
+          "competition": {
+            "id": 57,
+            "name": "Copa América",
+            "slug": "copa-america"
+          },
+          "player": {
+            "id": 18102,
+            "slug": "l-martinez"
+          }
+        },
+        {
+          "id": "2023",
+          "name": "2022/2023",
+          "slug": "2022-2023",
+          "games": 13,
+          "points": {
+            "3": 72,
+            "1": 52
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 8388,
+            "slug": "l-martinez"
+          }
+        },
+        {
+          "id": "2022",
+          "name": "2021/2022",
+          "slug": "2021-2022",
+          "games": 8,
+          "points": {
+            "3": 40,
+            "1": 33
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 8388,
+            "slug": "l-martinez"
+          }
+        },
+        {
+          "id": "2022",
+          "name": "Qatar 2022",
+          "slug": "qatar-2022",
+          "games": 6,
+          "points": {
+            "3": 10,
+            "1": 9
+          },
+          "competition": {
+            "id": 53,
+            "name": "World Cup",
+            "slug": "world-cup"
+          },
+          "player": {
+            "id": 15078,
+            "slug": "lautaro-martinez"
+          }
+        },
+        {
+          "id": "2021",
+          "name": "2020/2021",
+          "slug": "2020-2021",
+          "games": 6,
+          "points": {
+            "3": 29,
+            "1": 22
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 8388,
+            "slug": "l-martinez"
+          }
+        },
+        {
+          "id": "2020",
+          "name": "2019/2020",
+          "slug": "2019-2020",
+          "games": 6,
+          "points": {
+            "3": 49,
+            "1": 40
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 8388,
+            "slug": "l-martinez"
+          }
+        },
+        {
+          "id": "2020",
+          "name": "Copa América 2020",
+          "slug": "copa-america-2020",
+          "games": 6,
+          "points": {
+            "3": 33
+          },
+          "competition": {
+            "id": 57,
+            "name": "Copa América",
+            "slug": "copa-america"
+          },
+          "player": {
+            "id": 18102,
+            "slug": "l-martinez"
+          }
+        },
+        {
+          "id": "2020",
+          "name": "2019/2020",
+          "slug": "2019-2020",
+          "games": 1,
+          "points": {
+            "3": 1
+          },
+          "competition": {
+            "id": 52,
+            "name": "Europa League",
+            "slug": "europa-league"
+          },
+          "player": {
+            "id": 22002,
+            "slug": "l-martinez"
+          }
+        },
+        {
+          "id": "2019",
+          "name": "2018/2019",
+          "slug": "2018-2019",
+          "games": 3,
+          "points": {
+            "3": 7,
+            "1": 0
+          },
+          "competition": {
+            "id": 51,
+            "name": "Champions League",
+            "slug": "champions-league"
+          },
+          "player": {
+            "id": 8388,
+            "slug": "l-martinez"
+          }
+        },
+        {
+          "id": "2019",
+          "name": "Brasil 2019",
+          "slug": "brasil-2019",
+          "games": 4,
+          "points": {
+            "3": 23
+          },
+          "competition": {
+            "id": 57,
+            "name": "Copa América",
+            "slug": "copa-america"
+          },
+          "player": {
+            "id": 18102,
+            "slug": "l-martinez"
+          }
+        },
+        {
+          "id": "2018",
+          "name": "2017/2018 season",
+          "slug": "2017-2018",
+          "games": 21,
+          "points": {
+            "3": 180
+          },
+          "competition": {
+            "id": 8,
+            "name": "Primera División de Argentina",
+            "slug": "primera-division-argentina"
+          },
+          "player": {
+            "id": 7635,
+            "slug": "lautaro-martinez"
+          }
+        },
+        {
+          "id": "2017",
+          "name": "2016/2017 season",
+          "slug": "2016-2017",
+          "games": 12,
+          "points": {
+            "3": 92
+          },
+          "competition": {
+            "id": 8,
+            "name": "Primera División de Argentina",
+            "slug": "primera-division-argentina"
+          },
+          "player": {
+            "id": 7635,
+            "slug": "lautaro-martinez"
+          }
+        }
+      ]
+    }
+  ]
+}
