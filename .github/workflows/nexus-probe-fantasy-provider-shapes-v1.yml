@@ -22,12 +22,12 @@ jobs:
         with:
           python-version: '3.13.5'
       - run: python -m pip install --no-cache-dir requests==2.32.5 beautifulsoup4==4.13.5 lxml==6.0.1
-      - name: Probe provider response shapes
+      - name: Probe historical provider response shapes
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p .nexus-probe-fantasy-provider-shapes-v1-status
-          python scripts/nexus-probe-fantasy-provider-shapes-v1.py | tee .nexus-probe-fantasy-provider-shapes-v1-status/RESULT.json
+          python scripts/nexus-probe-comunio-history-biwenger-v1.py | tee .nexus-probe-fantasy-provider-shapes-v1-status/RESULT.json
       - name: Persist probe result safely
         if: always()
         shell: bash
