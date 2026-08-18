@@ -1,0 +1,281 @@
+{
+  "schema": "NEXUS_CHANCE_LIGA_FANTASY_PUBLIC_PROBE_V1",
+  "pages": {
+    "fantasy": {
+      "requested": "https://www.chanceliga.cz/fantasy",
+      "url": "https://www.chanceliga.cz/fantasy",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 136516,
+      "sha256": "dcba9b03c84c74afc289b5e389210115fe78cd4dff0415c4fa574c5d62bf7b16",
+      "preview": "<!DOCTYPE html>\n<!--[if lt IE 7]><html class=\"no-js lt-ie9 lt-ie8 lt-ie7\"><![endif]-->\n<!--[if IE 7]><html class=\"no-js lt-ie9 lt-ie8\"><![endif]-->\n<!--[if IE 8]>html class=\"no-js lt-ie9\"><![endif]-->\n<!--[if gt IE 8]><!--><html class=\"no-js\"><!--<![endif]-->\n<head>\n    <meta charset=\"utf-8\">\n    <title>Chance Liga</title>\n\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n    <meta http-equiv=\"x-ua-compatible\" content=\"IE=edge\">\n    \n    <meta name=\"robots\" content=\"ALL,FOLLOW\" />\n    <meta name=\"googlebot\" content=\"index,follow,snippet,archive\" />\n\n    <meta name=\"keywords\" content=\"czech, cesky, cech, eech, sport, soccer, fotbal, football, cup, fussball, futsal, statisti, result, league, fixture, champion, qualifi, new, calcio, team, national, club, kopaná\" />\n    <meta name=\"description\" content=\"Chance Liga – Oficiální internetové stránky 1. fotbalové ligy. Aktuální informace a dění v české nejvyšší fotbalové soutěži.\" />\n    <meta name=\"theme-color\" content=\"#aeff00\">\n    \n    <!--facebook meta-->\n    <meta property=\"og:image\" content=\"https://chanceliga.cz/favicon/mstile-150x150.png\" />\n    <meta property=\"og:title\" content=\"Chance Liga\" />\n    <meta property=\"og:description\" content=\"Chance Liga – Oficiální internetové stránky 1. fotbalové ligy. Aktuální informace a dění v české nejvyšší fotbalové soutěži.\" />\n    <meta property=\"og:url\" content=\"https://www.chanceliga.cz/fantasy\" />\n    <meta property=\"og:site_name\" content=\"Chance Liga\" />\n  "
+    },
+    "fantasy_info": {
+      "requested": "https://www.chanceliga.cz/text/178-fantasy",
+      "url": "https://www.chanceliga.cz/text/178-fantasy",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 68811,
+      "sha256": "84e0637e94208ab03a342a8f37ea49ac86ae9988fe575d08f4f5fd1890d0026e",
+      "preview": "<!DOCTYPE html>\n<!--[if lt IE 7]><html class=\"no-js lt-ie9 lt-ie8 lt-ie7\"><![endif]-->\n<!--[if IE 7]><html class=\"no-js lt-ie9 lt-ie8\"><![endif]-->\n<!--[if IE 8]>html class=\"no-js lt-ie9\"><![endif]-->\n<!--[if gt IE 8]><!--><html class=\"no-js\"><!--<![endif]-->\n<head>\n    <meta charset=\"utf-8\">\n    <title>Fantasy | Chance Liga</title>\n\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n    <meta http-equiv=\"x-ua-compatible\" content=\"IE=edge\">\n    \n    <meta name=\"robots\" content=\"ALL,FOLLOW\" />\n    <meta name=\"googlebot\" content=\"index,follow,snippet,archive\" />\n\n    <meta name=\"keywords\" content=\"Fantasy\" />\n    <meta name=\"description\" content=\"Fantasy\" />\n    <meta name=\"theme-color\" content=\"#aeff00\">\n    \n    <!--facebook meta-->\n    <meta property=\"og:image\" content=\"https://chanceliga.cz/favicon/mstile-150x150.png\" />\n    <meta property=\"og:title\" content=\"Fantasy\" />\n    <meta property=\"og:description\" content=\"Fantasy\" />\n    <meta property=\"og:url\" content=\"https://www.chanceliga.cz/text/178-fantasy\" />\n    <meta property=\"og:site_name\" content=\"Chance Liga\" />\n    <meta property=\"og:type\" content=\"website\" />\n    <meta property=\"fb:app_id\" content=\"519853968045241\" />\n\n    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png?v3\">\n    <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon/favicon-32x32.png?v3\">\n    <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon/favicon-16x16.png?v3\">\n    <link "
+    },
+    "stats": {
+      "requested": "https://www.chanceliga.cz/statistiky?order=15&parameter=1&season=2026&unit=1",
+      "url": "https://www.chanceliga.cz/statistiky?order=15&parameter=1&season=2026&unit=1",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 169719,
+      "sha256": "6e377709a68d3eacf324ab0387b12eca7356c603bf36f7f93352bdef3063b859",
+      "preview": "<!DOCTYPE html>\n<!--[if lt IE 7]><html class=\"no-js lt-ie9 lt-ie8 lt-ie7\"><![endif]-->\n<!--[if IE 7]><html class=\"no-js lt-ie9 lt-ie8\"><![endif]-->\n<!--[if IE 8]>html class=\"no-js lt-ie9\"><![endif]-->\n<!--[if gt IE 8]><!--><html class=\"no-js\"><!--<![endif]-->\n<head>\n    <meta charset=\"utf-8\">\n    <title>Podrobné statistiky | Statistiky  | Chance Liga</title>\n\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n    <meta http-equiv=\"x-ua-compatible\" content=\"IE=edge\">\n    \n    <meta name=\"robots\" content=\"ALL,FOLLOW\" />\n    <meta name=\"googlebot\" content=\"index,follow,snippet,archive\" />\n\n    <meta name=\"keywords\" content=\"Podrobné statistiky | Statistiky \" />\n    <meta name=\"description\" content=\"Podrobné statistiky | Statistiky \" />\n    <meta name=\"theme-color\" content=\"#aeff00\">\n    \n    <!--facebook meta-->\n    <meta property=\"og:image\" content=\"https://chanceliga.cz/favicon/mstile-150x150.png\" />\n    <meta property=\"og:title\" content=\"Podrobné statistiky | Statistiky \" />\n    <meta property=\"og:description\" content=\"Podrobné statistiky | Statistiky \" />\n    <meta property=\"og:url\" content=\"https://www.chanceliga.cz/statistiky?order=15&parameter=1&season=2026&unit=1\" />\n    <meta property=\"og:site_name\" content=\"Chance Liga\" />\n    <meta property=\"og:type\" content=\"website\" />\n    <meta property=\"fb:app_id\" content=\"519853968045241\" />\n\n    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png?v3\">\n    <link rel=\"icon\" type="
+    }
+  },
+  "scripts": [
+    {
+      "requested": "https://use.typekit.net/bmx8lmg.js",
+      "url": "https://use.typekit.net/bmx8lmg.js",
+      "status": 200,
+      "content_type": "text/javascript;charset=utf-8",
+      "bytes": 19134,
+      "sha256": "f40cfab351d76d3a6c9d477a32846676ea0aadc8ca0892f849e0b2181f161c0c",
+      "preview": "/*\n * The Typekit service used to deliver this font or fonts for use on websites\n * is provided by Adobe and is subject to these Terms of Use\n * http://www.adobe.com/products/eulas/tou_typekit. For font license\n * information, see the list below.\n *\n * korolev:\n *   - http://typekit.com/eulas/00000000000000003b9b1a1c\n *   - http://typekit.com/eulas/00000000000000003b9b1a22\n *   - http://typekit.com/eulas/00000000000000003b9b1a1e\n *   - http://typekit.com/eulas/00000000000000003b9b1a1f\n *   - http://typekit.com/eulas/00000000000000003b9b1a23\n *   - http://typekit.com/eulas/00000000000000003b9b1a1d\n * roboto:\n *   - http://typekit.com/eulas/00000000000000003b9ad059\n *   - http://typekit.com/eulas/00000000000000003b9ad05b\n *\n * © 2009-2026 Adobe Systems Incorporated. All Rights Reserved.\n */\nif(!window.Typekit)window.Typekit={};window.Typekit.config={\"a\":\"7827974\",\"c\":[\".tk-roboto\",\"\\\"roboto\\\",sans-serif\",\".tk-korolev\",\"\\\"korolev\\\",sans-serif\"],\"fi\":[15505,15510,27920,27925,27926,27932,27991,27999],\"fc\":[{\"id\":15505,\"family\":\"roboto\",\"src\":\"https://use.typekit.net/af/5be8cf/00000000000000003b9ad059/27/{format}{?primer,subset_id,fvd,v}\",\"descriptors\":{\"weight\":\"400\",\"style\":\"italic\",\"stretch\":\"normal\",\"display\":\"auto\",\"variable\":false,\"primer\":\"821f5854e5bb76cc2d1fa37754dff295047e4beff025e5f1b99ca04df83a3333\"}},{\"id\":15510,\"family\":\"roboto\",\"src\":\"https://use.typekit.net/af/acc12d/00000000000000003b9ad05b/27/{format}{?primer,subset_id,fvd,v}\",\"descriptors\":{\"weight\":\"400\",\"style\"",
+      "contexts": {
+        "api": [],
+        "ajax": [],
+        "fantasy": [],
+        "player": [],
+        "stats": []
+      }
+    },
+    {
+      "requested": "https://apis.google.com/js/platform.js",
+      "url": "https://apis.google.com/js/platform.js",
+      "status": 200,
+      "content_type": "text/javascript",
+      "bytes": 64840,
+      "sha256": "f0cd0303adfd9144a394a3d0d307a7529f4b69fedd3ac61b69a536dda6b549ff",
+      "preview": "(function(){var p,aa=typeof Object.create==\"function\"?Object.create:function(a){var b=function(){};b.prototype=a;return new b},ba=typeof Object.defineProperties==\"function\"?Object.defineProperty:function(a,b,c){if(a==Array.prototype||a==Object.prototype)return a;a[b]=c.value;return a},ca=function(a){a=[\"object\"==typeof globalThis&&globalThis,a,\"object\"==typeof window&&window,\"object\"==typeof self&&self,\"object\"==typeof global&&global];for(var b=0;b<a.length;++b){var c=a[b];if(c&&c.Math==Math)return c}throw Error(\"Cannot find global object\");\n},r=ca(this),u=function(a,b){if(b)a:{var c=r;a=a.split(\".\");for(var d=0;d<a.length-1;d++){var e=a[d];if(!(e in c))break a;c=c[e]}a=a[a.length-1];d=c[a];b=b(d);b!=d&&b!=null&&ba(c,a,{configurable:!0,writable:!0,value:b})}},da;if(typeof Object.setPrototypeOf==\"function\")da=Object.setPrototypeOf;else{var ea;a:{var fa={a:!0},ha={};try{ha.__proto__=fa;ea=ha.a;break a}catch(a){}ea=!1}da=ea?function(a,b){a.__proto__=b;if(a.__proto__!==b)throw new TypeError(a+\" is not extensible\");return a}:null}\nvar ia=da,ja=function(a){var b=0;return function(){return b<a.length?{done:!1,value:a[b++]}:{done:!0}}},x=function(a){var b=typeof Symbol!=\"undefined\"&&Symbol.iterator&&a[Symbol.iterator];if(b)return b.call(a);if(typeof a.length==\"number\")return{next:ja(a)};throw Error(String(a)+\" is not an iterable or ArrayLike\");},ka=function(a){return y(a,a)},y=function(a,b){a.raw=b;Object.freeze&&(Object.freeze(a),Object.freeze(b));return a};u(\"globalThis\",function(a",
+      "contexts": {
+        "api": [
+          "return!1}});u(\"String.prototype.includes\",function(a){return a?a:function(b,c){return pa(this,b,\"includes\").indexOf(b,c||0)!==-1}});window.gapi=window.gapi||{};window.gapi.Oa=(new Date).getTime();/*\n\n Copyright The Closure Library Authors.\n SPDX-License-Identifier: Apache-2.0\n*/\nvar A=this||self,qa=function(a){var b=typeof a;b=b!=\"object\"?b:a?Array.isArray(a)?\"array\":b:\"null\";return b==\"array\"||b==\"o",
+          "u(\"String.prototype.includes\",function(a){return a?a:function(b,c){return pa(this,b,\"includes\").indexOf(b,c||0)!==-1}});window.gapi=window.gapi||{};window.gapi.Oa=(new Date).getTime();/*\n\n Copyright The Closure Library Authors.\n SPDX-License-Identifier: Apache-2.0\n*/\nvar A=this||self,qa=function(a){var b=typeof a;b=b!=\"object\"?b:a?Array.isArray(a)?\"array\":b:\"null\";return b==\"array\"||b==\"object\"&&type",
+          "ype.includes\",function(a){return a?a:function(b,c){return pa(this,b,\"includes\").indexOf(b,c||0)!==-1}});window.gapi=window.gapi||{};window.gapi.Oa=(new Date).getTime();/*\n\n Copyright The Closure Library Authors.\n SPDX-License-Identifier: Apache-2.0\n*/\nvar A=this||self,qa=function(a){var b=typeof a;b=b!=\"object\"?b:a?Array.isArray(a)?\"array\":b:\"null\";return b==\"array\"||b==\"object\"&&typeof a.length==\"nu",
+          " not guarantee the attribute to be safe as it is also a prefix for the security sensitive attribute '\"+(c+\"'. Please use native or safe DOM APIs to set the attribute.\"));});\nreturn new Ja(b)};var Ya=globalThis.trustedTypes,Za;function $a(){var a=null;if(!Ya)return a;try{var b=function(c){return c};a=Ya.createPolicy(\"gapi#html\",{createHTML:b,createScript:b,createScriptURL:b})}catch(c){throw c;}return ",
+          "n new Ja(b)};var Ya=globalThis.trustedTypes,Za;function $a(){var a=null;if(!Ya)return a;try{var b=function(c){return c};a=Ya.createPolicy(\"gapi#html\",{createHTML:b,createScript:b,createScriptURL:b})}catch(c){throw c;}return a};var ab=function(a){Ia();this.qa=a};ab.prototype.toString=function(){return this.qa+\"\"};var B=function(a){Ia();this.ra=a};B.prototype.toString=function(){return this.ra};new B(\"",
+          " Error(\"Unexpected type when unwrapping SafeAttributePrefix, got '\"+c+\"' of type '\"+typeof c+\"'\");return c}).every(function(c){return\"data-gapiscan\".indexOf(c)!==0}))throw Error('Attribute \"data-gapiscan\" does not match any of the allowed prefixes.');a.setAttribute(\"data-gapiscan\",\"true\")};var hb=function(a,b,c){function d(k){k&&b.appendChild(typeof k===\"string\"?a.createTextNode(k):k)}for(var e=1;e<c",
+          "fix, got '\"+c+\"' of type '\"+typeof c+\"'\");return c}).every(function(c){return\"data-gapiscan\".indexOf(c)!==0}))throw Error('Attribute \"data-gapiscan\" does not match any of the allowed prefixes.');a.setAttribute(\"data-gapiscan\",\"true\")};var hb=function(a,b,c){function d(k){k&&b.appendChild(typeof k===\"string\"?a.createTextNode(k):k)}for(var e=1;e<c.length;e++){var f=c[e];if(!qa(f)||ra(f)&&f.nodeType>0)d",
+          "\"data-gapiscan\".indexOf(c)!==0}))throw Error('Attribute \"data-gapiscan\" does not match any of the allowed prefixes.');a.setAttribute(\"data-gapiscan\",\"true\")};var hb=function(a,b,c){function d(k){k&&b.appendChild(typeof k===\"string\"?a.createTextNode(k):k)}for(var e=1;e<c.length;e++){var f=c[e];if(!qa(f)||ra(f)&&f.nodeType>0)d(f);else{a:{if(f&&typeof f.length==\"number\"){if(ra(f)){var g=typeof f.item==\"",
+          "peof a.compareDocumentPosition!=\"undefined\")return a==b||!!(a.compareDocumentPosition(b)&16);for(;b&&a!=b;)b=b.parentNode;return b==a};/*\n gapi.loader.OBJECT_CREATE_TEST_OVERRIDE &&*/\nvar C=window,D=document,lb=C.location,mb=function(){},nb=/\\[native code\\]/,E=function(a,b,c){return a[b]=a[b]||c},ob=function(a){for(var b=0;b<this.length;b++)if(this[b]===a)return b;return-1},pb=function(a){a=a.sort();",
+          "for(var c in a)G(a,c)&&(b[c]=a[c])},xb=function(a){return function(){C.setTimeout(a,0)}},I=function(a,b){if(!a)throw Error(b||\"\");},J=E(C,\"gapi\",{});var L=function(a,b,c){var d=new RegExp(\"([#].*&|[#])\"+b+\"=([^&#]*)\",\"g\");b=new RegExp(\"([?#].*&|[?#])\"+b+\"=([^&#]*)\",\"g\");if(a=a&&(d.exec(a)||b.exec(a)))try{c=decodeURIComponent(a[2])}catch(e){}return c},yb=new RegExp(/^/.source+/([a-zA-Z][-+.a-zA-Z0-9]*"
+        ],
+        "ajax": [],
+        "fantasy": [],
+        "player": [],
+        "stats": []
+      }
+    },
+    {
+      "requested": "https://www.google.com/recaptcha/api.js",
+      "url": "https://www.google.com/recaptcha/api.js",
+      "status": 200,
+      "content_type": "text/javascript; charset=utf-8",
+      "bytes": 976,
+      "sha256": "38038da6d0f68a8b9cadf8402fc2233981b8b87e84709a5d94f7dff26e7135c2",
+      "preview": "/* PLEASE DO NOT COPY AND PASTE THIS CODE. */(function(){var w=window,C='___grecaptcha_cfg',cfg=w[C]=w[C]||{},N='grecaptcha';var gr=w[N]=w[N]||{};gr.ready=gr.ready||function(f){(cfg['fns']=cfg['fns']||[]).push(f);};w['__recaptcha_api']='https://www.google.com/recaptcha/api2/';(cfg['render']=cfg['render']||[]).push('onload');(cfg['anchor-ms']=cfg['anchor-ms']||[]).push(20000);(cfg['execute-ms']=cfg['execute-ms']||[]).push(30000);w['__google_recaptcha_client']=true;var d=document,po=d.createElement('script');po.type='text/javascript';po.async=true; po.charset='utf-8';po.src='https://www.gstatic.com/recaptcha/releases/xg_pWYS8-HRESiV6Rdg4aY_R/recaptcha__en.js';po.crossOrigin='anonymous';po.integrity='sha384-qWH0xCejb2gc1yqo8ob4TQrvIcQ9XjhOfGKbhFr/+LvFrJdTE3bA+FQP/FLAiQhz';var e=d.querySelector('script[nonce]'),n=e&&(e['nonce']||e.getAttribute('nonce'));if(n){po.setAttribute('nonce',n);}var s=d.getElementsByTagName('script')[0];s.parentNode.insertBefore(po, s);})();",
+      "contexts": {
+        "api": [
+          "',cfg=w[C]=w[C]||{},N='grecaptcha';var gr=w[N]=w[N]||{};gr.ready=gr.ready||function(f){(cfg['fns']=cfg['fns']||[]).push(f);};w['__recaptcha_api']='https://www.google.com/recaptcha/api2/';(cfg['render']=cfg['render']||[]).push('onload');(cfg['anchor-ms']=cfg['anchor-ms']||[]).push(20000);(cfg['execute-ms']=cfg['execute-ms']||[]).push(30000);w['__google_recaptcha_client']=true;var d=document,po=d.creat",
+          "r=w[N]=w[N]||{};gr.ready=gr.ready||function(f){(cfg['fns']=cfg['fns']||[]).push(f);};w['__recaptcha_api']='https://www.google.com/recaptcha/api2/';(cfg['render']=cfg['render']||[]).push('onload');(cfg['anchor-ms']=cfg['anchor-ms']||[]).push(20000);(cfg['execute-ms']=cfg['execute-ms']||[]).push(30000);w['__google_recaptcha_client']=true;var d=document,po=d.createElement('script');po.type='text/javascr"
+        ],
+        "ajax": [],
+        "fantasy": [],
+        "player": [],
+        "stats": []
+      }
+    },
+    {
+      "requested": "https://www.chanceliga.cz/dist/js/main.js?1726821871",
+      "error": "ConnectionError(ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))"
+    },
+    {
+      "requested": "https://www.chanceliga.cz/cookie-consent/dist/js/cookie-consent-config.js",
+      "url": "https://www.chanceliga.cz/cookie-consent/dist/js/cookie-consent-config.js",
+      "status": 200,
+      "content_type": "application/javascript",
+      "bytes": 6097,
+      "sha256": "0508ebd51c13b9086dfe8468f2283a23ed4657b548380e5b2bab50b48909c3be",
+      "preview": "window.cookieConsentSettings = {\n    current_lang: 'cs',\n    autoclear_cookies: true, // default: false\n    theme_css: '/cookie-consent/dist/css/cookie-consent.css', // 🚨 replace with a valid path\n    page_scripts: true, // default: false\n    languages: {\n        cs: {\n            consent_modal: {\n                title: 'Tato webová stránka používá cookies',\n                description:\n                    'Tyto webové stránky používají k poskytování služeb, personalizaci reklam a analýze návštěvnosti soubory cookies. Některé z nich jsou k fungování stránky nezbytné, ale o některých můžete rozhodnout sami. Více o používání souborů cookies se dozvíte níže. Můžete je povolit všechny, jednotlivě vybrat nebo všechny odmítnout. Více informací získáte kdykoliv na stránce Zásady používání souborů cookies <button type=\"button\" data-cc=\"c-settings\" class=\"cc-link\">Přizpůsobit</button>',\n                primary_btn: {\n                    text: 'Přijmout vše',\n                    role: 'accept_all', // 'accept_selected' or 'accept_all'\n                },\n                secondary_btn: {\n                    text: 'Odmítnout vše',\n                    role: 'accept_necessary', // 'settings' or 'accept_necessary'\n                },\n            },\n            settings_modal: {\n                title: 'Nastavení cookies',\n                save_settings_btn: 'Uložit moje volby',\n                accept_all_btn: 'Přijmout vše',\n                reject_all_btn: 'Odmítnout vše',\n                close",
+      "contexts": {
+        "api": [],
+        "ajax": [],
+        "fantasy": [],
+        "player": [],
+        "stats": []
+      }
+    },
+    {
+      "requested": "https://www.chanceliga.cz/cookie-consent/dist/js/cookie-consent.js",
+      "url": "https://www.chanceliga.cz/cookie-consent/dist/js/cookie-consent.js",
+      "status": 200,
+      "content_type": "application/javascript",
+      "bytes": 20117,
+      "sha256": "2216c22df8bee986dc9d6621f059ffc2b92a2f81122b781c1038aa90cf90fae4",
+      "preview": "parcelRequire=function(e,r,t,n){var i,o=\"function\"==typeof parcelRequire&&parcelRequire,u=\"function\"==typeof require&&require;function f(t,n){if(!r[t]){if(!e[t]){var i=\"function\"==typeof parcelRequire&&parcelRequire;if(!n&&i)return i(t,!0);if(o)return o(t,!0);if(u&&\"string\"==typeof t)return u(t);var c=new Error(\"Cannot find module '\"+t+\"'\");throw c.code=\"MODULE_NOT_FOUND\",c}p.resolve=function(r){return e[t][1][r]||r},p.cache={};var l=r[t]=new f.Module(t);e[t][0].call(l.exports,p,l,l.exports,this)}return r[t].exports;function p(e){return f(p.resolve(e))}}f.isParcelRequire=!0,f.Module=function(e){this.id=e,this.bundle=f,this.exports={}},f.modules=e,f.cache=r,f.parent=o,f.register=function(r,t){e[r]=[function(e,r){r.exports=t},{}]};for(var c=0;c<t.length;c++)try{f(t[c])}catch(e){i||(i=e)}if(t.length){var l=f(t[t.length-1]);\"object\"==typeof exports&&\"undefined\"!=typeof module?module.exports=l:\"function\"==typeof define&&define.amd?define(function(){return l}):n&&(this[n]=l)}if(parcelRequire=f,i)throw i;return f}({\"KraF\":[function(require,module,exports) {\n\"function\"!=typeof window.initCookieConsent&&(window.initCookieConsent=function(e){var t,n,i,o,a,c,r,s,l,d,u,p,f,g,h,m,_={current_lang:\"en\",auto_language:null,autorun:!0,cookie_name:\"cc_cookie\",cookie_expiration:182,cookie_domain:window.location.hostname,cookie_path:\"/\",cookie_same_site:\"Lax\",use_rfc_cookie:!1,autoclear_cookies:!0,revision:0,script_selector:\"data-cookiecategory\"},v={},b={},y=!1,k=!1,C=!1,A=!1,w=!1,x=!0,S=!1,N=nul",
+      "contexts": {
+        "api": [],
+        "ajax": [],
+        "fantasy": [],
+        "player": [],
+        "stats": []
+      }
+    },
+    {
+      "requested": "https://www.chanceliga.cz/cookie-consent/dist/js/cookie-social-media.js",
+      "url": "https://www.chanceliga.cz/cookie-consent/dist/js/cookie-social-media.js",
+      "status": 200,
+      "content_type": "application/javascript",
+      "bytes": 292,
+      "sha256": "702e0f2c7d0910b02de0dc67823b5ad817c62d130ff76932af59396685ddaa9b",
+      "preview": "document.querySelectorAll('[data-src][data-cookiecategory=\"social\"]').forEach(function(el) {\n\tel.setAttribute(\"src\", el.dataset.src);\n\tdelete(el.dataset.src);\n});\ndocument.querySelectorAll('[data-cookie-placeholder]').forEach(function(el) {\n\tel.removeAttribute(\"data-cookie-placeholder\");\n});",
+      "contexts": {
+        "api": [],
+        "ajax": [],
+        "fantasy": [],
+        "player": [],
+        "stats": []
+      }
+    }
+  ],
+  "api_candidates": [
+    "),b.dataset.gapistub=!0,h.style.cssText=",
+    ");for(var e=0,f=a.length;e<f-1;++e){var g={};d=d[a[e]]=g}d[a[e]]=b}else c=a;Oc(c)};var Qc=function(){var a=window.__GOOGLEAPIS;a&&(a.googleapis&&!a[",
+    ")if(d=d.a&&d.a[c?0:1],b=D.getElementById(a),ad(a,2),d&&b&&d.width&&d.height){a:{c=b.parentNode;a=d||{};var e;if(Yc()&&(e=b.id)){d=(d=U[e])?d.state:void 0;if(d===1||d===4)break a;bf(e)}(d=c.nextSibling)&&d.dataset&&d.dataset.gapistub&&(c.parentNode.removeChild(d),c.style.cssText=",
+    "+b[1])}]);var ec=/^(\\/[a-zA-Z0-9_\\-]+)+$/,fc=[/\\/amp\\//,/\\/amp$/,/^\\/amp$/],hc=/^[a-zA-Z0-9\\-_\\.,!]+$/,ic=/^gapi\\.loaded_[0-9]+$/,jc=/^[a-zA-Z0-9,._-]+$/,nc=function(a,b,c,d,e){var f=a.split(",
+    ",!0);delete window.gapi._bs;window.gapi.load(",
+    ",!0,window.gapi._bs);N(",
+    ",t,v);b.sync||C.___gapisync?yc(a):wc(a)}else K[Q](mb)}else w(t)&&d&&d()},Dc;var Ec=null,Fc=A.trustedTypes;if(Fc&&Fc.createPolicy)try{Ec=Fc.createPolicy(",
+    ",usegapi:!1},debug:{reportExceptionRate:1,forceIm:!1,rethrowException:!0,host:",
+    ",{callback:function(){var d=C.gapi.auth,e={client_id:c,session_state:b};d.checkSessionState(e,function(f){var g=e.session_state,k=!!S(",
+    ". Please use native or safe DOM APIs to set the attribute.",
+    ":ctx_socialhost:/:session_prefix::im_prefix:_/widget/render/community?usegapi=1",
+    ":socialhost:/:session_prefix::im_prefix:_/widget/render/post?usegapi=1",
+    ":socialhost:/:session_prefix::im_prefix:_/widget/render/share?usegapi=1",
+    ":socialhost:/:session_prefix::se:_/+1/fastbutton?usegapi=1",
+    ":socialhost:/:session_prefix::se:_/+1/sharebutton?plusShare=true&usegapi=1",
+    ":socialhost:/:session_prefix::se:_/widget/plus/circle?usegapi=1",
+    ":socialhost:/:session_prefix:_/events/widget?usegapi=1",
+    ":socialhost:/:session_prefix:_/plusbuttonconfigurator?usegapi=1",
+    ":socialhost:/:session_prefix:_/widget/render/badge?usegapi=1",
+    ":socialhost:/:session_prefix:_/widget/render/blogger?usegapi=1",
+    ":socialhost:/:session_prefix:_/widget/render/commentcount?usegapi=1",
+    ":socialhost:/:session_prefix:_/widget/render/comments?usegapi=1",
+    ":socialhost:/:session_prefix:_/widget/render/follow?usegapi=1",
+    ":socialhost:/:session_prefix:_/widget/render/page?usegapi=1",
+    ":socialhost:/:session_prefix:_/widget/render/person?usegapi=1",
+    ":socialhost:/:session_prefix:_/widget/render/signin?usegapi=1",
+    ":socialhost:/:session_prefix:_/widget/render/visibility?usegapi=1",
+    ":socialhost:/:session_prefix:_/widget/render/youtube?usegapi=1",
+    ":socialhost:/:session_prefix:_/widget/render/ytshare?usegapi=1",
+    ":socialhost:/_/im/_/widget/render/plus/followers?usegapi=1",
+    "?usegapi=1",
+    "__recaptcha_api",
+    "data-gapiattached",
+    "data-gapiscan",
+    "gapi",
+    "gapi#html",
+    "gapi.",
+    "gapi_onload",
+    "gapi_processed",
+    "googleapis.config",
+    "googleapis.config/sessionDelegate",
+    "googleapis.config/sessionIndex",
+    "https://apis.google.com",
+    "https://apis.google.com/js/platform.js",
+    "https://classroom.google.com/sharewidget-boq?usegapi=1",
+    "https://classroom.google.com/sharewidget?usegapi=1",
+    "https://clients3.google.com/cast/chromecast/home/widget/backdrop?usegapi=1",
+    "https://content.googleapis.com",
+    "https://dataconnector.corp.google.com/:session_prefix:ui/widgetview?usegapi=1",
+    "https://drive.google.com/savetodrivebutton?usegapi=1",
+    "https://families.google.com/webcreation?usegapi=1&usegapi=1",
+    "https://play.google.com/work/embedded/search?usegapi=1&usegapi=1",
+    "https://plus.googleapis.com",
+    "https://workspace.google.com/:session_prefix:marketplace/appfinder?usegapi=1",
+    "https://www.google.com/recaptcha/api2/",
+    "https://www.google.com/shopping/customerreviews/optin?usegapi=1",
+    "https://www.google.com/shopping/merchantverse/?usegapi=1",
+    "https://www.gstatic.com/partners/badge/templates/badge.html?usegapi=1",
+    "https://www.youtube.com/subscribe_embed?usegapi=1",
+    "m;/_/scs/abc-static/_/js/k=gapi.lb.en.zhTT8Br0Ho8.O/d=1/rs=AHpOoo-7LeULGjNQZRvhdu3G71akb6JY6A/m=__features__"
+  ],
+  "literal_tests": [
+    {
+      "requested": "https://www.chanceliga.cz/api/",
+      "url": "https://www.chanceliga.cz/api/",
+      "status": 404,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 65043,
+      "sha256": "219ec21ec44abd35717a8c9709a8954033fe6f226997ee760558547832bc3c3e",
+      "preview": "<!DOCTYPE html>\n<!--[if lt IE 7]><html class=\"no-js lt-ie9 lt-ie8 lt-ie7\"><![endif]-->\n<!--[if IE 7]><html class=\"no-js lt-ie9 lt-ie8\"><![endif]-->\n<!--[if IE 8]>html class=\"no-js lt-ie9\"><![endif]-->\n<!--[if gt IE 8]><!--><html class=\"no-js\"><!--<![endif]-->\n<head>\n    <meta charset=\"utf-8\">\n    <title>Hledáte něco na www.chanceliga.cz? | Chance Liga</title>\n\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n    <meta http-equiv=\"x-ua-compatible\" content=\"IE=edge\">\n    \n    <meta name=\"robots\" content=\"ALL,FOLLOW\" />\n    <meta name=\"googlebot\" content=\"index,follow,snippet,archive\" />\n\n    <meta name=\"keywords\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta name=\"description\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta name=\"theme-color\" content=\"#aeff00\">\n    \n    <!--facebook meta-->\n    <meta property=\"og:image\" content=\"https://chanceliga.cz/favicon/mstile-150x150.png\" />\n    <meta property=\"og:title\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta property=\"og:description\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta property=\"og:url\" content=\"https://www.chanceliga.cz/api/\" />\n    <meta property=\"og:site_name\" content=\"Chance Liga\" />\n    <meta property=\"og:type\" content=\"website\" />\n    <meta property=\"fb:app_id\" content=\"519853968045241\" />\n\n    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png?v3\">\n    <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon/"
+    },
+    {
+      "requested": "https://www.chanceliga.cz/fantasy/api/",
+      "url": "https://www.chanceliga.cz/fantasy/api/",
+      "status": 404,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 65059,
+      "sha256": "e46999d0bd8031e1326da1f175ffd25de57bdbfca08d408828151957baf4940e",
+      "preview": "<!DOCTYPE html>\n<!--[if lt IE 7]><html class=\"no-js lt-ie9 lt-ie8 lt-ie7\"><![endif]-->\n<!--[if IE 7]><html class=\"no-js lt-ie9 lt-ie8\"><![endif]-->\n<!--[if IE 8]>html class=\"no-js lt-ie9\"><![endif]-->\n<!--[if gt IE 8]><!--><html class=\"no-js\"><!--<![endif]-->\n<head>\n    <meta charset=\"utf-8\">\n    <title>Hledáte něco na www.chanceliga.cz? | Chance Liga</title>\n\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n    <meta http-equiv=\"x-ua-compatible\" content=\"IE=edge\">\n    \n    <meta name=\"robots\" content=\"ALL,FOLLOW\" />\n    <meta name=\"googlebot\" content=\"index,follow,snippet,archive\" />\n\n    <meta name=\"keywords\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta name=\"description\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta name=\"theme-color\" content=\"#aeff00\">\n    \n    <!--facebook meta-->\n    <meta property=\"og:image\" content=\"https://chanceliga.cz/favicon/mstile-150x150.png\" />\n    <meta property=\"og:title\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta property=\"og:description\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta property=\"og:url\" content=\"https://www.chanceliga.cz/fantasy/api/\" />\n    <meta property=\"og:site_name\" content=\"Chance Liga\" />\n    <meta property=\"og:type\" content=\"website\" />\n    <meta property=\"fb:app_id\" content=\"519853968045241\" />\n\n    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png?v3\">\n    <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/"
+    },
+    {
+      "requested": "https://www.chanceliga.cz/ajax/fantasy",
+      "url": "https://www.chanceliga.cz/ajax/fantasy",
+      "status": 404,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 65059,
+      "sha256": "f8faa91fbbce50d008d94e9ba1b320ac5ee970c5c3a3969a990b320dcb667056",
+      "preview": "<!DOCTYPE html>\n<!--[if lt IE 7]><html class=\"no-js lt-ie9 lt-ie8 lt-ie7\"><![endif]-->\n<!--[if IE 7]><html class=\"no-js lt-ie9 lt-ie8\"><![endif]-->\n<!--[if IE 8]>html class=\"no-js lt-ie9\"><![endif]-->\n<!--[if gt IE 8]><!--><html class=\"no-js\"><!--<![endif]-->\n<head>\n    <meta charset=\"utf-8\">\n    <title>Hledáte něco na www.chanceliga.cz? | Chance Liga</title>\n\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n    <meta http-equiv=\"x-ua-compatible\" content=\"IE=edge\">\n    \n    <meta name=\"robots\" content=\"ALL,FOLLOW\" />\n    <meta name=\"googlebot\" content=\"index,follow,snippet,archive\" />\n\n    <meta name=\"keywords\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta name=\"description\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta name=\"theme-color\" content=\"#aeff00\">\n    \n    <!--facebook meta-->\n    <meta property=\"og:image\" content=\"https://chanceliga.cz/favicon/mstile-150x150.png\" />\n    <meta property=\"og:title\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta property=\"og:description\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta property=\"og:url\" content=\"https://www.chanceliga.cz/ajax/fantasy\" />\n    <meta property=\"og:site_name\" content=\"Chance Liga\" />\n    <meta property=\"og:type\" content=\"website\" />\n    <meta property=\"fb:app_id\" content=\"519853968045241\" />\n\n    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png?v3\">\n    <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/"
+    },
+    {
+      "requested": "https://www.chanceliga.cz/fantasy/players",
+      "url": "https://www.chanceliga.cz/fantasy/players",
+      "status": 404,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 65065,
+      "sha256": "f8e9a94c415430c678ff225cc3e45bdbb7906a3063f39e68525873163aba3efa",
+      "preview": "<!DOCTYPE html>\n<!--[if lt IE 7]><html class=\"no-js lt-ie9 lt-ie8 lt-ie7\"><![endif]-->\n<!--[if IE 7]><html class=\"no-js lt-ie9 lt-ie8\"><![endif]-->\n<!--[if IE 8]>html class=\"no-js lt-ie9\"><![endif]-->\n<!--[if gt IE 8]><!--><html class=\"no-js\"><!--<![endif]-->\n<head>\n    <meta charset=\"utf-8\">\n    <title>Hledáte něco na www.chanceliga.cz? | Chance Liga</title>\n\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n    <meta http-equiv=\"x-ua-compatible\" content=\"IE=edge\">\n    \n    <meta name=\"robots\" content=\"ALL,FOLLOW\" />\n    <meta name=\"googlebot\" content=\"index,follow,snippet,archive\" />\n\n    <meta name=\"keywords\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta name=\"description\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta name=\"theme-color\" content=\"#aeff00\">\n    \n    <!--facebook meta-->\n    <meta property=\"og:image\" content=\"https://chanceliga.cz/favicon/mstile-150x150.png\" />\n    <meta property=\"og:title\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta property=\"og:description\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta property=\"og:url\" content=\"https://www.chanceliga.cz/fantasy/players\" />\n    <meta property=\"og:site_name\" content=\"Chance Liga\" />\n    <meta property=\"og:type\" content=\"website\" />\n    <meta property=\"fb:app_id\" content=\"519853968045241\" />\n\n    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png?v3\">\n    <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href"
+    },
+    {
+      "requested": "https://www.chanceliga.cz/fantasy/stats",
+      "url": "https://www.chanceliga.cz/fantasy/stats",
+      "status": 404,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 65061,
+      "sha256": "087e1d0826316d303d78375848f953113c3cbe4881664807e2abeb3ac5d32718",
+      "preview": "<!DOCTYPE html>\n<!--[if lt IE 7]><html class=\"no-js lt-ie9 lt-ie8 lt-ie7\"><![endif]-->\n<!--[if IE 7]><html class=\"no-js lt-ie9 lt-ie8\"><![endif]-->\n<!--[if IE 8]>html class=\"no-js lt-ie9\"><![endif]-->\n<!--[if gt IE 8]><!--><html class=\"no-js\"><!--<![endif]-->\n<head>\n    <meta charset=\"utf-8\">\n    <title>Hledáte něco na www.chanceliga.cz? | Chance Liga</title>\n\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n    <meta http-equiv=\"x-ua-compatible\" content=\"IE=edge\">\n    \n    <meta name=\"robots\" content=\"ALL,FOLLOW\" />\n    <meta name=\"googlebot\" content=\"index,follow,snippet,archive\" />\n\n    <meta name=\"keywords\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta name=\"description\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta name=\"theme-color\" content=\"#aeff00\">\n    \n    <!--facebook meta-->\n    <meta property=\"og:image\" content=\"https://chanceliga.cz/favicon/mstile-150x150.png\" />\n    <meta property=\"og:title\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta property=\"og:description\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta property=\"og:url\" content=\"https://www.chanceliga.cz/fantasy/stats\" />\n    <meta property=\"og:site_name\" content=\"Chance Liga\" />\n    <meta property=\"og:type\" content=\"website\" />\n    <meta property=\"fb:app_id\" content=\"519853968045241\" />\n\n    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png?v3\">\n    <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\""
+    },
+    {
+      "requested": "https://www.chanceliga.cz/api/fantasy",
+      "url": "https://www.chanceliga.cz/api/fantasy",
+      "status": 404,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 65057,
+      "sha256": "15d449719a94961682bb31310c02630fb860904a4a261d38ea569c56fdad2b9e",
+      "preview": "<!DOCTYPE html>\n<!--[if lt IE 7]><html class=\"no-js lt-ie9 lt-ie8 lt-ie7\"><![endif]-->\n<!--[if IE 7]><html class=\"no-js lt-ie9 lt-ie8\"><![endif]-->\n<!--[if IE 8]>html class=\"no-js lt-ie9\"><![endif]-->\n<!--[if gt IE 8]><!--><html class=\"no-js\"><!--<![endif]-->\n<head>\n    <meta charset=\"utf-8\">\n    <title>Hledáte něco na www.chanceliga.cz? | Chance Liga</title>\n\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n    <meta http-equiv=\"x-ua-compatible\" content=\"IE=edge\">\n    \n    <meta name=\"robots\" content=\"ALL,FOLLOW\" />\n    <meta name=\"googlebot\" content=\"index,follow,snippet,archive\" />\n\n    <meta name=\"keywords\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta name=\"description\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta name=\"theme-color\" content=\"#aeff00\">\n    \n    <!--facebook meta-->\n    <meta property=\"og:image\" content=\"https://chanceliga.cz/favicon/mstile-150x150.png\" />\n    <meta property=\"og:title\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta property=\"og:description\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta property=\"og:url\" content=\"https://www.chanceliga.cz/api/fantasy\" />\n    <meta property=\"og:site_name\" content=\"Chance Liga\" />\n    <meta property=\"og:type\" content=\"website\" />\n    <meta property=\"fb:app_id\" content=\"519853968045241\" />\n\n    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png?v3\">\n    <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/f"
+    },
+    {
+      "requested": "https://www.chanceliga.cz/api/players",
+      "url": "https://www.chanceliga.cz/api/players",
+      "status": 404,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 65057,
+      "sha256": "ccf4658e8ac2c8b7b0f120d6c6cc9fa76991fba0486e1bb01e84c2810d36dc2f",
+      "preview": "<!DOCTYPE html>\n<!--[if lt IE 7]><html class=\"no-js lt-ie9 lt-ie8 lt-ie7\"><![endif]-->\n<!--[if IE 7]><html class=\"no-js lt-ie9 lt-ie8\"><![endif]-->\n<!--[if IE 8]>html class=\"no-js lt-ie9\"><![endif]-->\n<!--[if gt IE 8]><!--><html class=\"no-js\"><!--<![endif]-->\n<head>\n    <meta charset=\"utf-8\">\n    <title>Hledáte něco na www.chanceliga.cz? | Chance Liga</title>\n\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n    <meta http-equiv=\"x-ua-compatible\" content=\"IE=edge\">\n    \n    <meta name=\"robots\" content=\"ALL,FOLLOW\" />\n    <meta name=\"googlebot\" content=\"index,follow,snippet,archive\" />\n\n    <meta name=\"keywords\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta name=\"description\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta name=\"theme-color\" content=\"#aeff00\">\n    \n    <!--facebook meta-->\n    <meta property=\"og:image\" content=\"https://chanceliga.cz/favicon/mstile-150x150.png\" />\n    <meta property=\"og:title\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta property=\"og:description\" content=\"Hledáte něco na www.chanceliga.cz?\" />\n    <meta property=\"og:url\" content=\"https://www.chanceliga.cz/api/players\" />\n    <meta property=\"og:site_name\" content=\"Chance Liga\" />\n    <meta property=\"og:type\" content=\"website\" />\n    <meta property=\"fb:app_id\" content=\"519853968045241\" />\n\n    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png?v3\">\n    <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/f"
+    }
+  ],
+  "fantasy_page": {
+    "script_count": 7,
+    "has_login": true,
+    "player_word_count": 165,
+    "has_embedded_json": false
+  }
+}
