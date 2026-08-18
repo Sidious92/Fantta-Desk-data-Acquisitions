@@ -1,0 +1,2014 @@
+{
+  "schema": "NEXUS_FANTASY_EKSTRAKLASA_PUBLIC_PROBE_V1",
+  "homepage": {
+    "status": 200,
+    "url": "https://fantasy.ekstraklasa.org/",
+    "bytes": 570988,
+    "content_type": "text/html; charset=UTF-8"
+  },
+  "scripts": [
+    "https://fantasy.ekstraklasa.org/static/vendor/jquery/jquery.min.js?v2.43",
+    "https://fantasy.ekstraklasa.org/static/vendor/modernizr/modernizr.min.js?v2.43",
+    "https://fantasy.ekstraklasa.org/static/vendor/jquery.appear/jquery.appear.min.js?v2.43",
+    "https://fantasy.ekstraklasa.org/static/vendor/jquery.easing/jquery.easing.min.js?v2.43",
+    "https://fantasy.ekstraklasa.org/static/vendor/jquery-cookie/jquery-cookie.min.js?v2.43",
+    "https://fantasy.ekstraklasa.org/static/vendor/bootstrap/js/bootstrap.min.js?v2.43",
+    "https://fantasy.ekstraklasa.org/static/vendor/common/common.min.js?v2.43",
+    "https://fantasy.ekstraklasa.org/static/vendor/jquery.validation/jquery.validation.min.js?v2.43",
+    "https://fantasy.ekstraklasa.org/static/vendor/jquery.lazyload/jquery.lazyload.min.js?v2.43",
+    "https://fantasy.ekstraklasa.org/static/vendor/isotope/jquery.isotope.min.js?v2.43",
+    "https://fantasy.ekstraklasa.org/static/vendor/owl.carousel/owl.carousel.min.js?v2.43",
+    "https://fantasy.ekstraklasa.org/static/js/theme.js?v2.43",
+    "https://fantasy.ekstraklasa.org/static/vendor/rs-plugin/js/jquery.themepunch.tools.min.js?v2.43",
+    "https://fantasy.ekstraklasa.org/static/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js?v2.43",
+    "https://fantasy.ekstraklasa.org/static/js/views/view.home.js?v2.43",
+    "https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js",
+    "https://fantasy.ekstraklasa.org/static/js/custom.js?v2.43",
+    "https://fantasy.ekstraklasa.org/static/js/theme.init.js?v2.43"
+  ],
+  "links": [
+    {
+      "text": "Zacznij teraz",
+      "url": "https://fantasy.ekstraklasa.org/#header"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/1"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/30"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/17"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/3"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/4"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/5"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/7"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/29"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/8"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/9"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/26"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/22"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/11"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/27"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/31"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/13"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/16"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/14"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/"
+    },
+    {
+      "text": "Zaloguj się",
+      "url": "https://fantasy.ekstraklasa.org/login"
+    },
+    {
+      "text": "Zarejestruj się",
+      "url": "https://fantasy.ekstraklasa.org/register"
+    },
+    {
+      "text": "Strona główna",
+      "url": "https://fantasy.ekstraklasa.org/"
+    },
+    {
+      "text": "Wiadomości",
+      "url": "https://fantasy.ekstraklasa.org/"
+    },
+    {
+      "text": "Wiadomości",
+      "url": "https://fantasy.ekstraklasa.org/news"
+    },
+    {
+      "text": "Fantastyczny Skaut",
+      "url": "https://fantasy.ekstraklasa.org/fantastyczny-skaut"
+    },
+    {
+      "text": "Nagrody",
+      "url": "https://fantasy.ekstraklasa.org/page/prizes"
+    },
+    {
+      "text": "Zasady",
+      "url": "https://fantasy.ekstraklasa.org/"
+    },
+    {
+      "text": "Regulamin",
+      "url": "https://fantasy.ekstraklasa.org/page/rules"
+    },
+    {
+      "text": "Punktacja i zasady",
+      "url": "https://fantasy.ekstraklasa.org/page/howto"
+    },
+    {
+      "text": "Osiągnięcia",
+      "url": "https://fantasy.ekstraklasa.org/page/osiagniecia"
+    },
+    {
+      "text": "Klasyfikacje",
+      "url": "https://fantasy.ekstraklasa.org/"
+    },
+    {
+      "text": "Klasyfikacja generalna",
+      "url": "https://fantasy.ekstraklasa.org/ranking"
+    },
+    {
+      "text": "Klasyfikacja klubowa",
+      "url": "https://fantasy.ekstraklasa.org/ranking-team/1"
+    },
+    {
+      "text": "Klasyfikacja regionalna",
+      "url": "https://fantasy.ekstraklasa.org/ranking-region/1"
+    },
+    {
+      "text": "Klasyfikacja lig prywatnych",
+      "url": "https://fantasy.ekstraklasa.org/ranking-league"
+    },
+    {
+      "text": "Liga klubowa",
+      "url": "https://fantasy.ekstraklasa.org/club-league"
+    },
+    {
+      "text": "Puchar Fantasy",
+      "url": "https://fantasy.ekstraklasa.org/league/puchar-fantasy"
+    },
+    {
+      "text": "Statystyki",
+      "url": "https://fantasy.ekstraklasa.org/"
+    },
+    {
+      "text": "Zawodników",
+      "url": "https://fantasy.ekstraklasa.org/stats"
+    },
+    {
+      "text": "Statystyki Premium",
+      "url": "https://fantasy.ekstraklasa.org/stats/premium"
+    },
+    {
+      "text": "Zaloguj się",
+      "url": "https://fantasy.ekstraklasa.org/login"
+    },
+    {
+      "text": "Zarejestruj się",
+      "url": "https://fantasy.ekstraklasa.org/register"
+    },
+    {
+      "text": "Home",
+      "url": "https://fantasy.ekstraklasa.org/"
+    },
+    {
+      "text": "2\n                                                            : 1",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/2"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/2"
+    },
+    {
+      "text": "0\n                                                            : 1",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/1"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/1"
+    },
+    {
+      "text": "1\n                                                            : 0",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/4"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/4"
+    },
+    {
+      "text": "2\n                                                            : 1",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/3"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/3"
+    },
+    {
+      "text": "0\n                                                            : 0",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/5"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/5"
+    },
+    {
+      "text": "1\n                                                            : 2",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/6"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/6"
+    },
+    {
+      "text": "2\n                                                            : 2",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/7"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/7"
+    },
+    {
+      "text": "2\n                                                            : 1",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/8"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/8"
+    },
+    {
+      "text": "2\n                                                            : 0",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/9"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/9"
+    },
+    {
+      "text": "0\n                                                            : 0",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/11"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/11"
+    },
+    {
+      "text": "1\n                                                            : 2",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/10"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/10"
+    },
+    {
+      "text": "4\n                                                            : 3",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/13"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/13"
+    },
+    {
+      "text": "1\n                                                            : 2",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/14"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/14"
+    },
+    {
+      "text": "3\n                                                            : 1",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/16"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/16"
+    },
+    {
+      "text": "2\n                                                            : 1",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/17"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/17"
+    },
+    {
+      "text": "3\n                                                            : 1",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/15"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/15"
+    },
+    {
+      "text": "0\n                                                            : 2",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/18"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/18"
+    },
+    {
+      "text": "2\n                                                            : 1",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/20"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/20"
+    },
+    {
+      "text": "1\n                                                            : 3",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/23"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/23"
+    },
+    {
+      "text": "3\n                                                            : 1",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/19"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/19"
+    },
+    {
+      "text": "1\n                                                            : 1",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/21"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/21"
+    },
+    {
+      "text": "0\n                                                            : 0",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/27"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/27"
+    },
+    {
+      "text": "3\n                                                            : 0",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/22"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/22"
+    },
+    {
+      "text": "0\n                                                            : 2",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/25"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/25"
+    },
+    {
+      "text": "5\n                                                            : 0",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/31"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/31"
+    },
+    {
+      "text": "2\n                                                            : 1",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/36"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/36"
+    },
+    {
+      "text": "3\n                                                            : 4",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/33"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/33"
+    },
+    {
+      "text": "1\n                                                            : 2",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/34"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/34"
+    },
+    {
+      "text": "1\n                                                            : 0",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/32"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/32"
+    },
+    {
+      "text": "2\n                                                            : 1",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/28"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/28"
+    },
+    {
+      "text": "2\n                                                            : 1",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/29"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/29"
+    },
+    {
+      "text": "20:30",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/37"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/37"
+    },
+    {
+      "text": "14:45",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/39"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/39"
+    },
+    {
+      "text": "17:30",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/41"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/41"
+    },
+    {
+      "text": "20:15",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/45"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/45"
+    },
+    {
+      "text": "14:45",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/43"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/43"
+    },
+    {
+      "text": "17:30",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/38"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/38"
+    },
+    {
+      "text": "20:15",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/42"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/42"
+    },
+    {
+      "text": "18:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/53"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/53"
+    },
+    {
+      "text": "20:30",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/47"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/47"
+    },
+    {
+      "text": "12:15",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/49"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/49"
+    },
+    {
+      "text": "14:45",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/48"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/48"
+    },
+    {
+      "text": "17:30",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/52"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/52"
+    },
+    {
+      "text": "20:15",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/54"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/54"
+    },
+    {
+      "text": "14:45",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/50"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/50"
+    },
+    {
+      "text": "17:30",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/46"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/46"
+    },
+    {
+      "text": "20:15",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/51"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/51"
+    },
+    {
+      "text": "18:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/44"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/44"
+    },
+    {
+      "text": "20:30",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/40"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/40"
+    },
+    {
+      "text": "20:30",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/60"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/60"
+    },
+    {
+      "text": "14:45",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/62"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/62"
+    },
+    {
+      "text": "17:30",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/57"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/57"
+    },
+    {
+      "text": "20:15",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/59"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/59"
+    },
+    {
+      "text": "14:45",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/55"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/55"
+    },
+    {
+      "text": "17:30",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/58"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/58"
+    },
+    {
+      "text": "20:15",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/56"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/56"
+    },
+    {
+      "text": "18:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/63"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/63"
+    },
+    {
+      "text": "20:30",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/61"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/61"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/64"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/64"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/65"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/65"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/66"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/66"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/67"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/67"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/68"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/68"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/69"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/69"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/70"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/70"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/71"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/71"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/72"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/72"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/73"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/73"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/74"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/74"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/75"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/75"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/76"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/76"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/77"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/77"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/78"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/78"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/79"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/79"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/80"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/80"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/81"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/81"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/82"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/82"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/83"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/83"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/84"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/84"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/85"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/85"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/86"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/86"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/87"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/87"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/88"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/88"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/89"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/89"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/90"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/90"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/91"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/91"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/92"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/92"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/93"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/93"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/94"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/94"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/95"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/95"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/96"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/96"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/97"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/97"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/98"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/98"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/99"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/99"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/100"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/100"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/101"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/101"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/102"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/102"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/103"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/103"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/104"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/104"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/105"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/105"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/106"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/106"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/107"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/107"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/108"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/108"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/109"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/109"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/110"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/110"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/111"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/111"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/112"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/112"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/113"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/113"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/114"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/114"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/115"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/115"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/116"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/116"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/117"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/117"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/118"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/118"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/119"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/119"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/120"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/120"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/121"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/121"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/122"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/122"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/123"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/123"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/124"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/124"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/125"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/125"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/126"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/126"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/127"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/127"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/128"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/128"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/129"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/129"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/130"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/130"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/131"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/131"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/132"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/132"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/133"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/133"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/134"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/134"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/135"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/135"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/136"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/136"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/137"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/137"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/138"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/138"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/139"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/139"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/140"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/140"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/141"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/141"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/142"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/142"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/143"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/143"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/144"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/144"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/145"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/145"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/146"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/146"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/147"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/147"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/148"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/148"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/149"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/149"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/150"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/150"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/151"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/151"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/152"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/152"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/153"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/153"
+    },
+    {
+      "text": "14:45",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/26"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/26"
+    },
+    {
+      "text": "17:30",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/24"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/24"
+    },
+    {
+      "text": "17:30",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/30"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/30"
+    },
+    {
+      "text": "20:15",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/35"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/35"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/12"
+    },
+    {
+      "text": "",
+      "url": "https://www.canalplus.com/pl/sport/"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/12"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/154"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/154"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/155"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/155"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/156"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/156"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/157"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/157"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/158"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/158"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/159"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/159"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/160"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/160"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/161"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/161"
+    },
+    {
+      "text": "01:00",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/162"
+    },
+    {
+      "text": "Raport",
+      "url": "https://fantasy.ekstraklasa.org/stats-game/162"
+    },
+    {
+      "text": "",
+      "url": "https://www.lotto.pl/"
+    },
+    {
+      "text": "Zobacz więcej",
+      "url": "https://fantasy.ekstraklasa.org/dreamteam"
+    },
+    {
+      "text": "Paweł Wszołek",
+      "url": "javascript:void(0);"
+    },
+    {
+      "text": "Jordi Sánchez",
+      "url": "javascript:void(0);"
+    },
+    {
+      "text": "Rúben Vinagre",
+      "url": "javascript:void(0);"
+    },
+    {
+      "text": "Piotr Samiec-Talar",
+      "url": "javascript:void(0);"
+    },
+    {
+      "text": "Tobias Christensen",
+      "url": "javascript:void(0);"
+    },
+    {
+      "text": "Rafał Augustyniak",
+      "url": "javascript:void(0);"
+    },
+    {
+      "text": "Bartosz Kapustka",
+      "url": "javascript:void(0);"
+    },
+    {
+      "text": "Mbaye N'Diaye",
+      "url": "javascript:void(0);"
+    },
+    {
+      "text": "Kamil Piątkowski",
+      "url": "javascript:void(0);"
+    },
+    {
+      "text": "Łukasz Zjawiński",
+      "url": "javascript:void(0);"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/news/wywiad-z-liderem-rankingu-polacy-1"
+    },
+    {
+      "text": "Wywiad z liderem rankingu POLACY",
+      "url": "https://fantasy.ekstraklasa.org/news/wywiad-z-liderem-rankingu-polacy-1"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/news/dwa-mecze-5-kolejki-przelozone"
+    },
+    {
+      "text": "Dwa mecze 5. kolejki przełożone",
+      "url": "https://fantasy.ekstraklasa.org/news/dwa-mecze-5-kolejki-przelozone"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/news/zmiany-cen-przed-4-kolejka-1"
+    },
+    {
+      "text": "Zmiany cen przed 4. kolejką",
+      "url": "https://fantasy.ekstraklasa.org/news/zmiany-cen-przed-4-kolejka-1"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/news/pokonaj-skauta-propozycja-druzyny-4-2"
+    },
+    {
+      "text": "Pokonaj Skauta - propozycja drużyny [#4]",
+      "url": "https://fantasy.ekstraklasa.org/news/pokonaj-skauta-propozycja-druzyny-4-2"
+    },
+    {
+      "text": "",
+      "url": "https://www.lotto.pl/"
+    },
+    {
+      "text": "Załóż konto",
+      "url": "https://fantasy.ekstraklasa.org/register"
+    },
+    {
+      "text": "Ustawienia cookies",
+      "url": "https://fantasy.ekstraklasa.org/"
+    },
+    {
+      "text": "Nagrody",
+      "url": "https://fantasy.ekstraklasa.org/page/prizes"
+    },
+    {
+      "text": "Regulamin",
+      "url": "https://fantasy.ekstraklasa.org/page/rules"
+    },
+    {
+      "text": "Polityka prywatności",
+      "url": "https://fantasy.ekstraklasa.org/page/policy"
+    },
+    {
+      "text": "Punktacja i zasady",
+      "url": "https://fantasy.ekstraklasa.org/page/howto"
+    },
+    {
+      "text": "Kontakt",
+      "url": "https://fantasy.ekstraklasa.org/page/contact"
+    },
+    {
+      "text": "",
+      "url": "https://fantasy.ekstraklasa.org/premium"
+    },
+    {
+      "text": "Więcej",
+      "url": "https://fantasy.ekstraklasa.org/"
+    },
+    {
+      "text": "Dostosuj\n                                    zgody",
+      "url": "https://fantasy.ekstraklasa.org/"
+    },
+    {
+      "text": "Dostosuj\n                                    zgody",
+      "url": "https://fantasy.ekstraklasa.org/"
+    },
+    {
+      "text": "Dostosuj\n                                    zgody",
+      "url": "https://fantasy.ekstraklasa.org/"
+    },
+    {
+      "text": "AKCEPTUJ",
+      "url": "https://fantasy.ekstraklasa.org/"
+    },
+    {
+      "text": "ODRZUĆ",
+      "url": "https://fantasy.ekstraklasa.org/"
+    },
+    {
+      "text": "ZAPISZ",
+      "url": "https://fantasy.ekstraklasa.org/"
+    }
+  ],
+  "assets": [
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/vendor/jquery/jquery.min.js?v2.43",
+      "status": 200,
+      "bytes": 85593,
+      "hits": []
+    },
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/vendor/modernizr/modernizr.min.js?v2.43",
+      "status": 200,
+      "bytes": 10333,
+      "hits": []
+    },
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/vendor/jquery.appear/jquery.appear.min.js?v2.43",
+      "status": 200,
+      "bytes": 1584,
+      "hits": []
+    },
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/vendor/jquery.easing/jquery.easing.min.js?v2.43",
+      "status": 200,
+      "bytes": 5144,
+      "hits": []
+    },
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/vendor/jquery-cookie/jquery-cookie.min.js?v2.43",
+      "status": 200,
+      "bytes": 1414,
+      "hits": []
+    },
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/vendor/bootstrap/js/bootstrap.min.js?v2.43",
+      "status": 200,
+      "bytes": 36868,
+      "hits": []
+    },
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/vendor/common/common.min.js?v2.43",
+      "status": 200,
+      "bytes": 18812,
+      "hits": []
+    },
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/vendor/jquery.validation/jquery.validation.min.js?v2.43",
+      "status": 200,
+      "bytes": 21299,
+      "hits": []
+    },
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/vendor/jquery.lazyload/jquery.lazyload.min.js?v2.43",
+      "status": 200,
+      "bytes": 3601,
+      "hits": []
+    },
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/vendor/isotope/jquery.isotope.min.js?v2.43",
+      "status": 200,
+      "bytes": 40858,
+      "hits": []
+    },
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/vendor/owl.carousel/owl.carousel.min.js?v2.43",
+      "status": 200,
+      "bytes": 41419,
+      "hits": [
+        "http://player.vimeo.com/video/",
+        "http://vimeo.com/api/v2/video/"
+      ]
+    },
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/js/theme.js?v2.43",
+      "status": 200,
+      "bytes": 57914,
+      "hits": []
+    },
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/vendor/rs-plugin/js/jquery.themepunch.tools.min.js?v2.43",
+      "status": 200,
+      "bytes": 104767,
+      "hits": []
+    },
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js?v2.43",
+      "status": 200,
+      "bytes": 183458,
+      "hits": [
+        "https://player.vimeo.com/video/"
+      ]
+    },
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/js/views/view.home.js?v2.43",
+      "status": 200,
+      "bytes": 1293,
+      "hits": []
+    },
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/js/custom.js?v2.43",
+      "status": 200,
+      "bytes": 54314,
+      "hits": [
+        "https://$player",
+        "https://fantasy.ekstraklasa.org/stats-player/"
+      ]
+    },
+    {
+      "url": "https://fantasy.ekstraklasa.org/static/js/theme.init.js?v2.43",
+      "status": 200,
+      "bytes": 8813,
+      "hits": []
+    }
+  ],
+  "api_candidates": [
+    "http://vimeo.com/api/v2/video/"
+  ]
+}
