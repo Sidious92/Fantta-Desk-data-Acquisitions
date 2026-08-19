@@ -1,13 +1,13 @@
 {
   "workflow": "Nexus Eredivisie Archive 2025 v1",
   "job_status": "success",
-  "run_id": 32183205275,
+  "run_id": 32285211414,
   "manifest": {
     "schema": "NEXUS_EREDIVISIE_ARCHIVE_2025_V1",
     "status": "PASS",
-    "capture_completed": "2026-08-18T20:36:56.472029+00:00",
+    "capture_completed": "2026-08-19T18:04:12.465777+00:00",
     "archive_repository": "TopMarx/eredivisie",
-    "archive_git_sha": "f15cafbef174ed4263b8e05b4935f0b65aa5cda1",
+    "archive_git_sha": "b1ea374d2b0c75aec35851dbba47bfe562bee44c",
     "archive_path": "data/2025",
     "season": "2025-26",
     "coverage": {
@@ -44,6 +44,6 @@
       "csv_files": 700,
       "total_files": 1467
     },
-    "archive_git_sha": "f15cafbef174ed4263b8e05b4935f0b65aa5cda1"
+    "archive_git_sha": "b1ea374d2b0c75aec35851dbba47bfe562bee44c"
   }
 }
