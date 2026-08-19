@@ -3,7 +3,7 @@
   "protocolVersion": "1.1",
   "status": "TECHNICAL_FAILURE",
   "declaredUse": "CURRENT_PROBE",
-  "capturedAt": "2026-08-19T20:14:12.737841Z",
+  "capturedAt": "2026-08-19T20:15:49.737513Z",
   "technicalFailure": {
     "exitCode": 1,
     "stdoutPath": "probe.stdout.log",
