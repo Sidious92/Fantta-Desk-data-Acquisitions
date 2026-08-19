@@ -1,0 +1,32 @@
+{
+  "schema": "NEXUS_EREDIVISIE_ARCHIVE_2025_ACQUISITION_V1_SUMMARY",
+  "status": "FAIL_CLOSED",
+  "provider": "ESPN Fantasy Voetbal",
+  "competition": "Eredivisie",
+  "season": "2025-26",
+  "source_repository": "TopMarx/eredivisie",
+  "source_path": "data/2025",
+  "source_commit": "b1ea374d2b0c75aec35851dbba47bfe562bee44c",
+  "file_count": 1466,
+  "total_bytes": 37237481,
+  "validation": {
+    "bootstrap_exists": true,
+    "bootstrap_player_count": 693,
+    "bootstrap_team_count": 18,
+    "players_directory_exists": true,
+    "player_json_count": 693,
+    "gameweeks_directory_exists": true,
+    "gameweek_json_count": 0,
+    "csv_directory_exists": true,
+    "csv_count": 7
+  },
+  "governance": {
+    "raw_archive_preserved": true,
+    "archive_season_kept_separate": true,
+    "current_snapshot_overwritten": false,
+    "cross_provider_normalization": false,
+    "missing_value_fill": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
