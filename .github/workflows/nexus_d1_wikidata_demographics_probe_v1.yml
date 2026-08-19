@@ -105,12 +105,14 @@ jobs:
           print(d['status'])
           PY
 
-      - name: Persist compact scientific/technical result and manifest
+      - name: Persist compact result, manifest and technical logs
         run: |
           set -euo pipefail
           mkdir -p .nexus-d1-wikidata-demographics-probe-v1-status
           cp "$OUT/RESULT.json" .nexus-d1-wikidata-demographics-probe-v1-status/RESULT.json
           cp "$OUT/MANIFEST.json" .nexus-d1-wikidata-demographics-probe-v1-status/MANIFEST.json
+          cp "$OUT/probe.stdout.log" .nexus-d1-wikidata-demographics-probe-v1-status/probe.stdout.log || true
+          cp "$OUT/probe.stderr.log" .nexus-d1-wikidata-demographics-probe-v1-status/probe.stderr.log || true
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add .nexus-d1-wikidata-demographics-probe-v1-status
