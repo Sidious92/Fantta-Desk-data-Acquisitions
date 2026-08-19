@@ -1,0 +1,28 @@
+{
+  "schema": "NEXUS_LIGUE1_HISTORICAL_MATCH_PROBE_V3",
+  "observed_source": {
+    "season": 2025,
+    "game_week": 1,
+    "match_id": "mpg_championship_match_2568433"
+  },
+  "request": {
+    "route": "/match-sheet/mpg_championship_match_2568433/match-history",
+    "url": "https://api.mpg.football/fantasy/match-sheet/mpg_championship_match_2568433/match-history",
+    "status": 404,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 195,
+    "sha256": "3cf9c6fe349c6b6157743de8e2e1826c3ecb4663d4de1bbafe79983f4e25e42b"
+  },
+  "governance": {
+    "route_template_source": "frontend-observed-v1",
+    "match_id_source": "historical-calendar-v2-observed-matchesIds",
+    "match_id_guessed": false,
+    "authenticated_surface_accessed": false,
+    "private_user_or_coach_routes_accessed": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  },
+  "json_error": "JSONDecodeError('Expecting value: line 1 column 1 (char 0)')",
+  "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /match-sheet/mpg_championship_match_2568433/match-history</pre>\n</body>\n</html>\n",
+  "status": "FAIL_CLOSED_MATCH_HISTORY"
+}
