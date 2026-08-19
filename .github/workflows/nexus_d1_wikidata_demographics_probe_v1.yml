@@ -1,0 +1,109 @@
+name: Nexus D1 Wikidata Demographics Probe v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-wikidata-demographics-probe-v1/EXECUTE'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: nexus-d1-wikidata-demographics-probe-v1
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      OUT: .nexus-d1-wikidata-demographics-probe-v1/output
+      RELEASE_TAG: nexus-d1-wikidata-demographics-probe-v1
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Fail closed if immutable probe release already exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Immutable D1 probe release already exists: $RELEASE_TAG" >&2
+            exit 1
+          fi
+
+      - name: Run deterministic Wikidata probe
+        run: |
+          set -euo pipefail
+          rm -rf "$OUT"
+          python scripts/nexus-d1-probe-wikidata-demographics-v1.py \
+            --subjects data/nexus-d1/wikidata-demographics-probe-v1/subjects.json \
+            --output "$OUT"
+
+      - name: Assert governance and collision regression
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          d=json.load(open('.nexus-d1-wikidata-demographics-probe-v1/output/RESULT.json'))
+          assert d['declaredUse']=='CURRENT_PROBE'
+          assert d['rules']['fuzzyMatchingUsed'] is False
+          assert d['rules']['computedAgeDerived'] is False
+          assert d['rules']['currentRetrievalImpliesHistoricalAsOf'] is False
+          assert d['rules']['trainingPromotionGranted'] is False
+          assert d['summary']['knownProviderIdReuseRegressionPass'] is True
+          assert d['summary']['mappingStatus'].get('IDENTITY_AMBIGUOUS',0)==0
+          print(d['summary'])
+          PY
+
+      - name: Persist compact result and manifest
+        run: |
+          set -euo pipefail
+          mkdir -p .nexus-d1-wikidata-demographics-probe-v1-status
+          cp "$OUT/RESULT.json" .nexus-d1-wikidata-demographics-probe-v1-status/RESULT.json
+          cp "$OUT/MANIFEST.json" .nexus-d1-wikidata-demographics-probe-v1-status/MANIFEST.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-d1-wikidata-demographics-probe-v1-status
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus: persist D1 Wikidata demographics probe result [skip ci]'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Freeze raw probe in immutable draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tar -C .nexus-d1-wikidata-demographics-probe-v1 -czf nexus-d1-wikidata-demographics-probe-v1.tar.gz output
+          sha256sum nexus-d1-wikidata-demographics-probe-v1.tar.gz > nexus-d1-wikidata-demographics-probe-v1.tar.gz.sha256
+          trap 'gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true' ERR
+          gh release create "$RELEASE_TAG" \
+            --draft \
+            --target "$(git rev-parse HEAD)" \
+            --title 'FantaNexus D1 Wikidata Demographics Probe v1' \
+            --notes 'D1 CURRENT_PROBE only. CC0 Wikidata structured data. No fuzzy mapping, no age derivation, no historical-as-of claim and no training promotion.'
+          gh release upload "$RELEASE_TAG" \
+            nexus-d1-wikidata-demographics-probe-v1.tar.gz \
+            nexus-d1-wikidata-demographics-probe-v1.tar.gz.sha256 \
+            "$OUT/RESULT.json" \
+            "$OUT/MANIFEST.json"
+          trap - ERR
+
+      - name: Upload Actions artifact as secondary transport
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-wikidata-demographics-probe-v1
+          path: .nexus-d1-wikidata-demographics-probe-v1/output/
+          if-no-files-found: error
+          retention-days: 30
