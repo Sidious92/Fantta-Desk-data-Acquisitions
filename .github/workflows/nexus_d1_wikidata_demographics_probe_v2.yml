@@ -1,0 +1,114 @@
+name: Nexus D1 Wikidata Demographics Probe v2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-wikidata-demographics-probe-v2/EXECUTE'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: nexus-d1-wikidata-demographics-probe-v2
+  cancel-in-progress: false
+
+jobs:
+  resolve:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      OUT: .nexus-d1-wikidata-demographics-probe-v2/output
+      RELEASE_TAG: nexus-d1-wikidata-demographics-probe-v2
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Require completed v1 evidence
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          d=json.load(open('.nexus-d1-wikidata-demographics-probe-v1-status/RESULT.json'))
+          assert d['status'] in {'PASS','REVIEW_REQUIRED'}
+          assert d['summary']['subjects']==11
+          assert d['summary']['sourceRequestFailureCount']==0
+          assert d['summary']['knownProviderIdReuseRegressionPass'] is True
+          PY
+
+      - name: Resolve only v1 ambiguities with exact club context
+        run: |
+          set -euo pipefail
+          rm -rf "$OUT"
+          python scripts/nexus-d1-resolve-wikidata-context-v2.py \
+            --input .nexus-d1-wikidata-demographics-probe-v1-status/RESULT.json \
+            --output "$OUT"
+
+      - name: Assert v2 governance
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          d=json.load(open('.nexus-d1-wikidata-demographics-probe-v2/output/RESULT.json'))
+          assert d['declaredUse']=='CURRENT_PROBE'
+          assert d['rules']['fuzzyMatchingUsed'] is False
+          assert d['rules']['dobUsedForIdentitySelection'] is False
+          assert d['rules']['computedAgeDerived'] is False
+          assert d['rules']['currentRetrievalImpliesHistoricalAsOf'] is False
+          assert d['rules']['trainingPromotionGranted'] is False
+          assert d['summary']['knownProviderIdReuseRegressionPass'] is True
+          print(d['status'], d['summary'])
+          PY
+
+      - name: Persist v2 result and manifest
+        run: |
+          set -euo pipefail
+          mkdir -p .nexus-d1-wikidata-demographics-probe-v2-status
+          cp "$OUT/RESULT.json" .nexus-d1-wikidata-demographics-probe-v2-status/RESULT.json
+          cp "$OUT/MANIFEST.json" .nexus-d1-wikidata-demographics-probe-v2-status/MANIFEST.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-d1-wikidata-demographics-probe-v2-status
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus: persist D1 Wikidata demographics probe v2 [skip ci]'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Freeze v2 evidence in immutable draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Immutable D1 v2 release already exists: $RELEASE_TAG" >&2
+            exit 1
+          fi
+          tar -C .nexus-d1-wikidata-demographics-probe-v2 -czf nexus-d1-wikidata-demographics-probe-v2.tar.gz output
+          sha256sum nexus-d1-wikidata-demographics-probe-v2.tar.gz > nexus-d1-wikidata-demographics-probe-v2.tar.gz.sha256
+          trap 'gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true' ERR
+          gh release create "$RELEASE_TAG" \
+            --draft \
+            --target "$(git rev-parse HEAD)" \
+            --title 'FantaNexus D1 Wikidata Demographics Probe v2' \
+            --notes 'Second-stage D1 context disambiguation. Uses exact club context only; DOB is never used to choose identity. CURRENT_PROBE only, no historical-as-of or training promotion.'
+          gh release upload "$RELEASE_TAG" \
+            nexus-d1-wikidata-demographics-probe-v2.tar.gz \
+            nexus-d1-wikidata-demographics-probe-v2.tar.gz.sha256 \
+            "$OUT/RESULT.json" "$OUT/MANIFEST.json"
+          trap - ERR
+
+      - name: Upload secondary Actions artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-wikidata-demographics-probe-v2
+          path: .nexus-d1-wikidata-demographics-probe-v2/output/
+          if-no-files-found: error
+          retention-days: 30
