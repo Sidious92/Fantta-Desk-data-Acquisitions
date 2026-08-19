@@ -1,0 +1,3 @@
+launch=2026-08-19T19:32:00+02:00
+source=.nexus-fotmob-deepstats-contract-v1-status/RESULT.json
+endpoint=/api/data/playerStats
