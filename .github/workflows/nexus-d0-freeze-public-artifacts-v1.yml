@@ -1,0 +1,112 @@
+name: Nexus D0 Public Artifact Freeze v1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d0-freeze-trigger-v1/EXECUTE'
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: nexus-d0-public-freeze-v1
+  cancel-in-progress: false
+
+jobs:
+  freeze:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_TAG: nexus-d0-public-freeze-v1
+      MANIFEST: .nexus-d0-freeze-public-v1/MANIFEST.json
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Fail closed if immutable release already exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Immutable D0 release already exists: $RELEASE_TAG" >&2
+            exit 1
+          fi
+
+      - name: Discover, stage and hash every Nexus acquisition artifact still recoverable
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/nexus-d0-public
+          mkdir -p /tmp/nexus-d0-public
+          python scripts/nexus-d0-freeze-artifacts-v1.py \
+            --repo "$GITHUB_REPOSITORY" \
+            --discover-prefix nexus- \
+            --stage /tmp/nexus-d0-public \
+            --manifest "$MANIFEST" \
+            --release-tag "$RELEASE_TAG"
+
+      - name: Create immutable draft release and upload preservation assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          cleanup() {
+            gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true
+          }
+          trap cleanup ERR
+          gh release create "$RELEASE_TAG" \
+            --draft \
+            --target "$GITHUB_SHA" \
+            --title 'FantaNexus D0 Public Acquisition Freeze v1' \
+            --notes 'Immutable preservation of recoverable Nexus acquisition artifacts from the public data runner. Draft release; no model or F0 scientific promotion is implied.'
+          shopt -s nullglob
+          assets=(/tmp/nexus-d0-public/*.zip)
+          if [ "${#assets[@]}" -gt 0 ]; then
+            for asset in "${assets[@]}"; do
+              gh release upload "$RELEASE_TAG" "$asset"
+            done
+          fi
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('.nexus-d0-freeze-public-v1/MANIFEST.json')
+          d=json.loads(p.read_text())
+          d['status']='FROZEN_IN_IMMUTABLE_DRAFT_RELEASE'
+          for x in d['artifacts']:
+              if x.get('freeze_status')=='STAGED_FOR_IMMUTABLE_RELEASE':
+                  x['freeze_status']='FROZEN_IN_IMMUTABLE_DRAFT_RELEASE'
+          p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n')
+          PY
+          gh release upload "$RELEASE_TAG" "$MANIFEST"
+          trap - ERR
+
+      - name: Persist public freeze manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git checkout -B main origin/main
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$MANIFEST"
+          git commit -m 'ci: persist D0 public artifact freeze manifest v1 [skip ci]'
+          git push origin HEAD:main
+
+      - name: Governance assertions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          d=json.load(open('.nexus-d0-freeze-public-v1/MANIFEST.json'))
+          assert d['governance']['models_modified'] is False
+          assert d['governance']['features_derived'] is False
+          assert d['governance']['normalization_performed'] is False
+          assert d['governance']['f0_scientific_promotion_granted'] is False
+          assert not d['hard_failures']
+          print(d['summary'])
+          PY
