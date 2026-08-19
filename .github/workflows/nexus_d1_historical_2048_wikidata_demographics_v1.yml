@@ -1,0 +1,117 @@
+name: Nexus D1 Historical 2048 Wikidata Demographics v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-historical-2048-wikidata-v1/EXECUTE'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: nexus-d1-historical-2048-wikidata-v1
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      OUT: .nexus-d1-historical-2048-wikidata-v1/output
+      RELEASE_TAG: nexus-d1-historical-2048-wikidata-v1
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Validate minimized historical subject surface
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64,hashlib,json,lzma
+          m=json.load(open('data/nexus-d1/historical-resolved-person-subjects-v1-manifest.json'))
+          xz=base64.b64decode(open('data/nexus-d1/historical-resolved-person-subjects-v1.json.xz.b64').read().strip())
+          raw=lzma.decompress(xz); d=json.loads(raw)
+          assert hashlib.sha256(xz).hexdigest()==m['payload']['xzSha256']
+          assert hashlib.sha256(raw).hexdigest()==m['payload']['decodedJsonSha256']
+          assert len(d['subjects'])==2048
+          assert m['privacyMinimization']['performanceStatisticsTransferred'] is False
+          assert m['surfacePolicy']['knownFantacalcioId65CollisionPreserved'] is True
+          print(m['source'])
+          PY
+
+      - name: Acquire historical resolved-person identity and DOB evidence
+        run: |
+          set -euo pipefail
+          rm -rf "$OUT"
+          python scripts/nexus-d1-acquire-historical-wikidata-demographics-v1.py \
+            --subjects-b64 data/nexus-d1/historical-resolved-person-subjects-v1.json.xz.b64 \
+            --manifest data/nexus-d1/historical-resolved-person-subjects-v1-manifest.json \
+            --output "$OUT"
+
+      - name: Assert D1 governance
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          d=json.load(open('.nexus-d1-historical-2048-wikidata-v1/output/RESULT.json'))
+          assert d['subjectSurface']['count']==2048
+          assert d['rules']['fuzzyMatchingUsed'] is False
+          assert d['rules']['dobUsedForIdentitySelection'] is False
+          assert d['rules']['computedAgeDerived'] is False
+          assert d['rules']['currentRetrievalImpliesHistoricalAsOf'] is False
+          assert d['rules']['trainingPromotionGranted'] is False
+          assert d['rules']['requestFailureCanBecomeMissingIdentity'] is False
+          print(json.dumps(d['summary'],indent=2))
+          PY
+
+      - name: Persist compact result and manifest
+        run: |
+          set -euo pipefail
+          mkdir -p .nexus-d1-historical-2048-wikidata-v1-status
+          cp "$OUT/RESULT.json" .nexus-d1-historical-2048-wikidata-v1-status/RESULT.json
+          cp "$OUT/MANIFEST.json" .nexus-d1-historical-2048-wikidata-v1-status/MANIFEST.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-d1-historical-2048-wikidata-v1-status
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus: persist D1 historical 2048 Wikidata coverage [skip ci]'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Freeze historical acquisition evidence in immutable draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Immutable D1 historical release already exists: $RELEASE_TAG" >&2
+            exit 1
+          fi
+          tar -C .nexus-d1-historical-2048-wikidata-v1 -czf nexus-d1-historical-2048-wikidata-v1.tar.gz output
+          sha256sum nexus-d1-historical-2048-wikidata-v1.tar.gz > nexus-d1-historical-2048-wikidata-v1.tar.gz.sha256
+          trap 'gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true' ERR
+          gh release create "$RELEASE_TAG" \
+            --draft \
+            --target "$(git rev-parse HEAD)" \
+            --title 'FantaNexus D1 Historical 2048 Wikidata Demographics v1' \
+            --notes 'Historical resolved-person D1 current-retrieval coverage evidence. No performance stats, fuzzy matching, age derivation, historical-as-of claim or training promotion. The 445 historically unresolved Fantacalcio IDs remain a separate explicit gap.'
+          gh release upload "$RELEASE_TAG" nexus-d1-historical-2048-wikidata-v1.tar.gz nexus-d1-historical-2048-wikidata-v1.tar.gz.sha256 "$OUT/RESULT.json" "$OUT/MANIFEST.json"
+          trap - ERR
+
+      - name: Upload secondary Actions artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-historical-2048-wikidata-v1
+          path: .nexus-d1-historical-2048-wikidata-v1/output/
+          if-no-files-found: error
+          retention-days: 30
