@@ -1,15 +1,16 @@
 {
   "schema": "NEXUS_D1_WIKIDATA_DEMOGRAPHICS_PROBE_MANIFEST_V1",
+  "generatedAt": "2026-08-19T20:18:29.594153Z",
   "files": [
     {
       "path": "RESULT.json",
-      "size": 550,
-      "sha256": "d456e9636cabdf9c7ae36b5d0c72d24111ddd30ace10e33d10377155ecaae4bf"
+      "size": 18721,
+      "sha256": "b953a3ed6ecce37ec2b66b8af1a5665f8cc9ecf9edac8382829ffb8a5367f76b"
     },
     {
       "path": "probe.stderr.log",
-      "size": 817,
-      "sha256": "026854c615308510939aa92b4746318190bfb1bbae7676ffd2631cf27339baef"
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "path": "probe.stdout.log",
@@ -17,24 +18,59 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
-      "path": "raw/entities/Q16147481.json",
+      "path": "raw/entity-batches/current-fc-133--Lukasz_Skorupski.json",
+      "size": 41198,
+      "sha256": "8fd103438a2dcf4ab701d9579ffad95fcf3dd4f9d673e57302d3044a591cdf85"
+    },
+    {
+      "path": "raw/entity-batches/current-fc-3--Boris_Radunovic.json",
+      "size": 21439,
+      "sha256": "c64fbb1303193340876a6ec2bdbf15591b674ce39f6565b27bca3d3578229aa4"
+    },
+    {
+      "path": "raw/entity-batches/current-fc-4409--Amir_Rrahmani.json",
       "size": 40603,
       "sha256": "2abb97e17a3bdacc9d2f01cb6297f27112411ea61145a8ab90a95460700a6a3a"
     },
     {
-      "path": "raw/entities/Q16223252.json",
-      "size": 33787,
-      "sha256": "800f8ae8bc94d6f080b030ab0820727aef9229cad8b16beff89035c4beeea773"
+      "path": "raw/entity-batches/current-fc-4964--Guglielmo_Vicario.json",
+      "size": 34594,
+      "sha256": "304b75a5551a5f985df27864e9efc38414b4303a6c8ce279501546171280fefd"
     },
     {
-      "path": "raw/entities/Q16239746.json",
-      "size": 21364,
-      "sha256": "1854249b911a76664555afe143663001cad15ac1f472745c8710d5576895edea"
+      "path": "raw/entity-batches/current-fc-5982--Djed_Spence.json",
+      "size": 35068,
+      "sha256": "00315457fa5682165c8aecacb1eb1f6022361271ebbd8012e6ac8922555ed59e"
     },
     {
-      "path": "raw/entities/Q8080968.json",
-      "size": 41054,
-      "sha256": "561b9b4c94ca1b6c8717499577f3d687aa013e5bfba3fa4f47d43413741d76bb"
+      "path": "raw/entity-batches/current-fc-6397--Goncalo_Ramos.json",
+      "size": 58165,
+      "sha256": "b8038e76faba934160b58cbc9aef94103f79d9c570decaf493b5f2864b997768"
+    },
+    {
+      "path": "raw/entity-batches/current-fc-7213--Matija_Frigan.json",
+      "size": 12054,
+      "sha256": "5e9cea8dea092c266849c32dd5d7db6a0094c362334281fc29b1cef6943af34a"
+    },
+    {
+      "path": "raw/entity-batches/current-fc-7449--Albion_Rrahmani.json",
+      "size": 17291,
+      "sha256": "b981d0eabe5b6508646d9159289cf373cbe8bdedc359f41114018b6d9097bc20"
+    },
+    {
+      "path": "raw/entity-batches/current-fc-7529--Konstantinos_Koulierakis.json",
+      "size": 13928,
+      "sha256": "0dd31458dacb6d721b198fe988fcca61d9123ba0413377f984babd2bf568ad62"
+    },
+    {
+      "path": "raw/entity-batches/historical-fc-65-marco--Marco_Mancosu.json",
+      "size": 39311,
+      "sha256": "7a49ec53ca79570c627b7b2f64b435bbdf9ea34ae451d8b088e7f81dc0363ea6"
+    },
+    {
+      "path": "raw/entity-batches/historical-fc-65-matteo--Matteo_Mancosu.json",
+      "size": 33862,
+      "sha256": "b138d170f88d4ed3deebd474583f4130022b1c35799df175fc7a06b634979c19"
     },
     {
       "path": "raw/search/current-fc-133--Lukasz_Skorupski.json",
@@ -62,11 +98,51 @@
       "sha256": "a9c2d66a2e565e8000dd666a5a82e3f131ea0c967baac0c546f03a77e865245d"
     },
     {
+      "path": "raw/search/current-fc-4964--Guglielmo_Vicario.json",
+      "size": 563,
+      "sha256": "f4f66bd02f3104f04f72fef2d620a2f233ce0bcb82d9f9db9651128657a6a719"
+    },
+    {
+      "path": "raw/search/current-fc-5982--Djed_Spence.json",
+      "size": 515,
+      "sha256": "c98d9a2876b6c23a001f31a81f02c8064cf013a15600f4db16b4bb336fc57aba"
+    },
+    {
+      "path": "raw/search/current-fc-6397--Gon_alo_Ramos.json",
+      "size": 982,
+      "sha256": "284431d26f7ece6967645f3c741c8a16d60aced2234faf0405215578ed38d57c"
+    },
+    {
+      "path": "raw/search/current-fc-6397--Goncalo_Ramos.json",
+      "size": 981,
+      "sha256": "2902f0ff3d47a7081e460f7bd654fe03a73549d3bb9ce0e1a7cba6b32a4cb9d5"
+    },
+    {
+      "path": "raw/search/current-fc-7213--Matija_Frigan.json",
+      "size": 496,
+      "sha256": "50612815e1a6a7e30ccb0fa83d3bb7605c0fdbc79ce62e6a3357302f5ab30f14"
+    },
+    {
+      "path": "raw/search/current-fc-7449--Albion_Rrahmani.json",
+      "size": 536,
+      "sha256": "fb6af6f78f47bd94ca8ec33bf614907c3a039025fa16a745007e9ef11b206def"
+    },
+    {
+      "path": "raw/search/current-fc-7529--Konstantinos_Koulierakis.json",
+      "size": 534,
+      "sha256": "83fafad172f6b8f49bfb96a5767d8aee83277280b33a9451fa50ecd041870713"
+    },
+    {
+      "path": "raw/search/historical-fc-65-marco--Marco_Mancosu.json",
+      "size": 518,
+      "sha256": "ddf8bbcdec1e5bf1070f6ca26961c4f5ec545aeeee0fd2efb84934143d34e5f0"
+    },
+    {
       "path": "raw/search/historical-fc-65-matteo--Matteo_Mancosu.json",
       "size": 517,
       "sha256": "31155c1d39cef1572f5737558eac68a436fa7d95cc0f8bc9c4a3f3e4a0ffc639"
     }
   ],
-  "fileCount": 13,
-  "canonicalContentSha256": "822ddd46851881db3199ec104e7c6a791a87c11087a65848f4e947fe3f6cf7d8"
+  "fileCount": 28,
+  "canonicalContentSha256": "d472467df2c663f2f085152a25fcd144efee1a2c37d44ecc8538ad03330bd819"
 }

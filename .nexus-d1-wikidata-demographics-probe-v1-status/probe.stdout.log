@@ -1,0 +1,16 @@
+{
+  "subjects": 11,
+  "probeStatus": {
+    "EVALUATED": 11
+  },
+  "mappingStatus": {
+    "IDENTITY_VERIFIED": 10,
+    "IDENTITY_AMBIGUOUS": 1
+  },
+  "dobStatus": {
+    "DOB_VERIFIED": 10,
+    "IDENTITY_UNRESOLVED": 1
+  },
+  "sourceRequestFailureCount": 0,
+  "knownProviderIdReuseRegressionPass": true
+}

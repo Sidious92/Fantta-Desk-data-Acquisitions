@@ -1,21 +1,555 @@
 {
   "schema": "NEXUS_D1_WIKIDATA_DEMOGRAPHICS_PROBE_RESULT_V1",
+  "probeImplementationVersion": "1.1",
   "protocolVersion": "1.1",
-  "status": "TECHNICAL_FAILURE",
+  "status": "REVIEW_REQUIRED",
   "declaredUse": "CURRENT_PROBE",
-  "capturedAt": "2026-08-19T20:15:49.737513Z",
-  "technicalFailure": {
-    "exitCode": 1,
-    "stdoutPath": "probe.stdout.log",
-    "stderrPath": "probe.stderr.log"
+  "capturedAt": "2026-08-19T20:18:06.244405Z",
+  "source": {
+    "provider": "Wikidata",
+    "api": "https://www.wikidata.org/w/api.php",
+    "license": "CC0 structured data",
+    "queryMethods": [
+      "wbsearchentities",
+      "wbgetentities batch"
+    ]
   },
   "rules": {
     "fuzzyMatchingUsed": false,
     "computedAgeDerived": false,
     "currentRetrievalImpliesHistoricalAsOf": false,
-    "trainingPromotionGranted": false
+    "trainingPromotionGranted": false,
+    "exactMapping": "normalized exact label/alias + human Q5 + association football player Q937857; exactly one entity",
+    "requestFailureCanBecomeMissingIdentity": false
   },
   "summary": {
-    "subjectsEvaluated": 0
-  }
+    "subjects": 11,
+    "probeStatus": {
+      "EVALUATED": 11
+    },
+    "mappingStatus": {
+      "IDENTITY_VERIFIED": 10,
+      "IDENTITY_AMBIGUOUS": 1
+    },
+    "dobStatus": {
+      "DOB_VERIFIED": 10,
+      "IDENTITY_UNRESOLVED": 1
+    },
+    "sourceRequestFailureCount": 0,
+    "knownProviderIdReuseRegressionPass": true
+  },
+  "records": [
+    {
+      "subjectId": "current-fc-133",
+      "lookupNames": [
+        "Lukasz Skorupski",
+        "Łukasz Skorupski"
+      ],
+      "fantacalcioSourcePlayerId": "133",
+      "bridgePersonKey": "understat:1305",
+      "contextClubs": [
+        "Bologna"
+      ],
+      "cohort": "CURRENT_RESOLVED_ESTABLISHED",
+      "probeStatus": "EVALUATED",
+      "mappingStatus": "IDENTITY_VERIFIED",
+      "mappingMethod": "EXACT_LABEL_OR_ALIAS_UNIQUE_HUMAN_FOOTBALLER",
+      "wikidataItemId": "Q8080968",
+      "wikidataLastRevisionId": 2530894316,
+      "wikidataModified": "2026-08-13T13:37:41Z",
+      "dateOfBirthStatus": "DOB_VERIFIED",
+      "dateOfBirth": {
+        "statementGuid": "Q8080968$09D29514-2909-4392-9550-52B682F846BF",
+        "rank": "normal",
+        "time": "+1991-05-05T00:00:00Z",
+        "precision": 11,
+        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+      },
+      "allDobStatements": [
+        {
+          "statementGuid": "Q8080968$09D29514-2909-4392-9550-52B682F846BF",
+          "rank": "normal",
+          "time": "+1991-05-05T00:00:00Z",
+          "precision": 11,
+          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+        }
+      ],
+      "historicalAdmissibility": "NOT_ESTABLISHED_CURRENT_PROBE",
+      "searchEvidence": [
+        {
+          "lookup": "Lukasz Skorupski",
+          "path": "raw/search/current-fc-133--Lukasz_Skorupski.json",
+          "sha256": "acebfbd8ea61b4a3e6ceb71410216c303d2f5af8154358eb21bf490643d027cf",
+          "returned": 1
+        },
+        {
+          "lookup": "Łukasz Skorupski",
+          "path": "raw/search/current-fc-133--ukasz_Skorupski.json",
+          "sha256": "cfce9a97f9f078279ce15d680f4d2da88359a372038839418c6408172c17383b",
+          "returned": 1
+        }
+      ],
+      "requestFailures": []
+    },
+    {
+      "subjectId": "current-fc-3",
+      "lookupNames": [
+        "Boris Radunovic",
+        "Boris Radunović"
+      ],
+      "fantacalcioSourcePlayerId": "3",
+      "bridgePersonKey": "understat:1926",
+      "contextClubs": [
+        "Cagliari"
+      ],
+      "cohort": "CURRENT_RESOLVED_RETURNING",
+      "probeStatus": "EVALUATED",
+      "mappingStatus": "IDENTITY_VERIFIED",
+      "mappingMethod": "EXACT_LABEL_OR_ALIAS_UNIQUE_HUMAN_FOOTBALLER",
+      "wikidataItemId": "Q16239746",
+      "wikidataLastRevisionId": 2475862097,
+      "wikidataModified": "2026-03-28T14:26:59Z",
+      "dateOfBirthStatus": "DOB_VERIFIED",
+      "dateOfBirth": {
+        "statementGuid": "Q16239746$A5B7AD40-CFAB-4A8F-88BA-6675B5211A06",
+        "rank": "normal",
+        "time": "+1996-05-26T00:00:00Z",
+        "precision": 11,
+        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+      },
+      "allDobStatements": [
+        {
+          "statementGuid": "Q16239746$A5B7AD40-CFAB-4A8F-88BA-6675B5211A06",
+          "rank": "normal",
+          "time": "+1996-05-26T00:00:00Z",
+          "precision": 11,
+          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+        }
+      ],
+      "historicalAdmissibility": "NOT_ESTABLISHED_CURRENT_PROBE",
+      "searchEvidence": [
+        {
+          "lookup": "Boris Radunovic",
+          "path": "raw/search/current-fc-3--Boris_Radunovic.json",
+          "sha256": "4bb6b38b06c2bdf9e96fe352484d20a654851dbc1862084528ad606a13f4bfd9",
+          "returned": 1
+        },
+        {
+          "lookup": "Boris Radunović",
+          "path": "raw/search/current-fc-3--Boris_Radunovi.json",
+          "sha256": "b516bc4ac99445d7004a94bc00c5ec32b2b68ed275f35d7da0303604d0d9f747",
+          "returned": 1
+        }
+      ],
+      "requestFailures": []
+    },
+    {
+      "subjectId": "current-fc-4409",
+      "lookupNames": [
+        "Amir Rrahmani"
+      ],
+      "fantacalcioSourcePlayerId": "4409",
+      "bridgePersonKey": "understat:7924",
+      "contextClubs": [
+        "Napoli"
+      ],
+      "cohort": "CURRENT_RESOLVED_ESTABLISHED",
+      "probeStatus": "EVALUATED",
+      "mappingStatus": "IDENTITY_VERIFIED",
+      "mappingMethod": "EXACT_LABEL_OR_ALIAS_UNIQUE_HUMAN_FOOTBALLER",
+      "wikidataItemId": "Q16147481",
+      "wikidataLastRevisionId": 2529361713,
+      "wikidataModified": "2026-08-09T21:38:46Z",
+      "dateOfBirthStatus": "DOB_VERIFIED",
+      "dateOfBirth": {
+        "statementGuid": "Q16147481$E4B55004-D225-4908-9610-59C659563316",
+        "rank": "normal",
+        "time": "+1994-02-24T00:00:00Z",
+        "precision": 11,
+        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+      },
+      "allDobStatements": [
+        {
+          "statementGuid": "Q16147481$E4B55004-D225-4908-9610-59C659563316",
+          "rank": "normal",
+          "time": "+1994-02-24T00:00:00Z",
+          "precision": 11,
+          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+        }
+      ],
+      "historicalAdmissibility": "NOT_ESTABLISHED_CURRENT_PROBE",
+      "searchEvidence": [
+        {
+          "lookup": "Amir Rrahmani",
+          "path": "raw/search/current-fc-4409--Amir_Rrahmani.json",
+          "sha256": "a9c2d66a2e565e8000dd666a5a82e3f131ea0c967baac0c546f03a77e865245d",
+          "returned": 1
+        }
+      ],
+      "requestFailures": []
+    },
+    {
+      "subjectId": "historical-fc-65-matteo",
+      "lookupNames": [
+        "Matteo Mancosu"
+      ],
+      "fantacalcioSourcePlayerId": "65",
+      "bridgePersonKey": "understat:1981",
+      "contextClubs": [
+        "Carpi"
+      ],
+      "cohort": "HISTORICAL_PROVIDER_ID_REUSE_REGRESSION",
+      "probeStatus": "EVALUATED",
+      "mappingStatus": "IDENTITY_VERIFIED",
+      "mappingMethod": "EXACT_LABEL_OR_ALIAS_UNIQUE_HUMAN_FOOTBALLER",
+      "wikidataItemId": "Q16223252",
+      "wikidataLastRevisionId": 2529468849,
+      "wikidataModified": "2026-08-10T04:31:29Z",
+      "dateOfBirthStatus": "DOB_VERIFIED",
+      "dateOfBirth": {
+        "statementGuid": "Q16223252$08031CBA-D77F-46FC-B92A-8AA13AE7BEF9",
+        "rank": "normal",
+        "time": "+1984-12-22T00:00:00Z",
+        "precision": 11,
+        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+      },
+      "allDobStatements": [
+        {
+          "statementGuid": "Q16223252$08031CBA-D77F-46FC-B92A-8AA13AE7BEF9",
+          "rank": "normal",
+          "time": "+1984-12-22T00:00:00Z",
+          "precision": 11,
+          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+        }
+      ],
+      "historicalAdmissibility": "NOT_ESTABLISHED_CURRENT_PROBE",
+      "searchEvidence": [
+        {
+          "lookup": "Matteo Mancosu",
+          "path": "raw/search/historical-fc-65-matteo--Matteo_Mancosu.json",
+          "sha256": "31155c1d39cef1572f5737558eac68a436fa7d95cc0f8bc9c4a3f3e4a0ffc639",
+          "returned": 1
+        }
+      ],
+      "requestFailures": []
+    },
+    {
+      "subjectId": "historical-fc-65-marco",
+      "lookupNames": [
+        "Marco Mancosu"
+      ],
+      "fantacalcioSourcePlayerId": "65",
+      "bridgePersonKey": "understat:7973",
+      "contextClubs": [
+        "Lecce",
+        "Cagliari"
+      ],
+      "cohort": "HISTORICAL_PROVIDER_ID_REUSE_REGRESSION",
+      "probeStatus": "EVALUATED",
+      "mappingStatus": "IDENTITY_VERIFIED",
+      "mappingMethod": "EXACT_LABEL_OR_ALIAS_UNIQUE_HUMAN_FOOTBALLER",
+      "wikidataItemId": "Q3846249",
+      "wikidataLastRevisionId": 2408215094,
+      "wikidataModified": "2025-09-22T04:54:38Z",
+      "dateOfBirthStatus": "DOB_VERIFIED",
+      "dateOfBirth": {
+        "statementGuid": "Q3846249$7BFF86BF-A747-465C-BACC-3D500EA9708B",
+        "rank": "normal",
+        "time": "+1988-08-22T00:00:00Z",
+        "precision": 11,
+        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+      },
+      "allDobStatements": [
+        {
+          "statementGuid": "Q3846249$7BFF86BF-A747-465C-BACC-3D500EA9708B",
+          "rank": "normal",
+          "time": "+1988-08-22T00:00:00Z",
+          "precision": 11,
+          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+        }
+      ],
+      "historicalAdmissibility": "NOT_ESTABLISHED_CURRENT_PROBE",
+      "searchEvidence": [
+        {
+          "lookup": "Marco Mancosu",
+          "path": "raw/search/historical-fc-65-marco--Marco_Mancosu.json",
+          "sha256": "ddf8bbcdec1e5bf1070f6ca26961c4f5ec545aeeee0fd2efb84934143d34e5f0",
+          "returned": 1
+        }
+      ],
+      "requestFailures": []
+    },
+    {
+      "subjectId": "current-fc-7213",
+      "lookupNames": [
+        "Matija Frigan"
+      ],
+      "fantacalcioSourcePlayerId": "7213",
+      "bridgePersonKey": null,
+      "contextClubs": [
+        "Parma"
+      ],
+      "cohort": "CURRENT_IDENTITY_UNRESOLVED",
+      "probeStatus": "EVALUATED",
+      "mappingStatus": "IDENTITY_VERIFIED",
+      "mappingMethod": "EXACT_LABEL_OR_ALIAS_UNIQUE_HUMAN_FOOTBALLER",
+      "wikidataItemId": "Q111344591",
+      "wikidataLastRevisionId": 2531446016,
+      "wikidataModified": "2026-08-14T20:05:14Z",
+      "dateOfBirthStatus": "DOB_VERIFIED",
+      "dateOfBirth": {
+        "statementGuid": "Q111344591$f7cc21d1-f27b-4078-8769-7933c47ec1d5",
+        "rank": "normal",
+        "time": "+2003-02-11T00:00:00Z",
+        "precision": 11,
+        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+      },
+      "allDobStatements": [
+        {
+          "statementGuid": "Q111344591$f7cc21d1-f27b-4078-8769-7933c47ec1d5",
+          "rank": "normal",
+          "time": "+2003-02-11T00:00:00Z",
+          "precision": 11,
+          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+        }
+      ],
+      "historicalAdmissibility": "NOT_ESTABLISHED_CURRENT_PROBE",
+      "searchEvidence": [
+        {
+          "lookup": "Matija Frigan",
+          "path": "raw/search/current-fc-7213--Matija_Frigan.json",
+          "sha256": "50612815e1a6a7e30ccb0fa83d3bb7605c0fdbc79ce62e6a3357302f5ab30f14",
+          "returned": 1
+        }
+      ],
+      "requestFailures": []
+    },
+    {
+      "subjectId": "current-fc-6397",
+      "lookupNames": [
+        "Goncalo Ramos",
+        "Gonçalo Ramos"
+      ],
+      "fantacalcioSourcePlayerId": "6397",
+      "bridgePersonKey": null,
+      "contextClubs": [
+        "Milan"
+      ],
+      "cohort": "CURRENT_NEW_SOURCE_ID",
+      "probeStatus": "EVALUATED",
+      "mappingStatus": "IDENTITY_AMBIGUOUS",
+      "mappingMethod": null,
+      "wikidataCandidateIds": [
+        "Q16233821",
+        "Q60621615"
+      ],
+      "dateOfBirthStatus": "IDENTITY_UNRESOLVED",
+      "dateOfBirth": null,
+      "historicalAdmissibility": "NOT_ESTABLISHED_CURRENT_PROBE",
+      "missingReason": "MAPPING_UNRESOLVED",
+      "searchEvidence": [
+        {
+          "lookup": "Goncalo Ramos",
+          "path": "raw/search/current-fc-6397--Goncalo_Ramos.json",
+          "sha256": "2902f0ff3d47a7081e460f7bd654fe03a73549d3bb9ce0e1a7cba6b32a4cb9d5",
+          "returned": 2
+        },
+        {
+          "lookup": "Gonçalo Ramos",
+          "path": "raw/search/current-fc-6397--Gon_alo_Ramos.json",
+          "sha256": "284431d26f7ece6967645f3c741c8a16d60aced2234faf0405215578ed38d57c",
+          "returned": 2
+        }
+      ],
+      "requestFailures": []
+    },
+    {
+      "subjectId": "current-fc-7449",
+      "lookupNames": [
+        "Albion Rrahmani"
+      ],
+      "fantacalcioSourcePlayerId": "7449",
+      "bridgePersonKey": null,
+      "contextClubs": [
+        "Venezia"
+      ],
+      "cohort": "CURRENT_NEW_SOURCE_ID",
+      "probeStatus": "EVALUATED",
+      "mappingStatus": "IDENTITY_VERIFIED",
+      "mappingMethod": "EXACT_LABEL_OR_ALIAS_UNIQUE_HUMAN_FOOTBALLER",
+      "wikidataItemId": "Q121271905",
+      "wikidataLastRevisionId": 2530909925,
+      "wikidataModified": "2026-08-13T14:53:47Z",
+      "dateOfBirthStatus": "DOB_VERIFIED",
+      "dateOfBirth": {
+        "statementGuid": "Q121271905$3ceae96c-0aad-48f7-afc6-9b38442a9e11",
+        "rank": "normal",
+        "time": "+2000-08-31T00:00:00Z",
+        "precision": 11,
+        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+      },
+      "allDobStatements": [
+        {
+          "statementGuid": "Q121271905$3ceae96c-0aad-48f7-afc6-9b38442a9e11",
+          "rank": "normal",
+          "time": "+2000-08-31T00:00:00Z",
+          "precision": 11,
+          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+        }
+      ],
+      "historicalAdmissibility": "NOT_ESTABLISHED_CURRENT_PROBE",
+      "searchEvidence": [
+        {
+          "lookup": "Albion Rrahmani",
+          "path": "raw/search/current-fc-7449--Albion_Rrahmani.json",
+          "sha256": "fb6af6f78f47bd94ca8ec33bf614907c3a039025fa16a745007e9ef11b206def",
+          "returned": 1
+        }
+      ],
+      "requestFailures": []
+    },
+    {
+      "subjectId": "current-fc-7529",
+      "lookupNames": [
+        "Konstantinos Koulierakis"
+      ],
+      "fantacalcioSourcePlayerId": "7529",
+      "bridgePersonKey": null,
+      "contextClubs": [
+        "Roma"
+      ],
+      "cohort": "CURRENT_NEW_SOURCE_ID",
+      "probeStatus": "EVALUATED",
+      "mappingStatus": "IDENTITY_VERIFIED",
+      "mappingMethod": "EXACT_LABEL_OR_ALIAS_UNIQUE_HUMAN_FOOTBALLER",
+      "wikidataItemId": "Q109605287",
+      "wikidataLastRevisionId": 2528161040,
+      "wikidataModified": "2026-08-06T15:38:37Z",
+      "dateOfBirthStatus": "DOB_VERIFIED",
+      "dateOfBirth": {
+        "statementGuid": "Q109605287$D4CCB430-CD23-4829-87E6-93575CCDCF93",
+        "rank": "preferred",
+        "time": "+2003-11-28T00:00:00Z",
+        "precision": 11,
+        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+      },
+      "allDobStatements": [
+        {
+          "statementGuid": "Q109605287$b625f1ae-08ca-4c95-a8bb-680890dbe830",
+          "rank": "normal",
+          "time": "+2003-00-00T00:00:00Z",
+          "precision": 9,
+          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+        },
+        {
+          "statementGuid": "Q109605287$D4CCB430-CD23-4829-87E6-93575CCDCF93",
+          "rank": "preferred",
+          "time": "+2003-11-28T00:00:00Z",
+          "precision": 11,
+          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+        }
+      ],
+      "historicalAdmissibility": "NOT_ESTABLISHED_CURRENT_PROBE",
+      "searchEvidence": [
+        {
+          "lookup": "Konstantinos Koulierakis",
+          "path": "raw/search/current-fc-7529--Konstantinos_Koulierakis.json",
+          "sha256": "83fafad172f6b8f49bfb96a5767d8aee83277280b33a9451fa50ecd041870713",
+          "returned": 1
+        }
+      ],
+      "requestFailures": []
+    },
+    {
+      "subjectId": "current-fc-5982",
+      "lookupNames": [
+        "Djed Spence",
+        "Djed Spence"
+      ],
+      "fantacalcioSourcePlayerId": "5982",
+      "bridgePersonKey": null,
+      "contextClubs": [
+        "Inter"
+      ],
+      "cohort": "CURRENT_NEW_SOURCE_ID",
+      "probeStatus": "EVALUATED",
+      "mappingStatus": "IDENTITY_VERIFIED",
+      "mappingMethod": "EXACT_LABEL_OR_ALIAS_UNIQUE_HUMAN_FOOTBALLER",
+      "wikidataItemId": "Q56222532",
+      "wikidataLastRevisionId": 2533383460,
+      "wikidataModified": "2026-08-19T19:50:09Z",
+      "dateOfBirthStatus": "DOB_VERIFIED",
+      "dateOfBirth": {
+        "statementGuid": "Q56222532$DC754C2E-8F23-4CA7-9816-F1181406AD28",
+        "rank": "normal",
+        "time": "+2000-08-09T00:00:00Z",
+        "precision": 11,
+        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+      },
+      "allDobStatements": [
+        {
+          "statementGuid": "Q56222532$DC754C2E-8F23-4CA7-9816-F1181406AD28",
+          "rank": "normal",
+          "time": "+2000-08-09T00:00:00Z",
+          "precision": 11,
+          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+        }
+      ],
+      "historicalAdmissibility": "NOT_ESTABLISHED_CURRENT_PROBE",
+      "searchEvidence": [
+        {
+          "lookup": "Djed Spence",
+          "path": "raw/search/current-fc-5982--Djed_Spence.json",
+          "sha256": "c98d9a2876b6c23a001f31a81f02c8064cf013a15600f4db16b4bb336fc57aba",
+          "returned": 1
+        }
+      ],
+      "requestFailures": []
+    },
+    {
+      "subjectId": "current-fc-4964",
+      "lookupNames": [
+        "Guglielmo Vicario"
+      ],
+      "fantacalcioSourcePlayerId": "4964",
+      "bridgePersonKey": null,
+      "contextClubs": [
+        "Juventus"
+      ],
+      "cohort": "CURRENT_NEW_SOURCE_ID",
+      "probeStatus": "EVALUATED",
+      "mappingStatus": "IDENTITY_VERIFIED",
+      "mappingMethod": "EXACT_LABEL_OR_ALIAS_UNIQUE_HUMAN_FOOTBALLER",
+      "wikidataItemId": "Q44083681",
+      "wikidataLastRevisionId": 2533136234,
+      "wikidataModified": "2026-08-19T10:00:00Z",
+      "dateOfBirthStatus": "DOB_VERIFIED",
+      "dateOfBirth": {
+        "statementGuid": "Q44083681$33E5957A-C6F8-4B9B-89C0-CACF9A327644",
+        "rank": "normal",
+        "time": "+1996-10-07T00:00:00Z",
+        "precision": 11,
+        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+      },
+      "allDobStatements": [
+        {
+          "statementGuid": "Q44083681$33E5957A-C6F8-4B9B-89C0-CACF9A327644",
+          "rank": "normal",
+          "time": "+1996-10-07T00:00:00Z",
+          "precision": 11,
+          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+        }
+      ],
+      "historicalAdmissibility": "NOT_ESTABLISHED_CURRENT_PROBE",
+      "searchEvidence": [
+        {
+          "lookup": "Guglielmo Vicario",
+          "path": "raw/search/current-fc-4964--Guglielmo_Vicario.json",
+          "sha256": "f4f66bd02f3104f04f72fef2d620a2f233ce0bcb82d9f9db9651128657a6a719",
+          "returned": 1
+        }
+      ],
+      "requestFailures": []
+    }
+  ]
 }
