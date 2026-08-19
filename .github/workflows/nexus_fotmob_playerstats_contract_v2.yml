@@ -1,0 +1,33 @@
+name: Nexus FotMob PlayerStats Contract v2
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-fotmob-playerstats-contract-v2-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo mkdir -p /mnt/data/nexus-fotmob-playerstats-contract-v2 && sudo chown -R $USER:$USER /mnt/data
+      - run: python scripts/extract_fotmob_playerstats_contract_v2.py
+      - name: Record contract
+        if: always()
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-fotmob-playerstats-contract-v2-status
+          if [ -f /mnt/data/nexus-fotmob-playerstats-contract-v2/CONTRACT.json ]; then
+            cp /mnt/data/nexus-fotmob-playerstats-contract-v2/CONTRACT.json .nexus-fotmob-playerstats-contract-v2-status/CONTRACT.json
+          else
+            printf '{"schema":"NEXUS_FOTMOB_PLAYERSTATS_CONTRACT_EXTRACT_V2","status":"NO_CONTRACT_FILE","run_id":%s}\n' "$GITHUB_RUN_ID" > .nexus-fotmob-playerstats-contract-v2-status/CONTRACT.json
+          fi
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .nexus-fotmob-playerstats-contract-v2-status/CONTRACT.json
+          git commit -m 'ci: record FotMob playerStats contract v2' || exit 0
+          git push origin HEAD:main
