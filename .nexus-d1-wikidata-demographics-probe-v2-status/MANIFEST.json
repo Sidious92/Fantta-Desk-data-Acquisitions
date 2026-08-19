@@ -1,0 +1,23 @@
+{
+  "schema": "NEXUS_D1_WIKIDATA_DEMOGRAPHICS_PROBE_MANIFEST_V2",
+  "generatedAt": "2026-08-19T20:21:59.812575Z",
+  "files": [
+    {
+      "path": "RESULT.json",
+      "size": 25677,
+      "sha256": "4bde4d4fe23d431ed43a2c67976d52b619234e0d7da3ed40abaa702162888aa5"
+    },
+    {
+      "path": "raw/current-fc-6397--candidate-clubs.json",
+      "size": 11612,
+      "sha256": "5a44af42b31221bef7fbe0b1ee6423ceeb401d76ee82d0afbda7856d9bfd9aff"
+    },
+    {
+      "path": "raw/current-fc-6397--candidate-people.json",
+      "size": 56591,
+      "sha256": "69e099fd84435c3be3bbc538748cfe536511d146a5842322a67b37369fd3590d"
+    }
+  ],
+  "fileCount": 3,
+  "canonicalContentSha256": "54f5207959649097aece73c02d0d788e8e1ef6cd702fa99ae4aab2bf62d04150"
+}
