@@ -1,0 +1,176 @@
+{
+  "schema": "NEXUS_FOTMOB_DEEPSTATS_CONTRACT_SUMMARY_V1",
+  "source_schema": "NEXUS_FOTMOB_DEEPSTATS_CONTRACT_PROBE_V1",
+  "source_status": "PASS_DISCOVERY",
+  "page": {
+    "url": "https://www.fotmob.com/players/1190371/matija-frigan",
+    "status": 200,
+    "bytes": 599019,
+    "sha256": "14e80100f0a13fa26c5fdf293a768517cb7795ddb663002a6b1c7a525b370e35"
+  },
+  "declared_script_count": 83,
+  "hit_files": 13,
+  "api_candidates": [
+    "/api/auth/:provider/callback",
+    "/api/contact_us",
+    "/api/data/lineup-builder/team",
+    "/api/data/match/lineup",
+    "/api/data/match/preview",
+    "/api/data/match/shotmap",
+    "/api/data/playerMatches",
+    "/api/data/playerNews?id=",
+    "/api/data/playerStats",
+    "/api/health",
+    "/api/info",
+    "/api/news/feed",
+    "/api/robots-txt",
+    "/api/s3static/ads.txt",
+    "/api/s3static/app-ads.txt",
+    "/api/s3static/law.json",
+    "/api/s3static/tos.txt",
+    "/api/sitemap",
+    "/api/sitemap/:locale",
+    "/api/sitemap/:locale/:item",
+    "/api/sitemap/:locale/:item/:index",
+    "/api/sitemap/:locale/:item/:sub/:index",
+    "/api/sitemap/all-indexes",
+    "/api/well-known/:file",
+    "/api/well-known/apple-app-site-association",
+    "https://pub.fotmob.com/beta/news/api/rumour/all?pageSize=200&daysSince=180&includeContracts=false&minFee=0&orderBy=lastModified&sortOrder=desc&Probabilities="
+  ],
+  "relevant_contexts": [
+    {
+      "url": "https://www.fotmob.com/_next/static/chunks/72689.a4a070aa6c6904d5.js",
+      "needles": [
+        "statSeasons"
+      ],
+      "api_candidates": []
+    },
+    {
+      "url": "https://www.fotmob.com/_next/static/chunks/46282-75299f70ca19d44c.js",
+      "needles": [
+        "playerStats"
+      ],
+      "api_candidates": []
+    },
+    {
+      "url": "https://www.fotmob.com/_next/static/chunks/94515.500474033e1b231a.js",
+      "needles": [
+        "/api/data/player"
+      ],
+      "api_candidates": [
+        "/api/data/playerNews?id="
+      ]
+    },
+    {
+      "url": "https://www.fotmob.com/_next/static/chunks/46886.30eefe12aea0ba61.js",
+      "needles": [
+        "playerStats",
+        "stats?"
+      ],
+      "api_candidates": []
+    },
+    {
+      "url": "https://www.fotmob.com/_next/static/chunks/34031.d95ee0bf4c1daa30.js",
+      "needles": [
+        "/api/data/player",
+        "/api/data/players",
+        "entryId",
+        "playerStats",
+        "seasonStats",
+        "statSeasons",
+        "tournamentId"
+      ],
+      "api_candidates": [
+        "/api/data/playerStats"
+      ]
+    },
+    {
+      "url": "https://www.fotmob.com/_next/static/chunks/36666.b1766bff449de121.js",
+      "needles": [
+        "career",
+        "careerHistory",
+        "seasonStats",
+        "statSeasons",
+        "statistics",
+        "tournamentId"
+      ],
+      "api_candidates": []
+    },
+    {
+      "url": "https://www.fotmob.com/_next/static/chunks/pages/_app-77fb1a53a115133a.js",
+      "needles": [
+        "career",
+        "playerStats"
+      ],
+      "api_candidates": []
+    },
+    {
+      "url": "https://www.fotmob.com/_next/static/chunks/19593-ab3d52ef4a99db2a.js",
+      "needles": [
+        "playerStats",
+        "tournamentId"
+      ],
+      "api_candidates": []
+    },
+    {
+      "url": "https://www.fotmob.com/_next/static/r896ZxsV_byVIoGGHX3Sm/_buildManifest.js",
+      "needles": [
+        "career"
+      ],
+      "api_candidates": [
+        "/api/auth/:provider/callback",
+        "/api/contact_us",
+        "/api/data/lineup-builder/team",
+        "/api/data/match/lineup",
+        "/api/data/match/preview",
+        "/api/data/match/shotmap",
+        "/api/health",
+        "/api/info",
+        "/api/news/feed",
+        "/api/robots-txt",
+        "/api/s3static/ads.txt",
+        "/api/s3static/app-ads.txt",
+        "/api/s3static/law.json",
+        "/api/s3static/tos.txt",
+        "/api/sitemap",
+        "/api/sitemap/:locale",
+        "/api/sitemap/:locale/:item",
+        "/api/sitemap/:locale/:item/:index",
+        "/api/sitemap/:locale/:item/:sub/:index",
+        "/api/sitemap/all-indexes",
+        "/api/well-known/:file",
+        "/api/well-known/apple-app-site-association"
+      ]
+    },
+    {
+      "url": "https://www.fotmob.com/_next/static/chunks/13221-d1781f5a41e0d6a8.js",
+      "needles": [
+        "/api/data/player",
+        "career",
+        "careerHistory",
+        "deepStats",
+        "entryId",
+        "hasDeepStats",
+        "seasonEntries",
+        "seasonStats",
+        "statSeasons",
+        "tournamentId"
+      ],
+      "api_candidates": [
+        "/api/data/playerMatches",
+        "https://pub.fotmob.com/beta/news/api/rumour/all?pageSize=200&daysSince=180&includeContracts=false&minFee=0&orderBy=lastModified&sortOrder=desc&Probabilities="
+      ]
+    }
+  ],
+  "errors_count": 0,
+  "governance": {
+    "only_public_page_declared_assets_requested": true,
+    "discovered_api_endpoints_called": false,
+    "authenticated_surface_accessed": false,
+    "private_routes_accessed": false,
+    "bruteforce_ids": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
