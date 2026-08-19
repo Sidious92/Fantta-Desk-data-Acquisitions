@@ -1,0 +1,33 @@
+name: Nexus Ligue 1 Match History Context v4
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-ligue1-match-history-context-v4-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo mkdir -p /mnt/data/nexus-ligue1-match-history-context-v4 && sudo chown -R $USER:$USER /mnt/data
+      - run: python scripts/extract_ligue1_match_history_context_v4.py
+      - name: Record context
+        if: always()
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-ligue1-match-history-context-v4-status
+          if [ -f /mnt/data/nexus-ligue1-match-history-context-v4/CONTEXT.json ]; then
+            cp /mnt/data/nexus-ligue1-match-history-context-v4/CONTEXT.json .nexus-ligue1-match-history-context-v4-status/CONTEXT.json
+          else
+            printf '{"schema":"NEXUS_LIGUE1_MATCH_HISTORY_CONTEXT_V4","status":"NO_CONTEXT_FILE","run_id":%s}\n' "$GITHUB_RUN_ID" > .nexus-ligue1-match-history-context-v4-status/CONTEXT.json
+          fi
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .nexus-ligue1-match-history-context-v4-status/CONTEXT.json
+          git commit -m 'ci: record Ligue 1 match-history context v4' || exit 0
+          git push origin HEAD:main
