@@ -1,0 +1,103 @@
+{
+  "schema": "NEXUS_FPL_CLONE_CROSSLEAGUE_ACQUISITION_V1_SUMMARY",
+  "providers": [
+    {
+      "provider": "Fantasy Liga Portugal Betclic",
+      "competition": "Liga Portugal Betclic",
+      "key": "liga_portugal",
+      "status": "PASS",
+      "player_count": 625,
+      "profile_success": 625,
+      "profile_failures": 0,
+      "profile_success_rate": 1.0,
+      "history_past_rows": 449,
+      "history_past_season_labels_observed": [
+        "2025/26"
+      ],
+      "current_history_rows": 1162,
+      "bootstrap_http": 200,
+      "fixtures_http": 200
+    },
+    {
+      "provider": "RSL Fantasy",
+      "competition": "Saudi Pro League",
+      "key": "rsl",
+      "status": "PASS",
+      "player_count": 656,
+      "profile_success": 656,
+      "profile_failures": 0,
+      "profile_success_rate": 1.0,
+      "history_past_rows": 1121,
+      "history_past_season_labels_observed": [
+        "2025/26",
+        "2024/25",
+        "2023/24"
+      ],
+      "current_history_rows": 656,
+      "bootstrap_http": 200,
+      "fixtures_http": 200
+    },
+    {
+      "provider": "Fantasy Eliteserien",
+      "competition": "Eliteserien",
+      "key": "eliteserien",
+      "status": "PASS",
+      "player_count": 499,
+      "profile_success": 499,
+      "profile_failures": 0,
+      "profile_success_rate": 1.0,
+      "history_past_rows": 919,
+      "history_past_season_labels_observed": [
+        "2025",
+        "2024",
+        "2023",
+        "2022",
+        "2021",
+        "2020",
+        "2019",
+        "2018",
+        "2017"
+      ],
+      "current_history_rows": 7676,
+      "bootstrap_http": 200,
+      "fixtures_http": 200
+    },
+    {
+      "provider": "Allsvenskan Fantasy",
+      "competition": "Allsvenskan",
+      "key": "allsvenskan",
+      "status": "PASS",
+      "player_count": 476,
+      "profile_success": 476,
+      "profile_failures": 0,
+      "profile_success_rate": 1.0,
+      "history_past_rows": 953,
+      "history_past_season_labels_observed": [
+        "2025",
+        "2024",
+        "2023",
+        "2022",
+        "2021",
+        "2020",
+        "2019",
+        "2018"
+      ],
+      "current_history_rows": 7368,
+      "bootstrap_http": 200,
+      "fixtures_http": 200
+    }
+  ],
+  "provider_count": 4,
+  "pass_count": 4,
+  "status": "PASS",
+  "governance": {
+    "public_unauthenticated_reads_only": true,
+    "raw_provider_payloads_preserved_in_artifact": true,
+    "provider_native_history_past_preserved": true,
+    "cross_provider_normalization": false,
+    "fantacalcio_relabelling": false,
+    "missing_value_fill": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
