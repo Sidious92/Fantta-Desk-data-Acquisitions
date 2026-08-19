@@ -1,0 +1,46 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_RESOLVED_PERSON_SUBJECT_SURFACE_MANIFEST_V1",
+  "protocolVersion": "1.1",
+  "historicalIdentityScope": "2015/16-2025/26",
+  "subjectCount": 2048,
+  "source": {
+    "repository": "Sidious92/FantaDesk",
+    "artifactId": 9162967092,
+    "artifactName": "nexus-replay-v3-prepared",
+    "preservationContainerSha256": "555e012b8e992d04a088aa5809c20b6efc023aa442bbf6a904435df17038d721",
+    "identityPaths": "identity/2015-16.json through identity/2025-26.json",
+    "historicalRosterObservations": 7291,
+    "resolvedObservations": 5869,
+    "unresolvedObservations": 1422,
+    "uniqueResolvedUnderstatPersons": 2048,
+    "fantacalcioIdsNeverResolvedToUnderstat": 445,
+    "providerIdReuseCollisionCount": 1
+  },
+  "surfacePolicy": {
+    "deduplicationKey": "resolved Understat-backed person bridge",
+    "providerIdUsedAsGlobalPersonKey": false,
+    "knownFantacalcioId65CollisionPreserved": true,
+    "unresolvedHistoricalIdsSilentlyDropped": false,
+    "unresolvedHistoricalIdsDisposition": "EXPLICITLY_OUTSIDE_RESOLVED_FIRST_PASS_445_IDS"
+  },
+  "privacyMinimization": {
+    "identityOnly": true,
+    "performanceStatisticsTransferred": false,
+    "targetValuesTransferred": false,
+    "quotationsTransferred": false
+  },
+  "payload": {
+    "path": "data/nexus-d1/historical-resolved-person-subjects-v1.json.xz.b64",
+    "encoding": "BASE64_XZ_JSON",
+    "decodedJsonBytes": 534432,
+    "decodedJsonSha256": "f0b4fd17d619bc383dbe902539bd71b6fdf5a54bf10a9cc9498d02ad5be403b6",
+    "xzBytes": 49744,
+    "xzSha256": "ee64cfb85af4e6a3c4e574a4bec1d229d49bf8fba571dc76350c869c084ff871"
+  },
+  "governance": {
+    "canonicalEngineModified": false,
+    "trainingPromotionGranted": false,
+    "historicalAsOfGranted": false,
+    "f1Started": false
+  }
+}
