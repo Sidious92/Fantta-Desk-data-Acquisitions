@@ -1,0 +1,75 @@
+{
+  "schema": "NEXUS_FOTMOB_CROSSLEAGUE_DEEPSTATS_V1_SUMMARY",
+  "current_season_excluded": "2026/2027",
+  "max_prior_seasons": 5,
+  "players": [
+    {
+      "name": "Matija Frigan",
+      "playerId": 1190371,
+      "status": "PASS",
+      "season_count": 5,
+      "records": 7,
+      "failures": 0,
+      "selected_seasons": [
+        "2025/2026",
+        "2024/2025",
+        "2023/2024",
+        "2022/2023",
+        "2021/2022"
+      ]
+    },
+    {
+      "name": "Andrea Adorante",
+      "playerId": 1024432,
+      "status": "PASS",
+      "season_count": 3,
+      "records": 5,
+      "failures": 0,
+      "selected_seasons": [
+        "2025/2026",
+        "2024/2025",
+        "2020/2021"
+      ]
+    },
+    {
+      "name": "Kornel Lisman",
+      "playerId": 1529483,
+      "status": "PASS",
+      "season_count": 2,
+      "records": 3,
+      "failures": 0,
+      "selected_seasons": [
+        "2025/2026",
+        "2024/2025"
+      ]
+    },
+    {
+      "name": "Albion Rrahmani",
+      "playerId": 1379468,
+      "status": "PASS",
+      "season_count": 4,
+      "records": 13,
+      "failures": 0,
+      "selected_seasons": [
+        "2025/2026",
+        "2024/2025",
+        "2023/2024",
+        "2022/2023"
+      ]
+    }
+  ],
+  "record_count": 28,
+  "observed_record_count": 28,
+  "unavailable_record_count": 0,
+  "status": "PASS",
+  "governance": {
+    "provider": "FotMob",
+    "public_unauthenticated_surfaces_only": true,
+    "only_observed_player_and_season_ids_used": true,
+    "raw_provider_data_preserved": true,
+    "provider_rating_separate_from_official_fantasy_points": true,
+    "missing_fields_not_imputed": true,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
