@@ -1,0 +1,3 @@
+launch=2026-08-19T20:25:00+02:00
+source=.nexus-ligue1-historical-calendar-v2-status/RESULT.json
+mode=one-observed-historical-match-id-only
