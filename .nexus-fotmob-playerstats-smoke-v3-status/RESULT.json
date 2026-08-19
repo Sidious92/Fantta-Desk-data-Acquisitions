@@ -1,0 +1,2934 @@
+{
+  "schema": "NEXUS_FOTMOB_PLAYERSTATS_SMOKE_V3",
+  "endpoint": "https://www.fotmob.com/api/data/playerStats",
+  "tests": [
+    {
+      "name": "Matija Frigan",
+      "playerId": 1190371,
+      "stat_root_path": "$.next_data_hits[0].object",
+      "available_seasons": [
+        {
+          "seasonName": "2026/2027",
+          "entryId": "0-0",
+          "tournamentId": 141,
+          "tournamentName": "Coppa Italia",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2025/2026",
+          "entryId": "1-0",
+          "tournamentId": 40,
+          "tournamentName": "Belgian Pro League",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2025/2026",
+          "entryId": "1-1",
+          "tournamentId": 141,
+          "tournamentName": "Coppa Italia",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2024/2025",
+          "entryId": "2-0",
+          "tournamentId": 40,
+          "tournamentName": "Belgian Pro League",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2023/2024",
+          "entryId": "3-0",
+          "tournamentId": 40,
+          "tournamentName": "Belgian Pro League",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2023/2024",
+          "entryId": "3-1",
+          "tournamentId": 288,
+          "tournamentName": "EURO U21",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2022/2023",
+          "entryId": "4-0",
+          "tournamentId": 252,
+          "tournamentName": "HNL",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2021/2022",
+          "entryId": "5-0",
+          "tournamentId": 252,
+          "tournamentName": "1. Division",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2020/2021",
+          "entryId": "6-0",
+          "tournamentId": 73,
+          "tournamentName": "Europa League",
+          "hasDeepStats": true
+        }
+      ],
+      "chosen": {
+        "seasonName": "2025/2026",
+        "entryId": "1-0",
+        "tournamentId": 40,
+        "tournamentName": "Belgian Pro League",
+        "hasDeepStats": true
+      },
+      "request_url": "https://www.fotmob.com/api/data/playerStats?playerId=1190371&seasonId=1-0&isFirstSeason=false",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 8528,
+      "sha256": "e0bf448fbd17717b7797bfb933c2ab5edcec68225f9cbc918a16cc1f69811cf1",
+      "preview": "{\"sectionOrder\":[\"top-stat-card\",\"shotmap\",\"stats-section\"],\"shotmap\":[{\"id\":2829890237,\"playerName\":\"Matija Frigan\",\"eventType\":\"Goal\",\"shotType\":\"LeftFoot\",\"situation\":\"FastBreak\",\"teamId\":10001,\"playerId\":1190371,\"x\":93.6,\"y\":20.9864968186,\"min\":58,\"period\":\"SecondHalf\",\"isOwnGoal\":false,\"isBlocked\":false,\"isOnTarget\":true,\"isSavedOffLine\":false,\"isFromInsideBox\":true,\"goalCrossedY\":31.02625,\"goalCrossedZ\":0.0834736838,\"expectedGoals\":0.032138030976057,\"expectedGoalsOnTarget\":0.361935615539551,\"onGoalShot\":{\"x\":1.78670634920635,\"y\":0.0220829851322751,\"zoomRatio\":1},\"box\":\"InsideBox\",\"homeTeamId\":8635,\"awayTeamId\":10001,\"homeTeamName\":\"Anderlecht\",\"awayTeamName\":\"Westerlo\",\"homeScore\":5,\"awayScore\":2,\"matchId\":4818044,\"matchDate\":\"2025-07-27T11:30:00Z\",\"teamColor\":\"#006098\",\"teamColorDark\":\"#E3DA33\"},{\"id\":2829900021,\"playerName\":\"Matija Frigan\",\"eventType\":\"AttemptSaved\",\"shotType\":\"RightFoot\",\"situation\":\"FastBreak\",\"teamId\":10001,\"playerId\":1190371,\"x\":95.3508771917,\"y\":25.3025,\"min\":79,\"period\":\"SecondHalf\",\"isOwnGoal\":false,\"isBlocked\":false,\"isOnTarget\":true,\"isSavedOffLine\":false,\"isFromInsideBox\":true,\"blockedX\":102.4396551726,\"blockedY\":31.56,\"goalCrossedY\":33.46625,\"goalCrossedZ\":0.8154736802,\"expectedGoals\":0.314310044050217,\"expectedGoalsOnTarget\":0.141860768198967,\"onGoalShot\":{\"x\":1.1412037037037,\"y\":0.215733777830688,\"zoomRatio\":1},\"box\":\"InsideBox\",\"homeTeamId\":8635,\"awayTeamId\":10001,\"homeTeamName\":\"Anderlecht\",\"awayTeamName\":\"Westerlo\",\"homeScore\":5,\"awayScore\":2,\"matchId\":4818044,\"matchDate\":\"2025-07-27T11:30:00Z\",\"teamColor\":\"#006098\",\"teamColorDark\":\"#E3DA33\"}],\"statsSection\":{\"id\":\"stats-section\",\"items\":[{\"display\":\"stats-group\",\"items\":[{\"localizedTitleId\":\"goals\",\"per90\":0.5142857142857142,\"percentileRank\":13.636363636363635,\"percentileRankPer90\":86.36363636363636,\"statFormat\":\"number\",\"statValue\":\"1\",\"title\":\"Goals\"},{\"localizedTitleId\":\"expected_goals\",\"per90\":0.06721714649881635,\"percentileRank\":6.0606060606060606,\"percentileRankPer90\":3.0303030303030303,\"statFormat\":\"fraction\",\"statValue\":\"0.13\",\"title\":\"xG\"},{\"localizedTitleId\":\"expected_goals_on_target\",\"per90\":0.23585143600191388,\"percentileRank\":13.636363636363635,\"percentileRankPer90\":28.78787878787879,\"statFormat\":\"fraction\",\"statValue\":\"0.46\",\"title\":\"xGOT\"},{\"localizedTitleId\":\"non_penalty_xg\",\"per90\":0.06721714649881635,\"percentileRank\":6.0606060606060606,\"percentileRankPer90\":3.0303030303030303,\"statFormat\":\"fraction\",\"statValue\":\"0.13\",\"title\":\"xG excl. penalty\"},{",
+      "json_type": "dict",
+      "json_keys": [
+        "sectionOrder",
+        "shotmap",
+        "statsSection",
+        "topStatCard",
+        "keeperShotmap"
+      ],
+      "stat_index": [
+        {
+          "path": "$.statsSection",
+          "localizedTitleId": "season_performance",
+          "title": "Season performance",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[0]",
+          "localizedTitleId": "shooting",
+          "title": "Shooting",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[0].items[0]",
+          "localizedTitleId": "goals",
+          "title": "Goals",
+          "statValue": "1",
+          "value": null,
+          "percentileRank": 13.636363636363635
+        },
+        {
+          "path": "$.statsSection.items[0].items[1]",
+          "localizedTitleId": "expected_goals",
+          "title": "xG",
+          "statValue": "0.13",
+          "value": null,
+          "percentileRank": 6.0606060606060606
+        },
+        {
+          "path": "$.statsSection.items[0].items[2]",
+          "localizedTitleId": "expected_goals_on_target",
+          "title": "xGOT",
+          "statValue": "0.46",
+          "value": null,
+          "percentileRank": 13.636363636363635
+        },
+        {
+          "path": "$.statsSection.items[0].items[3]",
+          "localizedTitleId": "non_penalty_xg",
+          "title": "xG excl. penalty",
+          "statValue": "0.13",
+          "value": null,
+          "percentileRank": 6.0606060606060606
+        },
+        {
+          "path": "$.statsSection.items[0].items[4]",
+          "localizedTitleId": "shots",
+          "title": "Shots",
+          "statValue": "2",
+          "value": null,
+          "percentileRank": 4.545454545454546
+        },
+        {
+          "path": "$.statsSection.items[0].items[5]",
+          "localizedTitleId": "ShotsOnTarget",
+          "title": "Shots on target",
+          "statValue": "2",
+          "value": null,
+          "percentileRank": 12.121212121212121
+        },
+        {
+          "path": "$.statsSection.items[1]",
+          "localizedTitleId": "passing",
+          "title": "Passing",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[1].items[0]",
+          "localizedTitleId": "assists",
+          "title": "Assists",
+          "statValue": "0",
+          "value": null,
+          "percentileRank": 0
+        },
+        {
+          "path": "$.statsSection.items[1].items[1]",
+          "localizedTitleId": "expected_assists",
+          "title": "xA",
+          "statValue": "0.03",
+          "value": null,
+          "percentileRank": 4.545454545454546
+        },
+        {
+          "path": "$.statsSection.items[1].items[2]",
+          "localizedTitleId": "successful_passes",
+          "title": "Accurate passes",
+          "statValue": "17",
+          "value": null,
+          "percentileRank": 9.090909090909092
+        },
+        {
+          "path": "$.statsSection.items[1].items[3]",
+          "localizedTitleId": "successful_passes_accuracy",
+          "title": "Pass accuracy",
+          "statValue": "70.8",
+          "value": null,
+          "percentileRank": 54.54545454545454
+        },
+        {
+          "path": "$.statsSection.items[2]",
+          "localizedTitleId": "possession",
+          "title": "Possession",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[2].items[0]",
+          "localizedTitleId": "duel_won",
+          "title": "Duels won",
+          "statValue": "4",
+          "value": null,
+          "percentileRank": 6.0606060606060606
+        },
+        {
+          "path": "$.statsSection.items[2].items[1]",
+          "localizedTitleId": "duel_won_percent",
+          "title": "Duels won %",
+          "statValue": "28.6",
+          "value": null,
+          "percentileRank": 6.0606060606060606
+        },
+        {
+          "path": "$.statsSection.items[2].items[2]",
+          "localizedTitleId": "aerials_won",
+          "title": "Aerials won",
+          "statValue": "2",
+          "value": null,
+          "percentileRank": 10.606060606060606
+        },
+        {
+          "path": "$.statsSection.items[2].items[3]",
+          "localizedTitleId": "aerials_won_percent",
+          "title": "Aerials won %",
+          "statValue": "22.2",
+          "value": null,
+          "percentileRank": 12.121212121212121
+        },
+        {
+          "path": "$.statsSection.items[2].items[4]",
+          "localizedTitleId": "touches",
+          "title": "Touches",
+          "statValue": "34",
+          "value": null,
+          "percentileRank": 4.545454545454546
+        },
+        {
+          "path": "$.statsSection.items[2].items[5]",
+          "localizedTitleId": "touches_opp_box",
+          "title": "Touches in opposition box",
+          "statValue": "3",
+          "value": null,
+          "percentileRank": 4.545454545454546
+        },
+        {
+          "path": "$.statsSection.items[2].items[6]",
+          "localizedTitleId": "dispossessed",
+          "title": "Dispossessed",
+          "statValue": "1",
+          "value": null,
+          "percentileRank": 92.42424242424242
+        },
+        {
+          "path": "$.statsSection.items[2].items[7]",
+          "localizedTitleId": "fouls_won",
+          "title": "Fouls won",
+          "statValue": "2",
+          "value": null,
+          "percentileRank": 4.545454545454546
+        },
+        {
+          "path": "$.statsSection.items[3]",
+          "localizedTitleId": "defending",
+          "title": "Defending",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[3].items[0]",
+          "localizedTitleId": "fouls",
+          "title": "Fouls committed",
+          "statValue": "2",
+          "value": null,
+          "percentileRank": 92.42424242424242
+        },
+        {
+          "path": "$.statsSection.items[3].items[1]",
+          "localizedTitleId": "recoveries",
+          "title": "Recoveries",
+          "statValue": "5",
+          "value": null,
+          "percentileRank": 13.636363636363635
+        },
+        {
+          "path": "$.statsSection.items[3].items[2]",
+          "localizedTitleId": "poss_won_att_3rd_team_title",
+          "title": "Possession won final 3rd",
+          "statValue": "1",
+          "value": null,
+          "percentileRank": 7.575757575757576
+        },
+        {
+          "path": "$.statsSection.items[3].items[3]",
+          "localizedTitleId": "clean_sheet_team_title",
+          "title": "Clean sheets",
+          "statValue": "0",
+          "value": null,
+          "percentileRank": 0
+        },
+        {
+          "path": "$.statsSection.items[3].items[4]",
+          "localizedTitleId": "goals_conceded_while_on_pitch",
+          "title": "Goals conceded while on pitch",
+          "statValue": "7",
+          "value": null,
+          "percentileRank": 74.24242424242425
+        },
+        {
+          "path": "$.statsSection.items[3].items[5]",
+          "localizedTitleId": "expected_goals_against_while_on_pitch",
+          "title": "xG against while on pitch",
+          "statValue": "3.77",
+          "value": null,
+          "percentileRank": 87.87878787878788
+        },
+        {
+          "path": "$.statsSection.items[4]",
+          "localizedTitleId": "discipline",
+          "title": "Discipline",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[4].items[0]",
+          "localizedTitleId": "yellow_cards",
+          "title": "Yellow cards",
+          "statValue": "0",
+          "value": null,
+          "percentileRank": 100
+        },
+        {
+          "path": "$.statsSection.items[4].items[1]",
+          "localizedTitleId": "red_cards",
+          "title": "Red cards",
+          "statValue": "0",
+          "value": null,
+          "percentileRank": 100
+        },
+        {
+          "path": "$.topStatCard.items[2]",
+          "localizedTitleId": "rating",
+          "title": "Rating",
+          "statValue": "6.47",
+          "value": null,
+          "percentileRank": 42.42424242424242
+        },
+        {
+          "path": "$.topStatCard.items[3]",
+          "localizedTitleId": "matches_uppercase",
+          "title": "Matches",
+          "statValue": "3",
+          "value": null,
+          "percentileRank": 0
+        },
+        {
+          "path": "$.topStatCard.items[4]",
+          "localizedTitleId": "player_started_matches",
+          "title": "Started",
+          "statValue": "2",
+          "value": null,
+          "percentileRank": 15.151515151515152
+        },
+        {
+          "path": "$.topStatCard.items[5]",
+          "localizedTitleId": "minutes_played",
+          "title": "Minutes",
+          "statValue": "175",
+          "value": null,
+          "percentileRank": 12.121212121212121
+        }
+      ],
+      "json": {
+        "sectionOrder": [
+          "top-stat-card",
+          "shotmap",
+          "stats-section"
+        ],
+        "shotmap": [
+          {
+            "id": 2829890237,
+            "playerName": "Matija Frigan",
+            "eventType": "Goal",
+            "shotType": "LeftFoot",
+            "situation": "FastBreak",
+            "teamId": 10001,
+            "playerId": 1190371,
+            "x": 93.6,
+            "y": 20.9864968186,
+            "min": 58,
+            "period": "SecondHalf",
+            "isOwnGoal": false,
+            "isBlocked": false,
+            "isOnTarget": true,
+            "isSavedOffLine": false,
+            "isFromInsideBox": true,
+            "goalCrossedY": 31.02625,
+            "goalCrossedZ": 0.0834736838,
+            "expectedGoals": 0.032138030976057,
+            "expectedGoalsOnTarget": 0.361935615539551,
+            "onGoalShot": {
+              "x": 1.78670634920635,
+              "y": 0.0220829851322751,
+              "zoomRatio": 1
+            },
+            "box": "InsideBox",
+            "homeTeamId": 8635,
+            "awayTeamId": 10001,
+            "homeTeamName": "Anderlecht",
+            "awayTeamName": "Westerlo",
+            "homeScore": 5,
+            "awayScore": 2,
+            "matchId": 4818044,
+            "matchDate": "2025-07-27T11:30:00Z",
+            "teamColor": "#006098",
+            "teamColorDark": "#E3DA33"
+          },
+          {
+            "id": 2829900021,
+            "playerName": "Matija Frigan",
+            "eventType": "AttemptSaved",
+            "shotType": "RightFoot",
+            "situation": "FastBreak",
+            "teamId": 10001,
+            "playerId": 1190371,
+            "x": 95.3508771917,
+            "y": 25.3025,
+            "min": 79,
+            "period": "SecondHalf",
+            "isOwnGoal": false,
+            "isBlocked": false,
+            "isOnTarget": true,
+            "isSavedOffLine": false,
+            "isFromInsideBox": true,
+            "blockedX": 102.4396551726,
+            "blockedY": 31.56,
+            "goalCrossedY": 33.46625,
+            "goalCrossedZ": 0.8154736802,
+            "expectedGoals": 0.314310044050217,
+            "expectedGoalsOnTarget": 0.141860768198967,
+            "onGoalShot": {
+              "x": 1.1412037037037,
+              "y": 0.215733777830688,
+              "zoomRatio": 1
+            },
+            "box": "InsideBox",
+            "homeTeamId": 8635,
+            "awayTeamId": 10001,
+            "homeTeamName": "Anderlecht",
+            "awayTeamName": "Westerlo",
+            "homeScore": 5,
+            "awayScore": 2,
+            "matchId": 4818044,
+            "matchDate": "2025-07-27T11:30:00Z",
+            "teamColor": "#006098",
+            "teamColorDark": "#E3DA33"
+          }
+        ],
+        "statsSection": {
+          "id": "stats-section",
+          "items": [
+            {
+              "display": "stats-group",
+              "items": [
+                {
+                  "localizedTitleId": "goals",
+                  "per90": 0.5142857142857142,
+                  "percentileRank": 13.636363636363635,
+                  "percentileRankPer90": 86.36363636363636,
+                  "statFormat": "number",
+                  "statValue": "1",
+                  "title": "Goals"
+                },
+                {
+                  "localizedTitleId": "expected_goals",
+                  "per90": 0.06721714649881635,
+                  "percentileRank": 6.0606060606060606,
+                  "percentileRankPer90": 3.0303030303030303,
+                  "statFormat": "fraction",
+                  "statValue": "0.13",
+                  "title": "xG"
+                },
+                {
+                  "localizedTitleId": "expected_goals_on_target",
+                  "per90": 0.23585143600191388,
+                  "percentileRank": 13.636363636363635,
+                  "percentileRankPer90": 28.78787878787879,
+                  "statFormat": "fraction",
+                  "statValue": "0.46",
+                  "title": "xGOT"
+                },
+                {
+                  "localizedTitleId": "non_penalty_xg",
+                  "per90": 0.06721714649881635,
+                  "percentileRank": 6.0606060606060606,
+                  "percentileRankPer90": 3.0303030303030303,
+                  "statFormat": "fraction",
+                  "statValue": "0.13",
+                  "title": "xG excl. penalty"
+                },
+                {
+                  "localizedTitleId": "shots",
+                  "per90": 1.0285714285714285,
+                  "percentileRank": 4.545454545454546,
+                  "percentileRankPer90": 4.545454545454546,
+                  "statFormat": "number",
+                  "statValue": "2",
+                  "title": "Shots"
+                },
+                {
+                  "localizedTitleId": "ShotsOnTarget",
+                  "per90": 1.0285714285714285,
+                  "percentileRank": 12.121212121212121,
+                  "percentileRankPer90": 59.09090909090909,
+                  "statFormat": "number",
+                  "statValue": "2",
+                  "title": "Shots on target"
+                }
+              ],
+              "localizedTitleId": "shooting",
+              "title": "Shooting",
+              "type": "stat-values"
+            },
+            {
+              "display": "stats-group",
+              "items": [
+                {
+                  "localizedTitleId": "assists",
+                  "per90": 0,
+                  "percentileRank": 0,
+                  "percentileRankPer90": 0,
+                  "statFormat": "number",
+                  "statValue": "0",
+                  "title": "Assists"
+                },
+                {
+                  "localizedTitleId": "expected_assists",
+                  "per90": 0.015525822235005243,
+                  "percentileRank": 4.545454545454546,
+                  "percentileRankPer90": 4.545454545454546,
+                  "statFormat": "fraction",
+                  "statValue": "0.03",
+                  "title": "xA"
+                },
+                {
+                  "localizedTitleId": "successful_passes",
+                  "per90": 8.742857142857142,
+                  "percentileRank": 9.090909090909092,
+                  "percentileRankPer90": 12.121212121212121,
+                  "statFormat": "number",
+                  "statValue": "17",
+                  "title": "Accurate passes"
+                },
+                {
+                  "localizedTitleId": "successful_passes_accuracy",
+                  "per90": 70.83333333333333,
+                  "percentileRank": 54.54545454545454,
+                  "percentileRankPer90": 54.54545454545454,
+                  "statFormat": "percent",
+                  "statValue": "70.8",
+                  "title": "Pass accuracy"
+                }
+              ],
+              "localizedTitleId": "passing",
+              "title": "Passing",
+              "type": "stat-values"
+            },
+            {
+              "display": "stats-group",
+              "items": [
+                {
+                  "localizedTitleId": "duel_won",
+                  "per90": 2.057142857142857,
+                  "percentileRank": 6.0606060606060606,
+                  "percentileRankPer90": 3.0303030303030303,
+                  "statFormat": "number",
+                  "statValue": "4",
+                  "title": "Duels won"
+                },
+                {
+                  "localizedTitleId": "duel_won_percent",
+                  "per90": 28.571428571428573,
+                  "percentileRank": 6.0606060606060606,
+                  "percentileRankPer90": 6.0606060606060606,
+                  "statFormat": "percent",
+                  "statValue": "28.6",
+                  "title": "Duels won %"
+                },
+                {
+                  "localizedTitleId": "aerials_won",
+                  "per90": 1.0285714285714285,
+                  "percentileRank": 10.606060606060606,
+                  "percentileRankPer90": 25.757575757575758,
+                  "statFormat": "number",
+                  "statValue": "2",
+                  "title": "Aerials won"
+                },
+                {
+                  "localizedTitleId": "aerials_won_percent",
+                  "per90": 22.22222222222222,
+                  "percentileRank": 12.121212121212121,
+                  "percentileRankPer90": 12.121212121212121,
+                  "statFormat": "percent",
+                  "statValue": "22.2",
+                  "title": "Aerials won %"
+                },
+                {
+                  "localizedTitleId": "touches",
+                  "per90": 17.485714285714284,
+                  "percentileRank": 4.545454545454546,
+                  "percentileRankPer90": 0,
+                  "statFormat": "number",
+                  "statValue": "34",
+                  "title": "Touches"
+                },
+                {
+                  "localizedTitleId": "touches_opp_box",
+                  "per90": 1.542857142857143,
+                  "percentileRank": 4.545454545454546,
+                  "percentileRankPer90": 3.0303030303030303,
+                  "statFormat": "number",
+                  "statValue": "3",
+                  "title": "Touches in opposition box"
+                },
+                {
+                  "localizedTitleId": "dispossessed",
+                  "per90": 0.5142857142857142,
+                  "percentileRank": 92.42424242424242,
+                  "percentileRankPer90": 93.93939393939394,
+                  "statFormat": "number",
+                  "statValue": "1",
+                  "title": "Dispossessed"
+                },
+                {
+                  "localizedTitleId": "fouls_won",
+                  "per90": 1.0285714285714285,
+                  "percentileRank": 4.545454545454546,
+                  "percentileRankPer90": 27.27272727272727,
+                  "statFormat": "number",
+                  "statValue": "2",
+                  "title": "Fouls won"
+                }
+              ],
+              "localizedTitleId": "possession",
+              "title": "Possession",
+              "type": "stat-values"
+            },
+            {
+              "display": "stats-group",
+              "items": [
+                {
+                  "localizedTitleId": "fouls",
+                  "per90": 1.0285714285714285,
+                  "percentileRank": 92.42424242424242,
+                  "percentileRankPer90": 77.27272727272727,
+                  "statFormat": "number",
+                  "statValue": "2",
+                  "title": "Fouls committed"
+                },
+                {
+                  "localizedTitleId": "recoveries",
+                  "per90": 2.571428571428571,
+                  "percentileRank": 13.636363636363635,
+                  "percentileRankPer90": 53.03030303030303,
+                  "statFormat": "number",
+                  "statValue": "5",
+                  "title": "Recoveries"
+                },
+                {
+                  "localizedTitleId": "poss_won_att_3rd_team_title",
+                  "per90": 0.5142857142857142,
+                  "percentileRank": 7.575757575757576,
+                  "percentileRankPer90": 42.42424242424242,
+                  "statFormat": "number",
+                  "statValue": "1",
+                  "title": "Possession won final 3rd"
+                },
+                {
+                  "localizedTitleId": "clean_sheet_team_title",
+                  "per90": 0,
+                  "percentileRank": 0,
+                  "percentileRankPer90": 0,
+                  "statFormat": "number",
+                  "statValue": "0",
+                  "title": "Clean sheets"
+                },
+                {
+                  "localizedTitleId": "goals_conceded_while_on_pitch",
+                  "per90": 3.6,
+                  "percentileRank": 74.24242424242425,
+                  "percentileRankPer90": 1.5151515151515151,
+                  "statFormat": "number",
+                  "statValue": "7",
+                  "title": "Goals conceded while on pitch"
+                },
+                {
+                  "localizedTitleId": "expected_goals_against_while_on_pitch",
+                  "per90": 1.9367485182625908,
+                  "percentileRank": 87.87878787878788,
+                  "percentileRankPer90": 15.151515151515152,
+                  "statFormat": "fraction",
+                  "statValue": "3.77",
+                  "title": "xG against while on pitch"
+                }
+              ],
+              "localizedTitleId": "defending",
+              "title": "Defending",
+              "type": "stat-values"
+            },
+            {
+              "display": "stats-group",
+              "items": [
+                {
+                  "localizedTitleId": "yellow_cards",
+                  "per90": 0,
+                  "percentileRank": 100,
+                  "percentileRankPer90": 100,
+                  "statFormat": "number",
+                  "statValue": "0",
+                  "title": "Yellow cards"
+                },
+                {
+                  "localizedTitleId": "red_cards",
+                  "per90": 0,
+                  "percentileRank": 100,
+                  "percentileRankPer90": 100,
+                  "statFormat": "number",
+                  "statValue": "0",
+                  "title": "Red cards"
+                }
+              ],
+              "localizedTitleId": "discipline",
+              "title": "Discipline",
+              "type": "stat-values"
+            }
+          ],
+          "localizedTitleId": "season_performance",
+          "title": "Season performance",
+          "type": "grouped-stat-values"
+        },
+        "topStatCard": {
+          "display": "stats-group",
+          "id": "top-stat-card",
+          "items": [
+            {
+              "localizedTitleId": "goals",
+              "per90": 0.5142857142857142,
+              "percentileRank": 13.636363636363635,
+              "percentileRankPer90": 86.36363636363636,
+              "statFormat": "number",
+              "statValue": "1",
+              "title": "Goals"
+            },
+            {
+              "localizedTitleId": "assists",
+              "per90": 0,
+              "percentileRank": 0,
+              "percentileRankPer90": 0,
+              "statFormat": "number",
+              "statValue": "0",
+              "title": "Assists"
+            },
+            {
+              "localizedTitleId": "rating",
+              "per90": 6.473333333333334,
+              "percentileRank": 42.42424242424242,
+              "percentileRankPer90": 42.42424242424242,
+              "statFormat": "fraction",
+              "statValue": "6.47",
+              "title": "Rating"
+            },
+            {
+              "localizedTitleId": "matches_uppercase",
+              "per90": 3,
+              "percentileRank": 0,
+              "percentileRankPer90": 0,
+              "statFormat": "number",
+              "statValue": "3",
+              "title": "Matches"
+            },
+            {
+              "localizedTitleId": "player_started_matches",
+              "per90": 2,
+              "percentileRank": 15.151515151515152,
+              "percentileRankPer90": 62.121212121212125,
+              "statFormat": "number",
+              "statValue": "2",
+              "title": "Started"
+            },
+            {
+              "localizedTitleId": "minutes_played",
+              "per90": 90,
+              "percentileRank": 12.121212121212121,
+              "percentileRankPer90": 100,
+              "statFormat": "number",
+              "statValue": "175",
+              "title": "Minutes"
+            }
+          ],
+          "type": "stat-values"
+        },
+        "keeperShotmap": null
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "Andrea Adorante",
+      "playerId": 1024432,
+      "stat_root_path": "$.next_data_hits[0].object",
+      "available_seasons": [
+        {
+          "seasonName": "2025/2026",
+          "entryId": "0-0",
+          "tournamentId": 86,
+          "tournamentName": "Serie B",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2025/2026",
+          "entryId": "0-1",
+          "tournamentId": 141,
+          "tournamentName": "Coppa Italia",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2024/2025",
+          "entryId": "1-0",
+          "tournamentId": 86,
+          "tournamentName": "Serie B",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2020/2021",
+          "entryId": "2-0",
+          "tournamentId": 55,
+          "tournamentName": "Serie A",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2020/2021",
+          "entryId": "2-1",
+          "tournamentId": 141,
+          "tournamentName": "Coppa Italia",
+          "hasDeepStats": true
+        }
+      ],
+      "chosen": {
+        "seasonName": "2025/2026",
+        "entryId": "0-1",
+        "tournamentId": 141,
+        "tournamentName": "Coppa Italia",
+        "hasDeepStats": true
+      },
+      "request_url": "https://www.fotmob.com/api/data/playerStats?playerId=1024432&seasonId=0-1&isFirstSeason=false",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 5053,
+      "sha256": "64056ffe6bf9e854e16e79e0ab4f390a6fda64a5a50756a519f497ac0c3f9309",
+      "preview": "{\"sectionOrder\":[\"top-stat-card\",\"shotmap\",\"stats-section\"],\"shotmap\":[{\"id\":2835664561,\"playerName\":\"Andrea Adorante\",\"eventType\":\"Miss\",\"shotType\":\"Header\",\"situation\":\"FromCorner\",\"teamId\":7881,\"playerId\":1024432,\"x\":100.1637931038,\"y\":31.48375,\"min\":5,\"period\":\"FirstHalf\",\"isOwnGoal\":false,\"isBlocked\":false,\"isOnTarget\":false,\"isSavedOffLine\":false,\"isFromInsideBox\":true,\"goalCrossedY\":33.5425,\"goalCrossedZ\":5.427586216,\"expectedGoals\":0.220965847373009,\"expectedGoalsOnTarget\":0,\"onGoalShot\":{\"x\":1.05708638380131,\"y\":0.677248677248677,\"zoomRatio\":0.471664548128847},\"box\":\"InsideBox\",\"homeTeamId\":7881,\"awayTeamId\":9889,\"homeTeamName\":\"Venezia\",\"awayTeamName\":\"Mantova\",\"homeScore\":4,\"awayScore\":0,\"matchId\":4822800,\"matchDate\":\"2025-08-16T16:00:00Z\",\"teamColor\":\"#101010\",\"teamColorDark\":\"#006127\"},{\"id\":2835670219,\"playerName\":\"Andrea Adorante\",\"eventType\":\"AttemptSaved\",\"shotType\":\"RightFoot\",\"situation\":\"RegularPlay\",\"teamId\":7881,\"playerId\":1024432,\"x\":75.3898058272,\"y\":29.043333332,\"min\":11,\"period\":\"FirstHalf\",\"isOwnGoal\":false,\"isBlocked\":false,\"isOnTarget\":true,\"isSavedOffLine\":false,\"isFromInsideBox\":false,\"blockedX\":103.8620689656,\"blockedY\":33.31375,\"goalCrossedY\":36.135,\"goalCrossedZ\":0.160526315,\"expectedGoals\":0.0157199613749981,\"expectedGoalsOnTarget\":0.0457719378173351,\"onGoalShot\":{\"x\":0.435185185185184,\"y\":0.0424672791005291,\"zoomRatio\":1},\"box\":\"OutsideBox\",\"homeTeamId\":7881,\"awayTeamId\":9889,\"homeTeamName\":\"Venezia\",\"awayTeamName\":\"Mantova\",\"homeScore\":4,\"awayScore\":0,\"matchId\":4822800,\"matchDate\":\"2025-08-16T16:00:00Z\",\"teamColor\":\"#101010\",\"teamColorDark\":\"#006127\"},{\"id\":2835704975,\"playerName\":\"Andrea Adorante\",\"eventType\":\"AttemptSaved\",\"shotType\":\"RightFoot\",\"situation\":\"RegularPlay\",\"teamId\":7881,\"playerId\":1024432,\"x\":97.0877192975,\"y\":38.116190478,\"min\":45,\"minAdded\":0,\"period\":\"FirstHalf\",\"isOwnGoal\":false,\"isBlocked\":false,\"isOnTarget\":true,\"isSavedOffLine\":false,\"isFromInsideBox\":true,\"blockedX\":103.103448276,\"blockedY\":35.3725,\"goalCrossedY\":34.4575,\"goalCrossedZ\":1.7079999916,\"expectedGoals\":0.168984159827232,\"expectedGoalsOnTarget\":0.366941183805466,\"onGoalShot\":{\"x\":0.878968253968253,\"y\":0.45185184962963,\"zoomRatio\":1},\"box\":\"InsideBox\",\"homeTeamId\":7881,\"awayTeamId\":9889,\"homeTeamName\":\"Venezia\",\"awayTeamName\":\"Mantova\",\"homeScore\":4,\"awayScore\":0,\"matchId\":4822800,\"matchDate\":\"2025-08-16T16:00:00Z\",\"teamColor\":\"#101010\",\"teamColorDark\":\"#006127\"},{\"id\":2835726669,\"playerName\":\"Andrea Adorante\",\"eventType\":\"Miss\",\"shotT",
+      "json_type": "dict",
+      "json_keys": [
+        "sectionOrder",
+        "shotmap",
+        "topStatCard",
+        "keeperShotmap"
+      ],
+      "stat_index": [
+        {
+          "path": "$.topStatCard.items[0]",
+          "localizedTitleId": "goals",
+          "title": "Goals",
+          "statValue": "0",
+          "value": null,
+          "percentileRank": 0
+        },
+        {
+          "path": "$.topStatCard.items[1]",
+          "localizedTitleId": "assists",
+          "title": "Assists",
+          "statValue": "0",
+          "value": null,
+          "percentileRank": 0
+        },
+        {
+          "path": "$.topStatCard.items[2]",
+          "localizedTitleId": "rating",
+          "title": "Rating",
+          "statValue": "7.51",
+          "value": null,
+          "percentileRank": 92.0323325635104
+        },
+        {
+          "path": "$.topStatCard.items[3]",
+          "localizedTitleId": "matches_uppercase",
+          "title": "Matches",
+          "statValue": "2",
+          "value": null,
+          "percentileRank": 59.468822170900694
+        },
+        {
+          "path": "$.topStatCard.items[4]",
+          "localizedTitleId": "player_started_matches",
+          "title": "Started",
+          "statValue": "1",
+          "value": null,
+          "percentileRank": 22.170900692840647
+        },
+        {
+          "path": "$.topStatCard.items[5]",
+          "localizedTitleId": "minutes_played",
+          "title": "Minutes",
+          "statValue": "85",
+          "value": null,
+          "percentileRank": 44.45727482678984
+        }
+      ],
+      "json": {
+        "sectionOrder": [
+          "top-stat-card",
+          "shotmap",
+          "stats-section"
+        ],
+        "shotmap": [
+          {
+            "id": 2835664561,
+            "playerName": "Andrea Adorante",
+            "eventType": "Miss",
+            "shotType": "Header",
+            "situation": "FromCorner",
+            "teamId": 7881,
+            "playerId": 1024432,
+            "x": 100.1637931038,
+            "y": 31.48375,
+            "min": 5,
+            "period": "FirstHalf",
+            "isOwnGoal": false,
+            "isBlocked": false,
+            "isOnTarget": false,
+            "isSavedOffLine": false,
+            "isFromInsideBox": true,
+            "goalCrossedY": 33.5425,
+            "goalCrossedZ": 5.427586216,
+            "expectedGoals": 0.220965847373009,
+            "expectedGoalsOnTarget": 0,
+            "onGoalShot": {
+              "x": 1.05708638380131,
+              "y": 0.677248677248677,
+              "zoomRatio": 0.471664548128847
+            },
+            "box": "InsideBox",
+            "homeTeamId": 7881,
+            "awayTeamId": 9889,
+            "homeTeamName": "Venezia",
+            "awayTeamName": "Mantova",
+            "homeScore": 4,
+            "awayScore": 0,
+            "matchId": 4822800,
+            "matchDate": "2025-08-16T16:00:00Z",
+            "teamColor": "#101010",
+            "teamColorDark": "#006127"
+          },
+          {
+            "id": 2835670219,
+            "playerName": "Andrea Adorante",
+            "eventType": "AttemptSaved",
+            "shotType": "RightFoot",
+            "situation": "RegularPlay",
+            "teamId": 7881,
+            "playerId": 1024432,
+            "x": 75.3898058272,
+            "y": 29.043333332,
+            "min": 11,
+            "period": "FirstHalf",
+            "isOwnGoal": false,
+            "isBlocked": false,
+            "isOnTarget": true,
+            "isSavedOffLine": false,
+            "isFromInsideBox": false,
+            "blockedX": 103.8620689656,
+            "blockedY": 33.31375,
+            "goalCrossedY": 36.135,
+            "goalCrossedZ": 0.160526315,
+            "expectedGoals": 0.0157199613749981,
+            "expectedGoalsOnTarget": 0.0457719378173351,
+            "onGoalShot": {
+              "x": 0.435185185185184,
+              "y": 0.0424672791005291,
+              "zoomRatio": 1
+            },
+            "box": "OutsideBox",
+            "homeTeamId": 7881,
+            "awayTeamId": 9889,
+            "homeTeamName": "Venezia",
+            "awayTeamName": "Mantova",
+            "homeScore": 4,
+            "awayScore": 0,
+            "matchId": 4822800,
+            "matchDate": "2025-08-16T16:00:00Z",
+            "teamColor": "#101010",
+            "teamColorDark": "#006127"
+          },
+          {
+            "id": 2835704975,
+            "playerName": "Andrea Adorante",
+            "eventType": "AttemptSaved",
+            "shotType": "RightFoot",
+            "situation": "RegularPlay",
+            "teamId": 7881,
+            "playerId": 1024432,
+            "x": 97.0877192975,
+            "y": 38.116190478,
+            "min": 45,
+            "minAdded": 0,
+            "period": "FirstHalf",
+            "isOwnGoal": false,
+            "isBlocked": false,
+            "isOnTarget": true,
+            "isSavedOffLine": false,
+            "isFromInsideBox": true,
+            "blockedX": 103.103448276,
+            "blockedY": 35.3725,
+            "goalCrossedY": 34.4575,
+            "goalCrossedZ": 1.7079999916,
+            "expectedGoals": 0.168984159827232,
+            "expectedGoalsOnTarget": 0.366941183805466,
+            "onGoalShot": {
+              "x": 0.878968253968253,
+              "y": 0.45185184962963,
+              "zoomRatio": 1
+            },
+            "box": "InsideBox",
+            "homeTeamId": 7881,
+            "awayTeamId": 9889,
+            "homeTeamName": "Venezia",
+            "awayTeamName": "Mantova",
+            "homeScore": 4,
+            "awayScore": 0,
+            "matchId": 4822800,
+            "matchDate": "2025-08-16T16:00:00Z",
+            "teamColor": "#101010",
+            "teamColorDark": "#006127"
+          },
+          {
+            "id": 2835726669,
+            "playerName": "Andrea Adorante",
+            "eventType": "Miss",
+            "shotType": "RightFoot",
+            "situation": "FromCorner",
+            "teamId": 7881,
+            "playerId": 1024432,
+            "x": 98.535087719,
+            "y": 36.51625,
+            "min": 55,
+            "period": "SecondHalf",
+            "isOwnGoal": false,
+            "isBlocked": false,
+            "isOnTarget": false,
+            "isSavedOffLine": false,
+            "isFromInsideBox": true,
+            "goalCrossedY": 37.12625,
+            "goalCrossedZ": 7.2350344976,
+            "expectedGoals": 0.122398063540459,
+            "expectedGoalsOnTarget": 0,
+            "onGoalShot": {
+              "x": 0.707361633458554,
+              "y": 0.677248677248677,
+              "zoomRatio": 0.35383383463468
+            },
+            "box": "InsideBox",
+            "homeTeamId": 7881,
+            "awayTeamId": 9889,
+            "homeTeamName": "Venezia",
+            "awayTeamName": "Mantova",
+            "homeScore": 4,
+            "awayScore": 0,
+            "matchId": 4822800,
+            "matchDate": "2025-08-16T16:00:00Z",
+            "teamColor": "#101010",
+            "teamColorDark": "#006127"
+          },
+          {
+            "id": 2835733059,
+            "playerName": "Andrea Adorante",
+            "eventType": "AttemptSaved",
+            "shotType": "RightFoot",
+            "situation": "RegularPlay",
+            "teamId": 7881,
+            "playerId": 1024432,
+            "x": 101.5862068968,
+            "y": 37.72,
+            "min": 63,
+            "period": "SecondHalf",
+            "isOwnGoal": false,
+            "isBlocked": false,
+            "isOnTarget": true,
+            "isSavedOffLine": true,
+            "isFromInsideBox": true,
+            "blockedX": 104.1465517242,
+            "blockedY": 33.31375,
+            "goalCrossedY": 31.865,
+            "goalCrossedZ": 1.219999994,
+            "expectedGoals": 0.275292664766312,
+            "expectedGoalsOnTarget": 0,
+            "onGoalShot": {
+              "x": 1.56481481481482,
+              "y": 0.322751321164021,
+              "zoomRatio": 1
+            },
+            "box": "InsideBox",
+            "homeTeamId": 7881,
+            "awayTeamId": 9889,
+            "homeTeamName": "Venezia",
+            "awayTeamName": "Mantova",
+            "homeScore": 4,
+            "awayScore": 0,
+            "matchId": 4822800,
+            "matchDate": "2025-08-16T16:00:00Z",
+            "teamColor": "#101010",
+            "teamColorDark": "#006127"
+          }
+        ],
+        "topStatCard": {
+          "display": "stats-group",
+          "id": "top-stat-card",
+          "items": [
+            {
+              "localizedTitleId": "goals",
+              "per90": 0,
+              "percentileRank": 0,
+              "percentileRankPer90": 0,
+              "statFormat": "number",
+              "statValue": "0",
+              "title": "Goals"
+            },
+            {
+              "localizedTitleId": "assists",
+              "per90": 0,
+              "percentileRank": 0,
+              "percentileRankPer90": 0,
+              "statFormat": "number",
+              "statValue": "0",
+              "title": "Assists"
+            },
+            {
+              "localizedTitleId": "rating",
+              "per90": 7.51,
+              "percentileRank": 92.0323325635104,
+              "percentileRankPer90": 92.0323325635104,
+              "statFormat": "fraction",
+              "statValue": "7.51",
+              "title": "Rating"
+            },
+            {
+              "localizedTitleId": "matches_uppercase",
+              "per90": 2,
+              "percentileRank": 59.468822170900694,
+              "percentileRankPer90": 59.468822170900694,
+              "statFormat": "number",
+              "statValue": "2",
+              "title": "Matches"
+            },
+            {
+              "localizedTitleId": "player_started_matches",
+              "per90": 1,
+              "percentileRank": 22.170900692840647,
+              "percentileRankPer90": 65.01154734411085,
+              "statFormat": "number",
+              "statValue": "1",
+              "title": "Started"
+            },
+            {
+              "localizedTitleId": "minutes_played",
+              "per90": 90,
+              "percentileRank": 44.45727482678984,
+              "percentileRankPer90": 100,
+              "statFormat": "number",
+              "statValue": "85",
+              "title": "Minutes"
+            }
+          ],
+          "type": "stat-values"
+        },
+        "keeperShotmap": null
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "Kornel Lisman",
+      "playerId": 1529483,
+      "stat_root_path": "$.next_data_hits[0].object",
+      "available_seasons": [
+        {
+          "seasonName": "2025/2026",
+          "entryId": "0-0",
+          "tournamentId": 196,
+          "tournamentName": "Ekstraklasa",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2025/2026",
+          "entryId": "0-1",
+          "tournamentId": 10216,
+          "tournamentName": "Conference League",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2024/2025",
+          "entryId": "1-0",
+          "tournamentId": 196,
+          "tournamentName": "Ekstraklasa",
+          "hasDeepStats": true
+        }
+      ],
+      "chosen": {
+        "seasonName": "2025/2026",
+        "entryId": "0-1",
+        "tournamentId": 10216,
+        "tournamentName": "Conference League",
+        "hasDeepStats": true
+      },
+      "request_url": "https://www.fotmob.com/api/data/playerStats?playerId=1529483&seasonId=0-1&isFirstSeason=false",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 7970,
+      "sha256": "4891e95dba9e27b4fc999762b220e57584c9fee120345246415fa88911cebe3e",
+      "preview": "{\"sectionOrder\":[\"top-stat-card\",\"shotmap\",\"stats-section\"],\"shotmap\":[{\"id\":2854644753,\"playerName\":\"Kornel Lisman\",\"eventType\":\"Miss\",\"shotType\":\"RightFoot\",\"situation\":\"RegularPlay\",\"teamId\":2182,\"playerId\":1529483,\"x\":92.8,\"y\":45.5421656011,\"min\":31,\"period\":\"FirstHalf\",\"isOwnGoal\":false,\"isBlocked\":false,\"isOnTarget\":false,\"isSavedOffLine\":false,\"isFromInsideBox\":true,\"goalCrossedY\":30.05190476,\"goalCrossedZ\":3.9764137976,\"expectedGoals\":0.0421117730438709,\"expectedGoalsOnTarget\":0,\"onGoalShot\":{\"x\":1.6724255610811,\"y\":0.677248677248677,\"zoomRatio\":0.643796176732188},\"box\":\"InsideBox\",\"homeTeamId\":2182,\"awayTeamId\":10015,\"homeTeamName\":\"Lech Poznan\",\"awayTeamName\":\"Rapid Wien\",\"homeScore\":2,\"awayScore\":0,\"matchId\":4947966,\"matchDate\":\"2025-10-02T16:45:00Z\",\"teamColor\":\"#004898\",\"teamColorDark\":\"#004898\"}],\"statsSection\":{\"id\":\"stats-section\",\"items\":[{\"display\":\"stats-group\",\"items\":[{\"localizedTitleId\":\"goals\",\"per90\":0,\"percentileRank\":0,\"percentileRankPer90\":0,\"statFormat\":\"number\",\"statValue\":\"0\",\"title\":\"Goals\"},{\"localizedTitleId\":\"shots\",\"per90\":0,\"percentileRank\":0,\"percentileRankPer90\":0,\"statFormat\":\"number\",\"statValue\":\"0\",\"title\":\"Shots\"}],\"localizedTitleId\":\"shooting\",\"title\":\"Shooting\",\"type\":\"stat-values\"},{\"display\":\"stats-group\",\"items\":[{\"localizedTitleId\":\"assists\",\"per90\":0,\"percentileRank\":0,\"percentileRankPer90\":0,\"statFormat\":\"number\",\"statValue\":\"0\",\"title\":\"Assists\"},{\"localizedTitleId\":\"expected_assists\",\"per90\":0.11320407662926049,\"percentileRank\":17.02127659574468,\"percentileRankPer90\":46.09929078014184,\"statFormat\":\"fraction\",\"statValue\":\"0.15\",\"title\":\"xA\"},{\"localizedTitleId\":\"successful_passes\",\"per90\":13.965517241379311,\"percentileRank\":3.546099290780142,\"percentileRankPer90\":8.51063829787234,\"statFormat\":\"number\",\"statValue\":\"18\",\"title\":\"Accurate passes\"},{\"localizedTitleId\":\"successful_passes_accuracy\",\"per90\":94.73684210526316,\"percentileRank\":100,\"percentileRankPer90\":100,\"statFormat\":\"percent\",\"statValue\":\"94.7\",\"title\":\"Pass accuracy\"},{\"localizedTitleId\":\"chances_created\",\"per90\":1.5517241379310345,\"percentileRank\":17.02127659574468,\"percentileRankPer90\":70.2127659574468,\"statFormat\":\"number\",\"statValue\":\"2\",\"title\":\"Chances created\"}],\"localizedTitleId\":\"passing\",\"title\":\"Passing\",\"type\":\"stat-values\"},{\"display\":\"stats-group\",\"items\":[{\"localizedTitleId\":\"dribbles_succeeded\",\"per90\":1.5517241379310345,\"percentileRank\":21.27659574468085,\"percentileRankPer90\":68.08510638297872,\"statFormat\":\"number\",\"statValue\":",
+      "json_type": "dict",
+      "json_keys": [
+        "sectionOrder",
+        "shotmap",
+        "statsSection",
+        "topStatCard",
+        "keeperShotmap"
+      ],
+      "stat_index": [
+        {
+          "path": "$.statsSection",
+          "localizedTitleId": "season_performance",
+          "title": "Season performance",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[0]",
+          "localizedTitleId": "shooting",
+          "title": "Shooting",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[0].items[0]",
+          "localizedTitleId": "goals",
+          "title": "Goals",
+          "statValue": "0",
+          "value": null,
+          "percentileRank": 0
+        },
+        {
+          "path": "$.statsSection.items[0].items[1]",
+          "localizedTitleId": "shots",
+          "title": "Shots",
+          "statValue": "0",
+          "value": null,
+          "percentileRank": 0
+        },
+        {
+          "path": "$.statsSection.items[1]",
+          "localizedTitleId": "passing",
+          "title": "Passing",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[1].items[0]",
+          "localizedTitleId": "assists",
+          "title": "Assists",
+          "statValue": "0",
+          "value": null,
+          "percentileRank": 0
+        },
+        {
+          "path": "$.statsSection.items[1].items[1]",
+          "localizedTitleId": "expected_assists",
+          "title": "xA",
+          "statValue": "0.15",
+          "value": null,
+          "percentileRank": 17.02127659574468
+        },
+        {
+          "path": "$.statsSection.items[1].items[2]",
+          "localizedTitleId": "successful_passes",
+          "title": "Accurate passes",
+          "statValue": "18",
+          "value": null,
+          "percentileRank": 3.546099290780142
+        },
+        {
+          "path": "$.statsSection.items[1].items[3]",
+          "localizedTitleId": "successful_passes_accuracy",
+          "title": "Pass accuracy",
+          "statValue": "94.7",
+          "value": null,
+          "percentileRank": 100
+        },
+        {
+          "path": "$.statsSection.items[1].items[4]",
+          "localizedTitleId": "chances_created",
+          "title": "Chances created",
+          "statValue": "2",
+          "value": null,
+          "percentileRank": 17.02127659574468
+        },
+        {
+          "path": "$.statsSection.items[2]",
+          "localizedTitleId": "possession",
+          "title": "Possession",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[2].items[0]",
+          "localizedTitleId": "dribbles_succeeded",
+          "title": "Dribbles",
+          "statValue": "2",
+          "value": null,
+          "percentileRank": 21.27659574468085
+        },
+        {
+          "path": "$.statsSection.items[2].items[1]",
+          "localizedTitleId": "won_contest_subtitle",
+          "title": "Dribbles success rate",
+          "statValue": "33.3",
+          "value": null,
+          "percentileRank": 28.368794326241137
+        },
+        {
+          "path": "$.statsSection.items[2].items[2]",
+          "localizedTitleId": "duel_won",
+          "title": "Duels won",
+          "statValue": "6",
+          "value": null,
+          "percentileRank": 9.929078014184398
+        },
+        {
+          "path": "$.statsSection.items[2].items[3]",
+          "localizedTitleId": "duel_won_percent",
+          "title": "Duels won %",
+          "statValue": "40.0",
+          "value": null,
+          "percentileRank": 26.24113475177305
+        },
+        {
+          "path": "$.statsSection.items[2].items[4]",
+          "localizedTitleId": "aerials_won",
+          "title": "Aerials won",
+          "statValue": "2",
+          "value": null,
+          "percentileRank": 48.226950354609926
+        },
+        {
+          "path": "$.statsSection.items[2].items[5]",
+          "localizedTitleId": "aerials_won_percent",
+          "title": "Aerials won %",
+          "statValue": "50.0",
+          "value": null,
+          "percentileRank": 69.50354609929079
+        },
+        {
+          "path": "$.statsSection.items[2].items[6]",
+          "localizedTitleId": "touches",
+          "title": "Touches",
+          "statValue": "47",
+          "value": null,
+          "percentileRank": 4.964539007092199
+        },
+        {
+          "path": "$.statsSection.items[2].items[7]",
+          "localizedTitleId": "touches_opp_box",
+          "title": "Touches in opposition box",
+          "statValue": "3",
+          "value": null,
+          "percentileRank": 10.638297872340425
+        },
+        {
+          "path": "$.statsSection.items[2].items[8]",
+          "localizedTitleId": "dispossessed",
+          "title": "Dispossessed",
+          "statValue": "1",
+          "value": null,
+          "percentileRank": 82.26950354609929
+        },
+        {
+          "path": "$.statsSection.items[2].items[9]",
+          "localizedTitleId": "fouls_won",
+          "title": "Fouls won",
+          "statValue": "1",
+          "value": null,
+          "percentileRank": 2.8368794326241136
+        },
+        {
+          "path": "$.statsSection.items[3]",
+          "localizedTitleId": "defending",
+          "title": "Defending",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[3].items[0]",
+          "localizedTitleId": "defensive_actions",
+          "title": "Defensive actions",
+          "statValue": "4",
+          "value": null,
+          "percentileRank": 19.858156028368796
+        },
+        {
+          "path": "$.statsSection.items[3].items[1]",
+          "localizedTitleId": "matchstats.headers.tackles",
+          "title": "Tackles",
+          "statValue": "1",
+          "value": null,
+          "percentileRank": 5.673758865248227
+        },
+        {
+          "path": "$.statsSection.items[3].items[2]",
+          "localizedTitleId": "blocked_shots",
+          "title": "Blocked scoring attempt",
+          "statValue": "1",
+          "value": null,
+          "percentileRank": 68.79432624113475
+        },
+        {
+          "path": "$.statsSection.items[3].items[3]",
+          "localizedTitleId": "recoveries",
+          "title": "Recoveries",
+          "statValue": "3",
+          "value": null,
+          "percentileRank": 2.127659574468085
+        },
+        {
+          "path": "$.statsSection.items[3].items[4]",
+          "localizedTitleId": "dribbled_past",
+          "title": "Dribbled past",
+          "statValue": "2",
+          "value": null,
+          "percentileRank": 52.4822695035461
+        },
+        {
+          "path": "$.statsSection.items[3].items[5]",
+          "localizedTitleId": "clearances",
+          "title": "Clearances",
+          "statValue": "2",
+          "value": null,
+          "percentileRank": 41.13475177304964
+        },
+        {
+          "path": "$.statsSection.items[3].items[6]",
+          "localizedTitleId": "clean_sheet_team_title",
+          "title": "Clean sheets",
+          "statValue": "0",
+          "value": null,
+          "percentileRank": 0
+        },
+        {
+          "path": "$.statsSection.items[3].items[7]",
+          "localizedTitleId": "goals_conceded_while_on_pitch",
+          "title": "Goals conceded while on pitch",
+          "statValue": "2",
+          "value": null,
+          "percentileRank": 70.2127659574468
+        },
+        {
+          "path": "$.statsSection.items[3].items[8]",
+          "localizedTitleId": "expected_goals_against_while_on_pitch",
+          "title": "xG against while on pitch",
+          "statValue": "1.72",
+          "value": null,
+          "percentileRank": 82.97872340425532
+        },
+        {
+          "path": "$.statsSection.items[4]",
+          "localizedTitleId": "discipline",
+          "title": "Discipline",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[4].items[0]",
+          "localizedTitleId": "yellow_cards",
+          "title": "Yellow cards",
+          "statValue": "0",
+          "value": null,
+          "percentileRank": 100
+        },
+        {
+          "path": "$.statsSection.items[4].items[1]",
+          "localizedTitleId": "red_cards",
+          "title": "Red cards",
+          "statValue": "0",
+          "value": null,
+          "percentileRank": 100
+        },
+        {
+          "path": "$.topStatCard.items[2]",
+          "localizedTitleId": "rating",
+          "title": "Rating",
+          "statValue": "6.44",
+          "value": null,
+          "percentileRank": 21.27659574468085
+        },
+        {
+          "path": "$.topStatCard.items[3]",
+          "localizedTitleId": "matches_uppercase",
+          "title": "Matches",
+          "statValue": "3",
+          "value": null,
+          "percentileRank": 9.219858156028367
+        },
+        {
+          "path": "$.topStatCard.items[4]",
+          "localizedTitleId": "player_started_matches",
+          "title": "Started",
+          "statValue": "1",
+          "value": null,
+          "percentileRank": 0
+        },
+        {
+          "path": "$.topStatCard.items[5]",
+          "localizedTitleId": "minutes_played",
+          "title": "Minutes",
+          "statValue": "116",
+          "value": null,
+          "percentileRank": 11.347517730496454
+        }
+      ],
+      "json": {
+        "sectionOrder": [
+          "top-stat-card",
+          "shotmap",
+          "stats-section"
+        ],
+        "shotmap": [
+          {
+            "id": 2854644753,
+            "playerName": "Kornel Lisman",
+            "eventType": "Miss",
+            "shotType": "RightFoot",
+            "situation": "RegularPlay",
+            "teamId": 2182,
+            "playerId": 1529483,
+            "x": 92.8,
+            "y": 45.5421656011,
+            "min": 31,
+            "period": "FirstHalf",
+            "isOwnGoal": false,
+            "isBlocked": false,
+            "isOnTarget": false,
+            "isSavedOffLine": false,
+            "isFromInsideBox": true,
+            "goalCrossedY": 30.05190476,
+            "goalCrossedZ": 3.9764137976,
+            "expectedGoals": 0.0421117730438709,
+            "expectedGoalsOnTarget": 0,
+            "onGoalShot": {
+              "x": 1.6724255610811,
+              "y": 0.677248677248677,
+              "zoomRatio": 0.643796176732188
+            },
+            "box": "InsideBox",
+            "homeTeamId": 2182,
+            "awayTeamId": 10015,
+            "homeTeamName": "Lech Poznan",
+            "awayTeamName": "Rapid Wien",
+            "homeScore": 2,
+            "awayScore": 0,
+            "matchId": 4947966,
+            "matchDate": "2025-10-02T16:45:00Z",
+            "teamColor": "#004898",
+            "teamColorDark": "#004898"
+          }
+        ],
+        "statsSection": {
+          "id": "stats-section",
+          "items": [
+            {
+              "display": "stats-group",
+              "items": [
+                {
+                  "localizedTitleId": "goals",
+                  "per90": 0,
+                  "percentileRank": 0,
+                  "percentileRankPer90": 0,
+                  "statFormat": "number",
+                  "statValue": "0",
+                  "title": "Goals"
+                },
+                {
+                  "localizedTitleId": "shots",
+                  "per90": 0,
+                  "percentileRank": 0,
+                  "percentileRankPer90": 0,
+                  "statFormat": "number",
+                  "statValue": "0",
+                  "title": "Shots"
+                }
+              ],
+              "localizedTitleId": "shooting",
+              "title": "Shooting",
+              "type": "stat-values"
+            },
+            {
+              "display": "stats-group",
+              "items": [
+                {
+                  "localizedTitleId": "assists",
+                  "per90": 0,
+                  "percentileRank": 0,
+                  "percentileRankPer90": 0,
+                  "statFormat": "number",
+                  "statValue": "0",
+                  "title": "Assists"
+                },
+                {
+                  "localizedTitleId": "expected_assists",
+                  "per90": 0.11320407662926049,
+                  "percentileRank": 17.02127659574468,
+                  "percentileRankPer90": 46.09929078014184,
+                  "statFormat": "fraction",
+                  "statValue": "0.15",
+                  "title": "xA"
+                },
+                {
+                  "localizedTitleId": "successful_passes",
+                  "per90": 13.965517241379311,
+                  "percentileRank": 3.546099290780142,
+                  "percentileRankPer90": 8.51063829787234,
+                  "statFormat": "number",
+                  "statValue": "18",
+                  "title": "Accurate passes"
+                },
+                {
+                  "localizedTitleId": "successful_passes_accuracy",
+                  "per90": 94.73684210526316,
+                  "percentileRank": 100,
+                  "percentileRankPer90": 100,
+                  "statFormat": "percent",
+                  "statValue": "94.7",
+                  "title": "Pass accuracy"
+                },
+                {
+                  "localizedTitleId": "chances_created",
+                  "per90": 1.5517241379310345,
+                  "percentileRank": 17.02127659574468,
+                  "percentileRankPer90": 70.2127659574468,
+                  "statFormat": "number",
+                  "statValue": "2",
+                  "title": "Chances created"
+                }
+              ],
+              "localizedTitleId": "passing",
+              "title": "Passing",
+              "type": "stat-values"
+            },
+            {
+              "display": "stats-group",
+              "items": [
+                {
+                  "localizedTitleId": "dribbles_succeeded",
+                  "per90": 1.5517241379310345,
+                  "percentileRank": 21.27659574468085,
+                  "percentileRankPer90": 68.08510638297872,
+                  "statFormat": "number",
+                  "statValue": "2",
+                  "title": "Dribbles"
+                },
+                {
+                  "localizedTitleId": "won_contest_subtitle",
+                  "per90": 33.333333333333336,
+                  "percentileRank": 28.368794326241137,
+                  "percentileRankPer90": 28.368794326241137,
+                  "statFormat": "percent",
+                  "statValue": "33.3",
+                  "title": "Dribbles success rate"
+                },
+                {
+                  "localizedTitleId": "duel_won",
+                  "per90": 4.655172413793103,
+                  "percentileRank": 9.929078014184398,
+                  "percentileRankPer90": 43.97163120567376,
+                  "statFormat": "number",
+                  "statValue": "6",
+                  "title": "Duels won"
+                },
+                {
+                  "localizedTitleId": "duel_won_percent",
+                  "per90": 40,
+                  "percentileRank": 26.24113475177305,
+                  "percentileRankPer90": 26.24113475177305,
+                  "statFormat": "percent",
+                  "statValue": "40.0",
+                  "title": "Duels won %"
+                },
+                {
+                  "localizedTitleId": "aerials_won",
+                  "per90": 1.5517241379310345,
+                  "percentileRank": 48.226950354609926,
+                  "percentileRankPer90": 87.2340425531915,
+                  "statFormat": "number",
+                  "statValue": "2",
+                  "title": "Aerials won"
+                },
+                {
+                  "localizedTitleId": "aerials_won_percent",
+                  "per90": 50,
+                  "percentileRank": 69.50354609929079,
+                  "percentileRankPer90": 69.50354609929079,
+                  "statFormat": "percent",
+                  "statValue": "50.0",
+                  "title": "Aerials won %"
+                },
+                {
+                  "localizedTitleId": "touches",
+                  "per90": 36.46551724137931,
+                  "percentileRank": 4.964539007092199,
+                  "percentileRankPer90": 7.092198581560284,
+                  "statFormat": "number",
+                  "statValue": "47",
+                  "title": "Touches"
+                },
+                {
+                  "localizedTitleId": "touches_opp_box",
+                  "per90": 2.3275862068965516,
+                  "percentileRank": 10.638297872340425,
+                  "percentileRankPer90": 24.822695035460992,
+                  "statFormat": "number",
+                  "statValue": "3",
+                  "title": "Touches in opposition box"
+                },
+                {
+                  "localizedTitleId": "dispossessed",
+                  "per90": 0.7758620689655172,
+                  "percentileRank": 82.26950354609929,
+                  "percentileRankPer90": 75.177304964539,
+                  "statFormat": "number",
+                  "statValue": "1",
+                  "title": "Dispossessed"
+                },
+                {
+                  "localizedTitleId": "fouls_won",
+                  "per90": 0.7758620689655172,
+                  "percentileRank": 2.8368794326241136,
+                  "percentileRankPer90": 12.056737588652481,
+                  "statFormat": "number",
+                  "statValue": "1",
+                  "title": "Fouls won"
+                }
+              ],
+              "localizedTitleId": "possession",
+              "title": "Possession",
+              "type": "stat-values"
+            },
+            {
+              "display": "stats-group",
+              "items": [
+                {
+                  "localizedTitleId": "defensive_actions",
+                  "per90": 3.103448275862069,
+                  "percentileRank": 19.858156028368796,
+                  "percentileRankPer90": 61.702127659574465,
+                  "statFormat": "number",
+                  "statValue": "4",
+                  "title": "Defensive actions"
+                },
+                {
+                  "localizedTitleId": "matchstats.headers.tackles",
+                  "per90": 0.7758620689655172,
+                  "percentileRank": 5.673758865248227,
+                  "percentileRankPer90": 21.98581560283688,
+                  "statFormat": "number",
+                  "statValue": "1",
+                  "title": "Tackles"
+                },
+                {
+                  "localizedTitleId": "blocked_shots",
+                  "per90": 0.7758620689655172,
+                  "percentileRank": 68.79432624113475,
+                  "percentileRankPer90": 98.58156028368793,
+                  "statFormat": "number",
+                  "statValue": "1",
+                  "title": "Blocked scoring attempt"
+                },
+                {
+                  "localizedTitleId": "recoveries",
+                  "per90": 2.3275862068965516,
+                  "percentileRank": 2.127659574468085,
+                  "percentileRankPer90": 6.382978723404255,
+                  "statFormat": "number",
+                  "statValue": "3",
+                  "title": "Recoveries"
+                },
+                {
+                  "localizedTitleId": "dribbled_past",
+                  "per90": 1.5517241379310345,
+                  "percentileRank": 52.4822695035461,
+                  "percentileRankPer90": 12.056737588652481,
+                  "statFormat": "number",
+                  "statValue": "2",
+                  "title": "Dribbled past"
+                },
+                {
+                  "localizedTitleId": "clearances",
+                  "per90": 1.5517241379310345,
+                  "percentileRank": 41.13475177304964,
+                  "percentileRankPer90": 88.65248226950354,
+                  "statFormat": "number",
+                  "statValue": "2",
+                  "title": "Clearances"
+                },
+                {
+                  "localizedTitleId": "clean_sheet_team_title",
+                  "per90": 0,
+                  "percentileRank": 0,
+                  "percentileRankPer90": 0,
+                  "statFormat": "number",
+                  "statValue": "0",
+                  "title": "Clean sheets"
+                },
+                {
+                  "localizedTitleId": "goals_conceded_while_on_pitch",
+                  "per90": 1.5517241379310345,
+                  "percentileRank": 70.2127659574468,
+                  "percentileRankPer90": 21.98581560283688,
+                  "statFormat": "number",
+                  "statValue": "2",
+                  "title": "Goals conceded while on pitch"
+                },
+                {
+                  "localizedTitleId": "expected_goals_against_while_on_pitch",
+                  "per90": 1.338129290219011,
+                  "percentileRank": 82.97872340425532,
+                  "percentileRankPer90": 45.39007092198582,
+                  "statFormat": "fraction",
+                  "statValue": "1.72",
+                  "title": "xG against while on pitch"
+                }
+              ],
+              "localizedTitleId": "defending",
+              "title": "Defending",
+              "type": "stat-values"
+            },
+            {
+              "display": "stats-group",
+              "items": [
+                {
+                  "localizedTitleId": "yellow_cards",
+                  "per90": 0,
+                  "percentileRank": 100,
+                  "percentileRankPer90": 100,
+                  "statFormat": "number",
+                  "statValue": "0",
+                  "title": "Yellow cards"
+                },
+                {
+                  "localizedTitleId": "red_cards",
+                  "per90": 0,
+                  "percentileRank": 100,
+                  "percentileRankPer90": 100,
+                  "statFormat": "number",
+                  "statValue": "0",
+                  "title": "Red cards"
+                }
+              ],
+              "localizedTitleId": "discipline",
+              "title": "Discipline",
+              "type": "stat-values"
+            }
+          ],
+          "localizedTitleId": "season_performance",
+          "title": "Season performance",
+          "type": "grouped-stat-values"
+        },
+        "topStatCard": {
+          "display": "stats-group",
+          "id": "top-stat-card",
+          "items": [
+            {
+              "localizedTitleId": "goals",
+              "per90": 0,
+              "percentileRank": 0,
+              "percentileRankPer90": 0,
+              "statFormat": "number",
+              "statValue": "0",
+              "title": "Goals"
+            },
+            {
+              "localizedTitleId": "assists",
+              "per90": 0,
+              "percentileRank": 0,
+              "percentileRankPer90": 0,
+              "statFormat": "number",
+              "statValue": "0",
+              "title": "Assists"
+            },
+            {
+              "localizedTitleId": "rating",
+              "per90": 6.4366666666666665,
+              "percentileRank": 21.27659574468085,
+              "percentileRankPer90": 21.27659574468085,
+              "statFormat": "fraction",
+              "statValue": "6.44",
+              "title": "Rating"
+            },
+            {
+              "localizedTitleId": "matches_uppercase",
+              "per90": 3,
+              "percentileRank": 9.219858156028367,
+              "percentileRankPer90": 9.219858156028367,
+              "statFormat": "number",
+              "statValue": "3",
+              "title": "Matches"
+            },
+            {
+              "localizedTitleId": "player_started_matches",
+              "per90": 1,
+              "percentileRank": 0,
+              "percentileRankPer90": 14.184397163120568,
+              "statFormat": "number",
+              "statValue": "1",
+              "title": "Started"
+            },
+            {
+              "localizedTitleId": "minutes_played",
+              "per90": 90,
+              "percentileRank": 11.347517730496454,
+              "percentileRankPer90": 100,
+              "statFormat": "number",
+              "statValue": "116",
+              "title": "Minutes"
+            }
+          ],
+          "type": "stat-values"
+        },
+        "keeperShotmap": null
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "Albion Rrahmani",
+      "playerId": 1379468,
+      "stat_root_path": "$.next_data_hits[0].object",
+      "available_seasons": [
+        {
+          "seasonName": "2026/2027",
+          "entryId": "0-0",
+          "tournamentId": 141,
+          "tournamentName": "Coppa Italia",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2025/2026",
+          "entryId": "1-0",
+          "tournamentId": 122,
+          "tournamentName": "1. Liga",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2025/2026",
+          "entryId": "1-1",
+          "tournamentId": 10195,
+          "tournamentName": "World Cup UEFA qualification",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2025/2026",
+          "entryId": "1-2",
+          "tournamentId": 10216,
+          "tournamentName": "Conference League",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2024/2025",
+          "entryId": "2-0",
+          "tournamentId": 189,
+          "tournamentName": "Superliga",
+          "hasDeepStats": false
+        },
+        {
+          "seasonName": "2024/2025",
+          "entryId": "2-1",
+          "tournamentId": 122,
+          "tournamentName": "1. Liga",
+          "hasDeepStats": false
+        },
+        {
+          "seasonName": "2024/2025",
+          "entryId": "2-2",
+          "tournamentId": 42,
+          "tournamentName": "Champions League",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2024/2025",
+          "entryId": "2-3",
+          "tournamentId": 10611,
+          "tournamentName": "Champions League Qualification qualification",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2024/2025",
+          "entryId": "2-4",
+          "tournamentId": 9808,
+          "tournamentName": "UEFA Nations League C",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2023/2024",
+          "entryId": "3-0",
+          "tournamentId": 189,
+          "tournamentName": "Superliga",
+          "hasDeepStats": false
+        },
+        {
+          "seasonName": "2023/2024",
+          "entryId": "3-1",
+          "tournamentId": 10607,
+          "tournamentName": "EURO Qualification qualification",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2023/2024",
+          "entryId": "3-2",
+          "tournamentId": 10611,
+          "tournamentName": "Champions League Qualification qualification",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2022/2023",
+          "entryId": "4-0",
+          "tournamentId": 10611,
+          "tournamentName": "Champions League Qualification qualification",
+          "hasDeepStats": true
+        },
+        {
+          "seasonName": "2022/2023",
+          "entryId": "4-1",
+          "tournamentId": 10216,
+          "tournamentName": "Conference League",
+          "hasDeepStats": true
+        }
+      ],
+      "chosen": {
+        "seasonName": "2025/2026",
+        "entryId": "1-0",
+        "tournamentId": 122,
+        "tournamentName": "1. Liga",
+        "hasDeepStats": true
+      },
+      "request_url": "https://www.fotmob.com/api/data/playerStats?playerId=1379468&seasonId=1-0&isFirstSeason=false",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 8581,
+      "sha256": "c54925278b084086d6fc29c5d28e979716b5f5c1c37c705357b7227e2b72ba6f",
+      "preview": "{\"sectionOrder\":[\"top-stat-card\",\"shotmap\",\"stats-section\"],\"statsSection\":{\"id\":\"stats-section\",\"items\":[{\"display\":\"stats-group\",\"items\":[{\"localizedTitleId\":\"goals\",\"per90\":0.5296950240770465,\"percentileRank\":93.75,\"percentileRankPer90\":82.8125,\"statFormat\":\"number\",\"statValue\":\"11\",\"title\":\"Goals\"},{\"localizedTitleId\":\"goals_subtitle\",\"per90\":0.04815409309791332,\"percentileRank\":85.9375,\"percentileRankPer90\":85.9375,\"statFormat\":\"number\",\"statValue\":\"1\",\"title\":\"Penalty goals\"},{\"localizedTitleId\":\"shots\",\"per90\":3.515248796147673,\"percentileRank\":96.875,\"percentileRankPer90\":93.75,\"statFormat\":\"number\",\"statValue\":\"73\",\"title\":\"Shots\"},{\"localizedTitleId\":\"ShotsOnTarget\",\"per90\":1.2520064205457464,\"percentileRank\":92.1875,\"percentileRankPer90\":82.8125,\"statFormat\":\"number\",\"statValue\":\"26\",\"title\":\"Shots on target\"},{\"localizedTitleId\":\"headed_shots\",\"per90\":0.6741573033707865,\"percentileRank\":82.8125,\"percentileRankPer90\":54.6875,\"statFormat\":\"number\",\"statValue\":\"14\",\"title\":\"Headed shots\"}],\"localizedTitleId\":\"shooting\",\"title\":\"Shooting\",\"type\":\"stat-values\"},{\"display\":\"stats-group\",\"items\":[{\"localizedTitleId\":\"assists\",\"per90\":0.14446227929373998,\"percentileRank\":81.25,\"percentileRankPer90\":76.5625,\"statFormat\":\"number\",\"statValue\":\"3\",\"title\":\"Assists\"},{\"localizedTitleId\":\"successful_passes\",\"per90\":19.887640449438205,\"percentileRank\":100,\"percentileRankPer90\":89.0625,\"statFormat\":\"number\",\"statValue\":\"413\",\"title\":\"Accurate passes\"},{\"localizedTitleId\":\"successful_passes_accuracy\",\"per90\":72.07678883071553,\"percentileRank\":70.3125,\"percentileRankPer90\":70.3125,\"statFormat\":\"percent\",\"statValue\":\"72.1\",\"title\":\"Pass accuracy\"},{\"localizedTitleId\":\"long_balls_accurate\",\"per90\":0.7704654895666131,\"percentileRank\":100,\"percentileRankPer90\":87.5,\"statFormat\":\"number\",\"statValue\":\"16\",\"title\":\"Accurate long balls\"},{\"localizedTitleId\":\"long_ball_succeeeded_accuracy\",\"per90\":59.25925925925926,\"percentileRank\":67.1875,\"percentileRankPer90\":67.1875,\"statFormat\":\"percent\",\"statValue\":\"59.3\",\"title\":\"Long ball accuracy\"},{\"localizedTitleId\":\"chances_created\",\"per90\":1.6372391653290528,\"percentileRank\":100,\"percentileRankPer90\":90.625,\"statFormat\":\"number\",\"statValue\":\"34\",\"title\":\"Chances created\"},{\"localizedTitleId\":\"big_chance_created_team_title\",\"per90\":0.28892455858747995,\"percentileRank\":87.5,\"percentileRankPer90\":73.4375,\"statFormat\":\"number\",\"statValue\":\"6\",\"title\":\"Big chances created\"},{\"localizedTitleId\":\"crosses_succeeeded\",\"per90\":0.096308",
+      "json_type": "dict",
+      "json_keys": [
+        "sectionOrder",
+        "statsSection",
+        "topStatCard",
+        "shotmap",
+        "keeperShotmap"
+      ],
+      "stat_index": [
+        {
+          "path": "$.statsSection",
+          "localizedTitleId": "season_performance",
+          "title": "Season performance",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[0]",
+          "localizedTitleId": "shooting",
+          "title": "Shooting",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[0].items[0]",
+          "localizedTitleId": "goals",
+          "title": "Goals",
+          "statValue": "11",
+          "value": null,
+          "percentileRank": 93.75
+        },
+        {
+          "path": "$.statsSection.items[0].items[1]",
+          "localizedTitleId": "goals_subtitle",
+          "title": "Penalty goals",
+          "statValue": "1",
+          "value": null,
+          "percentileRank": 85.9375
+        },
+        {
+          "path": "$.statsSection.items[0].items[2]",
+          "localizedTitleId": "shots",
+          "title": "Shots",
+          "statValue": "73",
+          "value": null,
+          "percentileRank": 96.875
+        },
+        {
+          "path": "$.statsSection.items[0].items[3]",
+          "localizedTitleId": "ShotsOnTarget",
+          "title": "Shots on target",
+          "statValue": "26",
+          "value": null,
+          "percentileRank": 92.1875
+        },
+        {
+          "path": "$.statsSection.items[0].items[4]",
+          "localizedTitleId": "headed_shots",
+          "title": "Headed shots",
+          "statValue": "14",
+          "value": null,
+          "percentileRank": 82.8125
+        },
+        {
+          "path": "$.statsSection.items[1]",
+          "localizedTitleId": "passing",
+          "title": "Passing",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[1].items[0]",
+          "localizedTitleId": "assists",
+          "title": "Assists",
+          "statValue": "3",
+          "value": null,
+          "percentileRank": 81.25
+        },
+        {
+          "path": "$.statsSection.items[1].items[1]",
+          "localizedTitleId": "successful_passes",
+          "title": "Accurate passes",
+          "statValue": "413",
+          "value": null,
+          "percentileRank": 100
+        },
+        {
+          "path": "$.statsSection.items[1].items[2]",
+          "localizedTitleId": "successful_passes_accuracy",
+          "title": "Pass accuracy",
+          "statValue": "72.1",
+          "value": null,
+          "percentileRank": 70.3125
+        },
+        {
+          "path": "$.statsSection.items[1].items[3]",
+          "localizedTitleId": "long_balls_accurate",
+          "title": "Accurate long balls",
+          "statValue": "16",
+          "value": null,
+          "percentileRank": 100
+        },
+        {
+          "path": "$.statsSection.items[1].items[4]",
+          "localizedTitleId": "long_ball_succeeeded_accuracy",
+          "title": "Long ball accuracy",
+          "statValue": "59.3",
+          "value": null,
+          "percentileRank": 67.1875
+        },
+        {
+          "path": "$.statsSection.items[1].items[5]",
+          "localizedTitleId": "chances_created",
+          "title": "Chances created",
+          "statValue": "34",
+          "value": null,
+          "percentileRank": 100
+        },
+        {
+          "path": "$.statsSection.items[1].items[6]",
+          "localizedTitleId": "big_chance_created_team_title",
+          "title": "Big chances created",
+          "statValue": "6",
+          "value": null,
+          "percentileRank": 87.5
+        },
+        {
+          "path": "$.statsSection.items[1].items[7]",
+          "localizedTitleId": "crosses_succeeeded",
+          "title": "Successful crosses",
+          "statValue": "2",
+          "value": null,
+          "percentileRank": 62.5
+        },
+        {
+          "path": "$.statsSection.items[1].items[8]",
+          "localizedTitleId": "crosses_succeeeded_accuracy",
+          "title": "Cross accuracy",
+          "statValue": "50.0",
+          "value": null,
+          "percentileRank": 90.625
+        },
+        {
+          "path": "$.statsSection.items[2]",
+          "localizedTitleId": "possession",
+          "title": "Possession",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[2].items[0]",
+          "localizedTitleId": "dribbles_succeeded",
+          "title": "Dribbles",
+          "statValue": "26",
+          "value": null,
+          "percentileRank": 96.875
+        },
+        {
+          "path": "$.statsSection.items[2].items[1]",
+          "localizedTitleId": "won_contest_subtitle",
+          "title": "Dribbles success rate",
+          "statValue": "37.7",
+          "value": null,
+          "percentileRank": 50
+        },
+        {
+          "path": "$.statsSection.items[2].items[2]",
+          "localizedTitleId": "duel_won",
+          "title": "Duels won",
+          "statValue": "94",
+          "value": null,
+          "percentileRank": 82.8125
+        },
+        {
+          "path": "$.statsSection.items[2].items[3]",
+          "localizedTitleId": "duel_won_percent",
+          "title": "Duels won %",
+          "statValue": "43.1",
+          "value": null,
+          "percentileRank": 59.375
+        },
+        {
+          "path": "$.statsSection.items[2].items[4]",
+          "localizedTitleId": "aerials_won",
+          "title": "Aerials won",
+          "statValue": "24",
+          "value": null,
+          "percentileRank": 46.875
+        },
+        {
+          "path": "$.statsSection.items[2].items[5]",
+          "localizedTitleId": "aerials_won_percent",
+          "title": "Aerials won %",
+          "statValue": "47.1",
+          "value": null,
+          "percentileRank": 56.25
+        },
+        {
+          "path": "$.statsSection.items[2].items[6]",
+          "localizedTitleId": "touches",
+          "title": "Touches",
+          "statValue": "914",
+          "value": null,
+          "percentileRank": 100
+        },
+        {
+          "path": "$.statsSection.items[2].items[7]",
+          "localizedTitleId": "touches_opp_box",
+          "title": "Touches in opposition box",
+          "statValue": "135",
+          "value": null,
+          "percentileRank": 93.75
+        },
+        {
+          "path": "$.statsSection.items[2].items[8]",
+          "localizedTitleId": "dispossessed",
+          "title": "Dispossessed",
+          "statValue": "26",
+          "value": null,
+          "percentileRank": 6.25
+        },
+        {
+          "path": "$.statsSection.items[2].items[9]",
+          "localizedTitleId": "fouls_won",
+          "title": "Fouls won",
+          "statValue": "23",
+          "value": null,
+          "percentileRank": 75
+        },
+        {
+          "path": "$.statsSection.items[3]",
+          "localizedTitleId": "defending",
+          "title": "Defending",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[3].items[0]",
+          "localizedTitleId": "defensive_actions",
+          "title": "Defensive actions",
+          "statValue": "34",
+          "value": null,
+          "percentileRank": 79.6875
+        },
+        {
+          "path": "$.statsSection.items[3].items[1]",
+          "localizedTitleId": "matchstats.headers.tackles",
+          "title": "Tackles",
+          "statValue": "21",
+          "value": null,
+          "percentileRank": 93.75
+        },
+        {
+          "path": "$.statsSection.items[3].items[2]",
+          "localizedTitleId": "interceptions",
+          "title": "Interceptions",
+          "statValue": "6",
+          "value": null,
+          "percentileRank": 90.625
+        },
+        {
+          "path": "$.statsSection.items[3].items[3]",
+          "localizedTitleId": "blocked_shots",
+          "title": "Blocked scoring attempt",
+          "statValue": "1",
+          "value": null,
+          "percentileRank": 34.375
+        },
+        {
+          "path": "$.statsSection.items[3].items[4]",
+          "localizedTitleId": "fouls",
+          "title": "Fouls committed",
+          "statValue": "21",
+          "value": null,
+          "percentileRank": 39.0625
+        },
+        {
+          "path": "$.statsSection.items[3].items[5]",
+          "localizedTitleId": "recoveries",
+          "title": "Recoveries",
+          "statValue": "61",
+          "value": null,
+          "percentileRank": 96.875
+        },
+        {
+          "path": "$.statsSection.items[3].items[6]",
+          "localizedTitleId": "poss_won_att_3rd_team_title",
+          "title": "Possession won final 3rd",
+          "statValue": "13",
+          "value": null,
+          "percentileRank": 92.1875
+        },
+        {
+          "path": "$.statsSection.items[3].items[7]",
+          "localizedTitleId": "dribbled_past",
+          "title": "Dribbled past",
+          "statValue": "8",
+          "value": null,
+          "percentileRank": 6.25
+        },
+        {
+          "path": "$.statsSection.items[3].items[8]",
+          "localizedTitleId": "clearances",
+          "title": "Clearances",
+          "statValue": "6",
+          "value": null,
+          "percentileRank": 34.375
+        },
+        {
+          "path": "$.statsSection.items[3].items[9]",
+          "localizedTitleId": "clean_sheet_team_title",
+          "title": "Clean sheets",
+          "statValue": "1",
+          "value": null,
+          "percentileRank": 65.625
+        },
+        {
+          "path": "$.statsSection.items[3].items[10]",
+          "localizedTitleId": "goals_conceded_while_on_pitch",
+          "title": "Goals conceded while on pitch",
+          "statValue": "25",
+          "value": null,
+          "percentileRank": 10.9375
+        },
+        {
+          "path": "$.statsSection.items[4]",
+          "localizedTitleId": "discipline",
+          "title": "Discipline",
+          "statValue": null,
+          "value": null,
+          "percentileRank": null
+        },
+        {
+          "path": "$.statsSection.items[4].items[0]",
+          "localizedTitleId": "yellow_cards",
+          "title": "Yellow cards",
+          "statValue": "3",
+          "value": null,
+          "percentileRank": 26.5625
+        },
+        {
+          "path": "$.statsSection.items[4].items[1]",
+          "localizedTitleId": "red_cards",
+          "title": "Red cards",
+          "statValue": "0",
+          "value": null,
+          "percentileRank": 100
+        },
+        {
+          "path": "$.topStatCard.items[2]",
+          "localizedTitleId": "rating",
+          "title": "Rating",
+          "statValue": "6.95",
+          "value": null,
+          "percentileRank": 90.625
+        },
+        {
+          "path": "$.topStatCard.items[3]",
+          "localizedTitleId": "matches_uppercase",
+          "title": "Matches",
+          "statValue": "34",
+          "value": null,
+          "percentileRank": 100
+        },
+        {
+          "path": "$.topStatCard.items[4]",
+          "localizedTitleId": "player_started_matches",
+          "title": "Started",
+          "statValue": "20",
+          "value": null,
+          "percentileRank": 87.5
+        },
+        {
+          "path": "$.topStatCard.items[5]",
+          "localizedTitleId": "minutes_played",
+          "title": "Minutes",
+          "statValue": "1869",
+          "value": null,
+          "percentileRank": 93.75
+        }
+      ],
+      "json": {
+        "sectionOrder": [
+          "top-stat-card",
+          "shotmap",
+          "stats-section"
+        ],
+        "statsSection": {
+          "id": "stats-section",
+          "items": [
+            {
+              "display": "stats-group",
+              "items": [
+                {
+                  "localizedTitleId": "goals",
+                  "per90": 0.5296950240770465,
+                  "percentileRank": 93.75,
+                  "percentileRankPer90": 82.8125,
+                  "statFormat": "number",
+                  "statValue": "11",
+                  "title": "Goals"
+                },
+                {
+                  "localizedTitleId": "goals_subtitle",
+                  "per90": 0.04815409309791332,
+                  "percentileRank": 85.9375,
+                  "percentileRankPer90": 85.9375,
+                  "statFormat": "number",
+                  "statValue": "1",
+                  "title": "Penalty goals"
+                },
+                {
+                  "localizedTitleId": "shots",
+                  "per90": 3.515248796147673,
+                  "percentileRank": 96.875,
+                  "percentileRankPer90": 93.75,
+                  "statFormat": "number",
+                  "statValue": "73",
+                  "title": "Shots"
+                },
+                {
+                  "localizedTitleId": "ShotsOnTarget",
+                  "per90": 1.2520064205457464,
+                  "percentileRank": 92.1875,
+                  "percentileRankPer90": 82.8125,
+                  "statFormat": "number",
+                  "statValue": "26",
+                  "title": "Shots on target"
+                },
+                {
+                  "localizedTitleId": "headed_shots",
+                  "per90": 0.6741573033707865,
+                  "percentileRank": 82.8125,
+                  "percentileRankPer90": 54.6875,
+                  "statFormat": "number",
+                  "statValue": "14",
+                  "title": "Headed shots"
+                }
+              ],
+              "localizedTitleId": "shooting",
+              "title": "Shooting",
+              "type": "stat-values"
+            },
+            {
+              "display": "stats-group",
+              "items": [
+                {
+                  "localizedTitleId": "assists",
+                  "per90": 0.14446227929373998,
+                  "percentileRank": 81.25,
+                  "percentileRankPer90": 76.5625,
+                  "statFormat": "number",
+                  "statValue": "3",
+                  "title": "Assists"
+                },
+                {
+                  "localizedTitleId": "successful_passes",
+                  "per90": 19.887640449438205,
+                  "percentileRank": 100,
+                  "percentileRankPer90": 89.0625,
+                  "statFormat": "number",
+                  "statValue": "413",
+                  "title": "Accurate passes"
+                },
+                {
+                  "localizedTitleId": "successful_passes_accuracy",
+                  "per90": 72.07678883071553,
+                  "percentileRank": 70.3125,
+                  "percentileRankPer90": 70.3125,
+                  "statFormat": "percent",
+                  "statValue": "72.1",
+                  "title": "Pass accuracy"
+                },
+                {
+                  "localizedTitleId": "long_balls_accurate",
+                  "per90": 0.7704654895666131,
+                  "percentileRank": 100,
+                  "percentileRankPer90": 87.5,
+                  "statFormat": "number",
+                  "statValue": "16",
+                  "title": "Accurate long balls"
+                },
+                {
+                  "localizedTitleId": "long_ball_succeeeded_accuracy",
+                  "per90": 59.25925925925926,
+                  "percentileRank": 67.1875,
+                  "percentileRankPer90": 67.1875,
+                  "statFormat": "percent",
+                  "statValue": "59.3",
+                  "title": "Long ball accuracy"
+                },
+                {
+                  "localizedTitleId": "chances_created",
+                  "per90": 1.6372391653290528,
+                  "percentileRank": 100,
+                  "percentileRankPer90": 90.625,
+                  "statFormat": "number",
+                  "statValue": "34",
+                  "title": "Chances created"
+                },
+                {
+                  "localizedTitleId": "big_chance_created_team_title",
+                  "per90": 0.28892455858747995,
+                  "percentileRank": 87.5,
+                  "percentileRankPer90": 73.4375,
+                  "statFormat": "number",
+                  "statValue": "6",
+                  "title": "Big chances created"
+                },
+                {
+                  "localizedTitleId": "crosses_succeeeded",
+                  "per90": 0.09630818619582664,
+                  "percentileRank": 62.5,
+                  "percentileRankPer90": 46.875,
+                  "statFormat": "number",
+                  "statValue": "2",
+                  "title": "Successful crosses"
+                },
+                {
+                  "localizedTitleId": "crosses_succeeeded_accuracy",
+                  "per90": 50,
+                  "percentileRank": 90.625,
+                  "percentileRankPer90": 90.625,
+                  "statFormat": "percent",
+                  "statValue": "50.0",
+                  "title": "Cross accuracy"
+                }
+              ],
+              "localizedTitleId": "passing",
+              "title": "Passing",
+              "type": "stat-values"
+            },
+            {
+              "display": "stats-group",
+              "items": [
+                {
+                  "localizedTitleId": "dribbles_succeeded",
+                  "per90": 1.2520064205457464,
+                  "percentileRank": 96.875,
+                  "percentileRankPer90": 87.5,
+                  "statFormat": "number",
+                  "statValue": "26",
+                  "title": "Dribbles"
+                },
+                {
+                  "localizedTitleId": "won_contest_subtitle",
+                  "per90": 37.68115942028985,
+                  "percentileRank": 50,
+                  "percentileRankPer90": 50,
+                  "statFormat": "percent",
+                  "statValue": "37.7",
+                  "title": "Dribbles success rate"
+                },
+                {
+                  "localizedTitleId": "duel_won",
+                  "per90": 4.526484751203853,
+                  "percentileRank": 82.8125,
+                  "percentileRankPer90": 32.8125,
+                  "statFormat": "number",
+                  "statValue": "94",
+                  "title": "Duels won"
+                },
+                {
+                  "localizedTitleId": "duel_won_percent",
+                  "per90": 43.11926605504587,
+                  "percentileRank": 59.375,
+                  "percentileRankPer90": 59.375,
+                  "statFormat": "percent",
+                  "statValue": "43.1",
+                  "title": "Duels won %"
+                },
+                {
+                  "localizedTitleId": "aerials_won",
+                  "per90": 1.1556982343499198,
+                  "percentileRank": 46.875,
+                  "percentileRankPer90": 15.625,
+                  "statFormat": "number",
+                  "statValue": "24",
+                  "title": "Aerials won"
+                },
+                {
+                  "localizedTitleId": "aerials_won_percent",
+                  "per90": 47.05882352941177,
+                  "percentileRank": 56.25,
+                  "percentileRankPer90": 56.25,
+                  "statFormat": "percent",
+                  "statValue": "47.1",
+                  "title": "Aerials won %"
+                },
+                {
+                  "localizedTitleId": "touches",
+                  "per90": 44.012841091492774,
+                  "percentileRank": 100,
+                  "percentileRankPer90": 89.0625,
+                  "statFormat": "number",
+                  "statValue": "914",
+                  "title": "Touches"
+                },
+                {
+                  "localizedTitleId": "touches_opp_box",
+                  "per90": 6.500802568218299,
+                  "percentileRank": 93.75,
+                  "percentileRankPer90": 87.5,
+                  "statFormat": "number",
+                  "statValue": "135",
+                  "title": "Touches in opposition box"
+                },
+                {
+                  "localizedTitleId": "dispossessed",
+                  "per90": 1.2520064205457464,
+                  "percentileRank": 6.25,
+                  "percentileRankPer90": 43.75,
+                  "statFormat": "number",
+                  "statValue": "26",
+                  "title": "Dispossessed"
+                },
+                {
+                  "localizedTitleId": "fouls_won",
+                  "per90": 1.1075441412520064,
+                  "percentileRank": 75,
+                  "percentileRankPer90": 45.3125,
+                  "statFormat": "number",
+                  "statValue": "23",
+                  "title": "Fouls won"
+                }
+              ],
+              "localizedTitleId": "possession",
+              "title": "Possession",
+              "type": "stat-values"
+            },
+            {
+              "display": "stats-group",
+              "items": [
+                {
+                  "localizedTitleId": "defensive_actions",
+                  "per90": 1.6372391653290528,
+                  "percentileRank": 79.6875,
+                  "percentileRankPer90": 31.25,
+                  "statFormat": "number",
+                  "statValue": "34",
+                  "title": "Defensive actions"
+                },
+                {
+                  "localizedTitleId": "matchstats.headers.tackles",
+                  "per90": 1.0112359550561798,
+                  "percentileRank": 93.75,
+                  "percentileRankPer90": 82.8125,
+                  "statFormat": "number",
+                  "statValue": "21",
+                  "title": "Tackles"
+                },
+                {
+                  "localizedTitleId": "interceptions",
+                  "per90": 0.28892455858747995,
+                  "percentileRank": 90.625,
+                  "percentileRankPer90": 60.9375,
+                  "statFormat": "number",
+                  "statValue": "6",
+                  "title": "Interceptions"
+                },
+                {
+                  "localizedTitleId": "blocked_shots",
+                  "per90": 0.04815409309791332,
+                  "percentileRank": 34.375,
+                  "percentileRankPer90": 34.375,
+                  "statFormat": "number",
+                  "statValue": "1",
+                  "title": "Blocked scoring attempt"
+                },
+                {
+                  "localizedTitleId": "fouls",
+                  "per90": 1.0112359550561798,
+                  "percentileRank": 39.0625,
+                  "percentileRankPer90": 78.125,
+                  "statFormat": "number",
+                  "statValue": "21",
+                  "title": "Fouls committed"
+                },
+                {
+                  "localizedTitleId": "recoveries",
+                  "per90": 2.937399678972713,
+                  "percentileRank": 96.875,
+                  "percentileRankPer90": 75,
+                  "statFormat": "number",
+                  "statValue": "61",
+                  "title": "Recoveries"
+                },
+                {
+                  "localizedTitleId": "poss_won_att_3rd_team_title",
+                  "per90": 0.6260032102728732,
+                  "percentileRank": 92.1875,
+                  "percentileRankPer90": 70.3125,
+                  "statFormat": "number",
+                  "statValue": "13",
+                  "title": "Possession won final 3rd"
+                },
+                {
+                  "localizedTitleId": "dribbled_past",
+                  "per90": 0.38523274478330655,
+                  "percentileRank": 6.25,
+                  "percentileRankPer90": 46.875,
+                  "statFormat": "number",
+                  "statValue": "8",
+                  "title": "Dribbled past"
+                },
+                {
+                  "localizedTitleId": "clearances",
+                  "per90": 0.28892455858747995,
+                  "percentileRank": 34.375,
+                  "percentileRankPer90": 9.375,
+                  "statFormat": "number",
+                  "statValue": "6",
+                  "title": "Clearances"
+                },
+                {
+                  "localizedTitleId": "clean_sheet_team_title",
+                  "per90": 0.04815409309791332,
+                  "percentileRank": 65.625,
+                  "percentileRankPer90": 68.75,
+                  "statFormat": "number",
+                  "statValue": "1",
+                  "title": "Clean sheets"
+                },
+                {
+                  "localizedTitleId": "goals_conceded_while_on_pitch",
+                  "per90": 1.203852327447833,
+                  "percentileRank": 10.9375,
+                  "percentileRankPer90": 54.6875,
+                  "statFormat": "number",
+                  "statValue": "25",
+                  "title": "Goals conceded while on pitch"
+                }
+              ],
+              "localizedTitleId": "defending",
+              "title": "Defending",
+              "type": "stat-values"
+            },
+            {
+              "display": "stats-group",
+              "items": [
+                {
+                  "localizedTitleId": "yellow_cards",
+                  "per90": 0.14446227929373998,
+                  "percentileRank": 26.5625,
+                  "percentileRankPer90": 57.8125,
+                  "statFormat": "number",
+                  "statValue": "3",
+                  "title": "Yellow cards"
+                },
+                {
+                  "localizedTitleId": "red_cards",
+                  "per90": 0,
+                  "percentileRank": 100,
+                  "percentileRankPer90": 100,
+                  "statFormat": "number",
+                  "statValue": "0",
+                  "title": "Red cards"
+                }
+              ],
+              "localizedTitleId": "discipline",
+              "title": "Discipline",
+              "type": "stat-values"
+            }
+          ],
+          "localizedTitleId": "season_performance",
+          "title": "Season performance",
+          "type": "grouped-stat-values"
+        },
+        "topStatCard": {
+          "display": "stats-group",
+          "id": "top-stat-card",
+          "items": [
+            {
+              "localizedTitleId": "goals",
+              "per90": 0.5296950240770465,
+              "percentileRank": 93.75,
+              "percentileRankPer90": 82.8125,
+              "statFormat": "number",
+              "statValue": "11",
+              "title": "Goals"
+            },
+            {
+              "localizedTitleId": "assists",
+              "per90": 0.14446227929373998,
+              "percentileRank": 81.25,
+              "percentileRankPer90": 76.5625,
+              "statFormat": "number",
+              "statValue": "3",
+              "title": "Assists"
+            },
+            {
+              "localizedTitleId": "rating",
+              "per90": 6.952058823529412,
+              "percentileRank": 90.625,
+              "percentileRankPer90": 90.625,
+              "statFormat": "fraction",
+              "statValue": "6.95",
+              "title": "Rating"
+            },
+            {
+              "localizedTitleId": "matches_uppercase",
+              "per90": 34,
+              "percentileRank": 100,
+              "percentileRankPer90": 100,
+              "statFormat": "number",
+              "statValue": "34",
+              "title": "Matches"
+            },
+            {
+              "localizedTitleId": "player_started_matches",
+              "per90": 20,
+              "percentileRank": 87.5,
+              "percentileRankPer90": 51.5625,
+              "statFormat": "number",
+              "statValue": "20",
+              "title": "Started"
+            },
+            {
+              "localizedTitleId": "minutes_played",
+              "per90": 90,
+              "percentileRank": 93.75,
+              "percentileRankPer90": 100,
+              "statFormat": "number",
+              "statValue": "1869",
+              "title": "Minutes"
+            }
+          ],
+          "type": "stat-values"
+        },
+        "shotmap": null,
+        "keeperShotmap": null
+      },
+      "status": "PASS"
+    }
+  ],
+  "governance": {
+    "season_ids_source": ".nexus-fotmob-nextdata-career-v3-status/RESULT.json",
+    "only_observed_entry_ids_used": true,
+    "public_unauthenticated_endpoint_only": true,
+    "authenticated_surface_accessed": false,
+    "private_routes_accessed": false,
+    "bruteforce_ids": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  },
+  "pass_count": 4,
+  "test_count": 4,
+  "status": "PASS"
+}
