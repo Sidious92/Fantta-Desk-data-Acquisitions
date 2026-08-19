@@ -1,0 +1,52 @@
+{
+  "schema": "NEXUS_D1_CURRENT_2026_27_SUBJECT_SURFACE_MANIFEST_V1",
+  "protocolVersion": "1.1",
+  "canonicalAsOf": "2026-08-18",
+  "subjectCount": 505,
+  "sourceReconstruction": {
+    "baselineArtifact": {
+      "repository": "Sidious92/FantaDesk",
+      "artifactId": 9191657389,
+      "capturedAt": "2026-08-13T17:42:15.418Z",
+      "playerCount": 509,
+      "currentListoneInternalSha256": "0f3c49d313e4fbd0831c59c4ea8a193538e41e2b6435b1b046b2f455caef63ed"
+    },
+    "canonicalDelta": {
+      "path": "data/nexus/current-listone/2026-08-18/audit-vs-live-2026-08-13.json",
+      "githubBlobSha": "3a947710994c7eb35e9b3fc879af42bdd95fc902",
+      "added": 11,
+      "removed": 15,
+      "clubChanges": 5,
+      "classicRoleChanges": 0
+    },
+    "checks": {
+      "playerCount": 505,
+      "roles": {"P": 62, "D": 177, "C": 177, "A": 89},
+      "identityBridgeExact": 402,
+      "identityBridgeCompatible": 4,
+      "identityUnresolved": 99,
+      "identityConflict": 0
+    }
+  },
+  "privacyMinimization": {
+    "fieldsTransferred": ["fantacalcioSourcePlayerId", "lookupNames", "contextClubs", "classicRole", "bridgePersonKey", "identityFoundationState", "identityFoundationMethod"],
+    "quotationTransferred": false,
+    "fvmTransferred": false,
+    "performanceStatisticsTransferred": false
+  },
+  "payload": {
+    "path": "data/nexus-d1/current-2026-27-subjects-v1.json.gz.b64",
+    "encoding": "BASE64_GZIP_JSON",
+    "decodedJsonBytes": 206952,
+    "decodedJsonSha256": "338df62cd6e182bf1cad204d841e3bf13929b13da50474dd01cf6ce75714b1a8",
+    "gzipBytes": 14529,
+    "gzipSha256": "72714a800d712a21c1d53a24816e1e35d8e233e746c7d6579ff0aa548edb85a8"
+  },
+  "governance": {
+    "identityOnly": true,
+    "rawEconomicsExposedToPublicRunner": false,
+    "canonicalEngineModified": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false
+  }
+}
