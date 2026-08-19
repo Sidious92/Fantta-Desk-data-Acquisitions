@@ -1,0 +1,33 @@
+name: Nexus FotMob DeepStats Contract v1 Summarize
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-fotmob-deepstats-contract-v1-summary-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo mkdir -p /mnt/data/nexus-fotmob-deepstats-contract-v1-summary && sudo chown -R $USER:$USER /mnt/data
+      - run: python scripts/summarize_fotmob_deepstats_contract_v1.py
+      - name: Record summary
+        if: always()
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-fotmob-deepstats-contract-v1-summary
+          if [ -f /mnt/data/nexus-fotmob-deepstats-contract-v1-summary/SUMMARY.json ]; then
+            cp /mnt/data/nexus-fotmob-deepstats-contract-v1-summary/SUMMARY.json .nexus-fotmob-deepstats-contract-v1-summary/SUMMARY.json
+          else
+            printf '{"schema":"NEXUS_FOTMOB_DEEPSTATS_CONTRACT_SUMMARY_V1","status":"NO_SUMMARY_FILE","run_id":%s}\n' "$GITHUB_RUN_ID" > .nexus-fotmob-deepstats-contract-v1-summary/SUMMARY.json
+          fi
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .nexus-fotmob-deepstats-contract-v1-summary/SUMMARY.json
+          git commit -m 'ci: summarize FotMob deep-stats contract v1' || exit 0
+          git push origin HEAD:main
