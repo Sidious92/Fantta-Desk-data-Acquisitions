@@ -1,0 +1,257 @@
+{
+  "schema": "NEXUS_FOTMOB_PUBLIC_SEARCH_SMOKE_V5",
+  "endpoint": "https://www.fotmob.com/api/data/search/suggest",
+  "players": [
+    "Matija Frigan",
+    "Andrea Adorante",
+    "Kornel Lisman",
+    "Albion Rrahmani"
+  ],
+  "tests": [
+    {
+      "player": "Matija Frigan",
+      "requested": "https://www.fotmob.com/api/data/search/suggest?hits=50&lang=en&term=Matija+Frigan",
+      "url": "https://www.fotmob.com/api/data/search/suggest?hits=50&lang=en&term=Matija+Frigan",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 359,
+      "sha256": "8f96fac8f1b23361afbbc6ef1860a041ea5371783ca2fa7ee3c8ac1b6fc46c52",
+      "preview": "[{\"title\":{\"key\":\"all\",\"value\":\"All\"},\"suggestions\":[{\"type\":\"player\",\"id\":\"1190371\",\"score\":300038,\"name\":\"Matija Frigan\",\"isCoach\":false,\"teamId\":10167,\"teamName\":\"Parma\"}]},{\"title\":{\"key\":\"players\",\"value\":\"Players\"},\"suggestions\":[{\"type\":\"player\",\"id\":\"1190371\",\"score\":300038,\"name\":\"Matija Frigan\",\"isCoach\":false,\"teamId\":10167,\"teamName\":\"Parma\"}]}]",
+      "json_type": "list",
+      "json_keys": null,
+      "player_candidates": [
+        {
+          "path": "$[0].suggestions[0]",
+          "type": "player",
+          "id": "1190371",
+          "name": "Matija Frigan",
+          "primaryTeam": null,
+          "teamName": "Parma",
+          "teamId": 10167
+        }
+      ],
+      "json": [
+        {
+          "title": {
+            "key": "all",
+            "value": "All"
+          },
+          "suggestions": [
+            {
+              "type": "player",
+              "id": "1190371",
+              "score": 300038,
+              "name": "Matija Frigan",
+              "isCoach": false,
+              "teamId": 10167,
+              "teamName": "Parma"
+            }
+          ]
+        },
+        {
+          "title": {
+            "key": "players",
+            "value": "Players"
+          },
+          "suggestions": [
+            {
+              "type": "player",
+              "id": "1190371",
+              "score": 300038,
+              "name": "Matija Frigan",
+              "isCoach": false,
+              "teamId": 10167,
+              "teamName": "Parma"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "player": "Andrea Adorante",
+      "requested": "https://www.fotmob.com/api/data/search/suggest?hits=50&lang=en&term=Andrea+Adorante",
+      "url": "https://www.fotmob.com/api/data/search/suggest?hits=50&lang=en&term=Andrea+Adorante",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 365,
+      "sha256": "3b75f9544926b62c2c405c2757f72397f99446a694c9f022c154770b0de289b9",
+      "preview": "[{\"title\":{\"key\":\"all\",\"value\":\"All\"},\"suggestions\":[{\"type\":\"player\",\"id\":\"1024432\",\"score\":300019,\"name\":\"Andrea Adorante\",\"isCoach\":false,\"teamId\":7881,\"teamName\":\"Venezia\"}]},{\"title\":{\"key\":\"players\",\"value\":\"Players\"},\"suggestions\":[{\"type\":\"player\",\"id\":\"1024432\",\"score\":300019,\"name\":\"Andrea Adorante\",\"isCoach\":false,\"teamId\":7881,\"teamName\":\"Venezia\"}]}]",
+      "json_type": "list",
+      "json_keys": null,
+      "player_candidates": [
+        {
+          "path": "$[0].suggestions[0]",
+          "type": "player",
+          "id": "1024432",
+          "name": "Andrea Adorante",
+          "primaryTeam": null,
+          "teamName": "Venezia",
+          "teamId": 7881
+        }
+      ],
+      "json": [
+        {
+          "title": {
+            "key": "all",
+            "value": "All"
+          },
+          "suggestions": [
+            {
+              "type": "player",
+              "id": "1024432",
+              "score": 300019,
+              "name": "Andrea Adorante",
+              "isCoach": false,
+              "teamId": 7881,
+              "teamName": "Venezia"
+            }
+          ]
+        },
+        {
+          "title": {
+            "key": "players",
+            "value": "Players"
+          },
+          "suggestions": [
+            {
+              "type": "player",
+              "id": "1024432",
+              "score": 300019,
+              "name": "Andrea Adorante",
+              "isCoach": false,
+              "teamId": 7881,
+              "teamName": "Venezia"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "player": "Kornel Lisman",
+      "requested": "https://www.fotmob.com/api/data/search/suggest?hits=50&lang=en&term=Kornel+Lisman",
+      "url": "https://www.fotmob.com/api/data/search/suggest?hits=50&lang=en&term=Kornel+Lisman",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 361,
+      "sha256": "6fb9644ef4723ddaf1082a93f67fef8dd420616e6668fc7533a8c33c359b8e45",
+      "preview": "[{\"title\":{\"key\":\"all\",\"value\":\"All\"},\"suggestions\":[{\"type\":\"player\",\"id\":\"1529483\",\"score\":300014,\"name\":\"Kornel Lisman\",\"isCoach\":false,\"teamId\":7881,\"teamName\":\"Venezia\"}]},{\"title\":{\"key\":\"players\",\"value\":\"Players\"},\"suggestions\":[{\"type\":\"player\",\"id\":\"1529483\",\"score\":300014,\"name\":\"Kornel Lisman\",\"isCoach\":false,\"teamId\":7881,\"teamName\":\"Venezia\"}]}]",
+      "json_type": "list",
+      "json_keys": null,
+      "player_candidates": [
+        {
+          "path": "$[0].suggestions[0]",
+          "type": "player",
+          "id": "1529483",
+          "name": "Kornel Lisman",
+          "primaryTeam": null,
+          "teamName": "Venezia",
+          "teamId": 7881
+        }
+      ],
+      "json": [
+        {
+          "title": {
+            "key": "all",
+            "value": "All"
+          },
+          "suggestions": [
+            {
+              "type": "player",
+              "id": "1529483",
+              "score": 300014,
+              "name": "Kornel Lisman",
+              "isCoach": false,
+              "teamId": 7881,
+              "teamName": "Venezia"
+            }
+          ]
+        },
+        {
+          "title": {
+            "key": "players",
+            "value": "Players"
+          },
+          "suggestions": [
+            {
+              "type": "player",
+              "id": "1529483",
+              "score": 300014,
+              "name": "Kornel Lisman",
+              "isCoach": false,
+              "teamId": 7881,
+              "teamName": "Venezia"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "player": "Albion Rrahmani",
+      "requested": "https://www.fotmob.com/api/data/search/suggest?hits=50&lang=en&term=Albion+Rrahmani",
+      "url": "https://www.fotmob.com/api/data/search/suggest?hits=50&lang=en&term=Albion+Rrahmani",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 365,
+      "sha256": "a5fd989c5fe9fa96ad6aab2449fdc063157f3a0426e7df3d299f68116c8dbf5f",
+      "preview": "[{\"title\":{\"key\":\"all\",\"value\":\"All\"},\"suggestions\":[{\"type\":\"player\",\"id\":\"1379468\",\"score\":300023,\"name\":\"Albion Rrahmani\",\"isCoach\":false,\"teamId\":7881,\"teamName\":\"Venezia\"}]},{\"title\":{\"key\":\"players\",\"value\":\"Players\"},\"suggestions\":[{\"type\":\"player\",\"id\":\"1379468\",\"score\":300023,\"name\":\"Albion Rrahmani\",\"isCoach\":false,\"teamId\":7881,\"teamName\":\"Venezia\"}]}]",
+      "json_type": "list",
+      "json_keys": null,
+      "player_candidates": [
+        {
+          "path": "$[0].suggestions[0]",
+          "type": "player",
+          "id": "1379468",
+          "name": "Albion Rrahmani",
+          "primaryTeam": null,
+          "teamName": "Venezia",
+          "teamId": 7881
+        }
+      ],
+      "json": [
+        {
+          "title": {
+            "key": "all",
+            "value": "All"
+          },
+          "suggestions": [
+            {
+              "type": "player",
+              "id": "1379468",
+              "score": 300023,
+              "name": "Albion Rrahmani",
+              "isCoach": false,
+              "teamId": 7881,
+              "teamName": "Venezia"
+            }
+          ]
+        },
+        {
+          "title": {
+            "key": "players",
+            "value": "Players"
+          },
+          "suggestions": [
+            {
+              "type": "player",
+              "id": "1379468",
+              "score": 300023,
+              "name": "Albion Rrahmani",
+              "isCoach": false,
+              "teamId": 7881,
+              "teamName": "Venezia"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "governance": {
+    "public_unauthenticated_endpoint_only": true,
+    "authenticated_surface_accessed": false,
+    "private_routes_accessed": false,
+    "bruteforce_ids": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  },
+  "status": "PASS"
+}
