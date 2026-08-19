@@ -1,0 +1,119 @@
+name: Nexus D1 Current 505 Wikidata Demographics v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-current-505-wikidata-v1/EXECUTE'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: nexus-d1-current-505-wikidata-v1
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      OUT: .nexus-d1-current-505-wikidata-v1/output
+      RELEASE_TAG: nexus-d1-current-505-wikidata-v1
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Validate minimized subject surface
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64,gzip,hashlib,json
+          m=json.load(open('data/nexus-d1/current-2026-27-subjects-v1-manifest.json'))
+          enc=open('data/nexus-d1/current-2026-27-subjects-v1.json.gz.b64').read().strip()
+          gz=base64.b64decode(enc); raw=gzip.decompress(gz); d=json.loads(raw)
+          assert hashlib.sha256(gz).hexdigest()==m['payload']['gzipSha256']
+          assert hashlib.sha256(raw).hexdigest()==m['payload']['decodedJsonSha256']
+          assert len(d['subjects'])==505
+          assert m['privacyMinimization']['quotationTransferred'] is False
+          assert m['privacyMinimization']['fvmTransferred'] is False
+          assert m['privacyMinimization']['performanceStatisticsTransferred'] is False
+          print(d['identityBridgeSummary'])
+          PY
+
+      - name: Acquire current population identity and DOB evidence
+        run: |
+          set -euo pipefail
+          rm -rf "$OUT"
+          python scripts/nexus-d1-acquire-current-wikidata-demographics-v1.py \
+            --subjects-b64 data/nexus-d1/current-2026-27-subjects-v1.json.gz.b64 \
+            --manifest data/nexus-d1/current-2026-27-subjects-v1-manifest.json \
+            --output "$OUT"
+
+      - name: Assert D1 governance
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          d=json.load(open('.nexus-d1-current-505-wikidata-v1/output/RESULT.json'))
+          assert d['subjectSurface']['count']==505
+          assert d['rules']['fuzzyMatchingUsed'] is False
+          assert d['rules']['dobUsedForIdentitySelection'] is False
+          assert d['rules']['unbridgedRequiresUniqueExactClubContext'] is True
+          assert d['rules']['computedAgeDerived'] is False
+          assert d['rules']['currentRetrievalImpliesHistoricalAsOf'] is False
+          assert d['rules']['trainingPromotionGranted'] is False
+          assert d['rules']['requestFailureCanBecomeMissingIdentity'] is False
+          print(json.dumps(d['summary'],indent=2))
+          PY
+
+      - name: Persist compact result and manifest
+        run: |
+          set -euo pipefail
+          mkdir -p .nexus-d1-current-505-wikidata-v1-status
+          cp "$OUT/RESULT.json" .nexus-d1-current-505-wikidata-v1-status/RESULT.json
+          cp "$OUT/MANIFEST.json" .nexus-d1-current-505-wikidata-v1-status/MANIFEST.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-d1-current-505-wikidata-v1-status
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus: persist D1 current 505 Wikidata coverage [skip ci]'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Freeze acquisition evidence in immutable draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Immutable D1 current release already exists: $RELEASE_TAG" >&2
+            exit 1
+          fi
+          tar -C .nexus-d1-current-505-wikidata-v1 -czf nexus-d1-current-505-wikidata-v1.tar.gz output
+          sha256sum nexus-d1-current-505-wikidata-v1.tar.gz > nexus-d1-current-505-wikidata-v1.tar.gz.sha256
+          trap 'gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true' ERR
+          gh release create "$RELEASE_TAG" \
+            --draft \
+            --target "$(git rev-parse HEAD)" \
+            --title 'FantaNexus D1 Current 505 Wikidata Demographics v1' \
+            --notes 'Current-population D1 acquisition evidence. Identity-only subject surface; no quotation/FVM/performance stats. No fuzzy mapping, age derivation, historical-as-of claim or training promotion.'
+          gh release upload "$RELEASE_TAG" nexus-d1-current-505-wikidata-v1.tar.gz nexus-d1-current-505-wikidata-v1.tar.gz.sha256 "$OUT/RESULT.json" "$OUT/MANIFEST.json"
+          trap - ERR
+
+      - name: Upload secondary Actions artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-current-505-wikidata-v1
+          path: .nexus-d1-current-505-wikidata-v1/output/
+          if-no-files-found: error
+          retention-days: 30
