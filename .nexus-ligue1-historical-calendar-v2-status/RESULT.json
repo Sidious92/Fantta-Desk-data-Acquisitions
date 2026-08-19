@@ -1,0 +1,728 @@
+{
+  "schema": "NEXUS_LIGUE1_HISTORICAL_CALENDAR_PROBE_V2",
+  "status": "PASS_HISTORICAL_CALENDAR",
+  "observed_settings": {
+    "championship_id": 1,
+    "current_season": 2026,
+    "first_season": 2025
+  },
+  "results": [
+    {
+      "label": "current_control",
+      "season": 2026,
+      "route": "/championship-calendar/1?season=2026",
+      "url": "https://api.mpg.football/fantasy/championship-calendar/1?season=2026",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 606,
+      "sha256": "7e3fdf47873d26ddb5cbb55ba3f56e087576863c7e41b61810e4b664828036a5",
+      "json_type": "dict",
+      "json_keys": [
+        "id",
+        "type",
+        "gameWeeks",
+        "nearestGameWeeks"
+      ],
+      "inspection": {
+        "counts": {
+          "dicts": 3,
+          "lists": 2,
+          "scalars": 19
+        },
+        "match_like_count": 0,
+        "match_like_samples": [],
+        "observed_match_ids": []
+      },
+      "json": {
+        "id": "mpg_championship_calendar_2026_1",
+        "type": "mpg_championship_calendar",
+        "gameWeeks": [
+          {
+            "gameWeekNumber": 1,
+            "startDate": "2026-08-21T18:45:00.000Z",
+            "endDate": "2026-08-23T18:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2640563",
+              "mpg_championship_match_2640562",
+              "mpg_championship_match_2640561",
+              "mpg_championship_match_2640564",
+              "mpg_championship_match_2640566",
+              "mpg_championship_match_2640567",
+              "mpg_championship_match_2640559",
+              "mpg_championship_match_2640560",
+              "mpg_championship_match_2640565"
+            ],
+            "status": 1,
+            "openDate": "2020-01-01T00:00:00.000Z"
+          }
+        ],
+        "nearestGameWeeks": {
+          "previous": null,
+          "current": 1,
+          "next": 2
+        }
+      }
+    },
+    {
+      "label": "observed_first_season",
+      "season": 2025,
+      "route": "/championship-calendar/1?season=2025",
+      "url": "https://api.mpg.football/fantasy/championship-calendar/1?season=2025",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 15783,
+      "sha256": "7a11f8f18b698ad393f98c2527cea518ef8989d0c1aa6c11e231d1b3aba117e2",
+      "json_type": "dict",
+      "json_keys": [
+        "id",
+        "type",
+        "gameWeeks",
+        "nearestGameWeeks"
+      ],
+      "inspection": {
+        "counts": {
+          "dicts": 36,
+          "lists": 35,
+          "scalars": 481
+        },
+        "match_like_count": 0,
+        "match_like_samples": [],
+        "observed_match_ids": []
+      },
+      "json": {
+        "id": "mpg_championship_calendar_2025_1",
+        "type": "mpg_championship_calendar",
+        "gameWeeks": [
+          {
+            "gameWeekNumber": 1,
+            "startDate": "2025-08-15T18:45:00.000Z",
+            "endDate": "2025-08-17T18:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568433",
+              "mpg_championship_match_2568434",
+              "mpg_championship_match_2568440",
+              "mpg_championship_match_2568435",
+              "mpg_championship_match_2568437",
+              "mpg_championship_match_2568438",
+              "mpg_championship_match_2568436",
+              "mpg_championship_match_2568439",
+              "mpg_championship_match_2568441"
+            ],
+            "status": -1,
+            "openDate": "2020-01-01T00:00:00.000Z"
+          },
+          {
+            "gameWeekNumber": 2,
+            "startDate": "2025-08-22T18:45:00.000Z",
+            "endDate": "2025-08-24T18:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568450",
+              "mpg_championship_match_2568442",
+              "mpg_championship_match_2568446",
+              "mpg_championship_match_2568448",
+              "mpg_championship_match_2568445",
+              "mpg_championship_match_2568444",
+              "mpg_championship_match_2568449",
+              "mpg_championship_match_2568447",
+              "mpg_championship_match_2568443"
+            ],
+            "status": -1,
+            "openDate": "2025-08-18T03:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 3,
+            "startDate": "2025-08-29T18:45:00.000Z",
+            "endDate": "2025-08-31T18:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568453",
+              "mpg_championship_match_2568458",
+              "mpg_championship_match_2568454",
+              "mpg_championship_match_2568451",
+              "mpg_championship_match_2568455",
+              "mpg_championship_match_2568457",
+              "mpg_championship_match_2568452",
+              "mpg_championship_match_2568456",
+              "mpg_championship_match_2568459"
+            ],
+            "status": -1,
+            "openDate": "2025-08-25T03:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 4,
+            "startDate": "2025-09-12T18:45:00.000Z",
+            "endDate": "2025-09-14T18:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568460",
+              "mpg_championship_match_2568463",
+              "mpg_championship_match_2568462",
+              "mpg_championship_match_2568467",
+              "mpg_championship_match_2568465",
+              "mpg_championship_match_2568464",
+              "mpg_championship_match_2568461",
+              "mpg_championship_match_2568466",
+              "mpg_championship_match_2568468"
+            ],
+            "status": -1,
+            "openDate": "2025-09-01T03:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 5,
+            "startDate": "2025-09-19T18:45:00.000Z",
+            "endDate": "2025-09-22T18:00:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568476",
+              "mpg_championship_match_2568470",
+              "mpg_championship_match_2568472",
+              "mpg_championship_match_2568469",
+              "mpg_championship_match_2568471",
+              "mpg_championship_match_2568473",
+              "mpg_championship_match_2568474",
+              "mpg_championship_match_2568475",
+              "mpg_championship_match_2568477"
+            ],
+            "status": -1,
+            "openDate": "2025-09-15T03:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 6,
+            "startDate": "2025-09-26T18:45:00.000Z",
+            "endDate": "2025-09-28T18:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568478",
+              "mpg_championship_match_2568484",
+              "mpg_championship_match_2568481",
+              "mpg_championship_match_2568486",
+              "mpg_championship_match_2568483",
+              "mpg_championship_match_2568479",
+              "mpg_championship_match_2568485",
+              "mpg_championship_match_2568482",
+              "mpg_championship_match_2568480"
+            ],
+            "status": -1,
+            "openDate": "2025-09-23T03:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 7,
+            "startDate": "2025-10-03T18:45:00.000Z",
+            "endDate": "2025-10-05T18:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568491",
+              "mpg_championship_match_2568488",
+              "mpg_championship_match_2568493",
+              "mpg_championship_match_2568494",
+              "mpg_championship_match_2568489",
+              "mpg_championship_match_2568490",
+              "mpg_championship_match_2568487",
+              "mpg_championship_match_2568492",
+              "mpg_championship_match_2568495"
+            ],
+            "status": -1,
+            "openDate": "2025-09-29T03:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 8,
+            "startDate": "2025-10-17T18:45:00.000Z",
+            "endDate": "2025-10-19T18:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568498",
+              "mpg_championship_match_2568497",
+              "mpg_championship_match_2568502",
+              "mpg_championship_match_2568496",
+              "mpg_championship_match_2568500",
+              "mpg_championship_match_2568501",
+              "mpg_championship_match_2568504",
+              "mpg_championship_match_2568499",
+              "mpg_championship_match_2568503"
+            ],
+            "status": -1,
+            "openDate": "2025-10-06T03:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 9,
+            "startDate": "2025-10-24T18:45:00.000Z",
+            "endDate": "2025-10-26T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568511",
+              "mpg_championship_match_2568513",
+              "mpg_championship_match_2568507",
+              "mpg_championship_match_2568512",
+              "mpg_championship_match_2568510",
+              "mpg_championship_match_2568506",
+              "mpg_championship_match_2568509",
+              "mpg_championship_match_2568508",
+              "mpg_championship_match_2568505"
+            ],
+            "status": -1,
+            "openDate": "2025-10-20T03:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 10,
+            "startDate": "2025-10-29T18:00:00.000Z",
+            "endDate": "2025-10-29T20:05:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568519",
+              "mpg_championship_match_2568515",
+              "mpg_championship_match_2568521",
+              "mpg_championship_match_2568522",
+              "mpg_championship_match_2568514",
+              "mpg_championship_match_2568516",
+              "mpg_championship_match_2568518",
+              "mpg_championship_match_2568517",
+              "mpg_championship_match_2568520"
+            ],
+            "status": -1,
+            "openDate": "2025-10-27T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 11,
+            "startDate": "2025-11-01T16:00:00.000Z",
+            "endDate": "2025-11-02T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568523",
+              "mpg_championship_match_2568530",
+              "mpg_championship_match_2568531",
+              "mpg_championship_match_2568526",
+              "mpg_championship_match_2568527",
+              "mpg_championship_match_2568525",
+              "mpg_championship_match_2568529",
+              "mpg_championship_match_2568524",
+              "mpg_championship_match_2568528"
+            ],
+            "status": -1,
+            "openDate": "2025-10-30T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 12,
+            "startDate": "2025-11-07T19:45:00.000Z",
+            "endDate": "2025-11-09T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568537",
+              "mpg_championship_match_2568532",
+              "mpg_championship_match_2568536",
+              "mpg_championship_match_2568539",
+              "mpg_championship_match_2568538",
+              "mpg_championship_match_2568535",
+              "mpg_championship_match_2568534",
+              "mpg_championship_match_2568540",
+              "mpg_championship_match_2568533"
+            ],
+            "status": -1,
+            "openDate": "2025-11-03T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 13,
+            "startDate": "2025-11-21T19:45:00.000Z",
+            "endDate": "2025-11-23T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568548",
+              "mpg_championship_match_2568541",
+              "mpg_championship_match_2568542",
+              "mpg_championship_match_2568549",
+              "mpg_championship_match_2568547",
+              "mpg_championship_match_2568545",
+              "mpg_championship_match_2568543",
+              "mpg_championship_match_2568544",
+              "mpg_championship_match_2568546"
+            ],
+            "status": -1,
+            "openDate": "2025-11-10T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 14,
+            "startDate": "2025-11-28T19:45:00.000Z",
+            "endDate": "2025-11-30T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568554",
+              "mpg_championship_match_2568557",
+              "mpg_championship_match_2568551",
+              "mpg_championship_match_2568558",
+              "mpg_championship_match_2568555",
+              "mpg_championship_match_2568552",
+              "mpg_championship_match_2568553",
+              "mpg_championship_match_2568556",
+              "mpg_championship_match_2568550"
+            ],
+            "status": -1,
+            "openDate": "2025-11-24T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 15,
+            "startDate": "2025-12-05T18:00:00.000Z",
+            "endDate": "2025-12-07T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568564",
+              "mpg_championship_match_2568559",
+              "mpg_championship_match_2568562",
+              "mpg_championship_match_2568566",
+              "mpg_championship_match_2568567",
+              "mpg_championship_match_2568563",
+              "mpg_championship_match_2568561",
+              "mpg_championship_match_2568560",
+              "mpg_championship_match_2568565"
+            ],
+            "status": -1,
+            "openDate": "2025-12-01T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 16,
+            "startDate": "2025-12-12T19:45:00.000Z",
+            "endDate": "2025-12-14T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568568",
+              "mpg_championship_match_2568571",
+              "mpg_championship_match_2568574",
+              "mpg_championship_match_2568569",
+              "mpg_championship_match_2568572",
+              "mpg_championship_match_2568570",
+              "mpg_championship_match_2568575",
+              "mpg_championship_match_2568573",
+              "mpg_championship_match_2568576"
+            ],
+            "status": -1,
+            "openDate": "2025-12-08T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 17,
+            "startDate": "2026-01-02T19:45:00.000Z",
+            "endDate": "2026-01-04T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568584",
+              "mpg_championship_match_2568579",
+              "mpg_championship_match_2568577",
+              "mpg_championship_match_2568580",
+              "mpg_championship_match_2568585",
+              "mpg_championship_match_2568583",
+              "mpg_championship_match_2568581",
+              "mpg_championship_match_2568582",
+              "mpg_championship_match_2568578"
+            ],
+            "status": -1,
+            "openDate": "2025-12-15T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 18,
+            "startDate": "2026-01-16T18:00:00.000Z",
+            "endDate": "2026-01-18T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568592",
+              "mpg_championship_match_2568593",
+              "mpg_championship_match_2568589",
+              "mpg_championship_match_2568590",
+              "mpg_championship_match_2568594",
+              "mpg_championship_match_2568587",
+              "mpg_championship_match_2568591",
+              "mpg_championship_match_2568586",
+              "mpg_championship_match_2568588"
+            ],
+            "status": -1,
+            "openDate": "2026-01-05T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 19,
+            "startDate": "2026-01-23T19:00:00.000Z",
+            "endDate": "2026-01-25T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568596",
+              "mpg_championship_match_2568599",
+              "mpg_championship_match_2568601",
+              "mpg_championship_match_2568603",
+              "mpg_championship_match_2568602",
+              "mpg_championship_match_2568597",
+              "mpg_championship_match_2568600",
+              "mpg_championship_match_2568598",
+              "mpg_championship_match_2568595"
+            ],
+            "status": -1,
+            "openDate": "2026-01-19T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 20,
+            "startDate": "2026-01-30T19:45:00.000Z",
+            "endDate": "2026-02-01T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568610",
+              "mpg_championship_match_2568604",
+              "mpg_championship_match_2568608",
+              "mpg_championship_match_2568609",
+              "mpg_championship_match_2568605",
+              "mpg_championship_match_2568612",
+              "mpg_championship_match_2568611",
+              "mpg_championship_match_2568607",
+              "mpg_championship_match_2568606"
+            ],
+            "status": -1,
+            "openDate": "2026-01-26T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 21,
+            "startDate": "2026-02-06T19:45:00.000Z",
+            "endDate": "2026-02-08T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568621",
+              "mpg_championship_match_2568619",
+              "mpg_championship_match_2568615",
+              "mpg_championship_match_2568618",
+              "mpg_championship_match_2568614",
+              "mpg_championship_match_2568620",
+              "mpg_championship_match_2568617",
+              "mpg_championship_match_2568616",
+              "mpg_championship_match_2568613"
+            ],
+            "status": -1,
+            "openDate": "2026-02-02T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 22,
+            "startDate": "2026-02-13T18:00:00.000Z",
+            "endDate": "2026-02-15T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568630",
+              "mpg_championship_match_2568628",
+              "mpg_championship_match_2568623",
+              "mpg_championship_match_2568624",
+              "mpg_championship_match_2568629",
+              "mpg_championship_match_2568625",
+              "mpg_championship_match_2568627",
+              "mpg_championship_match_2568626",
+              "mpg_championship_match_2568622"
+            ],
+            "status": -1,
+            "openDate": "2026-02-09T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 23,
+            "startDate": "2026-02-20T19:45:00.000Z",
+            "endDate": "2026-02-22T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568634",
+              "mpg_championship_match_2568632",
+              "mpg_championship_match_2568637",
+              "mpg_championship_match_2568633",
+              "mpg_championship_match_2568639",
+              "mpg_championship_match_2568638",
+              "mpg_championship_match_2568636",
+              "mpg_championship_match_2568635",
+              "mpg_championship_match_2568631"
+            ],
+            "status": -1,
+            "openDate": "2026-02-16T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 24,
+            "startDate": "2026-02-27T19:45:00.000Z",
+            "endDate": "2026-03-01T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568647",
+              "mpg_championship_match_2568641",
+              "mpg_championship_match_2568642",
+              "mpg_championship_match_2568640",
+              "mpg_championship_match_2568646",
+              "mpg_championship_match_2568645",
+              "mpg_championship_match_2568643",
+              "mpg_championship_match_2568644",
+              "mpg_championship_match_2568648"
+            ],
+            "status": -1,
+            "openDate": "2026-02-23T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 25,
+            "startDate": "2026-03-06T19:45:00.000Z",
+            "endDate": "2026-03-08T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568657",
+              "mpg_championship_match_2568656",
+              "mpg_championship_match_2568655",
+              "mpg_championship_match_2568649",
+              "mpg_championship_match_2568653",
+              "mpg_championship_match_2568650",
+              "mpg_championship_match_2568654",
+              "mpg_championship_match_2568651",
+              "mpg_championship_match_2568652"
+            ],
+            "status": -1,
+            "openDate": "2026-03-02T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 26,
+            "startDate": "2026-03-13T19:45:00.000Z",
+            "endDate": "2026-03-15T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568666",
+              "mpg_championship_match_2568659",
+              "mpg_championship_match_2568664",
+              "mpg_championship_match_2568665",
+              "mpg_championship_match_2568661",
+              "mpg_championship_match_2568660",
+              "mpg_championship_match_2568662",
+              "mpg_championship_match_2568663",
+              "mpg_championship_match_2568658"
+            ],
+            "status": -1,
+            "openDate": "2026-03-09T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 27,
+            "startDate": "2026-03-20T19:45:00.000Z",
+            "endDate": "2026-03-22T19:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568671",
+              "mpg_championship_match_2568673",
+              "mpg_championship_match_2568668",
+              "mpg_championship_match_2568674",
+              "mpg_championship_match_2568667",
+              "mpg_championship_match_2568675",
+              "mpg_championship_match_2568672",
+              "mpg_championship_match_2568669",
+              "mpg_championship_match_2568670"
+            ],
+            "status": -1,
+            "openDate": "2026-03-16T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 28,
+            "startDate": "2026-04-03T18:45:00.000Z",
+            "endDate": "2026-04-05T18:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568683",
+              "mpg_championship_match_2568684",
+              "mpg_championship_match_2568677",
+              "mpg_championship_match_2568682",
+              "mpg_championship_match_2568678",
+              "mpg_championship_match_2568680",
+              "mpg_championship_match_2568681",
+              "mpg_championship_match_2568679",
+              "mpg_championship_match_2568676"
+            ],
+            "status": -1,
+            "openDate": "2026-03-23T04:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 29,
+            "startDate": "2026-04-10T17:00:00.000Z",
+            "endDate": "2026-04-12T18:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568690",
+              "mpg_championship_match_2568685",
+              "mpg_championship_match_2568692",
+              "mpg_championship_match_2568687",
+              "mpg_championship_match_2568688",
+              "mpg_championship_match_2568691",
+              "mpg_championship_match_2568686",
+              "mpg_championship_match_2568689",
+              "mpg_championship_match_2568693"
+            ],
+            "status": -1,
+            "openDate": "2026-04-06T03:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 30,
+            "startDate": "2026-04-17T18:45:00.000Z",
+            "endDate": "2026-04-19T18:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568697",
+              "mpg_championship_match_2568694",
+              "mpg_championship_match_2568698",
+              "mpg_championship_match_2568701",
+              "mpg_championship_match_2568699",
+              "mpg_championship_match_2568696",
+              "mpg_championship_match_2568700",
+              "mpg_championship_match_2568695",
+              "mpg_championship_match_2568702"
+            ],
+            "status": -1,
+            "openDate": "2026-04-13T03:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 31,
+            "startDate": "2026-04-24T18:45:00.000Z",
+            "endDate": "2026-04-26T18:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568710",
+              "mpg_championship_match_2568708",
+              "mpg_championship_match_2568704",
+              "mpg_championship_match_2568709",
+              "mpg_championship_match_2568707",
+              "mpg_championship_match_2568705",
+              "mpg_championship_match_2568706",
+              "mpg_championship_match_2568703",
+              "mpg_championship_match_2568711"
+            ],
+            "status": -1,
+            "openDate": "2026-04-20T03:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 32,
+            "startDate": "2026-05-02T13:00:00.000Z",
+            "endDate": "2026-05-03T18:45:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568713",
+              "mpg_championship_match_2568712",
+              "mpg_championship_match_2568714",
+              "mpg_championship_match_2568720",
+              "mpg_championship_match_2568715",
+              "mpg_championship_match_2568719",
+              "mpg_championship_match_2568718",
+              "mpg_championship_match_2568716",
+              "mpg_championship_match_2568717"
+            ],
+            "status": -1,
+            "openDate": "2026-04-27T03:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 33,
+            "startDate": "2026-05-08T18:45:00.000Z",
+            "endDate": "2026-05-10T19:00:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568724",
+              "mpg_championship_match_2568728",
+              "mpg_championship_match_2568725",
+              "mpg_championship_match_2568722",
+              "mpg_championship_match_2568727",
+              "mpg_championship_match_2568729",
+              "mpg_championship_match_2568721",
+              "mpg_championship_match_2568726",
+              "mpg_championship_match_2568723"
+            ],
+            "status": -1,
+            "openDate": "2026-05-04T03:59:59.999Z"
+          },
+          {
+            "gameWeekNumber": 34,
+            "startDate": "2026-05-17T19:00:00.000Z",
+            "endDate": "2026-05-17T19:00:00.000Z",
+            "matchesIds": [
+              "mpg_championship_match_2568732",
+              "mpg_championship_match_2568733",
+              "mpg_championship_match_2568731",
+              "mpg_championship_match_2568738",
+              "mpg_championship_match_2568736",
+              "mpg_championship_match_2568730",
+              "mpg_championship_match_2568734",
+              "mpg_championship_match_2568735",
+              "mpg_championship_match_2568737"
+            ],
+            "status": -1,
+            "openDate": "2026-05-11T03:59:59.999Z"
+          }
+        ],
+        "nearestGameWeeks": {
+          "previous": 34,
+          "current": null,
+          "next": null
+        }
+      }
+    }
+  ],
+  "historical_distinct_from_current": true,
+  "governance": {
+    "route_template_source": "frontend-observed-v1",
+    "championship_id_source": "existing verified Ligue 1 contract",
+    "season_values_source": "public championships-settings via v1",
+    "season_ids_guessed": false,
+    "authenticated_surface_accessed": false,
+    "private_user_or_coach_routes_accessed": false,
+    "predictive_models_modified": false,
+    "decision_layer_started": false
+  }
+}
