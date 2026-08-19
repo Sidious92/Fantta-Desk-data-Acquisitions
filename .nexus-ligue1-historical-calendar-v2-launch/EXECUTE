@@ -1,0 +1,3 @@
+launch=2026-08-19T20:20:00+02:00
+source=.nexus-ligue1-historical-contract-v1-status/RESULT.json
+mode=observed-current-vs-first-season-only
