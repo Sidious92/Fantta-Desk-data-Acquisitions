@@ -1,0 +1,33 @@
+name: Nexus FotMob Crossleague DeepStats v1 Audit
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-fotmob-crossleague-deepstats-v1-audit-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo mkdir -p /mnt/data/nexus-fotmob-crossleague-deepstats-v1-audit && sudo chown -R $USER:$USER /mnt/data
+      - run: python scripts/audit_fotmob_crossleague_deepstats_v1.py
+      - name: Record audit
+        if: always()
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-fotmob-crossleague-deepstats-v1-audit
+          if [ -f /mnt/data/nexus-fotmob-crossleague-deepstats-v1-audit/AUDIT.json ]; then
+            cp /mnt/data/nexus-fotmob-crossleague-deepstats-v1-audit/AUDIT.json .nexus-fotmob-crossleague-deepstats-v1-audit/AUDIT.json
+          else
+            printf '{"schema":"NEXUS_FOTMOB_CROSSLEAGUE_DEEPSTATS_V1_AUDIT","status":"NO_AUDIT_FILE","run_id":%s}\n' "$GITHUB_RUN_ID" > .nexus-fotmob-crossleague-deepstats-v1-audit/AUDIT.json
+          fi
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .nexus-fotmob-crossleague-deepstats-v1-audit/AUDIT.json
+          git commit -m 'data: record FotMob crossleague deep-stats v1 audit' || exit 0
+          git push origin HEAD:main
