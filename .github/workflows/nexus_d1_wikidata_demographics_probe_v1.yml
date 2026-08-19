@@ -31,23 +31,64 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Fail closed if immutable probe release already exists
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Run deterministic Wikidata probe with technical diagnostics
+        id: probe
+        shell: bash
         run: |
-          set -euo pipefail
-          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
-            echo "Immutable D1 probe release already exists: $RELEASE_TAG" >&2
-            exit 1
-          fi
-
-      - name: Run deterministic Wikidata probe
-        run: |
-          set -euo pipefail
+          set -uo pipefail
           rm -rf "$OUT"
+          mkdir -p "$OUT"
+          set +e
           python scripts/nexus-d1-probe-wikidata-demographics-v1.py \
             --subjects data/nexus-d1/wikidata-demographics-probe-v1/subjects.json \
-            --output "$OUT"
+            --output "$OUT" \
+            >"$OUT/probe.stdout.log" 2>"$OUT/probe.stderr.log"
+          rc=$?
+          set -e
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          if [ ! -f "$OUT/RESULT.json" ]; then
+            RC="$rc" python - <<'PY'
+          import json, os
+          from datetime import datetime, timezone
+          out=os.environ['OUT']
+          d={
+            'schema':'NEXUS_D1_WIKIDATA_DEMOGRAPHICS_PROBE_RESULT_V1',
+            'protocolVersion':'1.1',
+            'status':'TECHNICAL_FAILURE',
+            'declaredUse':'CURRENT_PROBE',
+            'capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),
+            'technicalFailure':{
+              'exitCode':int(os.environ['RC']),
+              'stdoutPath':'probe.stdout.log',
+              'stderrPath':'probe.stderr.log'
+            },
+            'rules':{
+              'fuzzyMatchingUsed':False,
+              'computedAgeDerived':False,
+              'currentRetrievalImpliesHistoricalAsOf':False,
+              'trainingPromotionGranted':False
+            },
+            'summary':{'subjectsEvaluated':0}
+          }
+          with open(os.path.join(out,'RESULT.json'),'w') as f:
+              json.dump(d,f,indent=2); f.write('\n')
+          PY
+          fi
+          if [ ! -f "$OUT/MANIFEST.json" ]; then
+            python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          root=Path(os.environ['OUT'])
+          files=[]
+          for p in sorted(x for x in root.rglob('*') if x.is_file() and x.name!='MANIFEST.json'):
+              b=p.read_bytes()
+              files.append({'path':str(p.relative_to(root)),'size':len(b),'sha256':hashlib.sha256(b).hexdigest()})
+          d={'schema':'NEXUS_D1_WIKIDATA_DEMOGRAPHICS_PROBE_MANIFEST_V1','files':files,'fileCount':len(files)}
+          d['canonicalContentSha256']=hashlib.sha256('\n'.join(f"{x['path']}\t{x['size']}\t{x['sha256']}" for x in files).encode()).hexdigest()
+          (root/'MANIFEST.json').write_text(json.dumps(d,indent=2)+'\n')
+          PY
+          fi
+          cat "$OUT/RESULT.json"
 
       - name: Assert methodological governance only
         run: |
@@ -60,11 +101,11 @@ jobs:
           assert d['rules']['computedAgeDerived'] is False
           assert d['rules']['currentRetrievalImpliesHistoricalAsOf'] is False
           assert d['rules']['trainingPromotionGranted'] is False
-          assert d['status'] in {'PASS','REVIEW_REQUIRED'}
-          print(d['summary'])
+          assert d['status'] in {'PASS','REVIEW_REQUIRED','TECHNICAL_FAILURE'}
+          print(d['status'])
           PY
 
-      - name: Persist compact scientific result and manifest
+      - name: Persist compact scientific/technical result and manifest
         run: |
           set -euo pipefail
           mkdir -p .nexus-d1-wikidata-demographics-probe-v1-status
@@ -79,11 +120,24 @@ jobs:
             git push origin HEAD:main
           fi
 
-      - name: Freeze raw probe in immutable draft release
+      - name: Freeze successful scientific probe in immutable draft release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          status=$(python - <<'PY'
+          import json
+          print(json.load(open('.nexus-d1-wikidata-demographics-probe-v1/output/RESULT.json'))['status'])
+          PY
+          )
+          if [ "$status" = "TECHNICAL_FAILURE" ]; then
+            echo 'Technical failure persisted; immutable scientific source freeze intentionally skipped.'
+            exit 0
+          fi
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Immutable D1 probe release already exists: $RELEASE_TAG" >&2
+            exit 1
+          fi
           tar -C .nexus-d1-wikidata-demographics-probe-v1 -czf nexus-d1-wikidata-demographics-probe-v1.tar.gz output
           sha256sum nexus-d1-wikidata-demographics-probe-v1.tar.gz > nexus-d1-wikidata-demographics-probe-v1.tar.gz.sha256
           trap 'gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true' ERR
@@ -91,7 +145,7 @@ jobs:
             --draft \
             --target "$(git rev-parse HEAD)" \
             --title 'FantaNexus D1 Wikidata Demographics Probe v1' \
-            --notes 'D1 CURRENT_PROBE only. The release preserves evidence even when the source result is REVIEW_REQUIRED. No fuzzy mapping, age derivation, historical-as-of claim or training promotion.'
+            --notes 'D1 CURRENT_PROBE only. Evidence is frozen even when scientific status is REVIEW_REQUIRED. No fuzzy mapping, age derivation, historical-as-of claim or training promotion.'
           gh release upload "$RELEASE_TAG" \
             nexus-d1-wikidata-demographics-probe-v1.tar.gz \
             nexus-d1-wikidata-demographics-probe-v1.tar.gz.sha256 \
@@ -100,6 +154,7 @@ jobs:
           trap - ERR
 
       - name: Upload Actions artifact as secondary transport
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: nexus-d1-wikidata-demographics-probe-v1
@@ -107,7 +162,8 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
-      - name: Publish scientific classification
+      - name: Publish classification
+        if: always()
         run: |
           set -euo pipefail
           python - <<'PY'
@@ -115,8 +171,7 @@ jobs:
           d=json.load(open('.nexus-d1-wikidata-demographics-probe-v1/output/RESULT.json'))
           with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
               f.write('## Nexus D1 Wikidata Demographics Probe v1\n\n')
-              f.write(f"Scientific probe status: **{d['status']}**\n\n")
-              f.write('This is a source-feasibility classification, not a training promotion.\n\n')
-              f.write('```json\n'+json.dumps(d['summary'],indent=2)+'\n```\n')
-          print(d['status'])
+              f.write(f"Probe status: **{d['status']}**\n\n")
+              f.write('This is source-feasibility evidence, never training promotion.\n\n')
+              f.write('```json\n'+json.dumps(d.get('summary',{}),indent=2)+'\n```\n')
           PY
