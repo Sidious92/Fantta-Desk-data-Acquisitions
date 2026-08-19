@@ -1,0 +1,18 @@
+{
+  "schema": "NEXUS_D1_WIKIDATA_DEMOGRAPHICS_PROBE_SUBJECTS_V1",
+  "protocolVersion": "1.1",
+  "selectionPolicy": "Fixed representative identity sample spanning established current players, current unresolved/newcomers, and the known Fantacalcio source-ID reuse collision. No DOB expected values are stored.",
+  "subjects": [
+    {"subjectId":"current-fc-133","lookupNames":["Lukasz Skorupski","Łukasz Skorupski"],"fantacalcioSourcePlayerId":"133","bridgePersonKey":"understat:1305","contextClubs":["Bologna"],"cohort":"CURRENT_RESOLVED_ESTABLISHED"},
+    {"subjectId":"current-fc-3","lookupNames":["Boris Radunovic","Boris Radunović"],"fantacalcioSourcePlayerId":"3","bridgePersonKey":"understat:1926","contextClubs":["Cagliari"],"cohort":"CURRENT_RESOLVED_RETURNING"},
+    {"subjectId":"current-fc-4409","lookupNames":["Amir Rrahmani"],"fantacalcioSourcePlayerId":"4409","bridgePersonKey":"understat:7924","contextClubs":["Napoli"],"cohort":"CURRENT_RESOLVED_ESTABLISHED"},
+    {"subjectId":"historical-fc-65-matteo","lookupNames":["Matteo Mancosu"],"fantacalcioSourcePlayerId":"65","bridgePersonKey":"understat:1981","contextClubs":["Carpi"],"cohort":"HISTORICAL_PROVIDER_ID_REUSE_REGRESSION"},
+    {"subjectId":"historical-fc-65-marco","lookupNames":["Marco Mancosu"],"fantacalcioSourcePlayerId":"65","bridgePersonKey":"understat:7973","contextClubs":["Lecce","Cagliari"],"cohort":"HISTORICAL_PROVIDER_ID_REUSE_REGRESSION"},
+    {"subjectId":"current-fc-7213","lookupNames":["Matija Frigan"],"fantacalcioSourcePlayerId":"7213","bridgePersonKey":null,"contextClubs":["Parma"],"cohort":"CURRENT_IDENTITY_UNRESOLVED"},
+    {"subjectId":"current-fc-6397","lookupNames":["Goncalo Ramos","Gonçalo Ramos"],"fantacalcioSourcePlayerId":"6397","bridgePersonKey":null,"contextClubs":["Milan"],"cohort":"CURRENT_NEW_SOURCE_ID"},
+    {"subjectId":"current-fc-7449","lookupNames":["Albion Rrahmani"],"fantacalcioSourcePlayerId":"7449","bridgePersonKey":null,"contextClubs":["Venezia"],"cohort":"CURRENT_NEW_SOURCE_ID"},
+    {"subjectId":"current-fc-7529","lookupNames":["Konstantinos Koulierakis"],"fantacalcioSourcePlayerId":"7529","bridgePersonKey":null,"contextClubs":["Roma"],"cohort":"CURRENT_NEW_SOURCE_ID"},
+    {"subjectId":"current-fc-5982","lookupNames":["Djed Spence","Djed Spence"],"fantacalcioSourcePlayerId":"5982","bridgePersonKey":null,"contextClubs":["Inter"],"cohort":"CURRENT_NEW_SOURCE_ID"},
+    {"subjectId":"current-fc-4964","lookupNames":["Guglielmo Vicario"],"fantacalcioSourcePlayerId":"4964","bridgePersonKey":null,"contextClubs":["Juventus"],"cohort":"CURRENT_NEW_SOURCE_ID"}
+  ]
+}
