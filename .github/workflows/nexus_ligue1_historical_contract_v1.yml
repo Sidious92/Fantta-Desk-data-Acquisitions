@@ -1,0 +1,43 @@
+name: Nexus Ligue 1 Historical Fantasy Contract v1
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-ligue1-historical-contract-v1-launch/EXECUTE'
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - run: sudo mkdir -p /mnt/data/nexus-ligue1-historical-contract-v1 && sudo chown -R $USER:$USER /mnt/data
+      - run: timeout 12m python scripts/probe_ligue1_historical_contract_v1.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexus-ligue1-historical-contract-v1
+          path: /mnt/data/nexus-ligue1-historical-contract-v1
+          if-no-files-found: warn
+      - name: Record result
+        if: always()
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p .nexus-ligue1-historical-contract-v1-status
+          if [ -f /mnt/data/nexus-ligue1-historical-contract-v1/RESULT.json ]; then
+            cp /mnt/data/nexus-ligue1-historical-contract-v1/RESULT.json .nexus-ligue1-historical-contract-v1-status/RESULT.json
+          else
+            printf '{"schema":"NEXUS_LIGUE1_HISTORICAL_FANTASY_CONTRACT_PROBE_V1","status":"NO_RESULT_FILE","run_id":%s}\n' "$GITHUB_RUN_ID" > .nexus-ligue1-historical-contract-v1-status/RESULT.json
+          fi
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .nexus-ligue1-historical-contract-v1-status/RESULT.json
+          git commit -m 'ci: record Ligue 1 historical fantasy contract v1' || exit 0
+          git push origin HEAD:main
