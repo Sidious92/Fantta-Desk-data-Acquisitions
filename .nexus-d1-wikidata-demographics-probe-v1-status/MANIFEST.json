@@ -1,0 +1,72 @@
+{
+  "schema": "NEXUS_D1_WIKIDATA_DEMOGRAPHICS_PROBE_MANIFEST_V1",
+  "files": [
+    {
+      "path": "RESULT.json",
+      "size": 550,
+      "sha256": "e87297be99eefc21b1765ca0c4b55d006e1a4c08085730271714b5c6a3476b18"
+    },
+    {
+      "path": "probe.stderr.log",
+      "size": 817,
+      "sha256": "026854c615308510939aa92b4746318190bfb1bbae7676ffd2631cf27339baef"
+    },
+    {
+      "path": "probe.stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/entities/Q16147481.json",
+      "size": 40603,
+      "sha256": "2abb97e17a3bdacc9d2f01cb6297f27112411ea61145a8ab90a95460700a6a3a"
+    },
+    {
+      "path": "raw/entities/Q16223252.json",
+      "size": 33787,
+      "sha256": "800f8ae8bc94d6f080b030ab0820727aef9229cad8b16beff89035c4beeea773"
+    },
+    {
+      "path": "raw/entities/Q16239746.json",
+      "size": 21364,
+      "sha256": "1854249b911a76664555afe143663001cad15ac1f472745c8710d5576895edea"
+    },
+    {
+      "path": "raw/entities/Q8080968.json",
+      "size": 41054,
+      "sha256": "561b9b4c94ca1b6c8717499577f3d687aa013e5bfba3fa4f47d43413741d76bb"
+    },
+    {
+      "path": "raw/search/current-fc-133--Lukasz_Skorupski.json",
+      "size": 531,
+      "sha256": "acebfbd8ea61b4a3e6ceb71410216c303d2f5af8154358eb21bf490643d027cf"
+    },
+    {
+      "path": "raw/search/current-fc-133--ukasz_Skorupski.json",
+      "size": 532,
+      "sha256": "cfce9a97f9f078279ce15d680f4d2da88359a372038839418c6408172c17383b"
+    },
+    {
+      "path": "raw/search/current-fc-3--Boris_Radunovi.json",
+      "size": 501,
+      "sha256": "b516bc4ac99445d7004a94bc00c5ec32b2b68ed275f35d7da0303604d0d9f747"
+    },
+    {
+      "path": "raw/search/current-fc-3--Boris_Radunovic.json",
+      "size": 500,
+      "sha256": "4bb6b38b06c2bdf9e96fe352484d20a654851dbc1862084528ad606a13f4bfd9"
+    },
+    {
+      "path": "raw/search/current-fc-4409--Amir_Rrahmani.json",
+      "size": 513,
+      "sha256": "a9c2d66a2e565e8000dd666a5a82e3f131ea0c967baac0c546f03a77e865245d"
+    },
+    {
+      "path": "raw/search/historical-fc-65-matteo--Matteo_Mancosu.json",
+      "size": 517,
+      "sha256": "31155c1d39cef1572f5737558eac68a436fa7d95cc0f8bc9c4a3f3e4a0ffc639"
+    }
+  ],
+  "fileCount": 13,
+  "canonicalContentSha256": "6604c7a1097ea47c15e8e035898c608bd84399c302c3eb9d37d3161ad6128c5c"
+}
