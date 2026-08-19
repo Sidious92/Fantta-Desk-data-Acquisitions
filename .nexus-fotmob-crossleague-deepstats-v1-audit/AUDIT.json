@@ -1,0 +1,1788 @@
+{
+  "schema": "NEXUS_FOTMOB_CROSSLEAGUE_DEEPSTATS_V1_AUDIT",
+  "record_count": 28,
+  "priority_fields": [
+    "rating",
+    "matches_uppercase",
+    "player_started_matches",
+    "minutes_played",
+    "goals",
+    "assists",
+    "shots",
+    "ShotsOnTarget",
+    "expected_goals",
+    "non_penalty_xg",
+    "expected_assists",
+    "chances_created",
+    "yellow_cards",
+    "red_cards"
+  ],
+  "overall_coverage": {
+    "rating": {
+      "observed": 21,
+      "records": 28,
+      "coverage": 0.75
+    },
+    "matches_uppercase": {
+      "observed": 25,
+      "records": 28,
+      "coverage": 0.8929
+    },
+    "player_started_matches": {
+      "observed": 25,
+      "records": 28,
+      "coverage": 0.8929
+    },
+    "minutes_played": {
+      "observed": 28,
+      "records": 28,
+      "coverage": 1.0
+    },
+    "goals": {
+      "observed": 28,
+      "records": 28,
+      "coverage": 1.0
+    },
+    "assists": {
+      "observed": 28,
+      "records": 28,
+      "coverage": 1.0
+    },
+    "shots": {
+      "observed": 19,
+      "records": 28,
+      "coverage": 0.6786
+    },
+    "ShotsOnTarget": {
+      "observed": 15,
+      "records": 28,
+      "coverage": 0.5357
+    },
+    "expected_goals": {
+      "observed": 11,
+      "records": 28,
+      "coverage": 0.3929
+    },
+    "non_penalty_xg": {
+      "observed": 11,
+      "records": 28,
+      "coverage": 0.3929
+    },
+    "expected_assists": {
+      "observed": 12,
+      "records": 28,
+      "coverage": 0.4286
+    },
+    "chances_created": {
+      "observed": 17,
+      "records": 28,
+      "coverage": 0.6071
+    },
+    "yellow_cards": {
+      "observed": 22,
+      "records": 28,
+      "coverage": 0.7857
+    },
+    "red_cards": {
+      "observed": 22,
+      "records": 28,
+      "coverage": 0.7857
+    }
+  },
+  "players": [
+    {
+      "player_id": 1379468,
+      "player_name": "Albion Rrahmani",
+      "records": 13,
+      "seasons": [
+        "2025/2026",
+        "2024/2025",
+        "2023/2024",
+        "2022/2023"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 8,
+          "records": 13,
+          "coverage": 0.6154
+        },
+        "matches_uppercase": {
+          "observed": 10,
+          "records": 13,
+          "coverage": 0.7692
+        },
+        "player_started_matches": {
+          "observed": 10,
+          "records": 13,
+          "coverage": 0.7692
+        },
+        "minutes_played": {
+          "observed": 13,
+          "records": 13,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 13,
+          "records": 13,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 13,
+          "records": 13,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 8,
+          "records": 13,
+          "coverage": 0.6154
+        },
+        "ShotsOnTarget": {
+          "observed": 5,
+          "records": 13,
+          "coverage": 0.3846
+        },
+        "expected_goals": {
+          "observed": 6,
+          "records": 13,
+          "coverage": 0.4615
+        },
+        "non_penalty_xg": {
+          "observed": 6,
+          "records": 13,
+          "coverage": 0.4615
+        },
+        "expected_assists": {
+          "observed": 6,
+          "records": 13,
+          "coverage": 0.4615
+        },
+        "chances_created": {
+          "observed": 7,
+          "records": 13,
+          "coverage": 0.5385
+        },
+        "yellow_cards": {
+          "observed": 11,
+          "records": 13,
+          "coverage": 0.8462
+        },
+        "red_cards": {
+          "observed": 11,
+          "records": 13,
+          "coverage": 0.8462
+        }
+      }
+    },
+    {
+      "player_id": 1024432,
+      "player_name": "Andrea Adorante",
+      "records": 5,
+      "seasons": [
+        "2025/2026",
+        "2024/2025",
+        "2020/2021"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 3,
+          "records": 5,
+          "coverage": 0.6
+        },
+        "matches_uppercase": {
+          "observed": 5,
+          "records": 5,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 5,
+          "records": 5,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 5,
+          "records": 5,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 5,
+          "records": 5,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 5,
+          "records": 5,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 2,
+          "records": 5,
+          "coverage": 0.4
+        },
+        "ShotsOnTarget": {
+          "observed": 2,
+          "records": 5,
+          "coverage": 0.4
+        },
+        "expected_goals": {
+          "observed": 1,
+          "records": 5,
+          "coverage": 0.2
+        },
+        "non_penalty_xg": {
+          "observed": 1,
+          "records": 5,
+          "coverage": 0.2
+        },
+        "expected_assists": {
+          "observed": 1,
+          "records": 5,
+          "coverage": 0.2
+        },
+        "chances_created": {
+          "observed": 2,
+          "records": 5,
+          "coverage": 0.4
+        },
+        "yellow_cards": {
+          "observed": 2,
+          "records": 5,
+          "coverage": 0.4
+        },
+        "red_cards": {
+          "observed": 2,
+          "records": 5,
+          "coverage": 0.4
+        }
+      }
+    },
+    {
+      "player_id": 1529483,
+      "player_name": "Kornel Lisman",
+      "records": 3,
+      "seasons": [
+        "2025/2026",
+        "2024/2025"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "matches_uppercase": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "ShotsOnTarget": {
+          "observed": 2,
+          "records": 3,
+          "coverage": 0.6667
+        },
+        "expected_goals": {
+          "observed": 1,
+          "records": 3,
+          "coverage": 0.3333
+        },
+        "non_penalty_xg": {
+          "observed": 1,
+          "records": 3,
+          "coverage": 0.3333
+        },
+        "expected_assists": {
+          "observed": 2,
+          "records": 3,
+          "coverage": 0.6667
+        },
+        "chances_created": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "yellow_cards": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "red_cards": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "player_id": 1190371,
+      "player_name": "Matija Frigan",
+      "records": 7,
+      "seasons": [
+        "2025/2026",
+        "2024/2025",
+        "2023/2024",
+        "2022/2023",
+        "2021/2022"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 7,
+          "records": 7,
+          "coverage": 1.0
+        },
+        "matches_uppercase": {
+          "observed": 7,
+          "records": 7,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 7,
+          "records": 7,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 7,
+          "records": 7,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 7,
+          "records": 7,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 7,
+          "records": 7,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 6,
+          "records": 7,
+          "coverage": 0.8571
+        },
+        "ShotsOnTarget": {
+          "observed": 6,
+          "records": 7,
+          "coverage": 0.8571
+        },
+        "expected_goals": {
+          "observed": 3,
+          "records": 7,
+          "coverage": 0.4286
+        },
+        "non_penalty_xg": {
+          "observed": 3,
+          "records": 7,
+          "coverage": 0.4286
+        },
+        "expected_assists": {
+          "observed": 3,
+          "records": 7,
+          "coverage": 0.4286
+        },
+        "chances_created": {
+          "observed": 5,
+          "records": 7,
+          "coverage": 0.7143
+        },
+        "yellow_cards": {
+          "observed": 6,
+          "records": 7,
+          "coverage": 0.8571
+        },
+        "red_cards": {
+          "observed": 6,
+          "records": 7,
+          "coverage": 0.8571
+        }
+      }
+    }
+  ],
+  "tournaments": [
+    {
+      "tournament_id": 252,
+      "tournament_name": "1. Division",
+      "competition_classification": "UNVERIFIED",
+      "records": 1,
+      "players": [
+        "Matija Frigan"
+      ],
+      "seasons": [
+        "2021/2022"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "matches_uppercase": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "ShotsOnTarget": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "expected_goals": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "non_penalty_xg": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "expected_assists": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "chances_created": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "yellow_cards": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "red_cards": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "tournament_id": 122,
+      "tournament_name": "1. Liga",
+      "competition_classification": "UNVERIFIED",
+      "records": 2,
+      "players": [
+        "Albion Rrahmani"
+      ],
+      "seasons": [
+        "2025/2026",
+        "2024/2025"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 1,
+          "records": 2,
+          "coverage": 0.5
+        },
+        "matches_uppercase": {
+          "observed": 1,
+          "records": 2,
+          "coverage": 0.5
+        },
+        "player_started_matches": {
+          "observed": 1,
+          "records": 2,
+          "coverage": 0.5
+        },
+        "minutes_played": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 1,
+          "records": 2,
+          "coverage": 0.5
+        },
+        "ShotsOnTarget": {
+          "observed": 1,
+          "records": 2,
+          "coverage": 0.5
+        },
+        "expected_goals": {
+          "observed": 0,
+          "records": 2,
+          "coverage": 0.0
+        },
+        "non_penalty_xg": {
+          "observed": 0,
+          "records": 2,
+          "coverage": 0.0
+        },
+        "expected_assists": {
+          "observed": 0,
+          "records": 2,
+          "coverage": 0.0
+        },
+        "chances_created": {
+          "observed": 1,
+          "records": 2,
+          "coverage": 0.5
+        },
+        "yellow_cards": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "red_cards": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "tournament_id": 40,
+      "tournament_name": "Belgian Pro League",
+      "competition_classification": "UNVERIFIED",
+      "records": 3,
+      "players": [
+        "Matija Frigan"
+      ],
+      "seasons": [
+        "2025/2026",
+        "2024/2025",
+        "2023/2024"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "matches_uppercase": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "ShotsOnTarget": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "expected_goals": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "non_penalty_xg": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "expected_assists": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "chances_created": {
+          "observed": 2,
+          "records": 3,
+          "coverage": 0.6667
+        },
+        "yellow_cards": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "red_cards": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "tournament_id": 42,
+      "tournament_name": "Champions League",
+      "competition_classification": "UNVERIFIED",
+      "records": 1,
+      "players": [
+        "Albion Rrahmani"
+      ],
+      "seasons": [
+        "2024/2025"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "matches_uppercase": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "ShotsOnTarget": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "expected_goals": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "non_penalty_xg": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "expected_assists": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "chances_created": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "yellow_cards": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "red_cards": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "tournament_id": 10611,
+      "tournament_name": "Champions League Qualification qualification",
+      "competition_classification": "UNVERIFIED",
+      "records": 3,
+      "players": [
+        "Albion Rrahmani"
+      ],
+      "seasons": [
+        "2024/2025",
+        "2023/2024",
+        "2022/2023"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 1,
+          "records": 3,
+          "coverage": 0.3333
+        },
+        "matches_uppercase": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 1,
+          "records": 3,
+          "coverage": 0.3333
+        },
+        "ShotsOnTarget": {
+          "observed": 0,
+          "records": 3,
+          "coverage": 0.0
+        },
+        "expected_goals": {
+          "observed": 0,
+          "records": 3,
+          "coverage": 0.0
+        },
+        "non_penalty_xg": {
+          "observed": 0,
+          "records": 3,
+          "coverage": 0.0
+        },
+        "expected_assists": {
+          "observed": 0,
+          "records": 3,
+          "coverage": 0.0
+        },
+        "chances_created": {
+          "observed": 0,
+          "records": 3,
+          "coverage": 0.0
+        },
+        "yellow_cards": {
+          "observed": 1,
+          "records": 3,
+          "coverage": 0.3333
+        },
+        "red_cards": {
+          "observed": 1,
+          "records": 3,
+          "coverage": 0.3333
+        }
+      }
+    },
+    {
+      "tournament_id": 10216,
+      "tournament_name": "Conference League",
+      "competition_classification": "UNVERIFIED",
+      "records": 3,
+      "players": [
+        "Albion Rrahmani",
+        "Kornel Lisman"
+      ],
+      "seasons": [
+        "2025/2026",
+        "2022/2023"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "matches_uppercase": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "ShotsOnTarget": {
+          "observed": 2,
+          "records": 3,
+          "coverage": 0.6667
+        },
+        "expected_goals": {
+          "observed": 2,
+          "records": 3,
+          "coverage": 0.6667
+        },
+        "non_penalty_xg": {
+          "observed": 2,
+          "records": 3,
+          "coverage": 0.6667
+        },
+        "expected_assists": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "chances_created": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "yellow_cards": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "red_cards": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "tournament_id": 141,
+      "tournament_name": "Coppa Italia",
+      "competition_classification": "UNVERIFIED",
+      "records": 3,
+      "players": [
+        "Andrea Adorante",
+        "Matija Frigan"
+      ],
+      "seasons": [
+        "2025/2026",
+        "2020/2021"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 2,
+          "records": 3,
+          "coverage": 0.6667
+        },
+        "matches_uppercase": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 3,
+          "records": 3,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 0,
+          "records": 3,
+          "coverage": 0.0
+        },
+        "ShotsOnTarget": {
+          "observed": 0,
+          "records": 3,
+          "coverage": 0.0
+        },
+        "expected_goals": {
+          "observed": 0,
+          "records": 3,
+          "coverage": 0.0
+        },
+        "non_penalty_xg": {
+          "observed": 0,
+          "records": 3,
+          "coverage": 0.0
+        },
+        "expected_assists": {
+          "observed": 0,
+          "records": 3,
+          "coverage": 0.0
+        },
+        "chances_created": {
+          "observed": 0,
+          "records": 3,
+          "coverage": 0.0
+        },
+        "yellow_cards": {
+          "observed": 0,
+          "records": 3,
+          "coverage": 0.0
+        },
+        "red_cards": {
+          "observed": 0,
+          "records": 3,
+          "coverage": 0.0
+        }
+      }
+    },
+    {
+      "tournament_id": 10607,
+      "tournament_name": "EURO Qualification qualification",
+      "competition_classification": "UNVERIFIED",
+      "records": 1,
+      "players": [
+        "Albion Rrahmani"
+      ],
+      "seasons": [
+        "2023/2024"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "matches_uppercase": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "ShotsOnTarget": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "expected_goals": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "non_penalty_xg": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "expected_assists": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "chances_created": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "yellow_cards": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "red_cards": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "tournament_id": 288,
+      "tournament_name": "EURO U21",
+      "competition_classification": "UNVERIFIED",
+      "records": 1,
+      "players": [
+        "Matija Frigan"
+      ],
+      "seasons": [
+        "2023/2024"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "matches_uppercase": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "ShotsOnTarget": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "expected_goals": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "non_penalty_xg": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "expected_assists": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "chances_created": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "yellow_cards": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "red_cards": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "tournament_id": 196,
+      "tournament_name": "Ekstraklasa",
+      "competition_classification": "UNVERIFIED",
+      "records": 2,
+      "players": [
+        "Kornel Lisman"
+      ],
+      "seasons": [
+        "2025/2026",
+        "2024/2025"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "matches_uppercase": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "ShotsOnTarget": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "expected_goals": {
+          "observed": 1,
+          "records": 2,
+          "coverage": 0.5
+        },
+        "non_penalty_xg": {
+          "observed": 1,
+          "records": 2,
+          "coverage": 0.5
+        },
+        "expected_assists": {
+          "observed": 1,
+          "records": 2,
+          "coverage": 0.5
+        },
+        "chances_created": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "yellow_cards": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "red_cards": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "tournament_id": 252,
+      "tournament_name": "HNL",
+      "competition_classification": "UNVERIFIED",
+      "records": 1,
+      "players": [
+        "Matija Frigan"
+      ],
+      "seasons": [
+        "2022/2023"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "matches_uppercase": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "ShotsOnTarget": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "expected_goals": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "non_penalty_xg": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "expected_assists": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "chances_created": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "yellow_cards": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "red_cards": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "tournament_id": 55,
+      "tournament_name": "Serie A",
+      "competition_classification": "UNVERIFIED",
+      "records": 1,
+      "players": [
+        "Andrea Adorante"
+      ],
+      "seasons": [
+        "2020/2021"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "matches_uppercase": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "ShotsOnTarget": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "expected_goals": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "non_penalty_xg": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "expected_assists": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "chances_created": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "yellow_cards": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "red_cards": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        }
+      }
+    },
+    {
+      "tournament_id": 86,
+      "tournament_name": "Serie B",
+      "competition_classification": "UNVERIFIED",
+      "records": 2,
+      "players": [
+        "Andrea Adorante"
+      ],
+      "seasons": [
+        "2025/2026",
+        "2024/2025"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "matches_uppercase": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "ShotsOnTarget": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "expected_goals": {
+          "observed": 1,
+          "records": 2,
+          "coverage": 0.5
+        },
+        "non_penalty_xg": {
+          "observed": 1,
+          "records": 2,
+          "coverage": 0.5
+        },
+        "expected_assists": {
+          "observed": 1,
+          "records": 2,
+          "coverage": 0.5
+        },
+        "chances_created": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "yellow_cards": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "red_cards": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "tournament_id": 189,
+      "tournament_name": "Superliga",
+      "competition_classification": "UNVERIFIED",
+      "records": 2,
+      "players": [
+        "Albion Rrahmani"
+      ],
+      "seasons": [
+        "2024/2025",
+        "2023/2024"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 0,
+          "records": 2,
+          "coverage": 0.0
+        },
+        "matches_uppercase": {
+          "observed": 0,
+          "records": 2,
+          "coverage": 0.0
+        },
+        "player_started_matches": {
+          "observed": 0,
+          "records": 2,
+          "coverage": 0.0
+        },
+        "minutes_played": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 0,
+          "records": 2,
+          "coverage": 0.0
+        },
+        "ShotsOnTarget": {
+          "observed": 0,
+          "records": 2,
+          "coverage": 0.0
+        },
+        "expected_goals": {
+          "observed": 0,
+          "records": 2,
+          "coverage": 0.0
+        },
+        "non_penalty_xg": {
+          "observed": 0,
+          "records": 2,
+          "coverage": 0.0
+        },
+        "expected_assists": {
+          "observed": 0,
+          "records": 2,
+          "coverage": 0.0
+        },
+        "chances_created": {
+          "observed": 0,
+          "records": 2,
+          "coverage": 0.0
+        },
+        "yellow_cards": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        },
+        "red_cards": {
+          "observed": 2,
+          "records": 2,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "tournament_id": 9808,
+      "tournament_name": "UEFA Nations League C",
+      "competition_classification": "UNVERIFIED",
+      "records": 1,
+      "players": [
+        "Albion Rrahmani"
+      ],
+      "seasons": [
+        "2024/2025"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "matches_uppercase": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "ShotsOnTarget": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "expected_goals": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "non_penalty_xg": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "expected_assists": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "chances_created": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "yellow_cards": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "red_cards": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "tournament_id": 10195,
+      "tournament_name": "World Cup UEFA qualification",
+      "competition_classification": "UNVERIFIED",
+      "records": 1,
+      "players": [
+        "Albion Rrahmani"
+      ],
+      "seasons": [
+        "2025/2026"
+      ],
+      "priority_field_coverage": {
+        "rating": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "matches_uppercase": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "player_started_matches": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "minutes_played": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "goals": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "assists": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "shots": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "ShotsOnTarget": {
+          "observed": 0,
+          "records": 1,
+          "coverage": 0.0
+        },
+        "expected_goals": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "non_penalty_xg": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "expected_assists": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "chances_created": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "yellow_cards": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        },
+        "red_cards": {
+          "observed": 1,
+          "records": 1,
+          "coverage": 1.0
+        }
+      }
+    }
+  ],
+  "interpretation_rules": {
+    "competition_type_not_inferred_from_name": true,
+    "chances_created_not_relabelled_as_key_passes": true,
+    "rating_is_provider_rating_not_fantasy_vote": true,
+    "missing_values_not_imputed": true
+  }
+}
