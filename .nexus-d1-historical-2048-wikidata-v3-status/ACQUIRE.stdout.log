@@ -1,0 +1,14 @@
+{
+  "subjects": 2048,
+  "mappingStatus": {
+    "IDENTITY_VERIFIED": 1939,
+    "IDENTITY_AMBIGUOUS": 50,
+    "IDENTITY_UNRESOLVED": 59
+  },
+  "dobStatus": {
+    "DOB_VERIFIED": 1893,
+    "DOB_CONFLICT": 46,
+    "IDENTITY_UNRESOLVED": 109
+  },
+  "requestFailures": 0
+}
