@@ -1,0 +1,133 @@
+name: Nexus D1 Final v3 Mirror Completion
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-final-v3-mirror-completion/EXECUTE'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: nexus-d1-final-v3-mirror-completion
+  cancel-in-progress: false
+
+jobs:
+  complete:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      RELEASE_TAG: nexus-d1-identity-demographics-final-v3
+      ARCHIVE: nexus-d1-identity-demographics-final-v3.tar.gz
+      EXPECTED_SHA: 8125b48152e260c211ec73387fd84c7a214ab0f56ed56c7dcc9ed5886659945d
+      EXPECTED_BYTES: '178240'
+      DEST: data/nexus-d1/final-v3
+      MIRROR: .nexus-d1-final-v3-mirror-completion
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Download already-frozen final release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf "$MIRROR" && mkdir -p "$MIRROR"
+          gh release view "$RELEASE_TAG" >/dev/null
+          gh release download "$RELEASE_TAG" --dir "$MIRROR" --pattern "$ARCHIVE" --pattern "$ARCHIVE.sha256" --pattern 'IDENTITY_MASTER.json' --pattern 'D1_REGISTRY.json' --pattern 'MANIFEST.json'
+          test -f "$MIRROR/$ARCHIVE"
+          test -f "$MIRROR/$ARCHIVE.sha256"
+
+      - name: Verify content-addressed archive and canonical final package
+        run: |
+          set -euo pipefail
+          actual_sha=$(sha256sum "$MIRROR/$ARCHIVE" | cut -d' ' -f1)
+          actual_bytes=$(stat -c %s "$MIRROR/$ARCHIVE")
+          declared_sha=$(awk '{print $1}' "$MIRROR/$ARCHIVE.sha256")
+          test "$actual_sha" = "$EXPECTED_SHA"
+          test "$declared_sha" = "$EXPECTED_SHA"
+          test "$actual_bytes" = "$EXPECTED_BYTES"
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          root=Path('.nexus-d1-final-v3-mirror-completion')
+          master=json.loads((root/'IDENTITY_MASTER.json').read_text())
+          reg=json.loads((root/'D1_REGISTRY.json').read_text())
+          man=json.loads((root/'MANIFEST.json').read_text())
+          assert master['schema']=='NEXUS_D1_IDENTITY_MASTER_V3' and master['status']=='PASS'
+          assert master['scope']['currentSubjectRecords']==505
+          assert master['scope']['historicalUnderstatSubjectRecords']==2048
+          assert master['scope']['uniqueGlobalPersonKeys']==2147
+          assert master['scope']['historicalProviderScopedIdentityUnits']==445
+          assert reg['counts']['current']=={'subjects':505,'dobVerified':505,'dobConflict':0}
+          assert reg['counts']['historicalUnderstatBacked']=={'subjects':2048,'dobVerified':2047,'dobConflict':1}
+          assert len(reg['typedResiduals']['dobConflicts'])==1
+          assert reg['governance']['providerIdsUsedAsGlobalPersonKeys'] is False
+          assert reg['governance']['fuzzyMatchingUsed'] is False
+          assert reg['governance']['dobInferred'] is False
+          assert reg['governance']['computedAgeDerived'] is False
+          assert reg['governance']['f1Started'] is False and reg['governance']['d2Started'] is False
+          for name in ['IDENTITY_MASTER.json','D1_REGISTRY.json']:
+              spec=man['outputs']['identityMaster' if name.startswith('IDENTITY') else 'registry']
+              b=(root/name).read_bytes()
+              assert len(b)==spec['size'] and hashlib.sha256(b).hexdigest()==spec['sha256']
+          PY
+
+      - name: Persist mirror-prep receipt
+        env:
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os
+          from datetime import datetime,timezone
+          from pathlib import Path
+          d={
+            'schema':'NEXUS_D1_MIRROR_PREP_RECEIPT_V3',
+            'protocolVersion':'1.1',
+            'status':'PASS_READY_FOR_PRIVATE_DRIVE_MIRROR',
+            'capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),
+            'sourceReleaseTag':'nexus-d1-identity-demographics-final-v3',
+            'archiveFile':'nexus-d1-identity-demographics-final-v3.tar.gz',
+            'archiveBytes':178240,
+            'archiveSha256':'8125b48152e260c211ec73387fd84c7a214ab0f56ed56c7dcc9ed5886659945d',
+            'githubActionsRunId':int(os.environ['RUN_ID']),
+            'releaseArchiveReadbackSha256Pass':True,
+            'releaseCanonicalPackageChecksPass':True,
+            'governance':{
+              'rebuildPerformed':False,'releaseRecreated':False,'rawMutation':False,
+              'fuzzyMatchingUsed':False,'dobInferred':False,'computedAgeDerived':False,
+              'trainingPromotionGranted':False,'f1Started':False,'d2Started':False
+            },
+            'nextRequiredAction':'UPLOAD_MIRROR_ARTIFACT_TO_PRIVATE_DRIVE_AND_VERIFY_READBACK'
+          }
+          p=Path('data/nexus-d1/final-v3/D1_MIRROR_PREP_RECEIPT.json')
+          p.write_text(json.dumps(d,indent=2)+'\n')
+          Path('.nexus-d1-final-v3-mirror-completion/D1_MIRROR_PREP_RECEIPT.json').write_text(json.dumps(d,indent=2)+'\n')
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$DEST/D1_MIRROR_PREP_RECEIPT.json"
+          git commit -m 'nexus: persist D1 final v3 mirror-prep receipt [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Complete receipt upload on existing release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release upload "$RELEASE_TAG" "$DEST/D1_PUBLIC_FREEZE_RECEIPT.json" --clobber
+          gh release upload "$RELEASE_TAG" "$DEST/D1_MIRROR_PREP_RECEIPT.json" --clobber
+
+      - name: Upload mirror artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-identity-demographics-final-v3-mirror
+          path: .nexus-d1-final-v3-mirror-completion/
+          if-no-files-found: error
+          retention-days: 30
