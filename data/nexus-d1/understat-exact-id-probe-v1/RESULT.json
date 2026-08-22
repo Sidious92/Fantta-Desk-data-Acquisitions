@@ -1,0 +1,85 @@
+{
+  "schema": "NEXUS_D1_UNDERSTAT_EXACT_ID_IDENTITY_PROBE_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS",
+  "capturedAt": "2026-08-22T16:19:40.580910Z",
+  "summary": {
+    "subjectsExpected": 4,
+    "subjectsFetched": 4,
+    "usableExactIdIdentityPages": 4,
+    "technicalFailures": 0
+  },
+  "rules": {
+    "identityResolvedIntoD1": false,
+    "providerIdUsedAsGlobalPersonKey": false,
+    "nameOnlyMatchingUsed": false,
+    "fuzzyMatchingUsed": false,
+    "dobUsedForIdentitySelection": false,
+    "computedAgeDerived": false,
+    "f1Started": false,
+    "d2Started": false
+  },
+  "records": [
+    {
+      "understatPlayerId": "1204",
+      "label": "Patric",
+      "requestedUrl": "https://understat.com/player/1204",
+      "finalUrl": "https://understat.com/player/1204",
+      "httpStatus": 200,
+      "rawPath": ".nexus-d1-understat-exact-id-probe-v1/output/raw/00--understat-1204.html",
+      "rawBytes": 20682,
+      "rawSha256": "47611d07e0ad6e5f8d8c6feb492d998913f01cd8cdeab5830b64d769ba933263",
+      "title": "Patric | Lazio | xG | Shot Map | Goal stats | Understat.com",
+      "h1": "Patric",
+      "birthLikeTokenCount": 0,
+      "birthLikeTokens": [],
+      "exactIdRequestBinding": true
+    },
+    {
+      "understatPlayerId": "6960",
+      "label": "Bremer",
+      "requestedUrl": "https://understat.com/player/6960",
+      "finalUrl": "https://understat.com/player/6960",
+      "httpStatus": 200,
+      "rawPath": ".nexus-d1-understat-exact-id-probe-v1/output/raw/01--understat-6960.html",
+      "rawBytes": 19345,
+      "rawSha256": "3912a23828e254e0d402245eceb03f5fd205422c83cb0f85ce2433768eafe2d8",
+      "title": "Bremer | Juventus | xG | Shot Map | Goal stats | Understat.com",
+      "h1": "Bremer",
+      "birthLikeTokenCount": 0,
+      "birthLikeTokens": [],
+      "exactIdRequestBinding": true
+    },
+    {
+      "understatPlayerId": "6976",
+      "label": "Demba Thiam",
+      "requestedUrl": "https://understat.com/player/6976",
+      "finalUrl": "https://understat.com/player/6976",
+      "httpStatus": 200,
+      "rawPath": ".nexus-d1-understat-exact-id-probe-v1/output/raw/02--understat-6976.html",
+      "rawBytes": 18091,
+      "rawSha256": "c6a68238fc9edcd9d268143f47edac32d04140185f5dc7b28f57ee9408ed3129",
+      "title": "Demba Thiam | SPAL 2013 | xG | Shot Map | Goal stats | Understat.com",
+      "h1": "Demba Thiam",
+      "birthLikeTokenCount": 0,
+      "birthLikeTokens": [],
+      "exactIdRequestBinding": true
+    },
+    {
+      "understatPlayerId": "8182",
+      "label": "cross-scope-known",
+      "requestedUrl": "https://understat.com/player/8182",
+      "finalUrl": "https://understat.com/player/8182",
+      "httpStatus": 200,
+      "rawPath": ".nexus-d1-understat-exact-id-probe-v1/output/raw/03--understat-8182.html",
+      "rawBytes": 19765,
+      "rawSha256": "d56f9c8cf93fabe46ffc02606d1c204c2727efe25767cb850d81d6c28879c663",
+      "title": "Lucas Da Cunha | Como | xG | Shot Map | Goal stats | Understat.com",
+      "h1": "Lucas Da Cunha",
+      "birthLikeTokenCount": 0,
+      "birthLikeTokens": [],
+      "exactIdRequestBinding": true
+    }
+  ],
+  "technicalFailures": []
+}
