@@ -1,0 +1,23 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_RESIDUAL_REVIEW_MANIFEST_V1",
+  "status": "PASS",
+  "resultBytes": 7375,
+  "resultSha256": "baeb2a818bd26d5cb09d6ca64b91a21540f12dc8625f224b2be233e461eebcba",
+  "governance": {
+    "networkRequestsMade": 0,
+    "rawEvidenceMutated": false,
+    "d0PersonBridgeIsIdentityAuthority": true,
+    "providerObservationKey": [
+      "Fantacalcio",
+      "season",
+      "fantacalcioPlayerId"
+    ],
+    "providerIdUsedAsGlobalHistoricalPersonKey": false,
+    "nameSearchUsed": false,
+    "fuzzyMatchingUsed": false,
+    "dobUsedForIdentitySelection": false,
+    "computedAgeDerived": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}

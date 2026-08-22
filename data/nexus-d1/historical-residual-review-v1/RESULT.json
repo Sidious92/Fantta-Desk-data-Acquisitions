@@ -1,0 +1,227 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_RESIDUAL_REVIEW_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS",
+  "capturedAt": "2026-08-22T17:07:30.428854Z",
+  "rules": {
+    "networkRequestsMade": 0,
+    "rawEvidenceMutated": false,
+    "d0PersonBridgeIsIdentityAuthority": true,
+    "providerObservationKey": [
+      "Fantacalcio",
+      "season",
+      "fantacalcioPlayerId"
+    ],
+    "providerIdUsedAsGlobalHistoricalPersonKey": false,
+    "nameSearchUsed": false,
+    "fuzzyMatchingUsed": false,
+    "dobUsedForIdentitySelection": false,
+    "computedAgeDerived": false,
+    "f1Started": false,
+    "d2Started": false
+  },
+  "summary": {
+    "historicalOpenResidualSubjects": 12,
+    "historicalOpenResolved": 12,
+    "historicalDobConflictResidualSubjects": 2,
+    "historicalDobConflictsResolved": 1
+  },
+  "historicalOpenResiduals": [
+    {
+      "subjectId": "historical-understat-1103",
+      "understatPlayerId": "1103",
+      "bridgePersonKey": "understat:1103",
+      "status": "HISTORICAL_PERSON_DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "1994-12-19",
+      "exactDobValues": [
+        "1994-12-19"
+      ],
+      "exactObservationCount": 2,
+      "identityAuthority": "D0_DERIVED_UNDERSTAT_PERSON_BRIDGE",
+      "nameGateUsed": false
+    },
+    {
+      "subjectId": "historical-understat-1126",
+      "understatPlayerId": "1126",
+      "bridgePersonKey": "understat:1126",
+      "status": "HISTORICAL_PERSON_DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "1994-12-19",
+      "exactDobValues": [
+        "1994-12-19"
+      ],
+      "exactObservationCount": 4,
+      "identityAuthority": "D0_DERIVED_UNDERSTAT_PERSON_BRIDGE",
+      "nameGateUsed": false
+    },
+    {
+      "subjectId": "historical-understat-1374",
+      "understatPlayerId": "1374",
+      "bridgePersonKey": "understat:1374",
+      "status": "HISTORICAL_PERSON_DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "1982-08-31",
+      "exactDobValues": [
+        "1982-08-31"
+      ],
+      "exactObservationCount": 8,
+      "identityAuthority": "D0_DERIVED_UNDERSTAT_PERSON_BRIDGE",
+      "nameGateUsed": false
+    },
+    {
+      "subjectId": "historical-understat-1875",
+      "understatPlayerId": "1875",
+      "bridgePersonKey": "understat:1875",
+      "status": "HISTORICAL_PERSON_DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "1991-06-10",
+      "exactDobValues": [
+        "1991-06-10"
+      ],
+      "exactObservationCount": 1,
+      "identityAuthority": "D0_DERIVED_UNDERSTAT_PERSON_BRIDGE",
+      "nameGateUsed": false
+    },
+    {
+      "subjectId": "historical-understat-2003",
+      "understatPlayerId": "2003",
+      "bridgePersonKey": "understat:2003",
+      "status": "HISTORICAL_PERSON_DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "1996-03-06",
+      "exactDobValues": [
+        "1996-03-06"
+      ],
+      "exactObservationCount": 3,
+      "identityAuthority": "D0_DERIVED_UNDERSTAT_PERSON_BRIDGE",
+      "nameGateUsed": false
+    },
+    {
+      "subjectId": "historical-understat-7265",
+      "understatPlayerId": "7265",
+      "bridgePersonKey": "understat:7265",
+      "status": "HISTORICAL_PERSON_DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "2001-03-26",
+      "exactDobValues": [
+        "2001-03-26"
+      ],
+      "exactObservationCount": 2,
+      "identityAuthority": "D0_DERIVED_UNDERSTAT_PERSON_BRIDGE",
+      "nameGateUsed": false
+    },
+    {
+      "subjectId": "historical-understat-7977",
+      "understatPlayerId": "7977",
+      "bridgePersonKey": "understat:7977",
+      "status": "HISTORICAL_PERSON_DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "1990-11-30",
+      "exactDobValues": [
+        "1990-11-30"
+      ],
+      "exactObservationCount": 1,
+      "identityAuthority": "D0_DERIVED_UNDERSTAT_PERSON_BRIDGE",
+      "nameGateUsed": false
+    },
+    {
+      "subjectId": "historical-understat-9057",
+      "understatPlayerId": "9057",
+      "bridgePersonKey": "understat:9057",
+      "status": "HISTORICAL_PERSON_DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "2003-04-04",
+      "exactDobValues": [
+        "2003-04-04"
+      ],
+      "exactObservationCount": 3,
+      "identityAuthority": "D0_DERIVED_UNDERSTAT_PERSON_BRIDGE",
+      "nameGateUsed": false
+    },
+    {
+      "subjectId": "historical-understat-9447",
+      "understatPlayerId": "9447",
+      "bridgePersonKey": "understat:9447",
+      "status": "HISTORICAL_PERSON_DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "2002-04-10",
+      "exactDobValues": [
+        "2002-04-10"
+      ],
+      "exactObservationCount": 1,
+      "identityAuthority": "D0_DERIVED_UNDERSTAT_PERSON_BRIDGE",
+      "nameGateUsed": false
+    },
+    {
+      "subjectId": "historical-understat-10497",
+      "understatPlayerId": "10497",
+      "bridgePersonKey": "understat:10497",
+      "status": "HISTORICAL_PERSON_DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "2001-02-07",
+      "exactDobValues": [
+        "2001-02-07"
+      ],
+      "exactObservationCount": 1,
+      "identityAuthority": "D0_DERIVED_UNDERSTAT_PERSON_BRIDGE",
+      "nameGateUsed": false
+    },
+    {
+      "subjectId": "historical-understat-11901",
+      "understatPlayerId": "11901",
+      "bridgePersonKey": "understat:11901",
+      "status": "HISTORICAL_PERSON_DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "2006-01-06",
+      "exactDobValues": [
+        "2006-01-06"
+      ],
+      "exactObservationCount": 1,
+      "identityAuthority": "D0_DERIVED_UNDERSTAT_PERSON_BRIDGE",
+      "nameGateUsed": false
+    },
+    {
+      "subjectId": "historical-understat-12168",
+      "understatPlayerId": "12168",
+      "bridgePersonKey": "understat:12168",
+      "status": "HISTORICAL_PERSON_DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "2005-05-08",
+      "exactDobValues": [
+        "2005-05-08"
+      ],
+      "exactObservationCount": 3,
+      "identityAuthority": "D0_DERIVED_UNDERSTAT_PERSON_BRIDGE",
+      "nameGateUsed": false
+    }
+  ],
+  "historicalDobConflictResiduals": [
+    {
+      "subjectId": "historical-understat-1525",
+      "understatPlayerId": "1525",
+      "wikidataItemId": "Q19818111",
+      "existingConflictDates": [
+        "1996-09-28",
+        "1996-11-07"
+      ],
+      "exactFantacalcioDobValues": [
+        "1996-09-28"
+      ],
+      "matchingExistingConflictDates": [
+        "1996-09-28"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "1996-09-28",
+      "exactObservationCount": 1,
+      "identityAuthority": "VERIFIED_WIKIDATA_QID_PLUS_D0_UNDERSTAT_PERSON_BRIDGE",
+      "nameGateUsed": false
+    },
+    {
+      "subjectId": "historical-understat-4904",
+      "understatPlayerId": "4904",
+      "wikidataItemId": "Q16298600",
+      "existingConflictDates": [
+        "1996-05-11",
+        "1996-06-22"
+      ],
+      "exactFantacalcioDobValues": [
+        "1996-05-22"
+      ],
+      "matchingExistingConflictDates": [],
+      "status": "DOB_CONFLICT_REMAINS_UNRESOLVED",
+      "dateOfBirth": null,
+      "exactObservationCount": 1,
+      "identityAuthority": "VERIFIED_WIKIDATA_QID_PLUS_D0_UNDERSTAT_PERSON_BRIDGE",
+      "nameGateUsed": false
+    }
+  ]
+}
