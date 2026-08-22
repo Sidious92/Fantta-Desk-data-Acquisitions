@@ -1,0 +1,21 @@
+{
+  "schema": "NEXUS_D1_PUBLIC_FREEZE_RECEIPT_V3",
+  "protocolVersion": "1.1",
+  "status": "PUBLIC_CONTENT_ADDRESSED_FREEZE_COMPLETE_PRIVATE_DRIVE_MIRROR_PENDING",
+  "capturedAt": "2026-08-22T17:40:50.139928Z",
+  "releaseTag": "nexus-d1-identity-demographics-final-v3",
+  "archiveFile": "nexus-d1-identity-demographics-final-v3.tar.gz",
+  "archiveBytes": 178240,
+  "archiveSha256": "8125b48152e260c211ec73387fd84c7a214ab0f56ed56c7dcc9ed5886659945d",
+  "githubActionsRunId": 32588453669,
+  "governance": {
+    "rawMutation": false,
+    "fuzzyMatchingUsed": false,
+    "dobInferred": false,
+    "computedAgeDerived": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  },
+  "nextRequiredAction": "PRIVATE_DRIVE_MIRROR_AND_SHA256_READBACK"
+}
