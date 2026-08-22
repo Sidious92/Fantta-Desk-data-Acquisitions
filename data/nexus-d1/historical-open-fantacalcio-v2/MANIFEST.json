@@ -1,0 +1,25 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_OPEN_FANTACALCIO_DEMOGRAPHICS_MANIFEST_V2",
+  "status": "PASS",
+  "resultBytes": 172606,
+  "resultSha256": "f61dde3fec546235e2c8fe4d37f4580f9133a2691052e741c8addfdb7ca2f78b",
+  "rawEvidenceAuthority": "data/nexus-d1/historical-open-fantacalcio-v1/MANIFEST.json",
+  "governance": {
+    "providerObservationKey": [
+      "Fantacalcio",
+      "season",
+      "fantacalcioPlayerId"
+    ],
+    "providerIdUsedAsGlobalHistoricalPersonKey": false,
+    "d0UnderstatPersonBridgeRequired": true,
+    "exactSeasonPlayerIdCanonicalBindingRequired": true,
+    "exactLookupTokenSubsetOfFullNameRequired": true,
+    "nameSearchUsed": false,
+    "fuzzyMatchingUsed": false,
+    "dobUsedForIdentitySelection": false,
+    "computedAgeDerived": false,
+    "currentRetrievalImpliesHistoricalAsOf": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
