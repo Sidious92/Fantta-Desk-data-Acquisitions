@@ -1,0 +1,183 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_SUBJECT_BRIDGE_FIELD_AUDIT_V1",
+  "status": "PASS",
+  "capturedAt": "2026-08-22T16:26:21.946090Z",
+  "historicalIdentityProblemSubjects": 109,
+  "subjectTopLevelKeyPresence": {
+    "bridgePersonKey": 109,
+    "contextClubs": 109,
+    "fantacalcioObservationIds": 109,
+    "lookupNames": 109,
+    "seasons": 109,
+    "subjectId": 109,
+    "understatPlayerId": 109
+  },
+  "nestedFirstItemKeyPresence": {},
+  "samples": [
+    {
+      "understatPlayerId": "560",
+      "keys": [
+        "bridgePersonKey",
+        "contextClubs",
+        "fantacalcioObservationIds",
+        "lookupNames",
+        "seasons",
+        "subjectId",
+        "understatPlayerId"
+      ],
+      "subject": {
+        "bridgePersonKey": "understat:560",
+        "contextClubs": [
+          "venezia"
+        ],
+        "fantacalcioObservationIds": [
+          "2628"
+        ],
+        "lookupNames": [
+          "Sergio Romero"
+        ],
+        "seasons": [
+          "2021/22"
+        ],
+        "subjectId": "historical-understat-560",
+        "understatPlayerId": "560"
+      }
+    },
+    {
+      "understatPlayerId": "817",
+      "keys": [
+        "bridgePersonKey",
+        "contextClubs",
+        "fantacalcioObservationIds",
+        "lookupNames",
+        "seasons",
+        "subjectId",
+        "understatPlayerId"
+      ],
+      "subject": {
+        "bridgePersonKey": "understat:817",
+        "contextClubs": [
+          "benevento",
+          "genoa",
+          "udinese"
+        ],
+        "fantacalcioObservationIds": [
+          "2646"
+        ],
+        "lookupNames": [
+          "Sandro"
+        ],
+        "seasons": [
+          "2017/18",
+          "2018/19"
+        ],
+        "subjectId": "historical-understat-817",
+        "understatPlayerId": "817"
+      }
+    },
+    {
+      "understatPlayerId": "1103",
+      "keys": [
+        "bridgePersonKey",
+        "contextClubs",
+        "fantacalcioObservationIds",
+        "lookupNames",
+        "seasons",
+        "subjectId",
+        "understatPlayerId"
+      ],
+      "subject": {
+        "bridgePersonKey": "understat:1103",
+        "contextClubs": [
+          "chievo",
+          "genoa"
+        ],
+        "fantacalcioObservationIds": [
+          "809"
+        ],
+        "lookupNames": [
+          "Nicola Ninkovic"
+        ],
+        "seasons": [
+          "2015/16",
+          "2016/17"
+        ],
+        "subjectId": "historical-understat-1103",
+        "understatPlayerId": "1103"
+      }
+    },
+    {
+      "understatPlayerId": "1126",
+      "keys": [
+        "bridgePersonKey",
+        "contextClubs",
+        "fantacalcioObservationIds",
+        "lookupNames",
+        "seasons",
+        "subjectId",
+        "understatPlayerId"
+      ],
+      "subject": {
+        "bridgePersonKey": "understat:1126",
+        "contextClubs": [
+          "ac milan",
+          "empoli",
+          "torino"
+        ],
+        "fantacalcioObservationIds": [
+          "382"
+        ],
+        "lookupNames": [
+          "M&#039;Baye Niang"
+        ],
+        "seasons": [
+          "2015/16",
+          "2016/17",
+          "2017/18",
+          "2023/24"
+        ],
+        "subjectId": "historical-understat-1126",
+        "understatPlayerId": "1126"
+      }
+    },
+    {
+      "understatPlayerId": "1132",
+      "keys": [
+        "bridgePersonKey",
+        "contextClubs",
+        "fantacalcioObservationIds",
+        "lookupNames",
+        "seasons",
+        "subjectId",
+        "understatPlayerId"
+      ],
+      "subject": {
+        "bridgePersonKey": "understat:1132",
+        "contextClubs": [
+          "cagliari",
+          "lecce",
+          "napoli"
+        ],
+        "fantacalcioObservationIds": [
+          "385"
+        ],
+        "lookupNames": [
+          "Gabriel"
+        ],
+        "seasons": [
+          "2015/16",
+          "2016/17",
+          "2019/20"
+        ],
+        "subjectId": "historical-understat-1132",
+        "understatPlayerId": "1132"
+      }
+    }
+  ],
+  "governance": {
+    "performanceStatisticsConsumed": false,
+    "fuzzyMatchingUsed": false,
+    "d2Started": false,
+    "f1Started": false
+  }
+}
