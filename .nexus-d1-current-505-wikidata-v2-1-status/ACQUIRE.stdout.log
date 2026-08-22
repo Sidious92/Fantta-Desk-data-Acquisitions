@@ -1,0 +1,23 @@
+{
+  "subjects": 505,
+  "mappingStatus": {
+    "IDENTITY_VERIFIED": 379,
+    "IDENTITY_UNRESOLVED": 111,
+    "IDENTITY_AMBIGUOUS": 15
+  },
+  "dobStatus": {
+    "DOB_VERIFIED": 378,
+    "IDENTITY_UNRESOLVED": 126,
+    "DOB_CONFLICT": 1
+  },
+  "bridgedMappingStatus": {
+    "IDENTITY_VERIFIED": 376,
+    "IDENTITY_UNRESOLVED": 15,
+    "IDENTITY_AMBIGUOUS": 15
+  },
+  "unbridgedMappingStatus": {
+    "IDENTITY_UNRESOLVED": 96,
+    "IDENTITY_VERIFIED": 3
+  },
+  "requestFailures": 0
+}
