@@ -1,0 +1,23 @@
+name: Nexus D1 Historical 445 Demographic Cluster Audit v1
+on:
+  push:
+    paths: ['.nexus-d1-historical-445-demographic-cluster-audit-v1/EXECUTE']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python scripts/nexus-d1-audit-historical-445-demographic-clusters-v1.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/nexus-d1/historical-445-demographic-cluster-audit-v1
+          git commit -m 'nexus: persist D1 historical 445 demographic cluster audit v1 [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
