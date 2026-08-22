@@ -1,4 +1,4 @@
-# Trigger revision 2: completion-only, no scientific rebuild.
+# Trigger revision 3: include hidden mirror directory in artifact.
 name: Nexus D1 Final v3 Mirror Completion v2
 
 on:
@@ -79,4 +79,5 @@ jobs:
           name: nexus-d1-identity-demographics-final-v3-mirror
           path: .nexus-d1-final-v3-mirror-v2/
           if-no-files-found: error
+          include-hidden-files: true
           retention-days: 30
