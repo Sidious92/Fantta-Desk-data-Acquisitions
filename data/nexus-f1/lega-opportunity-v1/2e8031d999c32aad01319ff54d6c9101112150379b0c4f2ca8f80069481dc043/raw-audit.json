@@ -1,0 +1,22 @@
+{
+  "schema": "NEXUS_F1_LEGA_RAW_SNAPSHOT_AUDIT_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS_RAW_ACQUISITION_ONLY",
+  "manifestSha256": "809f13f1174fe19cbfd565a1635b37f9ecb9e5592ab78777230dd2e0f9487318",
+  "snapshotContentSha256": "d3800236f4a08f88525866226f0b02e9576bcfee92b0ce946ba707bcfc9b48ca",
+  "expectedSeasons": 5,
+  "observedSeasons": 5,
+  "sourceMatchRows": 1901,
+  "excludedSourceMatches": 1,
+  "expectedMatches": 1900,
+  "observedMatches": 1900,
+  "expectedLineupPayloads": 1900,
+  "observedLineupPayloads": 1900,
+  "regularSeasonSelectionRule": "verified provider matchday signals only; no date/order inference",
+  "oldArtifactRecovered": false,
+  "availableAtAssigned": false,
+  "normalizationPerformed": false,
+  "stintDerivationPerformed": false,
+  "f1Closed": false,
+  "nextRequiredStep": "SEMANTIC_LINEUP_AUDIT_AND_F1_RAW_STINT_DERIVATION_WITH_RECONCILIATION"
+}
