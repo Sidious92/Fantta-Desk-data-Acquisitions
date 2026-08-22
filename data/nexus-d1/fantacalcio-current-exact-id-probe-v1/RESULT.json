@@ -1,0 +1,101 @@
+{
+  "schema": "NEXUS_D1_FANTACALCIO_CURRENT_EXACT_ID_DEMOGRAPHICS_PROBE_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS",
+  "capturedAt": "2026-08-22T16:22:10.286282Z",
+  "summary": {
+    "subjectsExpected": 4,
+    "subjectsFetched": 4,
+    "exactIdDobPass": 4,
+    "technicalFailures": 0
+  },
+  "semantics": {
+    "authoritySurface": "Fantacalcio current Serie A player profile",
+    "identityBinding": "CURRENT_LISTONE_FANTACALCIO_PLAYER_ID_EXACT",
+    "dateSource": "Nato il on exact-ID current player page",
+    "datePrecision": "DAY",
+    "providerIdUsedAsGlobalHistoricalPersonKey": false,
+    "currentScopeOnly": true,
+    "nameSearchUsed": false,
+    "fuzzyMatchingUsed": false,
+    "dobUsedForIdentitySelection": false
+  },
+  "records": [
+    {
+      "fantacalcioPlayerId": "327",
+      "expectedClub": "Lazio",
+      "sourceLookupName": "Patric",
+      "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/lazio/patric/327",
+      "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/lazio/patric/327",
+      "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/lazio/patric/327",
+      "httpStatus": 200,
+      "exactProviderIdBound": true,
+      "fullName": "Patric Gabarron",
+      "dobCandidates": [
+        "1993-04-17"
+      ],
+      "rawPath": ".nexus-d1-fantacalcio-current-exact-id-probe-v1/output/raw/00--fc-327.html",
+      "rawBytes": 169113,
+      "rawSha256": "4ff661e30f3372f171af0dfda56821b80ff9c6c95e3b91b9e26e6ed8aebeffb0"
+    },
+    {
+      "fantacalcioPlayerId": "2788",
+      "expectedClub": "Juventus",
+      "sourceLookupName": "Bremer",
+      "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/juventus/bremer/2788",
+      "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/juventus/bremer/2788",
+      "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/juventus/bremer/2788",
+      "httpStatus": 200,
+      "exactProviderIdBound": true,
+      "fullName": "Gleison Bremer",
+      "dobCandidates": [
+        "1997-03-18"
+      ],
+      "rawPath": ".nexus-d1-fantacalcio-current-exact-id-probe-v1/output/raw/01--fc-2788.html",
+      "rawBytes": 170015,
+      "rawSha256": "e10c7aa5eb0772d2b510f466a68e89462e5f2944111251c88798b3fc59cb2ad9"
+    },
+    {
+      "fantacalcioPlayerId": "4317",
+      "expectedClub": "Roma",
+      "sourceLookupName": "N'Dicka",
+      "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/roma/n-dicka/4317",
+      "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/roma/n-dicka/4317",
+      "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/roma/n-dicka/4317",
+      "httpStatus": 200,
+      "exactProviderIdBound": true,
+      "fullName": "Evan N'Dicka",
+      "dobCandidates": [
+        "1999-08-20"
+      ],
+      "rawPath": ".nexus-d1-fantacalcio-current-exact-id-probe-v1/output/raw/02--fc-4317.html",
+      "rawBytes": 168153,
+      "rawSha256": "8ec8b0ee5fcb318887f7ddd876d6555eb2af060e4f2dae31f4cc70df637cc025"
+    },
+    {
+      "fantacalcioPlayerId": "2857",
+      "expectedClub": "Genoa",
+      "sourceLookupName": "Traore Hj",
+      "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/genoa/traore-hj/2857",
+      "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/genoa/traore-hj/2857",
+      "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/genoa/traore-hj/2857",
+      "httpStatus": 200,
+      "exactProviderIdBound": true,
+      "fullName": "Hamed Traorè",
+      "dobCandidates": [
+        "2000-02-18"
+      ],
+      "rawPath": ".nexus-d1-fantacalcio-current-exact-id-probe-v1/output/raw/03--fc-2857.html",
+      "rawBytes": 169305,
+      "rawSha256": "577a1edbadbe9224a839e5637476b94d67a608092dddc903bf340f28baceb4fb"
+    }
+  ],
+  "technicalFailures": [],
+  "governance": {
+    "subjectsResolvedIntoD1": false,
+    "secondPassCasesMutated": false,
+    "computedAgeDerived": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
