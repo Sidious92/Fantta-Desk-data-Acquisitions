@@ -1,0 +1,57 @@
+{
+  "schema": "NEXUS_D1_CURRENT_2026_27_SUBJECT_SURFACE_MANIFEST_V2",
+  "protocolVersion": "1.1",
+  "canonicalAsOf": "2026-08-18",
+  "subjectCount": 505,
+  "supersedesTransport": "data/nexus-d1/current-2026-27-subjects-v1-manifest.json",
+  "supersessionReason": "V1_PUBLIC_TRANSPORT_INVALID: gzip CRC failure and raw-DEFLATE decoded SHA did not match declared canonical decoded JSON SHA; v1 retained unchanged and is not an authority.",
+  "sourceReconstruction": {
+    "baselineArtifactId": 9191657389,
+    "baselineCurrentListoneInternalSha256": "0f3c49d313e4fbd0831c59c4ea8a193538e41e2b6435b1b046b2f455caef63ed",
+    "canonicalDeltaPath": "data/nexus/current-listone/2026-08-18/audit-vs-live-2026-08-13.json",
+    "canonicalDeltaBlobSha": "3a947710994c7eb35e9b3fc879af42bdd95fc902",
+    "identityArtifactId": 9162967092,
+    "identityPreservationContainerSha256": "555e012b8e992d04a088aa5809c20b6efc023aa442bbf6a904435df17038d721",
+    "identityScope": "identity/2015-16.json through identity/2025-26.json"
+  },
+  "checks": {
+    "players": 505,
+    "personResolvedExactName": 402,
+    "personResolvedCompatibleProviderName": 4,
+    "resolvedTotal": 406,
+    "identityUnresolved": 99,
+    "identityConflict": 0,
+    "historicalFantacalcioIdNeverResolved": 25,
+    "newFantacalcioIdNotPresentIn2015_26IdentityHistory": 74,
+    "fuzzyMatchingUsed": false
+  },
+  "privacyMinimization": {
+    "fieldsTransferred": [
+      "fantacalcioSourcePlayerId",
+      "lookupNames",
+      "contextClubs",
+      "classicRole",
+      "bridgePersonKey",
+      "identityFoundationState",
+      "identityFoundationMethod"
+    ],
+    "quotationTransferred": false,
+    "fvmTransferred": false,
+    "performanceStatisticsTransferred": false
+  },
+  "payload": {
+    "path": "data/nexus-d1/current-2026-27-subjects-v2.json.gz.b64",
+    "encoding": "BASE64_GZIP_JSON",
+    "decodedJsonBytes": 150545,
+    "decodedJsonSha256": "21ad5fda032c41931bd4075224bb16fa953b4d7a34ed95e9d08f06911093db46",
+    "gzipBytes": 12749,
+    "gzipSha256": "03aa5f6a838d2cbe40ef8d244f96ff81f1bcf736313d60be61f3a661f21d5bb1"
+  },
+  "governance": {
+    "semanticReconstructionFromFrozenAuthorities": true,
+    "corruptV1Reused": false,
+    "canonicalEngineModified": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false
+  }
+}
