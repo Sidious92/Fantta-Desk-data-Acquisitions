@@ -1,0 +1,46 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_UNRESOLVED_FANTACALCIO_ID_SUBLOT_MANIFEST_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS",
+  "source": {
+    "artifactId": 9162967092,
+    "artifactName": "nexus-replay-v3-prepared",
+    "d0PreservationContainerSha256": "555e012b8e992d04a088aa5809c20b6efc023aa442bbf6a904435df17038d721",
+    "identityPaths": "identity/2015-16.json through identity/2025-26.json"
+  },
+  "scope": {
+    "historicalRosterObservations": 7291,
+    "resolvedObservations": 5869,
+    "unresolvedObservations": 1422,
+    "uniqueFantacalcioIdsNeverResolvedToUnderstat": 445,
+    "unresolvedObservationsInSublot": 704
+  },
+  "payload": {
+    "path": "data/nexus-d1/historical-unresolved-fantacalcio-id-sublot-v1.json.xz.b64",
+    "encoding": "BASE64_XZ_JSON",
+    "decodedJsonBytes": 288795,
+    "decodedJsonSha256": "437f1631b34b4647a36239a7b073d423a8164538659946b7335eaf3a2418bf9b",
+    "xzBytes": 8904,
+    "xzSha256": "3cab32c0b3ee1f096cd15753c14c107250acab81b92903f43ba1a835f15ad1e6",
+    "base64Chars": 11872,
+    "base64TextSha256": "14786ef5daacdfe6931755c9340f7e97ac7ff77745d9d316fbb039045d068126"
+  },
+  "checks": {
+    "uniqueFantacalcioIdsNeverResolvedToUnderstat": 445,
+    "providerIdsTreatedAsGlobalPersonKeys": false,
+    "nameNormalizationUsedForSelection": false,
+    "fuzzyMatchingUsed": false,
+    "performanceStatisticsTransferred": false
+  },
+  "governance": {
+    "identityOnly": true,
+    "performanceStatisticsTransferred": false,
+    "targetValuesTransferred": false,
+    "quotationsTransferred": false,
+    "computedAgeDerived": false,
+    "dobInferred": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
