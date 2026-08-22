@@ -1,0 +1,55 @@
+{
+  "schema": "NEXUS_D1_FOTMOB_DOB_SEMANTICS_PROBE_MANIFEST_V1",
+  "generatedAt": "2026-08-22T14:49:12.017670Z",
+  "status": "PASS",
+  "files": [
+    {
+      "path": "PROBE.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "PROBE.stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "RESULT.json",
+      "size": 23368,
+      "sha256": "ef792dec3983290d0058fecdafc031b3e0db5f9965c1f76dc5a99ffbe73186f9"
+    },
+    {
+      "path": "raw/fotmob-1024432-next-data.json",
+      "size": 406998,
+      "sha256": "468d46f9e362156ea9209c815007a56dbf199a24ba85977e298443e3cdc004e9"
+    },
+    {
+      "path": "raw/fotmob-1190371-next-data.json",
+      "size": 224090,
+      "sha256": "705b81a28c6c916c637bf0ca53ef19415d69e785473d2f0119a29939b3ac0fc0"
+    },
+    {
+      "path": "raw/fotmob-1379468-next-data.json",
+      "size": 277928,
+      "sha256": "2853bc94d6164c157a33a6097edf7e869d0ced77a9594b462f30fb85cfc19a87"
+    },
+    {
+      "path": "raw/fotmob-1529483-next-data.json",
+      "size": 253892,
+      "sha256": "06487f09519361f45026e0401a85034b7c6300ab6208ad73fd9959a593b78e70"
+    }
+  ],
+  "fileCount": 7,
+  "canonicalContentSha256": "6e201373277cdc808dcea8f692f97f93f91a23e7ce70718922d659a15aa1a554",
+  "governance": {
+    "identityResolverExecuted": false,
+    "fuzzyMatchingUsed": false,
+    "nameOnlyMatchingUsed": false,
+    "dobUsedForIdentitySelection": false,
+    "computedAgeDerived": false,
+    "secondPassCasesMutated": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}

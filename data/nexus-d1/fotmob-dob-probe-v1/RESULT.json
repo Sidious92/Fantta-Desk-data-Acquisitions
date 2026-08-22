@@ -1,0 +1,476 @@
+{
+  "schema": "NEXUS_D1_FOTMOB_DOB_SEMANTICS_PROBE_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS",
+  "capturedAt": "2026-08-22T14:49:12.015420Z",
+  "probeSubjects": [
+    {
+      "fotmobPlayerId": 1190371,
+      "label": "Frigan"
+    },
+    {
+      "fotmobPlayerId": 1024432,
+      "label": "Adorante"
+    },
+    {
+      "fotmobPlayerId": 1529483,
+      "label": "Lisman"
+    },
+    {
+      "fotmobPlayerId": 1379468,
+      "label": "Rrahmani"
+    }
+  ],
+  "semantics": {
+    "authoritySurface": "FotMob player page __NEXT_DATA__",
+    "dataRoot": "$.props.pageProps.data",
+    "dateOfBirthPath": "$.props.pageProps.data.meta.personJSONLD.birthDate",
+    "precision": "DAY",
+    "acceptedFormat": "YYYY-MM-DD or ISO datetime carrying an exact YYYY-MM-DD",
+    "ageOnlyAccepted": false,
+    "yearOnlyAccepted": false,
+    "identityBoundByExactFotmobPlayerId": true,
+    "dobUsedForIdentitySelection": false,
+    "commonFullDateCandidatePaths": [
+      "$.props.pageProps.data.meta.personJSONLD.birthDate"
+    ],
+    "values": [
+      {
+        "fotmobPlayerId": 1190371,
+        "dateOfBirth": "2003-02-11",
+        "rawValue": "2003-02-11T00:00:00.000Z"
+      },
+      {
+        "fotmobPlayerId": 1024432,
+        "dateOfBirth": "2000-02-05",
+        "rawValue": "2000-02-05T00:00:00.000Z"
+      },
+      {
+        "fotmobPlayerId": 1529483,
+        "dateOfBirth": "2006-02-20",
+        "rawValue": "2006-02-20T00:00:00.000Z"
+      },
+      {
+        "fotmobPlayerId": 1379468,
+        "dateOfBirth": "2000-08-31",
+        "rawValue": "2000-08-31T00:00:00.000Z"
+      }
+    ]
+  },
+  "summary": {
+    "subjectsExpected": 4,
+    "subjectsFetched": 4,
+    "technicalFailures": 0,
+    "exactIdBindingPass": 4,
+    "subjectsWithFullDateCandidateInDataRoot": 4,
+    "singleCommonFullDatePath": true
+  },
+  "technicalFailures": [],
+  "records": [
+    {
+      "fotmobPlayerId": 1190371,
+      "label": "Frigan",
+      "requestedUrl": "https://www.fotmob.com/players/1190371/x",
+      "capturedAt": "2026-08-22T14:49:07.385533Z",
+      "httpStatus": 200,
+      "response": {
+        "htmlBytes": 593352,
+        "htmlSha256": "e4bb4b34478ddba367d5cac820dbd09c4931cbbcbec5a76abe4609ed1c4e7cbf",
+        "contentType": "text/html; charset=utf-8"
+      },
+      "nextData": {
+        "rawPath": "raw/fotmob-1190371-next-data.json",
+        "bytes": 224090,
+        "sha256": "705b81a28c6c916c637bf0ca53ef19415d69e785473d2f0119a29939b3ac0fc0",
+        "buildId": "K8seapo1mInchoRH-uHSi",
+        "page": "/players/[id]/[[...slug]]",
+        "dataRootPresent": true
+      },
+      "identityBinding": {
+        "requestedExactFotmobPlayerId": 1190371,
+        "matchingIdPaths": [
+          "$.props.pageProps.data.firstSeasonStats.shotmap[0].playerId",
+          "$.props.pageProps.data.id",
+          "$.props.pageProps.fallback.player:1190371.firstSeasonStats.shotmap[0].playerId",
+          "$.props.pageProps.fallback.player:1190371.id",
+          "$.query.id"
+        ],
+        "exactIdObservedInNextData": true
+      },
+      "birthCandidatesWithinDataRoot": [
+        {
+          "path": "$.props.pageProps.data.meta.personJSONLD.birthDate",
+          "key": "birthDate",
+          "value": "2003-02-11T00:00:00.000Z",
+          "fullDate": "2003-02-11"
+        }
+      ],
+      "birthCandidatesAnywhereInNextData": [
+        {
+          "path": "$.props.pageProps.data.meta.personJSONLD.birthDate",
+          "key": "birthDate",
+          "value": "2003-02-11T00:00:00.000Z",
+          "fullDate": "2003-02-11"
+        },
+        {
+          "path": "$.props.pageProps.fallback.player:1190371.meta.personJSONLD.birthDate",
+          "key": "birthDate",
+          "value": "2003-02-11T00:00:00.000Z",
+          "fullDate": "2003-02-11"
+        }
+      ],
+      "fullDateCandidatesWithinDataRoot": [
+        {
+          "path": "$.props.pageProps.data.meta.personJSONLD.birthDate",
+          "key": "birthDate",
+          "value": "2003-02-11T00:00:00.000Z",
+          "fullDate": "2003-02-11"
+        }
+      ]
+    },
+    {
+      "fotmobPlayerId": 1024432,
+      "label": "Adorante",
+      "requestedUrl": "https://www.fotmob.com/players/1024432/x",
+      "capturedAt": "2026-08-22T14:49:08.486068Z",
+      "httpStatus": 200,
+      "response": {
+        "htmlBytes": 985103,
+        "htmlSha256": "ece395ccaf48bf3d662d42b245279be6ea5b852e11a6a84c59f2d53ab11797f4",
+        "contentType": "text/html; charset=utf-8"
+      },
+      "nextData": {
+        "rawPath": "raw/fotmob-1024432-next-data.json",
+        "bytes": 406998,
+        "sha256": "468d46f9e362156ea9209c815007a56dbf199a24ba85977e298443e3cdc004e9",
+        "buildId": "K8seapo1mInchoRH-uHSi",
+        "page": "/players/[id]/[[...slug]]",
+        "dataRootPresent": true
+      },
+      "identityBinding": {
+        "requestedExactFotmobPlayerId": 1024432,
+        "matchingIdPaths": [
+          "$.props.pageProps.data.firstSeasonStats.shotmap[0].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[10].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[11].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[12].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[13].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[14].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[15].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[16].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[17].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[18].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[19].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[1].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[20].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[21].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[22].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[23].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[24].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[25].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[26].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[27].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[28].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[29].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[2].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[30].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[31].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[32].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[33].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[34].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[35].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[36].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[37].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[38].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[39].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[3].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[40].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[41].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[42].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[43].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[44].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[45].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[46].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[47].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[48].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[49].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[4].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[50].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[51].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[52].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[53].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[54].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[55].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[56].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[57].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[58].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[59].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[5].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[60].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[61].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[62].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[63].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[64].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[65].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[66].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[67].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[68].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[69].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[6].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[70].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[71].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[7].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[8].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[9].playerId",
+          "$.props.pageProps.data.id",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[0].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[10].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[11].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[12].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[13].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[14].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[15].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[16].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[17].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[18].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[19].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[1].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[20].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[21].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[22].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[23].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[24].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[25].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[26].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[27].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[28].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[29].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[2].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[30].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[31].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[32].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[33].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[34].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[35].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[36].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[37].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[38].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[39].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[3].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[40].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[41].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[42].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[43].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[44].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[45].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[46].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[47].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[48].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[49].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[4].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[50].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[51].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[52].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[53].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[54].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[55].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[56].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[57].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[58].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[59].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[5].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[60].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[61].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[62].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[63].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[64].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[65].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[66].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[67].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[68].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[69].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[6].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[70].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[71].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[7].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[8].playerId",
+          "$.props.pageProps.fallback.player:1024432.firstSeasonStats.shotmap[9].playerId",
+          "$.props.pageProps.fallback.player:1024432.id",
+          "$.query.id"
+        ],
+        "exactIdObservedInNextData": true
+      },
+      "birthCandidatesWithinDataRoot": [
+        {
+          "path": "$.props.pageProps.data.meta.personJSONLD.birthDate",
+          "key": "birthDate",
+          "value": "2000-02-05T00:00:00.000Z",
+          "fullDate": "2000-02-05"
+        }
+      ],
+      "birthCandidatesAnywhereInNextData": [
+        {
+          "path": "$.props.pageProps.data.meta.personJSONLD.birthDate",
+          "key": "birthDate",
+          "value": "2000-02-05T00:00:00.000Z",
+          "fullDate": "2000-02-05"
+        },
+        {
+          "path": "$.props.pageProps.fallback.player:1024432.meta.personJSONLD.birthDate",
+          "key": "birthDate",
+          "value": "2000-02-05T00:00:00.000Z",
+          "fullDate": "2000-02-05"
+        }
+      ],
+      "fullDateCandidatesWithinDataRoot": [
+        {
+          "path": "$.props.pageProps.data.meta.personJSONLD.birthDate",
+          "key": "birthDate",
+          "value": "2000-02-05T00:00:00.000Z",
+          "fullDate": "2000-02-05"
+        }
+      ]
+    },
+    {
+      "fotmobPlayerId": 1529483,
+      "label": "Lisman",
+      "requestedUrl": "https://www.fotmob.com/players/1529483/x",
+      "capturedAt": "2026-08-22T14:49:09.491309Z",
+      "httpStatus": 200,
+      "response": {
+        "htmlBytes": 691451,
+        "htmlSha256": "91f8fd42061f38fd76d500f494176a053fecc02cd38b366974ec71033d881561",
+        "contentType": "text/html; charset=utf-8"
+      },
+      "nextData": {
+        "rawPath": "raw/fotmob-1529483-next-data.json",
+        "bytes": 253892,
+        "sha256": "06487f09519361f45026e0401a85034b7c6300ab6208ad73fd9959a593b78e70",
+        "buildId": "K8seapo1mInchoRH-uHSi",
+        "page": "/players/[id]/[[...slug]]",
+        "dataRootPresent": true
+      },
+      "identityBinding": {
+        "requestedExactFotmobPlayerId": 1529483,
+        "matchingIdPaths": [
+          "$.props.pageProps.data.firstSeasonStats.shotmap[0].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[1].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[2].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[3].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[4].playerId",
+          "$.props.pageProps.data.firstSeasonStats.shotmap[5].playerId",
+          "$.props.pageProps.data.id",
+          "$.props.pageProps.fallback.player:1529483.firstSeasonStats.shotmap[0].playerId",
+          "$.props.pageProps.fallback.player:1529483.firstSeasonStats.shotmap[1].playerId",
+          "$.props.pageProps.fallback.player:1529483.firstSeasonStats.shotmap[2].playerId",
+          "$.props.pageProps.fallback.player:1529483.firstSeasonStats.shotmap[3].playerId",
+          "$.props.pageProps.fallback.player:1529483.firstSeasonStats.shotmap[4].playerId",
+          "$.props.pageProps.fallback.player:1529483.firstSeasonStats.shotmap[5].playerId",
+          "$.props.pageProps.fallback.player:1529483.id",
+          "$.query.id"
+        ],
+        "exactIdObservedInNextData": true
+      },
+      "birthCandidatesWithinDataRoot": [
+        {
+          "path": "$.props.pageProps.data.meta.personJSONLD.birthDate",
+          "key": "birthDate",
+          "value": "2006-02-20T00:00:00.000Z",
+          "fullDate": "2006-02-20"
+        }
+      ],
+      "birthCandidatesAnywhereInNextData": [
+        {
+          "path": "$.props.pageProps.data.meta.personJSONLD.birthDate",
+          "key": "birthDate",
+          "value": "2006-02-20T00:00:00.000Z",
+          "fullDate": "2006-02-20"
+        },
+        {
+          "path": "$.props.pageProps.fallback.player:1529483.meta.personJSONLD.birthDate",
+          "key": "birthDate",
+          "value": "2006-02-20T00:00:00.000Z",
+          "fullDate": "2006-02-20"
+        }
+      ],
+      "fullDateCandidatesWithinDataRoot": [
+        {
+          "path": "$.props.pageProps.data.meta.personJSONLD.birthDate",
+          "key": "birthDate",
+          "value": "2006-02-20T00:00:00.000Z",
+          "fullDate": "2006-02-20"
+        }
+      ]
+    },
+    {
+      "fotmobPlayerId": 1379468,
+      "label": "Rrahmani",
+      "requestedUrl": "https://www.fotmob.com/players/1379468/x",
+      "capturedAt": "2026-08-22T14:49:10.887945Z",
+      "httpStatus": 200,
+      "response": {
+        "htmlBytes": 669665,
+        "htmlSha256": "576a480f7ee1120fb51ddc0f321657be7bf05e4dfbae282ab32f050447eb5a95",
+        "contentType": "text/html; charset=utf-8"
+      },
+      "nextData": {
+        "rawPath": "raw/fotmob-1379468-next-data.json",
+        "bytes": 277928,
+        "sha256": "2853bc94d6164c157a33a6097edf7e869d0ced77a9594b462f30fb85cfc19a87",
+        "buildId": "K8seapo1mInchoRH-uHSi",
+        "page": "/players/[id]/[[...slug]]",
+        "dataRootPresent": true
+      },
+      "identityBinding": {
+        "requestedExactFotmobPlayerId": 1379468,
+        "matchingIdPaths": [
+          "$.props.pageProps.data.id",
+          "$.props.pageProps.fallback.player:1379468.id",
+          "$.query.id"
+        ],
+        "exactIdObservedInNextData": true
+      },
+      "birthCandidatesWithinDataRoot": [
+        {
+          "path": "$.props.pageProps.data.meta.personJSONLD.birthDate",
+          "key": "birthDate",
+          "value": "2000-08-31T00:00:00.000Z",
+          "fullDate": "2000-08-31"
+        }
+      ],
+      "birthCandidatesAnywhereInNextData": [
+        {
+          "path": "$.props.pageProps.data.meta.personJSONLD.birthDate",
+          "key": "birthDate",
+          "value": "2000-08-31T00:00:00.000Z",
+          "fullDate": "2000-08-31"
+        },
+        {
+          "path": "$.props.pageProps.fallback.player:1379468.meta.personJSONLD.birthDate",
+          "key": "birthDate",
+          "value": "2000-08-31T00:00:00.000Z",
+          "fullDate": "2000-08-31"
+        }
+      ],
+      "fullDateCandidatesWithinDataRoot": [
+        {
+          "path": "$.props.pageProps.data.meta.personJSONLD.birthDate",
+          "key": "birthDate",
+          "value": "2000-08-31T00:00:00.000Z",
+          "fullDate": "2000-08-31"
+        }
+      ]
+    }
+  ],
+  "governance": {
+    "identityResolverExecuted": false,
+    "fuzzyMatchingUsed": false,
+    "nameOnlyMatchingUsed": false,
+    "dobUsedForIdentitySelection": false,
+    "computedAgeDerived": false,
+    "secondPassCasesMutated": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
