@@ -2,9 +2,9 @@
   "schema": "NEXUS_F1_UNDERSTAT_RUN_RECEIPT_V1",
   "protocolVersion": "1.1",
   "status": "FAIL_CLOSED",
-  "generatedAt": "2026-08-22T20:48:22.524Z",
-  "sourceCommit": "d15a58c3ffd85245714518c13f19f7e4a60f8701",
-  "githubRunId": 32597739402,
+  "generatedAt": "2026-08-22T20:48:50.197Z",
+  "sourceCommit": "c951f33b51f12751162ce99ad86006c0dd192acd",
+  "githubRunId": 32597762489,
   "githubRunAttempt": 1,
   "stages": {
     "syntax": "success",

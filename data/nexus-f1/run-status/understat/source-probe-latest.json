@@ -1,0 +1,31 @@
+{
+  "schema": "NEXUS_F1_UNDERSTAT_SOURCE_PROBE_V1",
+  "protocolVersion": "1.1",
+  "status": "DIAGNOSTIC_ONLY_NOT_EVIDENCE_PROMOTION",
+  "source": "https://understat.com/league/Serie_A/2014",
+  "httpStatus": 200,
+  "capturedAt": "2026-08-22T20:48:50.145Z",
+  "rawSha256": "e08b89c670f320d143bc0ecf258ada5e2c82863bb8c164d696a7f0914af7c6d6",
+  "bytes": 18714,
+  "headers": {
+    "contentType": "text/html; charset=UTF-8",
+    "contentLength": "4695",
+    "server": "Apache/2.4.29 (Ubuntu)",
+    "cacheControl": "no-store, no-cache, must-revalidate",
+    "cfRay": null
+  },
+  "title": "Serie A xG Table and Scorers for the 2014/2015 season | Understat.com",
+  "containsJsonParse": true,
+  "containsTeamsData": false,
+  "containsPlayersData": false,
+  "declaredDataVariables": [],
+  "genericJsonParseAssignments": [
+    "PROMOTION"
+  ],
+  "governance": {
+    "diagnosticOnly": true,
+    "rawBodyNotPersistedByProbe": true,
+    "f1Closed": false,
+    "f2PlusAuthorized": false
+  }
+}
