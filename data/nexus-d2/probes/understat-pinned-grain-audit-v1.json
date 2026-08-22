@@ -1,0 +1,191 @@
+{
+  "schema": "NEXUS_D2A_UNDERSTAT_PINNED_GRAIN_AUDIT_V1",
+  "status": "PASS_AUDIT_MATERIAL_GRAIN_GAP_CONFIRMED",
+  "source": {
+    "repository": "vibedatascience/understat_players_aggregated",
+    "pinnedCommit": "768b7ca0b977a5e6b4b429c7b0cf750e8269f2fc",
+    "file": "understat_players_aggregated_2014_2024.csv",
+    "sourceUrl": "https://raw.githubusercontent.com/vibedatascience/understat_players_aggregated/768b7ca0b977a5e6b4b429c7b0cf750e8269f2fc/understat_players_aggregated_2014_2024.csv",
+    "expectedGitBlobSha1": "ddf4327251bb781f88b6edc4662bf20e5379ff3f",
+    "observedGitBlobSha1": "ddf4327251bb781f88b6edc4662bf20e5379ff3f",
+    "sha256": "b78fad5f01844a0fdab0d89474dafba9b86c586d2f0ce88f0ce2c9af70d2bc64",
+    "bytes": 6587761
+  },
+  "schemaFields": [
+    "assists",
+    "games",
+    "goals",
+    "id",
+    "key_passes",
+    "npg",
+    "npxG",
+    "player_name",
+    "position",
+    "red_cards",
+    "shots",
+    "team_title",
+    "time",
+    "xA",
+    "xG",
+    "xGBuildup",
+    "xGChain",
+    "yellow_cards",
+    "league",
+    "year",
+    "scrape_timestamp",
+    "primary_position",
+    "season"
+  ],
+  "counts": {
+    "rows": 34815,
+    "uniquePlayers": 10541,
+    "leagues": 6,
+    "seasons": 11,
+    "rowsWithCommaSeparatedMultiClubTeamTitle": 1086,
+    "uniquePlayersWithMultiClubAggregateRows": 938,
+    "singleTeamTitleRows": 33729,
+    "duplicateExactPlayerSeasonLeagueTeamTitleKeys": 0,
+    "rowsInDuplicateExactKeys": 0
+  },
+  "missingness": {
+    "id": 0,
+    "player_name": 0,
+    "team_title": 0,
+    "league": 0,
+    "year": 0,
+    "season": 0
+  },
+  "rowsByLeague": {
+    "Bundesliga": 5314,
+    "EPL": 5887,
+    "La_Liga": 6192,
+    "Ligue_1": 6105,
+    "RFPL": 5016,
+    "Serie_A": 6301
+  },
+  "multiClubRowsByLeague": {
+    "Bundesliga": 112,
+    "EPL": 126,
+    "La_Liga": 132,
+    "Ligue_1": 148,
+    "RFPL": 270,
+    "Serie_A": 298
+  },
+  "rowsBySeason": {
+    "2014/15": 3044,
+    "2015/16": 3114,
+    "2016/17": 3111,
+    "2017/18": 3056,
+    "2018/19": 3019,
+    "2019/20": 3140,
+    "2020/21": 3241,
+    "2021/22": 3324,
+    "2022/23": 3288,
+    "2023/24": 3238,
+    "2024/25": 3240
+  },
+  "multiClubRowsBySeason": {
+    "2014/15": 91,
+    "2015/16": 100,
+    "2016/17": 112,
+    "2017/18": 99,
+    "2018/19": 87,
+    "2019/20": 92,
+    "2020/21": 104,
+    "2021/22": 106,
+    "2022/23": 105,
+    "2023/24": 97,
+    "2024/25": 93
+  },
+  "multiClubCommaCountDistribution": {
+    "1": 1085,
+    "2": 1
+  },
+  "examples": [
+    {
+      "id": "622",
+      "player_name": "Wilfried Bony",
+      "team_title": "Manchester City,Swansea",
+      "league": "EPL",
+      "season": "2014/15"
+    },
+    {
+      "id": "690",
+      "player_name": "Loïc Remy",
+      "team_title": "Chelsea,Queens Park Rangers",
+      "league": "EPL",
+      "season": "2014/15"
+    },
+    {
+      "id": "1656",
+      "player_name": "George Boyd",
+      "team_title": "Burnley,Hull",
+      "league": "EPL",
+      "season": "2014/15"
+    },
+    {
+      "id": "501",
+      "player_name": "Danny Welbeck",
+      "team_title": "Arsenal,Manchester United",
+      "league": "EPL",
+      "season": "2014/15"
+    },
+    {
+      "id": "4471",
+      "player_name": "Mohamed Diamé",
+      "team_title": "Hull,West Ham",
+      "league": "EPL",
+      "season": "2014/15"
+    },
+    {
+      "id": "596",
+      "player_name": "Tom Cleverley",
+      "team_title": "Aston Villa,Manchester United",
+      "league": "EPL",
+      "season": "2014/15"
+    },
+    {
+      "id": "712",
+      "player_name": "Jack Cork",
+      "team_title": "Southampton,Swansea",
+      "league": "EPL",
+      "season": "2014/15"
+    },
+    {
+      "id": "593",
+      "player_name": "Aaron Lennon",
+      "team_title": "Everton,Tottenham",
+      "league": "EPL",
+      "season": "2014/15"
+    },
+    {
+      "id": "939",
+      "player_name": "Mauro Zárate",
+      "team_title": "Queens Park Rangers,West Ham",
+      "league": "EPL",
+      "season": "2014/15"
+    },
+    {
+      "id": "679",
+      "player_name": "Scott Sinclair",
+      "team_title": "Aston Villa,Manchester City",
+      "league": "EPL",
+      "season": "2014/15"
+    }
+  ],
+  "scientificFinding": {
+    "canonicalD2Grain": "player-season-league-club-stint",
+    "actualSourceGrainForTransferRows": "player-season-league with multiple clubs encoded in one team_title field",
+    "readmeSeparateClubRecordClaimSupportedByPinnedBytes": false,
+    "safeToSplitCommaSeparatedRowsIntoCanonicalStints": false,
+    "safeToAllocateAggregatedMetricsAcrossClubs": false,
+    "typedGap": "AGGREGATED_MULTI_CLUB_ROW",
+    "d2Consequence": "These rows cannot become canonical club-stints without independent source evidence that preserves stint boundaries and club-specific observations."
+  },
+  "governance": {
+    "newProviderPromoted": false,
+    "rawSourceMutated": false,
+    "modelModified": false,
+    "f1Started": false
+  }
+}
