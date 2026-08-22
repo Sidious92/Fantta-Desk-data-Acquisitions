@@ -1,0 +1,2 @@
+triggeredAt: 2026-08-22T16:06:00+02:00
+reason: replace fragile monolithic v3 with four sequential fail-closed 512-subject shards
