@@ -45,8 +45,22 @@ function oldContractMatchdayNumber(match){
   const m=typeof providerId==='string'?/^opta:MatchDay:(\d+)$/u.exec(providerId):null
   return m?Number(m[1]):null
 }
+function currentMatchdayNumber(match){
+  const ms=match?.matchSet
+  if(!ms||typeof ms!=='object'||Array.isArray(ms))return null
+  const index=Number(ms.index)
+  if(!Number.isInteger(index))return null
+  const short=String(ms.shortName??'').trim()
+  const provider=String(ms.providerId??'')
+  const providerMatch=/-([0-9]+)$/u.exec(provider)
+  const shortNumber=/^[0-9]+$/u.test(short)?Number(short):null
+  const providerNumber=providerMatch?Number(providerMatch[1]):null
+  if(shortNumber!==null&&shortNumber!==index)fail(`matchSet shortName/index mismatch: ${short}/${index}`)
+  if(providerNumber!==null&&providerNumber!==index)fail(`matchSet providerId/index mismatch: ${provider}/${index}`)
+  return index>=1&&index<=38?index:null
+}
 function matchProbe(seasonName,seasonId,matches,mr){
-  const keyCounts={};const matchSetShapes={};const providerIds={};const names={};
+  const keyCounts={},matchSetShapes={},providerIds={},names={},indexes={},shortNames={}
   for(const m of matches){
     for(const k of Object.keys(m??{}))keyCounts[k]=(keyCounts[k]??0)+1
     const ms=m?.matchSet
@@ -54,12 +68,15 @@ function matchProbe(seasonName,seasonId,matches,mr){
     matchSetShapes[shape]=(matchSetShapes[shape]??0)+1
     const pid=String(ms?.providerId??'<NULL>');providerIds[pid]=(providerIds[pid]??0)+1
     const name=String(ms?.name??'<NULL>');names[name]=(names[name]??0)+1
+    const index=String(ms?.index??'<NULL>');indexes[index]=(indexes[index]??0)+1
+    const shortName=String(ms?.shortName??'<NULL>');shortNames[shortName]=(shortNames[shortName]??0)+1
   }
   return {
     schema:'NEXUS_F1_LEGA_MATCH_SHAPE_PROBE_V1',protocolVersion:'1.1',status:'DIAGNOSTIC_ONLY_NOT_EVIDENCE_PROMOTION',
     seasonName,seasonId,sourceUrl:mr.url,capturedAt:mr.receivedAt,sourceSha256:mr.sha256,sourceRows:matches.length,
     oldContractRegularRows:matches.filter(m=>Number.isInteger(oldContractMatchdayNumber(m))&&oldContractMatchdayNumber(m)>=1&&oldContractMatchdayNumber(m)<=38).length,
-    topLevelKeyCounts:keyCounts,matchSetShapeCounts:matchSetShapes,matchSetProviderIdCounts:providerIds,matchSetNameCounts:names,
+    currentSchemaRegularRows:matches.filter(m=>currentMatchdayNumber(m)!==null).length,
+    topLevelKeyCounts:keyCounts,matchSetShapeCounts:matchSetShapes,matchSetProviderIdCounts:providerIds,matchSetNameCounts:names,matchSetIndexCounts:indexes,matchSetShortNameCounts:shortNames,
     samples:matches.slice(0,8).map(m=>({matchId:m?.matchId??m?.id??null,matchDateUtc:m?.matchDateUtc??null,status:m?.status??null,matchSet:m?.matchSet??null,home:m?.home??null,away:m?.away??null})),
     governance:{diagnosticOnly:true,f1Closed:false,f2PlusAuthorized:false,canonicalMutation:false}
   }
@@ -67,12 +84,12 @@ function matchProbe(seasonName,seasonId,matches,mr){
 function regularSeasonSelection(matches){
   const selected=[],excluded=[]
   for(const m of matches){
-    const matchId=m?.matchId??m?.id??null,md=oldContractMatchdayNumber(m)
-    if(Number.isInteger(md)&&md>=1&&md<=38){
+    const matchId=m?.matchId??m?.id??null,md=currentMatchdayNumber(m)
+    if(md!==null){
       if(!matchId)fail('regular-season match without matchId')
       if(!m?.matchDateUtc)fail(`regular-season match ${matchId} without matchDateUtc`)
       selected.push(m)
-    }else excluded.push({matchId:matchId===null?null:String(matchId),matchDateUtc:m?.matchDateUtc??null,matchStatus:m?.status??null,matchSet:m?.matchSet??null,exclusionReason:'OLD_F1_MATCHSET_RULE_NOT_SATISFIED'})
+    }else excluded.push({matchId:matchId===null?null:String(matchId),matchDateUtc:m?.matchDateUtc??null,matchStatus:m?.status??null,matchSet:m?.matchSet??null,exclusionReason:'PROVIDER_MATCHSET_INDEX_OUTSIDE_REGULAR_MATCHDAY_1_38'})
   }
   selected.sort((a,b)=>String(a.matchDateUtc).localeCompare(String(b.matchDateUtc))||String(a.matchId??a.id).localeCompare(String(b.matchId??b.id)))
   const ids=selected.map(m=>String(m.matchId??m.id));if(new Set(ids).size!==ids.length)fail('duplicate matchId in selected regular season')
@@ -101,17 +118,17 @@ for(const s of selected){
     const m=matches[i],id=ids[i],lr=await get(`${base}/seasons/${enc(s.id)}/matches/${enc(id)}/lineups?locale=${locale}`,`lineup:${s.name}:${id}`)
     if(!lr.body||typeof lr.body!=='object'||Array.isArray(lr.body)||!Object.keys(lr.body).length)fail(`empty lineup ${s.name}:${id}`)
     const p=path.join(dir,'lineups',`${String(i+1).padStart(3,'0')}-${safe(id)}.json`);write(p,lr.text)
-    const rec={matchId:id,matchDateUtc:m.matchDateUtc??null,matchStatus:m.status??null,matchday:oldContractMatchdayNumber(m),matchSet:m.matchSet??null,homeTeamId:m.home?.teamId??null,awayTeamId:m.away?.teamId??null,file:p,sha256:lr.sha256,bytes:lr.bytes,capturedAt:lr.receivedAt,availableAt:null,responseHeaders:lr.headers};lineups.push(rec)
+    const rec={matchId:id,matchDateUtc:m.matchDateUtc??null,matchStatus:m.status??null,matchday:currentMatchdayNumber(m),matchSet:m.matchSet??null,homeTeamId:m.home?.teamId??null,awayTeamId:m.away?.teamId??null,file:p,sha256:lr.sha256,bytes:lr.bytes,capturedAt:lr.receivedAt,availableAt:null,responseHeaders:lr.headers};lineups.push(rec)
     files.push({path:p,id:`lineup:${s.name}:${id}`,sha256:lr.sha256,bytes:lr.bytes,capturedAt:lr.receivedAt,availableAt:null,responseHeaders:lr.headers})
   }
-  seasons.push({seasonName:s.name,seasonId:s.id,sourceMatchRows:sourceMatches.length,regularSeasonSelectionRule:'F1 authority rule under validation against current provider schema',matchCount:matches.length,uniqueMatchIds:new Set(ids).size,excludedSourceMatches:selection.excluded,lineupPayloadCount:lineups.length,matchesFile:mp,matchesSha256:mr.sha256,lineups})
+  seasons.push({seasonName:s.name,seasonId:s.id,sourceMatchRows:sourceMatches.length,regularSeasonSelectionRule:'matchSet.index in 1..38 with shortName/providerId consistency checks',matchCount:matches.length,uniqueMatchIds:new Set(ids).size,excludedSourceMatches:selection.excluded,lineupPayloadCount:lineups.length,matchesFile:mp,matchesSha256:mr.sha256,lineups})
   console.log(`${s.name}: ${sourceMatches.length} source rows -> ${matches.length} regular matches / ${lineups.length} lineups; excluded ${selection.excluded.length}`)
 }
 
 const responseLog=path.join(ROOT,'response-log.json');json(responseLog,log)
 const index=files.map(f=>`${f.path}|${f.sha256}|${f.bytes}`).sort().join('\n'),snapshotContentSha256=hash(index)
-const manifest={schema:'NEXUS_F1_LEGA_RAW_SNAPSHOT_MANIFEST_V1',protocolVersion:'1.1',status:'FRESH_RAW_SNAPSHOT_CAPTURED_NOT_F1_PROMOTED',purpose:C.purpose,source:{provider:'Lega Serie A',surface:'Sports Data Platform',baseUrl:C.baseUrl,competitionId:C.competitionId},freshAcquisition:true,oldArtifactReference:C.oldArtifact,startedAt,completedAt:new Date().toISOString(),codeCommit:process.env.GITHUB_SHA??'LOCAL_UNKNOWN',githubRunId:process.env.GITHUB_RUN_ID?Number(process.env.GITHUB_RUN_ID):null,gihubRunAttempt:process.env.GITHUB_RUN_ATTEMPT?Number(process.env.GITHUB_RUN_ATTEMPT):null,runtime:process.version,randomSeed:'NOT_APPLICABLE_DETERMINISTIC_ACQUISITION',configurationPath:CONFIG_PATH,configurationSha256:fileHash(CONFIG_PATH),temporalPolicy:C.temporalPolicy,availableAtPolicy:'UNASSIGNED_IN_RAW_SNAPSHOT; provider event timestamps and HTTP response metadata preserved separately',regularSeasonSelection:{rule:'provider match-set schema validated fail-closed before use',authority:'FantaDesk scripts/lib/nexus-f1-opportunity-acquisition-v1.mjs plus current-provider shape probe',excludedRowsPreservedInSeasonManifest:true},catalog:{file:catalogPath,sha256:catalog.sha256,bytes:catalog.bytes,seasonCatalogRows:catalog.body.seasons.length},seasons,totals:{seasons:seasons.length,sourceMatchRows:seasons.reduce((a,s)=>a+s.sourceMatchRows,0),excludedSourceMatches:seasons.reduce((a,s)=>a+s.excludedSourceMatches.length,0),matches:seasons.reduce((a,s)=>a+s.matchCount,0),lineupPayloads:seasons.reduce((a,s)=>a+s.lineupPayloadCount,0),successfulHttpResponses:log.filter(x=>x.ok).length,failedAttempts:log.filter(x=>!x.ok).length,callsIncludingFailedAttempts:calls},snapshotContentSha256,contentIndexDefinition:'SHA256 over sorted path|sha256|bytes for raw source files only',responseLog:{file:responseLog,sha256:fileHash(responseLog)},semanticLineupValidationPerformed:false,normalizationPerformed:false,stintDerivationPerformed:false,historicalReplayPromotion:false,f1Closed:false,f2PlusAuthorized:false,canonicalMutation:false}
+const manifest={schema:'NEXUS_F1_LEGA_RAW_SNAPSHOT_MANIFEST_V1',protocolVersion:'1.1',status:'FRESH_RAW_SNAPSHOT_CAPTURED_NOT_F1_PROMOTED',purpose:C.purpose,source:{provider:'Lega Serie A',surface:'Sports Data Platform',baseUrl:C.baseUrl,competitionId:C.competitionId},freshAcquisition:true,oldArtifactReference:C.oldArtifact,startedAt,completedAt:new Date().toISOString(),codeCommit:process.env.GITHUB_SHA??'LOCAL_UNKNOWN',githubRunId:process.env.GITHUB_RUN_ID?Number(process.env.GITHUB_RUN_ID):null,githubRunAttempt:process.env.GITHUB_RUN_ATTEMPT?Number(process.env.GITHUB_RUN_ATTEMPT):null,runtime:process.version,randomSeed:'NOT_APPLICABLE_DETERMINISTIC_ACQUISITION',configurationPath:CONFIG_PATH,configurationSha256:fileHash(CONFIG_PATH),temporalPolicy:C.temporalPolicy,availableAtPolicy:'UNASSIGNED_IN_RAW_SNAPSHOT; provider event timestamps and HTTP response metadata preserved separately',regularSeasonSelection:{rule:'matchSet.index in 1..38; numeric shortName and trailing providerId matchday must agree when present',evidence:'data/nexus-f1/run-status/lega/match-shape-probe-latest.json',excludedRowsPreservedInSeasonManifest:true},catalog:{file:catalogPath,sha256:catalog.sha256,bytes:catalog.bytes,seasonCatalogRows:catalog.body.seasons.length},seasons,totals:{seasons:seasons.length,sourceMatchRows:seasons.reduce((a,s)=>a+s.sourceMatchRows,0),excludedSourceMatches:seasons.reduce((a,s)=>a+s.excludedSourceMatches.length,0),matches:seasons.reduce((a,s)=>a+s.matchCount,0),lineupPayloads:seasons.reduce((a,s)=>a+s.lineupPayloadCount,0),successfulHttpResponses:log.filter(x=>x.ok).length,failedAttempts:log.filter(x=>!x.ok).length,callsIncludingFailedAttempts:calls},snapshotContentSha256,contentIndexDefinition:'SHA256 over sorted path|sha256|bytes for raw source files only',responseLog:{file:responseLog,sha256:fileHash(responseLog)},semanticLineupValidationPerformed:false,normalizationPerformed:false,stintDerivationPerformed:false,historicalReplayPromotion:false,f1Closed:false,f2PlusAuthorized:false,canonicalMutation:false}
 const manifestPath=path.join(ROOT,'manifest.json');json(manifestPath,manifest);const manifestSha256=fileHash(manifestPath)
-const audit={schema:'NEXUS_F1_LEGA_RAW_SNAPSHOT_AUDIT_V1',protocolVersion:'1.1',status:'PASS_RAW_ACQUISITION_ONLY',manifestSha256,snapshotContentSha256,expectedSeasons:C.targetSeasons.length,observedSeasons:seasons.length,sourceMatchRows:manifest.totals.sourceMatchRows,excludedSourceMatches:manifest.totals.excludedSourceMatches,expectedMatches:C.targetSeasons.length*Number(C.expectedRegularSeasonMatchesPerSeason),observedMatches:manifest.totals.matches,expectedLineupPayloads:C.targetSeasons.length*Number(C.expectedRegularSeasonMatchesPerSeason),observedLineupPayloads:manifest.totals.lineupPayloads,oldArtifactRecovered:false,availableAtAssigned:false,normalizationPerformed:false,stintDerivationPerformed:false,f1Closed:false,nextRequiredStep:'SEMANTIC_LINEUP_AUDIT_AND_F1_RAW_STINT_DERIVATION_WITH_RECONCILIATION'}
+const audit={schema:'NEXUS_F1_LEGA_RAW_SNAPSHOT_AUDIT_V1',protocolVersion:'1.1',status:'PASS_RAW_ACQUISITION_ONLY',manifestSha256,snapshotContentSha256,expectedSeasons:C.targetSeasons.length,observedSeasons:seasons.length,sourceMatchRows:manifest.totals.sourceMatchRows,excludedSourceMatches:manifest.totals.excludedSourceMatches,expectedMatches:C.targetSeasons.length*Number(C.expectedRegularSeasonMatchesPerSeason),observedMatches:manifest.totals.matches,expectedLineupPayloads:C.targetSeasons.length*Number(C.expectedRegularSeasonMatchesPerSeason),observedLineupPayloads:manifest.totals.lineupPayloads,regularSeasonSelectionRule:'matchSet.index 1..38 with provider consistency checks',oldArtifactRecovered:false,availableAtAssigned:false,normalizationPerformed:false,stintDerivationPerformed:false,f1Closed:false,nextRequiredStep:'SEMANTIC_LINEUP_AUDIT_AND_F1_RAW_STINT_DERIVATION_WITH_RECONCILIATION'}
 json(path.join(ROOT,'audit.json'),audit)
 console.log(JSON.stringify({...audit,calls:manifest.totals.callsIncludingFailedAttempts},null,2))
