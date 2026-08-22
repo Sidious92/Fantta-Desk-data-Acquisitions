@@ -1,0 +1,62 @@
+name: Nexus F1 Understat V2 Materialize
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/nexus-input-v1-1-f1-understat-snapshot
+    paths:
+      - '.github/workflows/nexus-f1-understat-materialize-v2.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Reassemble frozen content-addressed bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          SHA='4f78372340db3c3373dd7f4be43e8f0224974154943311d91185728ced8d9e95'
+          ROOT="data/nexus-f1/understat-pinned-v2/$SHA"
+          test -f "$ROOT/PRESERVATION_RECEIPT.json"
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='data/nexus-f1/understat-pinned-v2/4f78372340db3c3373dd7f4be43e8f0224974154943311d91185728ced8d9e95/PRESERVATION_RECEIPT.json';
+          const r=JSON.parse(fs.readFileSync(p,'utf8'));
+          if(r.status!=='PASS_DURABLY_PRESERVED_REMOTE_GIT_READBACK_SHA256'||r.remoteReadbackSha256Pass!==true) throw new Error('frozen Understat receipt not PASS');
+          NODE
+          cat "$ROOT"/parts/part-* > understat-v2.tar.gz
+          ACTUAL=$(sha256sum understat-v2.tar.gz | awk '{print $1}')
+          test "$ACTUAL" = "$SHA"
+          mkdir materialized
+          tar -xzf understat-v2.tar.gz -C materialized
+
+      - name: Verify normalized output hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE='materialized/.nexus-f1-understat-pinned-v2/normalized/understat-pinned-source-v2.ndjson'
+          test -f "$FILE"
+          ACTUAL=$(sha256sum "$FILE" | awk '{print $1}')
+          test "$ACTUAL" = 'df95e4c0e93c364c89e883a516cfb79e08ae1faf871ef025d31ddb67bd50a323'
+          test "$(wc -l < "$FILE" | tr -d ' ')" = '6301'
+
+      - name: Upload verified materialization artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f1-understat-pinned-v2-materialized
+          path: |
+            materialized/.nexus-f1-understat-pinned-v2/normalized/understat-pinned-source-v2.ndjson
+            materialized/.nexus-f1-understat-pinned-v2/normalized/multi-club-quarantine-v2.json
+            materialized/.nexus-f1-understat-pinned-v2/audit.json
+            data/nexus-f1/understat-pinned-v2/4f78372340db3c3373dd7f4be43e8f0224974154943311d91185728ced8d9e95/PRESERVATION_RECEIPT.json
+          if-no-files-found: error
+          retention-days: 7
