@@ -1,0 +1,30 @@
+{
+  "schema": "NEXUS_F1_LEGA_SNAPSHOT_CONFIG_V1",
+  "protocolVersion": "1.1",
+  "purpose": "F1_RAW_OPPORTUNITY_PARTICIPATION_FRESH_SNAPSHOT",
+  "baseUrl": "https://api-sdp.legaseriea.it/v1/serie-a/football",
+  "competitionId": "serie-a::Football_Competition::ec93b94f74294dc98ab5bcfd67fc0d88",
+  "locale": "en-GB",
+  "targetSeasons": ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026"],
+  "expectedRegularSeasonMatchesPerSeason": 380,
+  "requestDelayMs": 180,
+  "maxRetries": 4,
+  "requestTimeoutMs": 30000,
+  "userAgent": "FantaNexus-Research/1.1 (+private noncommercial research)",
+  "temporalPolicy": "CAPTURE_RESPONSE_HEADERS_AND_PROVIDER_EVENT_TIMESTAMPS_ONLY_NO_SYNTHETIC_AVAILABLE_AT",
+  "oldArtifact": {
+    "artifactId": 9120837492,
+    "sha256": "5031c4577d431d78091fb0c173548f238acd18811048fcbf1ccb7e5b94f07055",
+    "status": "EXPIRED_UNRECOVERED_AT_D0",
+    "freshSnapshotIsRecovery": false
+  },
+  "governance": {
+    "rawOnly": true,
+    "normalizationAllowed": false,
+    "stintDerivationAllowed": false,
+    "historicalReplayPromotion": false,
+    "f1Closed": false,
+    "f2PlusAuthorized": false,
+    "canonicalMutation": false
+  }
+}
