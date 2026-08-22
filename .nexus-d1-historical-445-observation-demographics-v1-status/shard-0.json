@@ -1,0 +1,22 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_445_OBSERVATION_SHARD_STATUS_V1",
+  "capturedAt": "2026-08-22T16:39:14.809298Z",
+  "shard": 0,
+  "range": [
+    0,
+    176
+  ],
+  "exitCode": 0,
+  "status": "PASS",
+  "summary": {
+    "observations": 176,
+    "recordsCompleted": 176,
+    "statusCounts": {
+      "OBSERVATION_BINDING_FAILED": 1,
+      "OBSERVATION_DEMOGRAPHICS_VERIFIED": 175
+    },
+    "verifiedObservations": 175,
+    "requestFailures": 0
+  },
+  "resultCanonicalPresent": true
+}
