@@ -1,14 +1,14 @@
 {
   "schema": "NEXUS_F1_LEGA_OPPORTUNITY_DURABLE_PRESERVATION_RECEIPT_V1",
   "protocolVersion": "1.1",
-  "status": "PERSISTED_PENDING_REMOTE_READBACK",
+  "status": "PASS_DURABLY_PRESERVED_REMOTE_GIT_READBACK_SHA256",
   "sourceCommit": "afe50a9313f746d9fa24cbc7b2b08ed33f8358d1",
   "githubRunId": 32601707313,
   "bundleSha256": "2e8031d999c32aad01319ff54d6c9101112150379b0c4f2ca8f80069481dc043",
   "rawManifestSha256": "809f13f1174fe19cbfd565a1635b37f9ecb9e5592ab78777230dd2e0f9487318",
   "rawAuditSha256": "e5e9d2fe5d1afee931d2bfeb2d334b63ccb420955c648d6b64562c3c56267652",
   "normalizationAuditSha256": "12640bd303969ac87f7ed20b5513d7edbd01a2c1bbcc23b20826ac6975a3d644",
-  "remoteReadbackSha256Pass": false,
+  "remoteReadbackSha256Pass": true,
   "immutablePath": "data/nexus-f1/lega-opportunity-v1/2e8031d999c32aad01319ff54d6c9101112150379b0c4f2ca8f80069481dc043",
   "governance": {
     "rawMutation": false,
@@ -17,5 +17,6 @@
     "f1Closed": false,
     "f2PlusAuthorized": false,
     "canonicalMutation": false
-  }
+  },
+  "verifiedAt": "2026-08-22T22:20:49.889Z"
 }
