@@ -1,0 +1,25 @@
+{
+  "schema": "NEXUS_D1_MIRROR_PREP_RECEIPT_V3",
+  "protocolVersion": "1.1",
+  "status": "PASS_READY_FOR_PRIVATE_DRIVE_MIRROR",
+  "capturedAt": "2026-08-22T17:46:36.345449Z",
+  "sourceReleaseTag": "nexus-d1-identity-demographics-final-v3",
+  "archiveFile": "nexus-d1-identity-demographics-final-v3.tar.gz",
+  "archiveBytes": 178240,
+  "archiveSha256": "8125b48152e260c211ec73387fd84c7a214ab0f56ed56c7dcc9ed5886659945d",
+  "githubActionsRunId": 32588750068,
+  "releaseArchiveReadbackSha256Pass": true,
+  "releaseCanonicalPackageChecksPass": true,
+  "governance": {
+    "rebuildPerformed": false,
+    "releaseRecreated": false,
+    "rawMutation": false,
+    "fuzzyMatchingUsed": false,
+    "dobInferred": false,
+    "computedAgeDerived": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  },
+  "nextRequiredAction": "UPLOAD_MIRROR_ARTIFACT_TO_PRIVATE_DRIVE_AND_VERIFY_READBACK"
+}
