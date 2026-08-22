@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-d1-acquire-current-wikidata-demographics-v1.py", line 144, in main
+    p=search_dir/f'{idx:03d}--{slug(s["subjectId"])}--{slug(lookup)}.json'; p.write_bytes(b)
+                                    ~^^^^^^^^^^^^^
+KeyError: 'subjectId'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-d1-acquire-current-wikidata-demographics-v1.py", line 208, in <module>
+    if __name__=='__main__': main()
+                             ^^^^^^
+  File "/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-d1-acquire-current-wikidata-demographics-v1.py", line 148, in main
+    searches[s['subjectId']]={'lookup':lookup,'hits':[],'failure':str(e)}; failures.append({'subjectId':s['subjectId'],'stage':'SEARCH','detail':str(e)})
+             ~^^^^^^^^^^^^^
+KeyError: 'subjectId'

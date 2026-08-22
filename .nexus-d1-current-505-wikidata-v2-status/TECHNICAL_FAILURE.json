@@ -1,0 +1,12 @@
+{
+  "schema": "NEXUS_D1_CURRENT_505_TECHNICAL_FAILURE_V2",
+  "status": "TECHNICAL_FAILURE_NOT_SCIENTIFIC_MISSINGNESS",
+  "capturedAt": "2026-08-22T12:57:06.672482Z",
+  "exitCode": 1,
+  "stderrTail": "Traceback (most recent call last):\n  File \"/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-d1-acquire-current-wikidata-demographics-v1.py\", line 144, in main\n    p=search_dir/f'{idx:03d}--{slug(s[\"subjectId\"])}--{slug(lookup)}.json'; p.write_bytes(b)\n                                    ~^^^^^^^^^^^^^\nKeyError: 'subjectId'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-d1-acquire-current-wikidata-demographics-v1.py\", line 208, in <module>\n    if __name__=='__main__': main()\n                             ^^^^^^\n  File \"/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-d1-acquire-current-wikidata-demographics-v1.py\", line 148, in main\n    searches[s['subjectId']]={'lookup':lookup,'hits':[],'failure':str(e)}; failures.append({'subjectId':s['subjectId'],'stage':'SEARCH','detail':str(e)})\n             ~^^^^^^^^^^^^^\nKeyError: 'subjectId'\n",
+  "governance": {
+    "requestFailureCanBecomeMissingIdentity": false,
+    "trainingPromotionGranted": false,
+    "computedAgeDerived": false
+  }
+}
