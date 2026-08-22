@@ -1,0 +1,26 @@
+{
+  "schema": "NEXUS_F1_UNDERSTAT_PINNED_V2_RUN_RECEIPT",
+  "protocolVersion": "1.1",
+  "status": "PASS_HISTORICAL_2014_2024_WITH_EXPLICIT_STINT_QUARANTINE",
+  "generatedAt": "2026-08-22T21:05:57.592582Z",
+  "sourceCommit": "0f0e9bcc5276cf58a8fe84d92a4fce9b05d470a0",
+  "githubRunId": 32598585808,
+  "githubRunAttempt": 1,
+  "stages": {
+    "syntax": "success",
+    "acquire": "success",
+    "audit": "success",
+    "bundle": "success",
+    "persist": "success",
+    "readback": "success"
+  },
+  "bundleSha256": "4f78372340db3c3373dd7f4be43e8f0224974154943311d91185728ced8d9e95",
+  "coverage": "2014/15-2024/25",
+  "nextRequiredAction": "JOIN_WITH_PRIVATE_D0_2025_26_F1_SOURCE_FALLBACK",
+  "governance": {
+    "f1Closed": false,
+    "f2PlusAuthorized": false,
+    "trainingPromotionGranted": false,
+    "canonicalMutation": false
+  }
+}
