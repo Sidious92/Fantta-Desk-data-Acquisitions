@@ -1,0 +1,63 @@
+name: Nexus F1 Lega RAW snapshot v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/nexus-input-v1-1-f1-lega-snapshot
+    paths:
+      - 'config/nexus-f1-lega-snapshot-v1.json'
+      - 'scripts/nexus-f1-acquire-lega-snapshot-v1.mjs'
+      - '.github/workflows/nexus-f1-lega-raw-snapshot-v1.yml'
+      - '.nexus-f1-lega-snapshot-trigger'
+
+permissions:
+  contents: read
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout isolated F1 acquisition branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Static syntax check
+        run: node --check scripts/nexus-f1-acquire-lega-snapshot-v1.mjs
+
+      - name: Acquire fresh Lega Serie A RAW snapshot
+        run: node scripts/nexus-f1-acquire-lega-snapshot-v1.mjs
+
+      - name: Show fail-closed acquisition audit
+        if: always()
+        run: |
+          if [ -f .nexus-f1-lega-snapshot-v1/audit.json ]; then
+            cat .nexus-f1-lega-snapshot-v1/audit.json
+          fi
+
+      - name: Build deterministic preservation bundle
+        run: |
+          set -euo pipefail
+          tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner \
+            -cf - .nexus-f1-lega-snapshot-v1 | gzip -n > nexus-f1-lega-raw-snapshot-v1.tar.gz
+          sha256sum nexus-f1-lega-raw-snapshot-v1.tar.gz | tee nexus-f1-lega-raw-snapshot-v1.tar.gz.sha256
+
+      - name: Upload fresh RAW snapshot artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f1-lega-raw-snapshot-v1
+          path: |
+            .nexus-f1-lega-snapshot-v1/
+            nexus-f1-lega-raw-snapshot-v1.tar.gz
+            nexus-f1-lega-raw-snapshot-v1.tar.gz.sha256
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
