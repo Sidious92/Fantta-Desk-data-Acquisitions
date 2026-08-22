@@ -1,0 +1,90 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_RESOLVED_PERSON_SUBJECT_SURFACE_MANIFEST_V3",
+  "protocolVersion": "1.1",
+  "historicalIdentityScope": "2015/16-2025/26",
+  "subjectCount": 2048,
+  "supersedesTransport": "data/nexus-d1/historical-resolved-person-subjects-v2-manifest.json",
+  "supersessionReason": "V2_PUBLIC_TRANSPORT_TRUNCATED: repository blob historical-resolved-person-subjects-v2.json.xz.b64 was 19,999 bytes while the canonical base64 transport is 57,516 characters for the declared 43,136-byte XZ payload. V2 retained unchanged as invalid transport evidence; semantic payload reconstructed byte-identically from D0-frozen authority.",
+  "source": {
+    "repository": "Sidious92/FantaDesk",
+    "artifactId": 9162967092,
+    "artifactName": "nexus-replay-v3-prepared",
+    "d0PreservationContainerSha256": "555e012b8e992d04a088aa5809c20b6efc023aa442bbf6a904435df17038d721",
+    "d0CanonicalInternalContentSha256": "d966ccd7cf45468390bbf598651dd99187bec39bb1aac3133a3ce82ab1dcdf0b",
+    "identityPaths": "identity/2015-16.json through identity/2025-26.json",
+    "historicalRosterObservations": 7291,
+    "resolvedObservations": 5869,
+    "unresolvedObservations": 1422,
+    "uniqueResolvedUnderstatPersons": 2048,
+    "fantacalcioIdsNeverResolvedToUnderstat": 445,
+    "providerIdReuseCollisionCount": 1
+  },
+  "checks": {
+    "subjects": 2048,
+    "uniqueTechnicalSubjectIds": 2048,
+    "uniqueUnderstatPlayerIds": 2048,
+    "understatNameConflicts": 0,
+    "knownFantacalcioId65CollisionPreserved": true,
+    "fuzzyMatchingUsed": false
+  },
+  "surfacePolicy": {
+    "deduplicationKey": "resolved Understat-backed person bridge",
+    "providerIdUsedAsGlobalPersonKey": false,
+    "unresolvedHistoricalIdsSilentlyDropped": false,
+    "unresolvedHistoricalIdsDisposition": "EXPLICITLY_OUTSIDE_RESOLVED_FIRST_PASS_445_IDS",
+    "technicalSubjectId": "historical-understat-<understatPlayerId>"
+  },
+  "privacyMinimization": {
+    "identityOnly": true,
+    "performanceStatisticsTransferred": false,
+    "targetValuesTransferred": false,
+    "quotationsTransferred": false
+  },
+  "payload": {
+    "path": null,
+    "encoding": "BASE64_XZ_JSON_CHUNKED",
+    "decodedJsonBytes": 508959,
+    "decodedJsonSha256": "d472fe00c88e70b77adc8a38093360042a632559a9ac52366f8da3b37aec5660",
+    "xzBytes": 43136,
+    "xzSha256": "c1337f4d0dff552e99e56909267640be47df8ccccdf242987b6358c0b758f846",
+    "base64Chars": 57516,
+    "chunks": [
+      {
+        "path": "data/nexus-d1/historical-resolved-person-subjects-v3.part-00.b64",
+        "chars": 12000,
+        "textSha256": "f2f60c520d05901b2564c03c6e9629c912d5d0283ee47349c5f04d34073ec2b1"
+      },
+      {
+        "path": "data/nexus-d1/historical-resolved-person-subjects-v3.part-01.b64",
+        "chars": 12000,
+        "textSha256": "ba86ac1d3e1d7ef693550910597401fa92a829f5c34842621caf8d74c11a99ce"
+      },
+      {
+        "path": "data/nexus-d1/historical-resolved-person-subjects-v3.part-02.b64",
+        "chars": 12000,
+        "textSha256": "1b57f778be4681b9f4ac8d00f4a9acb65e8af1dd4971bb19070096e8654d43dd"
+      },
+      {
+        "path": "data/nexus-d1/historical-resolved-person-subjects-v3.part-03.b64",
+        "chars": 12000,
+        "textSha256": "a965a5412416ab2feb821939e69d56a6e6fe70e2e96db7846aaade0ebbb971be"
+      },
+      {
+        "path": "data/nexus-d1/historical-resolved-person-subjects-v3.part-04.b64",
+        "chars": 9516,
+        "textSha256": "783f2f590625677a5cf155851debecc166366de2576063d3a64178981f8869bc"
+      }
+    ],
+    "chunkCount": 5
+  },
+  "governance": {
+    "semanticReconstructionFromFrozenD0Authority": true,
+    "corruptOrTruncatedV1Reused": false,
+    "canonicalEngineModified": false,
+    "trainingPromotionGranted": false,
+    "historicalAsOfGranted": false,
+    "f1Started": false,
+    "v2TruncatedTransportReused": false,
+    "semanticPayloadChangedFromV2Authority": false
+  }
+}
