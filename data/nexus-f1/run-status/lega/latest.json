@@ -1,0 +1,25 @@
+{
+  "schema": "NEXUS_F1_LEGA_RUN_RECEIPT_V1",
+  "protocolVersion": "1.1",
+  "status": "FAIL_CLOSED",
+  "generatedAt": "2026-08-22T20:48:05.801Z",
+  "sourceCommit": "e68aaad315f56b724d24179fc937c86fabef169b",
+  "githubRunId": 32597636124,
+  "githubRunAttempt": 1,
+  "stages": {
+    "syntax": "success",
+    "acquireRaw": "failure",
+    "rawAudit": "skipped",
+    "normalize": "skipped",
+    "integrity": "skipped",
+    "bundle": "skipped",
+    "persist": "skipped",
+    "readback": "skipped"
+  },
+  "bundleSha256": null,
+  "governance": {
+    "f1Closed": false,
+    "f2PlusAuthorized": false,
+    "canonicalMutation": false
+  }
+}
