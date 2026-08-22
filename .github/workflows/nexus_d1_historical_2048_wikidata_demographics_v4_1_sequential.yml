@@ -1,0 +1,194 @@
+name: Nexus D1 Historical 2048 Wikidata Demographics v4.1 Sequential
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-historical-2048-wikidata-v4-1/EXECUTE'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: nexus-d1-historical-2048-wikidata-v4-1
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      ROOT: .nexus-d1-historical-2048-wikidata-v4-1
+      STATUS_DIR: .nexus-d1-historical-2048-wikidata-v4-1-status
+      RECONSTRUCTED: .nexus-d1-historical-2048-wikidata-v4-1/subjects.json.xz.b64
+      RELEASE_TAG: nexus-d1-historical-2048-wikidata-v4-1
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Reconstruct and verify D0-derived historical authority
+        run: |
+          set -euo pipefail
+          mkdir -p "$ROOT" "$STATUS_DIR"
+          python - <<'PY'
+          import base64,hashlib,json,lzma,os
+          from pathlib import Path
+          m=json.loads(Path('data/nexus-d1/historical-resolved-person-subjects-v3-manifest.json').read_text())
+          parts=[]
+          for c in m['payload']['chunks']:
+              text=Path(c['path']).read_text().strip()
+              assert len(text)==c['chars']
+              assert hashlib.sha256(text.encode()).hexdigest()==c['textSha256']
+              parts.append(text)
+          encoded=''.join(parts)
+          xz=base64.b64decode(encoded,validate=True)
+          raw=lzma.decompress(xz)
+          d=json.loads(raw)
+          assert len(encoded)==57516
+          assert len(xz)==43136
+          assert hashlib.sha256(xz).hexdigest()=='c1337f4d0dff552e99e56909267640be47df8ccccdf242987b6358c0b758f846'
+          assert len(raw)==508959
+          assert hashlib.sha256(raw).hexdigest()=='d472fe00c88e70b77adc8a38093360042a632559a9ac52366f8da3b37aec5660'
+          assert len(d['subjects'])==2048
+          assert len({s['subjectId'] for s in d['subjects']})==2048
+          assert len({s['understatPlayerId'] for s in d['subjects']})==2048
+          Path(os.environ['RECONSTRUCTED']).write_text(encoded+'\n')
+          PY
+
+      - name: Configure checkpoint commits
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+      - name: Acquire four shards sequentially with persisted checkpoints
+        shell: bash
+        run: |
+          set -euo pipefail
+          ranges=('0 0 512' '1 512 1024' '2 1024 1536' '3 1536 2048')
+          for spec in "${ranges[@]}"; do
+            read -r shard start end <<< "$spec"
+            out="$ROOT/shard-$shard/output"
+            rm -rf "$out"
+            mkdir -p "$out"
+            echo "Starting shard $shard [$start,$end)"
+            set +e
+            python scripts/nexus-d1-acquire-historical-wikidata-demographics-v2-shard-retry.py \
+              --subjects-b64 "$RECONSTRUCTED" \
+              --manifest data/nexus-d1/historical-resolved-person-subjects-v3-manifest.json \
+              --output "$out" \
+              --start "$start" \
+              --end "$end" \
+              >"$out/ACQUIRE.stdout.log" 2>"$out/ACQUIRE.stderr.log"
+            rc=$?
+            set -e
+            SHARD="$shard" START="$start" END="$end" RC="$rc" OUT="$out" STATUS_DIR="$STATUS_DIR" python - <<'PY'
+          import json,os
+          from datetime import datetime,timezone
+          from pathlib import Path
+          out=Path(os.environ['OUT']); rc=int(os.environ['RC'])
+          doc={'schema':'NEXUS_D1_HISTORICAL_V4_1_SHARD_STATUS_V1','capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),'shard':int(os.environ['SHARD']),'range':[int(os.environ['START']),int(os.environ['END'])],'exitCode':rc}
+          if (out/'RESULT.json').exists():
+              r=json.loads((out/'RESULT.json').read_text())
+              doc['status']=r['status']; doc['summary']=r['summary']; doc['resultCanonicalPresent']=True
+          elif (out/'TECHNICAL_FAILURE.json').exists():
+              f=json.loads((out/'TECHNICAL_FAILURE.json').read_text())
+              doc['status']='TECHNICAL_FAILURE_NOT_SCIENTIFIC_MISSINGNESS'
+              doc['failure']={'errorType':f.get('errorType'),'detail':f.get('detail'),'lastProgress':f.get('lastProgress')}
+              doc['resultCanonicalPresent']=False
+          else:
+              doc['status']='TECHNICAL_FAILURE_NO_DIAGNOSTIC'; doc['resultCanonicalPresent']=False
+          p=Path(os.environ['STATUS_DIR']); p.mkdir(parents=True,exist_ok=True)
+          (p/f"shard-{os.environ['SHARD']}.json").write_text(json.dumps(doc,ensure_ascii=False,indent=2)+'\n')
+          PY
+            git add "$STATUS_DIR/shard-$shard.json"
+            if ! git diff --cached --quiet; then
+              git commit -m "nexus: persist D1 historical v4.1 shard $shard status [skip ci]"
+              git pull --rebase origin main
+              git push origin HEAD:main
+            fi
+            if [ "$rc" -ne 0 ]; then
+              echo "Shard $shard failed technically after checkpoint persistence." >&2
+              exit "$rc"
+            fi
+          done
+
+      - name: Combine and validate 2048 historical results
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,json
+          from datetime import datetime,timezone
+          from pathlib import Path
+          root=Path('.nexus-d1-historical-2048-wikidata-v4-1')
+          results=[]
+          for shard in range(4):
+              p=root/f'shard-{shard}'/'output'/'RESULT.json'
+              if not p.exists(): raise SystemExit(f'missing {p}')
+              results.append(json.loads(p.read_text()))
+          ranges=[(r['shard']['start'],r['shard']['end']) for r in results]
+          assert ranges==[(0,512),(512,1024),(1024,1536),(1536,2048)]
+          records=[x for r in results for x in r['records']]
+          assert len(records)==2048
+          assert len({r['subjectId'] for r in records})==2048
+          mc={};dc={};fail=[]
+          for r in results:
+              for k,v in r['summary']['mappingStatus'].items(): mc[k]=mc.get(k,0)+v
+              for k,v in r['summary']['dobStatus'].items(): dc[k]=dc.get(k,0)+v
+              fail.extend(r.get('requestFailures') or [])
+          status='PASS' if not fail and all(r['status']=='PASS' for r in results) else 'REVIEW_REQUIRED'
+          captured=datetime.now(timezone.utc).isoformat().replace('+00:00','Z')
+          combined={'schema':'NEXUS_D1_HISTORICAL_RESOLVED_PERSON_WIKIDATA_RESULT_V4_1','protocolVersion':'1.1','status':status,'declaredUse':'HISTORICAL_POPULATION_COVERAGE_CURRENT_RETRIEVAL_ONLY','capturedAt':captured,'subjectSurface':{'count':2048,'decodedJsonSha256':'d472fe00c88e70b77adc8a38093360042a632559a9ac52366f8da3b37aec5660','sourceArtifactId':9162967092},'rules':{'fuzzyMatchingUsed':False,'dobUsedForIdentitySelection':False,'computedAgeDerived':False,'currentRetrievalImpliesHistoricalAsOf':False,'trainingPromotionGranted':False,'requestFailureCanBecomeMissingIdentity':False,'sequentialShardedExecution':True,'transientInfrastructureRetryOnly':True},'summary':{'subjects':2048,'mappingStatus':mc,'dobStatus':dc,'requestFailures':len(fail)},'requestFailures':fail,'records':records}
+          status_dir=Path('.nexus-d1-historical-2048-wikidata-v4-1-status'); status_dir.mkdir(parents=True,exist_ok=True)
+          (status_dir/'RESULT.json').write_text(json.dumps(combined,ensure_ascii=False,indent=2)+'\n')
+          evidence=[]
+          for shard in range(4):
+              out=root/f'shard-{shard}'/'output'
+              for p in sorted(x for x in out.rglob('*') if x.is_file()):
+                  b=p.read_bytes(); evidence.append({'path':str(p),'size':len(b),'sha256':hashlib.sha256(b).hexdigest()})
+          digest=hashlib.sha256('\n'.join(f"{x['path']}\t{x['size']}\t{x['sha256']}" for x in evidence).encode()).hexdigest()
+          manifest={'schema':'NEXUS_D1_HISTORICAL_WIKIDATA_COMBINED_MANIFEST_V4_1','generatedAt':captured,'status':status,'combinedSubjects':2048,'evidenceFileCount':len(evidence),'canonicalEvidenceSha256':digest,'evidence':evidence}
+          (status_dir/'MANIFEST.json').write_text(json.dumps(manifest,indent=2)+'\n')
+          print(json.dumps(combined['summary'],indent=2))
+          PY
+
+      - name: Persist combined outcome
+        run: |
+          set -euo pipefail
+          git add "$STATUS_DIR/RESULT.json" "$STATUS_DIR/MANIFEST.json"
+          git commit -m 'nexus: persist D1 historical 2048 Wikidata v4.1 combined outcome [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Freeze immutable D1 historical evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Immutable release already exists: $RELEASE_TAG" >&2
+            exit 1
+          fi
+          tar -czf nexus-d1-historical-2048-wikidata-v4-1.tar.gz "$ROOT" "$STATUS_DIR"
+          sha256sum nexus-d1-historical-2048-wikidata-v4-1.tar.gz > nexus-d1-historical-2048-wikidata-v4-1.tar.gz.sha256
+          trap 'gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true' ERR
+          gh release create "$RELEASE_TAG" --draft --target "$(git rev-parse HEAD)" --title 'FantaNexus D1 Historical 2048 Wikidata Demographics v4.1' --notes 'Sequential four-shard acquisition over byte-verified D0 authority. Retry hardening applies only to transient Wikidata maxlag/429/5xx/network events. No fuzzy mapping, age derivation, historical-as-of claim or training promotion.'
+          gh release upload "$RELEASE_TAG" nexus-d1-historical-2048-wikidata-v4-1.tar.gz nexus-d1-historical-2048-wikidata-v4-1.tar.gz.sha256 "$STATUS_DIR/RESULT.json" "$STATUS_DIR/MANIFEST.json"
+          trap - ERR
+
+      - name: Upload secondary evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-historical-2048-wikidata-v4-1
+          path: |
+            .nexus-d1-historical-2048-wikidata-v4-1/
+            .nexus-d1-historical-2048-wikidata-v4-1-status/
+          if-no-files-found: warn
+          retention-days: 30
