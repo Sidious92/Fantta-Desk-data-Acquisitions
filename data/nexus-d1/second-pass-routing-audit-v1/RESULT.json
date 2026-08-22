@@ -1,0 +1,62 @@
+{
+  "schema": "NEXUS_D1_SECOND_PASS_ROUTING_AUDIT_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS",
+  "capturedAt": "2026-08-22T16:20:27.933465Z",
+  "source": {
+    "path": "data/nexus-d1/second-pass-v2/SECOND_PASS_SUBJECTS.json",
+    "bytes": 550563,
+    "sha256": "a4caace4e7b9d67755ab523f98ad52e6dac838cf8ebba8d7abc45e9beb28381b"
+  },
+  "current": {
+    "records": 127,
+    "identityProblemRecords": 126,
+    "verifiedIdentityDobConflictRecords": 1,
+    "identityProblemWithExactUnderstatBridge": 30,
+    "identityProblemWithoutExactUnderstatBridge": 96,
+    "identityProblemMappingStatus": {
+      "IDENTITY_AMBIGUOUS": 15,
+      "IDENTITY_UNRESOLVED": 111
+    },
+    "exactUnderstatIds": 30
+  },
+  "historical": {
+    "records": 155,
+    "identityProblemRecords": 109,
+    "verifiedIdentityDobConflictRecords": 46,
+    "identityProblemWithExactUnderstatBridge": 109,
+    "identityProblemWithoutExactUnderstatBridge": 0,
+    "identityProblemMappingStatus": {
+      "IDENTITY_AMBIGUOUS": 50,
+      "IDENTITY_UNRESOLVED": 59
+    },
+    "exactUnderstatIds": 109
+  },
+  "combined": {
+    "records": 282,
+    "identityProblemRecords": 235,
+    "verifiedIdentityDobConflictRecords": 47,
+    "identityProblemWithExactUnderstatBridge": 139,
+    "identityProblemWithoutExactUnderstatBridge": 96,
+    "identityProblemMappingStatus": {
+      "IDENTITY_AMBIGUOUS": 65,
+      "IDENTITY_UNRESOLVED": 170
+    },
+    "exactUnderstatIds": 110
+  },
+  "historicalNeverResolvedFantacalcioSublot": {
+    "uniqueProviderIds": 445,
+    "observations": 704,
+    "authority": "data/nexus-d1/historical-never-resolved-fantacalcio-ids-v1-manifest.json",
+    "separateFromResolvedPersonSecondPass": true
+  },
+  "governance": {
+    "providerIdUsedAsGlobalPersonKey": false,
+    "nameOnlyMergeUsed": false,
+    "fuzzyMatchingUsed": false,
+    "dobInferred": false,
+    "computedAgeDerived": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}

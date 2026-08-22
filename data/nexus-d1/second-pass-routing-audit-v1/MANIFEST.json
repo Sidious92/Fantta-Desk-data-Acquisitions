@@ -1,0 +1,15 @@
+{
+  "schema": "NEXUS_D1_SECOND_PASS_ROUTING_AUDIT_MANIFEST_V1",
+  "status": "PASS",
+  "resultBytes": 1928,
+  "resultSha256": "01e9ee685fdeed8038707e56b6d394641d53333d48f64173a9adb182d377eb6b",
+  "governance": {
+    "providerIdUsedAsGlobalPersonKey": false,
+    "nameOnlyMergeUsed": false,
+    "fuzzyMatchingUsed": false,
+    "dobInferred": false,
+    "computedAgeDerived": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
