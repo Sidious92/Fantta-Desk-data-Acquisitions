@@ -1,4 +1,4 @@
-name: Nexus F1 Understat Pinned Club Snapshot v1
+name: Nexus F1 Understat Pinned Source v2
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     branches:
       - feat/nexus-input-v1-1-f1-understat-snapshot
     paths:
-      - 'scripts/nexus-f1-acquire-understat-pinned-club-segments-v1.py'
+      - 'scripts/nexus-f1-acquire-understat-pinned-source-v2.py'
       - '.github/workflows/nexus-f1-understat-club-stint-v1.yml'
       - '.nexus-f1-understat-snapshot-trigger'
 
@@ -14,7 +14,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: nexus-f1-understat-pinned-club-v1-${{ github.ref }}
+  group: nexus-f1-understat-pinned-v2-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -34,35 +34,37 @@ jobs:
 
       - name: Static syntax check
         id: syntax
-        run: python -m py_compile scripts/nexus-f1-acquire-understat-pinned-club-segments-v1.py
+        run: python -m py_compile scripts/nexus-f1-acquire-understat-pinned-source-v2.py
 
-      - name: Acquire pinned F0-approved Understat club-grain source
+      - name: Acquire pinned F0-approved Understat source
         id: acquire
         env:
-          NEXUS_F1_UNDERSTAT_PINNED_OUTPUT: .nexus-f1-understat-pinned-v1
-        run: python scripts/nexus-f1-acquire-understat-pinned-club-segments-v1.py
+          NEXUS_F1_UNDERSTAT_PINNED_OUTPUT: .nexus-f1-understat-pinned-v2
+        run: python scripts/nexus-f1-acquire-understat-pinned-source-v2.py
 
-      - name: Require RAW integrity PASS
+      - name: Require grain and RAW integrity PASS
         id: audit
         run: |
           python - <<'PY'
           import json
-          p='.nexus-f1-understat-pinned-v1/audit.json'
-          a=json.load(open(p,encoding='utf-8'))
-          assert a['status']=='PASS', a
+          a=json.load(open('.nexus-f1-understat-pinned-v2/audit.json',encoding='utf-8'))
+          assert a['status']=='PASS_WITH_EXPLICIT_STINT_QUARANTINE', a
           assert a['coverage']['seasons']==11, a['coverage']
-          assert a['coverage']['observedYears']==list(range(2014,2025)), a['coverage']
-          assert a['grain']['sourceAlreadyClubSplit'] is True, a['grain']
-          assert a['grain']['numericAllocationPerformed'] is False, a['grain']
-          assert a['integrity']['technicalKeys']==a['coverage']['records'], a['integrity']
+          assert a['coverage']['records']==a['integrity']['technicalKeys'], a['integrity']
           assert a['integrity']['duplicates']==0, a['integrity']
+          assert a['grain']['sourceAlreadyClubSplit'] is False, a['grain']
+          assert a['grain']['sourceClubLabelMayAggregateMultipleClubs'] is True, a['grain']
+          assert a['grain']['sourceMultiClubAggregateRows']>0, a['grain']
+          assert a['grain']['numericAllocationPerformed'] is False, a['grain']
+          assert a['grain']['multiClubNumericSplitAttempted'] is False, a['grain']
           assert a['temporal']['currentCaptureUsedAsHistoricalAvailableAt'] is False, a['temporal']
           assert a['temporal']['expectedMetricsReplayAdmissible'] is False, a['temporal']
           print(json.dumps({
-            'status':'PASS',
+            'status':a['status'],
             'records':a['coverage']['records'],
-            'multiClubPlayerSeasons':a['grain']['multiClubPlayerSeasons'],
-            'multiClubRecordsStintUnresolved':a['grain']['multiClubRecordsStintUnresolved'],
+            'singleClubRecords':a['grain']['singleClubRecordsWithDeterministicStintOrdinal1'],
+            'multiClubAggregateRows':a['grain']['sourceMultiClubAggregateRows'],
+            'stintUnresolvedRecords':a['grain']['stintUnresolvedRecords'],
             'sourceSha256':a['source']['sha256'],
             'outputSha256':a['integrity']['outputSha256']
           },indent=2))
@@ -73,18 +75,18 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner -cf - .nexus-f1-understat-pinned-v1 | gzip -n > nexus-f1-understat-pinned-club-v1.tar.gz
-          BUNDLE_SHA=$(sha256sum nexus-f1-understat-pinned-club-v1.tar.gz | awk '{print $1}')
-          AUDIT_SHA=$(sha256sum .nexus-f1-understat-pinned-v1/audit.json | awk '{print $1}')
-          OUTPUT_SHA=$(awk '{print $1}' .nexus-f1-understat-pinned-v1/OUTPUT.sha256)
+          tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner -cf - .nexus-f1-understat-pinned-v2 | gzip -n > nexus-f1-understat-pinned-v2.tar.gz
+          BUNDLE_SHA=$(sha256sum nexus-f1-understat-pinned-v2.tar.gz | awk '{print $1}')
+          AUDIT_SHA=$(sha256sum .nexus-f1-understat-pinned-v2/audit.json | awk '{print $1}')
+          OUTPUT_SHA=$(awk '{print $1}' .nexus-f1-understat-pinned-v2/OUTPUT.sha256)
           mkdir -p bundle-parts
-          split -b 40m -d -a 3 nexus-f1-understat-pinned-club-v1.tar.gz bundle-parts/part-
+          split -b 40m -d -a 3 nexus-f1-understat-pinned-v2.tar.gz bundle-parts/part-
           BUNDLE_SHA="$BUNDLE_SHA" python - <<'PY'
           import hashlib,json,os,pathlib
           parts=[]
           for p in sorted(pathlib.Path('bundle-parts').iterdir()):
               b=p.read_bytes();parts.append({'name':p.name,'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()})
-          pathlib.Path('BUNDLE_PARTS.json').write_text(json.dumps({'schema':'NEXUS_F1_UNDERSTAT_PINNED_BUNDLE_PARTS_V1','status':'PASS','bundleSha256':os.environ['BUNDLE_SHA'],'parts':parts},indent=2)+'\n',encoding='utf-8')
+          pathlib.Path('BUNDLE_PARTS.json').write_text(json.dumps({'schema':'NEXUS_F1_UNDERSTAT_PINNED_V2_BUNDLE_PARTS','status':'PASS','bundleSha256':os.environ['BUNDLE_SHA'],'parts':parts},indent=2)+'\n',encoding='utf-8')
           PY
           echo "bundle_sha=$BUNDLE_SHA" >> "$GITHUB_OUTPUT"
           echo "audit_sha=$AUDIT_SHA" >> "$GITHUB_OUTPUT"
@@ -99,17 +101,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          DEST="data/nexus-f1/understat-pinned-club-v1/$BUNDLE_SHA"
+          DEST="data/nexus-f1/understat-pinned-v2/$BUNDLE_SHA"
           mkdir -p "$DEST/parts"
           cp bundle-parts/* "$DEST/parts/"
           cp BUNDLE_PARTS.json "$DEST/BUNDLE_PARTS.json"
-          cp .nexus-f1-understat-pinned-v1/audit.json "$DEST/audit.json"
-          cp .nexus-f1-understat-pinned-v1/OUTPUT.sha256 "$DEST/OUTPUT.sha256"
+          cp .nexus-f1-understat-pinned-v2/audit.json "$DEST/audit.json"
+          cp .nexus-f1-understat-pinned-v2/OUTPUT.sha256 "$DEST/OUTPUT.sha256"
           python - <<'PY'
           import json,os,pathlib
-          dest=pathlib.Path('data/nexus-f1/understat-pinned-club-v1')/os.environ['BUNDLE_SHA']
+          dest=pathlib.Path('data/nexus-f1/understat-pinned-v2')/os.environ['BUNDLE_SHA']
           receipt={
-            'schema':'NEXUS_F1_UNDERSTAT_PINNED_DURABLE_PRESERVATION_RECEIPT_V1',
+            'schema':'NEXUS_F1_UNDERSTAT_PINNED_V2_PRESERVATION_RECEIPT',
             'protocolVersion':'1.1',
             'status':'PERSISTED_PENDING_REMOTE_READBACK',
             'sourceCommit':os.environ['GITHUB_SHA'],
@@ -118,10 +120,11 @@ jobs:
             'auditSha256':os.environ['AUDIT_SHA'],
             'normalizedOutputSha256':os.environ['OUTPUT_SHA'],
             'coverage':'2014/15-2024/25',
-            'sourceMode':'F0_APPROVED_PINNED_PUBLIC_UNDERSTAT_DERIVED_CLUB_GRAIN',
+            'supersedesBundleSha256':'7f0c299fbec1e9e952bae98f35262bfa911d337fa0b4192a01d7938bec8410e5',
+            'supersessionReason':'V1 source grain assumption was invalid; V2 explicitly quarantines comma-separated multi-club aggregate labels.',
             'remoteReadbackSha256Pass':False,
             'immutablePath':str(dest),
-            'nextRequiredAction':'ADD_2025_26_FROM_PRIVATE_D0_SOURCE_WITH_MULTI_CLUB_QUARANTINE',
+            'nextRequiredAction':'JOIN_WITH_PRIVATE_D0_2025_26_F1_SOURCE_FALLBACK',
             'governance':{'f1Closed':False,'f2PlusAuthorized':False,'trainingPromotionGranted':False,'canonicalMutation':False}
           }
           (dest/'PRESERVATION_RECEIPT.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
@@ -129,7 +132,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add "$DEST"
-          git commit -m "nexus f1: persist pinned Understat club snapshot $BUNDLE_SHA [skip ci]"
+          git commit -m "nexus f1: persist corrected Understat pinned v2 $BUNDLE_SHA [skip ci]"
           git push origin HEAD:feat/nexus-input-v1-1-f1-understat-snapshot
 
       - name: Verify remote Git read-back
@@ -140,11 +143,12 @@ jobs:
         run: |
           set -euo pipefail
           BRANCH='feat/nexus-input-v1-1-f1-understat-snapshot'
-          DEST="data/nexus-f1/understat-pinned-club-v1/$BUNDLE_SHA"
+          DEST="data/nexus-f1/understat-pinned-v2/$BUNDLE_SHA"
           git fetch origin "$BRANCH"
           python - <<'PY'
           import hashlib,json,os,pathlib,subprocess
-          dest=f"data/nexus-f1/understat-pinned-club-v1/{os.environ['BUNDLE_SHA']}"
+          from datetime import datetime,timezone
+          dest=f"data/nexus-f1/understat-pinned-v2/{os.environ['BUNDLE_SHA']}"
           m=json.load(open(f'{dest}/BUNDLE_PARTS.json',encoding='utf-8'))
           for p in m['parts']:
               b=subprocess.check_output(['git','show',f"origin/feat/nexus-input-v1-1-f1-understat-snapshot:{dest}/parts/{p['name']}"])
@@ -154,13 +158,37 @@ jobs:
           r=json.loads(rpath.read_text(encoding='utf-8'))
           r['status']='PASS_DURABLY_PRESERVED_REMOTE_GIT_READBACK_SHA256'
           r['remoteReadbackSha256Pass']=True
-          from datetime import datetime,timezone
           r['verifiedAt']=datetime.now(timezone.utc).isoformat().replace('+00:00','Z')
           rpath.write_text(json.dumps(r,indent=2)+'\n',encoding='utf-8')
           PY
           git add "$DEST/PRESERVATION_RECEIPT.json"
-          git commit -m "nexus f1: verify pinned Understat snapshot readback $BUNDLE_SHA [skip ci]"
+          git commit -m "nexus f1: verify corrected Understat pinned v2 readback $BUNDLE_SHA [skip ci]"
           git push origin HEAD:"$BRANCH"
+
+      - name: Record supersession of V1 artifact
+        if: ${{ steps.readback.outcome == 'success' }}
+        env:
+          BUNDLE_SHA: ${{ steps.meta.outputs.bundle_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p data/nexus-f1/superseded
+          python - <<'PY'
+          import json,os,pathlib
+          p=pathlib.Path('data/nexus-f1/superseded/understat-pinned-v1-7f0c299f.json')
+          p.write_text(json.dumps({
+            'schema':'NEXUS_F1_SUPERSESSION_RECEIPT_V1',
+            'protocolVersion':'1.1',
+            'status':'SUPERSEDED_DO_NOT_USE_FOR_F1_CLOSURE',
+            'supersededBundleSha256':'7f0c299fbec1e9e952bae98f35262bfa911d337fa0b4192a01d7938bec8410e5',
+            'replacementBundleSha256':os.environ['BUNDLE_SHA'],
+            'reason':'V1 inferred club-split grain from row multiplicity. Actual pinned source contains comma-separated multi-club aggregate labels; V2 detects and quarantines them without numeric allocation.',
+            'canonicalMutation':False
+          },indent=2)+'\n',encoding='utf-8')
+          PY
+          git add data/nexus-f1/superseded/understat-pinned-v1-7f0c299f.json
+          git commit -m "nexus f1: supersede invalid Understat pinned v1 grain claim [skip ci]"
+          git push origin HEAD:feat/nexus-input-v1-1-f1-understat-snapshot
 
       - name: Persist run outcome receipt
         if: always()
@@ -175,23 +203,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p data/nexus-f1/run-status/understat-pinned
+          mkdir -p data/nexus-f1/run-status/understat-pinned-v2
           python - <<'PY'
           import json,os,pathlib
           from datetime import datetime,timezone
-          stages={
-            'syntax':os.getenv('SYNTAX_OUTCOME','not-run'),
-            'acquire':os.getenv('ACQUIRE_OUTCOME','not-run'),
-            'audit':os.getenv('AUDIT_OUTCOME','not-run'),
-            'bundle':os.getenv('BUNDLE_OUTCOME','not-run'),
-            'persist':os.getenv('PERSIST_OUTCOME','not-run'),
-            'readback':os.getenv('READBACK_OUTCOME','not-run')
-          }
+          stages={k:os.getenv(v,'not-run') for k,v in {
+            'syntax':'SYNTAX_OUTCOME','acquire':'ACQUIRE_OUTCOME','audit':'AUDIT_OUTCOME','bundle':'BUNDLE_OUTCOME','persist':'PERSIST_OUTCOME','readback':'READBACK_OUTCOME'}.items()}
           success=all(v=='success' for v in stages.values())
           receipt={
-            'schema':'NEXUS_F1_UNDERSTAT_PINNED_RUN_RECEIPT_V1',
+            'schema':'NEXUS_F1_UNDERSTAT_PINNED_V2_RUN_RECEIPT',
             'protocolVersion':'1.1',
-            'status':'PASS_HISTORICAL_2014_2024' if success else 'FAIL_CLOSED',
+            'status':'PASS_HISTORICAL_2014_2024_WITH_EXPLICIT_STINT_QUARANTINE' if success else 'FAIL_CLOSED',
             'generatedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),
             'sourceCommit':os.environ['GITHUB_SHA'],
             'githubRunId':int(os.environ['GITHUB_RUN_ID']),
@@ -199,27 +221,27 @@ jobs:
             'stages':stages,
             'bundleSha256':os.getenv('BUNDLE_SHA') or None,
             'coverage':'2014/15-2024/25',
-            'understatLiveHtmlPathStatus':'REJECTED_FOR_F1_CURRENT_RUNNER_SOURCE_SHAPE_CHANGED',
-            'nextRequiredAction':'PRIVATE_D0_2025_26_SOURCE_ONLY_FALLBACK_AND_QUARANTINE_UNRESOLVED_MULTI_CLUB',
+            'nextRequiredAction':'JOIN_WITH_PRIVATE_D0_2025_26_F1_SOURCE_FALLBACK',
             'governance':{'f1Closed':False,'f2PlusAuthorized':False,'trainingPromotionGranted':False,'canonicalMutation':False}
           }
-          pathlib.Path('data/nexus-f1/run-status/understat-pinned/latest.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
+          pathlib.Path('data/nexus-f1/run-status/understat-pinned-v2/latest.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/nexus-f1/run-status/understat-pinned/latest.json
-          git commit -m "nexus f1: record pinned Understat runner outcome [skip ci]" || true
+          git add data/nexus-f1/run-status/understat-pinned-v2/latest.json
+          git commit -m "nexus f1: record corrected Understat pinned v2 outcome [skip ci]" || true
           git push origin HEAD:feat/nexus-input-v1-1-f1-understat-snapshot || true
 
       - name: Upload transient audit artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: nexus-f1-understat-pinned-club-v1
+          name: nexus-f1-understat-pinned-v2
           path: |
             BUNDLE_PARTS.json
-            .nexus-f1-understat-pinned-v1/audit.json
-            .nexus-f1-understat-pinned-v1/OUTPUT.sha256
-            data/nexus-f1/run-status/understat-pinned/latest.json
+            .nexus-f1-understat-pinned-v2/audit.json
+            .nexus-f1-understat-pinned-v2/OUTPUT.sha256
+            .nexus-f1-understat-pinned-v2/normalized/multi-club-quarantine-v2.json
+            data/nexus-f1/run-status/understat-pinned-v2/latest.json
           if-no-files-found: warn
           retention-days: 7
