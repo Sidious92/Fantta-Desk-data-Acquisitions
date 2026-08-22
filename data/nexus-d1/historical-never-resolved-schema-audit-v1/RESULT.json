@@ -1,0 +1,55 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_NEVER_RESOLVED_SUBLOT_SCHEMA_AUDIT_V1",
+  "status": "PASS",
+  "capturedAt": "2026-08-22T16:31:48.172751Z",
+  "rootType": "dict",
+  "rootKeys": [
+    "historicalScope",
+    "policy",
+    "protocolVersion",
+    "providerIdReuseOrNameVariationFlags",
+    "schema",
+    "sourceArtifactId",
+    "sourceArtifactName",
+    "sourceContainerSha256",
+    "sourceInternalCanonicalSha256",
+    "subjects",
+    "uniqueFantacalcioIds",
+    "unresolvedObservations"
+  ],
+  "listFields": {
+    "subjects": {
+      "length": 445,
+      "firstItemType": "dict",
+      "firstItemKeys": [
+        "exactObservedNames",
+        "fantacalcioSourcePlayerId",
+        "observations",
+        "providerIdReuseOrNameVariationFlag",
+        "status"
+      ],
+      "firstItem": {
+        "fantacalcioSourcePlayerId": "2",
+        "exactObservedNames": [
+          "Merelli"
+        ],
+        "observations": [
+          {
+            "season": "2015/16",
+            "seasonStart": 2015,
+            "name": "Merelli",
+            "team": "ATA"
+          }
+        ],
+        "status": "UNRESOLVED_NEVER_UNDERSTAT_BRIDGED",
+        "providerIdReuseOrNameVariationFlag": false
+      }
+    }
+  },
+  "governance": {
+    "payloadMutated": false,
+    "performanceStatisticsConsumed": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
