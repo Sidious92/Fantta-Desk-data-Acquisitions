@@ -1,0 +1,101 @@
+name: Nexus D1 SofaScore Identity DOB Probe v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-sofascore-probe-v1/EXECUTE'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: nexus-d1-sofascore-probe-v1
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      ROOT: .nexus-d1-sofascore-probe-v1
+      STATUS_DIR: .nexus-d1-sofascore-probe-v1-status
+      RELEASE_TAG: nexus-d1-sofascore-identity-dob-probe-v1
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Run bounded semantics probe only
+        run: |
+          set -euo pipefail
+          rm -rf "$ROOT/output"
+          mkdir -p "$ROOT/output"
+          python scripts/nexus-d1-probe-sofascore-identity-dob-v1.py --output "$ROOT/output" | tee "$ROOT/output/PROBE.stdout.log"
+
+      - name: Assert no D1 mutation
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('.nexus-d1-sofascore-probe-v1/output/RESULT.json').read_text())
+          a=d['acceptance']; g=d['governance']
+          assert a['fuzzyMatchingUsed'] is False
+          assert a['dobUsedForIdentitySelection'] is False
+          assert g['subjectsResolvedIntoD1'] is False
+          assert g['secondPassCasesMutated'] is False
+          assert g['computedAgeDerived'] is False
+          assert g['trainingPromotionGranted'] is False
+          assert g['f1Started'] is False
+          assert g['d2Started'] is False
+          print(json.dumps({'status':d['status'],**d['summary']},indent=2))
+          PY
+
+      - name: Persist probe outcome
+        run: |
+          set -euo pipefail
+          mkdir -p "$STATUS_DIR" data/nexus-d1/sofascore-identity-dob-probe-v1
+          cp "$ROOT/output/RESULT.json" "$STATUS_DIR/RESULT.json"
+          cp "$ROOT/output/MANIFEST.json" "$STATUS_DIR/MANIFEST.json"
+          cp "$ROOT/output/PROBE.stdout.log" "$STATUS_DIR/PROBE.stdout.log"
+          cp "$ROOT/output/RESULT.json" data/nexus-d1/sofascore-identity-dob-probe-v1/RESULT.json
+          cp "$ROOT/output/MANIFEST.json" data/nexus-d1/sofascore-identity-dob-probe-v1/MANIFEST.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$STATUS_DIR" data/nexus-d1/sofascore-identity-dob-probe-v1
+          git commit -m 'nexus: persist D1 SofaScore identity DOB probe v1 outcome [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Freeze immutable probe evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Immutable release already exists: $RELEASE_TAG" >&2
+            exit 1
+          fi
+          tar -czf nexus-d1-sofascore-identity-dob-probe-v1.tar.gz "$ROOT" "$STATUS_DIR"
+          sha256sum nexus-d1-sofascore-identity-dob-probe-v1.tar.gz > nexus-d1-sofascore-identity-dob-probe-v1.tar.gz.sha256
+          trap 'gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true' ERR
+          gh release create "$RELEASE_TAG" --draft --target "$(git rev-parse HEAD)" --title 'FantaNexus D1 SofaScore Identity DOB Probe v1' --notes 'Bounded source-contract probe only. No second-pass identity or DOB records are mutated or promoted.'
+          gh release upload "$RELEASE_TAG" nexus-d1-sofascore-identity-dob-probe-v1.tar.gz nexus-d1-sofascore-identity-dob-probe-v1.tar.gz.sha256 "$STATUS_DIR/RESULT.json" "$STATUS_DIR/MANIFEST.json"
+          trap - ERR
+
+      - name: Upload secondary evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-sofascore-identity-dob-probe-v1
+          path: |
+            .nexus-d1-sofascore-probe-v1/
+            .nexus-d1-sofascore-probe-v1-status/
+          if-no-files-found: warn
+          retention-days: 30
