@@ -1,0 +1,110 @@
+name: Nexus D1 Recover Current Subject Transport v2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-recover-current-subject-v2/EXECUTE'
+
+permissions:
+  contents: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Recover only if decoded canonical JSON hash matches
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64, gzip, hashlib, json, struct, zlib
+          from pathlib import Path
+
+          old_manifest_path=Path('data/nexus-d1/current-2026-27-subjects-v1-manifest.json')
+          old_payload_path=Path('data/nexus-d1/current-2026-27-subjects-v1.json.gz.b64')
+          new_manifest_path=Path('data/nexus-d1/current-2026-27-subjects-v2-manifest.json')
+          new_payload_path=Path('data/nexus-d1/current-2026-27-subjects-v2.json.gz.b64')
+
+          m=json.loads(old_manifest_path.read_text())
+          gz=base64.b64decode(old_payload_path.read_text().strip())
+          gz_sha=hashlib.sha256(gz).hexdigest()
+          expected_raw_sha=m['payload']['decodedJsonSha256']
+          expected_raw_bytes=m['payload']['decodedJsonBytes']
+
+          standard_error=None
+          try:
+              raw=gzip.decompress(gz)
+              recovery='STANDARD_GZIP'
+          except Exception as e:
+              standard_error=f'{type(e).__name__}: {e}'
+              if len(gz) < 18 or gz[:2] != b'\x1f\x8b' or gz[2] != 8:
+                  raise SystemExit('Not a recoverable gzip stream')
+              flg=gz[3]
+              pos=10
+              if flg & 4:
+                  xlen=struct.unpack('<H',gz[pos:pos+2])[0]; pos += 2+xlen
+              if flg & 8:
+                  pos=gz.index(b'\x00',pos)+1
+              if flg & 16:
+                  pos=gz.index(b'\x00',pos)+1
+              if flg & 2:
+                  pos += 2
+              raw=zlib.decompress(gz[pos:-8], -zlib.MAX_WBITS)
+              recovery='RAW_DEFLATE_IGNORE_GZIP_TRAILER'
+
+          raw_sha=hashlib.sha256(raw).hexdigest()
+          assert raw_sha == expected_raw_sha, (raw_sha, expected_raw_sha)
+          assert len(raw) == expected_raw_bytes, (len(raw), expected_raw_bytes)
+          doc=json.loads(raw)
+          assert len(doc['subjects']) == 505
+          assert doc['identityBridgeSummary']['identityUnresolved'] == 99
+
+          new_gz=gzip.compress(raw, compresslevel=9, mtime=0)
+          # Verify the repaired transport end-to-end before writing.
+          assert gzip.decompress(new_gz) == raw
+          new_gz_sha=hashlib.sha256(new_gz).hexdigest()
+          new_payload_path.write_text(base64.b64encode(new_gz).decode()+'\n')
+
+          nm={
+              **m,
+              'schema':'NEXUS_D1_CURRENT_2026_27_SUBJECT_SURFACE_MANIFEST_V2',
+              'supersedes':'data/nexus-d1/current-2026-27-subjects-v1-manifest.json',
+              'transportRecovery':{
+                  'status':'PASS_CANONICAL_JSON_HASH_PRESERVED',
+                  'method':recovery,
+                  'v1ObservedGzipSha256':gz_sha,
+                  'v1ManifestExpectedGzipSha256':m['payload']['gzipSha256'],
+                  'v1StandardGzipError':standard_error,
+                  'decodedJsonSha256Preserved':raw_sha,
+                  'decodedJsonBytesPreserved':len(raw),
+                  'subjectCountPreserved':505,
+                  'semanticContentChanged':False,
+              },
+              'payload':{
+                  **m['payload'],
+                  'path':str(new_payload_path),
+                  'encoding':'BASE64_GZIP_JSON',
+                  'gzipBytes':len(new_gz),
+                  'gzipSha256':new_gz_sha,
+              },
+          }
+          new_manifest_path.write_text(json.dumps(nm,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(nm['transportRecovery'],indent=2))
+          print('new gzip',len(new_gz),new_gz_sha)
+          PY
+      - name: Persist v2 transport without modifying v1
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add data/nexus-d1/current-2026-27-subjects-v2.json.gz.b64 data/nexus-d1/current-2026-27-subjects-v2-manifest.json
+          git commit -m 'nexus: recover D1 current subject transport v2 [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
