@@ -1,0 +1,31 @@
+{
+  "schema": "NEXUS_D1_SECONDARY_RAW_PRESERVATION_RESULT_V2",
+  "protocolVersion": "1.1",
+  "status": "PASS",
+  "capturedAt": "2026-08-22T17:18:28.254748Z",
+  "scope": {
+    "currentOpenSubjects": 127,
+    "historicalOpenSubjects": 109,
+    "historicalDobConflictSubjects": 46
+  },
+  "semanticValidation": {
+    "current127MatchesAuthority": true,
+    "historical109MatchesAuthority": true,
+    "resolvedHistoricalConflict45SupportedByReplay": true,
+    "unresolvedHistoricalDobConflictCount": 1
+  },
+  "rules": {
+    "preservationReplayOnly": true,
+    "scientificDecisionsRecomputed": false,
+    "rawEvidenceMutatedAfterCapture": false,
+    "providerIdsUsedAsGlobalPersonKeys": false,
+    "fuzzyMatchingUsed": false,
+    "dobInferred": false,
+    "computedAgeDerived": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  },
+  "evidenceFileCount": 494,
+  "canonicalEvidenceSha256": "957848bb6beac74b91df419bc0113937e62b66c166b7c4fa59bd6166ee7b8e01"
+}
