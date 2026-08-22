@@ -1,0 +1,9 @@
+{
+  "subjects": 127,
+  "recordsCompleted": 127,
+  "statusCounts": {
+    "CURRENT_CLUB_CONTEXT_UNCONFIRMED": 127
+  },
+  "currentIdentityDobVerified": 0,
+  "requestFailures": 0
+}
