@@ -1,0 +1,22 @@
+{
+  "schema": "NEXUS_F1_UNDERSTAT_PINNED_V2_PRESERVATION_RECEIPT",
+  "protocolVersion": "1.1",
+  "status": "PERSISTED_PENDING_REMOTE_READBACK",
+  "sourceCommit": "0f0e9bcc5276cf58a8fe84d92a4fce9b05d470a0",
+  "githubRunId": 32598585808,
+  "bundleSha256": "4f78372340db3c3373dd7f4be43e8f0224974154943311d91185728ced8d9e95",
+  "auditSha256": "7eec55c8b3a129ce2fddc567ab880423f5396799f6fcb5d306745898c3c74f4d",
+  "normalizedOutputSha256": "df95e4c0e93c364c89e883a516cfb79e08ae1faf871ef025d31ddb67bd50a323",
+  "coverage": "2014/15-2024/25",
+  "supersedesBundleSha256": "7f0c299fbec1e9e952bae98f35262bfa911d337fa0b4192a01d7938bec8410e5",
+  "supersessionReason": "V1 source grain assumption was invalid; V2 explicitly quarantines comma-separated multi-club aggregate labels.",
+  "remoteReadbackSha256Pass": false,
+  "immutablePath": "data/nexus-f1/understat-pinned-v2/4f78372340db3c3373dd7f4be43e8f0224974154943311d91185728ced8d9e95",
+  "nextRequiredAction": "JOIN_WITH_PRIVATE_D0_2025_26_F1_SOURCE_FALLBACK",
+  "governance": {
+    "f1Closed": false,
+    "f2PlusAuthorized": false,
+    "trainingPromotionGranted": false,
+    "canonicalMutation": false
+  }
+}
