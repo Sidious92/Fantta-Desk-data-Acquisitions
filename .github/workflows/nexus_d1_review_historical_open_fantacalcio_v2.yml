@@ -1,0 +1,33 @@
+name: Nexus D1 Review Historical Open Fantacalcio Demographics v2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-historical-open-fantacalcio-v2/EXECUTE'
+
+permissions:
+  contents: write
+
+jobs:
+  review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python scripts/nexus-d1-review-historical-open-fantacalcio-demographics-v2.py | tee /tmp/review.log
+      - name: Persist reviewed authority
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add data/nexus-d1/historical-open-fantacalcio-v2
+          git commit -m 'nexus: persist D1 historical-open Fantacalcio demographics v2 review [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
