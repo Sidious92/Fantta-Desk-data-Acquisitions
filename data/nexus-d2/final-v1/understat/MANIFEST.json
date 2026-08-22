@@ -1,0 +1,72 @@
+{
+  "contentFiles": [
+    {
+      "bytes": 1140351,
+      "path": "data/nexus-d2/final-v1/understat/stints-000.jsonl",
+      "rows": 1000,
+      "sha256": "d214754129b610f4cf7fd8b7e07ad2d90e994ded9ae200e72d283d7707fe560d"
+    },
+    {
+      "bytes": 1140809,
+      "path": "data/nexus-d2/final-v1/understat/stints-001.jsonl",
+      "rows": 1000,
+      "sha256": "cfc734b47256938ffeb810b6851cf4bbfecfdef8a3b3e3f7bb177e4f273c08fd"
+    },
+    {
+      "bytes": 1140703,
+      "path": "data/nexus-d2/final-v1/understat/stints-002.jsonl",
+      "rows": 1000,
+      "sha256": "718dca6466749e4ae85cd2a8d1bc3e26ada3b8aa1b48d929699efeb27ec7f35a"
+    },
+    {
+      "bytes": 1140396,
+      "path": "data/nexus-d2/final-v1/understat/stints-003.jsonl",
+      "rows": 1000,
+      "sha256": "aba527fcb84e935e34c1334ac0667b1d1ba8678ff8f4ba91cc555ad74ada93b0"
+    },
+    {
+      "bytes": 1140810,
+      "path": "data/nexus-d2/final-v1/understat/stints-004.jsonl",
+      "rows": 1000,
+      "sha256": "089627597d420e9c57f65d528f99eb3386ca1b5d67982ee47d9ece7ff9eed8d7"
+    },
+    {
+      "bytes": 1140781,
+      "path": "data/nexus-d2/final-v1/understat/stints-005.jsonl",
+      "rows": 1000,
+      "sha256": "ad17ee991666e050e287c05fcc06129c8a46bb5042716590fe55367fb30a2675"
+    },
+    {
+      "bytes": 1140773,
+      "path": "data/nexus-d2/final-v1/understat/stints-006.jsonl",
+      "rows": 1000,
+      "sha256": "9097ec1110bd6d1b16c1ccccc4deb36060010ab631646ac50e5b8843f41c2776"
+    },
+    {
+      "bytes": 1140783,
+      "path": "data/nexus-d2/final-v1/understat/stints-007.jsonl",
+      "rows": 1000,
+      "sha256": "2735c2c9a825f3123cc2444414289b3f6da7988a72aea7a5fcf92eb43ef4aada"
+    },
+    {
+      "bytes": 70724,
+      "path": "data/nexus-d2/final-v1/understat/stints-008.jsonl",
+      "rows": 62,
+      "sha256": "d6e11053fa380af699f34921d1ccdec66164da96361db2f422c415d2a375bc02"
+    },
+    {
+      "bytes": 348809,
+      "path": "data/nexus-d2/final-v1/understat/residuals.jsonl",
+      "rows": 337,
+      "sha256": "5e34877c97caefffd861955a301f596e5e7a6207267925130b857aee46e2e092"
+    }
+  ],
+  "registry": {
+    "bytes": 4397,
+    "path": "data/nexus-d2/final-v1/understat/REGISTRY.json",
+    "sha256": "a3d1b7ae7fa1774c325baba98a1aecd5a138cf231df127743e6df2ccb767019a"
+  },
+  "schema": "NEXUS_D2D_UNDERSTAT_PARTITION_MANIFEST_V1",
+  "status": "PASS",
+  "treeContentDigestSha256": "8bd05372ea806c26276cb8dd297aefed27ce0900ba8fa93eeed9b2d279a928aa"
+}

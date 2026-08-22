@@ -1,0 +1,38 @@
+name: D2D Understat Stint Partition v1
+
+on:
+  push:
+    branches:
+      - feat/d2d-career-stint-freeze
+    paths:
+      - 'scripts/d2d_build_understat_stint_partition_v1.py'
+      - '.github/workflows/d2d-understat-stint-partition-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/d2d-career-stint-freeze
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build frozen Understat D2D partition
+        run: python scripts/d2d_build_understat_stint_partition_v1.py
+      - name: Persist content-addressed partition
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/nexus-d2/final-v1/understat
+          if git diff --cached --quiet; then
+            echo 'No partition changes.'
+            exit 0
+          fi
+          git commit -m 'nexus d2d: persist Understat stint partition v1 [skip ci]'
+          git push origin HEAD:feat/d2d-career-stint-freeze

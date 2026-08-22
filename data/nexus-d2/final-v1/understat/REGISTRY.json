@@ -1,0 +1,148 @@
+{
+  "canonicalAnalyticalGrain": "player-season-league-club-stint",
+  "canonicalRowsByLeague": {
+    "Bundesliga": 463,
+    "EPL": 737,
+    "La_Liga": 587,
+    "Ligue_1": 635,
+    "RFPL": 141,
+    "Serie_A": 5499
+  },
+  "canonicalRowsBySeason": {
+    "2014/15": 535,
+    "2015/16": 667,
+    "2016/17": 719,
+    "2017/18": 730,
+    "2018/19": 741,
+    "2019/20": 775,
+    "2020/21": 816,
+    "2021/22": 825,
+    "2022/23": 772,
+    "2023/24": 747,
+    "2024/25": 735
+  },
+  "counts": {
+    "aggregatedMultiClubResidualRows": 337,
+    "canonicalSingleClubStintRows": 8062,
+    "d1BoundSourceRows": 8399,
+    "d1UnderstatAliases": 2048,
+    "residualShareOfD1BoundRows": 0.040123824264793426,
+    "uniqueCanonicalPersons": 1936,
+    "uniqueResidualPersons": 289
+  },
+  "files": [
+    {
+      "bytes": 1140351,
+      "path": "data/nexus-d2/final-v1/understat/stints-000.jsonl",
+      "rows": 1000,
+      "sha256": "d214754129b610f4cf7fd8b7e07ad2d90e994ded9ae200e72d283d7707fe560d"
+    },
+    {
+      "bytes": 1140809,
+      "path": "data/nexus-d2/final-v1/understat/stints-001.jsonl",
+      "rows": 1000,
+      "sha256": "cfc734b47256938ffeb810b6851cf4bbfecfdef8a3b3e3f7bb177e4f273c08fd"
+    },
+    {
+      "bytes": 1140703,
+      "path": "data/nexus-d2/final-v1/understat/stints-002.jsonl",
+      "rows": 1000,
+      "sha256": "718dca6466749e4ae85cd2a8d1bc3e26ada3b8aa1b48d929699efeb27ec7f35a"
+    },
+    {
+      "bytes": 1140396,
+      "path": "data/nexus-d2/final-v1/understat/stints-003.jsonl",
+      "rows": 1000,
+      "sha256": "aba527fcb84e935e34c1334ac0667b1d1ba8678ff8f4ba91cc555ad74ada93b0"
+    },
+    {
+      "bytes": 1140810,
+      "path": "data/nexus-d2/final-v1/understat/stints-004.jsonl",
+      "rows": 1000,
+      "sha256": "089627597d420e9c57f65d528f99eb3386ca1b5d67982ee47d9ece7ff9eed8d7"
+    },
+    {
+      "bytes": 1140781,
+      "path": "data/nexus-d2/final-v1/understat/stints-005.jsonl",
+      "rows": 1000,
+      "sha256": "ad17ee991666e050e287c05fcc06129c8a46bb5042716590fe55367fb30a2675"
+    },
+    {
+      "bytes": 1140773,
+      "path": "data/nexus-d2/final-v1/understat/stints-006.jsonl",
+      "rows": 1000,
+      "sha256": "9097ec1110bd6d1b16c1ccccc4deb36060010ab631646ac50e5b8843f41c2776"
+    },
+    {
+      "bytes": 1140783,
+      "path": "data/nexus-d2/final-v1/understat/stints-007.jsonl",
+      "rows": 1000,
+      "sha256": "2735c2c9a825f3123cc2444414289b3f6da7988a72aea7a5fcf92eb43ef4aada"
+    },
+    {
+      "bytes": 70724,
+      "path": "data/nexus-d2/final-v1/understat/stints-008.jsonl",
+      "rows": 62,
+      "sha256": "d6e11053fa380af699f34921d1ccdec66164da96361db2f422c415d2a375bc02"
+    },
+    {
+      "bytes": 348809,
+      "path": "data/nexus-d2/final-v1/understat/residuals.jsonl",
+      "rows": 337,
+      "sha256": "5e34877c97caefffd861955a301f596e5e7a6207267925130b857aee46e2e092"
+    }
+  ],
+  "governance": {
+    "canonicalPredictiveEngineModified": false,
+    "f1Started": false,
+    "fullD2Complete": false,
+    "partitionOnly": true
+  },
+  "residualRowsByLeague": {
+    "Bundesliga": 10,
+    "EPL": 17,
+    "La_Liga": 9,
+    "Ligue_1": 13,
+    "RFPL": 3,
+    "Serie_A": 285
+  },
+  "residualRowsBySeason": {
+    "2014/15": 29,
+    "2015/16": 36,
+    "2016/17": 25,
+    "2017/18": 26,
+    "2018/19": 29,
+    "2019/20": 33,
+    "2020/21": 29,
+    "2021/22": 28,
+    "2022/23": 32,
+    "2023/24": 29,
+    "2024/25": 41
+  },
+  "schema": "NEXUS_D2D_UNDERSTAT_STINT_PARTITION_V1",
+  "sourceAuthorities": {
+    "d1Identity": {
+      "commit": "d0cab101cc90f65ee0b1982e7ca974cd95c5d3b9",
+      "path": "data/nexus-d1/final-v3/IDENTITY_MASTER.json",
+      "repository": "Sidious92/Fantta-Desk-data-Acquisitions",
+      "sha256": "952bdf1d4cfb81a0683bff1f78d949b6350b11be1cc27d20059f7ace651bb53c"
+    },
+    "understat": {
+      "commit": "768b7ca0b977a5e6b4b429c7b0cf750e8269f2fc",
+      "gitBlobSha1": "ddf4327251bb781f88b6edc4662bf20e5379ff3f",
+      "repository": "vibedatascience/understat_players_aggregated",
+      "sha256": "b78fad5f01844a0fdab0d89474dafba9b86c586d2f0ce88f0ce2c9af70d2bc64"
+    }
+  },
+  "status": "FROZEN_PARTITION_PASS",
+  "validation": {
+    "commaSeparatedClubRowsPromoted": 0,
+    "duplicateAnalyticalTuples": 0,
+    "duplicateStintKeys": 0,
+    "exactD1ProviderBindingOnly": true,
+    "fuzzyMatchingUsed": false,
+    "metricAllocationPerformed": false,
+    "rawSourceMutated": false,
+    "sourceHashesVerified": true
+  }
+}
