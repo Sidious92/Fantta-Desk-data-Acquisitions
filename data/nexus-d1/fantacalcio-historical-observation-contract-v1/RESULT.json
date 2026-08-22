@@ -1,0 +1,34 @@
+{
+  "schema": "NEXUS_D1_FANTACALCIO_HISTORICAL_OBSERVATION_KEY_CONTRACT_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS",
+  "basis": {
+    "probeResult": "data/nexus-d1/fantacalcio-historical-observation-probe-v1/RESULT.json",
+    "probeCommit": "bd36977475b500b93f00b149075a1a2a9993c9b0",
+    "observationsFetched": 4,
+    "exactSeasonPlayerIdBound": 4,
+    "singleDayPrecisionDobObserved": 4,
+    "technicalFailures": 0,
+    "priorProbeStatus": "INSUFFICIENT_EVIDENCE",
+    "priorProbeInsufficiencyReason": "A parser-local proximity check for club text returned false although all four requested and canonical URLs were exact season/playerId pages and all four pages exposed full name plus one day-precision DOB. Club-near-H1 is not part of the provider observation key."
+  },
+  "contract": {
+    "providerObservationKey": ["provider=Fantacalcio", "season", "fantacalcioPlayerId"],
+    "providerObservationKeyIsGlobalPersonKey": false,
+    "exactCanonicalSeasonPlayerIdRequired": true,
+    "singleDayPrecisionDobRequired": true,
+    "fullNameRequired": true,
+    "historicalUnderstatBackedPersonResolutionAlsoRequiresExactNormalizedNameTokenSet": true,
+    "nameSearchUsed": false,
+    "fuzzyMatchingUsed": false,
+    "dobUsedForIdentitySelection": false,
+    "clubProximityParserRequired": false
+  },
+  "governance": {
+    "historicalPersonsAutoMergedByFantacalcioId": false,
+    "computedAgeDerived": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
