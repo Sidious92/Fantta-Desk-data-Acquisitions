@@ -1,0 +1,36 @@
+{
+  "schema": "NEXUS_D1_SECOND_PASS_AUTHORITY_REGISTRY_V1",
+  "protocolVersion": "1.1",
+  "status": "ACTIVE",
+  "canonical": {
+    "secondPassOpenSurface": {
+      "path": "data/nexus-d1/second-pass-v2/SECOND_PASS_SUBJECTS.json",
+      "sha256": "a4caace4e7b9d67755ab523f98ad52e6dac838cf8ebba8d7abc45e9beb28381b",
+      "authority": "current first-pass PASS + historical v4.1 PASS"
+    },
+    "historicalNeverResolvedFantacalcioIds": {
+      "manifest": "data/nexus-d1/historical-never-resolved-fantacalcio-ids-v1-manifest.json",
+      "payload": "data/nexus-d1/historical-never-resolved-fantacalcio-ids-v1.json.xz.b64",
+      "uniqueProviderIds": 445,
+      "observations": 704,
+      "providerIdsAreGlobalPersonKeys": false
+    }
+  },
+  "nonCanonicalRetainedEvidence": [
+    {
+      "manifest": "data/nexus-d1/historical-unresolved-fantacalcio-id-sublot-v1-manifest.json",
+      "payload": "data/nexus-d1/historical-unresolved-fantacalcio-id-sublot-v1.json.xz.b64",
+      "status": "REDUNDANT_RECONSTRUCTION_DO_NOT_CONSUME",
+      "reason": "Reconstructed independently from the same immutable D0 artifact after a canonical 445-ID surface already existed. Retained without deletion or overwrite for auditability."
+    }
+  ],
+  "governance": {
+    "rawEvidenceDeleted": false,
+    "existingEvidenceOverwritten": false,
+    "fuzzyMatchingAuthorized": false,
+    "computedAgeDerived": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
