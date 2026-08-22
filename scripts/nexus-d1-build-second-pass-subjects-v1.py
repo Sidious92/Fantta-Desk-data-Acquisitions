@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -49,10 +50,16 @@ ALLOWED = {
     "sourceBridge", "identityBridge", "sourceIdentity", "sourceContext",
 }
 
-BANNED_TOKENS = (
-    "goal", "assist", "xg", "xa", "shot", "minute", "rating", "vote",
-    "quotation", "fvm", "fantasy", "prediction", "target", "feature"
-)
+# Exact normalized field names only. Substring tests are forbidden here because
+# identity fields such as `exactCandidateIds` legitimately contain letter pairs
+# like `xa` without being performance metrics.
+FORBIDDEN_FIELDS = {
+    "goal", "goals", "assist", "assists", "xg", "xa", "shot", "shots",
+    "shotsontarget", "minute", "minutes", "rating", "ratings", "vote", "votes",
+    "mediavoto", "mv", "quotation", "quotations", "fvm", "fantasypoints",
+    "prediction", "predictions", "target", "targets", "targetvalue", "targetvalues",
+    "feature", "features", "featurevector", "featurevalues"
+}
 
 
 def compact_record(scope: str, r: dict) -> dict:
@@ -60,21 +67,21 @@ def compact_record(scope: str, r: dict) -> dict:
     for k in ALLOWED:
         if k in r:
             out[k] = r[k]
-    # Normalize status fields while preserving originals when present.
     out["mappingStatus"] = status(r, "mappingStatus", "identityStatus")
     out["dateOfBirthStatus"] = status(r, "dateOfBirthStatus", "dobStatus")
-    # Stable source-record locator into the persisted first-pass result.
     sid = r.get("subjectId") or r.get("fantacalcioPlayerId") or r.get("playerId") or r.get("understatPlayerId")
     out["firstPassSubjectLocator"] = str(sid) if sid is not None else None
     return out
 
 
 def assert_identity_only(obj):
+    def norm_key(k: str) -> str:
+        return re.sub(r"[^a-z0-9]", "", str(k).lower())
+
     def walk(v, path=""):
         if isinstance(v, dict):
             for k, x in v.items():
-                lk = k.lower()
-                if any(tok in lk for tok in BANNED_TOKENS):
+                if norm_key(k) in FORBIDDEN_FIELDS:
                     raise RuntimeError(f"PERFORMANCE_FIELD_FORBIDDEN:{path}/{k}")
                 walk(x, f"{path}/{k}")
         elif isinstance(v, list):
