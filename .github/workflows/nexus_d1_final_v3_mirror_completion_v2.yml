@@ -1,3 +1,4 @@
+# Trigger revision 2: completion-only, no scientific rebuild.
 name: Nexus D1 Final v3 Mirror Completion v2
 
 on:
