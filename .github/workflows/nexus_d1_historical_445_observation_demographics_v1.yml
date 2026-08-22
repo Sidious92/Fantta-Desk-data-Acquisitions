@@ -1,0 +1,162 @@
+name: Nexus D1 Historical 445 Observation Demographics v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-historical-445-observation-demographics-v1/EXECUTE'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: nexus-d1-historical-445-observation-demographics-v1
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      ROOT: .nexus-d1-historical-445-observation-demographics-v1
+      STATUS: .nexus-d1-historical-445-observation-demographics-v1-status
+      RELEASE_TAG: nexus-d1-historical-445-observation-demographics-v1
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Preflight canonical 445 surface and routing contract
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64,hashlib,json,lzma
+          from pathlib import Path
+          m=json.loads(Path('data/nexus-d1/historical-never-resolved-fantacalcio-ids-v1-manifest.json').read_text())
+          assert m['derivation']['uniqueFantacalcioIdsNeverResolvedToUnderstat']==445
+          assert m['derivation']['unresolvedObservationsForNeverResolvedIds']==704
+          enc=Path('data/nexus-d1/historical-never-resolved-fantacalcio-ids-v1.json.xz.b64').read_text().strip()
+          xz=base64.b64decode(enc,validate=True); raw=lzma.decompress(xz)
+          assert len(enc)==m['payload']['base64Chars'] and len(xz)==m['payload']['xzBytes']
+          assert hashlib.sha256(xz).hexdigest()==m['payload']['xzSha256']
+          assert len(raw)==m['payload']['decodedJsonBytes'] and hashlib.sha256(raw).hexdigest()==m['payload']['decodedJsonSha256']
+          d=json.loads(raw); assert len(d['subjects'])==445
+          assert sum(len(s.get('observations') or []) for s in d['subjects'])==704
+          p=json.loads(Path('data/nexus-d1/fantacalcio-historical-neutral-slug-probe-v1/RESULT.json').read_text())
+          assert p['status']=='PASS'
+          assert p['summary']['exactObservationPass']==4 and p['summary']['technicalFailures']==0
+          assert p['semantics']['neutralSeoSlugsAccepted'] is True
+          assert p['semantics']['providerIdUsedAsGlobalPersonKey'] is False
+          PY
+
+      - name: Configure checkpoint commits
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+      - name: Acquire four sequential observation shards
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$ROOT" "$STATUS"
+          ranges=('0 0 176' '1 176 352' '2 352 528' '3 528 704')
+          for spec in "${ranges[@]}"; do
+            read -r shard start end <<< "$spec"
+            out="$ROOT/shard-$shard/output"
+            rm -rf "$out" && mkdir -p "$out"
+            set +e
+            python scripts/nexus-d1-acquire-historical-never-resolved-observations-fantacalcio-v1.py \
+              --manifest data/nexus-d1/historical-never-resolved-fantacalcio-ids-v1-manifest.json \
+              --payload data/nexus-d1/historical-never-resolved-fantacalcio-ids-v1.json.xz.b64 \
+              --probe data/nexus-d1/fantacalcio-historical-neutral-slug-probe-v1/RESULT.json \
+              --output "$out" --start "$start" --end "$end" \
+              >"$out/ACQUIRE.stdout.log" 2>"$out/ACQUIRE.stderr.log"
+            rc=$?
+            set -e
+            SHARD="$shard" START="$start" END="$end" RC="$rc" OUT="$out" STATUS="$STATUS" python - <<'PY'
+          import json,os
+          from datetime import datetime,timezone
+          from pathlib import Path
+          out=Path(os.environ['OUT']); rc=int(os.environ['RC'])
+          doc={'schema':'NEXUS_D1_HISTORICAL_445_OBSERVATION_SHARD_STATUS_V1','capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),'shard':int(os.environ['SHARD']),'range':[int(os.environ['START']),int(os.environ['END'])],'exitCode':rc}
+          if (out/'RESULT.json').exists():
+              r=json.loads((out/'RESULT.json').read_text()); doc['status']=r['status']; doc['summary']=r['summary']; doc['resultCanonicalPresent']=True
+          else:
+              doc['status']='TECHNICAL_FAILURE_NO_RESULT'; doc['resultCanonicalPresent']=False
+              err=(out/'ACQUIRE.stderr.log').read_text(errors='replace') if (out/'ACQUIRE.stderr.log').exists() else ''
+              doc['stderrTail']=err[-4000:]
+          p=Path(os.environ['STATUS']);p.mkdir(parents=True,exist_ok=True);(p/f"shard-{os.environ['SHARD']}.json").write_text(json.dumps(doc,ensure_ascii=False,indent=2)+'\n')
+          PY
+            git add "$STATUS/shard-$shard.json"
+            git commit -m "nexus: persist D1 historical 445 observation shard $shard status [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+            if [ "$rc" -ne 0 ]; then exit "$rc"; fi
+          done
+
+      - name: Combine 704 observation outcomes
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,json
+          from collections import Counter
+          from datetime import datetime,timezone
+          from pathlib import Path
+          root=Path('.nexus-d1-historical-445-observation-demographics-v1'); status=Path('.nexus-d1-historical-445-observation-demographics-v1-status'); status.mkdir(parents=True,exist_ok=True)
+          rs=[json.loads((root/f'shard-{i}/output/RESULT.json').read_text()) for i in range(4)]
+          assert [(x['shard']['start'],x['shard']['end']) for x in rs]==[(0,176),(176,352),(352,528),(528,704)]
+          records=[r for x in rs for r in x['records']]; assert len(records)==704
+          assert [r['globalIndex'] for r in records]==list(range(704))
+          failures=[f for x in rs for f in x.get('requestFailures',[])]; counts=Counter(r['status'] for r in records)
+          overall='PASS' if not failures and all(x['status']=='PASS' for x in rs) else 'REVIEW_REQUIRED'
+          cap=datetime.now(timezone.utc).isoformat().replace('+00:00','Z')
+          result={'schema':'NEXUS_D1_HISTORICAL_NEVER_RESOLVED_OBSERVATION_DEMOGRAPHICS_RESULT_V1','protocolVersion':'1.1','status':overall,'capturedAt':cap,'scope':{'auditSubjectGroups':445,'providerObservations':704,'providerIdReuseOrNameVariationFlagGroups':7},'rules':rs[0]['rules'],'summary':{'observations':704,'statusCounts':dict(sorted(counts.items())),'verifiedObservations':counts.get('OBSERVATION_DEMOGRAPHICS_VERIFIED',0),'requestFailures':len(failures),'personClusteringPerformed':False},'requestFailures':failures,'records':records}
+          (status/'RESULT.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          evidence=[]
+          for i in range(4):
+              out=root/f'shard-{i}/output'
+              for p in sorted(x for x in out.rglob('*') if x.is_file()):
+                  b=p.read_bytes();evidence.append({'path':str(p),'size':len(b),'sha256':hashlib.sha256(b).hexdigest()})
+          digest=hashlib.sha256('\n'.join(f"{x['path']}\t{x['size']}\t{x['sha256']}" for x in evidence).encode()).hexdigest()
+          manifest={'schema':'NEXUS_D1_HISTORICAL_NEVER_RESOLVED_OBSERVATION_DEMOGRAPHICS_MANIFEST_V1','generatedAt':cap,'status':overall,'evidenceFileCount':len(evidence),'canonicalEvidenceSha256':digest,'evidence':evidence,'governance':result['rules']}
+          (status/'MANIFEST.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(result['summary'],indent=2))
+          if overall!='PASS':raise SystemExit(2)
+          PY
+
+      - name: Persist combined observation authority
+        run: |
+          set -euo pipefail
+          git add "$STATUS/RESULT.json" "$STATUS/MANIFEST.json"
+          git commit -m 'nexus: persist D1 historical 445 observation demographics combined outcome v1 [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Freeze immutable raw observation evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "release already exists" >&2; exit 1
+          fi
+          tar -czf nexus-d1-historical-445-observation-demographics-v1.tar.gz "$ROOT" "$STATUS"
+          sha256sum nexus-d1-historical-445-observation-demographics-v1.tar.gz > nexus-d1-historical-445-observation-demographics-v1.tar.gz.sha256
+          trap 'gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true' ERR
+          gh release create "$RELEASE_TAG" --draft --target "$(git rev-parse HEAD)" --title 'FantaNexus D1 Historical 445 Observation Demographics v1' --notes 'Observation-level exact season + Fantacalcio playerId demographics acquisition. Fantacalcio IDs are not person keys; no person clustering, fuzzy matching, age derivation, F1 or D2.'
+          gh release upload "$RELEASE_TAG" nexus-d1-historical-445-observation-demographics-v1.tar.gz nexus-d1-historical-445-observation-demographics-v1.tar.gz.sha256 "$STATUS/RESULT.json" "$STATUS/MANIFEST.json"
+          trap - ERR
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexus-d1-historical-445-observation-demographics-v1
+          path: |
+            .nexus-d1-historical-445-observation-demographics-v1/
+            .nexus-d1-historical-445-observation-demographics-v1-status/
+          retention-days: 30
