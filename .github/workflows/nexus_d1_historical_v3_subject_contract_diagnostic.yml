@@ -1,0 +1,57 @@
+name: Nexus D1 Historical v3 Subject Contract Diagnostic
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-historical-v3-subject-contract/EXECUTE'
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Validate every subject against acquisition script assumptions
+        run: |
+          set -euo pipefail
+          mkdir -p .nexus-d1-historical-v3-subject-contract-status
+          python - <<'PY'
+          import base64, json, lzma
+          from pathlib import Path
+          from datetime import datetime, timezone
+          m=json.loads(Path('data/nexus-d1/historical-resolved-person-subjects-v3-manifest.json').read_text())
+          encoded=''.join(Path(c['path']).read_text().strip() for c in m['payload']['chunks'])
+          subjects=json.loads(lzma.decompress(base64.b64decode(encoded)))['subjects']
+          bad=[]
+          for i,s in enumerate(subjects):
+              issues=[]
+              if not isinstance(s.get('subjectId'),str) or not s.get('subjectId'): issues.append('subjectId_missing')
+              if not isinstance(s.get('bridgePersonKey'),str) or not s.get('bridgePersonKey'): issues.append('bridgePersonKey_missing')
+              if not isinstance(s.get('understatPlayerId'),str) or not s.get('understatPlayerId'): issues.append('understatPlayerId_missing')
+              if not isinstance(s.get('lookupNames'),list) or not s.get('lookupNames'): issues.append('lookupNames_empty')
+              elif not isinstance(s['lookupNames'][0],str) or not s['lookupNames'][0].strip(): issues.append('lookupNames_first_blank')
+              if not isinstance(s.get('contextClubs'),list): issues.append('contextClubs_not_list')
+              if not isinstance(s.get('seasons'),list): issues.append('seasons_not_list')
+              if issues: bad.append({'index':i,'subject':s,'issues':issues})
+          out={'schema':'NEXUS_D1_HISTORICAL_V3_SUBJECT_CONTRACT_DIAGNOSTIC_V1','capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),'status':'PASS' if not bad else 'FAIL','subjects':len(subjects),'badCount':len(bad),'bad':bad[:100]}
+          Path('.nexus-d1-historical-v3-subject-contract-status/DIAGNOSTIC.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(out,ensure_ascii=False,indent=2))
+          PY
+      - name: Persist diagnostic
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-d1-historical-v3-subject-contract-status/DIAGNOSTIC.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus: persist D1 historical v3 subject contract diagnostic [skip ci]'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
