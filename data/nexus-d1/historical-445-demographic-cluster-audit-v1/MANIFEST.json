@@ -1,0 +1,17 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_445_DEMOGRAPHIC_CLUSTER_AUDIT_MANIFEST_V1",
+  "status": "PASS",
+  "resultBytes": 223024,
+  "resultSha256": "7be65f8ed6c803d0fc7060d6e25873e4e14bb935616ed2e65a04af5d8d2a5d23",
+  "governance": {
+    "scopeWithinFantacalcioAuditIdOnly": true,
+    "crossProviderIdMergeUsed": false,
+    "providerIdUsedAsGlobalPersonKey": false,
+    "signatureUsesExactNormalizedFullNameTokensAndDayDob": true,
+    "fuzzyMatchingUsed": false,
+    "personMergePerformed": false,
+    "computedAgeDerived": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
