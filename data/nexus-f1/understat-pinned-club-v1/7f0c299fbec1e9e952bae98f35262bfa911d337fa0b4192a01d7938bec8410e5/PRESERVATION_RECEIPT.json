@@ -1,0 +1,21 @@
+{
+  "schema": "NEXUS_F1_UNDERSTAT_PINNED_DURABLE_PRESERVATION_RECEIPT_V1",
+  "protocolVersion": "1.1",
+  "status": "PERSISTED_PENDING_REMOTE_READBACK",
+  "sourceCommit": "78407e6f24f1028de3634001039d23bef3bed117",
+  "githubRunId": 32598391678,
+  "bundleSha256": "7f0c299fbec1e9e952bae98f35262bfa911d337fa0b4192a01d7938bec8410e5",
+  "auditSha256": "e91f924d724bbbe9d83c76231ebdae32e917a448b0bd73014a95de34793d89c4",
+  "normalizedOutputSha256": "368f45da8ef0e2288ea02e1f19fa9f0b9ad1ee00d0080163a8be101123bb19a5",
+  "coverage": "2014/15-2024/25",
+  "sourceMode": "F0_APPROVED_PINNED_PUBLIC_UNDERSTAT_DERIVED_CLUB_GRAIN",
+  "remoteReadbackSha256Pass": false,
+  "immutablePath": "data/nexus-f1/understat-pinned-club-v1/7f0c299fbec1e9e952bae98f35262bfa911d337fa0b4192a01d7938bec8410e5",
+  "nextRequiredAction": "ADD_2025_26_FROM_PRIVATE_D0_SOURCE_WITH_MULTI_CLUB_QUARANTINE",
+  "governance": {
+    "f1Closed": false,
+    "f2PlusAuthorized": false,
+    "trainingPromotionGranted": false,
+    "canonicalMutation": false
+  }
+}

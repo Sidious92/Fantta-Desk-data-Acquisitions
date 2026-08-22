@@ -1,0 +1,12 @@
+{
+  "schema": "NEXUS_F1_UNDERSTAT_PINNED_BUNDLE_PARTS_V1",
+  "status": "PASS",
+  "bundleSha256": "7f0c299fbec1e9e952bae98f35262bfa911d337fa0b4192a01d7938bec8410e5",
+  "parts": [
+    {
+      "name": "part-000",
+      "bytes": 3485243,
+      "sha256": "7f0c299fbec1e9e952bae98f35262bfa911d337fa0b4192a01d7938bec8410e5"
+    }
+  ]
+}

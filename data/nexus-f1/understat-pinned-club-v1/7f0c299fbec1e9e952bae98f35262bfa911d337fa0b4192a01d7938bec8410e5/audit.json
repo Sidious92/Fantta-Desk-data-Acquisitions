@@ -1,0 +1,93 @@
+{
+  "schema": "NEXUS_F1_UNDERSTAT_PINNED_CLUB_SEGMENTS_AUDIT_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS",
+  "acquisitionKind": "PINNED_PUBLIC_SOURCE_SNAPSHOT_NOT_LIVE_UNDERSTAT_HTML",
+  "capturedAt": "2026-08-22T21:01:54.033821Z",
+  "source": {
+    "repository": "vibedatascience/understat_players_aggregated",
+    "commit": "768b7ca0b977a5e6b4b429c7b0cf750e8269f2fc",
+    "file": "understat_players_aggregated_2014_2024.csv",
+    "url": "https://raw.githubusercontent.com/vibedatascience/understat_players_aggregated/768b7ca0b977a5e6b4b429c7b0cf750e8269f2fc/understat_players_aggregated_2014_2024.csv",
+    "sha256": "b78fad5f01844a0fdab0d89474dafba9b86c586d2f0ce88f0ce2c9af70d2bc64",
+    "bytes": 6587761,
+    "f0SourceFamily": "PLAYER_EVENT_AGGREGATES"
+  },
+  "coverage": {
+    "targetYears": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "observedYears": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "seasons": 11,
+    "records": 6301,
+    "bySeason": {
+      "2014/15": 574,
+      "2015/16": 551,
+      "2016/17": 560,
+      "2017/18": 533,
+      "2018/19": 543,
+      "2019/20": 572,
+      "2020/21": 594,
+      "2021/22": 608,
+      "2022/23": 577,
+      "2023/24": 590,
+      "2024/25": 599
+    }
+  },
+  "grain": {
+    "sourceAlreadyClubSplit": true,
+    "numericAllocationPerformed": false,
+    "singleClubRecordsWithDeterministicStintOrdinal1": 6301,
+    "multiClubPlayerSeasons": 0,
+    "multiClubRecordsStintUnresolved": 0
+  },
+  "integrity": {
+    "technicalKeys": 6301,
+    "uniqueSourceRowHashes": 6301,
+    "duplicates": 0,
+    "missingReasons": {
+      "NOT_COLLECTED": 25204
+    },
+    "outputSha256": "368f45da8ef0e2288ea02e1f19fa9f0b9ad1ee00d0080163a8be101123bb19a5",
+    "outputBytes": 32171560
+  },
+  "temporal": {
+    "currentCaptureUsedAsHistoricalAvailableAt": false,
+    "availableAtAssigned": false,
+    "expectedMetricsReplayAdmissible": false,
+    "expectedMetricsReleaseCondition": "IMMUTABLE_PRE_CUTOFF_VINTAGE_OR_PROVIDER_INVARIANCE_EVIDENCE"
+  },
+  "governance": {
+    "rawOnly": true,
+    "per90Built": false,
+    "poolingBuilt": false,
+    "shrinkageBuilt": false,
+    "imputationPerformed": false,
+    "f1Closed": false,
+    "f2PlusAuthorized": false,
+    "trainingPromotionGranted": false,
+    "canonicalMutation": false
+  }
+}
