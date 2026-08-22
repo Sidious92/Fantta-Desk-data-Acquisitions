@@ -7,7 +7,7 @@
   "locale": "en-GB",
   "targetSeasons": ["2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026"],
   "expectedRegularSeasonMatchesPerSeason": 380,
-  "requestDelayMs": 180,
+  "requestDelayMs": 300,
   "maxRetries": 4,
   "requestTimeoutMs": 30000,
   "userAgent": "FantaNexus-Research/1.1 (+private noncommercial research)",
