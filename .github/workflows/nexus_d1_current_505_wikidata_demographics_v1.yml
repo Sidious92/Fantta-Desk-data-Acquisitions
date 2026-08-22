@@ -21,6 +21,7 @@ jobs:
     timeout-minutes: 45
     env:
       OUT: .nexus-d1-current-505-wikidata-v1/output
+      STATUS: .nexus-d1-current-505-wikidata-v1-status
       RELEASE_TAG: nexus-d1-current-505-wikidata-v1
     steps:
       - uses: actions/checkout@v6
@@ -49,15 +50,46 @@ jobs:
           PY
 
       - name: Acquire current population identity and DOB evidence
+        id: acquire
+        shell: bash
         run: |
-          set -euo pipefail
+          set -uo pipefail
           rm -rf "$OUT"
+          mkdir -p "$OUT"
+          set +e
           python scripts/nexus-d1-acquire-current-wikidata-demographics-v1.py \
             --subjects-b64 data/nexus-d1/current-2026-27-subjects-v1.json.gz.b64 \
             --manifest data/nexus-d1/current-2026-27-subjects-v1-manifest.json \
-            --output "$OUT"
+            --output "$OUT" \
+            >"$OUT/ACQUIRE.stdout.log" 2>"$OUT/ACQUIRE.stderr.log"
+          rc=$?
+          set -e
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          if [ "$rc" -ne 0 ]; then
+            RC="$rc" python - <<'PY'
+          import json, os
+          from datetime import datetime, timezone
+          from pathlib import Path
+          out=Path('.nexus-d1-current-505-wikidata-v1/output')
+          stderr=(out/'ACQUIRE.stderr.log').read_text(errors='replace') if (out/'ACQUIRE.stderr.log').exists() else ''
+          doc={
+            'schema':'NEXUS_D1_CURRENT_505_TECHNICAL_FAILURE_V1',
+            'status':'TECHNICAL_FAILURE_NOT_SCIENTIFIC_MISSINGNESS',
+            'capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),
+            'exitCode':int(os.environ['RC']),
+            'stderrTail':stderr[-12000:],
+            'governance':{
+              'requestFailureCanBecomeMissingIdentity':False,
+              'trainingPromotionGranted':False,
+              'computedAgeDerived':False,
+            },
+          }
+          (out/'TECHNICAL_FAILURE.json').write_text(json.dumps(doc,ensure_ascii=False,indent=2)+'\n')
+          PY
+          fi
 
       - name: Assert D1 governance
+        if: steps.acquire.outputs.rc == '0'
         run: |
           set -euo pipefail
           python - <<'PY'
@@ -74,22 +106,31 @@ jobs:
           print(json.dumps(d['summary'],indent=2))
           PY
 
-      - name: Persist compact result and manifest
+      - name: Persist result or technical diagnostic
+        if: always() && steps.acquire.outcome == 'success'
         run: |
           set -euo pipefail
-          mkdir -p .nexus-d1-current-505-wikidata-v1-status
-          cp "$OUT/RESULT.json" .nexus-d1-current-505-wikidata-v1-status/RESULT.json
-          cp "$OUT/MANIFEST.json" .nexus-d1-current-505-wikidata-v1-status/MANIFEST.json
+          mkdir -p "$STATUS"
+          for f in RESULT.json MANIFEST.json TECHNICAL_FAILURE.json ACQUIRE.stdout.log ACQUIRE.stderr.log; do
+            if [ -f "$OUT/$f" ]; then cp "$OUT/$f" "$STATUS/$f"; fi
+          done
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add .nexus-d1-current-505-wikidata-v1-status
+          git add "$STATUS"
           if ! git diff --cached --quiet; then
-            git commit -m 'nexus: persist D1 current 505 Wikidata coverage [skip ci]'
+            git commit -m 'nexus: persist D1 current 505 Wikidata outcome [skip ci]'
             git pull --rebase origin main
             git push origin HEAD:main
           fi
 
+      - name: Fail closed after diagnostic persistence
+        if: steps.acquire.outputs.rc != '0'
+        run: |
+          echo "D1 current acquisition failed technically with rc=${{ steps.acquire.outputs.rc }}; diagnostic was persisted before failure." >&2
+          exit 1
+
       - name: Freeze acquisition evidence in immutable draft release
+        if: steps.acquire.outputs.rc == '0'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
