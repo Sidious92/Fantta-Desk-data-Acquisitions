@@ -1,0 +1,21 @@
+{
+  "schema": "NEXUS_D1_FINAL_PREFLIGHT_DIAGNOSTIC_V1",
+  "capturedAt": "2026-08-22T17:21:54.216943Z",
+  "status": "FAIL",
+  "sourcePreflightExitCode": 0,
+  "releasePreflightExitCode": 0,
+  "builderExitCode": 1,
+  "sourceStdout": "SOURCE_PREFLIGHT_PASS\n",
+  "sourceStderr": "",
+  "releaseStdout": "title:\tFantaNexus D1 Current 505 Wikidata Demographics v2.1\ntag:\tnexus-d1-current-505-wikidata-v2-1\ndraft:\ttrue\nprerelease:\tfalse\nimmutable:\tfalse\nauthor:\tgithub-actions[bot]\ncreated:\t2026-08-22T13:09:08Z\nurl:\thttps://github.com/Sidious92/Fantta-Desk-data-Acquisitions/releases/tag/untagged-d9b2f40075ab97bf092f\nasset:\tMANIFEST.json\nasset:\tnexus-d1-current-505-wikidata-v2-1.tar.gz\nasset:\tnexus-d1-current-505-wikidata-v2-1.tar.gz.sha256\nasset:\tRESULT.json\n--\nD1 current-population evidence using immutable subject surface v2 and schema-compatible acquisition v2. No fuzzy mapping, age derivation, historical-as-of claim or training promotion.\nPASS nexus-d1-current-505-wikidata-v2-1\ntitle:\tFantaNexus D1 Historical 2048 Wikidata Demographics v4.1\ntag:\tnexus-d1-historical-2048-wikidata-v4-1\ndraft:\ttrue\nprerelease:\tfalse\nimmutable:\tfalse\nauthor:\tgithub-actions[bot]\ncreated:\t2026-08-22T15:04:47Z\nurl:\thttps://github.com/Sidious92/Fantta-Desk-data-Acquisitions/releases/tag/untagged-6d799e052f4dd7416dd5\nasset:\tMANIFEST.json\nasset:\tnexus-d1-historical-2048-wikidata-v4-1.tar.gz\nasset:\tnexus-d1-historical-2048-wikidata-v4-1.tar.gz.sha256\nasset:\tRESULT.json\n--\nSequential four-shard acquisition over byte-verified D0 authority. Retry hardening applies only to transient Wikidata maxlag/429/5xx/network events. No fuzzy mapping, age derivation, historical-as-of claim or training promotion.\nPASS nexus-d1-historical-2048-wikidata-v4-1\ntitle:\tFantaNexus D1 Historical 445 Observation Demographics v1\ntag:\tnexus-d1-historical-445-observation-demographics-v1\ndraft:\ttrue\nprerelease:\tfalse\nimmutable:\tfalse\nauthor:\tgithub-actions[bot]\ncreated:\t2026-08-22T16:43:44Z\nurl:\thttps://github.com/Sidious92/Fantta-Desk-data-Acquisitions/releases/tag/untagged-f101f16d2f6e3a1bc1ec\nasset:\tMANIFEST.json\nasset:\tnexus-d1-historical-445-observation-demographics-v1.tar.gz\nasset:\tnexus-d1-historical-445-observation-demographics-v1.tar.gz.sha256\nasset:\tRESULT.json\n--\nObservation-level exact season + Fantacalcio playerId demographics acquisition. Fantacalcio IDs are not person keys; no person clustering, fuzzy matching, age derivation, F1 or D2.\nPASS nexus-d1-historical-445-observation-demographics-v1\ntitle:\tFantaNexus D1 Secondary RAW Preservation v2\ntag:\tnexus-d1-secondary-raw-preservation-v2\ndraft:\ttrue\nprerelease:\tfalse\nimmutable:\tfalse\nauthor:\tgithub-actions[bot]\ncreated:\t2026-08-22T17:18:32Z\nurl:\thttps://github.com/Sidious92/Fantta-Desk-data-Acquisitions/releases/tag/untagged-8cf48003a0ff131e1c67\nasset:\tMANIFEST.json\nasset:\tnexus-d1-secondary-raw-preservation-v2.tar.gz\nasset:\tnexus-d1-secondary-raw-preservation-v2.tar.gz.sha256\nasset:\tRESULT.json\n--\nImmutable preservation replay for D1 current-open, historical-open, and historical DOB-conflict RAW evidence. Scientific decisions remain those of the already persisted authoritative D1 results.\nPASS nexus-d1-secondary-raw-preservation-v2\n",
+  "releaseStderr": "",
+  "builderStdout": "",
+  "builderStderr": "Traceback (most recent call last):\n  File \"/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-d1-build-final-identity-master-v1.py\", line 153, in <module>\n    verified={x['dateOfBirth'] for x in p['demographicsEvidence'] if x['status']=='DOB_VERIFIED' and x.get('dateOfBirth')}\n              ~^^^^^^^^^^^^^^^\nTypeError: unhashable type: 'dict'\n",
+  "governance": {
+    "diagnosticOnly": true,
+    "rawMutation": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
