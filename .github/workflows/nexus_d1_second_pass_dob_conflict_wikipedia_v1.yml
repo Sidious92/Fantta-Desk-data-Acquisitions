@@ -1,0 +1,134 @@
+name: Nexus D1 Second Pass DOB Conflict Wikipedia v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-second-pass-dob-conflict-wikipedia-v1/EXECUTE'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: nexus-d1-second-pass-dob-conflict-wikipedia-v1
+  cancel-in-progress: false
+
+jobs:
+  corroborate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      ROOT: .nexus-d1-second-pass-dob-conflict-wikipedia-v1
+      STATUS_DIR: .nexus-d1-second-pass-dob-conflict-wikipedia-v1-status
+      RELEASE_TAG: nexus-d1-second-pass-dob-conflict-wikipedia-v1
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Preflight definitive second-pass surface
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          p=Path('data/nexus-d1/second-pass-v2/SECOND_PASS_SUBJECTS.json')
+          b=p.read_bytes(); d=json.loads(b)
+          m=json.loads(Path('data/nexus-d1/second-pass-v2/MANIFEST.json').read_text())
+          assert d['status']=='PASS'
+          assert d['scope']['currentOpenRecords']==127
+          assert d['scope']['historicalOpenRecords']==155
+          assert d['scope']['rawOpenRecordsBeforeCrossScopeOverlap']==282
+          assert d['counts']['current']['mappingStatus']['IDENTITY_VERIFIED']==1
+          assert d['counts']['historical']['mappingStatus']['IDENTITY_VERIFIED']==46
+          assert d['counts']['current']['dateOfBirthStatus']['DOB_CONFLICT']==1
+          assert d['counts']['historical']['dateOfBirthStatus']['DOB_CONFLICT']==46
+          assert hashlib.sha256(b).hexdigest()==m['output']['sha256']=='a4caace4e7b9d67755ab523f98ad52e6dac838cf8ebba8d7abc45e9beb28381b'
+          assert d['governance']['fuzzyMatchingUsed'] is False
+          assert d['governance']['d2Started'] is False
+          assert d['governance']['f1Started'] is False
+          print('SECOND_PASS_V2_PREFLIGHT_PASS')
+          PY
+
+      - name: Corroborate verified-identity DOB conflicts
+        run: |
+          set -euo pipefail
+          rm -rf "$ROOT/output"
+          mkdir -p "$ROOT/output"
+          python scripts/nexus-d1-second-pass-dob-conflict-wikipedia-v1.py \
+            --subjects data/nexus-d1/second-pass-v2/SECOND_PASS_SUBJECTS.json \
+            --output "$ROOT/output" \
+            | tee "$ROOT/output/ACQUIRE.stdout.log"
+
+      - name: Assert no identity remapping or inference
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('.nexus-d1-second-pass-dob-conflict-wikipedia-v1/output/RESULT.json').read_text())
+          assert d['status']=='PASS'
+          assert d['summary']['rawConflictRecords']==47
+          assert d['summary']['uniquePersons']==46
+          assert d['summary']['recordsCompleted']==46
+          assert d['summary']['requestFailures']==0
+          r=d['rules']
+          assert r['identityBindingExactVerifiedWikidataQid'] is True
+          assert r['wikipediaPageSelectedOnlyByExactQidSitelink'] is True
+          assert r['nameSearchUsed'] is False
+          assert r['fuzzyMatchingUsed'] is False
+          assert r['dobUsedForIdentitySelection'] is False
+          assert r['computedAgeDerived'] is False
+          assert r['dobInferred'] is False
+          assert r['trainingPromotionGranted'] is False
+          assert r['f1Started'] is False
+          assert r['d2Started'] is False
+          print(json.dumps(d['summary'], indent=2))
+          PY
+
+      - name: Persist compact outcome
+        run: |
+          set -euo pipefail
+          mkdir -p "$STATUS_DIR"
+          cp "$ROOT/output/RESULT.json" "$STATUS_DIR/RESULT.json"
+          cp "$ROOT/output/MANIFEST.json" "$STATUS_DIR/MANIFEST.json"
+          cp "$ROOT/output/ACQUIRE.stdout.log" "$STATUS_DIR/ACQUIRE.stdout.log"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$STATUS_DIR"
+          git commit -m 'nexus: persist D1 second-pass Wikipedia DOB conflict outcome v1 [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Freeze immutable raw evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Immutable release already exists: $RELEASE_TAG" >&2
+            exit 1
+          fi
+          tar -czf nexus-d1-second-pass-dob-conflict-wikipedia-v1.tar.gz "$ROOT" "$STATUS_DIR"
+          sha256sum nexus-d1-second-pass-dob-conflict-wikipedia-v1.tar.gz > nexus-d1-second-pass-dob-conflict-wikipedia-v1.tar.gz.sha256
+          trap 'gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true' ERR
+          gh release create "$RELEASE_TAG" --draft --target "$(git rev-parse HEAD)" --title 'FantaNexus D1 Second Pass DOB Conflict Wikipedia v1' --notes 'Exact verified Wikidata QID to exact Wikipedia sitelink corroboration only. No name search, fuzzy matching, DOB identity selection, age derivation, historical-as-of claim, training promotion, F1 or D2.'
+          gh release upload "$RELEASE_TAG" nexus-d1-second-pass-dob-conflict-wikipedia-v1.tar.gz nexus-d1-second-pass-dob-conflict-wikipedia-v1.tar.gz.sha256 "$STATUS_DIR/RESULT.json" "$STATUS_DIR/MANIFEST.json"
+          trap - ERR
+
+      - name: Upload secondary evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-second-pass-dob-conflict-wikipedia-v1
+          path: |
+            .nexus-d1-second-pass-dob-conflict-wikipedia-v1/
+            .nexus-d1-second-pass-dob-conflict-wikipedia-v1-status/
+          if-no-files-found: warn
+          retention-days: 30
