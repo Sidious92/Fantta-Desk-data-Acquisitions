@@ -1,0 +1,160 @@
+name: Nexus D1 Current 505 Wikidata Demographics v2.1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-current-505-wikidata-v2-1/EXECUTE'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: nexus-d1-current-505-wikidata-v2-1
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      OUT: .nexus-d1-current-505-wikidata-v2-1/output
+      STATUS: .nexus-d1-current-505-wikidata-v2-1-status
+      RELEASE_TAG: nexus-d1-current-505-wikidata-v2-1
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Validate immutable current subject surface v2
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64,gzip,hashlib,json
+          m=json.load(open('data/nexus-d1/current-2026-27-subjects-v2-manifest.json'))
+          enc=open('data/nexus-d1/current-2026-27-subjects-v2.json.gz.b64').read().strip()
+          gz=base64.b64decode(enc); raw=gzip.decompress(gz); d=json.loads(raw)
+          assert m['schema']=='NEXUS_D1_CURRENT_2026_27_SUBJECT_SURFACE_MANIFEST_V2'
+          assert m['supersedesTransport']=='data/nexus-d1/current-2026-27-subjects-v1-manifest.json'
+          assert m['governance']['semanticReconstructionFromFrozenAuthorities'] is True
+          assert m['governance']['corruptV1Reused'] is False
+          assert hashlib.sha256(gz).hexdigest()==m['payload']['gzipSha256']
+          assert len(gz)==m['payload']['gzipBytes']
+          assert hashlib.sha256(raw).hexdigest()==m['payload']['decodedJsonSha256']
+          assert len(raw)==m['payload']['decodedJsonBytes']
+          assert len(d['subjects'])==505
+          s=d['identityBridgeSummary']
+          assert s['players']==505 and s['resolvedTotal']==406 and s['identityUnresolved']==99 and s['identityConflict']==0
+          assert s['fuzzyMatchingUsed'] is False
+          assert len({str(x['fantacalcioSourcePlayerId']) for x in d['subjects']})==505
+          assert all('subjectId' not in x for x in d['subjects'])
+          assert m['privacyMinimization']['quotationTransferred'] is False
+          assert m['privacyMinimization']['fvmTransferred'] is False
+          assert m['privacyMinimization']['performanceStatisticsTransferred'] is False
+          print(json.dumps(s,indent=2))
+          PY
+
+      - name: Acquire current population identity and DOB evidence
+        id: acquire
+        shell: bash
+        timeout-minutes: 35
+        run: |
+          set -uo pipefail
+          rm -rf "$OUT"
+          mkdir -p "$OUT"
+          set +e
+          python scripts/nexus-d1-acquire-current-wikidata-demographics-v2.py \
+            --subjects-b64 data/nexus-d1/current-2026-27-subjects-v2.json.gz.b64 \
+            --manifest data/nexus-d1/current-2026-27-subjects-v2-manifest.json \
+            --output "$OUT" \
+            >"$OUT/ACQUIRE.stdout.log" 2>"$OUT/ACQUIRE.stderr.log"
+          rc=$?
+          set -e
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          if [ "$rc" -ne 0 ]; then
+            RC="$rc" python - <<'PY'
+          import json, os
+          from datetime import datetime, timezone
+          from pathlib import Path
+          out=Path('.nexus-d1-current-505-wikidata-v2-1/output')
+          stderr=(out/'ACQUIRE.stderr.log').read_text(errors='replace') if (out/'ACQUIRE.stderr.log').exists() else ''
+          doc={'schema':'NEXUS_D1_CURRENT_505_TECHNICAL_FAILURE_V2_1','status':'TECHNICAL_FAILURE_NOT_SCIENTIFIC_MISSINGNESS','capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),'exitCode':int(os.environ['RC']),'stderrTail':stderr[-12000:],'governance':{'requestFailureCanBecomeMissingIdentity':False,'trainingPromotionGranted':False,'computedAgeDerived':False}}
+          (out/'TECHNICAL_FAILURE.json').write_text(json.dumps(doc,ensure_ascii=False,indent=2)+'\n')
+          PY
+          fi
+
+      - name: Assert D1 governance
+        if: steps.acquire.outputs.rc == '0'
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          d=json.load(open('.nexus-d1-current-505-wikidata-v2-1/output/RESULT.json'))
+          assert d['schema']=='NEXUS_D1_CURRENT_2026_27_WIKIDATA_DEMOGRAPHICS_RESULT_V2'
+          assert d['subjectSurface']['count']==505
+          assert d['rules']['fuzzyMatchingUsed'] is False
+          assert d['rules']['dobUsedForIdentitySelection'] is False
+          assert d['rules']['unbridgedRequiresUniqueExactClubContext'] is True
+          assert d['rules']['computedAgeDerived'] is False
+          assert d['rules']['currentRetrievalImpliesHistoricalAsOf'] is False
+          assert d['rules']['trainingPromotionGranted'] is False
+          assert d['rules']['requestFailureCanBecomeMissingIdentity'] is False
+          assert d['rules']['technicalSubjectIdDerivedFromProviderObservationId'] is True
+          assert d['summary']['subjects']==505
+          print(json.dumps(d['summary'],indent=2))
+          PY
+
+      - name: Persist result or technical diagnostic
+        if: always() && steps.acquire.outcome == 'success'
+        run: |
+          set -euo pipefail
+          mkdir -p "$STATUS"
+          for f in RESULT.json MANIFEST.json TECHNICAL_FAILURE.json ACQUIRE.stdout.log ACQUIRE.stderr.log; do
+            if [ -f "$OUT/$f" ]; then cp "$OUT/$f" "$STATUS/$f"; fi
+          done
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$STATUS"
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus: persist D1 current 505 Wikidata v2.1 outcome [skip ci]'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Fail closed after diagnostic persistence
+        if: steps.acquire.outputs.rc != '0'
+        run: |
+          echo "D1 current v2.1 acquisition failed technically with rc=${{ steps.acquire.outputs.rc }}; diagnostic persisted." >&2
+          exit 1
+
+      - name: Freeze acquisition evidence in immutable draft release
+        if: steps.acquire.outputs.rc == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Immutable D1 current v2.1 release already exists: $RELEASE_TAG" >&2
+            exit 1
+          fi
+          tar -C .nexus-d1-current-505-wikidata-v2-1 -czf nexus-d1-current-505-wikidata-v2-1.tar.gz output
+          sha256sum nexus-d1-current-505-wikidata-v2-1.tar.gz > nexus-d1-current-505-wikidata-v2-1.tar.gz.sha256
+          trap 'gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true' ERR
+          gh release create "$RELEASE_TAG" --draft --target "$(git rev-parse HEAD)" --title 'FantaNexus D1 Current 505 Wikidata Demographics v2.1' --notes 'D1 current-population evidence using immutable subject surface v2 and schema-compatible acquisition v2. No fuzzy mapping, age derivation, historical-as-of claim or training promotion.'
+          gh release upload "$RELEASE_TAG" nexus-d1-current-505-wikidata-v2-1.tar.gz nexus-d1-current-505-wikidata-v2-1.tar.gz.sha256 "$OUT/RESULT.json" "$OUT/MANIFEST.json"
+          trap - ERR
+
+      - name: Upload secondary Actions artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-current-505-wikidata-v2-1
+          path: .nexus-d1-current-505-wikidata-v2-1/output/
+          if-no-files-found: warn
+          retention-days: 30
