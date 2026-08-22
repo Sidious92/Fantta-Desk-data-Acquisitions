@@ -1,0 +1,29 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_V4_SHARD_STATUS_V1",
+  "capturedAt": "2026-08-22T14:15:33.976366Z",
+  "shard": 0,
+  "range": [
+    0,
+    512
+  ],
+  "exitCode": 2,
+  "status": "TECHNICAL_FAILURE_NOT_SCIENTIFIC_MISSINGNESS",
+  "failure": {
+    "errorType": "RuntimeError",
+    "detail": "RuntimeError: {'code': 'maxlag', 'info': 'Waiting for wdqs1014: 5.5166666666667 seconds lagged.', 'host': 'wdqs1014', 'lag': 5.516666666666667, 'type': 'wikibase-queryservice', 'queryserviceLag': 331, 'docref': 'See https://www.wikidata.org/w/api.php for API usage. Subscribe to the mediawiki-api-announce mailing list at &lt;https://lists.wikimedia.org/postorius/lists/mediawiki-api-announce.lists.wikimedia.org/&gt; for notice of API deprecations and breaking changes.'}",
+    "lastProgress": {
+      "schema": "NEXUS_D1_HISTORICAL_SHARD_PROGRESS_V2",
+      "capturedAt": "2026-08-22T14:14:49.179052Z",
+      "range": [
+        0,
+        512
+      ],
+      "processed": 512,
+      "expected": 512,
+      "stage": "PEOPLE_ENTITY_FETCH",
+      "searchRecords": 512,
+      "requestFailures": 0
+    }
+  },
+  "resultCanonicalPresent": false
+}
