@@ -2,9 +2,9 @@
   "schema": "NEXUS_F1_LEGA_RUN_RECEIPT_V1",
   "protocolVersion": "1.1",
   "status": "FAIL_CLOSED",
-  "generatedAt": "2026-08-22T20:50:58.384Z",
-  "sourceCommit": "3d590434f3b77351a56bf725fa25288bf9fed895",
-  "githubRunId": 32597862159,
+  "generatedAt": "2026-08-22T20:57:20.478Z",
+  "sourceCommit": "2b3e00a03d75973e95fc6094dc7dbc38d9158f05",
+  "githubRunId": 32598165072,
   "githubRunAttempt": 1,
   "stages": {
     "syntax": "success",
