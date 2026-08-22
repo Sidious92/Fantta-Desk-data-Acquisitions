@@ -1,0 +1,54 @@
+{
+  "schema": "NEXUS_D1_FOTMOB_SEARCH_CONTRACT_PROBE_MANIFEST_V1",
+  "generatedAt": "2026-08-22T14:53:37.256962Z",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "files": [
+    {
+      "path": "PROBE.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "PROBE.stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "RESULT.json",
+      "size": 9258,
+      "sha256": "1437cc25b6e76f6e68c066f7d4359cc35d64cf012106ae4807869cd8068846e8"
+    },
+    {
+      "path": "raw/player-1024432-next-data.json",
+      "size": 406998,
+      "sha256": "19dcd468f7d55262311e3d8fafddf73334345f2deb15186aa4a195aeed982cc2"
+    },
+    {
+      "path": "raw/player-1190371-next-data.json",
+      "size": 224090,
+      "sha256": "f9f58a7fed1620457bcdf6b3d32e9d803e6ab22186f19e301fa5336690961f8e"
+    },
+    {
+      "path": "raw/player-1379468-next-data.json",
+      "size": 277928,
+      "sha256": "dc6cd7db5d05ab189b77905272c06b591f501058824a9cf8f0b0d372e4e30c96"
+    },
+    {
+      "path": "raw/player-1529483-next-data.json",
+      "size": 253892,
+      "sha256": "9baf31c64bffc13faee223668e9ce20892c27415de4d38a1afce0fa5b10dc118"
+    }
+  ],
+  "fileCount": 7,
+  "canonicalContentSha256": "11742b9f1a537b2df094f82abfdf7955daa10456daa32e057aae561f5287f39c",
+  "rules": {
+    "d1SubjectsResolved": false,
+    "nameOnlyIdentityAccepted": false,
+    "fuzzyMatchingUsed": false,
+    "dobUsedForIdentitySelection": false,
+    "computedAgeDerived": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}

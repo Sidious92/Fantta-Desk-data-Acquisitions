@@ -1,0 +1,24 @@
+{
+  "schema": "NEXUS_D1_FOTMOB_SEARCH_CONTRACT_PROBE_STATUS_V1",
+  "capturedAt": "2026-08-22T14:53:37.322065Z",
+  "exitCode": 2,
+  "status": "INSUFFICIENT_EVIDENCE",
+  "endpoint": "https://www.fotmob.com/api/search/suggest?term={term}",
+  "summary": {
+    "subjectsExpected": 4,
+    "subjectsFetched": 0,
+    "technicalFailures": 4,
+    "exactKnownIdRecovered": 0,
+    "commonExactIdObjectPaths": []
+  },
+  "rules": {
+    "d1SubjectsResolved": false,
+    "nameOnlyIdentityAccepted": false,
+    "fuzzyMatchingUsed": false,
+    "dobUsedForIdentitySelection": false,
+    "computedAgeDerived": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}

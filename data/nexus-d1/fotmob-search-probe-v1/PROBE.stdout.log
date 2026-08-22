@@ -1,0 +1,10 @@
+{
+  "status": "INSUFFICIENT_EVIDENCE",
+  "summary": {
+    "subjectsExpected": 4,
+    "subjectsFetched": 0,
+    "technicalFailures": 4,
+    "exactKnownIdRecovered": 0,
+    "commonExactIdObjectPaths": []
+  }
+}
