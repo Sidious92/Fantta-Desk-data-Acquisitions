@@ -1,0 +1,100 @@
+{
+  "schema": "NEXUS_D1_FANTACALCIO_HISTORICAL_NEUTRAL_SLUG_ROUTING_PROBE_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS",
+  "capturedAt": "2026-08-22T16:35:54.691360Z",
+  "summary": {
+    "expected": 4,
+    "fetched": 4,
+    "exactObservationPass": 4,
+    "technicalFailures": 0
+  },
+  "semantics": {
+    "providerObservationKey": [
+      "Fantacalcio",
+      "season",
+      "fantacalcioPlayerId"
+    ],
+    "neutralSeoSlugsAccepted": true,
+    "providerIdUsedAsGlobalPersonKey": false,
+    "nameSearchUsed": false,
+    "fuzzyMatchingUsed": false
+  },
+  "records": [
+    {
+      "season": "2015-16",
+      "fantacalcioPlayerId": "2",
+      "label": "Merelli",
+      "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2/2015-16",
+      "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2/2015-16",
+      "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2/2015-16",
+      "httpStatus": 200,
+      "exactSeasonPlayerIdBound": true,
+      "fullName": "Merelli Davide",
+      "dobCandidates": [
+        "1996-03-03"
+      ],
+      "rawPath": ".nexus-d1-fantacalcio-historical-neutral-slug-probe-v1/output/raw/00--2015-16--fc-2.html",
+      "rawSha256": "bd994b1466c2ec68af81309a40b26f280399aea340a10f1b3e28f2acb041a851",
+      "rawBytes": 226010
+    },
+    {
+      "season": "2015-16",
+      "fantacalcioPlayerId": "21",
+      "label": "D'Alessandro",
+      "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/21/2015-16",
+      "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/21/2015-16",
+      "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/21/2015-16",
+      "httpStatus": 200,
+      "exactSeasonPlayerIdBound": true,
+      "fullName": "D'Alessandro Marco",
+      "dobCandidates": [
+        "1991-02-17"
+      ],
+      "rawPath": ".nexus-d1-fantacalcio-historical-neutral-slug-probe-v1/output/raw/01--2015-16--fc-21.html",
+      "rawSha256": "9f2d0af3dd1340f8b261ba99bd49c530c5bbd9454538c4ce915364defc300a05",
+      "rawBytes": 233635
+    },
+    {
+      "season": "2016-17",
+      "fantacalcioPlayerId": "1",
+      "label": "Bassi",
+      "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1/2016-17",
+      "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1/2016-17",
+      "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1/2016-17",
+      "httpStatus": 200,
+      "exactSeasonPlayerIdBound": true,
+      "fullName": "Bassi Davide",
+      "dobCandidates": [
+        "1985-04-12"
+      ],
+      "rawPath": ".nexus-d1-fantacalcio-historical-neutral-slug-probe-v1/output/raw/02--2016-17--fc-1.html",
+      "rawSha256": "074193c8be4ef32d94f6383cf1dc695abdc740f193755c9be0a0dcaad1d9bf4f",
+      "rawBytes": 220956
+    },
+    {
+      "season": "2016-17",
+      "fantacalcioPlayerId": "10",
+      "label": "Cherubin",
+      "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/10/2016-17",
+      "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/10/2016-17",
+      "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/10/2016-17",
+      "httpStatus": 200,
+      "exactSeasonPlayerIdBound": true,
+      "fullName": "Cherubin Nicolò",
+      "dobCandidates": [
+        "1986-12-02"
+      ],
+      "rawPath": ".nexus-d1-fantacalcio-historical-neutral-slug-probe-v1/output/raw/03--2016-17--fc-10.html",
+      "rawSha256": "66ca395e2211db4dbb693f15440052e999233e84a6d36a914d7c5d9442d29c5e",
+      "rawBytes": 221380
+    }
+  ],
+  "technicalFailures": [],
+  "governance": {
+    "subjectsMutated": false,
+    "computedAgeDerived": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}

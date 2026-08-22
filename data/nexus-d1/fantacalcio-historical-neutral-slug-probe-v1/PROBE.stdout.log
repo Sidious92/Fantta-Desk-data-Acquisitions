@@ -1,0 +1,6 @@
+{
+  "expected": 4,
+  "fetched": 4,
+  "exactObservationPass": 4,
+  "technicalFailures": 0
+}
