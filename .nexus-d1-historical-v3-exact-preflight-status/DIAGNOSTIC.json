@@ -1,0 +1,264 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_V3_EXACT_PREFLIGHT_DIAGNOSTIC_V1",
+  "capturedAt": "2026-08-22T14:01:33.091464Z",
+  "status": "PASS",
+  "failed": [],
+  "checks": [
+    {
+      "name": "schema",
+      "pass": true,
+      "detail": "NEXUS_D1_HISTORICAL_RESOLVED_PERSON_SUBJECT_SURFACE_MANIFEST_V3"
+    },
+    {
+      "name": "subjectCount_manifest",
+      "pass": true,
+      "detail": 2048
+    },
+    {
+      "name": "semanticReconstructionFromFrozenD0Authority",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "v2TruncatedTransportReused_false",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "semanticPayloadChangedFromV2Authority_false",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "providerIdUsedAsGlobalPersonKey_false",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unresolvedHistoricalIdsSilentlyDropped_false",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "performanceStatisticsTransferred_false",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "chunk_chars:data/nexus-d1/historical-resolved-person-subjects-v3.part-00.b64",
+      "pass": true,
+      "detail": {
+        "actual": 12000,
+        "expected": 12000
+      }
+    },
+    {
+      "name": "chunk_sha:data/nexus-d1/historical-resolved-person-subjects-v3.part-00.b64",
+      "pass": true,
+      "detail": {
+        "actual": "f2f60c520d05901b2564c03c6e9629c912d5d0283ee47349c5f04d34073ec2b1",
+        "expected": "f2f60c520d05901b2564c03c6e9629c912d5d0283ee47349c5f04d34073ec2b1"
+      }
+    },
+    {
+      "name": "chunk_chars:data/nexus-d1/historical-resolved-person-subjects-v3.part-01.b64",
+      "pass": true,
+      "detail": {
+        "actual": 12000,
+        "expected": 12000
+      }
+    },
+    {
+      "name": "chunk_sha:data/nexus-d1/historical-resolved-person-subjects-v3.part-01.b64",
+      "pass": true,
+      "detail": {
+        "actual": "ba86ac1d3e1d7ef693550910597401fa92a829f5c34842621caf8d74c11a99ce",
+        "expected": "ba86ac1d3e1d7ef693550910597401fa92a829f5c34842621caf8d74c11a99ce"
+      }
+    },
+    {
+      "name": "chunk_chars:data/nexus-d1/historical-resolved-person-subjects-v3.part-02.b64",
+      "pass": true,
+      "detail": {
+        "actual": 12000,
+        "expected": 12000
+      }
+    },
+    {
+      "name": "chunk_sha:data/nexus-d1/historical-resolved-person-subjects-v3.part-02.b64",
+      "pass": true,
+      "detail": {
+        "actual": "1b57f778be4681b9f4ac8d00f4a9acb65e8af1dd4971bb19070096e8654d43dd",
+        "expected": "1b57f778be4681b9f4ac8d00f4a9acb65e8af1dd4971bb19070096e8654d43dd"
+      }
+    },
+    {
+      "name": "chunk_chars:data/nexus-d1/historical-resolved-person-subjects-v3.part-03.b64",
+      "pass": true,
+      "detail": {
+        "actual": 12000,
+        "expected": 12000
+      }
+    },
+    {
+      "name": "chunk_sha:data/nexus-d1/historical-resolved-person-subjects-v3.part-03.b64",
+      "pass": true,
+      "detail": {
+        "actual": "a965a5412416ab2feb821939e69d56a6e6fe70e2e96db7846aaade0ebbb971be",
+        "expected": "a965a5412416ab2feb821939e69d56a6e6fe70e2e96db7846aaade0ebbb971be"
+      }
+    },
+    {
+      "name": "chunk_chars:data/nexus-d1/historical-resolved-person-subjects-v3.part-04.b64",
+      "pass": true,
+      "detail": {
+        "actual": 9516,
+        "expected": 9516
+      }
+    },
+    {
+      "name": "chunk_sha:data/nexus-d1/historical-resolved-person-subjects-v3.part-04.b64",
+      "pass": true,
+      "detail": {
+        "actual": "783f2f590625677a5cf155851debecc166366de2576063d3a64178981f8869bc",
+        "expected": "783f2f590625677a5cf155851debecc166366de2576063d3a64178981f8869bc"
+      }
+    },
+    {
+      "name": "base64Chars",
+      "pass": true,
+      "detail": 57516
+    },
+    {
+      "name": "xzBytes",
+      "pass": true,
+      "detail": 43136
+    },
+    {
+      "name": "xzSha256",
+      "pass": true,
+      "detail": "c1337f4d0dff552e99e56909267640be47df8ccccdf242987b6358c0b758f846"
+    },
+    {
+      "name": "decodedJsonBytes",
+      "pass": true,
+      "detail": 508959
+    },
+    {
+      "name": "decodedJsonSha256",
+      "pass": true,
+      "detail": "d472fe00c88e70b77adc8a38093360042a632559a9ac52366f8da3b37aec5660"
+    },
+    {
+      "name": "subjects_len",
+      "pass": true,
+      "detail": 2048
+    },
+    {
+      "name": "unique_subjectId",
+      "pass": true,
+      "detail": 2048
+    },
+    {
+      "name": "unique_understatPlayerId",
+      "pass": true,
+      "detail": 2048
+    },
+    {
+      "name": "manifest_understatNameConflicts_zero",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "manifest_collision65_true",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "id65_understat1981",
+      "pass": true,
+      "detail": [
+        {
+          "bridgePersonKey": "understat:1981",
+          "contextClubs": [
+            "bologna",
+            "carpi"
+          ],
+          "fantacalcioObservationIds": [
+            "65"
+          ],
+          "lookupNames": [
+            "Matteo Mancosu"
+          ],
+          "seasons": [
+            "2015/16"
+          ],
+          "subjectId": "historical-understat-1981",
+          "understatPlayerId": "1981"
+        },
+        {
+          "bridgePersonKey": "understat:7973",
+          "contextClubs": [
+            "cagliari",
+            "lecce"
+          ],
+          "fantacalcioObservationIds": [
+            "65"
+          ],
+          "lookupNames": [
+            "Marco Mancosu"
+          ],
+          "seasons": [
+            "2019/20",
+            "2023/24"
+          ],
+          "subjectId": "historical-understat-7973",
+          "understatPlayerId": "7973"
+        }
+      ]
+    },
+    {
+      "name": "id65_understat7973",
+      "pass": true,
+      "detail": [
+        {
+          "bridgePersonKey": "understat:1981",
+          "contextClubs": [
+            "bologna",
+            "carpi"
+          ],
+          "fantacalcioObservationIds": [
+            "65"
+          ],
+          "lookupNames": [
+            "Matteo Mancosu"
+          ],
+          "seasons": [
+            "2015/16"
+          ],
+          "subjectId": "historical-understat-1981",
+          "understatPlayerId": "1981"
+        },
+        {
+          "bridgePersonKey": "understat:7973",
+          "contextClubs": [
+            "cagliari",
+            "lecce"
+          ],
+          "fantacalcioObservationIds": [
+            "65"
+          ],
+          "lookupNames": [
+            "Marco Mancosu"
+          ],
+          "seasons": [
+            "2019/20",
+            "2023/24"
+          ],
+          "subjectId": "historical-understat-7973",
+          "understatPlayerId": "7973"
+        }
+      ]
+    }
+  ]
+}
