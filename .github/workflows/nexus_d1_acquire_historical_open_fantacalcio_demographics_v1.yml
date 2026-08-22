@@ -1,0 +1,83 @@
+name: Nexus D1 Acquire Historical Open Fantacalcio Demographics v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-historical-open-fantacalcio-v1/EXECUTE'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nexus-d1-historical-open-fantacalcio-v1
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Preflight historical observation contract
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          c=json.loads(Path('data/nexus-d1/fantacalcio-historical-observation-contract-v1/RESULT.json').read_text())
+          assert c['status']=='PASS'
+          assert c['contract']['providerObservationKeyIsGlobalPersonKey'] is False
+          assert c['contract']['exactCanonicalSeasonPlayerIdRequired'] is True
+          assert c['contract']['historicalUnderstatBackedPersonResolutionAlsoRequiresExactNormalizedNameTokenSet'] is True
+          PY
+      - name: Acquire 109 historical open persons
+        run: |
+          set -euo pipefail
+          OUT=.nexus-d1-historical-open-fantacalcio-v1/output
+          rm -rf "$OUT" && mkdir -p "$OUT"
+          python scripts/nexus-d1-acquire-historical-open-fantacalcio-demographics-v1.py \
+            --subjects-manifest data/nexus-d1/historical-resolved-person-subjects-v3-manifest.json \
+            --second-pass data/nexus-d1/second-pass-v2/SECOND_PASS_SUBJECTS.json \
+            --contract data/nexus-d1/fantacalcio-historical-observation-contract-v1/RESULT.json \
+            --output "$OUT" | tee "$OUT/ACQUIRE.stdout.log"
+      - name: Assert governance
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('.nexus-d1-historical-open-fantacalcio-v1/output/RESULT.json').read_text())
+          assert d['status']=='PASS' and d['summary']['subjects']==109 and d['summary']['requestFailures']==0
+          r=d['rules']
+          assert r['providerIdUsedAsGlobalHistoricalPersonKey'] is False
+          assert r['exactSeasonPlayerIdCanonicalBindingRequired'] is True
+          assert r['exactNormalizedNameTokenSetRequired'] is True
+          assert r['nameSearchUsed'] is False and r['fuzzyMatchingUsed'] is False
+          assert r['computedAgeDerived'] is False and r['f1Started'] is False and r['d2Started'] is False
+          PY
+      - name: Persist historical-open outcome
+        run: |
+          set -euo pipefail
+          DEST=data/nexus-d1/historical-open-fantacalcio-v1
+          mkdir -p "$DEST"
+          cp .nexus-d1-historical-open-fantacalcio-v1/output/RESULT.json "$DEST/RESULT.json"
+          cp .nexus-d1-historical-open-fantacalcio-v1/output/MANIFEST.json "$DEST/MANIFEST.json"
+          cp .nexus-d1-historical-open-fantacalcio-v1/output/ACQUIRE.stdout.log "$DEST/ACQUIRE.stdout.log"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$DEST"
+          git commit -m 'nexus: persist D1 historical-open Fantacalcio demographics v1 outcome [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Upload raw evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-historical-open-fantacalcio-v1
+          path: .nexus-d1-historical-open-fantacalcio-v1/output/
+          retention-days: 30
