@@ -1,0 +1,15 @@
+{
+  "schema": "NEXUS_D1_FOTMOB_DOB_SEMANTICS_PROBE_FREEZE_V1",
+  "status": "FROZEN_IN_IMMUTABLE_DRAFT_RELEASE",
+  "verifiedAt": "2026-08-22T14:49:14.908725Z",
+  "releaseTag": "nexus-d1-fotmob-dob-semantics-probe-v1",
+  "archiveBytes": 279910,
+  "archiveSha256": "dca7edd93a29139215f35def55294351c10452f7f3e8add34edf05af5486adf7",
+  "rawNextDataPreserved": true,
+  "governance": {
+    "secondPassCasesMutated": false,
+    "f1Started": false,
+    "d2Started": false,
+    "trainingPromotionGranted": false
+  }
+}
