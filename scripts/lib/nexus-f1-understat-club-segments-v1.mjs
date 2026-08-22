@@ -12,15 +12,50 @@ function num(v,label){ if(v===null||v===undefined||v==='') return null; const n=
 function sha(v){ return typeof v === 'string' && /^[a-f0-9]{64}$/u.test(v) }
 
 export function decodeUnderstatJsString(value){
-  return value.replace(/\\x([0-9a-fA-F]{2})/g,(_m,h)=>String.fromCharCode(parseInt(h,16))).replace(/\\u([0-9a-fA-F]{4})/g,(_m,h)=>String.fromCharCode(parseInt(h,16))).replace(/\\\//g,'/').replace(/\\'/g,"'").replace(/\\"/g,'"').replace(/\\n/g,'\n').replace(/\\r/g,'\r').replace(/\\t/g,'\t').replace(/\\\\/g,'\\')
+  return value
+    .replace(/\\x([0-9a-fA-F]{2})/g,(_m,h)=>String.fromCharCode(parseInt(h,16)))
+    .replace(/\\u([0-9a-fA-F]{4})/g,(_m,h)=>String.fromCharCode(parseInt(h,16)))
+    .replace(/\\\//g,'/')
+    .replace(/\\'/g,"'")
+    .replace(/\\"/g,'"')
+    .replace(/\\n/g,'\n')
+    .replace(/\\r/g,'\r')
+    .replace(/\\t/g,'\t')
+    .replace(/\\\\/g,'\\')
+}
+
+function extractQuotedArgument(html,start,variable){
+  let i=start
+  while(i<html.length&&/\s/u.test(html[i]))i++
+  const quote=html[i]
+  if(quote!=="'"&&quote!=='"')fail(`${variable}: JSON.parse argument non quoted`)
+  i++
+  let out=''
+  let escaped=false
+  for(;i<html.length;i++){
+    const ch=html[i]
+    if(escaped){out+=`\\${ch}`;escaped=false;continue}
+    if(ch==='\\'){escaped=true;continue}
+    if(ch===quote)return out
+    out+=ch
+  }
+  fail(`${variable}: string literal non terminata`)
 }
 
 export function extractUnderstatEmbedded(html, variable){
   if(!text(html)||!text(variable)) fail('html/variable mancanti')
   const escaped=variable.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')
-  const re=new RegExp(`(?:var|let|const)\\s+${escaped}\\s*=\\s*JSON\\.parse\\('([\\s\\S]*?)'\\);`)
-  const m=re.exec(html); if(!m) fail(`${variable} non trovato`)
-  return JSON.parse(decodeUnderstatJsString(m[1]))
+  const patterns=[
+    new RegExp(`(?:var|let|const)\\s+${escaped}\\s*=\\s*JSON\\.parse\\s*\\(`,'u'),
+    new RegExp(`(?:window\\.)?${escaped}\\s*=\\s*JSON\\.parse\\s*\\(`,'u'),
+  ]
+  let match=null
+  for(const re of patterns){match=re.exec(html);if(match)break}
+  if(!match) fail(`${variable} non trovato`)
+  const raw=extractQuotedArgument(html,match.index+match[0].length,variable)
+  let decoded
+  try{decoded=decodeUnderstatJsString(raw)}catch(e){fail(`${variable}: decode JS fallito: ${e.message}`)}
+  try{return JSON.parse(decoded)}catch(e){fail(`${variable}: JSON non valido dopo decode: ${e.message}`)}
 }
 
 export function normalizeUnderstatPlayersData(payload){
