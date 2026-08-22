@@ -1,0 +1,40 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_NEVER_RESOLVED_FANTACALCIO_ID_SURFACE_MANIFEST_V1",
+  "protocolVersion": "1.1",
+  "source": {
+    "repository": "Sidious92/FantaDesk",
+    "artifactId": 9162967092,
+    "artifactName": "nexus-replay-v3-prepared",
+    "d0PreservationContainerSha256": "555e012b8e992d04a088aa5809c20b6efc023aa442bbf6a904435df17038d721",
+    "d0CanonicalInternalContentSha256": "d966ccd7cf45468390bbf598651dd99187bec39bb1aac3133a3ce82ab1dcdf0b"
+  },
+  "derivation": {
+    "historicalIdentityFiles": "identity/2015-16.json through identity/2025-26.json",
+    "resolvedObservations": 5869,
+    "unresolvedObservationsAll": 1422,
+    "uniqueFantacalcioIdsWithAnyUnresolvedObservation": 998,
+    "uniqueFantacalcioIdsWithAnyResolvedObservation": 2047,
+    "uniqueFantacalcioIdsNeverResolvedToUnderstat": 445,
+    "unresolvedObservationsForNeverResolvedIds": 704,
+    "providerIdReuseOrNameVariationFlags": 7
+  },
+  "payload": {
+    "path": "data/nexus-d1/historical-never-resolved-fantacalcio-ids-v1.json.xz.b64",
+    "encoding": "BASE64_XZ_JSON",
+    "base64Chars": 10840,
+    "xzBytes": 8128,
+    "xzSha256": "e22f4054bf616c7b3dfa330c192e84263109b860359ca20c164cd8355c25aa54",
+    "decodedJsonBytes": 129242,
+    "decodedJsonSha256": "a9b7a68fccbcd0b27ec3bb1061bb77b852b82e568d522d43ce8a1609a98bb27a"
+  },
+  "governance": {
+    "sourceProviderIdUsedAsGlobalPersonKey": false,
+    "exactSourceIdsGroupedForAuditOnly": true,
+    "multipleExactNamesAutoMergedAsPerson": false,
+    "fuzzyMatchingUsed": false,
+    "performanceStatisticsTransferred": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
