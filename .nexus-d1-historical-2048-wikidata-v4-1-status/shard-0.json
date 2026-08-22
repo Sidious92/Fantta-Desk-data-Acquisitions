@@ -1,0 +1,26 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_V4_1_SHARD_STATUS_V1",
+  "capturedAt": "2026-08-22T14:34:27.538513Z",
+  "shard": 0,
+  "range": [
+    0,
+    512
+  ],
+  "exitCode": 0,
+  "status": "PASS",
+  "summary": {
+    "subjects": 512,
+    "mappingStatus": {
+      "IDENTITY_VERIFIED": 497,
+      "IDENTITY_AMBIGUOUS": 3,
+      "IDENTITY_UNRESOLVED": 12
+    },
+    "dobStatus": {
+      "DOB_VERIFIED": 484,
+      "DOB_CONFLICT": 13,
+      "IDENTITY_UNRESOLVED": 15
+    },
+    "requestFailures": 0
+  },
+  "resultCanonicalPresent": true
+}
