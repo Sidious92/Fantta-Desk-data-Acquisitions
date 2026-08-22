@@ -54,9 +54,7 @@ jobs:
           node - <<'NODE'
           const fs=require('fs');
           const a=JSON.parse(fs.readFileSync('.nexus-f1-lega-snapshot-v1/audit.json','utf8'));
-          if(a.status!=='PASS_RAW_ACQUISITION_ONLY'||a.observedMatches!==1900||a.observedLineupPayloads!==1900||a.oldArtifactRecovered!==false||a.availableAtAssigned!==false){
-            throw new Error(JSON.stringify(a));
-          }
+          if(a.status!=='PASS_RAW_ACQUISITION_ONLY'||a.observedMatches!==1900||a.observedLineupPayloads!==1900||a.oldArtifactRecovered!==false||a.availableAtAssigned!==false) throw new Error(JSON.stringify(a));
           console.log(JSON.stringify(a,null,2));
           NODE
 
@@ -70,9 +68,7 @@ jobs:
           node - <<'NODE'
           const fs=require('fs');
           const a=JSON.parse(fs.readFileSync('.nexus-f1-lega-snapshot-v1/normalized/opportunity-normalization-audit-v1.json','utf8'));
-          if(a.status!=='PASS'||a.normalizationAudit?.status!=='PASS'||a.integrity?.status!=='PASS'){
-            throw new Error(JSON.stringify(a.integrity?.violations?.slice(0,20)));
-          }
+          if(a.status!=='PASS'||a.normalizationAudit?.status!=='PASS'||a.integrity?.status!=='PASS') throw new Error(JSON.stringify(a.integrity?.violations?.slice(0,20)));
           if(a.normalizationAudit.matchesInput!==1900)throw new Error('expected 1900 normalization inputs');
           console.log(JSON.stringify({status:a.status,normalization:a.normalizationAudit,integrity:a.integrity.status,quarantinedMatches:a.quarantinedMatches.length},null,2));
           NODE
@@ -92,10 +88,7 @@ jobs:
           BUNDLE_SHA="$BUNDLE_SHA" node - <<'NODE'
           const fs=require('fs'),crypto=require('crypto'),path=require('path');
           const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
-          const parts=fs.readdirSync('bundle-parts').sort().map(name=>{
-            const b=fs.readFileSync(path.join('bundle-parts',name));
-            return {name,bytes:b.length,sha256:sha(b)};
-          });
+          const parts=fs.readdirSync('bundle-parts').sort().map(name=>{const b=fs.readFileSync(path.join('bundle-parts',name));return{name,bytes:b.length,sha256:sha(b)}});
           fs.writeFileSync('BUNDLE_PARTS.json',JSON.stringify({schema:'NEXUS_F1_LEGA_OPPORTUNITY_BUNDLE_PARTS_V1',status:'PASS',bundleSha256:process.env.BUNDLE_SHA,parts},null,2)+'\n');
           NODE
           echo "bundle_sha=$BUNDLE_SHA" >> "$GITHUB_OUTPUT"
@@ -124,20 +117,7 @@ jobs:
           node - <<'NODE'
           const fs=require('fs');
           const dest=`data/nexus-f1/lega-opportunity-v1/${process.env.BUNDLE_SHA}`;
-          const receipt={
-            schema:'NEXUS_F1_LEGA_OPPORTUNITY_DURABLE_PRESERVATION_RECEIPT_V1',
-            protocolVersion:'1.1',
-            status:'PERSISTED_PENDING_REMOTE_READBACK',
-            sourceCommit:process.env.GITHUB_SHA,
-            githubRunId:Number(process.env.GITHUB_RUN_ID),
-            bundleSha256:process.env.BUNDLE_SHA,
-            rawManifestSha256:process.env.RAW_MANIFEST_SHA,
-            rawAuditSha256:process.env.RAW_AUDIT_SHA,
-            normalizationAuditSha256:process.env.NORMALIZATION_AUDIT_SHA,
-            remoteReadbackSha256Pass:false,
-            immutablePath:dest,
-            governance:{rawMutation:false,expectedMinutesBuilt:false,canonicalIdentityApplied:false,f1Closed:false,f2PlusAuthorized:false,canonicalMutation:false}
-          };
+          const receipt={schema:'NEXUS_F1_LEGA_OPPORTUNITY_DURABLE_PRESERVATION_RECEIPT_V1',protocolVersion:'1.1',status:'PERSISTED_PENDING_REMOTE_READBACK',sourceCommit:process.env.GITHUB_SHA,githubRunId:Number(process.env.GITHUB_RUN_ID),bundleSha256:process.env.BUNDLE_SHA,rawManifestSha256:process.env.RAW_MANIFEST_SHA,rawAuditSha256:process.env.RAW_AUDIT_SHA,normalizationAuditSha256:process.env.NORMALIZATION_AUDIT_SHA,remoteReadbackSha256Pass:false,immutablePath:dest,governance:{rawMutation:false,expectedMinutesBuilt:false,canonicalIdentityApplied:false,f1Closed:false,f2PlusAuthorized:false,canonicalMutation:false}};
           fs.writeFileSync(`${dest}/PRESERVATION_RECEIPT.json`,JSON.stringify(receipt,null,2)+'\n');
           NODE
           git config user.name 'github-actions[bot]'
@@ -160,17 +140,8 @@ jobs:
           const fs=require('fs'),cp=require('child_process'),crypto=require('crypto');
           const dest=`data/nexus-f1/lega-opportunity-v1/${process.env.BUNDLE_SHA}`;
           const m=JSON.parse(fs.readFileSync(`${dest}/BUNDLE_PARTS.json`,'utf8'));
-          for(const p of m.parts){
-            const b=cp.execFileSync('git',['show',`origin/feat/nexus-input-v1-1-f1-lega-snapshot:${dest}/parts/${p.name}`],{maxBuffer:64*1024*1024});
-            const h=crypto.createHash('sha256').update(b).digest('hex');
-            if(h!==p.sha256)throw new Error(`remote part hash mismatch ${p.name}`);
-          }
-          const rpath=`${dest}/PRESERVATION_RECEIPT.json`;
-          const r=JSON.parse(fs.readFileSync(rpath,'utf8'));
-          r.status='PASS_DURABLY_PRESERVED_REMOTE_GIT_READBACK_SHA256';
-          r.remoteReadbackSha256Pass=true;
-          r.verifiedAt=new Date().toISOString();
-          fs.writeFileSync(rpath,JSON.stringify(r,null,2)+'\n');
+          for(const p of m.parts){const b=cp.execFileSync('git',['show',`origin/feat/nexus-input-v1-1-f1-lega-snapshot:${dest}/parts/${p.name}`],{maxBuffer:64*1024*1024});const h=crypto.createHash('sha256').update(b).digest('hex');if(h!==p.sha256)throw new Error(`remote part hash mismatch ${p.name}`)}
+          const rpath=`${dest}/PRESERVATION_RECEIPT.json`;const r=JSON.parse(fs.readFileSync(rpath,'utf8'));r.status='PASS_DURABLY_PRESERVED_REMOTE_GIT_READBACK_SHA256';r.remoteReadbackSha256Pass=true;r.verifiedAt=new Date().toISOString();fs.writeFileSync(rpath,JSON.stringify(r,null,2)+'\n');
           NODE
           git add "$DEST/PRESERVATION_RECEIPT.json"
           git commit -m "nexus f1: verify Lega Opportunity readback $BUNDLE_SHA [skip ci]"
@@ -194,34 +165,14 @@ jobs:
           mkdir -p data/nexus-f1/run-status/lega
           node - <<'NODE'
           const fs=require('fs');
-          const stages={
-            syntax:process.env.SYNTAX_OUTCOME||'not-run',
-            acquireRaw:process.env.ACQUIRE_OUTCOME||'not-run',
-            rawAudit:process.env.RAW_AUDIT_OUTCOME||'not-run',
-            normalize:process.env.NORMALIZE_OUTCOME||'not-run',
-            integrity:process.env.INTEGRITY_OUTCOME||'not-run',
-            bundle:process.env.BUNDLE_OUTCOME||'not-run',
-            persist:process.env.PERSIST_OUTCOME||'not-run',
-            readback:process.env.READBACK_OUTCOME||'not-run'
-          };
+          const stages={syntax:process.env.SYNTAX_OUTCOME||'not-run',acquireRaw:process.env.ACQUIRE_OUTCOME||'not-run',rawAudit:process.env.RAW_AUDIT_OUTCOME||'not-run',normalize:process.env.NORMALIZE_OUTCOME||'not-run',integrity:process.env.INTEGRITY_OUTCOME||'not-run',bundle:process.env.BUNDLE_OUTCOME||'not-run',persist:process.env.PERSIST_OUTCOME||'not-run',readback:process.env.READBACK_OUTCOME||'not-run'};
           const success=Object.values(stages).every(v=>v==='success');
-          const receipt={
-            schema:'NEXUS_F1_LEGA_RUN_RECEIPT_V1',
-            protocolVersion:'1.1',
-            status:success?'PASS':'FAIL_CLOSED',
-            generatedAt:new Date().toISOString(),
-            sourceCommit:process.env.GITHUB_SHA,
-            githubRunId:Number(process.env.GITHUB_RUN_ID),
-            githubRunAttempt:Number(process.env.GITHUB_RUN_ATTEMPT),
-            stages,
-            bundleSha256:process.env.BUNDLE_SHA||null,
-            governance:{f1Closed:false,f2PlusAuthorized:false,canonicalMutation:false}
-          };
+          const receipt={schema:'NEXUS_F1_LEGA_RUN_RECEIPT_V1',protocolVersion:'1.1',status:success?'PASS':'FAIL_CLOSED',generatedAt:new Date().toISOString(),sourceCommit:process.env.GITHUB_SHA,githubRunId:Number(process.env.GITHUB_RUN_ID),githubRunAttempt:Number(process.env.GITHUB_RUN_ATTEMPT),stages,bundleSha256:process.env.BUNDLE_SHA||null,governance:{f1Closed:false,f2PlusAuthorized:false,canonicalMutation:false}};
           fs.writeFileSync('data/nexus-f1/run-status/lega/latest.json',JSON.stringify(receipt,null,2)+'\n');
           NODE
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/nexus-f1/run-status/lega/latest.json
+          git add data/nexus-f1/run-status/lega
           git commit -m "nexus f1: record Lega runner outcome [skip ci]" || true
           git push origin HEAD:feat/nexus-input-v1-1-f1-lega-snapshot || true
 
@@ -236,5 +187,6 @@ jobs:
             .nexus-f1-lega-snapshot-v1/normalized/opportunity-normalization-audit-v1.json
             .nexus-f1-lega-snapshot-v1/normalized/NORMALIZED.sha256
             data/nexus-f1/run-status/lega/latest.json
+            data/nexus-f1/run-status/lega/match-shape-probe-latest.json
           if-no-files-found: warn
           retention-days: 7
