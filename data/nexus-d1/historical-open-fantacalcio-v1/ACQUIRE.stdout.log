@@ -1,0 +1,11 @@
+{
+  "subjects": 109,
+  "candidateRequests": 250,
+  "recordsCompleted": 109,
+  "statusCounts": {
+    "DOB_UNRESOLVED_NO_ACCEPTED_EXACT_FC_OBSERVATION": 26,
+    "HISTORICAL_PERSON_DOB_VERIFIED_BY_EXACT_FC_OBSERVATION": 83
+  },
+  "dobVerifiedSubjects": 83,
+  "requestFailures": 0
+}
