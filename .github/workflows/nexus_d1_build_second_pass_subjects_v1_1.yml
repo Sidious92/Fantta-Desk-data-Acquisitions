@@ -1,0 +1,140 @@
+name: Nexus D1 Build Second Pass Subject Surface v1.1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-second-pass-v1-1/EXECUTE'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nexus-d1-second-pass-v1-1
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      ROOT: .nexus-d1-second-pass-v1-1
+      OUT: .nexus-d1-second-pass-v1-1/output
+      STATUS: .nexus-d1-second-pass-v1-1-status
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Inspect persisted first-pass contracts
+        run: |
+          set -euo pipefail
+          mkdir -p "$OUT"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          paths={
+            'current':Path('.nexus-d1-current-505-wikidata-v2-1-status/RESULT.json'),
+            'historical':Path('.nexus-d1-historical-2048-wikidata-v3-status/RESULT.json'),
+          }
+          out={}
+          for k,p in paths.items():
+            d=json.loads(p.read_text())
+            out[k]={
+              'exists':True,
+              'topLevelKeys':sorted(d.keys()),
+              'recordsType':type(d.get('records')).__name__,
+              'recordsCount':len(d.get('records') or []),
+              'summary':d.get('summary'),
+              'firstRecordKeys':sorted((d.get('records') or [{}])[0].keys()) if d.get('records') else []
+            }
+          Path('.nexus-d1-second-pass-v1-1/output/INPUT_CONTRACT.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(out,ensure_ascii=False,indent=2))
+          PY
+
+      - name: Run second-pass builder
+        id: build
+        shell: bash
+        run: |
+          set +e
+          python scripts/nexus-d1-build-second-pass-subjects-v1.py \
+            --current .nexus-d1-current-505-wikidata-v2-1-status/RESULT.json \
+            --historical .nexus-d1-historical-2048-wikidata-v3-status/RESULT.json \
+            --historical-surface-manifest data/nexus-d1/historical-resolved-person-subjects-v3-manifest.json \
+            --output "$OUT" \
+            >"$OUT/BUILD.stdout.log" 2>"$OUT/BUILD.stderr.log"
+          rc=$?
+          set -e
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+
+      - name: Persist diagnostic or PASS before gate
+        if: always() && steps.build.outcome == 'success'
+        env:
+          RC: ${{ steps.build.outputs.rc }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$STATUS"
+          python - <<'PY'
+          import json,os,hashlib
+          from pathlib import Path
+          from datetime import datetime,timezone
+          out=Path(os.environ['OUT']); rc=int(os.environ.get('RC') or 999)
+          doc={
+            'schema':'NEXUS_D1_SECOND_PASS_BUILD_DIAGNOSTIC_V1_1',
+            'capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),
+            'exitCode':rc,
+            'status':'PASS' if rc==0 else 'TECHNICAL_FAILURE_NOT_SCIENTIFIC_MISSINGNESS',
+            'inputContract':json.loads((out/'INPUT_CONTRACT.json').read_text()),
+            'stdoutTail':(out/'BUILD.stdout.log').read_text(errors='replace')[-12000:] if (out/'BUILD.stdout.log').exists() else '',
+            'stderrTail':(out/'BUILD.stderr.log').read_text(errors='replace')[-12000:] if (out/'BUILD.stderr.log').exists() else '',
+            'governance':{
+              'fuzzyMatchingUsed':False,
+              'nameOnlyMergeUsed':False,
+              'computedAgeDerived':False,
+              'trainingPromotionGranted':False,
+              'f1Started':False,
+              'd2Started':False
+            }
+          }
+          if (out/'SECOND_PASS_SUBJECTS.json').exists():
+            b=(out/'SECOND_PASS_SUBJECTS.json').read_bytes()
+            doc['output']={'size':len(b),'sha256':hashlib.sha256(b).hexdigest()}
+          Path(os.environ['STATUS'],'DIAGNOSTIC.json').write_text(json.dumps(doc,ensure_ascii=False,indent=2)+'\n')
+          PY
+          if [ "${RC}" = "0" ]; then
+            cp "$OUT/SECOND_PASS_SUBJECTS.json" "$STATUS/SECOND_PASS_SUBJECTS.json"
+            cp "$OUT/MANIFEST.json" "$STATUS/MANIFEST.json"
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$STATUS"
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus: persist D1 second-pass builder v1.1 diagnostic [skip ci]'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Fail closed if builder failed
+        if: steps.build.outputs.rc != '0'
+        run: exit 1
+
+      - name: Promote compact surface on PASS
+        if: steps.build.outputs.rc == '0'
+        run: |
+          set -euo pipefail
+          DEST=data/nexus-d1/second-pass-v1
+          mkdir -p "$DEST"
+          cp "$OUT/SECOND_PASS_SUBJECTS.json" "$DEST/SECOND_PASS_SUBJECTS.json"
+          cp "$OUT/MANIFEST.json" "$DEST/MANIFEST.json"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$DEST"
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus: persist D1 second-pass subject surface v1 [skip ci]'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
