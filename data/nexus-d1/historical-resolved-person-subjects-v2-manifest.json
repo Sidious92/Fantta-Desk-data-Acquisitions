@@ -1,0 +1,59 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_RESOLVED_PERSON_SUBJECT_SURFACE_MANIFEST_V2",
+  "protocolVersion": "1.1",
+  "historicalIdentityScope": "2015/16-2025/26",
+  "subjectCount": 2048,
+  "supersedesTransport": "data/nexus-d1/historical-resolved-person-subjects-v1-manifest.json",
+  "supersessionReason": "V1_PUBLIC_TRANSPORT_INVALID_OR_TRUNCATED: public base64 payload size is inconsistent with the declared XZ byte count. V1 is retained unchanged and is not used as authority.",
+  "source": {
+    "repository": "Sidious92/FantaDesk",
+    "artifactId": 9162967092,
+    "artifactName": "nexus-replay-v3-prepared",
+    "d0PreservationContainerSha256": "555e012b8e992d04a088aa5809c20b6efc023aa442bbf6a904435df17038d721",
+    "d0CanonicalInternalContentSha256": "d966ccd7cf45468390bbf598651dd99187bec39bb1aac3133a3ce82ab1dcdf0b",
+    "identityPaths": "identity/2015-16.json through identity/2025-26.json",
+    "historicalRosterObservations": 7291,
+    "resolvedObservations": 5869,
+    "unresolvedObservations": 1422,
+    "uniqueResolvedUnderstatPersons": 2048,
+    "fantacalcioIdsNeverResolvedToUnderstat": 445,
+    "providerIdReuseCollisionCount": 1
+  },
+  "checks": {
+    "subjects": 2048,
+    "uniqueTechnicalSubjectIds": 2048,
+    "uniqueUnderstatPlayerIds": 2048,
+    "understatNameConflicts": 0,
+    "knownFantacalcioId65CollisionPreserved": true,
+    "fuzzyMatchingUsed": false
+  },
+  "surfacePolicy": {
+    "deduplicationKey": "resolved Understat-backed person bridge",
+    "providerIdUsedAsGlobalPersonKey": false,
+    "unresolvedHistoricalIdsSilentlyDropped": false,
+    "unresolvedHistoricalIdsDisposition": "EXPLICITLY_OUTSIDE_RESOLVED_FIRST_PASS_445_IDS",
+    "technicalSubjectId": "historical-understat-<understatPlayerId>"
+  },
+  "privacyMinimization": {
+    "identityOnly": true,
+    "performanceStatisticsTransferred": false,
+    "targetValuesTransferred": false,
+    "quotationsTransferred": false
+  },
+  "payload": {
+    "path": "data/nexus-d1/historical-resolved-person-subjects-v2.json.xz.b64",
+    "encoding": "BASE64_XZ_JSON",
+    "decodedJsonBytes": 508959,
+    "decodedJsonSha256": "d472fe00c88e70b77adc8a38093360042a632559a9ac52366f8da3b37aec5660",
+    "xzBytes": 43136,
+    "xzSha256": "c1337f4d0dff552e99e56909267640be47df8ccccdf242987b6358c0b758f846"
+  },
+  "governance": {
+    "semanticReconstructionFromFrozenD0Authority": true,
+    "corruptOrTruncatedV1Reused": false,
+    "canonicalEngineModified": false,
+    "trainingPromotionGranted": false,
+    "historicalAsOfGranted": false,
+    "f1Started": false
+  }
+}
