@@ -1,0 +1,10 @@
+{
+  "subjects": 6,
+  "statusCounts": {
+    "DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS": 6
+  },
+  "dobVerified": 6,
+  "dobConflict": 0,
+  "dobUnresolved": 0,
+  "requestFailures": 0
+}

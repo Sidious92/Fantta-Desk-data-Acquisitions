@@ -1,0 +1,65 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_NONDAY_DOB_FANTACALCIO_MANIFEST_V1",
+  "generatedAt": "2026-08-22T17:36:54.383760Z",
+  "status": "PASS",
+  "evidenceFileCount": 8,
+  "canonicalEvidenceSha256": "1e41d3260c45db7fb6cc31f5aae2f194acac0d31ba48a296d4af4fc8140772b2",
+  "evidence": [
+    {
+      "path": "RESULT.json",
+      "size": 9610,
+      "sha256": "bea1aa70278796c6e6cdf220a8a238fda2e4226c26761f0cabc256ed06d5f983"
+    },
+    {
+      "path": "raw/00--u10984--fc5444--2022-23.html",
+      "size": 219693,
+      "sha256": "552d15624b6af6a48d07551b4baecc640a11d4bf316043c6b7935c066ce29c92"
+    },
+    {
+      "path": "raw/01--u11610--fc6420--2023-24.html",
+      "size": 220126,
+      "sha256": "e1cb4af56c2e175db07dba3cd6f9d85a300882a13729b7cfb1825ec475b2dafa"
+    },
+    {
+      "path": "raw/02--u11948--fc6419--2023-24.html",
+      "size": 222877,
+      "sha256": "192a45bf08fa2b7724c1fd7df0f51bbf2010f55a8f3c768a187b03984a71f25d"
+    },
+    {
+      "path": "raw/03--u13401--fc6992--2024-25.html",
+      "size": 193396,
+      "sha256": "fe91d8ea3796662f02b09014a903c950b87fdcc81e8099da643535d1716216bb"
+    },
+    {
+      "path": "raw/03--u13401--fc6992--2025-26.html",
+      "size": 224815,
+      "sha256": "118f3ef5e5c3568c9c819c5deca60fcd8228a0bfd6e7318a02fa547f7d926423"
+    },
+    {
+      "path": "raw/04--u13940--fc7145--2025-26.html",
+      "size": 230155,
+      "sha256": "476d71dbf8c0cd04323966c230d08f8e8ec52714b47d026ebe11cb11f896ac24"
+    },
+    {
+      "path": "raw/05--u14444--fc7346--2025-26.html",
+      "size": 191230,
+      "sha256": "7498415e35f6900f597db49a2365259d32df0338469581b00fb541de01a923cb"
+    }
+  ],
+  "governance": {
+    "wikidataPrecisionBelow11NeverPromotedToExactDob": true,
+    "identityAuthority": "D0_DERIVED_UNDERSTAT_PERSON_BRIDGE",
+    "providerObservationKey": [
+      "Fantacalcio",
+      "season",
+      "fantacalcioPlayerId"
+    ],
+    "providerIdUsedAsGlobalPersonKey": false,
+    "nameSearchUsed": false,
+    "fuzzyMatchingUsed": false,
+    "dobUsedForIdentitySelection": false,
+    "computedAgeDerived": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}

@@ -1,0 +1,257 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_NONDAY_DOB_FANTACALCIO_RESULT_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS",
+  "capturedAt": "2026-08-22T17:36:54.383760Z",
+  "summary": {
+    "subjects": 6,
+    "statusCounts": {
+      "DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS": 6
+    },
+    "dobVerified": 6,
+    "dobConflict": 0,
+    "dobUnresolved": 0,
+    "requestFailures": 0
+  },
+  "rules": {
+    "wikidataPrecisionBelow11NeverPromotedToExactDob": true,
+    "identityAuthority": "D0_DERIVED_UNDERSTAT_PERSON_BRIDGE",
+    "providerObservationKey": [
+      "Fantacalcio",
+      "season",
+      "fantacalcioPlayerId"
+    ],
+    "providerIdUsedAsGlobalPersonKey": false,
+    "nameSearchUsed": false,
+    "fuzzyMatchingUsed": false,
+    "dobUsedForIdentitySelection": false,
+    "computedAgeDerived": false,
+    "f1Started": false,
+    "d2Started": false
+  },
+  "requestFailures": [],
+  "records": [
+    {
+      "subjectId": "historical-understat-10984",
+      "understatPlayerId": "10984",
+      "bridgePersonKey": "understat:10984",
+      "wikidataItemId": "Q73892406",
+      "wikidataNonDayPrecision": 9,
+      "wikidataRawTime": "+2001-01-01T00:00:00Z",
+      "status": "DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "2001-01-25",
+      "distinctExactFantacalcioDobValues": [
+        "2001-01-25"
+      ],
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "5444",
+          "season": "2022/23",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5444/2022-23",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5444/2022-23",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5444/2022-23",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Cortinovis Alessandro",
+          "dobCandidates": [
+            "2001-01-25"
+          ],
+          "rawPath": "raw/00--u10984--fc5444--2022-23.html",
+          "rawBytes": 219693,
+          "rawSha256": "552d15624b6af6a48d07551b4baecc640a11d4bf316043c6b7935c066ce29c92",
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2001-01-25"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-11610",
+      "understatPlayerId": "11610",
+      "bridgePersonKey": "understat:11610",
+      "wikidataItemId": "Q116917779",
+      "wikidataNonDayPrecision": 9,
+      "wikidataRawTime": "+2004-01-01T00:00:00Z",
+      "status": "DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "2004-11-28",
+      "distinctExactFantacalcioDobValues": [
+        "2004-11-28"
+      ],
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "6420",
+          "season": "2023/24",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6420/2023-24",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6420/2023-24",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6420/2023-24",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Pagano Riccardo",
+          "dobCandidates": [
+            "2004-11-28"
+          ],
+          "rawPath": "raw/01--u11610--fc6420--2023-24.html",
+          "rawBytes": 220126,
+          "rawSha256": "e1cb4af56c2e175db07dba3cd6f9d85a300882a13729b7cfb1825ec475b2dafa",
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2004-11-28"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-11948",
+      "understatPlayerId": "11948",
+      "bridgePersonKey": "understat:11948",
+      "wikidataItemId": "Q124581054",
+      "wikidataNonDayPrecision": 9,
+      "wikidataRawTime": "+2004-01-01T00:00:00Z",
+      "status": "DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "2004-12-29",
+      "distinctExactFantacalcioDobValues": [
+        "2004-12-29"
+      ],
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "6419",
+          "season": "2023/24",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6419/2023-24",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6419/2023-24",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6419/2023-24",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Corfitzen Jeppe",
+          "dobCandidates": [
+            "2004-12-29"
+          ],
+          "rawPath": "raw/02--u11948--fc6419--2023-24.html",
+          "rawBytes": 222877,
+          "rawSha256": "192a45bf08fa2b7724c1fd7df0f51bbf2010f55a8f3c768a187b03984a71f25d",
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2004-12-29"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-13401",
+      "understatPlayerId": "13401",
+      "bridgePersonKey": "understat:13401",
+      "wikidataItemId": "Q112847001",
+      "wikidataNonDayPrecision": 9,
+      "wikidataRawTime": "+2003-01-01T00:00:00Z",
+      "status": "DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "2003-01-03",
+      "distinctExactFantacalcioDobValues": [
+        "2003-01-03"
+      ],
+      "acceptedObservationCount": 2,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "6992",
+          "season": "2024/25",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6992/2024-25",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6992/2024-25",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6992/2024-25",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Oyegoke Daniel",
+          "dobCandidates": [
+            "2003-01-03"
+          ],
+          "rawPath": "raw/03--u13401--fc6992--2024-25.html",
+          "rawBytes": 193396,
+          "rawSha256": "fe91d8ea3796662f02b09014a903c950b87fdcc81e8099da643535d1716216bb",
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2003-01-03"
+        },
+        {
+          "fantacalcioPlayerId": "6992",
+          "season": "2025/26",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6992/2025-26",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6992/2025-26",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6992/2025-26",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Daniel Oyegoke",
+          "dobCandidates": [
+            "2003-01-03"
+          ],
+          "rawPath": "raw/03--u13401--fc6992--2025-26.html",
+          "rawBytes": 224815,
+          "rawSha256": "118f3ef5e5c3568c9c819c5deca60fcd8228a0bfd6e7318a02fa547f7d926423",
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2003-01-03"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-13940",
+      "understatPlayerId": "13940",
+      "bridgePersonKey": "understat:13940",
+      "wikidataItemId": "Q109754983",
+      "wikidataNonDayPrecision": 9,
+      "wikidataRawTime": "+2001-01-01T00:00:00Z",
+      "status": "DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "2001-04-06",
+      "distinctExactFantacalcioDobValues": [
+        "2001-04-06"
+      ],
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "7145",
+          "season": "2025/26",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/7145/2025-26",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/7145/2025-26",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/7145/2025-26",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Gabriele Piccinini",
+          "dobCandidates": [
+            "2001-04-06"
+          ],
+          "rawPath": "raw/04--u13940--fc7145--2025-26.html",
+          "rawBytes": 230155,
+          "rawSha256": "476d71dbf8c0cd04323966c230d08f8e8ec52714b47d026ebe11cb11f896ac24",
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2001-04-06"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-14444",
+      "understatPlayerId": "14444",
+      "bridgePersonKey": "understat:14444",
+      "wikidataItemId": "Q134029234",
+      "wikidataNonDayPrecision": 9,
+      "wikidataRawTime": "+2006-00-00T00:00:00Z",
+      "status": "DOB_VERIFIED_BY_D0_BRIDGE_AND_EXACT_FC_CONSENSUS",
+      "dateOfBirth": "2006-04-07",
+      "distinctExactFantacalcioDobValues": [
+        "2006-04-07"
+      ],
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "7346",
+          "season": "2025/26",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/7346/2025-26",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/7346/2025-26",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/7346/2025-26",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Othniel Raterink",
+          "dobCandidates": [
+            "2006-04-07"
+          ],
+          "rawPath": "raw/05--u14444--fc7346--2025-26.html",
+          "rawBytes": 191230,
+          "rawSha256": "7498415e35f6900f597db49a2365259d32df0338469581b00fb541de01a923cb",
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2006-04-07"
+        }
+      ]
+    }
+  ]
+}
