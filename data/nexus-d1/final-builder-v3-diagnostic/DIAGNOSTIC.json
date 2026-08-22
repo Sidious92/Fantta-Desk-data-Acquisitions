@@ -1,0 +1,14 @@
+{
+  "schema": "NEXUS_D1_FINAL_BUILDER_V3_DIAGNOSTIC",
+  "capturedAt": "2026-08-22T17:39:21.159887Z",
+  "status": "PASS",
+  "builderExitCode": 0,
+  "stdout": "{\n  \"status\": \"PASS\",\n  \"currentDob\": \"505/505\",\n  \"historicalUnderstatDob\": \"2047/2048\",\n  \"historicalDobConflict\": 1,\n  \"providerScopedGroups\": 445,\n  \"uniqueGlobalPersonKeys\": 2147\n}\n",
+  "stderr": "",
+  "governance": {
+    "diagnosticOnly": true,
+    "rawMutation": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
