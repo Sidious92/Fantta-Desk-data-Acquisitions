@@ -1,0 +1,95 @@
+{
+  "schema": "NEXUS_D1_REGISTRY_V3",
+  "protocolVersion": "1.1",
+  "status": "D1_READY_FOR_FINAL_IMMUTABLE_FREEZE",
+  "capturedAt": "2026-08-22T17:40:46.250567Z",
+  "counts": {
+    "current": {
+      "subjects": 505,
+      "dobVerified": 505,
+      "dobConflict": 0
+    },
+    "historicalUnderstatBacked": {
+      "subjects": 2048,
+      "dobVerified": 2047,
+      "dobConflict": 1
+    },
+    "historicalNeverUnderstatBridged": {
+      "providerScopedGroups": 445,
+      "singleDemographicSignature": 443,
+      "multipleNameSignaturesSameDob": 2,
+      "groupsWithoutDobConsensus": 0,
+      "providerObservations": 704,
+      "verifiedObservations": 703,
+      "sourceNoCoverageOrBindingFailedObservations": 1
+    },
+    "identityMaster": {
+      "uniqueGlobalPersonKeys": 2147,
+      "providerScopedIdentityUnits": 445
+    }
+  },
+  "typedResiduals": {
+    "dobConflicts": [
+      {
+        "subjectId": "historical-understat-4904",
+        "understatPlayerId": "4904",
+        "wikidataItemId": "Q16298600",
+        "candidateDates": [
+          "1996-05-11",
+          "1996-05-22",
+          "1996-06-22"
+        ],
+        "missingReason": "DOB_CONFLICT"
+      }
+    ],
+    "providerScopedMultipleNameSignatureGroups": [
+      {
+        "identityUnitKey": "nexus-provider-unit-v1-2494a794426442aa434e7ed7",
+        "fantacalcioPlayerId": "6024",
+        "dateOfBirth": "2003-05-22",
+        "status": "PROVIDER_SCOPED_MULTIPLE_NAME_SIGNATURES_SAME_DOB"
+      },
+      {
+        "identityUnitKey": "nexus-provider-unit-v1-25a6b9a5467bab8bd592eda5",
+        "fantacalcioPlayerId": "6164",
+        "dateOfBirth": "2000-03-15",
+        "status": "PROVIDER_SCOPED_MULTIPLE_NAME_SIGNATURES_SAME_DOB"
+      }
+    ],
+    "sourceCoverageGaps": [
+      {
+        "provider": "Fantacalcio",
+        "fantacalcioPlayerId": "61",
+        "season": "2015/16",
+        "observedName": "Zuculini F",
+        "missingReason": "SOURCE_NO_COVERAGE",
+        "groupStillHasVerifiedDobSignature": true
+      }
+    ]
+  },
+  "governance": {
+    "internalPersonKeyDistinctFromProviderIds": true,
+    "providerIdsUsedAsGlobalPersonKeys": false,
+    "historicalD0UnderstatBridgeIsIdentityAuthority": true,
+    "currentExactFantacalcioIdIsCurrentObservationKeyOnly": true,
+    "historicalUnbridgedFantacalcioUnitsRemainProviderScoped": true,
+    "wikidataStatementDobNormalizedOnlyAtDayPrecision": true,
+    "nameOnlyMergeUsed": false,
+    "fuzzyMatchingUsed": false,
+    "dobInferred": false,
+    "computedAgeDerived": false,
+    "historicalAsOfGrantedByCurrentRetrieval": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  },
+  "rawPreservation": {
+    "currentFirstPassRelease": "nexus-d1-current-505-wikidata-v2-1",
+    "historicalFirstPassRelease": "nexus-d1-historical-2048-wikidata-v4-1",
+    "historical445ObservationRawRelease": "nexus-d1-historical-445-observation-demographics-v1",
+    "secondaryRawPreservationRelease": "nexus-d1-secondary-raw-preservation-v2",
+    "historicalNonDayDobRecoveryRelease": "nexus-d1-historical-nonday-dob-fantacalcio-v1"
+  },
+  "nextAllowedAction": "D1_FINAL_IMMUTABLE_FREEZE",
+  "d2Allowed": false
+}
