@@ -1,0 +1,166 @@
+name: Nexus D1 Secondary RAW Preservation v2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-secondary-raw-preservation-v2/EXECUTE'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: nexus-d1-secondary-raw-preservation-v2
+  cancel-in-progress: false
+
+jobs:
+  preserve:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      ROOT: .nexus-d1-secondary-raw-preservation-v2
+      STATUS: .nexus-d1-secondary-raw-preservation-v2-status
+      RELEASE_TAG: nexus-d1-secondary-raw-preservation-v2
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Preflight authoritative outcomes
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          req = [
+            'data/nexus-d1/current-open-fantacalcio-v2/RESULT.json',
+            'data/nexus-d1/historical-open-fantacalcio-v2/RESULT.json',
+            'data/nexus-d1/historical-dob-conflict-fantacalcio-v1/RESULT.json',
+            'data/nexus-d1/historical-residual-review-v1/RESULT.json',
+          ]
+          for p in req:
+            d=json.loads(Path(p).read_text()); assert d['status']=='PASS', p
+          assert json.loads(Path(req[0]).read_text())['summary']['currentIdentityDobVerified']==127
+          assert json.loads(Path(req[3]).read_text())['summary']['historicalOpenResolved']==12
+          PY
+
+      - name: Replay current 127 RAW
+        run: |
+          set -euo pipefail
+          OUT="$ROOT/current-open/output"; rm -rf "$OUT"; mkdir -p "$OUT"
+          python scripts/nexus-d1-acquire-current-open-fantacalcio-demographics-v1.py \
+            --subjects data/nexus-d1/second-pass-v2/SECOND_PASS_SUBJECTS.json \
+            --probe data/nexus-d1/fantacalcio-current-exact-id-probe-v1/RESULT.json \
+            --output "$OUT" >"$OUT/ACQUIRE.stdout.log"
+
+      - name: Replay historical 109 RAW
+        run: |
+          set -euo pipefail
+          OUT="$ROOT/historical-open/output"; rm -rf "$OUT"; mkdir -p "$OUT"
+          python scripts/nexus-d1-acquire-historical-open-fantacalcio-demographics-v1.py \
+            --subjects-manifest data/nexus-d1/historical-resolved-person-subjects-v3-manifest.json \
+            --second-pass data/nexus-d1/second-pass-v2/SECOND_PASS_SUBJECTS.json \
+            --contract data/nexus-d1/fantacalcio-historical-observation-contract-v1/RESULT.json \
+            --output "$OUT" >"$OUT/ACQUIRE.stdout.log"
+
+      - name: Replay historical 46 DOB-conflict RAW
+        run: |
+          set -euo pipefail
+          OUT="$ROOT/historical-conflict/output"; rm -rf "$OUT"; mkdir -p "$OUT"
+          python scripts/nexus-d1-resolve-historical-dob-conflicts-fantacalcio-v1.py \
+            --subjects-manifest data/nexus-d1/historical-resolved-person-subjects-v3-manifest.json \
+            --second-pass data/nexus-d1/second-pass-v2/SECOND_PASS_SUBJECTS.json \
+            --output "$OUT" >"$OUT/ACQUIRE.stdout.log"
+
+      - name: Validate replay against authoritative D1 decisions
+        run: |
+          set -euo pipefail
+          mkdir -p "$STATUS"
+          python - <<'PY'
+          import hashlib,json,re
+          from pathlib import Path
+          from datetime import datetime,timezone
+          root=Path('.nexus-d1-secondary-raw-preservation-v2')
+          status=Path('.nexus-d1-secondary-raw-preservation-v2-status')
+          cur=json.loads((root/'current-open/output/RESULT.json').read_text())
+          hist=json.loads((root/'historical-open/output/RESULT.json').read_text())
+          conf=json.loads((root/'historical-conflict/output/RESULT.json').read_text())
+          assert cur['status']=='PASS' and cur['summary']['subjects']==127 and cur['summary']['requestFailures']==0
+          assert hist['status']=='PASS' and hist['summary']['subjects']==109 and hist['summary']['requestFailures']==0
+          assert conf['status']=='PASS' and conf['summary']['subjects']==46 and conf['summary']['requestFailures']==0
+
+          cur_auth=json.loads(Path('data/nexus-d1/current-open-fantacalcio-v2/RESULT.json').read_text())
+          ca={r['subjectId']:r['dateOfBirth'] for r in cur_auth['records']}
+          cr={r['subjectId']: (r.get('dobCandidates') or [None])[0] for r in cur['records'] if len(r.get('dobCandidates') or [])==1 and r.get('exactProviderIdBound') is True}
+          assert ca==cr, ('CURRENT_REPLAY_SEMANTIC_MISMATCH',len(ca),len(cr))
+
+          hist_auth=json.loads(Path('data/nexus-d1/historical-open-fantacalcio-v2/RESULT.json').read_text())
+          residual=json.loads(Path('data/nexus-d1/historical-residual-review-v1/RESULT.json').read_text())
+          ha={r['subjectId']:r['dateOfBirth'] for r in hist_auth['records'] if r.get('dateOfBirth')}
+          ha.update({r['subjectId']:r['dateOfBirth'] for r in residual['historicalOpenResiduals'] if r.get('dateOfBirth')})
+          assert len(ha)==109
+          hr={}
+          for r in hist['records']:
+            vals=set()
+            for a in r.get('attempts') or []:
+              ds=a.get('dobCandidates') or []
+              if a.get('httpStatus')==200 and a.get('exactSeasonPlayerIdBound') is True and len(ds)==1 and re.fullmatch(r'\d{4}-\d{2}-\d{2}',ds[0]): vals.add(ds[0])
+            if len(vals)==1: hr[r['subjectId']]=next(iter(vals))
+          assert ha==hr, ('HISTORICAL_OPEN_REPLAY_SEMANTIC_MISMATCH',len(ha),len(hr))
+
+          conf_auth=json.loads(Path('data/nexus-d1/historical-dob-conflict-fantacalcio-v1/RESULT.json').read_text())
+          resolved={r['subjectId']:r['dateOfBirth'] for r in conf_auth['records'] if r.get('dateOfBirth')}
+          resolved.update({r['subjectId']:r['dateOfBirth'] for r in residual['historicalDobConflictResiduals'] if r.get('dateOfBirth')})
+          assert len(resolved)==45
+          replay_by={r['subjectId']:r for r in conf['records']}
+          for sid,dob in resolved.items():
+            vals=set()
+            for a in replay_by[sid].get('attempts') or []:
+              ds=a.get('dobCandidates') or []
+              if a.get('httpStatus')==200 and a.get('exactSeasonPlayerIdBound') is True and len(ds)==1: vals.add(ds[0])
+            assert dob in vals, (sid,dob,vals)
+
+          evidence=[]
+          for p in sorted(x for x in root.rglob('*') if x.is_file()):
+            b=p.read_bytes(); evidence.append({'path':str(p),'size':len(b),'sha256':hashlib.sha256(b).hexdigest()})
+          digest=hashlib.sha256('\n'.join(f"{e['path']}\t{e['size']}\t{e['sha256']}" for e in evidence).encode()).hexdigest()
+          cap=datetime.now(timezone.utc).isoformat().replace('+00:00','Z')
+          result={
+            'schema':'NEXUS_D1_SECONDARY_RAW_PRESERVATION_RESULT_V2','protocolVersion':'1.1','status':'PASS','capturedAt':cap,
+            'scope':{'currentOpenSubjects':127,'historicalOpenSubjects':109,'historicalDobConflictSubjects':46},
+            'semanticValidation':{'current127MatchesAuthority':True,'historical109MatchesAuthority':True,'resolvedHistoricalConflict45SupportedByReplay':True,'unresolvedHistoricalDobConflictCount':1},
+            'rules':{'preservationReplayOnly':True,'scientificDecisionsRecomputed':False,'rawEvidenceMutatedAfterCapture':False,'providerIdsUsedAsGlobalPersonKeys':False,'fuzzyMatchingUsed':False,'dobInferred':False,'computedAgeDerived':False,'trainingPromotionGranted':False,'f1Started':False,'d2Started':False},
+            'evidenceFileCount':len(evidence),'canonicalEvidenceSha256':digest
+          }
+          (status/'RESULT.json').write_text(json.dumps(result,indent=2)+'\n')
+          (status/'MANIFEST.json').write_text(json.dumps({'schema':'NEXUS_D1_SECONDARY_RAW_PRESERVATION_MANIFEST_V2','generatedAt':cap,'status':'PASS','evidenceFileCount':len(evidence),'canonicalEvidenceSha256':digest,'evidence':evidence,'governance':result['rules']},indent=2)+'\n')
+          print(json.dumps(result,indent=2))
+          PY
+
+      - name: Persist preservation authority
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$STATUS/RESULT.json" "$STATUS/MANIFEST.json"
+          git commit -m 'nexus: persist D1 secondary RAW preservation v2 [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Freeze immutable secondary RAW release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then echo 'release already exists' >&2; exit 1; fi
+          tar -czf nexus-d1-secondary-raw-preservation-v2.tar.gz "$ROOT" "$STATUS"
+          sha256sum nexus-d1-secondary-raw-preservation-v2.tar.gz > nexus-d1-secondary-raw-preservation-v2.tar.gz.sha256
+          trap 'gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true' ERR
+          gh release create "$RELEASE_TAG" --draft --target "$(git rev-parse HEAD)" --title 'FantaNexus D1 Secondary RAW Preservation v2' --notes 'Immutable preservation replay for D1 current-open, historical-open, and historical DOB-conflict RAW evidence. Scientific decisions remain those of the already persisted authoritative D1 results.'
+          gh release upload "$RELEASE_TAG" nexus-d1-secondary-raw-preservation-v2.tar.gz nexus-d1-secondary-raw-preservation-v2.tar.gz.sha256 "$STATUS/RESULT.json" "$STATUS/MANIFEST.json"
+          trap - ERR
