@@ -24,10 +24,26 @@ const matchResults=[],sourceFiles=[]
 for(const season of manifest.seasons){
   const seasonName=String(season.seasonName),matchesPath=season.matchesFile,matchesText=read(matchesPath)
   if(hash(matchesText)!==season.matchesSha256)fail(`${seasonName}: matches hash mismatch`)
-  const matchesPayload=JSON.parse(matchesText),matches=Array.isArray(matchesPayload?.matches)?matchesPayload.matches:null
-  if(!matches||matches.length!==380)fail(`${seasonName}: matches[] invalid`)
-  const byId=new Map(matches.map(m=>[String(m.matchId??m.id),m]))
-  sourceFiles.push({kind:'MATCH_CATALOG',season:seasonName,path:matchesPath,sha256:season.matchesSha256})
+  const matchesPayload=JSON.parse(matchesText),sourceMatches=Array.isArray(matchesPayload?.matches)?matchesPayload.matches:null
+  if(!sourceMatches||sourceMatches.length<380)fail(`${seasonName}: source matches[] invalid`)
+  if(season.matchCount!==380||season.lineupPayloadCount!==380||!Array.isArray(season.lineups)||season.lineups.length!==380)fail(`${seasonName}: admitted regular-season manifest count invalid`)
+
+  const sourceIds=sourceMatches.map(m=>String(m.matchId??m.id??''))
+  if(sourceIds.some(id=>!id)||new Set(sourceIds).size!==sourceIds.length)fail(`${seasonName}: source match ids missing/duplicate`)
+  const byId=new Map(sourceMatches.map(m=>[String(m.matchId??m.id),m]))
+  const admittedIds=season.lineups.map(ref=>String(ref.matchId??''))
+  if(admittedIds.some(id=>!id)||new Set(admittedIds).size!==380)fail(`${seasonName}: admitted match ids missing/duplicate`)
+
+  const excluded=Array.isArray(season.excludedSourceMatches)?season.excludedSourceMatches:[]
+  const excludedIds=excluded.map(row=>String(row.matchId??''))
+  if(excludedIds.some(id=>!id)||new Set(excludedIds).size!==excludedIds.length)fail(`${seasonName}: excluded source match ids missing/duplicate`)
+  const admittedSet=new Set(admittedIds),excludedSet=new Set(excludedIds)
+  for(const id of admittedSet)if(excludedSet.has(id))fail(`${seasonName}/${id}: match simultaneously admitted and excluded`)
+  const residual=sourceIds.filter(id=>!admittedSet.has(id))
+  if(residual.length!==excludedIds.length||residual.some(id=>!excludedSet.has(id)))fail(`${seasonName}: raw source residual does not equal explicit exclusion set`)
+  if(sourceMatches.length!==admittedIds.length+excludedIds.length)fail(`${seasonName}: source accounting mismatch ${sourceMatches.length} != ${admittedIds.length}+${excludedIds.length}`)
+
+  sourceFiles.push({kind:'MATCH_CATALOG',season:seasonName,path:matchesPath,sha256:season.matchesSha256,sourceRows:sourceMatches.length,admittedRegularMatches:admittedIds.length,explicitExcludedSourceMatches:excludedIds.length})
   for(const ref of season.lineups){
     const lineupText=read(ref.file),actual=hash(lineupText)
     if(actual!==ref.sha256)fail(`${seasonName}/${ref.matchId}: lineup hash mismatch`)
@@ -46,7 +62,7 @@ const out=path.join(ROOT,'normalized')
 const participationText=records.map(x=>JSON.stringify(x)).join('\n')+(records.length?'\n':'')
 const stintDataset={schema:'NEXUS_F1_OPPORTUNITY_SOURCE_STINT_DATASET_V1',protocolVersion:'1.1',sourceSnapshotManifestSha256:hash(manifestText),sourceFamily:'OPPORTUNITY_PARTICIPATION',minutesConvention:'REGULATION_90_CLOCK_V1',canonicalIdentityApplied:false,d1IdentityAuthorityRequiredForCanonicalJoin:true,expectedMinutesBuilt:false,trainingPromotionGranted:false,canonicalMutation:false,records:stints}
 const stintsText=stable(stintDataset)
-const audit={schema:'NEXUS_F1_OPPORTUNITY_NORMALIZATION_AUDIT_V1',protocolVersion:'1.1',status:'PASS',sourceSnapshotManifestSha256:hash(manifestText),sourceRawAuditSha256:hash(read(auditPath)),normalizationAudit,integrity,quarantinedMatches:quarantined,sourceFiles,outputs:{participationSha256:hash(participationText),sourceStintsSha256:hash(stintsText)},governance:{canonicalIdentityApplied:false,expectedMinutesBuilt:false,trainingPromotionGranted:false,f1Closed:false,f2PlusAuthorized:false,canonicalMutation:false}}
+const audit={schema:'NEXUS_F1_OPPORTUNITY_NORMALIZATION_AUDIT_V1',protocolVersion:'1.1',status:'PASS',sourceSnapshotManifestSha256:hash(manifestText),sourceRawAuditSha256:hash(read(auditPath)),sourceAccounting:{sourceMatchRows:manifest.totals.sourceMatchRows,admittedRegularMatches:manifest.totals.matches,explicitExcludedSourceMatches:manifest.totals.excludedSourceMatches,accountingPass:manifest.totals.sourceMatchRows===manifest.totals.matches+manifest.totals.excludedSourceMatches},normalizationAudit,integrity,quarantinedMatches:quarantined,sourceFiles,outputs:{participationSha256:hash(participationText),sourceStintsSha256:hash(stintsText)},governance:{canonicalIdentityApplied:false,expectedMinutesBuilt:false,trainingPromotionGranted:false,f1Closed:false,f2PlusAuthorized:false,canonicalMutation:false}}
 const auditText=stable(audit)
 write(path.join(out,'opportunity-participation-raw-v1.ndjson'),participationText)
 write(path.join(out,'opportunity-source-stints-v1.json'),stintsText)
