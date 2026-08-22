@@ -1,0 +1,105 @@
+{
+  "schema": "NEXUS_D1_FANTACALCIO_HISTORICAL_EXACT_OBSERVATION_DEMOGRAPHICS_PROBE_V1",
+  "protocolVersion": "1.1",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "capturedAt": "2026-08-22T16:28:07.106039Z",
+  "summary": {
+    "observationsExpected": 4,
+    "observationsFetched": 4,
+    "exactSeasonIdClubDobPass": 0,
+    "technicalFailures": 0
+  },
+  "semantics": {
+    "identityBinding": "HISTORICAL_SEASON_PLUS_FANTACALCIO_PLAYER_ID_PLUS_CLUB_CONTEXT",
+    "providerIdUsedAsGlobalHistoricalPersonKey": false,
+    "datePrecision": "DAY",
+    "nameSearchUsed": false,
+    "fuzzyMatchingUsed": false,
+    "dobUsedForIdentitySelection": false
+  },
+  "records": [
+    {
+      "season": "2015-16",
+      "fantacalcioPlayerId": "2",
+      "expectedClub": "Atalanta",
+      "sourceName": "Merelli",
+      "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/atalanta/merelli/2/2015-16",
+      "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/atalanta/merelli/2/2015-16",
+      "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/atalanta/merelli/2/2015-16",
+      "httpStatus": 200,
+      "exactSeasonPlayerIdBound": true,
+      "expectedClubConfirmedNearIdentity": false,
+      "fullName": "Merelli Davide",
+      "dobCandidates": [
+        "1996-03-03"
+      ],
+      "rawPath": ".nexus-d1-fantacalcio-historical-observation-probe-v1/output/raw/00--2015-16--fc-2.html",
+      "rawBytes": 225781,
+      "rawSha256": "f3062803a7c89301a8a6485b81f10b01ce72a10ab6a341a5bbf4534be30c64a5"
+    },
+    {
+      "season": "2015-16",
+      "fantacalcioPlayerId": "21",
+      "expectedClub": "Atalanta",
+      "sourceName": "D'Alessandro",
+      "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/atalanta/d-alessandro/21/2015-16",
+      "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/atalanta/d-alessandro/21/2015-16",
+      "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/atalanta/d-alessandro/21/2015-16",
+      "httpStatus": 200,
+      "exactSeasonPlayerIdBound": true,
+      "expectedClubConfirmedNearIdentity": false,
+      "fullName": "D'Alessandro Marco",
+      "dobCandidates": [
+        "1991-02-17"
+      ],
+      "rawPath": ".nexus-d1-fantacalcio-historical-observation-probe-v1/output/raw/01--2015-16--fc-21.html",
+      "rawBytes": 233887,
+      "rawSha256": "351ea7cdfc827d299d2e021e1a99d9139942f0c657bc8c74b4b4b263df52b7df"
+    },
+    {
+      "season": "2016-17",
+      "fantacalcioPlayerId": "1",
+      "expectedClub": "Atalanta",
+      "sourceName": "Bassi",
+      "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/atalanta/bassi/1/2016-17",
+      "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/atalanta/bassi/1/2016-17",
+      "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/atalanta/bassi/1/2016-17",
+      "httpStatus": 200,
+      "exactSeasonPlayerIdBound": true,
+      "expectedClubConfirmedNearIdentity": false,
+      "fullName": "Bassi Davide",
+      "dobCandidates": [
+        "1985-04-12"
+      ],
+      "rawPath": ".nexus-d1-fantacalcio-historical-observation-probe-v1/output/raw/02--2016-17--fc-1.html",
+      "rawBytes": 220575,
+      "rawSha256": "dbff4f056435a5634c8d41105ae78ce58f5259f48561972519d1ecb07d20ef27"
+    },
+    {
+      "season": "2016-17",
+      "fantacalcioPlayerId": "10",
+      "expectedClub": "Bologna",
+      "sourceName": "Cherubin",
+      "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/bologna/cherubin/10/2016-17",
+      "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/bologna/cherubin/10/2016-17",
+      "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/bologna/cherubin/10/2016-17",
+      "httpStatus": 200,
+      "exactSeasonPlayerIdBound": true,
+      "expectedClubConfirmedNearIdentity": false,
+      "fullName": "Cherubin Nicolò",
+      "dobCandidates": [
+        "1986-12-02"
+      ],
+      "rawPath": ".nexus-d1-fantacalcio-historical-observation-probe-v1/output/raw/03--2016-17--fc-10.html",
+      "rawBytes": 220899,
+      "rawSha256": "a66be2ce830b53fda4c82ac547f68d0a77fee21b6d86326b05d0ca28b79452ee"
+    }
+  ],
+  "technicalFailures": [],
+  "governance": {
+    "historicalPersonsAutoMerged": false,
+    "computedAgeDerived": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
