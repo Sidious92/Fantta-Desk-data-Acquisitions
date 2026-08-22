@@ -1,0 +1,75 @@
+name: Nexus D1 Private Drive Mirror Prep v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-private-drive-mirror-prep-v1/EXECUTE'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - name: Validate final D1 package
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          d=Path('data/nexus-d1/final-v3')
+          m=json.loads((d/'MANIFEST.json').read_text())
+          r=json.loads((d/'D1_REGISTRY.json').read_text())
+          x=json.loads((d/'IDENTITY_MASTER.json').read_text())
+          p=json.loads((d/'D1_PUBLIC_FREEZE_RECEIPT.json').read_text())
+          assert m['status']=='PASS' and x['status']=='PASS'
+          assert r['status']=='D1_READY_FOR_FINAL_IMMUTABLE_FREEZE'
+          assert r['counts']['current']['dobVerified']==505
+          assert r['counts']['historicalUnderstatBacked']['dobVerified']==2047
+          assert r['counts']['historicalUnderstatBacked']['dobConflict']==1
+          assert x['scope']['uniqueGlobalPersonKeys']==2147
+          assert p['archiveSha256']=='8125b48152e260c211ec73387fd84c7a214ab0f56ed56c7dcc9ed5886659945d'
+          for k in ('identityMaster','registry'):
+              q=d/m['outputs'][k]['path']
+              b=q.read_bytes()
+              assert len(b)==m['outputs'][k]['size']
+              assert hashlib.sha256(b).hexdigest()==m['outputs'][k]['sha256']
+          print('FINAL_D1_PACKAGE_VALIDATED')
+          PY
+      - name: Build deterministic private mirror bundle
+        id: bundle
+        run: |
+          set -euo pipefail
+          B=nexus-d1-private-mirror-v1.tar.gz
+          tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner -czf "$B" data/nexus-d1/final-v3
+          sha256sum "$B" > "$B.sha256"
+          echo "sha=$(cut -d' ' -f1 "$B.sha256")" >> "$GITHUB_OUTPUT"
+          echo "bytes=$(stat -c %s "$B")" >> "$GITHUB_OUTPUT"
+      - name: Persist mirror prep receipt
+        env:
+          BUNDLE_SHA: ${{ steps.bundle.outputs.sha }}
+          BUNDLE_BYTES: ${{ steps.bundle.outputs.bytes }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          python - <<'PY'
+          import json,os
+          from datetime import datetime,timezone
+          from pathlib import Path
+          d={'schema':'NEXUS_D1_PRIVATE_MIRROR_PREP_RECEIPT_V1','protocolVersion':'1.1','status':'PASS','capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),'bundleFile':'nexus-d1-private-mirror-v1.tar.gz','bundleBytes':int(os.environ['BUNDLE_BYTES']),'bundleSha256':os.environ['BUNDLE_SHA'],'githubActionsRunId':int(os.environ['RUN_ID']),'sourcePackage':'data/nexus-d1/final-v3','sourcePublicArchiveSha256':'8125b48152e260c211ec73387fd84c7a214ab0f56ed56c7dcc9ed5886659945d','governance':{'mirrorOnly':True,'scientificRecomputation':False,'rawMutation':False,'f1Started':False,'d2Started':False}}
+          Path('MIRROR_PREP_RECEIPT.json').write_text(json.dumps(d,indent=2)+'\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-private-drive-mirror-v1
+          path: |
+            nexus-d1-private-mirror-v1.tar.gz
+            nexus-d1-private-mirror-v1.tar.gz.sha256
+            MIRROR_PREP_RECEIPT.json
+          if-no-files-found: error
+          retention-days: 30
