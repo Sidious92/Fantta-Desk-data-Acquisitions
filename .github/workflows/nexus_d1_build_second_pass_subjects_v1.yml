@@ -1,0 +1,87 @@
+name: Nexus D1 Build Second Pass Subject Surface v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-second-pass-v1/EXECUTE'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nexus-d1-second-pass-v1
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Build fail-closed second-pass surface
+        run: |
+          set -euo pipefail
+          rm -rf .nexus-d1-second-pass-v1/output
+          mkdir -p .nexus-d1-second-pass-v1/output
+          python scripts/nexus-d1-build-second-pass-subjects-v1.py \
+            --current .nexus-d1-current-505-wikidata-v2-1-status/RESULT.json \
+            --historical .nexus-d1-historical-2048-wikidata-v3-status/RESULT.json \
+            --historical-surface-manifest data/nexus-d1/historical-resolved-person-subjects-v3-manifest.json \
+            --output .nexus-d1-second-pass-v1/output \
+            | tee .nexus-d1-second-pass-v1/output/BUILD.stdout.log
+
+      - name: Assert governance and expected counts
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('.nexus-d1-second-pass-v1/output/SECOND_PASS_SUBJECTS.json')
+          d=json.loads(p.read_text())
+          assert d['status']=='PASS'
+          assert d['scope']['currentOpenRecords']==127
+          assert d['scope']['historicalOpenRecords']==155
+          assert d['scope']['rawOpenRecordsBeforeCrossScopeOverlap']==282
+          assert d['scope']['historicalFantacalcioIdsNeverResolvedToUnderstat']==445
+          g=d['governance']
+          assert g['performanceStatisticsTransferred'] is False
+          assert g['computedAgeDerived'] is False
+          assert g['dobInferred'] is False
+          assert g['fuzzyMatchingUsed'] is False
+          assert g['nameOnlyCrossScopeMergeUsed'] is False
+          assert g['trainingPromotionGranted'] is False
+          assert g['f1Started'] is False
+          assert g['d2Started'] is False
+          print(json.dumps({
+            'currentOpen':127,
+            'historicalOpen':155,
+            'rawOpen':282,
+            'crossScopeOverlapGroups':d['crossScopeDeterministicOverlap']['count'],
+            'historicalUnresolvedIdGap':445
+          }, indent=2))
+          PY
+
+      - name: Persist compact second-pass authority
+        run: |
+          set -euo pipefail
+          DEST=data/nexus-d1/second-pass-v1
+          mkdir -p "$DEST"
+          cp .nexus-d1-second-pass-v1/output/SECOND_PASS_SUBJECTS.json "$DEST/SECOND_PASS_SUBJECTS.json"
+          cp .nexus-d1-second-pass-v1/output/MANIFEST.json "$DEST/MANIFEST.json"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$DEST"
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus: persist D1 second-pass subject surface v1 [skip ci]'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
