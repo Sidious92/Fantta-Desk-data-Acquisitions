@@ -1,0 +1,27 @@
+{
+  "schema": "NEXUS_D1_SECOND_PASS_SUBJECT_SURFACE_MANIFEST_V1",
+  "generatedAt": "2026-08-22T14:43:57.713296Z",
+  "status": "PASS",
+  "output": {
+    "path": "SECOND_PASS_SUBJECTS.json",
+    "size": 550561,
+    "sha256": "c467ef28f149c229cdb45eca7f0d5d279bea4017093f98ee6d4fff887ed38240"
+  },
+  "expectedCounts": {
+    "currentOpen": 127,
+    "historicalOpen": 155,
+    "rawOpenBeforeOverlap": 282,
+    "historicalUnresolvedIdGap": 445
+  },
+  "governance": {
+    "performanceStatisticsTransferred": false,
+    "targetValuesTransferred": false,
+    "computedAgeDerived": false,
+    "dobInferred": false,
+    "fuzzyMatchingUsed": false,
+    "nameOnlyCrossScopeMergeUsed": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}

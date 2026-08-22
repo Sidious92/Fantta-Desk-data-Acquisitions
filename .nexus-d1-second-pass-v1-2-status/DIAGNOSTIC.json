@@ -1,0 +1,30 @@
+{
+  "schema": "NEXUS_D1_SECOND_PASS_BUILD_DIAGNOSTIC_V1_2",
+  "capturedAt": "2026-08-22T14:43:57.795353Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "stdoutTail": "{\n  \"status\": \"PASS\",\n  \"currentOpen\": 127,\n  \"historicalOpen\": 155,\n  \"rawOpen\": 282,\n  \"deterministicCrossScopeOverlapGroups\": 1,\n  \"historicalUnresolvedIdGap\": 445\n}\n",
+  "stderrTail": "",
+  "governance": {
+    "fuzzyMatchingUsed": false,
+    "nameOnlyMergeUsed": false,
+    "computedAgeDerived": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  },
+  "output": {
+    "size": 550561,
+    "sha256": "c467ef28f149c229cdb45eca7f0d5d279bea4017093f98ee6d4fff887ed38240",
+    "scope": {
+      "currentFirstPassSubjects": 505,
+      "historicalResolvedPersonFirstPassSubjects": 2048,
+      "currentOpenRecords": 127,
+      "historicalOpenRecords": 155,
+      "rawOpenRecordsBeforeCrossScopeOverlap": 282,
+      "historicalFantacalcioIdsNeverResolvedToUnderstat": 445,
+      "historicalUnresolved445Disposition": "SEPARATE_D1_SECOND_PASS_SUBLOT_REQUIRED_FROM_D0_AUTHORITY"
+    },
+    "overlap": 1
+  }
+}
