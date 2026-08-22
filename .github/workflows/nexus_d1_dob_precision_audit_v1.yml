@@ -1,0 +1,58 @@
+name: Nexus D1 DOB Precision Audit v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-dob-precision-audit-v1/EXECUTE'
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Audit all first-pass verified DOB precisions
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from datetime import datetime,timezone
+          from pathlib import Path
+          cur=json.loads(Path('.nexus-d1-current-505-wikidata-v2-1-status/RESULT.json').read_text())
+          his=json.loads(Path('.nexus-d1-historical-2048-wikidata-v4-1-status/RESULT.json').read_text())
+          def audit(rows):
+              c=Counter(); low=[]
+              for r in rows:
+                  if r.get('dateOfBirthStatus')!='DOB_VERIFIED': continue
+                  d=r.get('dateOfBirth')
+                  if isinstance(d,dict):
+                      p=d.get('precision'); c[str(p)]+=1
+                      if p!=11:
+                          low.append({'subjectId':r.get('subjectId'),'understatPlayerId':r.get('understatPlayerId'),'bridgePersonKey':r.get('bridgePersonKey'),'fantacalcioSourcePlayerId':r.get('fantacalcioSourcePlayerId'),'lookupName':r.get('lookupName'),'lookupNames':r.get('lookupNames'),'contextClubs':r.get('contextClubs'),'wikidataItemId':r.get('wikidataItemId'),'precision':p,'rawTime':d.get('time')})
+                  elif isinstance(d,str):
+                      c['STRING']+=1
+                  else:
+                      c['OTHER']+=1; low.append({'subjectId':r.get('subjectId'),'representation':type(d).__name__})
+              return dict(sorted(c.items())),low
+          cc,cl=audit(cur['records']); hc,hl=audit(his['records'])
+          out={'schema':'NEXUS_D1_DOB_PRECISION_AUDIT_V1','status':'PASS','capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),'current':{'subjects':505,'firstPassDobVerified':cur['summary']['dobStatus']['DOB_VERIFIED'],'precisionCounts':cc,'nonDayPrecisionCount':len(cl),'nonDayPrecisionRecords':cl},'historical':{'subjects':2048,'firstPassDobVerified':his['summary']['dobStatus']['DOB_VERIFIED'],'precisionCounts':hc,'nonDayPrecisionCount':len(hl),'nonDayPrecisionRecords':hl},'governance':{'precision11RequiredForExactDob':True,'precisionBelow11PromotedToExactDob':False,'computedAgeDerived':False,'f1Started':False,'d2Started':False}}
+          dest=Path('data/nexus-d1/dob-precision-audit-v1');dest.mkdir(parents=True,exist_ok=True);(dest/'RESULT.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({'current':out['current'],'historical':out['historical']},ensure_ascii=False,indent=2))
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add data/nexus-d1/dob-precision-audit-v1/RESULT.json
+          git commit -m 'nexus: persist D1 DOB precision audit v1 [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
