@@ -1,0 +1,77 @@
+name: Nexus D1 Historical Non-Day DOB Fantacalcio v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-historical-nonday-dob-fantacalcio-v1/EXECUTE'
+
+permissions:
+  contents: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      OUT: .nexus-d1-historical-nonday-dob-fantacalcio-v1/output
+      DEST: data/nexus-d1/historical-nonday-dob-fantacalcio-v1
+      RELEASE_TAG: nexus-d1-historical-nonday-dob-fantacalcio-v1
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Recover six non-day DOB records
+        run: |
+          set -euo pipefail
+          rm -rf "$OUT"
+          python scripts/nexus-d1-recover-historical-nonday-dob-fantacalcio-v1.py | tee /tmp/acquire.log
+      - name: Assert fail-closed semantics
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('.nexus-d1-historical-nonday-dob-fantacalcio-v1/output/RESULT.json').read_text())
+          assert r['status']=='PASS' and r['summary']['subjects']==6 and r['summary']['requestFailures']==0
+          assert r['rules']['wikidataPrecisionBelow11NeverPromotedToExactDob'] is True
+          assert r['rules']['providerIdUsedAsGlobalPersonKey'] is False
+          assert r['rules']['fuzzyMatchingUsed'] is False
+          assert r['rules']['computedAgeDerived'] is False
+          assert r['rules']['f1Started'] is False and r['rules']['d2Started'] is False
+          PY
+      - name: Persist outcome
+        run: |
+          set -euo pipefail
+          mkdir -p "$DEST"
+          cp "$OUT/RESULT.json" "$DEST/RESULT.json"
+          cp "$OUT/MANIFEST.json" "$DEST/MANIFEST.json"
+          cp /tmp/acquire.log "$DEST/ACQUIRE.stdout.log"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$DEST"
+          git commit -m 'nexus: persist D1 historical non-day DOB recovery v1 [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Freeze raw recovery evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then echo 'release exists' >&2; exit 1; fi
+          tar -czf nexus-d1-historical-nonday-dob-fantacalcio-v1.tar.gz "$OUT" "$DEST"
+          sha256sum nexus-d1-historical-nonday-dob-fantacalcio-v1.tar.gz > nexus-d1-historical-nonday-dob-fantacalcio-v1.tar.gz.sha256
+          trap 'gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true' ERR
+          gh release create "$RELEASE_TAG" --draft --target "$(git rev-parse HEAD)" --title 'FantaNexus D1 Historical Non-Day DOB Recovery v1' --notes 'Recovery of six historical records whose Wikidata DOB was year precision only. Exact dates accepted only from D0-bridged Fantacalcio season+playerId observations. No fuzzy/name identity selection, age derivation, F1 or D2.'
+          gh release upload "$RELEASE_TAG" nexus-d1-historical-nonday-dob-fantacalcio-v1.tar.gz nexus-d1-historical-nonday-dob-fantacalcio-v1.tar.gz.sha256 "$DEST/RESULT.json" "$DEST/MANIFEST.json"
+          trap - ERR
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexus-d1-historical-nonday-dob-fantacalcio-v1
+          path: .nexus-d1-historical-nonday-dob-fantacalcio-v1/output/
+          retention-days: 30
