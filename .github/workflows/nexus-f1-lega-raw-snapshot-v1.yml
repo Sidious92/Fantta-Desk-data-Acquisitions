@@ -10,6 +10,14 @@ on:
       - 'scripts/nexus-f1-acquire-lega-snapshot-v1.mjs'
       - '.github/workflows/nexus-f1-lega-raw-snapshot-v1.yml'
       - '.nexus-f1-lega-snapshot-trigger'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'config/nexus-f1-lega-snapshot-v1.json'
+      - 'scripts/nexus-f1-acquire-lega-snapshot-v1.mjs'
+      - '.github/workflows/nexus-f1-lega-raw-snapshot-v1.yml'
+      - '.nexus-f1-lega-snapshot-trigger'
 
 permissions:
   contents: read
