@@ -1,0 +1,81 @@
+name: Nexus D1 Final v3 Mirror Completion v2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/nexus_d1_final_v3_mirror_completion_v2.yml'
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  complete:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      TAG: nexus-d1-identity-demographics-final-v3
+      ARCHIVE: nexus-d1-identity-demographics-final-v3.tar.gz
+      SHA: 8125b48152e260c211ec73387fd84c7a214ab0f56ed56c7dcc9ed5886659945d
+      BYTES: '178240'
+      OUT: .nexus-d1-final-v3-mirror-v2
+    steps:
+      - uses: actions/checkout@v6
+        with: {fetch-depth: 0}
+      - name: Read back frozen release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf "$OUT" && mkdir -p "$OUT"
+          gh release view "$TAG" >/dev/null
+          gh release download "$TAG" --dir "$OUT" --pattern "$ARCHIVE" --pattern "$ARCHIVE.sha256" --pattern 'IDENTITY_MASTER.json' --pattern 'D1_REGISTRY.json' --pattern 'MANIFEST.json'
+          test "$(sha256sum "$OUT/$ARCHIVE" | cut -d' ' -f1)" = "$SHA"
+          test "$(awk '{print $1}' "$OUT/$ARCHIVE.sha256")" = "$SHA"
+          test "$(stat -c %s "$OUT/$ARCHIVE")" = "$BYTES"
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          root=Path('.nexus-d1-final-v3-mirror-v2')
+          m=json.loads((root/'IDENTITY_MASTER.json').read_text());r=json.loads((root/'D1_REGISTRY.json').read_text());x=json.loads((root/'MANIFEST.json').read_text())
+          assert m['schema']=='NEXUS_D1_IDENTITY_MASTER_V3' and m['status']=='PASS'
+          assert m['scope']=={'currentSubjectRecords':505,'historicalUnderstatSubjectRecords':2048,'uniqueGlobalPersonKeys':2147,'historicalProviderScopedIdentityUnits':445}
+          assert r['counts']['current']=={'subjects':505,'dobVerified':505,'dobConflict':0}
+          assert r['counts']['historicalUnderstatBacked']=={'subjects':2048,'dobVerified':2047,'dobConflict':1}
+          assert len(r['typedResiduals']['dobConflicts'])==1
+          assert r['governance']['providerIdsUsedAsGlobalPersonKeys'] is False and r['governance']['fuzzyMatchingUsed'] is False
+          for name,k in [('IDENTITY_MASTER.json','identityMaster'),('D1_REGISTRY.json','registry')]:
+              b=(root/name).read_bytes();spec=x['outputs'][k];assert len(b)==spec['size'] and hashlib.sha256(b).hexdigest()==spec['sha256']
+          PY
+      - name: Persist mirror receipt
+        env:
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          python - <<'PY'
+          import json,os
+          from datetime import datetime,timezone
+          from pathlib import Path
+          d={'schema':'NEXUS_D1_MIRROR_PREP_RECEIPT_V3','protocolVersion':'1.1','status':'PASS_READY_FOR_PRIVATE_DRIVE_MIRROR','capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),'sourceReleaseTag':'nexus-d1-identity-demographics-final-v3','archiveFile':'nexus-d1-identity-demographics-final-v3.tar.gz','archiveBytes':178240,'archiveSha256':'8125b48152e260c211ec73387fd84c7a214ab0f56ed56c7dcc9ed5886659945d','githubActionsRunId':int(os.environ['RUN_ID']),'releaseArchiveReadbackSha256Pass':True,'releaseCanonicalPackageChecksPass':True,'governance':{'rebuildPerformed':False,'releaseRecreated':False,'rawMutation':False,'fuzzyMatchingUsed':False,'dobInferred':False,'computedAgeDerived':False,'trainingPromotionGranted':False,'f1Started':False,'d2Started':False},'nextRequiredAction':'UPLOAD_MIRROR_ARTIFACT_TO_PRIVATE_DRIVE_AND_VERIFY_READBACK'}
+          Path('.nexus-d1-final-v3-mirror-v2/D1_MIRROR_PREP_RECEIPT.json').write_text(json.dumps(d,indent=2)+'\n')
+          p=Path('data/nexus-d1/final-v3/D1_MIRROR_PREP_RECEIPT.json');p.write_text(json.dumps(d,indent=2)+'\n')
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add data/nexus-d1/final-v3/D1_MIRROR_PREP_RECEIPT.json
+          git commit -m 'nexus: persist D1 final v3 mirror-prep receipt [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Complete existing release receipts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload "$TAG" data/nexus-d1/final-v3/D1_PUBLIC_FREEZE_RECEIPT.json --clobber
+          gh release upload "$TAG" data/nexus-d1/final-v3/D1_MIRROR_PREP_RECEIPT.json --clobber
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-identity-demographics-final-v3-mirror
+          path: .nexus-d1-final-v3-mirror-v2/
+          if-no-files-found: error
+          retention-days: 30
