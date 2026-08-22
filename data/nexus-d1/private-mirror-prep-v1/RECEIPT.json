@@ -1,0 +1,19 @@
+{
+  "schema": "NEXUS_D1_PRIVATE_MIRROR_PREP_RECEIPT_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS",
+  "capturedAt": "2026-08-22T17:53:43.281812Z",
+  "bundleFile": "nexus-d1-private-mirror-v1.tar.gz",
+  "bundleBytes": 178643,
+  "bundleSha256": "38afab593a8d9a4c81075c8029322ecf4abf7f8be4ec159d48e8337ceae431d9",
+  "githubActionsRunId": 32589105841,
+  "sourcePackage": "data/nexus-d1/final-v3",
+  "sourcePublicArchiveSha256": "8125b48152e260c211ec73387fd84c7a214ab0f56ed56c7dcc9ed5886659945d",
+  "governance": {
+    "mirrorOnly": true,
+    "scientificRecomputation": false,
+    "rawMutation": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
