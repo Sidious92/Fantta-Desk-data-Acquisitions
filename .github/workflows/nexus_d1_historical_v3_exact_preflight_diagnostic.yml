@@ -1,0 +1,75 @@
+name: Nexus D1 Historical v3 Exact Preflight Diagnostic
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-historical-v3-exact-preflight/EXECUTE'
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Run exact preflight with named checks
+        run: |
+          set -euo pipefail
+          mkdir -p .nexus-d1-historical-v3-exact-preflight-status
+          python - <<'PY'
+          import base64, hashlib, json, lzma
+          from datetime import datetime, timezone
+          from pathlib import Path
+          m=json.loads(Path('data/nexus-d1/historical-resolved-person-subjects-v3-manifest.json').read_text())
+          checks=[]
+          def check(name, cond, detail=None):
+              checks.append({'name':name,'pass':bool(cond),'detail':detail})
+          check('schema',m['schema']=='NEXUS_D1_HISTORICAL_RESOLVED_PERSON_SUBJECT_SURFACE_MANIFEST_V3',m['schema'])
+          check('subjectCount_manifest',m['subjectCount']==2048,m['subjectCount'])
+          check('semanticReconstructionFromFrozenD0Authority',m['governance']['semanticReconstructionFromFrozenD0Authority'] is True)
+          check('v2TruncatedTransportReused_false',m['governance']['v2TruncatedTransportReused'] is False)
+          check('semanticPayloadChangedFromV2Authority_false',m['governance']['semanticPayloadChangedFromV2Authority'] is False)
+          check('providerIdUsedAsGlobalPersonKey_false',m['surfacePolicy']['providerIdUsedAsGlobalPersonKey'] is False)
+          check('unresolvedHistoricalIdsSilentlyDropped_false',m['surfacePolicy']['unresolvedHistoricalIdsSilentlyDropped'] is False)
+          check('performanceStatisticsTransferred_false',m['privacyMinimization']['performanceStatisticsTransferred'] is False)
+          parts=[]
+          for c in m['payload']['chunks']:
+              text=Path(c['path']).read_text().strip(); parts.append(text)
+              check('chunk_chars:'+c['path'],len(text)==c['chars'],{'actual':len(text),'expected':c['chars']})
+              got=hashlib.sha256(text.encode()).hexdigest(); check('chunk_sha:'+c['path'],got==c['textSha256'],{'actual':got,'expected':c['textSha256']})
+          encoded=''.join(parts); check('base64Chars',len(encoded)==57516,len(encoded))
+          xz=base64.b64decode(encoded,validate=True); check('xzBytes',len(xz)==43136,len(xz)); check('xzSha256',hashlib.sha256(xz).hexdigest()=='c1337f4d0dff552e99e56909267640be47df8ccccdf242987b6358c0b758f846',hashlib.sha256(xz).hexdigest())
+          raw=lzma.decompress(xz); check('decodedJsonBytes',len(raw)==508959,len(raw)); check('decodedJsonSha256',hashlib.sha256(raw).hexdigest()=='d472fe00c88e70b77adc8a38093360042a632559a9ac52366f8da3b37aec5660',hashlib.sha256(raw).hexdigest())
+          d=json.loads(raw); subjects=d['subjects']
+          check('subjects_len',len(subjects)==2048,len(subjects))
+          check('unique_subjectId',len({s['subjectId'] for s in subjects})==2048,len({s['subjectId'] for s in subjects}))
+          check('unique_understatPlayerId',len({s['understatPlayerId'] for s in subjects})==2048,len({s['understatPlayerId'] for s in subjects}))
+          check('manifest_understatNameConflicts_zero',m['checks']['understatNameConflicts']==0,m['checks']['understatNameConflicts'])
+          check('manifest_collision65_true',m['checks']['knownFantacalcioId65CollisionPreserved'] is True,m['checks']['knownFantacalcioId65CollisionPreserved'])
+          a=[s for s in subjects if '65' in s.get('fantacalcioObservationIds',[])]
+          check('id65_understat1981',any(s['understatPlayerId']=='1981' for s in a),a)
+          check('id65_understat7973',any(s['understatPlayerId']=='7973' for s in a),a)
+          failed=[x for x in checks if not x['pass']]
+          out={'schema':'NEXUS_D1_HISTORICAL_V3_EXACT_PREFLIGHT_DIAGNOSTIC_V1','capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),'status':'PASS' if not failed else 'FAIL','failed':failed,'checks':checks}
+          Path('.nexus-d1-historical-v3-exact-preflight-status/DIAGNOSTIC.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(out,ensure_ascii=False,indent=2))
+          PY
+      - name: Persist exact diagnostic
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-d1-historical-v3-exact-preflight-status/DIAGNOSTIC.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus: persist D1 historical v3 exact preflight diagnostic [skip ci]'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
