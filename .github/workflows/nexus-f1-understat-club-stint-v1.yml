@@ -1,0 +1,150 @@
+name: Nexus F1 Understat Club Stint Snapshot v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/nexus-input-v1-1-f1-understat-snapshot
+    paths:
+      - 'scripts/nexus-f1-acquire-understat-club-segments-v1.mjs'
+      - 'scripts/nexus-f1-acquire-understat-stint-chronology-v1.mjs'
+      - 'scripts/lib/nexus-f1-raw-stint-contract-v1.mjs'
+      - 'scripts/lib/nexus-f1-understat-club-segments-v1.mjs'
+      - 'scripts/lib/nexus-f1-understat-stint-resolution-v1.mjs'
+      - '.github/workflows/nexus-f1-understat-club-stint-v1.yml'
+      - '.nexus-f1-understat-snapshot-trigger'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nexus-f1-understat-club-stint-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: Static syntax check
+        run: |
+          node --check scripts/nexus-f1-acquire-understat-club-segments-v1.mjs
+          node --check scripts/nexus-f1-acquire-understat-stint-chronology-v1.mjs
+          node --check scripts/lib/nexus-f1-raw-stint-contract-v1.mjs
+          node --check scripts/lib/nexus-f1-understat-club-segments-v1.mjs
+          node --check scripts/lib/nexus-f1-understat-stint-resolution-v1.mjs
+      - name: Acquire and reconcile Understat player-season-club RAW
+        env:
+          NEXUS_F1_UNDERSTAT_CLUB_OUTPUT: .nexus-f1-understat-club-segments-v1
+          NEXUS_F1_UNDERSTAT_REQUEST_SPACING_MS: '500'
+        run: node scripts/nexus-f1-acquire-understat-club-segments-v1.mjs
+      - name: Resolve observed multi-club stint chronology
+        env:
+          NEXUS_F1_UNDERSTAT_CLUB_OUTPUT: .nexus-f1-understat-club-segments-v1
+          NEXUS_F1_UNDERSTAT_REQUEST_SPACING_MS: '500'
+        run: node scripts/nexus-f1-acquire-understat-stint-chronology-v1.mjs
+      - name: Require fail-closed audits PASS
+        shell: bash
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const fs=require('fs');
+          const a=JSON.parse(fs.readFileSync('.nexus-f1-understat-club-segments-v1/audit.json','utf8'));
+          const s=JSON.parse(fs.readFileSync('.nexus-f1-understat-club-segments-v1/stint-chronology-audit.json','utf8'));
+          if(a.status!=='PASS'||a.seasonAudits?.length!==12) throw new Error('club-segment audit not PASS');
+          if(s.status!=='PASS'||s.seasonAudits?.length!==12) throw new Error('stint chronology audit not PASS');
+          for(const x of a.seasonAudits){if(x.reconciliation?.status!=='PASS'||x.reconciliation?.missingSegments!==0||x.reconciliation?.extraSegments!==0||x.reconciliation?.mismatches!==0)throw new Error(`reconciliation fail ${x.season}`)}
+          console.log(JSON.stringify({status:'PASS',clubSegmentRows:a.totalSegmentRows,multiClubPlayerSeasons:a.totalMultiClubPlayerSeasons,chronologyPlayers:s.targetMultiClubSourcePlayers,stintUnresolved:s.seasonAudits.reduce((n,x)=>n+x.stintUnresolvedRecords,0)},null,2));
+          NODE
+      - name: Build deterministic preservation bundle and split safely
+        id: bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner -cf - .nexus-f1-understat-club-segments-v1 | gzip -n > nexus-f1-understat-club-stint-v1.tar.gz
+          BUNDLE_SHA=$(sha256sum nexus-f1-understat-club-stint-v1.tar.gz | awk '{print $1}')
+          AUDIT_SHA=$(sha256sum .nexus-f1-understat-club-segments-v1/audit.json | awk '{print $1}')
+          STINT_AUDIT_SHA=$(sha256sum .nexus-f1-understat-club-segments-v1/stint-chronology-audit.json | awk '{print $1}')
+          mkdir -p bundle-parts
+          split -b 40m -d -a 3 nexus-f1-understat-club-stint-v1.tar.gz bundle-parts/part-
+          node - <<'NODE'
+          const fs=require('fs'),crypto=require('crypto'),path=require('path');
+          const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+          const files=fs.readdirSync('bundle-parts').sort().map(name=>{const b=fs.readFileSync(path.join('bundle-parts',name));return{name,bytes:b.length,sha256:sha(b)}});
+          fs.writeFileSync('BUNDLE_PARTS.json',JSON.stringify({schema:'NEXUS_F1_UNDERSTAT_BUNDLE_PARTS_V1',status:'PASS',bundleSha256:process.env.BUNDLE_SHA,parts:files},null,2)+'\n');
+          NODE
+        env:
+          BUNDLE_SHA: placeholder
+      - name: Finalize bundle metadata
+        id: meta
+        shell: bash
+        run: |
+          set -euo pipefail
+          BUNDLE_SHA=$(sha256sum nexus-f1-understat-club-stint-v1.tar.gz | awk '{print $1}')
+          AUDIT_SHA=$(sha256sum .nexus-f1-understat-club-segments-v1/audit.json | awk '{print $1}')
+          STINT_AUDIT_SHA=$(sha256sum .nexus-f1-understat-club-segments-v1/stint-chronology-audit.json | awk '{print $1}')
+          BUNDLE_SHA="$BUNDLE_SHA" node - <<'NODE'
+          const fs=require('fs');const p='BUNDLE_PARTS.json';const x=JSON.parse(fs.readFileSync(p,'utf8'));x.bundleSha256=process.env.BUNDLE_SHA;fs.writeFileSync(p,JSON.stringify(x,null,2)+'\n');
+          NODE
+          echo "bundle_sha=$BUNDLE_SHA" >> "$GITHUB_OUTPUT"
+          echo "audit_sha=$AUDIT_SHA" >> "$GITHUB_OUTPUT"
+          echo "stint_audit_sha=$STINT_AUDIT_SHA" >> "$GITHUB_OUTPUT"
+      - name: Persist immutable content-addressed snapshot
+        env:
+          BUNDLE_SHA: ${{ steps.meta.outputs.bundle_sha }}
+          AUDIT_SHA: ${{ steps.meta.outputs.audit_sha }}
+          STINT_AUDIT_SHA: ${{ steps.meta.outputs.stint_audit_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          DEST="data/nexus-f1/understat-club-stint-v1/$BUNDLE_SHA"
+          mkdir -p "$DEST/parts"
+          cp bundle-parts/* "$DEST/parts/"
+          cp BUNDLE_PARTS.json "$DEST/BUNDLE_PARTS.json"
+          cp .nexus-f1-understat-club-segments-v1/audit.json "$DEST/club-segment-audit.json"
+          cp .nexus-f1-understat-club-segments-v1/stint-chronology-audit.json "$DEST/stint-chronology-audit.json"
+          node - <<'NODE'
+          const fs=require('fs');const dest=`data/nexus-f1/understat-club-stint-v1/${process.env.BUNDLE_SHA}`;
+          const receipt={schema:'NEXUS_F1_UNDERSTAT_DURABLE_PRESERVATION_RECEIPT_V1',protocolVersion:'1.1',status:'PERSISTED_PENDING_REMOTE_READBACK',sourceCommit:process.env.GITHUB_SHA,githubRunId:Number(process.env.GITHUB_RUN_ID),bundleSha256:process.env.BUNDLE_SHA,clubSegmentAuditSha256:process.env.AUDIT_SHA,stintChronologyAuditSha256:process.env.STINT_AUDIT_SHA,remoteReadbackSha256Pass:false,immutablePath:dest,governance:{f1Closed:false,f2PlusAuthorized:false,canonicalMutation:false}};
+          fs.writeFileSync(`${dest}/PRESERVATION_RECEIPT.json`,JSON.stringify(receipt,null,2)+'\n');
+          NODE
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$DEST"
+          git commit -m "nexus f1: persist Understat club/stint snapshot $BUNDLE_SHA [skip ci]"
+          git push origin HEAD:feat/nexus-input-v1-1-f1-understat-snapshot
+      - name: Verify remote read-back and freeze receipt
+        env:
+          BUNDLE_SHA: ${{ steps.meta.outputs.bundle_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          BRANCH='feat/nexus-input-v1-1-f1-understat-snapshot'
+          DEST="data/nexus-f1/understat-club-stint-v1/$BUNDLE_SHA"
+          git fetch origin "$BRANCH"
+          node - <<'NODE'
+          const fs=require('fs'),cp=require('child_process'),crypto=require('crypto');
+          const dest=`data/nexus-f1/understat-club-stint-v1/${process.env.BUNDLE_SHA}`;
+          const m=JSON.parse(fs.readFileSync(`${dest}/BUNDLE_PARTS.json`,'utf8'));
+          for(const p of m.parts){const b=cp.execFileSync('git',['show',`origin/feat/nexus-input-v1-1-f1-understat-snapshot:${dest}/parts/${p.name}`],{maxBuffer:64*1024*1024});const h=crypto.createHash('sha256').update(b).digest('hex');if(h!==p.sha256)throw new Error(`remote part hash mismatch ${p.name}`)}
+          const rpath=`${dest}/PRESERVATION_RECEIPT.json`;const r=JSON.parse(fs.readFileSync(rpath,'utf8'));r.status='PASS_DURABLY_PRESERVED_REMOTE_GIT_READBACK_SHA256';r.remoteReadbackSha256Pass=true;r.verifiedAt=new Date().toISOString();fs.writeFileSync(rpath,JSON.stringify(r,null,2)+'\n');
+          NODE
+          git add "$DEST/PRESERVATION_RECEIPT.json"
+          git commit -m "nexus f1: verify Understat snapshot readback $BUNDLE_SHA [skip ci]"
+          git push origin HEAD:"$BRANCH"
+      - name: Upload transient convenience artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f1-understat-club-stint-v1
+          path: |
+            BUNDLE_PARTS.json
+            .nexus-f1-understat-club-segments-v1/audit.json
+            .nexus-f1-understat-club-segments-v1/stint-chronology-audit.json
+          if-no-files-found: error
+          retention-days: 7
