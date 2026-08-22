@@ -1,0 +1,11 @@
+{
+  "subjects": 46,
+  "candidateRequests": 107,
+  "recordsCompleted": 46,
+  "statusCounts": {
+    "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION": 44,
+    "DOB_CONFLICT_UNRESOLVED_NO_ACCEPTED_FC_OBSERVATION": 2
+  },
+  "resolvedConflicts": 44,
+  "requestFailures": 0
+}

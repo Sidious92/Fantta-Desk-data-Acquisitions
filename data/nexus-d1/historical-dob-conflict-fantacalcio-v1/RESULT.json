@@ -1,0 +1,3165 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_DOB_CONFLICT_FANTACALCIO_RESULT_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS",
+  "capturedAt": "2026-08-22T16:40:13.783334Z",
+  "rules": {
+    "identityAuthority": "VERIFIED_WIKIDATA_QID_PLUS_D0_UNDERSTAT_PERSON_BRIDGE",
+    "providerObservationKey": [
+      "Fantacalcio",
+      "season",
+      "fantacalcioPlayerId"
+    ],
+    "providerIdUsedAsGlobalHistoricalPersonKey": false,
+    "exactSeasonPlayerIdBindingRequired": true,
+    "lookupNameTokenSubsetConsistencyRequired": true,
+    "onlyExistingWikidataConflictDateMayResolve": true,
+    "nameSearchUsed": false,
+    "fuzzyMatchingUsed": false,
+    "dobUsedForIdentitySelection": false,
+    "computedAgeDerived": false,
+    "historicalAsOfGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  },
+  "summary": {
+    "subjects": 46,
+    "candidateRequests": 107,
+    "recordsCompleted": 46,
+    "statusCounts": {
+      "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION": 44,
+      "DOB_CONFLICT_UNRESOLVED_NO_ACCEPTED_FC_OBSERVATION": 2
+    },
+    "resolvedConflicts": 44,
+    "requestFailures": 0
+  },
+  "requestFailures": [],
+  "records": [
+    {
+      "subjectId": "historical-understat-307",
+      "bridgePersonKey": "understat:307",
+      "understatPlayerId": "307",
+      "wikidataItemId": "Q21084036",
+      "lookupNames": [
+        "Suat Serdar"
+      ],
+      "existingConflictDates": [
+        "1997-04-01",
+        "1997-04-11"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1997-04-11"
+      ],
+      "matchingExistingConflictDates": [
+        "1997-04-11"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1997-04-11",
+      "acceptedObservationCount": 3,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "6458",
+          "season": "2023/24",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6458/2023-24",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6458/2023-24",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6458/2023-24",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Serdar Suat",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1997-04-11"
+          ],
+          "rawPath": "raw/000--u307--fc6458--2023-24.html",
+          "rawSha256": "3842c3519abf959fe511c949746574960deee1fe7cb3bcf41b357dcf2c41aaaf",
+          "rawBytes": 229564,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1997-04-11"
+        },
+        {
+          "fantacalcioPlayerId": "6458",
+          "season": "2024/25",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6458/2024-25",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6458/2024-25",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6458/2024-25",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Serdar Suat",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1997-04-11"
+          ],
+          "rawPath": "raw/000--u307--fc6458--2024-25.html",
+          "rawSha256": "606bb8acc5a0741ddacb35421a6c63227572838ebf0f455b4307a5090078af5b",
+          "rawBytes": 230253,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1997-04-11"
+        },
+        {
+          "fantacalcioPlayerId": "6458",
+          "season": "2025/26",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6458/2025-26",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6458/2025-26",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6458/2025-26",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Suat Serdar",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1997-04-11"
+          ],
+          "rawPath": "raw/000--u307--fc6458--2025-26.html",
+          "rawSha256": "13d3bc70f0b7410df84801d5fd096dcf3ab411897f8f1c3f13f4c34e180b152f",
+          "rawBytes": 228964,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1997-04-11"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1030",
+      "bridgePersonKey": "understat:1030",
+      "understatPlayerId": "1030",
+      "wikidataItemId": "Q10709",
+      "lookupNames": [
+        "Fernando Forestieri"
+      ],
+      "existingConflictDates": [
+        "1990-01-15",
+        "1990-01-16"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1990-01-16"
+      ],
+      "matchingExistingConflictDates": [
+        "1990-01-16"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1990-01-16",
+      "acceptedObservationCount": 2,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "5004",
+          "season": "2020/21",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5004/2020-21",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5004/2020-21",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5004/2020-21",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Forestieri Fernando",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1990-01-16"
+          ],
+          "rawPath": "raw/001--u1030--fc5004--2020-21.html",
+          "rawSha256": "4ff4746a31fc400798da183f3a4264a48fce08a096f2e3eae7e4d3dc80775a04",
+          "rawBytes": 226633,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1990-01-16"
+        },
+        {
+          "fantacalcioPlayerId": "5004",
+          "season": "2021/22",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5004/2021-22",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5004/2021-22",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5004/2021-22",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Forestieri Fernando",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1990-01-16"
+          ],
+          "rawPath": "raw/001--u1030--fc5004--2021-22.html",
+          "rawSha256": "adfc6cb0f533b0cdc34e335d0a46b668f1f1bf4d6602940367255cea0dc91c1e",
+          "rawBytes": 222734,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1990-01-16"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1112",
+      "bridgePersonKey": "understat:1112",
+      "understatPlayerId": "1112",
+      "wikidataItemId": "Q3016737",
+      "lookupNames": [
+        "Isaac Cofie"
+      ],
+      "existingConflictDates": [
+        "1991-04-05",
+        "1991-09-20"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1991-04-05"
+      ],
+      "matchingExistingConflictDates": [
+        "1991-04-05"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1991-04-05",
+      "acceptedObservationCount": 3,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "232",
+          "season": "2015/16",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/232/2015-16",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/232/2015-16",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/232/2015-16",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Cofie Isaac",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1991-04-05"
+          ],
+          "rawPath": "raw/002--u1112--fc232--2015-16.html",
+          "rawSha256": "925f2ad649187bc8796c1eeedc40e16e81693d8f0e6a4657e5e9c199f754d357",
+          "rawBytes": 231271,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1991-04-05"
+        },
+        {
+          "fantacalcioPlayerId": "232",
+          "season": "2016/17",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/232/2016-17",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/232/2016-17",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/232/2016-17",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Cofie Isaac",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1991-04-05"
+          ],
+          "rawPath": "raw/002--u1112--fc232--2016-17.html",
+          "rawSha256": "e7eeee7e2cb2aa7ec2676adf5c6be119b34c0e7fa8d48a70848e3fbb475cabcf",
+          "rawBytes": 225586,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1991-04-05"
+        },
+        {
+          "fantacalcioPlayerId": "232",
+          "season": "2017/18",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/232/2017-18",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/232/2017-18",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/232/2017-18",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Cofie Isaac",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1991-04-05"
+          ],
+          "rawPath": "raw/002--u1112--fc232--2017-18.html",
+          "rawSha256": "3190f9036307ee67ac89d048b7021cf1d30b71cb8e6409fd904b9355f0ff2f93",
+          "rawBytes": 225146,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1991-04-05"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1152",
+      "bridgePersonKey": "understat:1152",
+      "understatPlayerId": "1152",
+      "wikidataItemId": "Q14755607",
+      "lookupNames": [
+        "Lucas Evangelista"
+      ],
+      "existingConflictDates": [
+        "1995-02-06",
+        "1995-05-06"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1995-05-06"
+      ],
+      "matchingExistingConflictDates": [
+        "1995-05-06"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1995-05-06",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "595",
+          "season": "2016/17",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/595/2016-17",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/595/2016-17",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/595/2016-17",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Lucas Evangelista",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1995-05-06"
+          ],
+          "rawPath": "raw/003--u1152--fc595--2016-17.html",
+          "rawSha256": "1bbd3493c3fc09e06e1ae44257d01368f5038d748ac027668ac6c6590ebdb81a",
+          "rawBytes": 223910,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1995-05-06"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1174",
+      "bridgePersonKey": "understat:1174",
+      "understatPlayerId": "1174",
+      "wikidataItemId": "Q5222878",
+      "lookupNames": [
+        "Dario Zuparic"
+      ],
+      "existingConflictDates": [
+        "1992-03-05",
+        "1992-05-03"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1992-05-03"
+      ],
+      "matchingExistingConflictDates": [
+        "1992-05-03"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1992-05-03",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "1953",
+          "season": "2016/17",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1953/2016-17",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1953/2016-17",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1953/2016-17",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Zuparic Dario",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1992-05-03"
+          ],
+          "rawPath": "raw/004--u1174--fc1953--2016-17.html",
+          "rawSha256": "d402e9d67938390ac1d15879b4b54bd7926786e4c6483aaf4581f558529e476d",
+          "rawBytes": 225632,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1992-05-03"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1181",
+      "bridgePersonKey": "understat:1181",
+      "understatPlayerId": "1181",
+      "wikidataItemId": "Q18021956",
+      "lookupNames": [
+        "Antonio Barreca"
+      ],
+      "existingConflictDates": [
+        "1995-03-18",
+        "1995-03-25"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1995-03-18"
+      ],
+      "matchingExistingConflictDates": [
+        "1995-03-18"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1995-03-18",
+      "acceptedObservationCount": 4,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "1979",
+          "season": "2016/17",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1979/2016-17",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1979/2016-17",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1979/2016-17",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Barreca Antonio",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1995-03-18"
+          ],
+          "rawPath": "raw/005--u1181--fc1979--2016-17.html",
+          "rawSha256": "a2a9bd89a82ca39296826da00762f2acdd05beb38acc2009504514fd3d4ad93b",
+          "rawBytes": 227867,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1995-03-18"
+        },
+        {
+          "fantacalcioPlayerId": "1979",
+          "season": "2017/18",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1979/2017-18",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1979/2017-18",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1979/2017-18",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Barreca Antonio",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1995-03-18"
+          ],
+          "rawPath": "raw/005--u1181--fc1979--2017-18.html",
+          "rawSha256": "9a3a7e49bf3303f1f6852a4c2137b50596b1914d22823a149939f132ae44f328",
+          "rawBytes": 221554,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1995-03-18"
+        },
+        {
+          "fantacalcioPlayerId": "1979",
+          "season": "2019/20",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1979/2019-20",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1979/2019-20",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1979/2019-20",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Barreca Antonio",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1995-03-18"
+          ],
+          "rawPath": "raw/005--u1181--fc1979--2019-20.html",
+          "rawSha256": "318aecc3882f9be35d30f3a0d0cbc9ef6d9f61a8ce9d510e5aae5c7f30e383e8",
+          "rawBytes": 230689,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1995-03-18"
+        },
+        {
+          "fantacalcioPlayerId": "1979",
+          "season": "2020/21",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1979/2020-21",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1979/2020-21",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1979/2020-21",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Barreca Antonio",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1995-03-18"
+          ],
+          "rawPath": "raw/005--u1181--fc1979--2020-21.html",
+          "rawSha256": "954a3da4de3e8cff944378d26fd0c8d0057a006786e382c82185c1364024c9f9",
+          "rawBytes": 215011,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1995-03-18"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1332",
+      "bridgePersonKey": "understat:1332",
+      "understatPlayerId": "1332",
+      "wikidataItemId": "Q528696",
+      "lookupNames": [
+        "Massimo Gobbi"
+      ],
+      "existingConflictDates": [
+        "1980-01-31",
+        "1980-10-31"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1980-10-31"
+      ],
+      "matchingExistingConflictDates": [
+        "1980-10-31"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1980-10-31",
+      "acceptedObservationCount": 4,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "105",
+          "season": "2015/16",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/105/2015-16",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/105/2015-16",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/105/2015-16",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Gobbi Massimo",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1980-10-31"
+          ],
+          "rawPath": "raw/006--u1332--fc105--2015-16.html",
+          "rawSha256": "79159fdf18816391b52923c3941590b574879cac9e14c372b67aa23720d8f2d9",
+          "rawBytes": 236593,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1980-10-31"
+        },
+        {
+          "fantacalcioPlayerId": "105",
+          "season": "2016/17",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/105/2016-17",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/105/2016-17",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/105/2016-17",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Gobbi Massimo",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1980-10-31"
+          ],
+          "rawPath": "raw/006--u1332--fc105--2016-17.html",
+          "rawSha256": "fa7402ef150e62666e7510fec8b4be2adf6b4dc6ac95d33ba0f9418a3163ae3f",
+          "rawBytes": 232062,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1980-10-31"
+        },
+        {
+          "fantacalcioPlayerId": "105",
+          "season": "2017/18",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/105/2017-18",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/105/2017-18",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/105/2017-18",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Gobbi Massimo",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1980-10-31"
+          ],
+          "rawPath": "raw/006--u1332--fc105--2017-18.html",
+          "rawSha256": "556e69236dfebc011cc712d7cdb9257f39c0d7dc6ec22e2a6dd8baa08e3f1bd9",
+          "rawBytes": 227175,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1980-10-31"
+        },
+        {
+          "fantacalcioPlayerId": "105",
+          "season": "2018/19",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/105/2018-19",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/105/2018-19",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/105/2018-19",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Gobbi Massimo",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1980-10-31"
+          ],
+          "rawPath": "raw/006--u1332--fc105--2018-19.html",
+          "rawSha256": "21b790122e22ad021d377aef259183e4daf73227b7330406058c6602bdf17fc6",
+          "rawBytes": 227373,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1980-10-31"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1354",
+      "bridgePersonKey": "understat:1354",
+      "understatPlayerId": "1354",
+      "wikidataItemId": "Q5558173",
+      "lookupNames": [
+        "Gianmarco Ferrari"
+      ],
+      "existingConflictDates": [
+        "1992-02-15",
+        "1992-05-15"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1992-05-15"
+      ],
+      "matchingExistingConflictDates": [
+        "1992-05-15"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1992-05-15",
+      "acceptedObservationCount": 8,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "1895",
+          "season": "2016/17",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2016-17",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2016-17",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2016-17",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ferrari Gianmarco",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1992-05-15"
+          ],
+          "rawPath": "raw/007--u1354--fc1895--2016-17.html",
+          "rawSha256": "05afbb2dc9ea0cdc95b4c4b23a1dd44772012af392fd52cc5311e77500d60675",
+          "rawBytes": 234794,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1992-05-15"
+        },
+        {
+          "fantacalcioPlayerId": "1895",
+          "season": "2017/18",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2017-18",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2017-18",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2017-18",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ferrari Gianmarco",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1992-05-15"
+          ],
+          "rawPath": "raw/007--u1354--fc1895--2017-18.html",
+          "rawSha256": "998023edb64cd2e58f10407ff0433f112aaebe5a2832041d03ee0438dda38340",
+          "rawBytes": 228075,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1992-05-15"
+        },
+        {
+          "fantacalcioPlayerId": "1895",
+          "season": "2018/19",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2018-19",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2018-19",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2018-19",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ferrari Gianmarco",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1992-05-15"
+          ],
+          "rawPath": "raw/007--u1354--fc1895--2018-19.html",
+          "rawSha256": "893a4ee73a7a9e0bcf216447346b5fb10cf2fd7e120b7b8fe28c6af457e5b527",
+          "rawBytes": 231497,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1992-05-15"
+        },
+        {
+          "fantacalcioPlayerId": "1895",
+          "season": "2019/20",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2019-20",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2019-20",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2019-20",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ferrari Gianmarco",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1992-05-15"
+          ],
+          "rawPath": "raw/007--u1354--fc1895--2019-20.html",
+          "rawSha256": "5564ce2587077a3a81d5b9e8d781c00131b75e9fa9bb6696f5117ae43fbb2c23",
+          "rawBytes": 228557,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1992-05-15"
+        },
+        {
+          "fantacalcioPlayerId": "1895",
+          "season": "2020/21",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2020-21",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2020-21",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2020-21",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ferrari Gianmarco",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1992-05-15"
+          ],
+          "rawPath": "raw/007--u1354--fc1895--2020-21.html",
+          "rawSha256": "77523ecc6435f20352ba4a452231a1c5af4b9dbec08fecb1e4e1856acfaa1369",
+          "rawBytes": 232142,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1992-05-15"
+        },
+        {
+          "fantacalcioPlayerId": "1895",
+          "season": "2021/22",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2021-22",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2021-22",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2021-22",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ferrari Gianmarco",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1992-05-15"
+          ],
+          "rawPath": "raw/007--u1354--fc1895--2021-22.html",
+          "rawSha256": "d4a754c3f4f3a4dfbca3237d7ecac7da64d45ea53cb85c85791a53550364f0d6",
+          "rawBytes": 231913,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1992-05-15"
+        },
+        {
+          "fantacalcioPlayerId": "1895",
+          "season": "2022/23",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2022-23",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2022-23",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2022-23",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ferrari Gianmarco",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1992-05-15"
+          ],
+          "rawPath": "raw/007--u1354--fc1895--2022-23.html",
+          "rawSha256": "32800a9dfc1393124a7d247205b341ac63c2a8da5c1e4ca2ac705947a3079cdb",
+          "rawBytes": 229503,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1992-05-15"
+        },
+        {
+          "fantacalcioPlayerId": "1895",
+          "season": "2023/24",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2023-24",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2023-24",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1895/2023-24",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ferrari Gianmarco",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1992-05-15"
+          ],
+          "rawPath": "raw/007--u1354--fc1895--2023-24.html",
+          "rawSha256": "26af690427c2ae1f1ccb89f58e06a03612f0c66d83d7cc3163bf327dd4c5b444",
+          "rawBytes": 229344,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1992-05-15"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1406",
+      "bridgePersonKey": "understat:1406",
+      "understatPlayerId": "1406",
+      "wikidataItemId": "Q560174",
+      "lookupNames": [
+        "Marco Sau"
+      ],
+      "existingConflictDates": [
+        "1987-11-03",
+        "1987-12-03"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1987-11-03"
+      ],
+      "matchingExistingConflictDates": [
+        "1987-11-03"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1987-11-03",
+      "acceptedObservationCount": 4,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "1882",
+          "season": "2016/17",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1882/2016-17",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1882/2016-17",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1882/2016-17",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Sau Marco",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1987-11-03"
+          ],
+          "rawPath": "raw/008--u1406--fc1882--2016-17.html",
+          "rawSha256": "894a50d33f3abe32b9457ecec02613e238b14098cb9946b35a022d006ace9388",
+          "rawBytes": 235083,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1987-11-03"
+        },
+        {
+          "fantacalcioPlayerId": "1882",
+          "season": "2017/18",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1882/2017-18",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1882/2017-18",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1882/2017-18",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Sau Marco",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1987-11-03"
+          ],
+          "rawPath": "raw/008--u1406--fc1882--2017-18.html",
+          "rawSha256": "e66177dbcf9a3ea505365bcaef94fa488a6d9eb5061ac4c374a5fb925be053af",
+          "rawBytes": 227363,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1987-11-03"
+        },
+        {
+          "fantacalcioPlayerId": "1882",
+          "season": "2018/19",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1882/2018-19",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1882/2018-19",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1882/2018-19",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Sau Marco",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1987-11-03"
+          ],
+          "rawPath": "raw/008--u1406--fc1882--2018-19.html",
+          "rawSha256": "bf50b7e40690eead9f0a5c89d009c6589e057027e7b690a55522c94e20c76929",
+          "rawBytes": 223603,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1987-11-03"
+        },
+        {
+          "fantacalcioPlayerId": "1882",
+          "season": "2020/21",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1882/2020-21",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1882/2020-21",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1882/2020-21",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Sau Marco",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1987-11-03"
+          ],
+          "rawPath": "raw/008--u1406--fc1882--2020-21.html",
+          "rawSha256": "bf1e44334ef2e9139761ef5423fdedf7f1a8869ef4fda608ff4b5276ba78e8cf",
+          "rawBytes": 227517,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1987-11-03"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1431",
+      "bridgePersonKey": "understat:1431",
+      "understatPlayerId": "1431",
+      "wikidataItemId": "Q1776713",
+      "lookupNames": [
+        "Sebastien De Maio"
+      ],
+      "existingConflictDates": [
+        "1987-03-05",
+        "1987-05-03"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1987-03-05"
+      ],
+      "matchingExistingConflictDates": [
+        "1987-03-05"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1987-03-05",
+      "acceptedObservationCount": 7,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "224",
+          "season": "2015/16",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2015-16",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2015-16",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2015-16",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "De Maio Sebastien",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1987-03-05"
+          ],
+          "rawPath": "raw/009--u1431--fc224--2015-16.html",
+          "rawSha256": "52ed8e3939363977e4af5a29b9c5cc38beaa761425d778abb1ab7157c735a299",
+          "rawBytes": 231676,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1987-03-05"
+        },
+        {
+          "fantacalcioPlayerId": "224",
+          "season": "2016/17",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2016-17",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2016-17",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2016-17",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "De Maio Sebastien",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1987-03-05"
+          ],
+          "rawPath": "raw/009--u1431--fc224--2016-17.html",
+          "rawSha256": "f3a43751a00cd3f7ed9575145ecd143371a38cb51b70048768bbc5b0cc8c80f2",
+          "rawBytes": 223956,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1987-03-05"
+        },
+        {
+          "fantacalcioPlayerId": "224",
+          "season": "2017/18",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2017-18",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2017-18",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2017-18",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "De Maio Sebastien",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1987-03-05"
+          ],
+          "rawPath": "raw/009--u1431--fc224--2017-18.html",
+          "rawSha256": "9dc25ba723af64e866db56e3619623d046c2588ef000715a8201c494ce31b305",
+          "rawBytes": 229635,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1987-03-05"
+        },
+        {
+          "fantacalcioPlayerId": "224",
+          "season": "2018/19",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2018-19",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2018-19",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2018-19",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "De Maio Sebastien",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1987-03-05"
+          ],
+          "rawPath": "raw/009--u1431--fc224--2018-19.html",
+          "rawSha256": "c5830a16c332e96e1fab3f9be8473d9e7e9daa04bfd4b1a55cd29ed1a80b175c",
+          "rawBytes": 230097,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1987-03-05"
+        },
+        {
+          "fantacalcioPlayerId": "224",
+          "season": "2019/20",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2019-20",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2019-20",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2019-20",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "De Maio Sebastien",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1987-03-05"
+          ],
+          "rawPath": "raw/009--u1431--fc224--2019-20.html",
+          "rawSha256": "2ed81a2cb8fb953adbcd1157d9423d9e37bf264ee9de877b116c1fb76503a96d",
+          "rawBytes": 227685,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1987-03-05"
+        },
+        {
+          "fantacalcioPlayerId": "224",
+          "season": "2020/21",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2020-21",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2020-21",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2020-21",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "De Maio Sebastien",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1987-03-05"
+          ],
+          "rawPath": "raw/009--u1431--fc224--2020-21.html",
+          "rawSha256": "7d68c2468392ef8027806725fd05b5332b1e0e6bf2fe3303caa8c3a67665267c",
+          "rawBytes": 223814,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1987-03-05"
+        },
+        {
+          "fantacalcioPlayerId": "224",
+          "season": "2021/22",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2021-22",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2021-22",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/224/2021-22",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "De Maio Sebastien",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1987-03-05"
+          ],
+          "rawPath": "raw/009--u1431--fc224--2021-22.html",
+          "rawSha256": "1eab236b70a99433f45dcba8ff310edfb3fe614d9fb2cd318f8988b9e6953137",
+          "rawBytes": 221715,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1987-03-05"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1478",
+      "bridgePersonKey": "understat:1478",
+      "understatPlayerId": "1478",
+      "wikidataItemId": "Q3845600",
+      "lookupNames": [
+        "Marcello Gazzola"
+      ],
+      "existingConflictDates": [
+        "1985-03-04",
+        "1985-04-03"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1985-04-03"
+      ],
+      "matchingExistingConflictDates": [
+        "1985-04-03"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1985-04-03",
+      "acceptedObservationCount": 4,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "519",
+          "season": "2015/16",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/519/2015-16",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/519/2015-16",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/519/2015-16",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Gazzola Marcello",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1985-04-03"
+          ],
+          "rawPath": "raw/010--u1478--fc519--2015-16.html",
+          "rawSha256": "ae3a5496b8359edeba830c3d821fe7b47da004deee01c5e3cd484651edc4337f",
+          "rawBytes": 222145,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1985-04-03"
+        },
+        {
+          "fantacalcioPlayerId": "519",
+          "season": "2016/17",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/519/2016-17",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/519/2016-17",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/519/2016-17",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Gazzola Marcello",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1985-04-03"
+          ],
+          "rawPath": "raw/010--u1478--fc519--2016-17.html",
+          "rawSha256": "aa9005475b764826506f09080b8ea5972ee920bd1fff05c13d4cc9017d6638b8",
+          "rawBytes": 226259,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1985-04-03"
+        },
+        {
+          "fantacalcioPlayerId": "519",
+          "season": "2017/18",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/519/2017-18",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/519/2017-18",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/519/2017-18",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Gazzola Marcello",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1985-04-03"
+          ],
+          "rawPath": "raw/010--u1478--fc519--2017-18.html",
+          "rawSha256": "13a6f7254b3e3482986667a4adf0df617abc53a1061370281f265fba3e93ad2c",
+          "rawBytes": 222124,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1985-04-03"
+        },
+        {
+          "fantacalcioPlayerId": "519",
+          "season": "2018/19",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/519/2018-19",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/519/2018-19",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/519/2018-19",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Gazzola Marcello",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1985-04-03"
+          ],
+          "rawPath": "raw/010--u1478--fc519--2018-19.html",
+          "rawSha256": "4f52ed6aee59f99764b0ee667fbb55c78979335b3733ba71c9575c5470ffe67f",
+          "rawBytes": 228395,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1985-04-03"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1525",
+      "bridgePersonKey": "understat:1525",
+      "understatPlayerId": "1525",
+      "wikidataItemId": "Q19818111",
+      "lookupNames": [
+        "Assane Demoya Gnoukouri"
+      ],
+      "existingConflictDates": [
+        "1996-09-28",
+        "1996-11-07"
+      ],
+      "acceptedFantacalcioDobValues": [],
+      "matchingExistingConflictDates": [],
+      "status": "DOB_CONFLICT_UNRESOLVED_NO_ACCEPTED_FC_OBSERVATION",
+      "dateOfBirth": null,
+      "acceptedObservationCount": 0,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "267",
+          "season": "2015/16",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/267/2015-16",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/267/2015-16",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/267/2015-16",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Gnoukouri Assan Demoya",
+          "lookupNameTokenSubsetOfFullName": false,
+          "dobCandidates": [
+            "1996-09-28"
+          ],
+          "rawPath": "raw/011--u1525--fc267--2015-16.html",
+          "rawSha256": "488a9d1eeb69ff3cecb04496a65d8f3f1ad18bf7171a57475b781aa18d2f4157",
+          "rawBytes": 222254,
+          "status": "NAME_CONSISTENCY_FAILED"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1550",
+      "bridgePersonKey": "understat:1550",
+      "understatPlayerId": "1550",
+      "wikidataItemId": "Q6695870",
+      "lookupNames": [
+        "Luca Ceppitelli"
+      ],
+      "existingConflictDates": [
+        "1989-08-11",
+        "1989-11-08"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1989-08-11"
+      ],
+      "matchingExistingConflictDates": [
+        "1989-08-11"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1989-08-11",
+      "acceptedObservationCount": 6,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "1866",
+          "season": "2016/17",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2016-17",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2016-17",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2016-17",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ceppitelli Luca",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1989-08-11"
+          ],
+          "rawPath": "raw/012--u1550--fc1866--2016-17.html",
+          "rawSha256": "0d5aee29010b5e2b7ad53458323f412275613005fd0b55baa8667d88bfcefd68",
+          "rawBytes": 227895,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1989-08-11"
+        },
+        {
+          "fantacalcioPlayerId": "1866",
+          "season": "2017/18",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2017-18",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2017-18",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2017-18",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ceppitelli Luca",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1989-08-11"
+          ],
+          "rawPath": "raw/012--u1550--fc1866--2017-18.html",
+          "rawSha256": "582329cf62ca5c86d60c714475a14f90972424669abfa053d004073344a7fa2c",
+          "rawBytes": 227614,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1989-08-11"
+        },
+        {
+          "fantacalcioPlayerId": "1866",
+          "season": "2018/19",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2018-19",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2018-19",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2018-19",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ceppitelli Luca",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1989-08-11"
+          ],
+          "rawPath": "raw/012--u1550--fc1866--2018-19.html",
+          "rawSha256": "c91f1dca581b8248ab28ab5301250e0bd8344a8fdd82df331317b82aa8ee4a12",
+          "rawBytes": 229533,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1989-08-11"
+        },
+        {
+          "fantacalcioPlayerId": "1866",
+          "season": "2019/20",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2019-20",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2019-20",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2019-20",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ceppitelli Luca",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1989-08-11"
+          ],
+          "rawPath": "raw/012--u1550--fc1866--2019-20.html",
+          "rawSha256": "9a063004cddbc4a906eb35c365f449c43602321e6f1b80b4e8add91a51301d5b",
+          "rawBytes": 227450,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1989-08-11"
+        },
+        {
+          "fantacalcioPlayerId": "1866",
+          "season": "2020/21",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2020-21",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2020-21",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2020-21",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ceppitelli Luca",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1989-08-11"
+          ],
+          "rawPath": "raw/012--u1550--fc1866--2020-21.html",
+          "rawSha256": "a174f1190733eff5e7b9fb495e2950b56f897a50a906c8a35d52bfa46b34ba8c",
+          "rawBytes": 228430,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1989-08-11"
+        },
+        {
+          "fantacalcioPlayerId": "1866",
+          "season": "2021/22",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2021-22",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2021-22",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/1866/2021-22",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ceppitelli Luca",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1989-08-11"
+          ],
+          "rawPath": "raw/012--u1550--fc1866--2021-22.html",
+          "rawSha256": "3b59e39ff27a61fd5ce6227c8052de870a0f5bde757d1c1137b363611d060c37",
+          "rawBytes": 227975,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1989-08-11"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1595",
+      "bridgePersonKey": "understat:1595",
+      "understatPlayerId": "1595",
+      "wikidataItemId": "Q4865527",
+      "lookupNames": [
+        "Bastos"
+      ],
+      "existingConflictDates": [
+        "1991-03-27",
+        "1991-11-23"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1991-11-23"
+      ],
+      "matchingExistingConflictDates": [
+        "1991-11-23"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1991-11-23",
+      "acceptedObservationCount": 5,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "2062",
+          "season": "2016/17",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2062/2016-17",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2062/2016-17",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2062/2016-17",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Bastos",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1991-11-23"
+          ],
+          "rawPath": "raw/013--u1595--fc2062--2016-17.html",
+          "rawSha256": "fda11e19d834f9dd85f4faaf6689f709e562cf84bfc3ab6a17a722debb2952cf",
+          "rawBytes": 224734,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1991-11-23"
+        },
+        {
+          "fantacalcioPlayerId": "2062",
+          "season": "2017/18",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2062/2017-18",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2062/2017-18",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2062/2017-18",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Bastos",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1991-11-23"
+          ],
+          "rawPath": "raw/013--u1595--fc2062--2017-18.html",
+          "rawSha256": "672996179ec80411b26e7803e4df5533e89157bc8375366884d0efe954b4f31e",
+          "rawBytes": 227360,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1991-11-23"
+        },
+        {
+          "fantacalcioPlayerId": "2062",
+          "season": "2018/19",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2062/2018-19",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2062/2018-19",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2062/2018-19",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Bastos",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1991-11-23"
+          ],
+          "rawPath": "raw/013--u1595--fc2062--2018-19.html",
+          "rawSha256": "00b2e1a943214687af7d7d201afe29c1a93c53f173f5e6d5fc86beacc90c9d99",
+          "rawBytes": 224780,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1991-11-23"
+        },
+        {
+          "fantacalcioPlayerId": "2062",
+          "season": "2019/20",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2062/2019-20",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2062/2019-20",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2062/2019-20",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Bastos",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1991-11-23"
+          ],
+          "rawPath": "raw/013--u1595--fc2062--2019-20.html",
+          "rawSha256": "241f3520b0907083641b7de6ab60cec09de23eda6e939994adf25ec60eaf8238",
+          "rawBytes": 227337,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1991-11-23"
+        },
+        {
+          "fantacalcioPlayerId": "2062",
+          "season": "2020/21",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2062/2020-21",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2062/2020-21",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2062/2020-21",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Bastos",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1991-11-23"
+          ],
+          "rawPath": "raw/013--u1595--fc2062--2020-21.html",
+          "rawSha256": "7dda1be5d478120390ef4cbfb00e4390ea8ea28e31b206fedab783556f213845",
+          "rawBytes": 220910,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1991-11-23"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1623",
+      "bridgePersonKey": "understat:1623",
+      "understatPlayerId": "1623",
+      "wikidataItemId": "Q24942297",
+      "lookupNames": [
+        "Lamin Jallow"
+      ],
+      "existingConflictDates": [
+        "1994-07-22",
+        "1995-12-18"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1994-07-22"
+      ],
+      "matchingExistingConflictDates": [
+        "1994-07-22"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1994-07-22",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "2018",
+          "season": "2016/17",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2018/2016-17",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2018/2016-17",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2018/2016-17",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Jallow Lamin",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1994-07-22"
+          ],
+          "rawPath": "raw/014--u1623--fc2018--2016-17.html",
+          "rawSha256": "7dd6867555ad82b60fd1c234ee306473f2c6dc79b22abd1bdf2eaedeb30a1d2f",
+          "rawBytes": 217921,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1994-07-22"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1805",
+      "bridgePersonKey": "understat:1805",
+      "understatPlayerId": "1805",
+      "wikidataItemId": "Q642934",
+      "lookupNames": [
+        "Rubinho"
+      ],
+      "existingConflictDates": [
+        "1982-08-04",
+        "1983-08-04"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1982-08-04"
+      ],
+      "matchingExistingConflictDates": [
+        "1982-08-04"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1982-08-04",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "284",
+          "season": "2016/17",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/284/2016-17",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/284/2016-17",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/284/2016-17",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Rubinho",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1982-08-04"
+          ],
+          "rawPath": "raw/015--u1805--fc284--2016-17.html",
+          "rawSha256": "d0242d13efa78dc13ec42781a7e928fba1065c83aabf3ab58e57eb7ed41e934c",
+          "rawBytes": 196467,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1982-08-04"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1900",
+      "bridgePersonKey": "understat:1900",
+      "understatPlayerId": "1900",
+      "wikidataItemId": "Q346917",
+      "lookupNames": [
+        "Raffaele Bianco"
+      ],
+      "existingConflictDates": [
+        "1987-08-25",
+        "1993-01-22"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1987-08-25"
+      ],
+      "matchingExistingConflictDates": [
+        "1987-08-25"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1987-08-25",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "80",
+          "season": "2015/16",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/80/2015-16",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/80/2015-16",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/80/2015-16",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Bianco Raffaele",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1987-08-25"
+          ],
+          "rawPath": "raw/016--u1900--fc80--2015-16.html",
+          "rawSha256": "fe313be228d762e6e5c67273b2671a13edde505e38c1986181fd79f301015fef",
+          "rawBytes": 232317,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1987-08-25"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1901",
+      "bridgePersonKey": "understat:1901",
+      "understatPlayerId": "1901",
+      "wikidataItemId": "Q552602",
+      "lookupNames": [
+        "Raphael Martinho"
+      ],
+      "existingConflictDates": [
+        "1988-01-22",
+        "1988-04-15"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1988-04-15"
+      ],
+      "matchingExistingConflictDates": [
+        "1988-04-15"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1988-04-15",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "85",
+          "season": "2015/16",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/85/2015-16",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/85/2015-16",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/85/2015-16",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Martinho Raphael",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1988-04-15"
+          ],
+          "rawPath": "raw/017--u1901--fc85--2015-16.html",
+          "rawSha256": "edd245d489c66670efbfa2d5163491cce190f0175dc1b1b9ac694e34fc419cc7",
+          "rawBytes": 225380,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1988-04-15"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1915",
+      "bridgePersonKey": "understat:1915",
+      "understatPlayerId": "1915",
+      "wikidataItemId": "Q443113",
+      "lookupNames": [
+        "Kevin Constant"
+      ],
+      "existingConflictDates": [
+        "1987-05-10",
+        "1987-05-15"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1987-05-10"
+      ],
+      "matchingExistingConflictDates": [
+        "1987-05-10"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1987-05-10",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "804",
+          "season": "2015/16",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/804/2015-16",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/804/2015-16",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/804/2015-16",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Constant Kevin",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1987-05-10"
+          ],
+          "rawPath": "raw/018--u1915--fc804--2015-16.html",
+          "rawSha256": "188e7080f56fc32c829d806f5a88a916b31f9f542f1a1cffd62da895e7457094",
+          "rawBytes": 196009,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1987-05-10"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1970",
+      "bridgePersonKey": "understat:1970",
+      "understatPlayerId": "1970",
+      "wikidataItemId": "Q16438504",
+      "lookupNames": [
+        "Jaime Báez"
+      ],
+      "existingConflictDates": [
+        "1995-04-24",
+        "1995-04-25"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1995-04-25"
+      ],
+      "matchingExistingConflictDates": [
+        "1995-04-25"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1995-04-25",
+      "acceptedObservationCount": 2,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "694",
+          "season": "2022/23",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/694/2022-23",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/694/2022-23",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/694/2022-23",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Baez Jaime",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1995-04-25"
+          ],
+          "rawPath": "raw/019--u1970--fc694--2022-23.html",
+          "rawSha256": "ba4020027ae371ab68075a563ab0aea327d441513fa298cf7f7d3448538621e9",
+          "rawBytes": 225081,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1995-04-25"
+        },
+        {
+          "fantacalcioPlayerId": "694",
+          "season": "2023/24",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/694/2023-24",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/694/2023-24",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/694/2023-24",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Baez Jaime",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1995-04-25"
+          ],
+          "rawPath": "raw/019--u1970--fc694--2023-24.html",
+          "rawSha256": "0ad4f3557b462a4fce76f543a92d7e3d7ecff5da11ee4af5da4db8424f17a9f7",
+          "rawBytes": 226540,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1995-04-25"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-2024",
+      "bridgePersonKey": "understat:2024",
+      "understatPlayerId": "2024",
+      "wikidataItemId": "Q5279198",
+      "lookupNames": [
+        "Diogo Figueiras"
+      ],
+      "existingConflictDates": [
+        "1991-01-07",
+        "1991-07-01"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1991-01-07"
+      ],
+      "matchingExistingConflictDates": [
+        "1991-01-07"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1991-01-07",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "225",
+          "season": "2015/16",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/225/2015-16",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/225/2015-16",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/225/2015-16",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Diogo Figueiras",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1991-01-07"
+          ],
+          "rawPath": "raw/020--u2024--fc225--2015-16.html",
+          "rawSha256": "c7965bc5372c05dc9203c90ffc6270417381e2a37801f13a05143d8e46fdfe48",
+          "rawBytes": 225389,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1991-01-07"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-3888",
+      "bridgePersonKey": "understat:3888",
+      "understatPlayerId": "3888",
+      "wikidataItemId": "Q515208",
+      "lookupNames": [
+        "Antonio Rosati"
+      ],
+      "existingConflictDates": [
+        "1983-03-26",
+        "1983-06-26"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1983-06-26"
+      ],
+      "matchingExistingConflictDates": [
+        "1983-06-26"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1983-06-26",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "2790",
+          "season": "2019/20",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2790/2019-20",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2790/2019-20",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2790/2019-20",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Rosati Antonio",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1983-06-26"
+          ],
+          "rawPath": "raw/021--u3888--fc2790--2019-20.html",
+          "rawSha256": "2156d4c0f418c6a0c2000578722d188aeff08f96cda45e63130a17f25086900a",
+          "rawBytes": 220349,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1983-06-26"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-4904",
+      "bridgePersonKey": "understat:4904",
+      "understatPlayerId": "4904",
+      "wikidataItemId": "Q16298600",
+      "lookupNames": [
+        "Adrián Cubas"
+      ],
+      "existingConflictDates": [
+        "1996-05-11",
+        "1996-06-22"
+      ],
+      "acceptedFantacalcioDobValues": [],
+      "matchingExistingConflictDates": [],
+      "status": "DOB_CONFLICT_UNRESOLVED_NO_ACCEPTED_FC_OBSERVATION",
+      "dateOfBirth": null,
+      "acceptedObservationCount": 0,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "2113",
+          "season": "2016/17",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2113/2016-17",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2113/2016-17",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2113/2016-17",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Cubas Andres",
+          "lookupNameTokenSubsetOfFullName": false,
+          "dobCandidates": [
+            "1996-05-22"
+          ],
+          "rawPath": "raw/022--u4904--fc2113--2016-17.html",
+          "rawSha256": "5e01b8f3205bb207ca5e106689115f71ca3d850292c4f0c6691a557efe1b704f",
+          "rawBytes": 199082,
+          "status": "NAME_CONSISTENCY_FAILED"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-5700",
+      "bridgePersonKey": "understat:5700",
+      "understatPlayerId": "5700",
+      "wikidataItemId": "Q23902246",
+      "lookupNames": [
+        "Yann Karamoh"
+      ],
+      "existingConflictDates": [
+        "1998-06-08",
+        "1998-07-08"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1998-07-08"
+      ],
+      "matchingExistingConflictDates": [
+        "1998-07-08"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1998-07-08",
+      "acceptedObservationCount": 7,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "2325",
+          "season": "2017/18",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2017-18",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2017-18",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2017-18",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Karamoh Yann",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1998-07-08"
+          ],
+          "rawPath": "raw/023--u5700--fc2325--2017-18.html",
+          "rawSha256": "7029c839d939cb3c405004964bf6d4ec362fe9199a169b94408823fa5bb63d94",
+          "rawBytes": 220972,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1998-07-08"
+        },
+        {
+          "fantacalcioPlayerId": "2325",
+          "season": "2018/19",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2018-19",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2018-19",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2018-19",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Karamoh Yann",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1998-07-08"
+          ],
+          "rawPath": "raw/023--u5700--fc2325--2018-19.html",
+          "rawSha256": "63ce319cf70f9222e6c210001adfbf64ac69fbccd0b5debf1777edfbf95e0490",
+          "rawBytes": 217026,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1998-07-08"
+        },
+        {
+          "fantacalcioPlayerId": "2325",
+          "season": "2019/20",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2019-20",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2019-20",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2019-20",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Karamoh Yann",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1998-07-08"
+          ],
+          "rawPath": "raw/023--u5700--fc2325--2019-20.html",
+          "rawSha256": "95e1b047a2871462aa7c29016dccee67f88dc13fa618033c0b690bbc96ef93d6",
+          "rawBytes": 225852,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1998-07-08"
+        },
+        {
+          "fantacalcioPlayerId": "2325",
+          "season": "2020/21",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2020-21",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2020-21",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2020-21",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Karamoh Yann",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1998-07-08"
+          ],
+          "rawPath": "raw/023--u5700--fc2325--2020-21.html",
+          "rawSha256": "f05d4d03b53c941d82b3f8e3f41b0300f09a54aa34a35978f223bba8ae674c78",
+          "rawBytes": 232157,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1998-07-08"
+        },
+        {
+          "fantacalcioPlayerId": "2325",
+          "season": "2022/23",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2022-23",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2022-23",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2022-23",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Karamoh Yann",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1998-07-08"
+          ],
+          "rawPath": "raw/023--u5700--fc2325--2022-23.html",
+          "rawSha256": "d46164780c855756262064c2f9d746c043c84d139c35765ac72d585b1b4b5c2a",
+          "rawBytes": 220413,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1998-07-08"
+        },
+        {
+          "fantacalcioPlayerId": "2325",
+          "season": "2023/24",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2023-24",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2023-24",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2023-24",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Karamoh Yann",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1998-07-08"
+          ],
+          "rawPath": "raw/023--u5700--fc2325--2023-24.html",
+          "rawSha256": "188c50a7f11e6f7f470efd895f5c2fc68975d42eaf5f9ecd1a878e05b3db173d",
+          "rawBytes": 222605,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1998-07-08"
+        },
+        {
+          "fantacalcioPlayerId": "2325",
+          "season": "2024/25",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2024-25",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2024-25",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2325/2024-25",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Karamoh Yann",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1998-07-08"
+          ],
+          "rawPath": "raw/023--u5700--fc2325--2024-25.html",
+          "rawSha256": "97c389afd8d0bc8c9545d4589bbecbb9c9db892300ca9e6b0d3f1565f5f86287",
+          "rawBytes": 226522,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1998-07-08"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-6197",
+      "bridgePersonKey": "understat:6197",
+      "understatPlayerId": "6197",
+      "wikidataItemId": "Q20090581",
+      "lookupNames": [
+        "Gianluca Di Chiara"
+      ],
+      "existingConflictDates": [
+        "1993-01-12",
+        "1993-12-26"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1993-12-26"
+      ],
+      "matchingExistingConflictDates": [
+        "1993-12-26"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1993-12-26",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "2203",
+          "season": "2017/18",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2203/2017-18",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2203/2017-18",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2203/2017-18",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Di Chiara Gianluca",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1993-12-26"
+          ],
+          "rawPath": "raw/024--u6197--fc2203--2017-18.html",
+          "rawSha256": "80f334a3b1ae5779a64a9d68dc70c035c86b533f1909ceedbf7b9abb186a3717",
+          "rawBytes": 230072,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1993-12-26"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-6297",
+      "bridgePersonKey": "understat:6297",
+      "understatPlayerId": "6297",
+      "wikidataItemId": "Q37749749",
+      "lookupNames": [
+        "Esteban Rolón"
+      ],
+      "existingConflictDates": [
+        "1995-03-25",
+        "1995-09-25"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1995-03-25"
+      ],
+      "matchingExistingConflictDates": [
+        "1995-03-25"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1995-03-25",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "2856",
+          "season": "2018/19",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2856/2018-19",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2856/2018-19",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2856/2018-19",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Rolon Esteban",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1995-03-25"
+          ],
+          "rawPath": "raw/025--u6297--fc2856--2018-19.html",
+          "rawSha256": "8ae44ddf0b4520ea593af8f3ab200fda3b6ff34aa8ca727714df1dd315af5a72",
+          "rawBytes": 227919,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1995-03-25"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-6973",
+      "bridgePersonKey": "understat:6973",
+      "understatPlayerId": "6973",
+      "wikidataItemId": "Q17364468",
+      "lookupNames": [
+        "Nehuén Paz"
+      ],
+      "existingConflictDates": [
+        "1993-01-28",
+        "1993-04-28"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1993-04-28"
+      ],
+      "matchingExistingConflictDates": [
+        "1993-04-28"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1993-04-28",
+      "acceptedObservationCount": 3,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "2747",
+          "season": "2018/19",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2747/2018-19",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2747/2018-19",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2747/2018-19",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Paz Nehuen",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1993-04-28"
+          ],
+          "rawPath": "raw/026--u6973--fc2747--2018-19.html",
+          "rawSha256": "a3068aaeb053f6e752ff41fae2b1ab2bdc82ff8717dc548b7d5caa783da27d48",
+          "rawBytes": 222381,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1993-04-28"
+        },
+        {
+          "fantacalcioPlayerId": "2747",
+          "season": "2019/20",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2747/2019-20",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2747/2019-20",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2747/2019-20",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Paz Nehuen",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1993-04-28"
+          ],
+          "rawPath": "raw/026--u6973--fc2747--2019-20.html",
+          "rawSha256": "6dec7c6dd811e5a492233e4e10c7e784f436fa26db315cbd959623b2cc82e4d3",
+          "rawBytes": 227736,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1993-04-28"
+        },
+        {
+          "fantacalcioPlayerId": "2747",
+          "season": "2020/21",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2747/2020-21",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2747/2020-21",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2747/2020-21",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Paz Nehuen",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1993-04-28"
+          ],
+          "rawPath": "raw/026--u6973--fc2747--2020-21.html",
+          "rawSha256": "880a3beccda0642955ac8db9eee18b95bfb6d3bb780f0dbe49033f97e91b3e87",
+          "rawBytes": 221105,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1993-04-28"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-7004",
+      "bridgePersonKey": "understat:7004",
+      "understatPlayerId": "7004",
+      "wikidataItemId": "Q28595322",
+      "lookupNames": [
+        "Leonardo Sernicola"
+      ],
+      "existingConflictDates": [
+        "1997-03-30",
+        "1997-07-30"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1997-07-30"
+      ],
+      "matchingExistingConflictDates": [
+        "1997-07-30"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1997-07-30",
+      "acceptedObservationCount": 2,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "2847",
+          "season": "2018/19",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2847/2018-19",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2847/2018-19",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2847/2018-19",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Sernicola Leonardo",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1997-07-30"
+          ],
+          "rawPath": "raw/027--u7004--fc2847--2018-19.html",
+          "rawSha256": "69def2e196bd71ababec6e37fb9a4fc36d775bee806c0112bb888f6dc89d472e",
+          "rawBytes": 219677,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1997-07-30"
+        },
+        {
+          "fantacalcioPlayerId": "2847",
+          "season": "2022/23",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2847/2022-23",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2847/2022-23",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/2847/2022-23",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Sernicola Leonardo",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1997-07-30"
+          ],
+          "rawPath": "raw/027--u7004--fc2847--2022-23.html",
+          "rawSha256": "826d91ddf624a0b9e535bf26684e1204cb2da7df06110ed4b9fd796c441653e1",
+          "rawBytes": 237470,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1997-07-30"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-7216",
+      "bridgePersonKey": "understat:7216",
+      "understatPlayerId": "7216",
+      "wikidataItemId": "Q41573175",
+      "lookupNames": [
+        "Ben Wilmot"
+      ],
+      "existingConflictDates": [
+        "1999-01-04",
+        "1999-11-04"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1999-11-04"
+      ],
+      "matchingExistingConflictDates": [
+        "1999-11-04"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1999-11-04",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "4339",
+          "season": "2018/19",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4339/2018-19",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4339/2018-19",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4339/2018-19",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Wilmot Ben",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1999-11-04"
+          ],
+          "rawPath": "raw/028--u7216--fc4339--2018-19.html",
+          "rawSha256": "8c76f788d6b8e1559cf43bb51db1b952e4f3f3133394e517a1813bb0c8ea449e",
+          "rawBytes": 196242,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1999-11-04"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-7960",
+      "bridgePersonKey": "understat:7960",
+      "understatPlayerId": "7960",
+      "wikidataItemId": "Q21004899",
+      "lookupNames": [
+        "Florian Aye"
+      ],
+      "existingConflictDates": [
+        "1997-01-09",
+        "1997-01-19"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1997-01-19"
+      ],
+      "matchingExistingConflictDates": [
+        "1997-01-19"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1997-01-19",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "4413",
+          "season": "2019/20",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4413/2019-20",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4413/2019-20",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4413/2019-20",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ayè Florian",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1997-01-19"
+          ],
+          "rawPath": "raw/029--u7960--fc4413--2019-20.html",
+          "rawSha256": "5a150733d7f68180c0c3461e8edef1622ad8d341a05c7ea70f56f14e4034bf61",
+          "rawBytes": 225574,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1997-01-19"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-8035",
+      "bridgePersonKey": "understat:8035",
+      "understatPlayerId": "8035",
+      "wikidataItemId": "Q2521780",
+      "lookupNames": [
+        "Samuel Di Carmine"
+      ],
+      "existingConflictDates": [
+        "1988-09-20",
+        "1988-09-29"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1988-09-29"
+      ],
+      "matchingExistingConflictDates": [
+        "1988-09-29"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1988-09-29",
+      "acceptedObservationCount": 4,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "4500",
+          "season": "2019/20",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4500/2019-20",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4500/2019-20",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4500/2019-20",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Di Carmine Samuel",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1988-09-29"
+          ],
+          "rawPath": "raw/030--u8035--fc4500--2019-20.html",
+          "rawSha256": "fb7ad53ac067ab0de144148e285d3fc8879eba5fd51e58e030007bcdc6b78478",
+          "rawBytes": 232906,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1988-09-29"
+        },
+        {
+          "fantacalcioPlayerId": "4500",
+          "season": "2020/21",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4500/2020-21",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4500/2020-21",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4500/2020-21",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Di Carmine Samuel",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1988-09-29"
+          ],
+          "rawPath": "raw/030--u8035--fc4500--2020-21.html",
+          "rawSha256": "7ba85ab234215a90bb36f3ccc1934d8c31aa453baa9048e4839f3c80b4fe4acd",
+          "rawBytes": 226157,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1988-09-29"
+        },
+        {
+          "fantacalcioPlayerId": "4500",
+          "season": "2021/22",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4500/2021-22",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4500/2021-22",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4500/2021-22",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Di Carmine Samuel",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1988-09-29"
+          ],
+          "rawPath": "raw/030--u8035--fc4500--2021-22.html",
+          "rawSha256": "c4afeda3c1ecfdc02e08c0fe7328b920243acc2cdee7d8d643eda6a302338109",
+          "rawBytes": 220159,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1988-09-29"
+        },
+        {
+          "fantacalcioPlayerId": "4500",
+          "season": "2022/23",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4500/2022-23",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4500/2022-23",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4500/2022-23",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Di Carmine Samuel",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1988-09-29"
+          ],
+          "rawPath": "raw/030--u8035--fc4500--2022-23.html",
+          "rawSha256": "dcbf098cdb69034c4e5a3b8fe898897e13a109d365bfb04792295e1cc112f1f4",
+          "rawBytes": 224775,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1988-09-29"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-8182",
+      "bridgePersonKey": "understat:8182",
+      "understatPlayerId": "8182",
+      "wikidataItemId": "Q79058092",
+      "lookupNames": [
+        "Lucas Da Cunha"
+      ],
+      "existingConflictDates": [
+        "2001-06-09",
+        "2001-07-09"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "2001-06-09"
+      ],
+      "matchingExistingConflictDates": [
+        "2001-06-09"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "2001-06-09",
+      "acceptedObservationCount": 2,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "5559",
+          "season": "2024/25",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5559/2024-25",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5559/2024-25",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5559/2024-25",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Da Cunha Lucas",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "2001-06-09"
+          ],
+          "rawPath": "raw/031--u8182--fc5559--2024-25.html",
+          "rawSha256": "f8dd1dae3f8940803d078c06b4eb0fc2cafe412056d0cd7c78851a31cd609875",
+          "rawBytes": 237254,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2001-06-09"
+        },
+        {
+          "fantacalcioPlayerId": "5559",
+          "season": "2025/26",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5559/2025-26",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5559/2025-26",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5559/2025-26",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Lucas Da Cunha",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "2001-06-09"
+          ],
+          "rawPath": "raw/031--u8182--fc5559--2025-26.html",
+          "rawSha256": "85083eff5b60022d7885516b98a0a70dda0ff9463f3bf209899e6373589845d8",
+          "rawBytes": 235236,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2001-06-09"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-8387",
+      "bridgePersonKey": "understat:8387",
+      "understatPlayerId": "8387",
+      "wikidataItemId": "Q96359277",
+      "lookupNames": [
+        "Andrea Papetti"
+      ],
+      "existingConflictDates": [
+        "2001-04-03",
+        "2002-07-03"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "2002-07-03"
+      ],
+      "matchingExistingConflictDates": [
+        "2002-07-03"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "2002-07-03",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "4920",
+          "season": "2019/20",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4920/2019-20",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4920/2019-20",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4920/2019-20",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Papetti Andrea",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "2002-07-03"
+          ],
+          "rawPath": "raw/032--u8387--fc4920--2019-20.html",
+          "rawSha256": "a9b7da5591b32b8ebcef0b6b914325040f1c41b9b155e45189aed5ed8c4257f5",
+          "rawBytes": 188395,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2002-07-03"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-8639",
+      "bridgePersonKey": "understat:8639",
+      "understatPlayerId": "8639",
+      "wikidataItemId": "Q74050136",
+      "lookupNames": [
+        "Brandon Soppy"
+      ],
+      "existingConflictDates": [
+        "2002-02-02",
+        "2002-02-21"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "2002-02-21"
+      ],
+      "matchingExistingConflictDates": [
+        "2002-02-21"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "2002-02-21",
+      "acceptedObservationCount": 3,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "5686",
+          "season": "2021/22",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5686/2021-22",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5686/2021-22",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5686/2021-22",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Soppy Brandon",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "2002-02-21"
+          ],
+          "rawPath": "raw/033--u8639--fc5686--2021-22.html",
+          "rawSha256": "9f51785ed74b8e26178ed248156f17e44478e8808bacd3f97bdd49c894425011",
+          "rawBytes": 225047,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2002-02-21"
+        },
+        {
+          "fantacalcioPlayerId": "5686",
+          "season": "2022/23",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5686/2022-23",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5686/2022-23",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5686/2022-23",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Soppy Brandon",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "2002-02-21"
+          ],
+          "rawPath": "raw/033--u8639--fc5686--2022-23.html",
+          "rawSha256": "08fd178516712271133abd7fe0deed903698a0077e60024f946538380cf0ea8e",
+          "rawBytes": 223281,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2002-02-21"
+        },
+        {
+          "fantacalcioPlayerId": "5686",
+          "season": "2023/24",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5686/2023-24",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5686/2023-24",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5686/2023-24",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Soppy Brandon",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "2002-02-21"
+          ],
+          "rawPath": "raw/033--u8639--fc5686--2023-24.html",
+          "rawSha256": "1e21af2dac29d087735ce892a678cc4a979d8898405f3172cce6c95a0c18d86f",
+          "rawBytes": 221570,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2002-02-21"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-8895",
+      "bridgePersonKey": "understat:8895",
+      "understatPlayerId": "8895",
+      "wikidataItemId": "Q37518060",
+      "lookupNames": [
+        "Tete Morente"
+      ],
+      "existingConflictDates": [
+        "1996-12-02",
+        "1996-12-04"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1996-12-04"
+      ],
+      "matchingExistingConflictDates": [
+        "1996-12-04"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1996-12-04",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "6634",
+          "season": "2024/25",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6634/2024-25",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6634/2024-25",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6634/2024-25",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Morente Oliva Josè Antonio",
+          "lookupNameTokenSubsetOfFullName": false,
+          "dobCandidates": [
+            "1996-12-04"
+          ],
+          "rawPath": "raw/034--u8895--fc6634--2024-25.html",
+          "rawSha256": "16de6b9e8706f8e9f8f589f8903e31ec3afa6830a382df6e794b4248c8ee5e3a",
+          "rawBytes": 233353,
+          "status": "NAME_CONSISTENCY_FAILED"
+        },
+        {
+          "fantacalcioPlayerId": "6634",
+          "season": "2025/26",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6634/2025-26",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6634/2025-26",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6634/2025-26",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Tete Morente",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1996-12-04"
+          ],
+          "rawPath": "raw/034--u8895--fc6634--2025-26.html",
+          "rawSha256": "ef5c836625613e2dd0c27751b463a6722212c687cf84d00cf2dca1bbafb731e2",
+          "rawBytes": 224927,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1996-12-04"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-8910",
+      "bridgePersonKey": "understat:8910",
+      "understatPlayerId": "8910",
+      "wikidataItemId": "Q28973931",
+      "lookupNames": [
+        "Paolo Bartolomei"
+      ],
+      "existingConflictDates": [
+        "1989-08-21",
+        "1989-08-22"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1989-08-22"
+      ],
+      "matchingExistingConflictDates": [
+        "1989-08-22"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1989-08-22",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "4987",
+          "season": "2020/21",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4987/2020-21",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4987/2020-21",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/4987/2020-21",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Bartolomei Paolo",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1989-08-22"
+          ],
+          "rawPath": "raw/035--u8910--fc4987--2020-21.html",
+          "rawSha256": "1c625cadb401b2ed6e46c4a1ed9383580189b78ac54928f82975c11fe3688d2b",
+          "rawBytes": 223027,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1989-08-22"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-8926",
+      "bridgePersonKey": "understat:8926",
+      "understatPlayerId": "8926",
+      "wikidataItemId": "Q17037914",
+      "lookupNames": [
+        "Milos Vulic"
+      ],
+      "existingConflictDates": [
+        "1996-08-18",
+        "1996-08-19"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1996-08-19"
+      ],
+      "matchingExistingConflictDates": [
+        "1996-08-19"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1996-08-19",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "5002",
+          "season": "2020/21",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5002/2020-21",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5002/2020-21",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5002/2020-21",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Vulic Milos",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1996-08-19"
+          ],
+          "rawPath": "raw/036--u8926--fc5002--2020-21.html",
+          "rawSha256": "e6454ae86479b45d7b920da4496af1063a486f22c4e897da2752fcafe2bd272d",
+          "rawBytes": 227533,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1996-08-19"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-9059",
+      "bridgePersonKey": "understat:9059",
+      "understatPlayerId": "9059",
+      "wikidataItemId": "Q105025726",
+      "lookupNames": [
+        "Simone Rabbi"
+      ],
+      "existingConflictDates": [
+        "2001-10-30",
+        "2001-10-31"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "2001-10-30"
+      ],
+      "matchingExistingConflictDates": [
+        "2001-10-30"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "2001-10-30",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "5361",
+          "season": "2020/21",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5361/2020-21",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5361/2020-21",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5361/2020-21",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Rabbi Simone",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "2001-10-30"
+          ],
+          "rawPath": "raw/037--u9059--fc5361--2020-21.html",
+          "rawSha256": "a3c377082391e126050252f94e8d1f9e1a15a3141e7e0eb5ff107763f4b318a7",
+          "rawBytes": 199980,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2001-10-30"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-9879",
+      "bridgePersonKey": "understat:9879",
+      "understatPlayerId": "9879",
+      "wikidataItemId": "Q26271405",
+      "lookupNames": [
+        "Daan Heymans"
+      ],
+      "existingConflictDates": [
+        "1999-06-14",
+        "1999-06-15"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1999-06-15"
+      ],
+      "matchingExistingConflictDates": [
+        "1999-06-15"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1999-06-15",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "5487",
+          "season": "2021/22",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5487/2021-22",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5487/2021-22",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/5487/2021-22",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Heymans Daan",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1999-06-15"
+          ],
+          "rawPath": "raw/038--u9879--fc5487--2021-22.html",
+          "rawSha256": "fcfd72d0722695aa7e85ded0b53dbe9bac0aa92043993712f1ca89c2af7e6cee",
+          "rawBytes": 227420,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1999-06-15"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-10090",
+      "bridgePersonKey": "understat:10090",
+      "understatPlayerId": "10090",
+      "wikidataItemId": "Q109289381",
+      "lookupNames": [
+        "Iker Bravo"
+      ],
+      "existingConflictDates": [
+        "2005-01-13",
+        "2005-01-15"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "2005-01-13"
+      ],
+      "matchingExistingConflictDates": [
+        "2005-01-13"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "2005-01-13",
+      "acceptedObservationCount": 2,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "6653",
+          "season": "2024/25",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6653/2024-25",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6653/2024-25",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6653/2024-25",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Bravo Iker",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "2005-01-13"
+          ],
+          "rawPath": "raw/039--u10090--fc6653--2024-25.html",
+          "rawSha256": "1bbbd4ee77bdf094e27d31216a8cc2f4def7f2e1c71c3b9edf179104009b380b",
+          "rawBytes": 227471,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2005-01-13"
+        },
+        {
+          "fantacalcioPlayerId": "6653",
+          "season": "2025/26",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6653/2025-26",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6653/2025-26",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6653/2025-26",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Iker Bravo",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "2005-01-13"
+          ],
+          "rawPath": "raw/039--u10090--fc6653--2025-26.html",
+          "rawSha256": "9d3f998c86dd74e12c951536d83fbecdabf9b1d48b888848bf4908eece07b2f2",
+          "rawBytes": 223393,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2005-01-13"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-10882",
+      "bridgePersonKey": "understat:10882",
+      "understatPlayerId": "10882",
+      "wikidataItemId": "Q116186163",
+      "lookupNames": [
+        "Lorenzo Malagrida"
+      ],
+      "existingConflictDates": [
+        "2003-10-24",
+        "2003-10-29"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "2003-10-24"
+      ],
+      "matchingExistingConflictDates": [
+        "2003-10-24"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "2003-10-24",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "6157",
+          "season": "2022/23",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6157/2022-23",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6157/2022-23",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6157/2022-23",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Malagrida Lorenzo",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "2003-10-24"
+          ],
+          "rawPath": "raw/040--u10882--fc6157--2022-23.html",
+          "rawSha256": "659ee0da8bfd460b2dddce9bf106a0457c88dbe9aa953eb92b758ff2ecef1480",
+          "rawBytes": 196062,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2003-10-24"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-11022",
+      "bridgePersonKey": "understat:11022",
+      "understatPlayerId": "11022",
+      "wikidataItemId": "Q22007381",
+      "lookupNames": [
+        "Simone Perilli"
+      ],
+      "existingConflictDates": [
+        "1995-01-07",
+        "1995-07-01"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "1995-01-07"
+      ],
+      "matchingExistingConflictDates": [
+        "1995-01-07"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "1995-01-07",
+      "acceptedObservationCount": 4,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "511",
+          "season": "2022/23",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/511/2022-23",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/511/2022-23",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/511/2022-23",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Perilli Simone",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1995-01-07"
+          ],
+          "rawPath": "raw/041--u11022--fc511--2022-23.html",
+          "rawSha256": "1dbe4ec0e4e35ca04f6438008820a33fe9c9a486c4533565c1b19b839ef983f8",
+          "rawBytes": 220867,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1995-01-07"
+        },
+        {
+          "fantacalcioPlayerId": "511",
+          "season": "2023/24",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/511/2023-24",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/511/2023-24",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/511/2023-24",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Perilli Simone",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1995-01-07"
+          ],
+          "rawPath": "raw/041--u11022--fc511--2023-24.html",
+          "rawSha256": "4131035be66644237db990915e576855c506e4a05cf7f9ffa10815d4771ca13e",
+          "rawBytes": 221900,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1995-01-07"
+        },
+        {
+          "fantacalcioPlayerId": "511",
+          "season": "2024/25",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/511/2024-25",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/511/2024-25",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/511/2024-25",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Perilli Simone",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1995-01-07"
+          ],
+          "rawPath": "raw/041--u11022--fc511--2024-25.html",
+          "rawSha256": "17e684e1e220fcd7dc52734573bd1e956c2dc7e4eb72a75a070e915062c74b70",
+          "rawBytes": 223090,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1995-01-07"
+        },
+        {
+          "fantacalcioPlayerId": "511",
+          "season": "2025/26",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/511/2025-26",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/511/2025-26",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/511/2025-26",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Simone Perilli",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "1995-01-07"
+          ],
+          "rawPath": "raw/041--u11022--fc511--2025-26.html",
+          "rawSha256": "de3d681c99fd74654039cc931a8ba1a6678499d67bffca1a237e64c3a1794272",
+          "rawBytes": 222798,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "1995-01-07"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-11140",
+      "bridgePersonKey": "understat:11140",
+      "understatPlayerId": "11140",
+      "wikidataItemId": "Q102045930",
+      "lookupNames": [
+        "Enzo Barrenechea"
+      ],
+      "existingConflictDates": [
+        "2001-05-11",
+        "2001-05-22"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "2001-05-22"
+      ],
+      "matchingExistingConflictDates": [
+        "2001-05-22"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "2001-05-22",
+      "acceptedObservationCount": 2,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "6175",
+          "season": "2022/23",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6175/2022-23",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6175/2022-23",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6175/2022-23",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Barrenechea Enzo",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "2001-05-22"
+          ],
+          "rawPath": "raw/042--u11140--fc6175--2022-23.html",
+          "rawSha256": "4e646b073814b3026bffebabcd2be10cacd34f296be6976775acccd1db83ace2",
+          "rawBytes": 187901,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2001-05-22"
+        },
+        {
+          "fantacalcioPlayerId": "6175",
+          "season": "2023/24",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6175/2023-24",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6175/2023-24",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6175/2023-24",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Barrenechea Enzo",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "2001-05-22"
+          ],
+          "rawPath": "raw/042--u11140--fc6175--2023-24.html",
+          "rawSha256": "2543da8af9d62842dcccdaa493e68ddbb8b8de83e11e785963a3af4b43f45e1e",
+          "rawBytes": 236968,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2001-05-22"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-12017",
+      "bridgePersonKey": "understat:12017",
+      "understatPlayerId": "12017",
+      "wikidataItemId": "Q73626011",
+      "lookupNames": [
+        "Agustín Martegani"
+      ],
+      "existingConflictDates": [
+        "2000-03-20",
+        "2000-05-20"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "2000-05-20"
+      ],
+      "matchingExistingConflictDates": [
+        "2000-05-20"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "2000-05-20",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "6448",
+          "season": "2023/24",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6448/2023-24",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6448/2023-24",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6448/2023-24",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Martegani Agustin",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "2000-05-20"
+          ],
+          "rawPath": "raw/043--u12017--fc6448--2023-24.html",
+          "rawSha256": "cf89bdefdf70a7a5a1ee0c5f32cb40a0127ba953215d0850e2786d4e96531011",
+          "rawBytes": 227607,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2000-05-20"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-13049",
+      "bridgePersonKey": "understat:13049",
+      "understatPlayerId": "13049",
+      "wikidataItemId": "Q117349349",
+      "lookupNames": [
+        "Damián Pizarro"
+      ],
+      "existingConflictDates": [
+        "2005-03-28",
+        "2005-08-25"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "2005-03-28"
+      ],
+      "matchingExistingConflictDates": [
+        "2005-03-28"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "2005-03-28",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "6635",
+          "season": "2024/25",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6635/2024-25",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6635/2024-25",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/6635/2024-25",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Pizarro Damian",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "2005-03-28"
+          ],
+          "rawPath": "raw/044--u13049--fc6635--2024-25.html",
+          "rawSha256": "1ddc982ca12f36a3296a78fcf86d92b43f653ec89351be147e937cc4853ec4bd",
+          "rawBytes": 221660,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2005-03-28"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-14416",
+      "bridgePersonKey": "understat:14416",
+      "understatPlayerId": "14416",
+      "wikidataItemId": "Q72090874",
+      "lookupNames": [
+        "Andrias Edmundsson"
+      ],
+      "existingConflictDates": [
+        "2000-12-01",
+        "2000-12-18"
+      ],
+      "acceptedFantacalcioDobValues": [
+        "2000-12-18"
+      ],
+      "matchingExistingConflictDates": [
+        "2000-12-18"
+      ],
+      "status": "DOB_CONFLICT_RESOLVED_BY_EXACT_FC_OBSERVATION",
+      "dateOfBirth": "2000-12-18",
+      "acceptedObservationCount": 1,
+      "attempts": [
+        {
+          "fantacalcioPlayerId": "7352",
+          "season": "2025/26",
+          "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/7352/2025-26",
+          "httpStatus": 200,
+          "finalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/7352/2025-26",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/x/x/7352/2025-26",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Andrias Edmundsson",
+          "lookupNameTokenSubsetOfFullName": true,
+          "dobCandidates": [
+            "2000-12-18"
+          ],
+          "rawPath": "raw/045--u14416--fc7352--2025-26.html",
+          "rawSha256": "076a3f5f4183a1247a31e5c2de650a89829ad11d4ad5347eb10251b41952c24e",
+          "rawBytes": 195157,
+          "status": "ACCEPTED_EXACT_OBSERVATION",
+          "dateOfBirth": "2000-12-18"
+        }
+      ]
+    }
+  ]
+}

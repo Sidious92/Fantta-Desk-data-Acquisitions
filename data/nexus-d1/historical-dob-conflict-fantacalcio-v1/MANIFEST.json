@@ -1,0 +1,573 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_DOB_CONFLICT_FANTACALCIO_MANIFEST_V1",
+  "generatedAt": "2026-08-22T16:40:13.783334Z",
+  "status": "PASS",
+  "evidenceFileCount": 109,
+  "canonicalEvidenceSha256": "ae73476949ae87e64f59f6ac171bdcc287123a841acd4f4cb91f6ab84b3e3c77",
+  "evidence": [
+    {
+      "path": "ACQUIRE.stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "RESULT.json",
+      "size": 121092,
+      "sha256": "bcf0f5892b4dd82051e79a866388839bfb102a1a85f103fa2dc935f94f8b241e"
+    },
+    {
+      "path": "raw/000--u307--fc6458--2023-24.html",
+      "size": 229564,
+      "sha256": "3842c3519abf959fe511c949746574960deee1fe7cb3bcf41b357dcf2c41aaaf"
+    },
+    {
+      "path": "raw/000--u307--fc6458--2024-25.html",
+      "size": 230253,
+      "sha256": "606bb8acc5a0741ddacb35421a6c63227572838ebf0f455b4307a5090078af5b"
+    },
+    {
+      "path": "raw/000--u307--fc6458--2025-26.html",
+      "size": 228964,
+      "sha256": "13d3bc70f0b7410df84801d5fd096dcf3ab411897f8f1c3f13f4c34e180b152f"
+    },
+    {
+      "path": "raw/001--u1030--fc5004--2020-21.html",
+      "size": 226633,
+      "sha256": "4ff4746a31fc400798da183f3a4264a48fce08a096f2e3eae7e4d3dc80775a04"
+    },
+    {
+      "path": "raw/001--u1030--fc5004--2021-22.html",
+      "size": 222734,
+      "sha256": "adfc6cb0f533b0cdc34e335d0a46b668f1f1bf4d6602940367255cea0dc91c1e"
+    },
+    {
+      "path": "raw/002--u1112--fc232--2015-16.html",
+      "size": 231271,
+      "sha256": "925f2ad649187bc8796c1eeedc40e16e81693d8f0e6a4657e5e9c199f754d357"
+    },
+    {
+      "path": "raw/002--u1112--fc232--2016-17.html",
+      "size": 225586,
+      "sha256": "e7eeee7e2cb2aa7ec2676adf5c6be119b34c0e7fa8d48a70848e3fbb475cabcf"
+    },
+    {
+      "path": "raw/002--u1112--fc232--2017-18.html",
+      "size": 225146,
+      "sha256": "3190f9036307ee67ac89d048b7021cf1d30b71cb8e6409fd904b9355f0ff2f93"
+    },
+    {
+      "path": "raw/003--u1152--fc595--2016-17.html",
+      "size": 223910,
+      "sha256": "1bbd3493c3fc09e06e1ae44257d01368f5038d748ac027668ac6c6590ebdb81a"
+    },
+    {
+      "path": "raw/004--u1174--fc1953--2016-17.html",
+      "size": 225632,
+      "sha256": "d402e9d67938390ac1d15879b4b54bd7926786e4c6483aaf4581f558529e476d"
+    },
+    {
+      "path": "raw/005--u1181--fc1979--2016-17.html",
+      "size": 227867,
+      "sha256": "a2a9bd89a82ca39296826da00762f2acdd05beb38acc2009504514fd3d4ad93b"
+    },
+    {
+      "path": "raw/005--u1181--fc1979--2017-18.html",
+      "size": 221554,
+      "sha256": "9a3a7e49bf3303f1f6852a4c2137b50596b1914d22823a149939f132ae44f328"
+    },
+    {
+      "path": "raw/005--u1181--fc1979--2019-20.html",
+      "size": 230689,
+      "sha256": "318aecc3882f9be35d30f3a0d0cbc9ef6d9f61a8ce9d510e5aae5c7f30e383e8"
+    },
+    {
+      "path": "raw/005--u1181--fc1979--2020-21.html",
+      "size": 215011,
+      "sha256": "954a3da4de3e8cff944378d26fd0c8d0057a006786e382c82185c1364024c9f9"
+    },
+    {
+      "path": "raw/006--u1332--fc105--2015-16.html",
+      "size": 236593,
+      "sha256": "79159fdf18816391b52923c3941590b574879cac9e14c372b67aa23720d8f2d9"
+    },
+    {
+      "path": "raw/006--u1332--fc105--2016-17.html",
+      "size": 232062,
+      "sha256": "fa7402ef150e62666e7510fec8b4be2adf6b4dc6ac95d33ba0f9418a3163ae3f"
+    },
+    {
+      "path": "raw/006--u1332--fc105--2017-18.html",
+      "size": 227175,
+      "sha256": "556e69236dfebc011cc712d7cdb9257f39c0d7dc6ec22e2a6dd8baa08e3f1bd9"
+    },
+    {
+      "path": "raw/006--u1332--fc105--2018-19.html",
+      "size": 227373,
+      "sha256": "21b790122e22ad021d377aef259183e4daf73227b7330406058c6602bdf17fc6"
+    },
+    {
+      "path": "raw/007--u1354--fc1895--2016-17.html",
+      "size": 234794,
+      "sha256": "05afbb2dc9ea0cdc95b4c4b23a1dd44772012af392fd52cc5311e77500d60675"
+    },
+    {
+      "path": "raw/007--u1354--fc1895--2017-18.html",
+      "size": 228075,
+      "sha256": "998023edb64cd2e58f10407ff0433f112aaebe5a2832041d03ee0438dda38340"
+    },
+    {
+      "path": "raw/007--u1354--fc1895--2018-19.html",
+      "size": 231497,
+      "sha256": "893a4ee73a7a9e0bcf216447346b5fb10cf2fd7e120b7b8fe28c6af457e5b527"
+    },
+    {
+      "path": "raw/007--u1354--fc1895--2019-20.html",
+      "size": 228557,
+      "sha256": "5564ce2587077a3a81d5b9e8d781c00131b75e9fa9bb6696f5117ae43fbb2c23"
+    },
+    {
+      "path": "raw/007--u1354--fc1895--2020-21.html",
+      "size": 232142,
+      "sha256": "77523ecc6435f20352ba4a452231a1c5af4b9dbec08fecb1e4e1856acfaa1369"
+    },
+    {
+      "path": "raw/007--u1354--fc1895--2021-22.html",
+      "size": 231913,
+      "sha256": "d4a754c3f4f3a4dfbca3237d7ecac7da64d45ea53cb85c85791a53550364f0d6"
+    },
+    {
+      "path": "raw/007--u1354--fc1895--2022-23.html",
+      "size": 229503,
+      "sha256": "32800a9dfc1393124a7d247205b341ac63c2a8da5c1e4ca2ac705947a3079cdb"
+    },
+    {
+      "path": "raw/007--u1354--fc1895--2023-24.html",
+      "size": 229344,
+      "sha256": "26af690427c2ae1f1ccb89f58e06a03612f0c66d83d7cc3163bf327dd4c5b444"
+    },
+    {
+      "path": "raw/008--u1406--fc1882--2016-17.html",
+      "size": 235083,
+      "sha256": "894a50d33f3abe32b9457ecec02613e238b14098cb9946b35a022d006ace9388"
+    },
+    {
+      "path": "raw/008--u1406--fc1882--2017-18.html",
+      "size": 227363,
+      "sha256": "e66177dbcf9a3ea505365bcaef94fa488a6d9eb5061ac4c374a5fb925be053af"
+    },
+    {
+      "path": "raw/008--u1406--fc1882--2018-19.html",
+      "size": 223603,
+      "sha256": "bf50b7e40690eead9f0a5c89d009c6589e057027e7b690a55522c94e20c76929"
+    },
+    {
+      "path": "raw/008--u1406--fc1882--2020-21.html",
+      "size": 227517,
+      "sha256": "bf1e44334ef2e9139761ef5423fdedf7f1a8869ef4fda608ff4b5276ba78e8cf"
+    },
+    {
+      "path": "raw/009--u1431--fc224--2015-16.html",
+      "size": 231676,
+      "sha256": "52ed8e3939363977e4af5a29b9c5cc38beaa761425d778abb1ab7157c735a299"
+    },
+    {
+      "path": "raw/009--u1431--fc224--2016-17.html",
+      "size": 223956,
+      "sha256": "f3a43751a00cd3f7ed9575145ecd143371a38cb51b70048768bbc5b0cc8c80f2"
+    },
+    {
+      "path": "raw/009--u1431--fc224--2017-18.html",
+      "size": 229635,
+      "sha256": "9dc25ba723af64e866db56e3619623d046c2588ef000715a8201c494ce31b305"
+    },
+    {
+      "path": "raw/009--u1431--fc224--2018-19.html",
+      "size": 230097,
+      "sha256": "c5830a16c332e96e1fab3f9be8473d9e7e9daa04bfd4b1a55cd29ed1a80b175c"
+    },
+    {
+      "path": "raw/009--u1431--fc224--2019-20.html",
+      "size": 227685,
+      "sha256": "2ed81a2cb8fb953adbcd1157d9423d9e37bf264ee9de877b116c1fb76503a96d"
+    },
+    {
+      "path": "raw/009--u1431--fc224--2020-21.html",
+      "size": 223814,
+      "sha256": "7d68c2468392ef8027806725fd05b5332b1e0e6bf2fe3303caa8c3a67665267c"
+    },
+    {
+      "path": "raw/009--u1431--fc224--2021-22.html",
+      "size": 221715,
+      "sha256": "1eab236b70a99433f45dcba8ff310edfb3fe614d9fb2cd318f8988b9e6953137"
+    },
+    {
+      "path": "raw/010--u1478--fc519--2015-16.html",
+      "size": 222145,
+      "sha256": "ae3a5496b8359edeba830c3d821fe7b47da004deee01c5e3cd484651edc4337f"
+    },
+    {
+      "path": "raw/010--u1478--fc519--2016-17.html",
+      "size": 226259,
+      "sha256": "aa9005475b764826506f09080b8ea5972ee920bd1fff05c13d4cc9017d6638b8"
+    },
+    {
+      "path": "raw/010--u1478--fc519--2017-18.html",
+      "size": 222124,
+      "sha256": "13a6f7254b3e3482986667a4adf0df617abc53a1061370281f265fba3e93ad2c"
+    },
+    {
+      "path": "raw/010--u1478--fc519--2018-19.html",
+      "size": 228395,
+      "sha256": "4f52ed6aee59f99764b0ee667fbb55c78979335b3733ba71c9575c5470ffe67f"
+    },
+    {
+      "path": "raw/011--u1525--fc267--2015-16.html",
+      "size": 222254,
+      "sha256": "488a9d1eeb69ff3cecb04496a65d8f3f1ad18bf7171a57475b781aa18d2f4157"
+    },
+    {
+      "path": "raw/012--u1550--fc1866--2016-17.html",
+      "size": 227895,
+      "sha256": "0d5aee29010b5e2b7ad53458323f412275613005fd0b55baa8667d88bfcefd68"
+    },
+    {
+      "path": "raw/012--u1550--fc1866--2017-18.html",
+      "size": 227614,
+      "sha256": "582329cf62ca5c86d60c714475a14f90972424669abfa053d004073344a7fa2c"
+    },
+    {
+      "path": "raw/012--u1550--fc1866--2018-19.html",
+      "size": 229533,
+      "sha256": "c91f1dca581b8248ab28ab5301250e0bd8344a8fdd82df331317b82aa8ee4a12"
+    },
+    {
+      "path": "raw/012--u1550--fc1866--2019-20.html",
+      "size": 227450,
+      "sha256": "9a063004cddbc4a906eb35c365f449c43602321e6f1b80b4e8add91a51301d5b"
+    },
+    {
+      "path": "raw/012--u1550--fc1866--2020-21.html",
+      "size": 228430,
+      "sha256": "a174f1190733eff5e7b9fb495e2950b56f897a50a906c8a35d52bfa46b34ba8c"
+    },
+    {
+      "path": "raw/012--u1550--fc1866--2021-22.html",
+      "size": 227975,
+      "sha256": "3b59e39ff27a61fd5ce6227c8052de870a0f5bde757d1c1137b363611d060c37"
+    },
+    {
+      "path": "raw/013--u1595--fc2062--2016-17.html",
+      "size": 224734,
+      "sha256": "fda11e19d834f9dd85f4faaf6689f709e562cf84bfc3ab6a17a722debb2952cf"
+    },
+    {
+      "path": "raw/013--u1595--fc2062--2017-18.html",
+      "size": 227360,
+      "sha256": "672996179ec80411b26e7803e4df5533e89157bc8375366884d0efe954b4f31e"
+    },
+    {
+      "path": "raw/013--u1595--fc2062--2018-19.html",
+      "size": 224780,
+      "sha256": "00b2e1a943214687af7d7d201afe29c1a93c53f173f5e6d5fc86beacc90c9d99"
+    },
+    {
+      "path": "raw/013--u1595--fc2062--2019-20.html",
+      "size": 227337,
+      "sha256": "241f3520b0907083641b7de6ab60cec09de23eda6e939994adf25ec60eaf8238"
+    },
+    {
+      "path": "raw/013--u1595--fc2062--2020-21.html",
+      "size": 220910,
+      "sha256": "7dda1be5d478120390ef4cbfb00e4390ea8ea28e31b206fedab783556f213845"
+    },
+    {
+      "path": "raw/014--u1623--fc2018--2016-17.html",
+      "size": 217921,
+      "sha256": "7dd6867555ad82b60fd1c234ee306473f2c6dc79b22abd1bdf2eaedeb30a1d2f"
+    },
+    {
+      "path": "raw/015--u1805--fc284--2016-17.html",
+      "size": 196467,
+      "sha256": "d0242d13efa78dc13ec42781a7e928fba1065c83aabf3ab58e57eb7ed41e934c"
+    },
+    {
+      "path": "raw/016--u1900--fc80--2015-16.html",
+      "size": 232317,
+      "sha256": "fe313be228d762e6e5c67273b2671a13edde505e38c1986181fd79f301015fef"
+    },
+    {
+      "path": "raw/017--u1901--fc85--2015-16.html",
+      "size": 225380,
+      "sha256": "edd245d489c66670efbfa2d5163491cce190f0175dc1b1b9ac694e34fc419cc7"
+    },
+    {
+      "path": "raw/018--u1915--fc804--2015-16.html",
+      "size": 196009,
+      "sha256": "188e7080f56fc32c829d806f5a88a916b31f9f542f1a1cffd62da895e7457094"
+    },
+    {
+      "path": "raw/019--u1970--fc694--2022-23.html",
+      "size": 225081,
+      "sha256": "ba4020027ae371ab68075a563ab0aea327d441513fa298cf7f7d3448538621e9"
+    },
+    {
+      "path": "raw/019--u1970--fc694--2023-24.html",
+      "size": 226540,
+      "sha256": "0ad4f3557b462a4fce76f543a92d7e3d7ecff5da11ee4af5da4db8424f17a9f7"
+    },
+    {
+      "path": "raw/020--u2024--fc225--2015-16.html",
+      "size": 225389,
+      "sha256": "c7965bc5372c05dc9203c90ffc6270417381e2a37801f13a05143d8e46fdfe48"
+    },
+    {
+      "path": "raw/021--u3888--fc2790--2019-20.html",
+      "size": 220349,
+      "sha256": "2156d4c0f418c6a0c2000578722d188aeff08f96cda45e63130a17f25086900a"
+    },
+    {
+      "path": "raw/022--u4904--fc2113--2016-17.html",
+      "size": 199082,
+      "sha256": "5e01b8f3205bb207ca5e106689115f71ca3d850292c4f0c6691a557efe1b704f"
+    },
+    {
+      "path": "raw/023--u5700--fc2325--2017-18.html",
+      "size": 220972,
+      "sha256": "7029c839d939cb3c405004964bf6d4ec362fe9199a169b94408823fa5bb63d94"
+    },
+    {
+      "path": "raw/023--u5700--fc2325--2018-19.html",
+      "size": 217026,
+      "sha256": "63ce319cf70f9222e6c210001adfbf64ac69fbccd0b5debf1777edfbf95e0490"
+    },
+    {
+      "path": "raw/023--u5700--fc2325--2019-20.html",
+      "size": 225852,
+      "sha256": "95e1b047a2871462aa7c29016dccee67f88dc13fa618033c0b690bbc96ef93d6"
+    },
+    {
+      "path": "raw/023--u5700--fc2325--2020-21.html",
+      "size": 232157,
+      "sha256": "f05d4d03b53c941d82b3f8e3f41b0300f09a54aa34a35978f223bba8ae674c78"
+    },
+    {
+      "path": "raw/023--u5700--fc2325--2022-23.html",
+      "size": 220413,
+      "sha256": "d46164780c855756262064c2f9d746c043c84d139c35765ac72d585b1b4b5c2a"
+    },
+    {
+      "path": "raw/023--u5700--fc2325--2023-24.html",
+      "size": 222605,
+      "sha256": "188c50a7f11e6f7f470efd895f5c2fc68975d42eaf5f9ecd1a878e05b3db173d"
+    },
+    {
+      "path": "raw/023--u5700--fc2325--2024-25.html",
+      "size": 226522,
+      "sha256": "97c389afd8d0bc8c9545d4589bbecbb9c9db892300ca9e6b0d3f1565f5f86287"
+    },
+    {
+      "path": "raw/024--u6197--fc2203--2017-18.html",
+      "size": 230072,
+      "sha256": "80f334a3b1ae5779a64a9d68dc70c035c86b533f1909ceedbf7b9abb186a3717"
+    },
+    {
+      "path": "raw/025--u6297--fc2856--2018-19.html",
+      "size": 227919,
+      "sha256": "8ae44ddf0b4520ea593af8f3ab200fda3b6ff34aa8ca727714df1dd315af5a72"
+    },
+    {
+      "path": "raw/026--u6973--fc2747--2018-19.html",
+      "size": 222381,
+      "sha256": "a3068aaeb053f6e752ff41fae2b1ab2bdc82ff8717dc548b7d5caa783da27d48"
+    },
+    {
+      "path": "raw/026--u6973--fc2747--2019-20.html",
+      "size": 227736,
+      "sha256": "6dec7c6dd811e5a492233e4e10c7e784f436fa26db315cbd959623b2cc82e4d3"
+    },
+    {
+      "path": "raw/026--u6973--fc2747--2020-21.html",
+      "size": 221105,
+      "sha256": "880a3beccda0642955ac8db9eee18b95bfb6d3bb780f0dbe49033f97e91b3e87"
+    },
+    {
+      "path": "raw/027--u7004--fc2847--2018-19.html",
+      "size": 219677,
+      "sha256": "69def2e196bd71ababec6e37fb9a4fc36d775bee806c0112bb888f6dc89d472e"
+    },
+    {
+      "path": "raw/027--u7004--fc2847--2022-23.html",
+      "size": 237470,
+      "sha256": "826d91ddf624a0b9e535bf26684e1204cb2da7df06110ed4b9fd796c441653e1"
+    },
+    {
+      "path": "raw/028--u7216--fc4339--2018-19.html",
+      "size": 196242,
+      "sha256": "8c76f788d6b8e1559cf43bb51db1b952e4f3f3133394e517a1813bb0c8ea449e"
+    },
+    {
+      "path": "raw/029--u7960--fc4413--2019-20.html",
+      "size": 225574,
+      "sha256": "5a150733d7f68180c0c3461e8edef1622ad8d341a05c7ea70f56f14e4034bf61"
+    },
+    {
+      "path": "raw/030--u8035--fc4500--2019-20.html",
+      "size": 232906,
+      "sha256": "fb7ad53ac067ab0de144148e285d3fc8879eba5fd51e58e030007bcdc6b78478"
+    },
+    {
+      "path": "raw/030--u8035--fc4500--2020-21.html",
+      "size": 226157,
+      "sha256": "7ba85ab234215a90bb36f3ccc1934d8c31aa453baa9048e4839f3c80b4fe4acd"
+    },
+    {
+      "path": "raw/030--u8035--fc4500--2021-22.html",
+      "size": 220159,
+      "sha256": "c4afeda3c1ecfdc02e08c0fe7328b920243acc2cdee7d8d643eda6a302338109"
+    },
+    {
+      "path": "raw/030--u8035--fc4500--2022-23.html",
+      "size": 224775,
+      "sha256": "dcbf098cdb69034c4e5a3b8fe898897e13a109d365bfb04792295e1cc112f1f4"
+    },
+    {
+      "path": "raw/031--u8182--fc5559--2024-25.html",
+      "size": 237254,
+      "sha256": "f8dd1dae3f8940803d078c06b4eb0fc2cafe412056d0cd7c78851a31cd609875"
+    },
+    {
+      "path": "raw/031--u8182--fc5559--2025-26.html",
+      "size": 235236,
+      "sha256": "85083eff5b60022d7885516b98a0a70dda0ff9463f3bf209899e6373589845d8"
+    },
+    {
+      "path": "raw/032--u8387--fc4920--2019-20.html",
+      "size": 188395,
+      "sha256": "a9b7da5591b32b8ebcef0b6b914325040f1c41b9b155e45189aed5ed8c4257f5"
+    },
+    {
+      "path": "raw/033--u8639--fc5686--2021-22.html",
+      "size": 225047,
+      "sha256": "9f51785ed74b8e26178ed248156f17e44478e8808bacd3f97bdd49c894425011"
+    },
+    {
+      "path": "raw/033--u8639--fc5686--2022-23.html",
+      "size": 223281,
+      "sha256": "08fd178516712271133abd7fe0deed903698a0077e60024f946538380cf0ea8e"
+    },
+    {
+      "path": "raw/033--u8639--fc5686--2023-24.html",
+      "size": 221570,
+      "sha256": "1e21af2dac29d087735ce892a678cc4a979d8898405f3172cce6c95a0c18d86f"
+    },
+    {
+      "path": "raw/034--u8895--fc6634--2024-25.html",
+      "size": 233353,
+      "sha256": "16de6b9e8706f8e9f8f589f8903e31ec3afa6830a382df6e794b4248c8ee5e3a"
+    },
+    {
+      "path": "raw/034--u8895--fc6634--2025-26.html",
+      "size": 224927,
+      "sha256": "ef5c836625613e2dd0c27751b463a6722212c687cf84d00cf2dca1bbafb731e2"
+    },
+    {
+      "path": "raw/035--u8910--fc4987--2020-21.html",
+      "size": 223027,
+      "sha256": "1c625cadb401b2ed6e46c4a1ed9383580189b78ac54928f82975c11fe3688d2b"
+    },
+    {
+      "path": "raw/036--u8926--fc5002--2020-21.html",
+      "size": 227533,
+      "sha256": "e6454ae86479b45d7b920da4496af1063a486f22c4e897da2752fcafe2bd272d"
+    },
+    {
+      "path": "raw/037--u9059--fc5361--2020-21.html",
+      "size": 199980,
+      "sha256": "a3c377082391e126050252f94e8d1f9e1a15a3141e7e0eb5ff107763f4b318a7"
+    },
+    {
+      "path": "raw/038--u9879--fc5487--2021-22.html",
+      "size": 227420,
+      "sha256": "fcfd72d0722695aa7e85ded0b53dbe9bac0aa92043993712f1ca89c2af7e6cee"
+    },
+    {
+      "path": "raw/039--u10090--fc6653--2024-25.html",
+      "size": 227471,
+      "sha256": "1bbbd4ee77bdf094e27d31216a8cc2f4def7f2e1c71c3b9edf179104009b380b"
+    },
+    {
+      "path": "raw/039--u10090--fc6653--2025-26.html",
+      "size": 223393,
+      "sha256": "9d3f998c86dd74e12c951536d83fbecdabf9b1d48b888848bf4908eece07b2f2"
+    },
+    {
+      "path": "raw/040--u10882--fc6157--2022-23.html",
+      "size": 196062,
+      "sha256": "659ee0da8bfd460b2dddce9bf106a0457c88dbe9aa953eb92b758ff2ecef1480"
+    },
+    {
+      "path": "raw/041--u11022--fc511--2022-23.html",
+      "size": 220867,
+      "sha256": "1dbe4ec0e4e35ca04f6438008820a33fe9c9a486c4533565c1b19b839ef983f8"
+    },
+    {
+      "path": "raw/041--u11022--fc511--2023-24.html",
+      "size": 221900,
+      "sha256": "4131035be66644237db990915e576855c506e4a05cf7f9ffa10815d4771ca13e"
+    },
+    {
+      "path": "raw/041--u11022--fc511--2024-25.html",
+      "size": 223090,
+      "sha256": "17e684e1e220fcd7dc52734573bd1e956c2dc7e4eb72a75a070e915062c74b70"
+    },
+    {
+      "path": "raw/041--u11022--fc511--2025-26.html",
+      "size": 222798,
+      "sha256": "de3d681c99fd74654039cc931a8ba1a6678499d67bffca1a237e64c3a1794272"
+    },
+    {
+      "path": "raw/042--u11140--fc6175--2022-23.html",
+      "size": 187901,
+      "sha256": "4e646b073814b3026bffebabcd2be10cacd34f296be6976775acccd1db83ace2"
+    },
+    {
+      "path": "raw/042--u11140--fc6175--2023-24.html",
+      "size": 236968,
+      "sha256": "2543da8af9d62842dcccdaa493e68ddbb8b8de83e11e785963a3af4b43f45e1e"
+    },
+    {
+      "path": "raw/043--u12017--fc6448--2023-24.html",
+      "size": 227607,
+      "sha256": "cf89bdefdf70a7a5a1ee0c5f32cb40a0127ba953215d0850e2786d4e96531011"
+    },
+    {
+      "path": "raw/044--u13049--fc6635--2024-25.html",
+      "size": 221660,
+      "sha256": "1ddc982ca12f36a3296a78fcf86d92b43f653ec89351be147e937cc4853ec4bd"
+    },
+    {
+      "path": "raw/045--u14416--fc7352--2025-26.html",
+      "size": 195157,
+      "sha256": "076a3f5f4183a1247a31e5c2de650a89829ad11d4ad5347eb10251b41952c24e"
+    }
+  ],
+  "governance": {
+    "identityAuthority": "VERIFIED_WIKIDATA_QID_PLUS_D0_UNDERSTAT_PERSON_BRIDGE",
+    "providerObservationKey": [
+      "Fantacalcio",
+      "season",
+      "fantacalcioPlayerId"
+    ],
+    "providerIdUsedAsGlobalHistoricalPersonKey": false,
+    "exactSeasonPlayerIdBindingRequired": true,
+    "lookupNameTokenSubsetConsistencyRequired": true,
+    "onlyExistingWikidataConflictDateMayResolve": true,
+    "nameSearchUsed": false,
+    "fuzzyMatchingUsed": false,
+    "dobUsedForIdentitySelection": false,
+    "computedAgeDerived": false,
+    "historicalAsOfGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
