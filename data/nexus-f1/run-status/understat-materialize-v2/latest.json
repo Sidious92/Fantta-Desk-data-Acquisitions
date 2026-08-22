@@ -1,0 +1,18 @@
+{
+  "schema": "NEXUS_F1_UNDERSTAT_MATERIALIZATION_RUN_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS_VERIFIED_MATERIALIZATION",
+  "generatedAt": "2026-08-22T22:04:58.661Z",
+  "sourceCommit": "ac112b9499e79b8c2602614a0c090ea9a5fb34cc",
+  "githubRunId": 32601430668,
+  "githubRunAttempt": 1,
+  "frozenBundleSha256": "4f78372340db3c3373dd7f4be43e8f0224974154943311d91185728ced8d9e95",
+  "normalizedOutputSha256": "df95e4c0e93c364c89e883a516cfb79e08ae1faf871ef025d31ddb67bd50a323",
+  "rows": 6301,
+  "governance": {
+    "materializationOnly": true,
+    "f1Closed": false,
+    "f2PlusAuthorized": false,
+    "canonicalMutation": false
+  }
+}
