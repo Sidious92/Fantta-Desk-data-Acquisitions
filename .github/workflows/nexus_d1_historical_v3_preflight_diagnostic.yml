@@ -1,0 +1,79 @@
+name: Nexus D1 Historical v3 Preflight Diagnostic
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-historical-v3-preflight-diagnostic/EXECUTE'
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Diagnose transport without fail-fast
+        run: |
+          set -euo pipefail
+          mkdir -p .nexus-d1-historical-v3-preflight-diagnostic-status
+          python - <<'PY'
+          import base64, hashlib, json, lzma, traceback
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          mp=Path('data/nexus-d1/historical-resolved-person-subjects-v3-manifest.json')
+          m=json.loads(mp.read_text())
+          report={
+            'schema':'NEXUS_D1_HISTORICAL_V3_PREFLIGHT_DIAGNOSTIC_V1',
+            'capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),
+            'status':'UNKNOWN',
+            'manifest':{'schema':m.get('schema'),'subjectCount':m.get('subjectCount')},
+            'chunks':[],
+            'checks':{},
+            'error':None,
+          }
+          try:
+            parts=[]
+            for c in m['payload']['chunks']:
+              p=Path(c['path']); text=p.read_text().strip(); got=hashlib.sha256(text.encode()).hexdigest()
+              row={'path':c['path'],'expectedChars':c['chars'],'actualChars':len(text),'expectedTextSha256':c['textSha256'],'actualTextSha256':got,'pass':len(text)==c['chars'] and got==c['textSha256']}
+              report['chunks'].append(row); parts.append(text)
+            encoded=''.join(parts)
+            report['checks']['base64']={'expectedChars':m['payload']['base64Chars'],'actualChars':len(encoded),'pass':len(encoded)==m['payload']['base64Chars']}
+            try:
+              xz=base64.b64decode(encoded,validate=True)
+              xzsha=hashlib.sha256(xz).hexdigest()
+              report['checks']['xz']={'expectedBytes':m['payload']['xzBytes'],'actualBytes':len(xz),'expectedSha256':m['payload']['xzSha256'],'actualSha256':xzsha,'pass':len(xz)==m['payload']['xzBytes'] and xzsha==m['payload']['xzSha256']}
+              try:
+                raw=lzma.decompress(xz); rawsha=hashlib.sha256(raw).hexdigest(); d=json.loads(raw)
+                report['checks']['decodedJson']={'expectedBytes':m['payload']['decodedJsonBytes'],'actualBytes':len(raw),'expectedSha256':m['payload']['decodedJsonSha256'],'actualSha256':rawsha,'subjects':len(d.get('subjects',[])),'pass':len(raw)==m['payload']['decodedJsonBytes'] and rawsha==m['payload']['decodedJsonSha256'] and len(d.get('subjects',[]))==2048}
+              except Exception as e:
+                report['checks']['decodedJson']={'pass':False,'error':f'{type(e).__name__}: {e}'}
+            except Exception as e:
+              report['checks']['xz']={'pass':False,'error':f'{type(e).__name__}: {e}'}
+            report['status']='PASS' if all(x.get('pass') for x in report['chunks']) and all(x.get('pass') for x in report['checks'].values()) else 'FAIL'
+          except Exception as e:
+            report['status']='FAIL'; report['error']=f'{type(e).__name__}: {e}\n{traceback.format_exc()}'
+          Path('.nexus-d1-historical-v3-preflight-diagnostic-status/DIAGNOSTIC.json').write_text(json.dumps(report,indent=2)+'\n')
+          print(json.dumps(report,indent=2))
+          PY
+      - name: Persist diagnostic
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .nexus-d1-historical-v3-preflight-diagnostic-status/DIAGNOSTIC.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus: persist D1 historical v3 preflight diagnostic [skip ci]'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
