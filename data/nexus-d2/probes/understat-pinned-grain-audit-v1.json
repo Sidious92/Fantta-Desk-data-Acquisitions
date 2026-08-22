@@ -11,6 +11,15 @@
     "sha256": "b78fad5f01844a0fdab0d89474dafba9b86c586d2f0ce88f0ce2c9af70d2bc64",
     "bytes": 6587761
   },
+  "identityAuthority": {
+    "repository": "Sidious92/Fantta-Desk-data-Acquisitions",
+    "commit": "d0cab101cc90f65ee0b1982e7ca974cd95c5d3b9",
+    "path": "data/nexus-d1/final-v3/IDENTITY_MASTER.json",
+    "expectedSha256": "952bdf1d4cfb81a0683bff1f78d949b6350b11be1cc27d20059f7ace651bb53c",
+    "observedSha256": "952bdf1d4cfb81a0683bff1f78d949b6350b11be1cc27d20059f7ace651bb53c",
+    "understatAliasesWithGlobalPromotion": 2048,
+    "bindingRule": "EXACT_UNDERSTAT_PROVIDER_ID_ONLY"
+  },
   "schemaFields": [
     "assists",
     "games",
@@ -44,6 +53,11 @@
     "rowsWithCommaSeparatedMultiClubTeamTitle": 1086,
     "uniquePlayersWithMultiClubAggregateRows": 938,
     "singleTeamTitleRows": 33729,
+    "d1ExactBoundRows": 8399,
+    "d1ExactBoundUniquePlayersObservedInPinnedDataset": 1945,
+    "d1ExactBoundMultiClubAggregateRows": 337,
+    "d1ExactBoundUniquePlayersWithMultiClubAggregateRows": 289,
+    "d1ExactBoundSingleTeamTitleRows": 8062,
     "duplicateExactPlayerSeasonLeagueTeamTitleKeys": 0,
     "rowsInDuplicateExactKeys": 0
   },
@@ -70,6 +84,22 @@
     "Ligue_1": 148,
     "RFPL": 270,
     "Serie_A": 298
+  },
+  "d1ExactBoundRowsByLeague": {
+    "Bundesliga": 473,
+    "EPL": 754,
+    "La_Liga": 596,
+    "Ligue_1": 648,
+    "RFPL": 144,
+    "Serie_A": 5784
+  },
+  "d1ExactBoundMultiClubRowsByLeague": {
+    "Bundesliga": 10,
+    "EPL": 17,
+    "La_Liga": 9,
+    "Ligue_1": 13,
+    "RFPL": 3,
+    "Serie_A": 285
   },
   "rowsBySeason": {
     "2014/15": 3044,
@@ -101,76 +131,86 @@
     "1": 1085,
     "2": 1
   },
-  "examples": [
-    {
-      "id": "622",
-      "player_name": "Wilfried Bony",
-      "team_title": "Manchester City,Swansea",
-      "league": "EPL",
-      "season": "2014/15"
-    },
-    {
-      "id": "690",
-      "player_name": "Loïc Remy",
-      "team_title": "Chelsea,Queens Park Rangers",
-      "league": "EPL",
-      "season": "2014/15"
-    },
-    {
-      "id": "1656",
-      "player_name": "George Boyd",
-      "team_title": "Burnley,Hull",
-      "league": "EPL",
-      "season": "2014/15"
-    },
-    {
-      "id": "501",
-      "player_name": "Danny Welbeck",
-      "team_title": "Arsenal,Manchester United",
-      "league": "EPL",
-      "season": "2014/15"
-    },
-    {
-      "id": "4471",
-      "player_name": "Mohamed Diamé",
-      "team_title": "Hull,West Ham",
-      "league": "EPL",
-      "season": "2014/15"
-    },
-    {
-      "id": "596",
-      "player_name": "Tom Cleverley",
-      "team_title": "Aston Villa,Manchester United",
-      "league": "EPL",
-      "season": "2014/15"
-    },
-    {
-      "id": "712",
-      "player_name": "Jack Cork",
-      "team_title": "Southampton,Swansea",
-      "league": "EPL",
-      "season": "2014/15"
-    },
-    {
-      "id": "593",
-      "player_name": "Aaron Lennon",
-      "team_title": "Everton,Tottenham",
-      "league": "EPL",
-      "season": "2014/15"
-    },
+  "d1BoundMultiClubExamples": [
     {
       "id": "939",
       "player_name": "Mauro Zárate",
       "team_title": "Queens Park Rangers,West Ham",
       "league": "EPL",
-      "season": "2014/15"
+      "season": "2014/15",
+      "d1PersonKey": "nexus-person-v1-1ac395e5b63fe2e7309a7971"
     },
     {
-      "id": "679",
-      "player_name": "Scott Sinclair",
-      "team_title": "Aston Villa,Manchester City",
+      "id": "952",
+      "player_name": "Gastón Ramírez",
+      "team_title": "Hull,Southampton",
       "league": "EPL",
-      "season": "2014/15"
+      "season": "2014/15",
+      "d1PersonKey": "nexus-person-v1-085435b6eeaeb135cc9493c2"
+    },
+    {
+      "id": "498",
+      "player_name": "Alexis Sánchez",
+      "team_title": "Arsenal,Manchester United",
+      "league": "EPL",
+      "season": "2017/18",
+      "d1PersonKey": "nexus-person-v1-7ae03947580a396cbdbda975"
+    },
+    {
+      "id": "502",
+      "player_name": "Olivier Giroud",
+      "team_title": "Arsenal,Chelsea",
+      "league": "EPL",
+      "season": "2017/18",
+      "d1PersonKey": "nexus-person-v1-91f4b49b09941bae21740d9e"
+    },
+    {
+      "id": "317",
+      "player_name": "Henrikh Mkhitaryan",
+      "team_title": "Arsenal,Manchester United",
+      "league": "EPL",
+      "season": "2017/18",
+      "d1PersonKey": "nexus-person-v1-60f6466a4c2e829f88db23a6"
+    },
+    {
+      "id": "847",
+      "player_name": "Cédric Soares",
+      "team_title": "Arsenal,Southampton",
+      "league": "EPL",
+      "season": "2019/20",
+      "d1PersonKey": "nexus-person-v1-a626a3b6edc07beb88f9cfe1"
+    },
+    {
+      "id": "8226",
+      "player_name": "Tariq Lamptey",
+      "team_title": "Brighton,Chelsea",
+      "league": "EPL",
+      "season": "2019/20",
+      "d1PersonKey": "nexus-person-v1-a443caf3ccfd80a3093fd6b7"
+    },
+    {
+      "id": "688",
+      "player_name": "Ruben Loftus-Cheek",
+      "team_title": "Chelsea,Fulham",
+      "league": "EPL",
+      "season": "2020/21",
+      "d1PersonKey": "nexus-person-v1-150b49dfc0de2c8ac85aa120"
+    },
+    {
+      "id": "1750",
+      "player_name": "Ainsley Maitland-Niles",
+      "team_title": "Arsenal,West Bromwich Albion",
+      "league": "EPL",
+      "season": "2020/21",
+      "d1PersonKey": "nexus-person-v1-86789a68169c7e0ed7151b3f"
+    },
+    {
+      "id": "645",
+      "player_name": "Dele Alli",
+      "team_title": "Everton,Tottenham",
+      "league": "EPL",
+      "season": "2021/22",
+      "d1PersonKey": "nexus-person-v1-d99f29882f3cc8a7481eea93"
     }
   ],
   "scientificFinding": {
@@ -180,11 +220,12 @@
     "safeToSplitCommaSeparatedRowsIntoCanonicalStints": false,
     "safeToAllocateAggregatedMetricsAcrossClubs": false,
     "typedGap": "AGGREGATED_MULTI_CLUB_ROW",
-    "d2Consequence": "These rows cannot become canonical club-stints without independent source evidence that preserves stint boundaries and club-specific observations."
+    "d2Consequence": "D1-bound multi-club aggregate rows cannot become canonical club-stints without independent source evidence that preserves stint boundaries and club-specific observations."
   },
   "governance": {
     "newProviderPromoted": false,
     "rawSourceMutated": false,
+    "identityReinterpreted": false,
     "modelModified": false,
     "f1Started": false
   }
