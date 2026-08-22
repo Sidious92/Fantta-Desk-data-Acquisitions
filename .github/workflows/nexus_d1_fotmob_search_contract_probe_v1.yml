@@ -1,0 +1,150 @@
+name: Nexus D1 FotMob Search Contract Probe v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-fotmob-search-probe-v1/EXECUTE'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: nexus-d1-fotmob-search-probe-v1
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      ROOT: .nexus-d1-fotmob-search-probe-v1
+      OUT: .nexus-d1-fotmob-search-probe-v1/output
+      STATUS: data/nexus-d1/fotmob-search-probe-v1
+      RELEASE_TAG: nexus-d1-fotmob-search-contract-probe-v1
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Probe search contract on pre-verified FotMob IDs
+        id: probe
+        shell: bash
+        run: |
+          set -uo pipefail
+          rm -rf "$OUT"; mkdir -p "$OUT"
+          set +e
+          python scripts/nexus-d1-probe-fotmob-search-contract-v1.py --output "$OUT" \
+            >"$OUT/PROBE.stdout.log" 2>"$OUT/PROBE.stderr.log"
+          rc=$?
+          set -e
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+
+      - name: Persist outcome before gate
+        if: always() && steps.probe.outcome == 'success'
+        env:
+          RC: ${{ steps.probe.outputs.rc }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$STATUS"
+          for f in RESULT.json MANIFEST.json PROBE.stdout.log PROBE.stderr.log; do
+            [ ! -f "$OUT/$f" ] || cp "$OUT/$f" "$STATUS/$f"
+          done
+          python - <<'PY'
+          import json,os
+          from datetime import datetime,timezone
+          from pathlib import Path
+          out=Path(os.environ['OUT']); status=Path(os.environ['STATUS']); rc=int(os.environ.get('RC') or 999)
+          result=json.loads((out/'RESULT.json').read_text()) if (out/'RESULT.json').exists() else None
+          doc={
+            'schema':'NEXUS_D1_FOTMOB_SEARCH_CONTRACT_PROBE_STATUS_V1',
+            'capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),
+            'exitCode':rc,
+            'status':(result or {}).get('status') or 'TECHNICAL_FAILURE_NO_RESULT',
+            'endpoint':(result or {}).get('endpoint'),
+            'summary':(result or {}).get('summary'),
+            'rules':(result or {}).get('rules'),
+          }
+          (status/'STATUS.json').write_text(json.dumps(doc,ensure_ascii=False,indent=2)+'\n')
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$STATUS"
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus: persist D1 FotMob search contract probe v1 outcome [skip ci]'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Fail closed if search contract is not established
+        if: steps.probe.outputs.rc != '0'
+        run: |
+          echo "FotMob search contract probe did not PASS; persisted rc=${{ steps.probe.outputs.rc }}." >&2
+          exit 1
+
+      - name: Freeze raw search probe evidence
+        if: steps.probe.outputs.rc == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git pull --rebase origin main
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Immutable search probe release already exists: $RELEASE_TAG" >&2
+            exit 1
+          fi
+          tar -C "$ROOT" -czf nexus-d1-fotmob-search-contract-probe-v1.tar.gz output
+          sha256sum nexus-d1-fotmob-search-contract-probe-v1.tar.gz > nexus-d1-fotmob-search-contract-probe-v1.tar.gz.sha256
+          trap 'gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true' ERR
+          gh release create "$RELEASE_TAG" \
+            --draft \
+            --target "$(git rev-parse HEAD)" \
+            --title 'FantaNexus D1 FotMob Search Contract Probe v1' \
+            --notes 'Four-player bounded contract probe using pre-verified exact FotMob IDs. No D1 identity resolution, no fuzzy/name-only admission, no DOB-based identity selection, no F1/D2 start or training promotion.'
+          gh release upload "$RELEASE_TAG" \
+            nexus-d1-fotmob-search-contract-probe-v1.tar.gz \
+            nexus-d1-fotmob-search-contract-probe-v1.tar.gz.sha256 \
+            "$OUT/RESULT.json" "$OUT/MANIFEST.json"
+          trap - ERR
+
+      - name: Persist freeze verification
+        if: steps.probe.outputs.rc == '0'
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,json,os
+          from datetime import datetime,timezone
+          from pathlib import Path
+          p=Path('nexus-d1-fotmob-search-contract-probe-v1.tar.gz')
+          doc={
+            'schema':'NEXUS_D1_FOTMOB_SEARCH_CONTRACT_PROBE_FREEZE_V1',
+            'status':'FROZEN_IN_IMMUTABLE_DRAFT_RELEASE',
+            'verifiedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),
+            'releaseTag':os.environ['RELEASE_TAG'],
+            'archiveBytes':p.stat().st_size,
+            'archiveSha256':hashlib.sha256(p.read_bytes()).hexdigest(),
+            'rawSearchAndPlayerPageNextDataPreserved':True,
+            'governance':{'d1SubjectsResolved':False,'f1Started':False,'d2Started':False,'trainingPromotionGranted':False}
+          }
+          Path(os.environ['STATUS'],'FREEZE.json').write_text(json.dumps(doc,indent=2)+'\n')
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$STATUS/FREEZE.json"
+          git commit -m 'nexus: verify immutable D1 FotMob search probe freeze v1 [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Upload secondary artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-fotmob-search-contract-probe-v1
+          path: ${{ env.OUT }}/
+          if-no-files-found: warn
+          retention-days: 30
