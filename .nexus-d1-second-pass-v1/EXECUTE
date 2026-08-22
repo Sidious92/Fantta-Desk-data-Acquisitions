@@ -1,0 +1,4 @@
+triggeredAt=2026-08-22T16:31:00+02:00
+sourceCurrent=.nexus-d1-current-505-wikidata-v2-1-status/RESULT.json
+sourceHistorical=.nexus-d1-historical-2048-wikidata-v3-status/RESULT.json
+mode=FAIL_CLOSED_IDENTITY_ONLY
