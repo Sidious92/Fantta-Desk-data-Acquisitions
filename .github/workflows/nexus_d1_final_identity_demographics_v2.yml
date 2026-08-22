@@ -1,0 +1,168 @@
+name: Nexus D1 Final Identity Demographics v2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-final-identity-demographics-v2/EXECUTE'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: nexus-d1-final-identity-demographics-v2
+  cancel-in-progress: false
+
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      DEST: data/nexus-d1/final-v2
+      RELEASE_TAG: nexus-d1-identity-demographics-final-v2
+      ARCHIVE: nexus-d1-identity-demographics-final-v2.tar.gz
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Preflight frozen D1 RAW authorities
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          current=json.loads(Path('.nexus-d1-current-505-wikidata-v2-1-status/RESULT.json').read_text())
+          hist=json.loads(Path('.nexus-d1-historical-2048-wikidata-v4-1-status/RESULT.json').read_text())
+          obs=json.loads(Path('.nexus-d1-historical-445-observation-demographics-v1-status/RESULT.json').read_text())
+          preserve=json.loads(Path('.nexus-d1-secondary-raw-preservation-v2-status/RESULT.json').read_text())
+          assert current['status']=='PASS' and current['summary']['subjects']==505 and current['summary']['requestFailures']==0
+          assert hist['status']=='PASS' and hist['summary']['subjects']==2048 and hist['summary']['requestFailures']==0
+          assert obs['status']=='PASS' and obs['summary']['observations']==704 and obs['summary']['requestFailures']==0
+          assert preserve['status']=='PASS' and preserve['rules']['preservationReplayOnly'] is True
+          assert preserve['rules']['f1Started'] is False and preserve['rules']['d2Started'] is False
+          PY
+          for tag in \
+            nexus-d1-current-505-wikidata-v2-1 \
+            nexus-d1-historical-2048-wikidata-v4-1 \
+            nexus-d1-historical-445-observation-demographics-v1 \
+            nexus-d1-secondary-raw-preservation-v2; do
+              gh release view "$tag" >/dev/null
+          done
+
+      - name: Build final Identity Master v2
+        run: |
+          set -euo pipefail
+          rm -rf "$DEST"
+          python scripts/nexus-d1-build-final-identity-master-v2.py | tee /tmp/d1-final-v2-build.log
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          m=json.loads(Path('data/nexus-d1/final-v2/IDENTITY_MASTER.json').read_text())
+          r=json.loads(Path('data/nexus-d1/final-v2/D1_REGISTRY.json').read_text())
+          x=json.loads(Path('data/nexus-d1/final-v2/MANIFEST.json').read_text())
+          assert m['status']=='PASS' and x['status']=='PASS'
+          assert m['schema']=='NEXUS_D1_IDENTITY_MASTER_V2'
+          assert m['scope']['currentSubjectRecords']==505
+          assert m['scope']['historicalUnderstatSubjectRecords']==2048
+          assert m['scope']['historicalProviderScopedIdentityUnits']==445
+          assert r['counts']['current']['dobVerified']==505
+          assert r['counts']['historicalUnderstatBacked']['dobVerified']==2047
+          assert r['counts']['historicalUnderstatBacked']['dobConflict']==1
+          assert r['counts']['historicalNeverUnderstatBridged']['providerScopedGroups']==445
+          assert r['counts']['historicalNeverUnderstatBridged']['groupsWithoutDobConsensus']==0
+          assert len(r['typedResiduals']['dobConflicts'])==1
+          assert r['governance']['wikidataStatementDobNormalizedOnlyAtDayPrecision'] is True
+          assert r['governance']['fuzzyMatchingUsed'] is False
+          assert r['governance']['providerIdsUsedAsGlobalPersonKeys'] is False
+          assert r['governance']['f1Started'] is False and r['governance']['d2Started'] is False
+          PY
+
+      - name: Persist final package v2
+        run: |
+          set -euo pipefail
+          cp /tmp/d1-final-v2-build.log "$DEST/BUILD.stdout.log"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$DEST"
+          git commit -m 'nexus: persist final D1 identity demographics package v2 [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Build content-addressed final archive
+        id: archive
+        run: |
+          set -euo pipefail
+          tar -czf "$ARCHIVE" "$DEST"
+          sha256sum "$ARCHIVE" > "$ARCHIVE.sha256"
+          sha=$(cut -d' ' -f1 "$ARCHIVE.sha256")
+          bytes=$(stat -c %s "$ARCHIVE")
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "bytes=$bytes" >> "$GITHUB_OUTPUT"
+
+      - name: Freeze final package in draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then echo 'final v2 release already exists' >&2; exit 1; fi
+          trap 'gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true' ERR
+          gh release create "$RELEASE_TAG" --draft --target "$(git rev-parse HEAD)" --title 'FantaNexus D1 Identity & Demographics Final v2' --notes 'Content-addressed final D1 identity-demographics package. Current 505 complete; historical Understat-backed 2047/2048 DOB verified with one typed source conflict; 445 never-bridged Fantacalcio groups remain provider-scoped. No fuzzy matching, inferred DOB, age derivation, F1, D2, or model mutation.'
+          gh release upload "$RELEASE_TAG" "$ARCHIVE" "$ARCHIVE.sha256" "$DEST/IDENTITY_MASTER.json" "$DEST/D1_REGISTRY.json" "$DEST/MANIFEST.json"
+          gh release view "$RELEASE_TAG" >/dev/null
+          trap - ERR
+
+      - name: Persist public freeze receipt
+        env:
+          ARCHIVE_SHA: ${{ steps.archive.outputs.sha }}
+          ARCHIVE_BYTES: ${{ steps.archive.outputs.bytes }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os
+          from datetime import datetime,timezone
+          from pathlib import Path
+          p=Path('data/nexus-d1/final-v2/D1_PUBLIC_FREEZE_RECEIPT.json')
+          d={
+            'schema':'NEXUS_D1_PUBLIC_FREEZE_RECEIPT_V2',
+            'protocolVersion':'1.1',
+            'status':'PUBLIC_CONTENT_ADDRESSED_FREEZE_COMPLETE_PRIVATE_DRIVE_MIRROR_PENDING',
+            'capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),
+            'releaseTag':'nexus-d1-identity-demographics-final-v2',
+            'archiveFile':'nexus-d1-identity-demographics-final-v2.tar.gz',
+            'archiveBytes':int(os.environ['ARCHIVE_BYTES']),
+            'archiveSha256':os.environ['ARCHIVE_SHA'],
+            'githubActionsRunId':int(os.environ['RUN_ID']),
+            'governance':{
+              'rawMutation':False,'fuzzyMatchingUsed':False,'dobInferred':False,
+              'computedAgeDerived':False,'trainingPromotionGranted':False,
+              'f1Started':False,'d2Started':False
+            },
+            'nextRequiredAction':'PRIVATE_DRIVE_MIRROR_AND_SHA256_READBACK'
+          }
+          p.write_text(json.dumps(d,indent=2)+'\n')
+          PY
+          git add "$DEST/D1_PUBLIC_FREEZE_RECEIPT.json"
+          git commit -m 'nexus: persist D1 public freeze receipt v2 [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+          gh release upload "$RELEASE_TAG" "$DEST/D1_PUBLIC_FREEZE_RECEIPT.json"
+
+      - name: Upload final freeze artifact for private mirror
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-identity-demographics-final-v2-freeze
+          path: |
+            nexus-d1-identity-demographics-final-v2.tar.gz
+            nexus-d1-identity-demographics-final-v2.tar.gz.sha256
+            data/nexus-d1/final-v2/
+          if-no-files-found: error
+          retention-days: 30
