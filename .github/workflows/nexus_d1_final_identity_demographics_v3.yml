@@ -1,0 +1,151 @@
+name: Nexus D1 Final Identity Demographics v3
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-final-identity-demographics-v3/EXECUTE'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: nexus-d1-final-identity-demographics-v3
+  cancel-in-progress: false
+
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      DEST: data/nexus-d1/final-v3
+      RELEASE_TAG: nexus-d1-identity-demographics-final-v3
+      ARCHIVE: nexus-d1-identity-demographics-final-v3.tar.gz
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Preflight all frozen D1 RAW authorities
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          current=json.loads(Path('.nexus-d1-current-505-wikidata-v2-1-status/RESULT.json').read_text())
+          hist=json.loads(Path('.nexus-d1-historical-2048-wikidata-v4-1-status/RESULT.json').read_text())
+          obs=json.loads(Path('.nexus-d1-historical-445-observation-demographics-v1-status/RESULT.json').read_text())
+          preserve=json.loads(Path('.nexus-d1-secondary-raw-preservation-v2-status/RESULT.json').read_text())
+          precision=json.loads(Path('data/nexus-d1/dob-precision-audit-v1/RESULT.json').read_text())
+          nonday=json.loads(Path('data/nexus-d1/historical-nonday-dob-fantacalcio-v1/RESULT.json').read_text())
+          assert current['status']=='PASS' and current['summary']['subjects']==505 and current['summary']['requestFailures']==0
+          assert hist['status']=='PASS' and hist['summary']['subjects']==2048 and hist['summary']['requestFailures']==0
+          assert obs['status']=='PASS' and obs['summary']['observations']==704 and obs['summary']['requestFailures']==0
+          assert preserve['status']=='PASS' and preserve['rules']['preservationReplayOnly'] is True
+          assert precision['status']=='PASS' and precision['current']['nonDayPrecisionCount']==0 and precision['historical']['nonDayPrecisionCount']==6
+          assert nonday['status']=='PASS' and nonday['summary']['subjects']==6 and nonday['summary']['dobVerified']==6 and nonday['summary']['requestFailures']==0
+          assert nonday['rules']['wikidataPrecisionBelow11NeverPromotedToExactDob'] is True
+          PY
+          for tag in \
+            nexus-d1-current-505-wikidata-v2-1 \
+            nexus-d1-historical-2048-wikidata-v4-1 \
+            nexus-d1-historical-445-observation-demographics-v1 \
+            nexus-d1-secondary-raw-preservation-v2 \
+            nexus-d1-historical-nonday-dob-fantacalcio-v1; do
+              gh release view "$tag" >/dev/null
+          done
+
+      - name: Build final Identity Master v3
+        run: |
+          set -euo pipefail
+          rm -rf "$DEST"
+          python scripts/nexus-d1-build-final-identity-master-v3.py | tee /tmp/d1-final-v3-build.log
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          m=json.loads(Path('data/nexus-d1/final-v3/IDENTITY_MASTER.json').read_text())
+          r=json.loads(Path('data/nexus-d1/final-v3/D1_REGISTRY.json').read_text())
+          x=json.loads(Path('data/nexus-d1/final-v3/MANIFEST.json').read_text())
+          assert m['status']=='PASS' and x['status']=='PASS' and m['schema']=='NEXUS_D1_IDENTITY_MASTER_V3'
+          assert m['scope']['currentSubjectRecords']==505 and m['scope']['historicalUnderstatSubjectRecords']==2048
+          assert m['scope']['historicalProviderScopedIdentityUnits']==445 and m['scope']['uniqueGlobalPersonKeys']==2147
+          assert r['counts']['current']=={'subjects':505,'dobVerified':505,'dobConflict':0}
+          assert r['counts']['historicalUnderstatBacked']=={'subjects':2048,'dobVerified':2047,'dobConflict':1}
+          assert r['counts']['historicalNeverUnderstatBridged']['providerScopedGroups']==445
+          assert r['counts']['historicalNeverUnderstatBridged']['groupsWithoutDobConsensus']==0
+          assert len(r['typedResiduals']['dobConflicts'])==1
+          assert r['governance']['providerIdsUsedAsGlobalPersonKeys'] is False
+          assert r['governance']['fuzzyMatchingUsed'] is False and r['governance']['dobInferred'] is False
+          assert r['governance']['computedAgeDerived'] is False and r['governance']['f1Started'] is False and r['governance']['d2Started'] is False
+          PY
+
+      - name: Persist final package v3
+        run: |
+          set -euo pipefail
+          cp /tmp/d1-final-v3-build.log "$DEST/BUILD.stdout.log"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$DEST"
+          git commit -m 'nexus: persist final D1 identity demographics package v3 [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Build content-addressed archive
+        id: archive
+        run: |
+          set -euo pipefail
+          tar -czf "$ARCHIVE" "$DEST"
+          sha256sum "$ARCHIVE" > "$ARCHIVE.sha256"
+          echo "sha=$(cut -d' ' -f1 "$ARCHIVE.sha256")" >> "$GITHUB_OUTPUT"
+          echo "bytes=$(stat -c %s "$ARCHIVE")" >> "$GITHUB_OUTPUT"
+
+      - name: Create final content-addressed release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then echo 'final v3 release exists' >&2; exit 1; fi
+          trap 'gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true' ERR
+          gh release create "$RELEASE_TAG" --draft --target "$(git rev-parse HEAD)" --title 'FantaNexus D1 Identity & Demographics Final v3' --notes 'Final content-addressed D1 package. Current 505 exact DOB complete; historical Understat-backed 2047/2048 exact DOB with one typed DOB_CONFLICT; six year-precision Wikidata records corrected only through D0-bridged exact Fantacalcio observations; 445 never-bridged groups remain provider-scoped. No fuzzy matching, DOB inference, age derivation, F1, D2, or model mutation.'
+          gh release upload "$RELEASE_TAG" "$ARCHIVE" "$ARCHIVE.sha256" "$DEST/IDENTITY_MASTER.json" "$DEST/D1_REGISTRY.json" "$DEST/MANIFEST.json"
+          gh release view "$RELEASE_TAG" >/dev/null
+          trap - ERR
+
+      - name: Persist public freeze receipt
+        env:
+          ARCHIVE_SHA: ${{ steps.archive.outputs.sha }}
+          ARCHIVE_BYTES: ${{ steps.archive.outputs.bytes }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os
+          from datetime import datetime,timezone
+          from pathlib import Path
+          p=Path('data/nexus-d1/final-v3/D1_PUBLIC_FREEZE_RECEIPT.json')
+          d={'schema':'NEXUS_D1_PUBLIC_FREEZE_RECEIPT_V3','protocolVersion':'1.1','status':'PUBLIC_CONTENT_ADDRESSED_FREEZE_COMPLETE_PRIVATE_DRIVE_MIRROR_PENDING','capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),'releaseTag':'nexus-d1-identity-demographics-final-v3','archiveFile':'nexus-d1-identity-demographics-final-v3.tar.gz','archiveBytes':int(os.environ['ARCHIVE_BYTES']),'archiveSha256':os.environ['ARCHIVE_SHA'],'githubActionsRunId':int(os.environ['RUN_ID']),'governance':{'rawMutation':False,'fuzzyMatchingUsed':False,'dobInferred':False,'computedAgeDerived':False,'trainingPromotionGranted':False,'f1Started':False,'d2Started':False},'nextRequiredAction':'PRIVATE_DRIVE_MIRROR_AND_SHA256_READBACK'}
+          p.write_text(json.dumps(d,indent=2)+'\n')
+          PY
+          git add "$DEST/D1_PUBLIC_FREEZE_RECEIPT.json"
+          git commit -m 'nexus: persist D1 public freeze receipt v3 [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+          gh release upload "$RELEASE_TAG" "$DEST/D1_PUBLIC_FREEZE_RECEIPT.json"
+
+      - name: Upload final freeze artifact for private Drive mirror
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-identity-demographics-final-v3-freeze
+          path: |
+            nexus-d1-identity-demographics-final-v3.tar.gz
+            nexus-d1-identity-demographics-final-v3.tar.gz.sha256
+            data/nexus-d1/final-v3/
+          if-no-files-found: error
+          retention-days: 30
