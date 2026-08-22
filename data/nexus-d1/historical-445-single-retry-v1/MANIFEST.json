@@ -1,0 +1,15 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_SINGLE_OBSERVATION_RETRY_MANIFEST_V1",
+  "status": "PASS",
+  "resultSha256": "c16a085e1aafed43873432b86d8ddca72b15e53e5c2e5fb18f19029e2da79760",
+  "resultBytes": 1071,
+  "governance": {
+    "onlyPreviouslyFailedObservationRequested": true,
+    "providerIdUsedAsGlobalPersonKey": false,
+    "nameSearchUsed": false,
+    "fuzzyMatchingUsed": false,
+    "computedAgeDerived": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}

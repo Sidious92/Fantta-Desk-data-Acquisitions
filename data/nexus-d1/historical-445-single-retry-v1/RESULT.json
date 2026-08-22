@@ -1,0 +1,32 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_SINGLE_OBSERVATION_RETRY_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS",
+  "capturedAt": "2026-08-22T17:09:06.474234Z",
+  "record": {
+    "sourceGlobalIndex": 18,
+    "fantacalcioPlayerId": "61",
+    "season": "2015/16",
+    "observedName": "Zuculini F",
+    "requestedUrl": "https://www.fantacalcio.it/serie-a/squadre/x/zuculini-f/61/2015-16",
+    "httpStatus": 200,
+    "finalUrl": "https://www.fantacalcio.it/404",
+    "canonicalUrl": "https://www.fantacalcio.it/404",
+    "fullName": "404",
+    "dateOfBirth": null,
+    "rawPath": "raw/fc61--2015-16.html",
+    "rawSha256": "43da366405a7f203145f24fb0b65dab16c489c9abb26c43662e57dbe53a9de5c",
+    "rawBytes": 45898,
+    "exactSeasonPlayerIdBound": false,
+    "status": "SOURCE_NO_COVERAGE_OR_BINDING_FAILED"
+  },
+  "governance": {
+    "onlyPreviouslyFailedObservationRequested": true,
+    "providerIdUsedAsGlobalPersonKey": false,
+    "nameSearchUsed": false,
+    "fuzzyMatchingUsed": false,
+    "computedAgeDerived": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
