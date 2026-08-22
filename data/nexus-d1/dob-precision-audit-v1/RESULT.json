@@ -1,0 +1,116 @@
+{
+  "schema": "NEXUS_D1_DOB_PRECISION_AUDIT_V1",
+  "status": "PASS",
+  "capturedAt": "2026-08-22T17:34:35.534266Z",
+  "current": {
+    "subjects": 505,
+    "firstPassDobVerified": 378,
+    "precisionCounts": {
+      "11": 378
+    },
+    "nonDayPrecisionCount": 0,
+    "nonDayPrecisionRecords": []
+  },
+  "historical": {
+    "subjects": 2048,
+    "firstPassDobVerified": 1893,
+    "precisionCounts": {
+      "11": 1887,
+      "9": 6
+    },
+    "nonDayPrecisionCount": 6,
+    "nonDayPrecisionRecords": [
+      {
+        "subjectId": "historical-understat-10984",
+        "understatPlayerId": "10984",
+        "bridgePersonKey": "understat:10984",
+        "fantacalcioSourcePlayerId": null,
+        "lookupName": "Alessandro Cortinovis",
+        "lookupNames": null,
+        "contextClubs": [
+          "verona"
+        ],
+        "wikidataItemId": "Q73892406",
+        "precision": 9,
+        "rawTime": "+2001-01-01T00:00:00Z"
+      },
+      {
+        "subjectId": "historical-understat-11610",
+        "understatPlayerId": "11610",
+        "bridgePersonKey": "understat:11610",
+        "fantacalcioSourcePlayerId": null,
+        "lookupName": "Riccardo Pagano",
+        "lookupNames": null,
+        "contextClubs": [
+          "roma"
+        ],
+        "wikidataItemId": "Q116917779",
+        "precision": 9,
+        "rawTime": "+2004-01-01T00:00:00Z"
+      },
+      {
+        "subjectId": "historical-understat-11948",
+        "understatPlayerId": "11948",
+        "bridgePersonKey": "understat:11948",
+        "fantacalcioSourcePlayerId": null,
+        "lookupName": "Jeppe Corfitzen",
+        "lookupNames": null,
+        "contextClubs": [
+          "lecce"
+        ],
+        "wikidataItemId": "Q124581054",
+        "precision": 9,
+        "rawTime": "+2004-01-01T00:00:00Z"
+      },
+      {
+        "subjectId": "historical-understat-13401",
+        "understatPlayerId": "13401",
+        "bridgePersonKey": "understat:13401",
+        "fantacalcioSourcePlayerId": null,
+        "lookupName": "Daniel Oyegoke",
+        "lookupNames": null,
+        "contextClubs": [
+          "verona"
+        ],
+        "wikidataItemId": "Q112847001",
+        "precision": 9,
+        "rawTime": "+2003-01-01T00:00:00Z"
+      },
+      {
+        "subjectId": "historical-understat-13940",
+        "understatPlayerId": "13940",
+        "bridgePersonKey": "understat:13940",
+        "fantacalcioSourcePlayerId": null,
+        "lookupName": "Gabriele Piccinini",
+        "lookupNames": null,
+        "contextClubs": [
+          "pisa"
+        ],
+        "wikidataItemId": "Q109754983",
+        "precision": 9,
+        "rawTime": "+2001-01-01T00:00:00Z"
+      },
+      {
+        "subjectId": "historical-understat-14444",
+        "understatPlayerId": "14444",
+        "bridgePersonKey": "understat:14444",
+        "fantacalcioSourcePlayerId": null,
+        "lookupName": "Othniël Raterink",
+        "lookupNames": null,
+        "contextClubs": [
+          "cagliari"
+        ],
+        "wikidataItemId": "Q134029234",
+        "precision": 9,
+        "rawTime": "+2006-00-00T00:00:00Z"
+      }
+    ]
+  },
+  "governance": {
+    "precision11RequiredForExactDob": true,
+    "precisionBelow11PromotedToExactDob": false,
+    "computedAgeDerived": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
