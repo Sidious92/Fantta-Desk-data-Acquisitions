@@ -20,12 +20,16 @@ on:
       - '.nexus-f1-lega-snapshot-trigger'
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: nexus-f1-lega-raw-snapshot-v1-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   acquire:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 35
 
     steps:
       - name: Checkout isolated F1 acquisition branch
@@ -52,11 +56,87 @@ jobs:
           fi
 
       - name: Build deterministic preservation bundle
+        id: bundle
+        shell: bash
         run: |
           set -euo pipefail
           tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner \
             -cf - .nexus-f1-lega-snapshot-v1 | gzip -n > nexus-f1-lega-raw-snapshot-v1.tar.gz
-          sha256sum nexus-f1-lega-raw-snapshot-v1.tar.gz | tee nexus-f1-lega-raw-snapshot-v1.tar.gz.sha256
+          BUNDLE_SHA=$(sha256sum nexus-f1-lega-raw-snapshot-v1.tar.gz | awk '{print $1}')
+          MANIFEST_SHA=$(sha256sum .nexus-f1-lega-snapshot-v1/manifest.json | awk '{print $1}')
+          AUDIT_SHA=$(sha256sum .nexus-f1-lega-snapshot-v1/audit.json | awk '{print $1}')
+          echo "$BUNDLE_SHA  nexus-f1-lega-raw-snapshot-v1.tar.gz" > nexus-f1-lega-raw-snapshot-v1.tar.gz.sha256
+          echo "bundle_sha=$BUNDLE_SHA" >> "$GITHUB_OUTPUT"
+          echo "manifest_sha=$MANIFEST_SHA" >> "$GITHUB_OUTPUT"
+          echo "audit_sha=$AUDIT_SHA" >> "$GITHUB_OUTPUT"
+          cat nexus-f1-lega-raw-snapshot-v1.tar.gz.sha256
+
+      - name: Persist immutable content-addressed F1 snapshot
+        if: github.event_name != 'pull_request'
+        env:
+          BUNDLE_SHA: ${{ steps.bundle.outputs.bundle_sha }}
+          MANIFEST_SHA: ${{ steps.bundle.outputs.manifest_sha }}
+          AUDIT_SHA: ${{ steps.bundle.outputs.audit_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          DEST="data/nexus-f1/lega-raw-v1/$BUNDLE_SHA"
+          mkdir -p "$DEST"
+          cp nexus-f1-lega-raw-snapshot-v1.tar.gz "$DEST/bundle.tar.gz"
+          cp nexus-f1-lega-raw-snapshot-v1.tar.gz.sha256 "$DEST/bundle.tar.gz.sha256"
+          cp .nexus-f1-lega-snapshot-v1/manifest.json "$DEST/manifest.json"
+          cp .nexus-f1-lega-snapshot-v1/audit.json "$DEST/audit.json"
+          node - <<'NODE'
+          const fs=require('fs');
+          const dest=`data/nexus-f1/lega-raw-v1/${process.env.BUNDLE_SHA}`;
+          const receipt={
+            schema:'NEXUS_F1_LEGA_DURABLE_PRESERVATION_RECEIPT_V1',
+            protocolVersion:'1.1',
+            status:'PERSISTED_PENDING_REMOTE_READBACK',
+            sourceCommit:process.env.GITHUB_SHA,
+            githubRunId:Number(process.env.GITHUB_RUN_ID),
+            bundleSha256:process.env.BUNDLE_SHA,
+            manifestSha256:process.env.MANIFEST_SHA,
+            auditSha256:process.env.AUDIT_SHA,
+            remoteReadbackSha256Pass:false,
+            immutablePath:dest,
+            governance:{f1Closed:false,f2PlusAuthorized:false,canonicalMutation:false}
+          };
+          fs.writeFileSync(`${dest}/PRESERVATION_RECEIPT.json`,JSON.stringify(receipt,null,2)+'\n');
+          NODE
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$DEST"
+          git commit -m "nexus f1: persist Lega RAW snapshot $BUNDLE_SHA [skip ci]"
+          git push origin HEAD:feat/nexus-input-v1-1-f1-lega-snapshot
+
+      - name: Verify remote git read-back and freeze receipt
+        if: github.event_name != 'pull_request'
+        env:
+          BUNDLE_SHA: ${{ steps.bundle.outputs.bundle_sha }}
+          MANIFEST_SHA: ${{ steps.bundle.outputs.manifest_sha }}
+          AUDIT_SHA: ${{ steps.bundle.outputs.audit_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          BRANCH='feat/nexus-input-v1-1-f1-lega-snapshot'
+          DEST="data/nexus-f1/lega-raw-v1/$BUNDLE_SHA"
+          git fetch origin "$BRANCH"
+          REMOTE_SHA=$(git show "origin/$BRANCH:$DEST/bundle.tar.gz" | sha256sum | awk '{print $1}')
+          test "$REMOTE_SHA" = "$BUNDLE_SHA"
+          node - <<'NODE'
+          const fs=require('fs');
+          const dest=`data/nexus-f1/lega-raw-v1/${process.env.BUNDLE_SHA}`;
+          const p=`${dest}/PRESERVATION_RECEIPT.json`;
+          const r=JSON.parse(fs.readFileSync(p,'utf8'));
+          r.status='PASS_DURABLY_PRESERVED_REMOTE_GIT_READBACK_SHA256';
+          r.remoteReadbackSha256Pass=true;
+          r.verifiedAt=new Date().toISOString();
+          fs.writeFileSync(p,JSON.stringify(r,null,2)+'\n');
+          NODE
+          git add "$DEST/PRESERVATION_RECEIPT.json"
+          git commit -m "nexus f1: verify Lega RAW snapshot readback $BUNDLE_SHA [skip ci]"
+          git push origin HEAD:"$BRANCH"
 
       - name: Upload fresh RAW snapshot artifact
         uses: actions/upload-artifact@v4
