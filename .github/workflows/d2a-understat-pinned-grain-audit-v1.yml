@@ -1,0 +1,43 @@
+name: D2A Understat Pinned Grain Audit v1
+
+on:
+  push:
+    branches:
+      - feat/d2a-understat-grain-audit-final
+    paths:
+      - 'scripts/d2a_understat_pinned_grain_audit.py'
+      - '.github/workflows/d2a-understat-pinned-grain-audit-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: feat/d2a-understat-grain-audit-final
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Audit exact pinned Understat blob
+        run: python scripts/d2a_understat_pinned_grain_audit.py
+
+      - name: Persist audit result
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/nexus-d2/probes/understat-pinned-grain-audit-v1.json
+          if git diff --cached --quiet; then
+            echo 'No audit changes to persist.'
+            exit 0
+          fi
+          git commit -m 'nexus d2a: persist pinned Understat grain audit v1 [skip ci]'
+          git push origin HEAD:feat/d2a-understat-grain-audit-final
