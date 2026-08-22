@@ -1,0 +1,14 @@
+{
+  "schema": "NEXUS_D1_FINAL_BUILDER_V2_DIAGNOSTIC",
+  "capturedAt": "2026-08-22T17:32:34.162057Z",
+  "status": "FAIL",
+  "builderExitCode": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-d1-build-final-identity-master-v2.py\", line 127, in <module>\n    d={'dateOfBirth':dob_iso(r['dateOfBirth']),'status':'DOB_VERIFIED','method':'WIKIDATA_FIRST_PASS_DAY_PRECISION'}\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-d1-build-final-identity-master-v2.py\", line 56, in dob_iso\n    raise RuntimeError(f'NON_DAY_PRECISION_DOB:{json.dumps(v,sort_keys=True)}')\nRuntimeError: NON_DAY_PRECISION_DOB:{\"calendarmodel\": \"http://www.wikidata.org/entity/Q1985727\", \"precision\": 9, \"rank\": \"normal\", \"statementGuid\": \"Q73892406$cd5ad5f2-63db-4a61-b1e1-0298bb527448\", \"time\": \"+2001-01-01T00:00:00Z\"}\n",
+  "governance": {
+    "diagnosticOnly": true,
+    "rawMutation": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
