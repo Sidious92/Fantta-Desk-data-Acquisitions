@@ -1,0 +1,84 @@
+name: Nexus D1 Acquire Current Open Fantacalcio Demographics v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-current-open-fantacalcio-v1/EXECUTE'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nexus-d1-current-open-fantacalcio-v1
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Preflight exact-ID semantics probe
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('data/nexus-d1/fantacalcio-current-exact-id-probe-v1/RESULT.json')
+          if not p.exists(): raise SystemExit('PROBE_RESULT_MISSING')
+          d=json.loads(p.read_text())
+          assert d['status']=='PASS'
+          assert d['summary']['exactIdDobPass']==4
+          assert d['semantics']['identityBinding']=='CURRENT_LISTONE_FANTACALCIO_PLAYER_ID_EXACT'
+          assert d['semantics']['providerIdUsedAsGlobalHistoricalPersonKey'] is False
+          PY
+      - name: Acquire 127 current-open exact-ID demographics
+        run: |
+          set -euo pipefail
+          OUT=.nexus-d1-current-open-fantacalcio-v1/output
+          rm -rf "$OUT" && mkdir -p "$OUT"
+          python scripts/nexus-d1-acquire-current-open-fantacalcio-demographics-v1.py \
+            --subjects data/nexus-d1/second-pass-v2/SECOND_PASS_SUBJECTS.json \
+            --probe data/nexus-d1/fantacalcio-current-exact-id-probe-v1/RESULT.json \
+            --output "$OUT" | tee "$OUT/ACQUIRE.stdout.log"
+      - name: Assert governance
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('.nexus-d1-current-open-fantacalcio-v1/output/RESULT.json').read_text())
+          assert d['status']=='PASS' and d['summary']['subjects']==127 and d['summary']['requestFailures']==0
+          r=d['rules']
+          assert r['currentListoneExactFantacalcioIdBinding'] is True
+          assert r['providerIdUsedAsGlobalHistoricalPersonKey'] is False
+          assert r['nameSearchUsed'] is False and r['fuzzyMatchingUsed'] is False
+          assert r['dobInferred'] is False and r['computedAgeDerived'] is False
+          assert r['f1Started'] is False and r['d2Started'] is False
+          PY
+      - name: Persist current-open outcome
+        run: |
+          set -euo pipefail
+          DEST=data/nexus-d1/current-open-fantacalcio-v1
+          mkdir -p "$DEST"
+          cp .nexus-d1-current-open-fantacalcio-v1/output/RESULT.json "$DEST/RESULT.json"
+          cp .nexus-d1-current-open-fantacalcio-v1/output/MANIFEST.json "$DEST/MANIFEST.json"
+          cp .nexus-d1-current-open-fantacalcio-v1/output/ACQUIRE.stdout.log "$DEST/ACQUIRE.stdout.log"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$DEST"
+          git commit -m 'nexus: persist D1 current-open Fantacalcio demographics v1 outcome [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Freeze raw evidence artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-current-open-fantacalcio-v1
+          path: .nexus-d1-current-open-fantacalcio-v1/output/
+          retention-days: 30
