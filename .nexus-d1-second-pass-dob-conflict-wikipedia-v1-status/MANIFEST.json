@@ -1,0 +1,492 @@
+{
+  "schema": "NEXUS_D1_SECOND_PASS_DOB_CONFLICT_WIKIPEDIA_MANIFEST_V1",
+  "generatedAt": "2026-08-22T15:43:18.402744Z",
+  "status": "PASS",
+  "evidenceFileCount": 94,
+  "canonicalEvidenceSha256": "092404e9e299e55cdc8c9aa9cb26f1a83bf2c5e19e16bb5ebbbfef723c1c5d05",
+  "evidence": [
+    {
+      "path": "ACQUIRE.stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "RESULT.json",
+      "size": 67215,
+      "sha256": "b94be41fb7b6d668dfa05777cb84808af11579e1d683491b42aa0c4e4e8b5d67"
+    },
+    {
+      "path": "raw/000--Q102045930--itwiki.html",
+      "size": 187658,
+      "sha256": "d8f2df2aa5110e7045617709ccbecc0ff607d0fa4cbf5cabe62cdff7e9be8a99"
+    },
+    {
+      "path": "raw/000--Q102045930--wikidata.json",
+      "size": 18493,
+      "sha256": "f3f923ad3ef5de95b385420806759fd3c794556ebe10d86c652eb2def236601e"
+    },
+    {
+      "path": "raw/001--Q105025726--itwiki.html",
+      "size": 143879,
+      "sha256": "f410caec208c02e81ada76929b86d7f161ad51b875b22ad950f62030f5decbf5"
+    },
+    {
+      "path": "raw/001--Q105025726--wikidata.json",
+      "size": 17274,
+      "sha256": "81e37170e982942938d52630837a2129dbb52f58a7923b7a6abfe8865e288ee6"
+    },
+    {
+      "path": "raw/002--Q10709--itwiki.html",
+      "size": 267578,
+      "sha256": "86d1b12348d69dd6193bfb64f9b4a0be0d2626b85a23bea9e6b5da35e0912ef9"
+    },
+    {
+      "path": "raw/002--Q10709--wikidata.json",
+      "size": 55511,
+      "sha256": "8c354fe3f8269a072ba5c61a68171f40e713b60f9c37c592f28bcba70560f068"
+    },
+    {
+      "path": "raw/003--Q109289381--itwiki.html",
+      "size": 176493,
+      "sha256": "ec9f3196d84d26cf2fe130bec8d8ce01287d536f39e6e68ca7c989fe287e49b1"
+    },
+    {
+      "path": "raw/003--Q109289381--wikidata.json",
+      "size": 19912,
+      "sha256": "46788c0501be94313f78e3ec388928a89157e5703deccecd6df7cc1f091cc039"
+    },
+    {
+      "path": "raw/004--Q116186163--itwiki.html",
+      "size": 150311,
+      "sha256": "1dd359b39ad0366e6bc7dd7c21b0cd41764b810d07dd634a883229984e105a2b"
+    },
+    {
+      "path": "raw/004--Q116186163--wikidata.json",
+      "size": 14088,
+      "sha256": "755e02c3427ff0e25b8a423bebfb0ab369b42734fd10ceadbc0ab7a75bbaf12c"
+    },
+    {
+      "path": "raw/005--Q117349349--itwiki.html",
+      "size": 206291,
+      "sha256": "a38b71a9c0846a931ce882af2eba8f4118fef829461539fb85aebd915ce139aa"
+    },
+    {
+      "path": "raw/005--Q117349349--wikidata.json",
+      "size": 17639,
+      "sha256": "7ecbbb452c28c884f0382426fc0be23d330d90f76938fcdb396e9586fd550d74"
+    },
+    {
+      "path": "raw/006--Q14755607--itwiki.html",
+      "size": 198769,
+      "sha256": "6d78115c9457198bc327b0b17f4926c80dedffed6232f52573843e32db04096d"
+    },
+    {
+      "path": "raw/006--Q14755607--wikidata.json",
+      "size": 41453,
+      "sha256": "417208e8d61ae7f2adf747eaeadd5f783b5678730a49ba639098ac627c9b06d2"
+    },
+    {
+      "path": "raw/007--Q16298600--itwiki.html",
+      "size": 333487,
+      "sha256": "3a2c9cef4057a1337d8033b24f57b990e605a3b6d237bda7eb78c6def83f20b2"
+    },
+    {
+      "path": "raw/007--Q16298600--wikidata.json",
+      "size": 38382,
+      "sha256": "237e0ffdab4ac90797bf169954342044be1e22103aa43395db4d7fcbeb4adfce"
+    },
+    {
+      "path": "raw/008--Q16438504--itwiki.html",
+      "size": 238869,
+      "sha256": "500b29acb4c6069532f17f6b77775589b5cbd5e4d1b9d95a633b52cc343f4d02"
+    },
+    {
+      "path": "raw/008--Q16438504--wikidata.json",
+      "size": 43307,
+      "sha256": "8436373bf2d23061731f56c9a73ef897135cd3d2aff701458a4d63f982db5767"
+    },
+    {
+      "path": "raw/009--Q17037914--itwiki.html",
+      "size": 168735,
+      "sha256": "d84a3ee55cda78e286b04d205d961c26baf321d18b1e7443996545a9a1aa8b82"
+    },
+    {
+      "path": "raw/009--Q17037914--wikidata.json",
+      "size": 22840,
+      "sha256": "fa98f1d499d9605c83ec5f597a01731932a049c50dbd0c5e5aa7bbf97ba4c4d5"
+    },
+    {
+      "path": "raw/010--Q17364468--itwiki.html",
+      "size": 212424,
+      "sha256": "85080dd68b776aff9a54162d2605bde0c85baff79f964889c8a147cb391ad0a9"
+    },
+    {
+      "path": "raw/010--Q17364468--wikidata.json",
+      "size": 25602,
+      "sha256": "a7a6a26178c5e54314c27528c3d6853afed36def47bf7b2f84fa270f016cc80f"
+    },
+    {
+      "path": "raw/011--Q1776713--itwiki.html",
+      "size": 259328,
+      "sha256": "ae59d23e8fe8b11fbbeaf57c00e4c4a505d28c4b848784dd87314be04dc51c42"
+    },
+    {
+      "path": "raw/011--Q1776713--wikidata.json",
+      "size": 36413,
+      "sha256": "ada4e0e323f6e0767bff27579118dcaa1856cabe652cbefdb0205aa848df97df"
+    },
+    {
+      "path": "raw/012--Q18021956--itwiki.html",
+      "size": 363614,
+      "sha256": "1d83e393c3131f7b56e29ed3198e2ff1544b5b865ff6989b1d5a74d785adfcbb"
+    },
+    {
+      "path": "raw/012--Q18021956--wikidata.json",
+      "size": 42727,
+      "sha256": "20869536e792a116e2ad9b97542e37203fd843d09765f6c55d69e5631c6aea63"
+    },
+    {
+      "path": "raw/013--Q19818111--itwiki.html",
+      "size": 160175,
+      "sha256": "f73337ae84350a32880a4e0ca59829c85a7a4752dd13efb0729ab60f7511db61"
+    },
+    {
+      "path": "raw/013--Q19818111--wikidata.json",
+      "size": 22823,
+      "sha256": "add72d3697f871ed3d3c2b337f975747f4759f44f7265421917befb63659ad02"
+    },
+    {
+      "path": "raw/014--Q20090581--itwiki.html",
+      "size": 200425,
+      "sha256": "87b855f448d861f6c0162479df96283547b265c2ad3d18ce299fc58605f7e84c"
+    },
+    {
+      "path": "raw/014--Q20090581--wikidata.json",
+      "size": 36174,
+      "sha256": "a5b8de21ef119992411fa7c824fe87c2ebe02fc859117acd45dd6c731ab827cc"
+    },
+    {
+      "path": "raw/015--Q21004899--itwiki.html",
+      "size": 202492,
+      "sha256": "65cf0ee77013de5489c119171f727d2fb426b8e54e3e4aaf39f570e190372f7e"
+    },
+    {
+      "path": "raw/015--Q21004899--wikidata.json",
+      "size": 29978,
+      "sha256": "914110ac8e98dc87e1f8d15a6ee6e2b3eabd2f6691a5fc69231ceffe194d6334"
+    },
+    {
+      "path": "raw/016--Q21084036--itwiki.html",
+      "size": 219810,
+      "sha256": "8102f94793f3d33af04344d8fa478b1662af8c87dafd87682d9550f0f7b261d4"
+    },
+    {
+      "path": "raw/016--Q21084036--wikidata.json",
+      "size": 47564,
+      "sha256": "3070f462b5ff167f12787fc31765d535e412705a1b03406df42ad23b991a014b"
+    },
+    {
+      "path": "raw/017--Q22007381--itwiki.html",
+      "size": 151151,
+      "sha256": "fd514b180c6f71d74f4be690bc0ff35001e3a2dcac5eca8abb9f031952380ddb"
+    },
+    {
+      "path": "raw/017--Q22007381--wikidata.json",
+      "size": 25229,
+      "sha256": "a554b1e3303666a9d5ac1cc98e908e440b4bf9e0e84365c27677b0cce7b8c3ae"
+    },
+    {
+      "path": "raw/018--Q23902246--itwiki.html",
+      "size": 249331,
+      "sha256": "3657cce5f43e20832d65705c1872f975276f947e5f711b612dd14807468bc0b8"
+    },
+    {
+      "path": "raw/018--Q23902246--wikidata.json",
+      "size": 31141,
+      "sha256": "6f1e050414459f27d6fcf2f5ef3dde733deb4d0469f270f34143fc25a5ec2bc5"
+    },
+    {
+      "path": "raw/019--Q24942297--itwiki.html",
+      "size": 279816,
+      "sha256": "ecc411abeafcc4c74eca0f5a7e5c4ef0922f252a22f0eaf9b97cc0cb07ea0726"
+    },
+    {
+      "path": "raw/019--Q24942297--wikidata.json",
+      "size": 22369,
+      "sha256": "5d173d0d7e75712b82021e7c9359d5f1ce5359b5a8d29e1ae833a21635c699ae"
+    },
+    {
+      "path": "raw/020--Q2521780--itwiki.html",
+      "size": 294897,
+      "sha256": "a6a9870a64245139695e97445fc668013ba1cd0c6c35b918c2d29f3135686ae9"
+    },
+    {
+      "path": "raw/020--Q2521780--wikidata.json",
+      "size": 49636,
+      "sha256": "f1b6eca91883dcbec991eb769a06c3cdb5fdb3cd14f01d02757c6714677e9858"
+    },
+    {
+      "path": "raw/021--Q26271405--itwiki.html",
+      "size": 149904,
+      "sha256": "5c0a7818cfbc165c5c63cb84e91bdea77f46dba3928ef460bf385ccb619e78ee"
+    },
+    {
+      "path": "raw/021--Q26271405--wikidata.json",
+      "size": 19591,
+      "sha256": "4cfec33b35526e676f9184382670b9cfddb4abaf9b8824d483e012e4b47b371e"
+    },
+    {
+      "path": "raw/022--Q28595322--itwiki.html",
+      "size": 236561,
+      "sha256": "f94d35a5f5fd1b0ac806190e972bc37b665e049b2adfc34bc58b791781d12d47"
+    },
+    {
+      "path": "raw/022--Q28595322--wikidata.json",
+      "size": 21570,
+      "sha256": "7cc706c7c3d20dd916f3c634aaf868bae4509f436c8f97018be3ae7c0928728e"
+    },
+    {
+      "path": "raw/023--Q28973931--itwiki.html",
+      "size": 186140,
+      "sha256": "74e5908348b49266e6b2bbe59de6e68721e3bb270de8c2883937c2ec1ac6011b"
+    },
+    {
+      "path": "raw/023--Q28973931--wikidata.json",
+      "size": 19473,
+      "sha256": "81d3b1dd5881fad4cc52edde80611dca6abbf5ab0327d2891a2bd27368db6b90"
+    },
+    {
+      "path": "raw/024--Q3016737--itwiki.html",
+      "size": 238860,
+      "sha256": "70ea72be8ba347e10425fd190b45ac461801bff4a349aa5419676946f3596cd4"
+    },
+    {
+      "path": "raw/024--Q3016737--wikidata.json",
+      "size": 44990,
+      "sha256": "e1830b97cd72e39ab78ab4fbaede8b444ff2abec8840d0cd1ec6884749cbda04"
+    },
+    {
+      "path": "raw/025--Q346917--itwiki.html",
+      "size": 235142,
+      "sha256": "4baadaa8e6601e1c17375797264c0a0bc9afd2e33bd4d744fb9464b6e6074895"
+    },
+    {
+      "path": "raw/025--Q346917--wikidata.json",
+      "size": 42825,
+      "sha256": "10d2c0da886bb0ed3813451b51763423808d17fef16e5d9355cfcdefa22ff4f0"
+    },
+    {
+      "path": "raw/026--Q37518060--itwiki.html",
+      "size": 159865,
+      "sha256": "39022ad8025ed74be71894a64cb6cd9a6544d42abd122c8526aa6364f240ae47"
+    },
+    {
+      "path": "raw/026--Q37518060--wikidata.json",
+      "size": 23900,
+      "sha256": "e2eb641c274d08b6e24f3891f36182050b7edc38de22756250b1fca6a7984c73"
+    },
+    {
+      "path": "raw/027--Q37749749--itwiki.html",
+      "size": 173817,
+      "sha256": "e7378b25f6b23da88502bef1e255b861aebc9cf8866907abb1637355cbb9bc41"
+    },
+    {
+      "path": "raw/027--Q37749749--wikidata.json",
+      "size": 23482,
+      "sha256": "9a29036b1612e7560d3bf2e451970df002ca418a8575918c7bb57f232944ad35"
+    },
+    {
+      "path": "raw/028--Q3845600--itwiki.html",
+      "size": 173941,
+      "sha256": "3971050d2d47c7f4b4acaa5c4c17c0ab7bfef1ecb9e329cdf3cad172d73d4585"
+    },
+    {
+      "path": "raw/028--Q3845600--wikidata.json",
+      "size": 36165,
+      "sha256": "9249717e1d2275d955512c0c1a4b0e5539ebf8a62c43e89e82697b09e61cc6ec"
+    },
+    {
+      "path": "raw/029--Q41573175--itwiki.html",
+      "size": 234093,
+      "sha256": "3dd1eee73af6cbdf407f6ad09a88e4966a44e8539904a7dcd3a29dcab249f957"
+    },
+    {
+      "path": "raw/029--Q41573175--wikidata.json",
+      "size": 38754,
+      "sha256": "6f556690aabf3ff75c09eb970a05d01961dce3d08834bd32e57d8128325fee8a"
+    },
+    {
+      "path": "raw/030--Q443113--itwiki.html",
+      "size": 360712,
+      "sha256": "0f232c195affc9696fe95b97d8c207344dddc30e4f8c3098875fb16ec5220518"
+    },
+    {
+      "path": "raw/030--Q443113--wikidata.json",
+      "size": 53743,
+      "sha256": "6f7b2d037988970fd995ef515f08f6d7ef1076d393249b83ee51bb61f9767db8"
+    },
+    {
+      "path": "raw/031--Q4865527--itwiki.html",
+      "size": 429749,
+      "sha256": "5860858c456890734568e92ed11674b7ea4242d4ff5c13292bc6dd62011d52d9"
+    },
+    {
+      "path": "raw/031--Q4865527--wikidata.json",
+      "size": 42488,
+      "sha256": "25c97aeabcbf0595f4f2abcc30318d830de4e22402caeccbba14ca4443a5d21b"
+    },
+    {
+      "path": "raw/032--Q515208--itwiki.html",
+      "size": 233072,
+      "sha256": "dcea8e53da61d694717399ae78e2233d7bcac9fb0651ec02ae0accde286d7fb9"
+    },
+    {
+      "path": "raw/032--Q515208--wikidata.json",
+      "size": 40361,
+      "sha256": "f576626f1a0a18208403fcb7ed461aa47baca52b1705eed0dc7eb70b16626ced"
+    },
+    {
+      "path": "raw/033--Q5222878--itwiki.html",
+      "size": 157931,
+      "sha256": "4792b5087b2c10fa3800cd53aedf51cdcb0b445559055e82e70cdec61f1e7650"
+    },
+    {
+      "path": "raw/033--Q5222878--wikidata.json",
+      "size": 30993,
+      "sha256": "e124c7f8479d8443072eda60a0c9243707fced50dc55c859178e27519cfcb7f0"
+    },
+    {
+      "path": "raw/034--Q5279198--itwiki.html",
+      "size": 191353,
+      "sha256": "d935e14785c5a6933acba9c073c39e9826779cb9d5b5f980f83c346b12a78c22"
+    },
+    {
+      "path": "raw/034--Q5279198--wikidata.json",
+      "size": 50478,
+      "sha256": "7da34a415cbb1f8eceb4e4e11160faa61f28c88b1d506f8c63f98227b0aa6da2"
+    },
+    {
+      "path": "raw/035--Q528696--itwiki.html",
+      "size": 213742,
+      "sha256": "4a07b4be726df316f86d9cffaf43403e6f637bd9abbcb7039d71bc99514ece2d"
+    },
+    {
+      "path": "raw/035--Q528696--wikidata.json",
+      "size": 45677,
+      "sha256": "13db4f3b6ab1d0c2f686ffed9470561e5934e6aad86afdb12a4eaec62a8a6012"
+    },
+    {
+      "path": "raw/036--Q552602--itwiki.html",
+      "size": 192384,
+      "sha256": "5d92e2d27ea52ce356d10df8676011088d8fca80fa21374981c721bbebb0faa1"
+    },
+    {
+      "path": "raw/036--Q552602--wikidata.json",
+      "size": 39314,
+      "sha256": "ea5fb1b6e3f19047cb87f9df46467aa32fbc02e75fb6e54899948803f62ed032"
+    },
+    {
+      "path": "raw/037--Q5558173--itwiki.html",
+      "size": 249262,
+      "sha256": "3bb3c7e0347950aa6c17f2ee8d4d654389b283a9dc02dbb415b9627a82a00090"
+    },
+    {
+      "path": "raw/037--Q5558173--wikidata.json",
+      "size": 40732,
+      "sha256": "ff5c8ad51bf8da4b7b720badaf1000322561f4fe21fed7b8777a33c6a7aae2cb"
+    },
+    {
+      "path": "raw/038--Q560174--itwiki.html",
+      "size": 300651,
+      "sha256": "55be956387dc15fae8424e0ab4af494e2cc78b8c8365440991e8de03ed5cab56"
+    },
+    {
+      "path": "raw/038--Q560174--wikidata.json",
+      "size": 44975,
+      "sha256": "3aa2e57d4af133fa438b6c51d21445a6b0ee354d0908dbfa5fb5cbf6ed1641d8"
+    },
+    {
+      "path": "raw/039--Q642934--itwiki.html",
+      "size": 338322,
+      "sha256": "b894e6176056f075e397fa37aeda20f1af7f94d359d16d847c1cca45936de26c"
+    },
+    {
+      "path": "raw/039--Q642934--wikidata.json",
+      "size": 48555,
+      "sha256": "1cc8555ae9306db184dd2c704d480ce369d7acaf528a5b7a727fe14b0d4ba9bd"
+    },
+    {
+      "path": "raw/040--Q6695870--itwiki.html",
+      "size": 176959,
+      "sha256": "4783d6dcdbb65a80985d920b204f8c23d5af63fa17f2fac1a69a41c04db6c35c"
+    },
+    {
+      "path": "raw/040--Q6695870--wikidata.json",
+      "size": 37006,
+      "sha256": "e1fb669778e172eb86c822c5b7e051ee6e376d421611cd6e55536aaf32d4264f"
+    },
+    {
+      "path": "raw/041--Q72090874--itwiki.html",
+      "size": 242138,
+      "sha256": "9fd14177f4c1530f66cdf92167f16fc1a3c29edd3350742a4f64243749b83cb1"
+    },
+    {
+      "path": "raw/041--Q72090874--wikidata.json",
+      "size": 13754,
+      "sha256": "b7e446256b2eb00748a966bbb900c0143beb8b9e8436daa89d5287764232d230"
+    },
+    {
+      "path": "raw/042--Q73626011--itwiki.html",
+      "size": 145212,
+      "sha256": "7c69a4688fbc36e05db062cd031df4cffdfb8fd4520a7578a8380c3632f71744"
+    },
+    {
+      "path": "raw/042--Q73626011--wikidata.json",
+      "size": 19287,
+      "sha256": "61d67face5746fed2520fe246cbabe17bc14a16a0eaa66b5cb934f1ef4cb8b7c"
+    },
+    {
+      "path": "raw/043--Q74050136--itwiki.html",
+      "size": 200184,
+      "sha256": "29b59fc985147e9bcc8d552fb197a70202ee8f09cf48e5115954b33ce5b3eac3"
+    },
+    {
+      "path": "raw/043--Q74050136--wikidata.json",
+      "size": 27673,
+      "sha256": "c2a34e9d737f54a097bfa1ce9faa9c282dbb15e2b3ef1e5bfb64412863f8d7c0"
+    },
+    {
+      "path": "raw/044--Q79058092--itwiki.html",
+      "size": 194920,
+      "sha256": "945ae936cb4810dd5693b2b5f6f57ca1951d41e999bb2b7b79153324dd56b1cf"
+    },
+    {
+      "path": "raw/044--Q79058092--wikidata.json",
+      "size": 26641,
+      "sha256": "b3765c940279b771126d1badfa25c35f1fc798d51ecc6bd9b43d14074ff57019"
+    },
+    {
+      "path": "raw/045--Q96359277--itwiki.html",
+      "size": 152160,
+      "sha256": "ee542f794a7845d2f1e84cf9bb0accdcaefb9c423ca8f40cdbe431cdadfe3883"
+    },
+    {
+      "path": "raw/045--Q96359277--wikidata.json",
+      "size": 19450,
+      "sha256": "eb4285b93aa1495a3578d0a626056ea25fbb5e0f43e72bb64cff7fe718752d85"
+    }
+  ],
+  "governance": {
+    "identityBindingExactVerifiedWikidataQid": true,
+    "wikipediaPageSelectedOnlyByExactQidSitelink": true,
+    "nameSearchUsed": false,
+    "fuzzyMatchingUsed": false,
+    "dobUsedForIdentitySelection": false,
+    "computedAgeDerived": false,
+    "dobInferred": false,
+    "currentRetrievalImpliesHistoricalAsOf": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}

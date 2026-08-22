@@ -1,0 +1,9 @@
+{
+  "rawConflictRecords": 47,
+  "uniquePersons": 46,
+  "recordsCompleted": 46,
+  "statusCounts": {
+    "DOB_NOT_OBSERVED": 46
+  },
+  "requestFailures": 0
+}
