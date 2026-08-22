@@ -1,0 +1,27 @@
+{
+  "schema": "NEXUS_F1_UNDERSTAT_PINNED_RUN_RECEIPT_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS_HISTORICAL_2014_2024",
+  "generatedAt": "2026-08-22T21:02:00.082447Z",
+  "sourceCommit": "78407e6f24f1028de3634001039d23bef3bed117",
+  "githubRunId": 32598391678,
+  "githubRunAttempt": 1,
+  "stages": {
+    "syntax": "success",
+    "acquire": "success",
+    "audit": "success",
+    "bundle": "success",
+    "persist": "success",
+    "readback": "success"
+  },
+  "bundleSha256": "7f0c299fbec1e9e952bae98f35262bfa911d337fa0b4192a01d7938bec8410e5",
+  "coverage": "2014/15-2024/25",
+  "understatLiveHtmlPathStatus": "REJECTED_FOR_F1_CURRENT_RUNNER_SOURCE_SHAPE_CHANGED",
+  "nextRequiredAction": "PRIVATE_D0_2025_26_SOURCE_ONLY_FALLBACK_AND_QUARANTINE_UNRESOLVED_MULTI_CLUB",
+  "governance": {
+    "f1Closed": false,
+    "f2PlusAuthorized": false,
+    "trainingPromotionGranted": false,
+    "canonicalMutation": false
+  }
+}
