@@ -1,0 +1,215 @@
+name: Nexus D1 Historical 2048 Wikidata Demographics v3
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.nexus-d1-historical-2048-wikidata-v3/EXECUTE'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: nexus-d1-historical-2048-wikidata-v3
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      ROOT: .nexus-d1-historical-2048-wikidata-v3
+      OUT: .nexus-d1-historical-2048-wikidata-v3/output
+      STATUS: .nexus-d1-historical-2048-wikidata-v3-status
+      RECONSTRUCTED: .nexus-d1-historical-2048-wikidata-v3/reconstructed-subjects.json.xz.b64
+      RELEASE_TAG: nexus-d1-historical-2048-wikidata-v3
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Reconstruct and validate immutable historical subject surface v3
+        run: |
+          set -euo pipefail
+          mkdir -p "$ROOT"
+          python - <<'PY'
+          import base64, hashlib, json, lzma
+          from pathlib import Path
+
+          manifest_path = Path('data/nexus-d1/historical-resolved-person-subjects-v3-manifest.json')
+          m = json.loads(manifest_path.read_text())
+          assert m['schema'] == 'NEXUS_D1_HISTORICAL_RESOLVED_PERSON_SUBJECT_SURFACE_MANIFEST_V3'
+          assert m['subjectCount'] == 2048
+          assert m['governance']['semanticReconstructionFromFrozenD0Authority'] is True
+          assert m['governance']['v2TruncatedTransportReused'] is False
+          assert m['governance']['semanticPayloadChangedFromV2Authority'] is False
+          assert m['surfacePolicy']['providerIdUsedAsGlobalPersonKey'] is False
+          assert m['surfacePolicy']['unresolvedHistoricalIdsSilentlyDropped'] is False
+          assert m['privacyMinimization']['performanceStatisticsTransferred'] is False
+
+          parts = []
+          chunks = m['payload']['chunks']
+          assert len(chunks) == m['payload']['chunkCount'] == 5
+          for c in chunks:
+              p = Path(c['path'])
+              text = p.read_text().strip()
+              assert len(text) == c['chars'], (p, len(text), c['chars'])
+              got = hashlib.sha256(text.encode()).hexdigest()
+              assert got == c['textSha256'], (p, got, c['textSha256'])
+              parts.append(text)
+
+          encoded = ''.join(parts)
+          assert len(encoded) == m['payload']['base64Chars'] == 57516
+          xz = base64.b64decode(encoded, validate=True)
+          assert len(xz) == m['payload']['xzBytes'] == 43136
+          assert hashlib.sha256(xz).hexdigest() == m['payload']['xzSha256'] == 'c1337f4d0dff552e99e56909267640be47df8ccccdf242987b6358c0b758f846'
+
+          raw = lzma.decompress(xz)
+          assert len(raw) == m['payload']['decodedJsonBytes'] == 508959
+          assert hashlib.sha256(raw).hexdigest() == m['payload']['decodedJsonSha256'] == 'd472fe00c88e70b77adc8a38093360042a632559a9ac52366f8da3b37aec5660'
+
+          d = json.loads(raw)
+          subjects = d['subjects']
+          assert len(subjects) == 2048
+          assert len({s['subjectId'] for s in subjects}) == 2048
+          assert len({s['understatPlayerId'] for s in subjects}) == 2048
+          assert m['checks']['understatNameConflicts'] == 0
+          assert m['checks']['knownFantacalcioId65CollisionPreserved'] is True
+          assert any(s['understatPlayerId'] == '1981' and '65' in s['fantacalcioObservationIds'] for s in subjects)
+          assert any(s['understatPlayerId'] == '7973' and '65' in s['fantacalcioObservationIds'] for s in subjects)
+
+          reconstructed = Path('.nexus-d1-historical-2048-wikidata-v3/reconstructed-subjects.json.xz.b64')
+          reconstructed.write_text(encoded + '\n')
+          print(json.dumps({
+              'status':'PASS_TRANSPORT_V3',
+              'chunks':len(chunks),
+              'base64Chars':len(encoded),
+              'xzBytes':len(xz),
+              'xzSha256':hashlib.sha256(xz).hexdigest(),
+              'decodedJsonBytes':len(raw),
+              'decodedJsonSha256':hashlib.sha256(raw).hexdigest(),
+              'subjects':len(subjects)
+          }, indent=2))
+          PY
+
+      - name: Acquire historical resolved-person identity and DOB evidence
+        id: acquire
+        shell: bash
+        timeout-minutes: 75
+        run: |
+          set -uo pipefail
+          rm -rf "$OUT"
+          mkdir -p "$OUT"
+          set +e
+          python scripts/nexus-d1-acquire-historical-wikidata-demographics-v1.py \
+            --subjects-b64 "$RECONSTRUCTED" \
+            --manifest data/nexus-d1/historical-resolved-person-subjects-v3-manifest.json \
+            --output "$OUT" \
+            >"$OUT/ACQUIRE.stdout.log" 2>"$OUT/ACQUIRE.stderr.log"
+          rc=$?
+          set -e
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          if [ "$rc" -ne 0 ]; then
+            RC="$rc" python - <<'PY'
+          import json, os
+          from datetime import datetime, timezone
+          from pathlib import Path
+          out=Path('.nexus-d1-historical-2048-wikidata-v3/output')
+          stderr=(out/'ACQUIRE.stderr.log').read_text(errors='replace') if (out/'ACQUIRE.stderr.log').exists() else ''
+          doc={
+            'schema':'NEXUS_D1_HISTORICAL_2048_TECHNICAL_FAILURE_V3',
+            'status':'TECHNICAL_FAILURE_NOT_SCIENTIFIC_MISSINGNESS',
+            'capturedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),
+            'exitCode':int(os.environ['RC']),
+            'stderrTail':stderr[-12000:],
+            'governance':{
+              'requestFailureCanBecomeMissingIdentity':False,
+              'trainingPromotionGranted':False,
+              'computedAgeDerived':False,
+              'historicalAsOfGranted':False,
+              'f1Started':False
+            }
+          }
+          (out/'TECHNICAL_FAILURE.json').write_text(json.dumps(doc,ensure_ascii=False,indent=2)+'\n')
+          PY
+          fi
+
+      - name: Assert D1 governance
+        if: steps.acquire.outputs.rc == '0'
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          d=json.load(open('.nexus-d1-historical-2048-wikidata-v3/output/RESULT.json'))
+          assert d['subjectSurface']['count'] == 2048
+          assert d['rules']['fuzzyMatchingUsed'] is False
+          assert d['rules']['dobUsedForIdentitySelection'] is False
+          assert d['rules']['computedAgeDerived'] is False
+          assert d['rules']['currentRetrievalImpliesHistoricalAsOf'] is False
+          assert d['rules']['trainingPromotionGranted'] is False
+          assert d['rules']['requestFailureCanBecomeMissingIdentity'] is False
+          print(json.dumps(d['summary'],indent=2))
+          PY
+
+      - name: Persist result or technical diagnostic
+        if: always() && steps.acquire.outcome == 'success'
+        run: |
+          set -euo pipefail
+          mkdir -p "$STATUS"
+          for f in RESULT.json MANIFEST.json TECHNICAL_FAILURE.json ACQUIRE.stdout.log ACQUIRE.stderr.log; do
+            if [ -f "$OUT/$f" ]; then cp "$OUT/$f" "$STATUS/$f"; fi
+          done
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$STATUS"
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus: persist D1 historical 2048 Wikidata v3 outcome [skip ci]'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Fail closed after diagnostic persistence
+        if: steps.acquire.outputs.rc != '0'
+        run: |
+          echo "D1 historical v3 acquisition failed technically with rc=${{ steps.acquire.outputs.rc }}; diagnostic persisted." >&2
+          exit 1
+
+      - name: Freeze acquisition evidence in immutable draft release
+        if: steps.acquire.outputs.rc == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Immutable D1 historical v3 release already exists: $RELEASE_TAG" >&2
+            exit 1
+          fi
+          tar -C "$ROOT" -czf nexus-d1-historical-2048-wikidata-v3.tar.gz output
+          sha256sum nexus-d1-historical-2048-wikidata-v3.tar.gz > nexus-d1-historical-2048-wikidata-v3.tar.gz.sha256
+          trap 'gh release delete "$RELEASE_TAG" --yes --cleanup-tag >/dev/null 2>&1 || true' ERR
+          gh release create "$RELEASE_TAG" \
+            --draft \
+            --target "$(git rev-parse HEAD)" \
+            --title 'FantaNexus D1 Historical 2048 Wikidata Demographics v3' \
+            --notes 'Historical D1 current-retrieval evidence using byte-identical chunked transport reconstructed from D0. V1/V2 invalid transports remain preserved as evidence. 445 historically unresolved Fantacalcio IDs remain an explicit separate gap. No fuzzy mapping, age derivation, historical-as-of claim or training promotion.'
+          gh release upload "$RELEASE_TAG" \
+            nexus-d1-historical-2048-wikidata-v3.tar.gz \
+            nexus-d1-historical-2048-wikidata-v3.tar.gz.sha256 \
+            "$OUT/RESULT.json" \
+            "$OUT/MANIFEST.json"
+          trap - ERR
+
+      - name: Upload secondary Actions artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-d1-historical-2048-wikidata-v3
+          path: .nexus-d1-historical-2048-wikidata-v3/output/
+          if-no-files-found: warn
+          retention-days: 30
