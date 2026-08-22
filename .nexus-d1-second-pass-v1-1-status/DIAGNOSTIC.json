@@ -1,0 +1,131 @@
+{
+  "schema": "NEXUS_D1_SECOND_PASS_BUILD_DIAGNOSTIC_V1_1",
+  "capturedAt": "2026-08-22T14:39:54.630571Z",
+  "exitCode": 1,
+  "status": "TECHNICAL_FAILURE_NOT_SCIENTIFIC_MISSINGNESS",
+  "inputContract": {
+    "current": {
+      "exists": true,
+      "topLevelKeys": [
+        "capturedAt",
+        "declaredUse",
+        "protocolVersion",
+        "records",
+        "requestFailures",
+        "rules",
+        "schema",
+        "status",
+        "subjectSurface",
+        "summary"
+      ],
+      "recordsType": "list",
+      "recordsCount": 505,
+      "summary": {
+        "subjects": 505,
+        "mappingStatus": {
+          "IDENTITY_VERIFIED": 379,
+          "IDENTITY_UNRESOLVED": 111,
+          "IDENTITY_AMBIGUOUS": 15
+        },
+        "dobStatus": {
+          "DOB_VERIFIED": 378,
+          "IDENTITY_UNRESOLVED": 126,
+          "DOB_CONFLICT": 1
+        },
+        "bridgedMappingStatus": {
+          "IDENTITY_VERIFIED": 376,
+          "IDENTITY_UNRESOLVED": 15,
+          "IDENTITY_AMBIGUOUS": 15
+        },
+        "unbridgedMappingStatus": {
+          "IDENTITY_UNRESOLVED": 96,
+          "IDENTITY_VERIFIED": 3
+        },
+        "requestFailures": 0
+      },
+      "firstRecordKeys": [
+        "allDobStatements",
+        "bridgePersonKey",
+        "candidateCount",
+        "classicRole",
+        "contextClubs",
+        "contextEvidence",
+        "dateOfBirth",
+        "dateOfBirthStatus",
+        "fantacalcioSourcePlayerId",
+        "historicalAdmissibility",
+        "identityFoundationMethod",
+        "identityFoundationState",
+        "lookupName",
+        "mappingMethod",
+        "mappingStatus",
+        "searchEvidence",
+        "subjectId",
+        "wikidataItemId",
+        "wikidataLastRevisionId",
+        "wikidataModified"
+      ]
+    },
+    "historical": {
+      "exists": true,
+      "topLevelKeys": [
+        "capturedAt",
+        "declaredUse",
+        "protocolVersion",
+        "records",
+        "requestFailures",
+        "rules",
+        "schema",
+        "status",
+        "subjectSurface",
+        "summary"
+      ],
+      "recordsType": "list",
+      "recordsCount": 2048,
+      "summary": {
+        "subjects": 2048,
+        "mappingStatus": {
+          "IDENTITY_VERIFIED": 1939,
+          "IDENTITY_AMBIGUOUS": 50,
+          "IDENTITY_UNRESOLVED": 59
+        },
+        "dobStatus": {
+          "DOB_VERIFIED": 1893,
+          "DOB_CONFLICT": 46,
+          "IDENTITY_UNRESOLVED": 109
+        },
+        "requestFailures": 0
+      },
+      "firstRecordKeys": [
+        "allDobStatements",
+        "bridgePersonKey",
+        "contextClubs",
+        "contextEvidence",
+        "dateOfBirth",
+        "dateOfBirthStatus",
+        "exactCandidateIds",
+        "historicalAdmissibility",
+        "lookupName",
+        "mappingMethod",
+        "mappingStatus",
+        "searchEvidence",
+        "seasons",
+        "subjectId",
+        "understatPlayerId",
+        "wikidataItemId",
+        "wikidataLastRevisionId",
+        "wikidataModified"
+      ]
+    }
+  },
+  "stdoutTail": "",
+  "stderrTail": "Traceback (most recent call last):\n  File \"/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-d1-build-second-pass-subjects-v1.py\", line 220, in <module>\n    main()\n  File \"/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-d1-build-second-pass-subjects-v1.py\", line 125, in main\n    assert_identity_only(ho)\n  File \"/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-d1-build-second-pass-subjects-v1.py\", line 83, in assert_identity_only\n    walk(obj)\n  File \"/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-d1-build-second-pass-subjects-v1.py\", line 82, in walk\n    walk(x, f\"{path}/{i}\")\n  File \"/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-d1-build-second-pass-subjects-v1.py\", line 78, in walk\n    raise RuntimeError(f\"PERFORMANCE_FIELD_FORBIDDEN:{path}/{k}\")\nRuntimeError: PERFORMANCE_FIELD_FORBIDDEN:/0/exactCandidateIds\n",
+  "governance": {
+    "fuzzyMatchingUsed": false,
+    "nameOnlyMergeUsed": false,
+    "computedAgeDerived": false,
+    "trainingPromotionGranted": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
