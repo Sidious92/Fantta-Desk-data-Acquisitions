@@ -1,0 +1,522 @@
+{
+  "schema": "NEXUS_D1_HISTORICAL_OPEN_12_UNRESOLVED_AUDIT_V1",
+  "status": "PASS",
+  "subjects": 12,
+  "aggregateAttemptStatusCounts": {
+    "NAME_TOKEN_SET_MISMATCH": 30
+  },
+  "records": [
+    {
+      "subjectId": "historical-understat-1103",
+      "understatPlayerId": "1103",
+      "lookupNames": [
+        "Nicola Ninkovic"
+      ],
+      "attemptStatusCounts": {
+        "NAME_TOKEN_SET_MISMATCH": 2
+      },
+      "http200Attempts": [
+        {
+          "fantacalcioPlayerId": "809",
+          "season": "2015/16",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ninkovic Nikola",
+          "dobCandidates": [
+            "1994-12-19"
+          ],
+          "rawPath": "raw/002--u1103--fc809--2015-16.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/chievo/nicola-ninkovic/809/2015-16"
+        },
+        {
+          "fantacalcioPlayerId": "809",
+          "season": "2016/17",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Ninkovic Nikola",
+          "dobCandidates": [
+            "1994-12-19"
+          ],
+          "rawPath": "raw/002--u1103--fc809--2016-17.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/chievo/nicola-ninkovic/809/2016-17"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1126",
+      "understatPlayerId": "1126",
+      "lookupNames": [
+        "M'Baye Niang"
+      ],
+      "attemptStatusCounts": {
+        "NAME_TOKEN_SET_MISMATCH": 4
+      },
+      "http200Attempts": [
+        {
+          "fantacalcioPlayerId": "382",
+          "season": "2015/16",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Niang Mbayé",
+          "dobCandidates": [
+            "1994-12-19"
+          ],
+          "rawPath": "raw/003--u1126--fc382--2015-16.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/ac-milan/m-baye-niang/382/2015-16"
+        },
+        {
+          "fantacalcioPlayerId": "382",
+          "season": "2016/17",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Niang Mbayé",
+          "dobCandidates": [
+            "1994-12-19"
+          ],
+          "rawPath": "raw/003--u1126--fc382--2016-17.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/ac-milan/m-baye-niang/382/2016-17"
+        },
+        {
+          "fantacalcioPlayerId": "382",
+          "season": "2017/18",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Niang Mbayé",
+          "dobCandidates": [
+            "1994-12-19"
+          ],
+          "rawPath": "raw/003--u1126--fc382--2017-18.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/ac-milan/m-baye-niang/382/2017-18"
+        },
+        {
+          "fantacalcioPlayerId": "382",
+          "season": "2023/24",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Niang Mbayé",
+          "dobCandidates": [
+            "1994-12-19"
+          ],
+          "rawPath": "raw/003--u1126--fc382--2023-24.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/ac-milan/m-baye-niang/382/2023-24"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1374",
+      "understatPlayerId": "1374",
+      "lookupNames": [
+        "José Reina"
+      ],
+      "attemptStatusCounts": {
+        "NAME_TOKEN_SET_MISMATCH": 8
+      },
+      "http200Attempts": [
+        {
+          "fantacalcioPlayerId": "387",
+          "season": "2015/16",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Reina Pepe",
+          "dobCandidates": [
+            "1982-08-31"
+          ],
+          "rawPath": "raw/012--u1374--fc387--2015-16.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/ac-milan/jose-reina/387/2015-16"
+        },
+        {
+          "fantacalcioPlayerId": "387",
+          "season": "2016/17",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Reina Pepe",
+          "dobCandidates": [
+            "1982-08-31"
+          ],
+          "rawPath": "raw/012--u1374--fc387--2016-17.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/ac-milan/jose-reina/387/2016-17"
+        },
+        {
+          "fantacalcioPlayerId": "387",
+          "season": "2017/18",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Reina Pepe",
+          "dobCandidates": [
+            "1982-08-31"
+          ],
+          "rawPath": "raw/012--u1374--fc387--2017-18.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/ac-milan/jose-reina/387/2017-18"
+        },
+        {
+          "fantacalcioPlayerId": "387",
+          "season": "2018/19",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Reina Pepe",
+          "dobCandidates": [
+            "1982-08-31"
+          ],
+          "rawPath": "raw/012--u1374--fc387--2018-19.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/ac-milan/jose-reina/387/2018-19"
+        },
+        {
+          "fantacalcioPlayerId": "387",
+          "season": "2019/20",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Reina Pepe",
+          "dobCandidates": [
+            "1982-08-31"
+          ],
+          "rawPath": "raw/012--u1374--fc387--2019-20.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/ac-milan/jose-reina/387/2019-20"
+        },
+        {
+          "fantacalcioPlayerId": "387",
+          "season": "2020/21",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Reina Pepe",
+          "dobCandidates": [
+            "1982-08-31"
+          ],
+          "rawPath": "raw/012--u1374--fc387--2020-21.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/ac-milan/jose-reina/387/2020-21"
+        },
+        {
+          "fantacalcioPlayerId": "387",
+          "season": "2021/22",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Reina Pepe",
+          "dobCandidates": [
+            "1982-08-31"
+          ],
+          "rawPath": "raw/012--u1374--fc387--2021-22.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/ac-milan/jose-reina/387/2021-22"
+        },
+        {
+          "fantacalcioPlayerId": "387",
+          "season": "2024/25",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Reina Pepe",
+          "dobCandidates": [
+            "1982-08-31"
+          ],
+          "rawPath": "raw/012--u1374--fc387--2024-25.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/ac-milan/jose-reina/387/2024-25"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-1875",
+      "understatPlayerId": "1875",
+      "lookupNames": [
+        "Vasiliy Pryima"
+      ],
+      "attemptStatusCounts": {
+        "NAME_TOKEN_SET_MISMATCH": 1
+      },
+      "http200Attempts": [
+        {
+          "fantacalcioPlayerId": "759",
+          "season": "2015/16",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Pryima Vasyl",
+          "dobCandidates": [
+            "1991-06-10"
+          ],
+          "rawPath": "raw/021--u1875--fc759--2015-16.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/frosinone/vasiliy-pryima/759/2015-16"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-2003",
+      "understatPlayerId": "2003",
+      "lookupNames": [
+        "Antonio La Gumina"
+      ],
+      "attemptStatusCounts": {
+        "NAME_TOKEN_SET_MISMATCH": 3
+      },
+      "http200Attempts": [
+        {
+          "fantacalcioPlayerId": "447",
+          "season": "2018/19",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "La Gumina Antonino",
+          "dobCandidates": [
+            "1996-03-06"
+          ],
+          "rawPath": "raw/023--u2003--fc447--2018-19.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/empoli/antonio-la-gumina/447/2018-19"
+        },
+        {
+          "fantacalcioPlayerId": "447",
+          "season": "2019/20",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "La Gumina Antonino",
+          "dobCandidates": [
+            "1996-03-06"
+          ],
+          "rawPath": "raw/023--u2003--fc447--2019-20.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/empoli/antonio-la-gumina/447/2019-20"
+        },
+        {
+          "fantacalcioPlayerId": "447",
+          "season": "2020/21",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "La Gumina Antonino",
+          "dobCandidates": [
+            "1996-03-06"
+          ],
+          "rawPath": "raw/023--u2003--fc447--2020-21.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/empoli/antonio-la-gumina/447/2020-21"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-7265",
+      "understatPlayerId": "7265",
+      "lookupNames": [
+        "Kephren Thuram"
+      ],
+      "attemptStatusCounts": {
+        "NAME_TOKEN_SET_MISMATCH": 2
+      },
+      "http200Attempts": [
+        {
+          "fantacalcioPlayerId": "5562",
+          "season": "2024/25",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Thuram Khephren",
+          "dobCandidates": [
+            "2001-03-26"
+          ],
+          "rawPath": "raw/042--u7265--fc5562--2024-25.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/juventus/kephren-thuram/5562/2024-25"
+        },
+        {
+          "fantacalcioPlayerId": "5562",
+          "season": "2025/26",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Khephren Thuram",
+          "dobCandidates": [
+            "2001-03-26"
+          ],
+          "rawPath": "raw/042--u7265--fc5562--2025-26.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/juventus/kephren-thuram/5562/2025-26"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-7977",
+      "understatPlayerId": "7977",
+      "lookupNames": [
+        "Evgen Shakhov"
+      ],
+      "attemptStatusCounts": {
+        "NAME_TOKEN_SET_MISMATCH": 1
+      },
+      "http200Attempts": [
+        {
+          "fantacalcioPlayerId": "4400",
+          "season": "2019/20",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Shakhov Yevhen",
+          "dobCandidates": [
+            "1990-11-30"
+          ],
+          "rawPath": "raw/045--u7977--fc4400--2019-20.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/lecce/evgen-shakhov/4400/2019-20"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-9057",
+      "understatPlayerId": "9057",
+      "lookupNames": [
+        "Franco Ezequiel Carboni"
+      ],
+      "attemptStatusCounts": {
+        "NAME_TOKEN_SET_MISMATCH": 3
+      },
+      "http200Attempts": [
+        {
+          "fantacalcioPlayerId": "6149",
+          "season": "2022/23",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Carboni Franco",
+          "dobCandidates": [
+            "2003-04-04"
+          ],
+          "rawPath": "raw/058--u9057--fc6149--2022-23.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/monza/franco-ezequiel-carboni/6149/2022-23"
+        },
+        {
+          "fantacalcioPlayerId": "6149",
+          "season": "2024/25",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Carboni Franco",
+          "dobCandidates": [
+            "2003-04-04"
+          ],
+          "rawPath": "raw/058--u9057--fc6149--2024-25.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/monza/franco-ezequiel-carboni/6149/2024-25"
+        },
+        {
+          "fantacalcioPlayerId": "6149",
+          "season": "2025/26",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Franco Carboni",
+          "dobCandidates": [
+            "2003-04-04"
+          ],
+          "rawPath": "raw/058--u9057--fc6149--2025-26.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/monza/franco-ezequiel-carboni/6149/2025-26"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-9447",
+      "understatPlayerId": "9447",
+      "lookupNames": [
+        "Niakhate Ndiaye"
+      ],
+      "attemptStatusCounts": {
+        "NAME_TOKEN_SET_MISMATCH": 1
+      },
+      "http200Attempts": [
+        {
+          "fantacalcioPlayerId": "7202",
+          "season": "2025/26",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Abdoulaye Ndiaye",
+          "dobCandidates": [
+            "2002-04-10"
+          ],
+          "rawPath": "raw/059--u9447--fc7202--2025-26.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/parma-calcio-1913/niakhate-ndiaye/7202/2025-26"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-10497",
+      "understatPlayerId": "10497",
+      "lookupNames": [
+        "Yannick Engelhardt"
+      ],
+      "attemptStatusCounts": {
+        "NAME_TOKEN_SET_MISMATCH": 1
+      },
+      "http200Attempts": [
+        {
+          "fantacalcioPlayerId": "6676",
+          "season": "2024/25",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Engelhardt Yannik",
+          "dobCandidates": [
+            "2001-02-07"
+          ],
+          "rawPath": "raw/069--u10497--fc6676--2024-25.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/como/yannick-engelhardt/6676/2024-25"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-11901",
+      "understatPlayerId": "11901",
+      "lookupNames": [
+        "Tomasso Martinelli"
+      ],
+      "attemptStatusCounts": {
+        "NAME_TOKEN_SET_MISMATCH": 1
+      },
+      "http200Attempts": [
+        {
+          "fantacalcioPlayerId": "6184",
+          "season": "2023/24",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Martinelli Tommaso",
+          "dobCandidates": [
+            "2006-01-06"
+          ],
+          "rawPath": "raw/078--u11901--fc6184--2023-24.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/fiorentina/tomasso-martinelli/6184/2023-24"
+        }
+      ]
+    },
+    {
+      "subjectId": "historical-understat-12168",
+      "understatPlayerId": "12168",
+      "lookupNames": [
+        "Alejandro Jiménez"
+      ],
+      "attemptStatusCounts": {
+        "NAME_TOKEN_SET_MISMATCH": 3
+      },
+      "http200Attempts": [
+        {
+          "fantacalcioPlayerId": "6531",
+          "season": "2023/24",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Jimenez Alex",
+          "dobCandidates": [
+            "2005-05-08"
+          ],
+          "rawPath": "raw/084--u12168--fc6531--2023-24.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/ac-milan/alejandro-jimenez/6531/2023-24"
+        },
+        {
+          "fantacalcioPlayerId": "6531",
+          "season": "2024/25",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Jimenez Alex",
+          "dobCandidates": [
+            "2005-05-08"
+          ],
+          "rawPath": "raw/084--u12168--fc6531--2024-25.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/ac-milan/alejandro-jimenez/6531/2024-25"
+        },
+        {
+          "fantacalcioPlayerId": "6531",
+          "season": "2025/26",
+          "status": "NAME_TOKEN_SET_MISMATCH",
+          "exactSeasonPlayerIdBound": true,
+          "fullName": "Alex Jimenez",
+          "dobCandidates": [
+            "2005-05-08"
+          ],
+          "rawPath": "raw/084--u12168--fc6531--2025-26.html",
+          "canonicalUrl": "https://www.fantacalcio.it/serie-a/squadre/ac-milan/alejandro-jimenez/6531/2025-26"
+        }
+      ]
+    }
+  ],
+  "governance": {
+    "ruleChanged": false,
+    "networkRequestsMade": 0,
+    "rawMutated": false,
+    "fuzzyMatchingUsed": false,
+    "f1Started": false,
+    "d2Started": false
+  }
+}
