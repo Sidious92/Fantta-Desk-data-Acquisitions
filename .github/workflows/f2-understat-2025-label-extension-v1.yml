@@ -1,0 +1,127 @@
+name: F2 Understat 2025-26 Event Label Extension v1
+
+on:
+  push:
+    branches:
+      - feat/f2-understat-player-match-temporal-probe
+    paths:
+      - '.github/workflows/f2-understat-2025-label-extension-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  acquire:
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        shard: [0, 1, 2, 3]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/f2-understat-player-match-temporal-probe
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Acquire 2025/26 shard ${{ matrix.shard }}
+        id: shard
+        shell: bash
+        run: |
+          out=".nexus-f2b-2025-label-extension-v1/shard-$(printf '%02d' '${{ matrix.shard }}')"
+          mkdir -p "$out"
+          set +e
+          python scripts/nexus-f2-acquire-understat-2025-label-extension-v1.py \
+            --shard-index '${{ matrix.shard }}' --shard-count 4 --delay 0.35 \
+            2>&1 | tee "$out/RUN.log"
+          code=${PIPESTATUS[0]}
+          echo "$code" > "$out/EXIT_CODE.txt"
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Upload shard evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f2b-2025-label-extension-v1-shard-${{ matrix.shard }}
+          path: .nexus-f2b-2025-label-extension-v1/shard-*
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
+      - name: Enforce shard
+        if: always()
+        run: |
+          code='${{ steps.shard.outputs.exit_code }}'
+          [ -n "$code" ] || exit 1
+          [ "$code" = "0" ] || exit "$code"
+
+  aggregate:
+    if: always()
+    needs: acquire
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/f2-understat-player-match-temporal-probe
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: nexus-f2b-2025-label-extension-v1-shard-*
+          path: combined
+          merge-multiple: false
+      - name: Audit and combine
+        id: audit
+        shell: bash
+        run: |
+          out=.nexus-f2b-2025-label-extension-v1-final
+          mkdir -p "$out"
+          set +e
+          python scripts/nexus-f2-audit-understat-2025-label-extension-v1.py \
+            --input-root combined --output-root "$out" --run-id '${{ github.run_id }}' \
+            2>&1 | tee "$out/RUN.log"
+          code=${PIPESTATUS[0]}
+          echo "$code" > "$out/EXIT_CODE.txt"
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Package immutable extension evidence
+        if: always()
+        run: |
+          tar -czf nexus-f2b-2025-label-extension-v1.tar.gz combined .nexus-f2b-2025-label-extension-v1-final
+          sha256sum nexus-f2b-2025-label-extension-v1.tar.gz > .nexus-f2b-2025-label-extension-v1-final/PACKAGE_SHA256.txt
+          printf '%s\n' '${{ github.run_id }}' > .nexus-f2b-2025-label-extension-v1-final/RUN_ID.txt
+      - name: Upload complete extension package
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f2b-2025-label-extension-v1
+          path: |
+            nexus-f2b-2025-label-extension-v1.tar.gz
+            .nexus-f2b-2025-label-extension-v1-final
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
+      - name: Persist compact audit status
+        if: always()
+        run: |
+          mkdir -p .nexus-f2b-2025-label-extension-v1-status
+          for f in FULL_AUDIT.json MANIFEST.json RUN.log EXIT_CODE.txt PACKAGE_SHA256.txt RUN_ID.txt; do
+            [ ! -f ".nexus-f2b-2025-label-extension-v1-final/$f" ] || cp ".nexus-f2b-2025-label-extension-v1-final/$f" ".nexus-f2b-2025-label-extension-v1-status/$f"
+          done
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f .nexus-f2b-2025-label-extension-v1-status
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus f2: persist 2025/26 event-label extension audit v1 [skip ci]'
+            git push origin HEAD:feat/f2-understat-player-match-temporal-probe
+          fi
+      - name: Enforce audit
+        if: always()
+        run: |
+          code='${{ steps.audit.outputs.exit_code }}'
+          [ -n "$code" ] || exit 1
+          [ "$code" = "0" ] || exit "$code"
