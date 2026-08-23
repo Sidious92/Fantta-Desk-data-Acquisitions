@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "players": 8,
+  "matchRows": 2488,
+  "comparisons": 86,
+  "exactComparisons": 86,
+  "failureCount": 0,
+  "probeSha256": "a849304a834e8796bf99790901deac9f604d949105c27fb6213958dd68c09a36",
+  "manifestSha256": "e1ed2f2983c9c7a2468c871e7fde41969091dfbb42f2c4901e2a2843d8fe2d65"
+}

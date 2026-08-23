@@ -1,0 +1,4451 @@
+{
+  "capturedAt": "2026-08-23T19:41:18.359235+00:00",
+  "cohort": {
+    "players": 8,
+    "selection": "DETERMINISTIC_EXACT_F1_D1_BOUND_LONG_HISTORY_TWO_PER_CLASSIC_ROLE"
+  },
+  "correction": "Decode gzip wire response before parsing current AJAX JSON endpoint.",
+  "failures": [],
+  "governance": {
+    "canonicalPredictiveEngineModified": false,
+    "expectedMetricsPromoted": false,
+    "f2ParametersFitted": false,
+    "fuzzyMatchingUsed": false,
+    "newProviderIntroduced": false
+  },
+  "matchShape": {
+    "allRowsDated": true,
+    "datedRows": 2488,
+    "totalRows": 2488
+  },
+  "playerEvidence": [
+    {
+      "classicRole": "P",
+      "decodedBytes": 110213,
+      "decodedSha256": "0822533d90b6ce4104a9ab9f00296f0f15817eb816b3aab8960889fc3d8a4e2a",
+      "matchRows": 324,
+      "name": "Lukasz Skorupski",
+      "payloadKeys": [
+        "groups",
+        "lastMatch",
+        "matches",
+        "minMaxPlayerStats",
+        "player",
+        "positionsList",
+        "shots"
+      ],
+      "pinnedSerieASeasonRows": 11,
+      "playerId": "1305",
+      "transportDecodedAs": "gzip",
+      "transportEncodingObserved": "gzip",
+      "wireBytes": 11064,
+      "wireSha256": "4794ecfc3b439a75fc9555c0802d3e81ebb68fb8e987b054facd9fad6e38f32b"
+    },
+    {
+      "classicRole": "P",
+      "decodedBytes": 74093,
+      "decodedSha256": "c6597ae383ad2e39fddc2284cc44274d677f440d38d7a763b845f555734924cb",
+      "matchRows": 206,
+      "name": "Mattia Perin",
+      "payloadKeys": [
+        "groups",
+        "lastMatch",
+        "matches",
+        "minMaxPlayerStats",
+        "player",
+        "positionsList",
+        "shots"
+      ],
+      "pinnedSerieASeasonRows": 11,
+      "playerId": "1093",
+      "transportDecodedAs": "gzip",
+      "transportEncodingObserved": "gzip",
+      "wireBytes": 7657,
+      "wireSha256": "b148b092c0d89f9f0d754efa367d8fbf68d4076b391867804a818c51f571905f"
+    },
+    {
+      "classicRole": "D",
+      "decodedBytes": 194575,
+      "decodedSha256": "6e2860b3ed89b1406d6ad057d58ac2c523dc073173664c7c9d442610dae760d0",
+      "matchRows": 308,
+      "name": "Stefan de Vrij",
+      "payloadKeys": [
+        "groups",
+        "lastMatch",
+        "matches",
+        "minMaxPlayerStats",
+        "player",
+        "positionsList",
+        "shots"
+      ],
+      "pinnedSerieASeasonRows": 11,
+      "playerId": "1541",
+      "transportDecodedAs": "gzip",
+      "transportEncodingObserved": "gzip",
+      "wireBytes": 26777,
+      "wireSha256": "1ad83a3d843a2cdc8d1d0e75c2497dd133cbf8e6f14b0de90275e417b691fda5"
+    },
+    {
+      "classicRole": "D",
+      "decodedBytes": 224516,
+      "decodedSha256": "b7e931b7b1facbb9c5388b4ccfae63ef6f372ebc37209a77b4c3588182298aeb",
+      "matchRows": 380,
+      "name": "Francesco Acerbi",
+      "payloadKeys": [
+        "groups",
+        "lastMatch",
+        "matches",
+        "minMaxPlayerStats",
+        "player",
+        "positionsList",
+        "shots"
+      ],
+      "pinnedSerieASeasonRows": 11,
+      "playerId": "1463",
+      "transportDecodedAs": "gzip",
+      "transportEncodingObserved": "gzip",
+      "wireBytes": 31359,
+      "wireSha256": "77384c45b2d329f31be668371828c3397ec39c63916251c00525f8dcfab8d9fc"
+    },
+    {
+      "classicRole": "C",
+      "decodedBytes": 379772,
+      "decodedSha256": "c63ad5b17f19a0cdc4c3fe15f8af50a1ca2d34ce4e63d7a832922fcdda5827d1",
+      "matchRows": 300,
+      "name": "Lorenzo Pellegrini",
+      "payloadKeys": [
+        "groups",
+        "lastMatch",
+        "matches",
+        "minMaxPlayerStats",
+        "player",
+        "positionsList",
+        "shots"
+      ],
+      "pinnedSerieASeasonRows": 11,
+      "playerId": "1471",
+      "transportDecodedAs": "gzip",
+      "transportEncodingObserved": "gzip",
+      "wireBytes": 53956,
+      "wireSha256": "2683c4e0ed14b0357c0c2a1966e6751d913c4b161b819d9448b9d6555fa7420a"
+    },
+    {
+      "classicRole": "C",
+      "decodedBytes": 261841,
+      "decodedSha256": "68626ca30d103e6fd404ef188b69ed195d52dd234995e719f57d1684480d5c67",
+      "matchRows": 316,
+      "name": "Manuel Locatelli",
+      "payloadKeys": [
+        "groups",
+        "lastMatch",
+        "matches",
+        "minMaxPlayerStats",
+        "player",
+        "positionsList",
+        "shots"
+      ],
+      "pinnedSerieASeasonRows": 10,
+      "playerId": "1122",
+      "transportDecodedAs": "gzip",
+      "transportEncodingObserved": "gzip",
+      "wireBytes": 39236,
+      "wireSha256": "34593ab623811ddc86628300cd4f07f247c7c5d82a8506409220417f0d69f170"
+    },
+    {
+      "classicRole": "A",
+      "decodedBytes": 558781,
+      "decodedSha256": "9de2f2c4d84ddc1385f1fec25081d37697e4e5934b083cb41810ae1acdfaeab3",
+      "matchRows": 343,
+      "name": "Paulo Dybala",
+      "payloadKeys": [
+        "groups",
+        "lastMatch",
+        "matches",
+        "minMaxPlayerStats",
+        "player",
+        "positionsList",
+        "shots"
+      ],
+      "pinnedSerieASeasonRows": 11,
+      "playerId": "1294",
+      "transportDecodedAs": "gzip",
+      "transportEncodingObserved": "gzip",
+      "wireBytes": 72954,
+      "wireSha256": "bbcaa17f907ace2576f2c33044b1d0d710433ede66522c6b9c8c83780e9d757e"
+    },
+    {
+      "classicRole": "A",
+      "decodedBytes": 548920,
+      "decodedSha256": "bcec0ef5ff1fcc45b7659001d51c18f44380584020ea615f1b8db63f56d9da7b",
+      "matchRows": 311,
+      "name": "Domenico Berardi",
+      "payloadKeys": [
+        "groups",
+        "lastMatch",
+        "matches",
+        "minMaxPlayerStats",
+        "player",
+        "positionsList",
+        "shots"
+      ],
+      "pinnedSerieASeasonRows": 10,
+      "playerId": "1612",
+      "transportDecodedAs": "gzip",
+      "transportEncodingObserved": "gzip",
+      "wireBytes": 69789,
+      "wireSha256": "2966315550d94b0aedbffba800e88fe3584c41b534f0581b4dc5289a4660aafa"
+    }
+  ],
+  "reconciliation": {
+    "allComparedSeasonsExact": true,
+    "comparisons": 86,
+    "exactComparisons": 86,
+    "fields": [
+      "games",
+      "time",
+      "goals",
+      "npg",
+      "assists",
+      "shots",
+      "key_passes"
+    ],
+    "rows": [
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 270,
+            "sourceAggregate": 270
+          }
+        },
+        "firstMatchDate": "2014-10-05",
+        "lastMatchDate": "2015-05-31",
+        "matchCount": 3,
+        "playerId": "1305",
+        "playerName": "Lukasz Skorupski",
+        "season": "2014/15",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Roma"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 31,
+            "sourceAggregate": 31
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2790,
+            "sourceAggregate": 2790
+          }
+        },
+        "firstMatchDate": "2015-08-23",
+        "lastMatchDate": "2016-04-02",
+        "matchCount": 31,
+        "playerId": "1305",
+        "playerName": "Lukasz Skorupski",
+        "season": "2015/16",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Empoli"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 35,
+            "sourceAggregate": 35
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 3150,
+            "sourceAggregate": 3150
+          }
+        },
+        "firstMatchDate": "2016-09-12",
+        "lastMatchDate": "2017-05-21",
+        "matchCount": 35,
+        "playerId": "1305",
+        "playerName": "Lukasz Skorupski",
+        "season": "2016/17",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Empoli"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 90,
+            "sourceAggregate": 90
+          }
+        },
+        "firstMatchDate": "2018-05-20",
+        "lastMatchDate": "2018-05-20",
+        "matchCount": 1,
+        "playerId": "1305",
+        "playerName": "Lukasz Skorupski",
+        "season": "2017/18",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Roma"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 38,
+            "sourceAggregate": 38
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 3420,
+            "sourceAggregate": 3420
+          }
+        },
+        "firstMatchDate": "2018-08-19",
+        "lastMatchDate": "2019-05-25",
+        "matchCount": 38,
+        "playerId": "1305",
+        "playerName": "Lukasz Skorupski",
+        "season": "2018/19",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Bologna"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 37,
+            "sourceAggregate": 37
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 3330,
+            "sourceAggregate": 3330
+          }
+        },
+        "firstMatchDate": "2019-08-25",
+        "lastMatchDate": "2020-08-02",
+        "matchCount": 37,
+        "playerId": "1305",
+        "playerName": "Lukasz Skorupski",
+        "season": "2019/20",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Bologna"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 28,
+            "sourceAggregate": 28
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2520,
+            "sourceAggregate": 2520
+          }
+        },
+        "firstMatchDate": "2020-09-21",
+        "lastMatchDate": "2021-05-23",
+        "matchCount": 28,
+        "playerId": "1305",
+        "playerName": "Lukasz Skorupski",
+        "season": "2020/21",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Bologna"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 36,
+            "sourceAggregate": 36
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 3240,
+            "sourceAggregate": 3240
+          }
+        },
+        "firstMatchDate": "2021-08-22",
+        "lastMatchDate": "2022-05-15",
+        "matchCount": 36,
+        "playerId": "1305",
+        "playerName": "Lukasz Skorupski",
+        "season": "2021/22",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Bologna"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 37,
+            "sourceAggregate": 37
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 3330,
+            "sourceAggregate": 3330
+          }
+        },
+        "firstMatchDate": "2022-08-14",
+        "lastMatchDate": "2023-06-04",
+        "matchCount": 37,
+        "playerId": "1305",
+        "playerName": "Lukasz Skorupski",
+        "season": "2022/23",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Bologna"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 32,
+            "sourceAggregate": 32
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2880,
+            "sourceAggregate": 2880
+          }
+        },
+        "firstMatchDate": "2023-08-21",
+        "lastMatchDate": "2024-05-20",
+        "matchCount": 32,
+        "playerId": "1305",
+        "playerName": "Lukasz Skorupski",
+        "season": "2023/24",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Bologna"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 27,
+            "sourceAggregate": 27
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2364,
+            "sourceAggregate": 2364
+          }
+        },
+        "firstMatchDate": "2024-08-18",
+        "lastMatchDate": "2025-05-18",
+        "matchCount": 27,
+        "playerId": "1305",
+        "playerName": "Lukasz Skorupski",
+        "season": "2024/25",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Bologna"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 32,
+            "sourceAggregate": 32
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2781,
+            "sourceAggregate": 2781
+          }
+        },
+        "firstMatchDate": "2014-08-31",
+        "lastMatchDate": "2015-05-23",
+        "matchCount": 32,
+        "playerId": "1093",
+        "playerName": "Mattia Perin",
+        "season": "2014/15",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Genoa"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 25,
+            "sourceAggregate": 25
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2250,
+            "sourceAggregate": 2250
+          }
+        },
+        "firstMatchDate": "2015-10-18",
+        "lastMatchDate": "2016-04-09",
+        "matchCount": 25,
+        "playerId": "1093",
+        "playerName": "Mattia Perin",
+        "season": "2015/16",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Genoa"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 16,
+            "sourceAggregate": 16
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1358,
+            "sourceAggregate": 1358
+          }
+        },
+        "firstMatchDate": "2016-09-18",
+        "lastMatchDate": "2017-01-08",
+        "matchCount": 16,
+        "playerId": "1093",
+        "playerName": "Mattia Perin",
+        "season": "2016/17",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Genoa"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 37,
+            "sourceAggregate": 37
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 3330,
+            "sourceAggregate": 3330
+          }
+        },
+        "firstMatchDate": "2017-08-20",
+        "lastMatchDate": "2018-05-20",
+        "matchCount": 37,
+        "playerId": "1093",
+        "playerName": "Mattia Perin",
+        "season": "2017/18",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Genoa"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 9,
+            "sourceAggregate": 9
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 810,
+            "sourceAggregate": 810
+          }
+        },
+        "firstMatchDate": "2018-09-26",
+        "lastMatchDate": "2019-04-13",
+        "matchCount": 9,
+        "playerId": "1093",
+        "playerName": "Mattia Perin",
+        "season": "2018/19",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Juventus"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 21,
+            "sourceAggregate": 21
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1890,
+            "sourceAggregate": 1890
+          }
+        },
+        "firstMatchDate": "2020-01-05",
+        "lastMatchDate": "2020-08-02",
+        "matchCount": 21,
+        "playerId": "1093",
+        "playerName": "Mattia Perin",
+        "season": "2019/20",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Genoa"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 32,
+            "sourceAggregate": 32
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2880,
+            "sourceAggregate": 2880
+          }
+        },
+        "firstMatchDate": "2020-09-20",
+        "lastMatchDate": "2021-05-12",
+        "matchCount": 32,
+        "playerId": "1093",
+        "playerName": "Mattia Perin",
+        "season": "2020/21",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Genoa"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 5,
+            "sourceAggregate": 5
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 409,
+            "sourceAggregate": 409
+          }
+        },
+        "firstMatchDate": "2021-09-26",
+        "lastMatchDate": "2022-05-21",
+        "matchCount": 5,
+        "playerId": "1093",
+        "playerName": "Mattia Perin",
+        "season": "2021/22",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Juventus"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 11,
+            "sourceAggregate": 11
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 948,
+            "sourceAggregate": 948
+          }
+        },
+        "firstMatchDate": "2022-08-15",
+        "lastMatchDate": "2023-05-14",
+        "matchCount": 11,
+        "playerId": "1093",
+        "playerName": "Mattia Perin",
+        "season": "2022/23",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Juventus"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 227,
+            "sourceAggregate": 227
+          }
+        },
+        "firstMatchDate": "2023-08-27",
+        "lastMatchDate": "2024-05-25",
+        "matchCount": 3,
+        "playerId": "1093",
+        "playerName": "Mattia Perin",
+        "season": "2023/24",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Juventus"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "P",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 5,
+            "sourceAggregate": 5
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 450,
+            "sourceAggregate": 450
+          }
+        },
+        "firstMatchDate": "2024-09-14",
+        "lastMatchDate": "2024-12-07",
+        "matchCount": 5,
+        "playerId": "1093",
+        "playerName": "Mattia Perin",
+        "season": "2024/25",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Juventus"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 30,
+            "sourceAggregate": 30
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 8,
+            "sourceAggregate": 8
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 11,
+            "sourceAggregate": 11
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2537,
+            "sourceAggregate": 2537
+          }
+        },
+        "firstMatchDate": "2014-08-31",
+        "lastMatchDate": "2015-05-31",
+        "matchCount": 30,
+        "playerId": "1541",
+        "playerName": "Stefan de Vrij",
+        "season": "2014/15",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Lazio"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 180,
+            "sourceAggregate": 180
+          }
+        },
+        "firstMatchDate": "2015-08-22",
+        "lastMatchDate": "2015-08-30",
+        "matchCount": 2,
+        "playerId": "1541",
+        "playerName": "Stefan de Vrij",
+        "season": "2015/16",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Lazio"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 27,
+            "sourceAggregate": 27
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 8,
+            "sourceAggregate": 8
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 9,
+            "sourceAggregate": 9
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2282,
+            "sourceAggregate": 2282
+          }
+        },
+        "firstMatchDate": "2016-08-21",
+        "lastMatchDate": "2017-05-21",
+        "matchCount": 27,
+        "playerId": "1541",
+        "playerName": "Stefan de Vrij",
+        "season": "2016/17",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Lazio"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 36,
+            "sourceAggregate": 36
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 6,
+            "sourceAggregate": 6
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 5,
+            "sourceAggregate": 5
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 6,
+            "sourceAggregate": 6
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 14,
+            "sourceAggregate": 14
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 3053,
+            "sourceAggregate": 3053
+          }
+        },
+        "firstMatchDate": "2017-08-20",
+        "lastMatchDate": "2018-05-20",
+        "matchCount": 36,
+        "playerId": "1541",
+        "playerName": "Stefan de Vrij",
+        "season": "2017/18",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Lazio"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 28,
+            "sourceAggregate": 28
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 6,
+            "sourceAggregate": 6
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 18,
+            "sourceAggregate": 18
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2520,
+            "sourceAggregate": 2520
+          }
+        },
+        "firstMatchDate": "2018-08-19",
+        "lastMatchDate": "2019-05-26",
+        "matchCount": 28,
+        "playerId": "1541",
+        "playerName": "Stefan de Vrij",
+        "season": "2018/19",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Inter"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 34,
+            "sourceAggregate": 34
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 10,
+            "sourceAggregate": 10
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 20,
+            "sourceAggregate": 20
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2830,
+            "sourceAggregate": 2830
+          }
+        },
+        "firstMatchDate": "2019-09-14",
+        "lastMatchDate": "2020-08-01",
+        "matchCount": 34,
+        "playerId": "1541",
+        "playerName": "Stefan de Vrij",
+        "season": "2019/20",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Inter"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 32,
+            "sourceAggregate": 32
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 6,
+            "sourceAggregate": 6
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 12,
+            "sourceAggregate": 12
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2730,
+            "sourceAggregate": 2730
+          }
+        },
+        "firstMatchDate": "2020-09-30",
+        "lastMatchDate": "2021-05-15",
+        "matchCount": 32,
+        "playerId": "1541",
+        "playerName": "Stefan de Vrij",
+        "season": "2020/21",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Inter"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 30,
+            "sourceAggregate": 30
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 21,
+            "sourceAggregate": 21
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2413,
+            "sourceAggregate": 2413
+          }
+        },
+        "firstMatchDate": "2021-08-21",
+        "lastMatchDate": "2022-05-22",
+        "matchCount": 30,
+        "playerId": "1541",
+        "playerName": "Stefan de Vrij",
+        "season": "2021/22",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Inter"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 27,
+            "sourceAggregate": 27
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 19,
+            "sourceAggregate": 19
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1938,
+            "sourceAggregate": 1938
+          }
+        },
+        "firstMatchDate": "2022-08-13",
+        "lastMatchDate": "2023-06-03",
+        "matchCount": 27,
+        "playerId": "1541",
+        "playerName": "Stefan de Vrij",
+        "season": "2022/23",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Inter"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 25,
+            "sourceAggregate": 25
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 10,
+            "sourceAggregate": 10
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1561,
+            "sourceAggregate": 1561
+          }
+        },
+        "firstMatchDate": "2023-08-19",
+        "lastMatchDate": "2024-05-10",
+        "matchCount": 25,
+        "playerId": "1541",
+        "playerName": "Stefan de Vrij",
+        "season": "2023/24",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Inter"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 26,
+            "sourceAggregate": 26
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 13,
+            "sourceAggregate": 13
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1719,
+            "sourceAggregate": 1719
+          }
+        },
+        "firstMatchDate": "2024-09-15",
+        "lastMatchDate": "2025-05-23",
+        "matchCount": 26,
+        "playerId": "1541",
+        "playerName": "Stefan de Vrij",
+        "season": "2024/25",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Inter"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 32,
+            "sourceAggregate": 32
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 6,
+            "sourceAggregate": 6
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 19,
+            "sourceAggregate": 19
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2879,
+            "sourceAggregate": 2879
+          }
+        },
+        "firstMatchDate": "2014-09-21",
+        "lastMatchDate": "2015-05-31",
+        "matchCount": 32,
+        "playerId": "1463",
+        "playerName": "Francesco Acerbi",
+        "season": "2014/15",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 36,
+            "sourceAggregate": 36
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 6,
+            "sourceAggregate": 6
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 13,
+            "sourceAggregate": 13
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 3240,
+            "sourceAggregate": 3240
+          }
+        },
+        "firstMatchDate": "2015-08-23",
+        "lastMatchDate": "2016-05-14",
+        "matchCount": 36,
+        "playerId": "1463",
+        "playerName": "Francesco Acerbi",
+        "season": "2015/16",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 38,
+            "sourceAggregate": 38
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 8,
+            "sourceAggregate": 8
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 17,
+            "sourceAggregate": 17
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 3420,
+            "sourceAggregate": 3420
+          }
+        },
+        "firstMatchDate": "2016-08-21",
+        "lastMatchDate": "2017-05-28",
+        "matchCount": 38,
+        "playerId": "1463",
+        "playerName": "Francesco Acerbi",
+        "season": "2016/17",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 38,
+            "sourceAggregate": 38
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 9,
+            "sourceAggregate": 9
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 15,
+            "sourceAggregate": 15
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 3420,
+            "sourceAggregate": 3420
+          }
+        },
+        "firstMatchDate": "2017-08-20",
+        "lastMatchDate": "2018-05-20",
+        "matchCount": 38,
+        "playerId": "1463",
+        "playerName": "Francesco Acerbi",
+        "season": "2017/18",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 37,
+            "sourceAggregate": 37
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 10,
+            "sourceAggregate": 10
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 18,
+            "sourceAggregate": 18
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 3311,
+            "sourceAggregate": 3311
+          }
+        },
+        "firstMatchDate": "2018-08-18",
+        "lastMatchDate": "2019-05-26",
+        "matchCount": 37,
+        "playerId": "1463",
+        "playerName": "Francesco Acerbi",
+        "season": "2018/19",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Lazio"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 36,
+            "sourceAggregate": 36
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 8,
+            "sourceAggregate": 8
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 15,
+            "sourceAggregate": 15
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 3171,
+            "sourceAggregate": 3171
+          }
+        },
+        "firstMatchDate": "2019-08-25",
+        "lastMatchDate": "2020-08-01",
+        "matchCount": 36,
+        "playerId": "1463",
+        "playerName": "Francesco Acerbi",
+        "season": "2019/20",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Lazio"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 32,
+            "sourceAggregate": 32
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 10,
+            "sourceAggregate": 10
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 8,
+            "sourceAggregate": 8
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2814,
+            "sourceAggregate": 2814
+          }
+        },
+        "firstMatchDate": "2020-09-26",
+        "lastMatchDate": "2021-05-15",
+        "matchCount": 32,
+        "playerId": "1463",
+        "playerName": "Francesco Acerbi",
+        "season": "2020/21",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Lazio"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 30,
+            "sourceAggregate": 30
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 5,
+            "sourceAggregate": 5
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 15,
+            "sourceAggregate": 15
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2535,
+            "sourceAggregate": 2535
+          }
+        },
+        "firstMatchDate": "2021-08-21",
+        "lastMatchDate": "2022-05-21",
+        "matchCount": 30,
+        "playerId": "1463",
+        "playerName": "Francesco Acerbi",
+        "season": "2021/22",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Lazio"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 31,
+            "sourceAggregate": 31
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 16,
+            "sourceAggregate": 16
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 18,
+            "sourceAggregate": 18
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2413,
+            "sourceAggregate": 2413
+          }
+        },
+        "firstMatchDate": "2022-09-18",
+        "lastMatchDate": "2023-06-03",
+        "matchCount": 31,
+        "playerId": "1463",
+        "playerName": "Francesco Acerbi",
+        "season": "2022/23",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Inter"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 29,
+            "sourceAggregate": 29
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 7,
+            "sourceAggregate": 7
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 15,
+            "sourceAggregate": 15
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2381,
+            "sourceAggregate": 2381
+          }
+        },
+        "firstMatchDate": "2023-09-16",
+        "lastMatchDate": "2024-05-26",
+        "matchCount": 29,
+        "playerId": "1463",
+        "playerName": "Francesco Acerbi",
+        "season": "2023/24",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Inter"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "D",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 23,
+            "sourceAggregate": 23
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 8,
+            "sourceAggregate": 8
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 5,
+            "sourceAggregate": 5
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1695,
+            "sourceAggregate": 1695
+          }
+        },
+        "firstMatchDate": "2024-08-17",
+        "lastMatchDate": "2025-05-23",
+        "matchCount": 23,
+        "playerId": "1463",
+        "playerName": "Francesco Acerbi",
+        "season": "2024/25",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Inter"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 23,
+            "sourceAggregate": 23
+          }
+        },
+        "firstMatchDate": "2015-03-22",
+        "lastMatchDate": "2015-03-22",
+        "matchCount": 1,
+        "playerId": "1471",
+        "playerName": "Lorenzo Pellegrini",
+        "season": "2014/15",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Roma"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 19,
+            "sourceAggregate": 19
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 16,
+            "sourceAggregate": 16
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 23,
+            "sourceAggregate": 23
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1152,
+            "sourceAggregate": 1152
+          }
+        },
+        "firstMatchDate": "2015-11-08",
+        "lastMatchDate": "2016-05-14",
+        "matchCount": 19,
+        "playerId": "1471",
+        "playerName": "Lorenzo Pellegrini",
+        "season": "2015/16",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 6,
+            "sourceAggregate": 6
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 28,
+            "sourceAggregate": 28
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 6,
+            "sourceAggregate": 6
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 26,
+            "sourceAggregate": 26
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 5,
+            "sourceAggregate": 5
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 46,
+            "sourceAggregate": 46
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1958,
+            "sourceAggregate": 1958
+          }
+        },
+        "firstMatchDate": "2016-09-10",
+        "lastMatchDate": "2017-05-28",
+        "matchCount": 28,
+        "playerId": "1471",
+        "playerName": "Lorenzo Pellegrini",
+        "season": "2016/17",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 28,
+            "sourceAggregate": 28
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 45,
+            "sourceAggregate": 45
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 39,
+            "sourceAggregate": 39
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1822,
+            "sourceAggregate": 1822
+          }
+        },
+        "firstMatchDate": "2017-08-20",
+        "lastMatchDate": "2018-05-20",
+        "matchCount": 28,
+        "playerId": "1471",
+        "playerName": "Lorenzo Pellegrini",
+        "season": "2017/18",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Roma"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 25,
+            "sourceAggregate": 25
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 58,
+            "sourceAggregate": 58
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 43,
+            "sourceAggregate": 43
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1829,
+            "sourceAggregate": 1829
+          }
+        },
+        "firstMatchDate": "2018-08-27",
+        "lastMatchDate": "2019-05-26",
+        "matchCount": 25,
+        "playerId": "1471",
+        "playerName": "Lorenzo Pellegrini",
+        "season": "2018/19",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Roma"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 9,
+            "sourceAggregate": 9
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 27,
+            "sourceAggregate": 27
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 65,
+            "sourceAggregate": 65
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 58,
+            "sourceAggregate": 58
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2138,
+            "sourceAggregate": 2138
+          }
+        },
+        "firstMatchDate": "2019-08-25",
+        "lastMatchDate": "2020-07-26",
+        "matchCount": 27,
+        "playerId": "1471",
+        "playerName": "Lorenzo Pellegrini",
+        "season": "2019/20",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Roma"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 6,
+            "sourceAggregate": 6
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 34,
+            "sourceAggregate": 34
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 7,
+            "sourceAggregate": 7
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 65,
+            "sourceAggregate": 65
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 6,
+            "sourceAggregate": 6
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 70,
+            "sourceAggregate": 70
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2623,
+            "sourceAggregate": 2623
+          }
+        },
+        "firstMatchDate": "2020-09-19",
+        "lastMatchDate": "2021-05-15",
+        "matchCount": 34,
+        "playerId": "1471",
+        "playerName": "Lorenzo Pellegrini",
+        "season": "2020/21",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Roma"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 5,
+            "sourceAggregate": 5
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 28,
+            "sourceAggregate": 28
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 9,
+            "sourceAggregate": 9
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 68,
+            "sourceAggregate": 68
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 7,
+            "sourceAggregate": 7
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 92,
+            "sourceAggregate": 92
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2321,
+            "sourceAggregate": 2321
+          }
+        },
+        "firstMatchDate": "2021-08-22",
+        "lastMatchDate": "2022-05-20",
+        "matchCount": 28,
+        "playerId": "1471",
+        "playerName": "Lorenzo Pellegrini",
+        "season": "2021/22",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Roma"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 5,
+            "sourceAggregate": 5
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 32,
+            "sourceAggregate": 32
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 70,
+            "sourceAggregate": 70
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 65,
+            "sourceAggregate": 65
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2574,
+            "sourceAggregate": 2574
+          }
+        },
+        "firstMatchDate": "2022-08-14",
+        "lastMatchDate": "2023-06-04",
+        "matchCount": 32,
+        "playerId": "1471",
+        "playerName": "Lorenzo Pellegrini",
+        "season": "2022/23",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Roma"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 29,
+            "sourceAggregate": 29
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 8,
+            "sourceAggregate": 8
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 36,
+            "sourceAggregate": 36
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 7,
+            "sourceAggregate": 7
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 47,
+            "sourceAggregate": 47
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1878,
+            "sourceAggregate": 1878
+          }
+        },
+        "firstMatchDate": "2023-08-26",
+        "lastMatchDate": "2024-05-26",
+        "matchCount": 29,
+        "playerId": "1471",
+        "playerName": "Lorenzo Pellegrini",
+        "season": "2023/24",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Roma"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 25,
+            "sourceAggregate": 25
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 27,
+            "sourceAggregate": 27
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 42,
+            "sourceAggregate": 42
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1648,
+            "sourceAggregate": 1648
+          }
+        },
+        "firstMatchDate": "2024-08-18",
+        "lastMatchDate": "2025-05-04",
+        "matchCount": 25,
+        "playerId": "1471",
+        "playerName": "Lorenzo Pellegrini",
+        "season": "2024/25",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Roma"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 91,
+            "sourceAggregate": 91
+          }
+        },
+        "firstMatchDate": "2016-04-21",
+        "lastMatchDate": "2016-05-14",
+        "matchCount": 2,
+        "playerId": "1122",
+        "playerName": "Manuel Locatelli",
+        "season": "2015/16",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "AC Milan"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 25,
+            "sourceAggregate": 25
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 14,
+            "sourceAggregate": 14
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 20,
+            "sourceAggregate": 20
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1697,
+            "sourceAggregate": 1697
+          }
+        },
+        "firstMatchDate": "2016-09-16",
+        "lastMatchDate": "2017-05-28",
+        "matchCount": 25,
+        "playerId": "1122",
+        "playerName": "Manuel Locatelli",
+        "season": "2016/17",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "AC Milan"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 21,
+            "sourceAggregate": 21
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 8,
+            "sourceAggregate": 8
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 11,
+            "sourceAggregate": 11
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 652,
+            "sourceAggregate": 652
+          }
+        },
+        "firstMatchDate": "2017-08-20",
+        "lastMatchDate": "2018-05-20",
+        "matchCount": 21,
+        "playerId": "1122",
+        "playerName": "Manuel Locatelli",
+        "season": "2017/18",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "AC Milan"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 29,
+            "sourceAggregate": 29
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 41,
+            "sourceAggregate": 41
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 30,
+            "sourceAggregate": 30
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1849,
+            "sourceAggregate": 1849
+          }
+        },
+        "firstMatchDate": "2018-08-26",
+        "lastMatchDate": "2019-05-26",
+        "matchCount": 29,
+        "playerId": "1122",
+        "playerName": "Manuel Locatelli",
+        "season": "2018/19",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 5,
+            "sourceAggregate": 5
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 33,
+            "sourceAggregate": 33
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 51,
+            "sourceAggregate": 51
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 32,
+            "sourceAggregate": 32
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2628,
+            "sourceAggregate": 2628
+          }
+        },
+        "firstMatchDate": "2019-08-25",
+        "lastMatchDate": "2020-08-02",
+        "matchCount": 33,
+        "playerId": "1122",
+        "playerName": "Manuel Locatelli",
+        "season": "2019/20",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 34,
+            "sourceAggregate": 34
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 37,
+            "sourceAggregate": 37
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 42,
+            "sourceAggregate": 42
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2887,
+            "sourceAggregate": 2887
+          }
+        },
+        "firstMatchDate": "2020-09-20",
+        "lastMatchDate": "2021-05-23",
+        "matchCount": 34,
+        "playerId": "1122",
+        "playerName": "Manuel Locatelli",
+        "season": "2020/21",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 31,
+            "sourceAggregate": 31
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 18,
+            "sourceAggregate": 18
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 21,
+            "sourceAggregate": 21
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2167,
+            "sourceAggregate": 2167
+          }
+        },
+        "firstMatchDate": "2021-08-22",
+        "lastMatchDate": "2022-05-21",
+        "matchCount": 31,
+        "playerId": "1122",
+        "playerName": "Manuel Locatelli",
+        "season": "2021/22",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Juventus"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 32,
+            "sourceAggregate": 32
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 22,
+            "sourceAggregate": 22
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 0,
+            "sourceAggregate": 0
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 29,
+            "sourceAggregate": 29
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2478,
+            "sourceAggregate": 2478
+          }
+        },
+        "firstMatchDate": "2022-08-15",
+        "lastMatchDate": "2023-06-04",
+        "matchCount": 32,
+        "playerId": "1122",
+        "playerName": "Manuel Locatelli",
+        "season": "2022/23",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Juventus"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 36,
+            "sourceAggregate": 36
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 26,
+            "sourceAggregate": 26
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 25,
+            "sourceAggregate": 25
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 3023,
+            "sourceAggregate": 3023
+          }
+        },
+        "firstMatchDate": "2023-08-20",
+        "lastMatchDate": "2024-05-20",
+        "matchCount": 36,
+        "playerId": "1122",
+        "playerName": "Manuel Locatelli",
+        "season": "2023/24",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Juventus"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "C",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 36,
+            "sourceAggregate": 36
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 29,
+            "sourceAggregate": 29
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 1,
+            "sourceAggregate": 1
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 25,
+            "sourceAggregate": 25
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2852,
+            "sourceAggregate": 2852
+          }
+        },
+        "firstMatchDate": "2024-08-19",
+        "lastMatchDate": "2025-05-25",
+        "matchCount": 36,
+        "playerId": "1122",
+        "playerName": "Manuel Locatelli",
+        "season": "2024/25",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Juventus"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 10,
+            "sourceAggregate": 10
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 34,
+            "sourceAggregate": 34
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 13,
+            "sourceAggregate": 13
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 58,
+            "sourceAggregate": 58
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 10,
+            "sourceAggregate": 10
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 117,
+            "sourceAggregate": 117
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2972,
+            "sourceAggregate": 2972
+          }
+        },
+        "firstMatchDate": "2014-08-31",
+        "lastMatchDate": "2015-05-24",
+        "matchCount": 34,
+        "playerId": "1294",
+        "playerName": "Paulo Dybala",
+        "season": "2014/15",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Palermo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 9,
+            "sourceAggregate": 9
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 34,
+            "sourceAggregate": 34
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 19,
+            "sourceAggregate": 19
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 73,
+            "sourceAggregate": 73
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 13,
+            "sourceAggregate": 13
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 107,
+            "sourceAggregate": 107
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2480,
+            "sourceAggregate": 2480
+          }
+        },
+        "firstMatchDate": "2015-08-23",
+        "lastMatchDate": "2016-05-14",
+        "matchCount": 34,
+        "playerId": "1294",
+        "playerName": "Paulo Dybala",
+        "season": "2015/16",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Juventus"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 7,
+            "sourceAggregate": 7
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 31,
+            "sourceAggregate": 31
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 11,
+            "sourceAggregate": 11
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 58,
+            "sourceAggregate": 58
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 8,
+            "sourceAggregate": 8
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 89,
+            "sourceAggregate": 89
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2162,
+            "sourceAggregate": 2162
+          }
+        },
+        "firstMatchDate": "2016-08-20",
+        "lastMatchDate": "2017-05-27",
+        "matchCount": 31,
+        "playerId": "1294",
+        "playerName": "Paulo Dybala",
+        "season": "2016/17",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Juventus"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 5,
+            "sourceAggregate": 5
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 33,
+            "sourceAggregate": 33
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 22,
+            "sourceAggregate": 22
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 54,
+            "sourceAggregate": 54
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 19,
+            "sourceAggregate": 19
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 114,
+            "sourceAggregate": 114
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2356,
+            "sourceAggregate": 2356
+          }
+        },
+        "firstMatchDate": "2017-08-19",
+        "lastMatchDate": "2018-05-19",
+        "matchCount": 33,
+        "playerId": "1294",
+        "playerName": "Paulo Dybala",
+        "season": "2017/18",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Juventus"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 30,
+            "sourceAggregate": 30
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 5,
+            "sourceAggregate": 5
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 51,
+            "sourceAggregate": 51
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 65,
+            "sourceAggregate": 65
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2135,
+            "sourceAggregate": 2135
+          }
+        },
+        "firstMatchDate": "2018-08-18",
+        "lastMatchDate": "2019-05-26",
+        "matchCount": 30,
+        "playerId": "1294",
+        "playerName": "Paulo Dybala",
+        "season": "2018/19",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Juventus"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 6,
+            "sourceAggregate": 6
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 33,
+            "sourceAggregate": 33
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 11,
+            "sourceAggregate": 11
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 69,
+            "sourceAggregate": 69
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 10,
+            "sourceAggregate": 10
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 100,
+            "sourceAggregate": 100
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2187,
+            "sourceAggregate": 2187
+          }
+        },
+        "firstMatchDate": "2019-08-31",
+        "lastMatchDate": "2020-07-26",
+        "matchCount": 33,
+        "playerId": "1294",
+        "playerName": "Paulo Dybala",
+        "season": "2019/20",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Juventus"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 20,
+            "sourceAggregate": 20
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 30,
+            "sourceAggregate": 30
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 51,
+            "sourceAggregate": 51
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1131,
+            "sourceAggregate": 1131
+          }
+        },
+        "firstMatchDate": "2020-10-25",
+        "lastMatchDate": "2021-05-23",
+        "matchCount": 20,
+        "playerId": "1294",
+        "playerName": "Paulo Dybala",
+        "season": "2020/21",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Juventus"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 5,
+            "sourceAggregate": 5
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 29,
+            "sourceAggregate": 29
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 10,
+            "sourceAggregate": 10
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 38,
+            "sourceAggregate": 38
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 9,
+            "sourceAggregate": 9
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 99,
+            "sourceAggregate": 99
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2079,
+            "sourceAggregate": 2079
+          }
+        },
+        "firstMatchDate": "2021-08-22",
+        "lastMatchDate": "2022-05-21",
+        "matchCount": 29,
+        "playerId": "1294",
+        "playerName": "Paulo Dybala",
+        "season": "2021/22",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Juventus"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 6,
+            "sourceAggregate": 6
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 25,
+            "sourceAggregate": 25
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 12,
+            "sourceAggregate": 12
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 53,
+            "sourceAggregate": 53
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 7,
+            "sourceAggregate": 7
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 65,
+            "sourceAggregate": 65
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1763,
+            "sourceAggregate": 1763
+          }
+        },
+        "firstMatchDate": "2022-08-14",
+        "lastMatchDate": "2023-06-04",
+        "matchCount": 25,
+        "playerId": "1294",
+        "playerName": "Paulo Dybala",
+        "season": "2022/23",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Roma"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 9,
+            "sourceAggregate": 9
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 28,
+            "sourceAggregate": 28
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 13,
+            "sourceAggregate": 13
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 50,
+            "sourceAggregate": 50
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 6,
+            "sourceAggregate": 6
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 59,
+            "sourceAggregate": 59
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2011,
+            "sourceAggregate": 2011
+          }
+        },
+        "firstMatchDate": "2023-08-26",
+        "lastMatchDate": "2024-05-26",
+        "matchCount": 28,
+        "playerId": "1294",
+        "playerName": "Paulo Dybala",
+        "season": "2023/24",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Roma"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 24,
+            "sourceAggregate": 24
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 6,
+            "sourceAggregate": 6
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 40,
+            "sourceAggregate": 40
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 50,
+            "sourceAggregate": 50
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1431,
+            "sourceAggregate": 1431
+          }
+        },
+        "firstMatchDate": "2024-08-18",
+        "lastMatchDate": "2025-03-16",
+        "matchCount": 24,
+        "playerId": "1294",
+        "playerName": "Paulo Dybala",
+        "season": "2024/25",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Roma"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 10,
+            "sourceAggregate": 10
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 32,
+            "sourceAggregate": 32
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 15,
+            "sourceAggregate": 15
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 48,
+            "sourceAggregate": 48
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 9,
+            "sourceAggregate": 9
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 95,
+            "sourceAggregate": 95
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2700,
+            "sourceAggregate": 2700
+          }
+        },
+        "firstMatchDate": "2014-08-31",
+        "lastMatchDate": "2015-05-31",
+        "matchCount": 32,
+        "playerId": "1612",
+        "playerName": "Domenico Berardi",
+        "season": "2014/15",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 6,
+            "sourceAggregate": 6
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 29,
+            "sourceAggregate": 29
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 7,
+            "sourceAggregate": 7
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 37,
+            "sourceAggregate": 37
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 88,
+            "sourceAggregate": 88
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2189,
+            "sourceAggregate": 2189
+          }
+        },
+        "firstMatchDate": "2015-08-23",
+        "lastMatchDate": "2016-05-08",
+        "matchCount": 29,
+        "playerId": "1612",
+        "playerName": "Domenico Berardi",
+        "season": "2015/16",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 9,
+            "sourceAggregate": 9
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 21,
+            "sourceAggregate": 21
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 5,
+            "sourceAggregate": 5
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 39,
+            "sourceAggregate": 39
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 42,
+            "sourceAggregate": 42
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1743,
+            "sourceAggregate": 1743
+          }
+        },
+        "firstMatchDate": "2016-08-21",
+        "lastMatchDate": "2017-05-28",
+        "matchCount": 21,
+        "playerId": "1612",
+        "playerName": "Domenico Berardi",
+        "season": "2016/17",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 31,
+            "sourceAggregate": 31
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 52,
+            "sourceAggregate": 52
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 2,
+            "sourceAggregate": 2
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 86,
+            "sourceAggregate": 86
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2322,
+            "sourceAggregate": 2322
+          }
+        },
+        "firstMatchDate": "2017-08-20",
+        "lastMatchDate": "2018-05-20",
+        "matchCount": 31,
+        "playerId": "1612",
+        "playerName": "Domenico Berardi",
+        "season": "2017/18",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 35,
+            "sourceAggregate": 35
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 8,
+            "sourceAggregate": 8
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 59,
+            "sourceAggregate": 59
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 7,
+            "sourceAggregate": 7
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 126,
+            "sourceAggregate": 126
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2887,
+            "sourceAggregate": 2887
+          }
+        },
+        "firstMatchDate": "2018-08-19",
+        "lastMatchDate": "2019-05-26",
+        "matchCount": 35,
+        "playerId": "1612",
+        "playerName": "Domenico Berardi",
+        "season": "2018/19",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 10,
+            "sourceAggregate": 10
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 31,
+            "sourceAggregate": 31
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 14,
+            "sourceAggregate": 14
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 59,
+            "sourceAggregate": 59
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 12,
+            "sourceAggregate": 12
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 119,
+            "sourceAggregate": 119
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2521,
+            "sourceAggregate": 2521
+          }
+        },
+        "firstMatchDate": "2019-09-01",
+        "lastMatchDate": "2020-08-02",
+        "matchCount": 31,
+        "playerId": "1612",
+        "playerName": "Domenico Berardi",
+        "season": "2019/20",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 7,
+            "sourceAggregate": 7
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 30,
+            "sourceAggregate": 30
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 17,
+            "sourceAggregate": 17
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 58,
+            "sourceAggregate": 58
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 10,
+            "sourceAggregate": 10
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 113,
+            "sourceAggregate": 113
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2494,
+            "sourceAggregate": 2494
+          }
+        },
+        "firstMatchDate": "2020-09-20",
+        "lastMatchDate": "2021-05-23",
+        "matchCount": 30,
+        "playerId": "1612",
+        "playerName": "Domenico Berardi",
+        "season": "2020/21",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 15,
+            "sourceAggregate": 15
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 33,
+            "sourceAggregate": 33
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 15,
+            "sourceAggregate": 15
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 83,
+            "sourceAggregate": 83
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 9,
+            "sourceAggregate": 9
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 110,
+            "sourceAggregate": 110
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 2867,
+            "sourceAggregate": 2867
+          }
+        },
+        "firstMatchDate": "2021-09-12",
+        "lastMatchDate": "2022-05-22",
+        "matchCount": 33,
+        "playerId": "1612",
+        "playerName": "Domenico Berardi",
+        "season": "2021/22",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 7,
+            "sourceAggregate": 7
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 26,
+            "sourceAggregate": 26
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 12,
+            "sourceAggregate": 12
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 45,
+            "sourceAggregate": 45
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 5,
+            "sourceAggregate": 5
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 83,
+            "sourceAggregate": 83
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1894,
+            "sourceAggregate": 1894
+          }
+        },
+        "firstMatchDate": "2022-08-15",
+        "lastMatchDate": "2023-06-02",
+        "matchCount": 26,
+        "playerId": "1612",
+        "playerName": "Domenico Berardi",
+        "season": "2022/23",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      },
+      {
+        "allObservedFieldsExact": true,
+        "classicRole": "A",
+        "fieldResults": {
+          "assists": {
+            "equal": true,
+            "matchReconstruction": 3,
+            "sourceAggregate": 3
+          },
+          "games": {
+            "equal": true,
+            "matchReconstruction": 17,
+            "sourceAggregate": 17
+          },
+          "goals": {
+            "equal": true,
+            "matchReconstruction": 9,
+            "sourceAggregate": 9
+          },
+          "key_passes": {
+            "equal": true,
+            "matchReconstruction": 28,
+            "sourceAggregate": 28
+          },
+          "npg": {
+            "equal": true,
+            "matchReconstruction": 4,
+            "sourceAggregate": 4
+          },
+          "shots": {
+            "equal": true,
+            "matchReconstruction": 51,
+            "sourceAggregate": 51
+          },
+          "time": {
+            "equal": true,
+            "matchReconstruction": 1448,
+            "sourceAggregate": 1448
+          }
+        },
+        "firstMatchDate": "2023-09-01",
+        "lastMatchDate": "2024-03-03",
+        "matchCount": 17,
+        "playerId": "1612",
+        "playerName": "Domenico Berardi",
+        "season": "2023/24",
+        "sourceMultiClub": false,
+        "sourceTeamTitle": "Sassuolo"
+      }
+    ]
+  },
+  "schema": "NEXUS_F2_UNDERSTAT_PLAYER_MATCH_TEMPORAL_PROBE_V2_1",
+  "source": {
+    "endpoint": "getPlayerData/{player_id}",
+    "endpointMethod": "GET_X_REQUESTED_WITH_XMLHTTPREQUEST",
+    "pinnedAggregateCommit": "768b7ca0b977a5e6b4b429c7b0cf750e8269f2fc",
+    "pinnedAggregateSha256": "b78fad5f01844a0fdab0d89474dafba9b86c586d2f0ce88f0ce2c9af70d2bc64",
+    "provider": "UNDERSTAT"
+  },
+  "status": "PASS",
+  "supersedesFailedProbe": "NEXUS_F2_UNDERSTAT_PLAYER_MATCH_TEMPORAL_PROBE_V2",
+  "temporalDecision": {
+    "expectedMetricReason": "Match occurrence dates do not establish provider-model expected-metric historical vintage/invariance.",
+    "expectedModelFields": [
+      "xG",
+      "npxG",
+      "xA",
+      "xGChain",
+      "xGBuildup"
+    ],
+    "expectedModelFieldsReleased": false,
+    "observedEventStableFields": "ELIGIBLE_FOR_FULL_RECONSTRUCTION_PILOT_IF_PROBE_PASS"
+  }
+}

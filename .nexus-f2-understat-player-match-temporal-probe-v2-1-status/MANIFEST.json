@@ -1,0 +1,91 @@
+{
+  "probe": {
+    "bytes": 121577,
+    "path": "PROBE.json",
+    "sha256": "a849304a834e8796bf99790901deac9f604d949105c27fb6213958dd68c09a36"
+  },
+  "rawFiles": [
+    {
+      "bytes": 74093,
+      "path": "raw/player-1093-api.json",
+      "sha256": "c6597ae383ad2e39fddc2284cc44274d677f440d38d7a763b845f555734924cb"
+    },
+    {
+      "bytes": 7657,
+      "path": "raw/player-1093-wire.bin",
+      "sha256": "b148b092c0d89f9f0d754efa367d8fbf68d4076b391867804a818c51f571905f"
+    },
+    {
+      "bytes": 261841,
+      "path": "raw/player-1122-api.json",
+      "sha256": "68626ca30d103e6fd404ef188b69ed195d52dd234995e719f57d1684480d5c67"
+    },
+    {
+      "bytes": 39236,
+      "path": "raw/player-1122-wire.bin",
+      "sha256": "34593ab623811ddc86628300cd4f07f247c7c5d82a8506409220417f0d69f170"
+    },
+    {
+      "bytes": 558781,
+      "path": "raw/player-1294-api.json",
+      "sha256": "9de2f2c4d84ddc1385f1fec25081d37697e4e5934b083cb41810ae1acdfaeab3"
+    },
+    {
+      "bytes": 72954,
+      "path": "raw/player-1294-wire.bin",
+      "sha256": "bbcaa17f907ace2576f2c33044b1d0d710433ede66522c6b9c8c83780e9d757e"
+    },
+    {
+      "bytes": 110213,
+      "path": "raw/player-1305-api.json",
+      "sha256": "0822533d90b6ce4104a9ab9f00296f0f15817eb816b3aab8960889fc3d8a4e2a"
+    },
+    {
+      "bytes": 11064,
+      "path": "raw/player-1305-wire.bin",
+      "sha256": "4794ecfc3b439a75fc9555c0802d3e81ebb68fb8e987b054facd9fad6e38f32b"
+    },
+    {
+      "bytes": 224516,
+      "path": "raw/player-1463-api.json",
+      "sha256": "b7e931b7b1facbb9c5388b4ccfae63ef6f372ebc37209a77b4c3588182298aeb"
+    },
+    {
+      "bytes": 31359,
+      "path": "raw/player-1463-wire.bin",
+      "sha256": "77384c45b2d329f31be668371828c3397ec39c63916251c00525f8dcfab8d9fc"
+    },
+    {
+      "bytes": 379772,
+      "path": "raw/player-1471-api.json",
+      "sha256": "c63ad5b17f19a0cdc4c3fe15f8af50a1ca2d34ce4e63d7a832922fcdda5827d1"
+    },
+    {
+      "bytes": 53956,
+      "path": "raw/player-1471-wire.bin",
+      "sha256": "2683c4e0ed14b0357c0c2a1966e6751d913c4b161b819d9448b9d6555fa7420a"
+    },
+    {
+      "bytes": 194575,
+      "path": "raw/player-1541-api.json",
+      "sha256": "6e2860b3ed89b1406d6ad057d58ac2c523dc073173664c7c9d442610dae760d0"
+    },
+    {
+      "bytes": 26777,
+      "path": "raw/player-1541-wire.bin",
+      "sha256": "1ad83a3d843a2cdc8d1d0e75c2497dd133cbf8e6f14b0de90275e417b691fda5"
+    },
+    {
+      "bytes": 548920,
+      "path": "raw/player-1612-api.json",
+      "sha256": "bcec0ef5ff1fcc45b7659001d51c18f44380584020ea615f1b8db63f56d9da7b"
+    },
+    {
+      "bytes": 69789,
+      "path": "raw/player-1612-wire.bin",
+      "sha256": "2966315550d94b0aedbffba800e88fe3584c41b534f0581b4dc5289a4660aafa"
+    }
+  ],
+  "schema": "NEXUS_F2_UNDERSTAT_PLAYER_MATCH_TEMPORAL_PROBE_MANIFEST_V2_1",
+  "status": "PASS"
+}
