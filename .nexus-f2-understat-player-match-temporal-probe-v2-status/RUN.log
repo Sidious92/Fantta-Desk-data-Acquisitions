@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-f2-probe-understat-player-api-v2.py", line 116, in <module>
+    if __name__=='__main__': main()
+                             ^^^^^^
+  File "/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-f2-probe-understat-player-api-v2.py", line 88, in main
+    payload=json.loads(raw)
+            ^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/json/__init__.py", line 341, in loads
+    s = s.decode(detect_encoding(s), 'surrogatepass')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x8b in position 1: invalid start byte
