@@ -1,0 +1,107 @@
+name: F2 Understat Duplicate Event Probe v2
+
+on:
+  push:
+    branches:
+      - feat/f2-understat-player-match-temporal-probe
+    paths:
+      - '.github/workflows/f2-understat-duplicate-event-probe-v2.yml'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/f2-understat-player-match-temporal-probe
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download frozen full reconstruction
+        uses: actions/download-artifact@v4
+        with:
+          name: nexus-f2-understat-full-reconstruction-v1-1
+          path: source-full
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: Sidious92/Fantta-Desk-data-Acquisitions
+          run-id: '32663544437'
+      - name: Download frozen duplicate probe v1 raw
+        uses: actions/download-artifact@v4
+        with:
+          name: nexus-f2-understat-duplicate-event-probe-v1
+          path: source-probe-v1
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: Sidious92/Fantta-Desk-data-Acquisitions
+          run-id: '32666339602'
+      - name: Verify and extract frozen inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          full='source-full/nexus-f2-understat-full-reconstruction-v1-1.tar.gz'
+          probe='source-probe-v1/nexus-f2-understat-duplicate-event-probe-v1.tar.gz'
+          [ "$(sha256sum "$full" | awk '{print $1}')" = '00a60a8a8b645e9bf171a354a4adb547c85b70085974596b093ea3dd7d5b329c' ]
+          [ "$(sha256sum "$probe" | awk '{print $1}')" = 'ed97c53c681f0f57c3450ca39be832550352017cbdef5fe9d55c0d34e505e959' ]
+          mkdir -p input-full input-probe-v1
+          tar -xzf "$full" -C input-full
+          tar -xzf "$probe" -C input-probe-v1
+      - name: Validate duplicate technical rows as single observed events
+        id: probe
+        shell: bash
+        run: |
+          mkdir -p .nexus-f2-understat-duplicate-event-probe-v2
+          set +e
+          python scripts/nexus-f2-probe-understat-duplicate-events-v2.py \
+            --full-root input-full/combined \
+            --probe-v1-raw-root input-probe-v1/.nexus-f2-understat-duplicate-event-probe-v1/raw \
+            --output-root .nexus-f2-understat-duplicate-event-probe-v2 \
+            2>&1 | tee .nexus-f2-understat-duplicate-event-probe-v2/RUN.log
+          code=${PIPESTATUS[0]}
+          echo "$code" > .nexus-f2-understat-duplicate-event-probe-v2/EXIT_CODE.txt
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Package probe evidence
+        if: always()
+        shell: bash
+        run: |
+          tar -czf nexus-f2-understat-duplicate-event-probe-v2.tar.gz .nexus-f2-understat-duplicate-event-probe-v2
+          sha256sum nexus-f2-understat-duplicate-event-probe-v2.tar.gz > .nexus-f2-understat-duplicate-event-probe-v2/PACKAGE_SHA256.txt
+          printf '%s\n' '${{ github.run_id }}' > .nexus-f2-understat-duplicate-event-probe-v2/RUN_ID.txt
+      - name: Upload immutable probe evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f2-understat-duplicate-event-probe-v2
+          path: |
+            nexus-f2-understat-duplicate-event-probe-v2.tar.gz
+            .nexus-f2-understat-duplicate-event-probe-v2
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+      - name: Persist compact probe status
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p .nexus-f2-understat-duplicate-event-probe-v2-status
+          for f in DUPLICATE_EVENT_PROBE_V2.json MANIFEST.json RUN.log EXIT_CODE.txt PACKAGE_SHA256.txt RUN_ID.txt; do
+            if [ -f ".nexus-f2-understat-duplicate-event-probe-v2/$f" ]; then cp ".nexus-f2-understat-duplicate-event-probe-v2/$f" ".nexus-f2-understat-duplicate-event-probe-v2-status/$f"; fi
+          done
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f .nexus-f2-understat-duplicate-event-probe-v2-status
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus f2: persist duplicate technical-row probe v2 [skip ci]'
+            git push origin HEAD:feat/f2-understat-player-match-temporal-probe
+          fi
+      - name: Enforce probe
+        if: always()
+        shell: bash
+        run: |
+          code='${{ steps.probe.outputs.exit_code }}'
+          [ -n "$code" ] || exit 1
+          [ "$code" = '0' ] || exit "$code"
