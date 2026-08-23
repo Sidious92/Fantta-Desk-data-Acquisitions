@@ -1,0 +1,45 @@
+{
+  "schema": "NEXUS_F2B_2025_26_EVENT_LABEL_EXTENSION_AUDIT_V1",
+  "status": "PASS",
+  "runId": "32670607085",
+  "counts": {
+    "shards": 4,
+    "targetPlayers": 451,
+    "labels": 451,
+    "observedLabels": 451,
+    "missingLabels": 0,
+    "duplicateTechnicalGroups": 0
+  },
+  "groupsQaStatusCounts": {
+    "EXACT": 451
+  },
+  "missingReasonCounts": {},
+  "files": {
+    "labels": {
+      "path": ".nexus-f2b-2025-label-extension-v1-final/labels-2025-26.jsonl",
+      "bytes": 133341,
+      "rows": 451,
+      "sha256": "51bcef832721c69c7f775ea738edaa1e7e2a5718208a817c8ba09dccd2b747a0"
+    },
+    "duplicates": {
+      "path": ".nexus-f2b-2025-label-extension-v1-final/duplicate-technical-events.jsonl",
+      "bytes": 0,
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qa": {
+      "path": ".nexus-f2b-2025-label-extension-v1-final/groups-qa.jsonl",
+      "bytes": 189639,
+      "rows": 451,
+      "sha256": "9a77c6e3ecc68035c9aff6f885535f9a040b1979187b0ed7c292ce3955646b88"
+    }
+  },
+  "failures": [],
+  "governance": {
+    "eventLevelPrimaryAuthority": true,
+    "retrospectiveAggregatePrimaryAuthority": false,
+    "expectedMetricsReleased": false,
+    "fuzzyMatchingUsed": false,
+    "canonicalPredictiveEngineModified": false
+  }
+}
