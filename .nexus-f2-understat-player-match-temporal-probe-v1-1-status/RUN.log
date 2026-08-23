@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-f2-probe-understat-player-matches-v1-1.py", line 281, in <module>
+    main()
+  File "/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-f2-probe-understat-player-matches-v1-1.py", line 146, in main
+    matches = parse_matches(html_raw.decode("utf-8", errors="replace"))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-f2-probe-understat-player-matches-v1-1.py", line 67, in parse_matches
+    raise RuntimeError("MATCHES_DATA_PAYLOAD_NOT_FOUND")
+RuntimeError: MATCHES_DATA_PAYLOAD_NOT_FOUND
