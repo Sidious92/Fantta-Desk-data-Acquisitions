@@ -1,0 +1,8 @@
+{
+  "probe": {
+    "bytes": 7690,
+    "sha256": "a23ac1b24260513fc77d004de711c8814ab9ed74d468f90f5edf14eb497e6ab3"
+  },
+  "schema": "NEXUS_F2B_UNDERSTAT_DUPLICATE_EVENT_PROBE_V2_MANIFEST",
+  "status": "PASS"
+}

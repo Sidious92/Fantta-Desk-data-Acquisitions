@@ -1,0 +1,302 @@
+{
+  "capturedAt": "2026-08-23T21:07:52.137041+00:00",
+  "counts": {
+    "failures": 0,
+    "validPairs": 4,
+    "validatedPlayerMatchPairs": 4
+  },
+  "criteria": {
+    "matchRosterAllowedDifferingFields": [
+      "id",
+      "roster_in",
+      "roster_out",
+      "xA",
+      "xG",
+      "xGBuildup",
+      "xGChain"
+    ],
+    "matchRosterInvariantFields": [
+      "player_id",
+      "team_id",
+      "h_a",
+      "position",
+      "time",
+      "goals",
+      "shots",
+      "key_passes",
+      "assists",
+      "yellow_card",
+      "red_card",
+      "own_goals"
+    ],
+    "oneProviderMatchIdDefinesOneFootballEvent": true,
+    "playerApiAllowedDifferingFields": [
+      "npxG",
+      "roster_id",
+      "xA",
+      "xG",
+      "xGBuildup",
+      "xGChain"
+    ],
+    "playerApiEventIdentityFields": [
+      "id",
+      "season",
+      "date",
+      "h_team",
+      "a_team"
+    ],
+    "playerApiReleasedObservedFields": [
+      "time",
+      "goals",
+      "npg",
+      "assists",
+      "shots",
+      "key_passes"
+    ],
+    "rawRowsMustRemainPreserved": true,
+    "requiredSameSideTeamPosition": true
+  },
+  "decision": {
+    "aggregateOverrideGranted": false,
+    "expectedMetricsStatus": "QUARANTINED_VINTAGE_REQUIRED",
+    "f2ObservedReleaseGrantedByThisProbeAlone": false,
+    "onPass": "The four provider duplicate player-match pairs are validated as duplicate technical rows for one observed football event. The observed F2 family may count each playerId+matchId once while retaining every raw row. Any aggregate/reference row that counts those technical duplicates more than once must be typed as duplicate-event-contaminated QA evidence rather than forcing the event reconstruction to double-count."
+  },
+  "evidence": [
+    {
+      "matchId": "23028",
+      "matchRosterDifferencesAllowed": true,
+      "matchRosterDifferingFields": [
+        "id",
+        "xG",
+        "xGBuildup",
+        "xGChain"
+      ],
+      "matchRosterInvariantFieldsEqual": true,
+      "matchRosterObservedMatchesPlayerApi": true,
+      "matchRosterPositions": [
+        "MC"
+      ],
+      "matchRosterRows": 2,
+      "matchRosterSides": [
+        "h"
+      ],
+      "matchRosterTeamIds": [
+        "261"
+      ],
+      "playerApiDifferencesAllowed": true,
+      "playerApiDifferingFields": [
+        "npxG",
+        "roster_id",
+        "xG",
+        "xGBuildup",
+        "xGChain"
+      ],
+      "playerApiRows": 2,
+      "playerEventIdentityEqual": true,
+      "playerId": "2437",
+      "playerReleasedObservedEqual": true,
+      "rawTechnicalRowsPreserved": true,
+      "rosterPlayerComparison": [
+        {
+          "checks": {
+            "assists": true,
+            "goals": true,
+            "key_passes": true,
+            "shots": true,
+            "time": true
+          },
+          "rosterIndex": 0
+        },
+        {
+          "checks": {
+            "assists": true,
+            "goals": true,
+            "key_passes": true,
+            "shots": true,
+            "time": true
+          },
+          "rosterIndex": 1
+        }
+      ],
+      "sameSideTeamPosition": true,
+      "validDuplicateTechnicalRowsForSingleObservedEvent": true
+    },
+    {
+      "matchId": "23028",
+      "matchRosterDifferencesAllowed": true,
+      "matchRosterDifferingFields": [
+        "id",
+        "roster_in",
+        "xG",
+        "xGChain"
+      ],
+      "matchRosterInvariantFieldsEqual": true,
+      "matchRosterObservedMatchesPlayerApi": true,
+      "matchRosterPositions": [
+        "MC"
+      ],
+      "matchRosterRows": 2,
+      "matchRosterSides": [
+        "a"
+      ],
+      "matchRosterTeamIds": [
+        "142"
+      ],
+      "playerApiDifferencesAllowed": true,
+      "playerApiDifferingFields": [
+        "npxG",
+        "roster_id",
+        "xG",
+        "xGChain"
+      ],
+      "playerApiRows": 2,
+      "playerEventIdentityEqual": true,
+      "playerId": "10561",
+      "playerReleasedObservedEqual": true,
+      "rawTechnicalRowsPreserved": true,
+      "rosterPlayerComparison": [
+        {
+          "checks": {
+            "assists": true,
+            "goals": true,
+            "key_passes": true,
+            "shots": true,
+            "time": true
+          },
+          "rosterIndex": 0
+        },
+        {
+          "checks": {
+            "assists": true,
+            "goals": true,
+            "key_passes": true,
+            "shots": true,
+            "time": true
+          },
+          "rosterIndex": 1
+        }
+      ],
+      "sameSideTeamPosition": true,
+      "validDuplicateTechnicalRowsForSingleObservedEvent": true
+    },
+    {
+      "matchId": "29482",
+      "matchRosterDifferencesAllowed": true,
+      "matchRosterDifferingFields": [
+        "id"
+      ],
+      "matchRosterInvariantFieldsEqual": true,
+      "matchRosterObservedMatchesPlayerApi": true,
+      "matchRosterPositions": [
+        "DC"
+      ],
+      "matchRosterRows": 2,
+      "matchRosterSides": [
+        "a"
+      ],
+      "matchRosterTeamIds": [
+        "154"
+      ],
+      "playerApiDifferencesAllowed": true,
+      "playerApiDifferingFields": [
+        "roster_id"
+      ],
+      "playerApiRows": 2,
+      "playerEventIdentityEqual": true,
+      "playerId": "11383",
+      "playerReleasedObservedEqual": true,
+      "rawTechnicalRowsPreserved": true,
+      "rosterPlayerComparison": [
+        {
+          "checks": {
+            "assists": true,
+            "goals": true,
+            "key_passes": true,
+            "shots": true,
+            "time": true
+          },
+          "rosterIndex": 0
+        },
+        {
+          "checks": {
+            "assists": true,
+            "goals": true,
+            "key_passes": true,
+            "shots": true,
+            "time": true
+          },
+          "rosterIndex": 1
+        }
+      ],
+      "sameSideTeamPosition": true,
+      "validDuplicateTechnicalRowsForSingleObservedEvent": true
+    },
+    {
+      "matchId": "29482",
+      "matchRosterDifferencesAllowed": true,
+      "matchRosterDifferingFields": [
+        "id",
+        "roster_in"
+      ],
+      "matchRosterInvariantFieldsEqual": true,
+      "matchRosterObservedMatchesPlayerApi": true,
+      "matchRosterPositions": [
+        "MR"
+      ],
+      "matchRosterRows": 2,
+      "matchRosterSides": [
+        "a"
+      ],
+      "matchRosterTeamIds": [
+        "154"
+      ],
+      "playerApiDifferencesAllowed": true,
+      "playerApiDifferingFields": [
+        "roster_id"
+      ],
+      "playerApiRows": 2,
+      "playerEventIdentityEqual": true,
+      "playerId": "12322",
+      "playerReleasedObservedEqual": true,
+      "rawTechnicalRowsPreserved": true,
+      "rosterPlayerComparison": [
+        {
+          "checks": {
+            "assists": true,
+            "goals": true,
+            "key_passes": true,
+            "shots": true,
+            "time": true
+          },
+          "rosterIndex": 0
+        },
+        {
+          "checks": {
+            "assists": true,
+            "goals": true,
+            "key_passes": true,
+            "shots": true,
+            "time": true
+          },
+          "rosterIndex": 1
+        }
+      ],
+      "sameSideTeamPosition": true,
+      "validDuplicateTechnicalRowsForSingleObservedEvent": true
+    }
+  ],
+  "failures": [],
+  "frozenInputs": {
+    "duplicateProbeV1PackageSha256": "ed97c53c681f0f57c3450ca39be832550352017cbdef5fe9d55c0d34e505e959",
+    "fullReconstructionPackageSha256": "00a60a8a8b645e9bf171a354a4adb547c85b70085974596b093ea3dd7d5b329c"
+  },
+  "governance": {
+    "canonicalPredictiveEngineModified": false,
+    "expectedMetricsPromoted": false,
+    "f2ParametersFitted": false,
+    "fuzzyMatchingUsed": false
+  },
+  "schema": "NEXUS_F2B_UNDERSTAT_DUPLICATE_EVENT_PROBE_V2",
+  "status": "PASS"
+}
