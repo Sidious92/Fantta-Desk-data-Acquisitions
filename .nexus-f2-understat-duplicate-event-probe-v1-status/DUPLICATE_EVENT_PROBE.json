@@ -1,0 +1,174 @@
+{
+  "capturedAt": "2026-08-23T21:03:58.508303+00:00",
+  "evidence": [
+    {
+      "differencesAllowedByObservedAmendment": true,
+      "differingFields": [
+        "npxG",
+        "roster_id",
+        "xG",
+        "xGBuildup",
+        "xGChain"
+      ],
+      "duplicateRows": 2,
+      "identityEqual": true,
+      "matchId": "23028",
+      "matchRosterObservedComparison": {},
+      "matchRosterObservedExact": false,
+      "matchRosterPlayerRows": 2,
+      "matchRosterRowId": null,
+      "matchRosterSide": null,
+      "matchRosterUnique": false,
+      "playerId": "2437",
+      "releasedObservedEqual": true
+    },
+    {
+      "differencesAllowedByObservedAmendment": true,
+      "differingFields": [
+        "npxG",
+        "roster_id",
+        "xG",
+        "xGChain"
+      ],
+      "duplicateRows": 2,
+      "identityEqual": true,
+      "matchId": "23028",
+      "matchRosterObservedComparison": {},
+      "matchRosterObservedExact": false,
+      "matchRosterPlayerRows": 2,
+      "matchRosterRowId": null,
+      "matchRosterSide": null,
+      "matchRosterUnique": false,
+      "playerId": "10561",
+      "releasedObservedEqual": true
+    },
+    {
+      "differencesAllowedByObservedAmendment": true,
+      "differingFields": [
+        "roster_id"
+      ],
+      "duplicateRows": 2,
+      "identityEqual": true,
+      "matchId": "29482",
+      "matchRosterObservedComparison": {},
+      "matchRosterObservedExact": false,
+      "matchRosterPlayerRows": 2,
+      "matchRosterRowId": null,
+      "matchRosterSide": null,
+      "matchRosterUnique": false,
+      "playerId": "11383",
+      "releasedObservedEqual": true
+    },
+    {
+      "differencesAllowedByObservedAmendment": true,
+      "differingFields": [
+        "roster_id"
+      ],
+      "duplicateRows": 2,
+      "identityEqual": true,
+      "matchId": "29482",
+      "matchRosterObservedComparison": {},
+      "matchRosterObservedExact": false,
+      "matchRosterPlayerRows": 2,
+      "matchRosterRowId": null,
+      "matchRosterSide": null,
+      "matchRosterUnique": false,
+      "playerId": "12322",
+      "releasedObservedEqual": true
+    }
+  ],
+  "failures": [
+    {
+      "code": "DUPLICATE_EVENT_INDEPENDENT_VALIDATION_FAILED",
+      "differencesAllowedByObservedAmendment": true,
+      "differingFields": [
+        "npxG",
+        "roster_id",
+        "xG",
+        "xGBuildup",
+        "xGChain"
+      ],
+      "duplicateRows": 2,
+      "identityEqual": true,
+      "matchId": "23028",
+      "matchRosterObservedComparison": {},
+      "matchRosterObservedExact": false,
+      "matchRosterPlayerRows": 2,
+      "matchRosterRowId": null,
+      "matchRosterSide": null,
+      "matchRosterUnique": false,
+      "playerId": "2437",
+      "releasedObservedEqual": true
+    },
+    {
+      "code": "DUPLICATE_EVENT_INDEPENDENT_VALIDATION_FAILED",
+      "differencesAllowedByObservedAmendment": true,
+      "differingFields": [
+        "npxG",
+        "roster_id",
+        "xG",
+        "xGChain"
+      ],
+      "duplicateRows": 2,
+      "identityEqual": true,
+      "matchId": "23028",
+      "matchRosterObservedComparison": {},
+      "matchRosterObservedExact": false,
+      "matchRosterPlayerRows": 2,
+      "matchRosterRowId": null,
+      "matchRosterSide": null,
+      "matchRosterUnique": false,
+      "playerId": "10561",
+      "releasedObservedEqual": true
+    },
+    {
+      "code": "DUPLICATE_EVENT_INDEPENDENT_VALIDATION_FAILED",
+      "differencesAllowedByObservedAmendment": true,
+      "differingFields": [
+        "roster_id"
+      ],
+      "duplicateRows": 2,
+      "identityEqual": true,
+      "matchId": "29482",
+      "matchRosterObservedComparison": {},
+      "matchRosterObservedExact": false,
+      "matchRosterPlayerRows": 2,
+      "matchRosterRowId": null,
+      "matchRosterSide": null,
+      "matchRosterUnique": false,
+      "playerId": "11383",
+      "releasedObservedEqual": true
+    },
+    {
+      "code": "DUPLICATE_EVENT_INDEPENDENT_VALIDATION_FAILED",
+      "differencesAllowedByObservedAmendment": true,
+      "differingFields": [
+        "roster_id"
+      ],
+      "duplicateRows": 2,
+      "identityEqual": true,
+      "matchId": "29482",
+      "matchRosterObservedComparison": {},
+      "matchRosterObservedExact": false,
+      "matchRosterPlayerRows": 2,
+      "matchRosterRowId": null,
+      "matchRosterSide": null,
+      "matchRosterUnique": false,
+      "playerId": "12322",
+      "releasedObservedEqual": true
+    }
+  ],
+  "interpretation": {
+    "expectedFieldsRemainQuarantined": true,
+    "onPass": "Each duplicated player-match pair is one provider match event: exact event identity and released observed fields agree across duplicate player rows, and getMatchData contains exactly one roster row for that player with matching observed match statistics. Aggregate/group double counting is therefore a source aggregate contamination for the released observed family, not evidence of two football events.",
+    "rawRowsPreserved": true
+  },
+  "matchIds": [
+    "23028",
+    "29482"
+  ],
+  "providerEndpoint": "getMatchData/{match_id}",
+  "schema": "NEXUS_F2B_UNDERSTAT_DUPLICATE_EVENT_PROBE_V1",
+  "sourcePackageSha256": "00a60a8a8b645e9bf171a354a4adb547c85b70085974596b093ea3dd7d5b329c",
+  "status": "FAIL"
+}
