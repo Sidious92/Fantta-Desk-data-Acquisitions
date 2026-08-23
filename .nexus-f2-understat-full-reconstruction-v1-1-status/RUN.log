@@ -1,0 +1,10 @@
+{
+  "status": "FAIL",
+  "players": 2048,
+  "comparisons": 8399,
+  "segments": 8737,
+  "inputTreeDigest": "df1dcb881af4678d07f044616d71530629341dd57eb1378fa2c39f9dd49f9350",
+  "auditSha256": "dca927d3301eed051f41ea94c32abfa8912edd993b9f9c2d0707d84ec01572c7",
+  "manifestSha256": "da0620b1686a88cefe04a026a85aed57451c267b5d13e8bb15eecd5065ee602e",
+  "failures": 9
+}

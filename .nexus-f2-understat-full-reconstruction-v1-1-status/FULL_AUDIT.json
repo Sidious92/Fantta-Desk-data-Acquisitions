@@ -1,0 +1,454 @@
+{
+  "capturedAt": "2026-08-23T20:31:56.266742+00:00",
+  "counts": {
+    "d1ExactUnderstatPlayers": 2048,
+    "exactSourceReferenceComparisons": 8131,
+    "manifestFiles": 4144,
+    "observedClubSegments": 8737,
+    "rawFiles": 4096,
+    "shards": 8,
+    "sourceReferenceComparisons": 8399
+  },
+  "failures": [
+    {
+      "code": "SHARD_NOT_PASS",
+      "path": "combined/nexus-f2-understat-reconstruction-v1-1-shard-0/shard-00/SHARD_REGISTRY.json",
+      "status": "FAIL"
+    },
+    {
+      "code": "SHARD_NOT_PASS",
+      "path": "combined/nexus-f2-understat-reconstruction-v1-1-shard-1/shard-01/SHARD_REGISTRY.json",
+      "status": "FAIL"
+    },
+    {
+      "code": "SHARD_NOT_PASS",
+      "path": "combined/nexus-f2-understat-reconstruction-v1-1-shard-2/shard-02/SHARD_REGISTRY.json",
+      "status": "FAIL"
+    },
+    {
+      "code": "SHARD_NOT_PASS",
+      "path": "combined/nexus-f2-understat-reconstruction-v1-1-shard-3/shard-03/SHARD_REGISTRY.json",
+      "status": "FAIL"
+    },
+    {
+      "code": "SHARD_NOT_PASS",
+      "path": "combined/nexus-f2-understat-reconstruction-v1-1-shard-4/shard-04/SHARD_REGISTRY.json",
+      "status": "FAIL"
+    },
+    {
+      "code": "SHARD_NOT_PASS",
+      "path": "combined/nexus-f2-understat-reconstruction-v1-1-shard-5/shard-05/SHARD_REGISTRY.json",
+      "status": "FAIL"
+    },
+    {
+      "code": "SHARD_NOT_PASS",
+      "path": "combined/nexus-f2-understat-reconstruction-v1-1-shard-6/shard-06/SHARD_REGISTRY.json",
+      "status": "FAIL"
+    },
+    {
+      "code": "SHARD_NOT_PASS",
+      "path": "combined/nexus-f2-understat-reconstruction-v1-1-shard-7/shard-07/SHARD_REGISTRY.json",
+      "status": "FAIL"
+    },
+    {
+      "code": "RECONCILIATION_NOT_EXACT",
+      "count": 268,
+      "examples": [
+        {
+          "allObservedFieldsExact": false,
+          "assignedMatchRows": 10,
+          "fieldResults": {
+            "assists": {
+              "equal": true,
+              "matchReconstruction": 1,
+              "sourceAggregate": 1
+            },
+            "games": {
+              "equal": false,
+              "matchReconstruction": 10,
+              "sourceAggregate": 11
+            },
+            "goals": {
+              "equal": true,
+              "matchReconstruction": 2,
+              "sourceAggregate": 2
+            },
+            "key_passes": {
+              "equal": false,
+              "matchReconstruction": 5,
+              "sourceAggregate": 7
+            },
+            "npg": {
+              "equal": true,
+              "matchReconstruction": 2,
+              "sourceAggregate": 2
+            },
+            "shots": {
+              "equal": false,
+              "matchReconstruction": 15,
+              "sourceAggregate": 17
+            },
+            "time": {
+              "equal": false,
+              "matchReconstruction": 403,
+              "sourceAggregate": 481
+            }
+          },
+          "league": "EPL",
+          "personKey": "nexus-person-v1-1ac395e5b63fe2e7309a7971",
+          "playerId": "939",
+          "season": "2014/15",
+          "sourceClubs": [
+            "Queens Park Rangers",
+            "West Ham"
+          ],
+          "sourceTeamTitle": "Queens Park Rangers,West Ham"
+        },
+        {
+          "allObservedFieldsExact": false,
+          "assignedMatchRows": 16,
+          "fieldResults": {
+            "assists": {
+              "equal": false,
+              "matchReconstruction": 2,
+              "sourceAggregate": 3
+            },
+            "games": {
+              "equal": false,
+              "matchReconstruction": 16,
+              "sourceAggregate": 17
+            },
+            "goals": {
+              "equal": true,
+              "matchReconstruction": 3,
+              "sourceAggregate": 3
+            },
+            "key_passes": {
+              "equal": false,
+              "matchReconstruction": 16,
+              "sourceAggregate": 17
+            },
+            "npg": {
+              "equal": true,
+              "matchReconstruction": 3,
+              "sourceAggregate": 3
+            },
+            "shots": {
+              "equal": false,
+              "matchReconstruction": 6,
+              "sourceAggregate": 7
+            },
+            "time": {
+              "equal": false,
+              "matchReconstruction": 887,
+              "sourceAggregate": 969
+            }
+          },
+          "league": "Serie_A",
+          "personKey": "nexus-person-v1-9f728adb5c9073a3df65274a",
+          "playerId": "1033",
+          "season": "2017/18",
+          "sourceClubs": [
+            "Chievo",
+            "Napoli"
+          ],
+          "sourceTeamTitle": "Chievo,Napoli"
+        },
+        {
+          "allObservedFieldsExact": false,
+          "assignedMatchRows": 26,
+          "fieldResults": {
+            "assists": {
+              "equal": true,
+              "matchReconstruction": 1,
+              "sourceAggregate": 1
+            },
+            "games": {
+              "equal": false,
+              "matchReconstruction": 26,
+              "sourceAggregate": 27
+            },
+            "goals": {
+              "equal": true,
+              "matchReconstruction": 0,
+              "sourceAggregate": 0
+            },
+            "key_passes": {
+              "equal": true,
+              "matchReconstruction": 25,
+              "sourceAggregate": 25
+            },
+            "npg": {
+              "equal": true,
+              "matchReconstruction": 0,
+              "sourceAggregate": 0
+            },
+            "shots": {
+              "equal": false,
+              "matchReconstruction": 18,
+              "sourceAggregate": 19
+            },
+            "time": {
+              "equal": false,
+              "matchReconstruction": 1794,
+              "sourceAggregate": 1884
+            }
+          },
+          "league": "Serie_A",
+          "personKey": "nexus-person-v1-ddf48fd5e5ede48589c07b31",
+          "playerId": "1151",
+          "season": "2015/16",
+          "sourceClubs": [
+            "Udinese",
+            "Verona"
+          ],
+          "sourceTeamTitle": "Udinese,Verona"
+        },
+        {
+          "allObservedFieldsExact": false,
+          "assignedMatchRows": 8,
+          "fieldResults": {
+            "assists": {
+              "equal": true,
+              "matchReconstruction": 0,
+              "sourceAggregate": 0
+            },
+            "games": {
+              "equal": false,
+              "matchReconstruction": 8,
+              "sourceAggregate": 9
+            },
+            "goals": {
+              "equal": true,
+              "matchReconstruction": 1,
+              "sourceAggregate": 1
+            },
+            "key_passes": {
+              "equal": false,
+              "matchReconstruction": 4,
+              "sourceAggregate": 5
+            },
+            "npg": {
+              "equal": true,
+              "matchReconstruction": 1,
+              "sourceAggregate": 1
+            },
+            "shots": {
+              "equal": true,
+              "matchReconstruction": 2,
+              "sourceAggregate": 2
+            },
+            "time": {
+              "equal": false,
+              "matchReconstruction": 498,
+              "sourceAggregate": 525
+            }
+          },
+          "league": "Serie_A",
+          "personKey": "nexus-person-v1-ddf48fd5e5ede48589c07b31",
+          "playerId": "1151",
+          "season": "2018/19",
+          "sourceClubs": [
+            "Frosinone",
+            "Udinese"
+          ],
+          "sourceTeamTitle": "Frosinone,Udinese"
+        },
+        {
+          "allObservedFieldsExact": false,
+          "assignedMatchRows": 24,
+          "fieldResults": {
+            "assists": {
+              "equal": true,
+              "matchReconstruction": 1,
+              "sourceAggregate": 1
+            },
+            "games": {
+              "equal": false,
+              "matchReconstruction": 24,
+              "sourceAggregate": 25
+            },
+            "goals": {
+              "equal": true,
+              "matchReconstruction": 1,
+              "sourceAggregate": 1
+            },
+            "key_passes": {
+              "equal": false,
+              "matchReconstruction": 19,
+              "sourceAggregate": 21
+            },
+            "npg": {
+              "equal": true,
+              "matchReconstruction": 1,
+              "sourceAggregate": 1
+            },
+            "shots": {
+              "equal": false,
+              "matchReconstruction": 15,
+              "sourceAggregate": 16
+            },
+            "time": {
+              "equal": false,
+              "matchReconstruction": 1698,
+              "sourceAggregate": 1788
+            }
+          },
+          "league": "Serie_A",
+          "personKey": "nexus-person-v1-4c3b28b19eb56786dfc600f2",
+          "playerId": "1167",
+          "season": "2016/17",
+          "sourceClubs": [
+            "Pescara",
+            "Sassuolo"
+          ],
+          "sourceTeamTitle": "Pescara,Sassuolo"
+        }
+      ]
+    }
+  ],
+  "githubRunId": "32663544437",
+  "schema": "NEXUS_F2_UNDERSTAT_FULL_TEMPORAL_RECONSTRUCTION_AUDIT_V1",
+  "segmentsByLeague": {
+    "Bundesliga": 483,
+    "EPL": 771,
+    "La_Liga": 605,
+    "Ligue_1": 662,
+    "RFPL": 147,
+    "Serie_A": 6069
+  },
+  "segmentsBySeason": {
+    "2014/15": 593,
+    "2015/16": 740,
+    "2016/17": 769,
+    "2017/18": 781,
+    "2018/19": 799,
+    "2019/20": 841,
+    "2020/21": 875,
+    "2021/22": 881,
+    "2022/23": 836,
+    "2023/24": 805,
+    "2024/25": 817
+  },
+  "shards": [
+    {
+      "playersExpected": 256,
+      "playersFetched": 256,
+      "providerMatchRowsPreserved": 23126,
+      "referenceMatchRowsAssigned": 21137,
+      "registrySha256": "b144ad044c112860c0c6be1943a33e1d3755ef9ad9e16e5c3d76579a31520a2d",
+      "segments": 1088,
+      "shardIndex": 0,
+      "sourceReferenceComparisons": 1049
+    },
+    {
+      "playersExpected": 256,
+      "playersFetched": 256,
+      "providerMatchRowsPreserved": 25455,
+      "referenceMatchRowsAssigned": 23008,
+      "registrySha256": "71effa243ac7363d115c76bdedccf1fe7914113593c0968ce8e26137eb0584b8",
+      "segments": 1138,
+      "shardIndex": 1,
+      "sourceReferenceComparisons": 1101
+    },
+    {
+      "playersExpected": 256,
+      "playersFetched": 256,
+      "providerMatchRowsPreserved": 24136,
+      "referenceMatchRowsAssigned": 22364,
+      "registrySha256": "d1564276cf07fba2380661e32868da22f2a1553b8eb9f5bd24a8db6da22f0ba1",
+      "segments": 1130,
+      "shardIndex": 2,
+      "sourceReferenceComparisons": 1081
+    },
+    {
+      "playersExpected": 256,
+      "playersFetched": 256,
+      "providerMatchRowsPreserved": 21960,
+      "referenceMatchRowsAssigned": 19933,
+      "registrySha256": "1c3e89c0b1664f85f2e8167b51f217b7ab840ddc68021724079b27620a8ef098",
+      "segments": 1050,
+      "shardIndex": 3,
+      "sourceReferenceComparisons": 1011
+    },
+    {
+      "playersExpected": 256,
+      "playersFetched": 256,
+      "providerMatchRowsPreserved": 22647,
+      "referenceMatchRowsAssigned": 20925,
+      "registrySha256": "27e298c01f0a853ef7d6fab6e17883d3972cda39694d2ec77c71607c941b5587",
+      "segments": 1091,
+      "shardIndex": 4,
+      "sourceReferenceComparisons": 1050
+    },
+    {
+      "playersExpected": 256,
+      "playersFetched": 256,
+      "providerMatchRowsPreserved": 22956,
+      "referenceMatchRowsAssigned": 21232,
+      "registrySha256": "f1d0d2c0c5baeae14588ccc12d41d4606774aa60e06e00934053e45ac9dcbc15",
+      "segments": 1100,
+      "shardIndex": 5,
+      "sourceReferenceComparisons": 1062
+    },
+    {
+      "playersExpected": 256,
+      "playersFetched": 256,
+      "providerMatchRowsPreserved": 23016,
+      "referenceMatchRowsAssigned": 20991,
+      "registrySha256": "4fb8969415ea62b6b76a301681a210a6ab71fcec6550e7e697849241b0578ecd",
+      "segments": 1081,
+      "shardIndex": 6,
+      "sourceReferenceComparisons": 1031
+    },
+    {
+      "playersExpected": 256,
+      "playersFetched": 256,
+      "providerMatchRowsPreserved": 22245,
+      "referenceMatchRowsAssigned": 20144,
+      "registrySha256": "62c8d26e1c32d50ede0ddb1ffb8bb45281b17efea5dbfbf15d4ca5ed7b6759b7",
+      "segments": 1059,
+      "shardIndex": 7,
+      "sourceReferenceComparisons": 1014
+    }
+  ],
+  "sourceAuthority": {
+    "d1Sha256": "952bdf1d4cfb81a0683bff1f78d949b6350b11be1cc27d20059f7ace651bb53c",
+    "endpoint": "getPlayerData/{player_id}",
+    "provider": "UNDERSTAT",
+    "understatAggregateSha256": "b78fad5f01844a0fdab0d89474dafba9b86c586d2f0ce88f0ce2c9af70d2bc64"
+  },
+  "status": "FAIL",
+  "temporalDecision": {
+    "expectedFields": [
+      "xG",
+      "npxG",
+      "xA",
+      "xGChain",
+      "xGBuildup"
+    ],
+    "expectedFieldsStatus": "QUARANTINED_VINTAGE_REQUIRED",
+    "observedFields": [
+      "games",
+      "time",
+      "goals",
+      "npg",
+      "assists",
+      "shots",
+      "key_passes"
+    ],
+    "releaseIfPass": "VERIFIED_EVENT_RECONSTRUCTION"
+  },
+  "treeContentDigestSha256": "df1dcb881af4678d07f044616d71530629341dd57eb1378fa2c39f9dd49f9350",
+  "validation": {
+    "aggregateUsedAsPrimaryEvidence": false,
+    "allD1AliasesFetchedExactlyOnce": true,
+    "allSourceReferenceComparisonsExact": false,
+    "canonicalPredictiveEngineModified": false,
+    "expectedMetricsReleased": false,
+    "fuzzyMatchingUsed": false,
+    "impossibleValues": 0,
+    "uniqueReconciliationKeys": true,
+    "uniqueSegmentKeys": true
+  }
+}
