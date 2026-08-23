@@ -1,0 +1,135 @@
+name: F2 Understat Full Temporal Reconstruction v1.1
+
+on:
+  push:
+    branches:
+      - feat/f2-understat-player-match-temporal-probe
+    paths:
+      - '.github/workflows/f2-understat-full-temporal-reconstruction-v1-1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  acquire:
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/f2-understat-player-match-temporal-probe
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Acquire shard ${{ matrix.shard }}
+        id: shard
+        shell: bash
+        run: |
+          out=".nexus-f2-understat-full-reconstruction-v1/shard-$(printf '%02d' '${{ matrix.shard }}')"
+          mkdir -p "$out"
+          set +e
+          python scripts/nexus-f2-acquire-understat-player-reconstruction-v1.py \
+            --shard-index '${{ matrix.shard }}' --shard-count 8 --delay 0.5 \
+            2>&1 | tee "$out/RUN.log"
+          code=${PIPESTATUS[0]}
+          echo "$code" > "$out/EXIT_CODE.txt"
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Upload shard evidence including hidden paths
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f2-understat-reconstruction-v1-1-shard-${{ matrix.shard }}
+          path: .nexus-f2-understat-full-reconstruction-v1/shard-*
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
+      - name: Enforce shard result
+        if: always()
+        shell: bash
+        run: |
+          code='${{ steps.shard.outputs.exit_code }}'
+          [ -n "$code" ] || exit 1
+          [ "$code" = "0" ] || exit "$code"
+
+  aggregate:
+    if: always()
+    needs: acquire
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/f2-understat-player-match-temporal-probe
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download all shard artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: nexus-f2-understat-reconstruction-v1-1-shard-*
+          path: combined
+          merge-multiple: false
+      - name: Run full fail-closed audit
+        id: audit
+        shell: bash
+        run: |
+          mkdir -p .nexus-f2-understat-full-reconstruction-v1-1-final
+          set +e
+          python scripts/nexus-f2-audit-understat-full-reconstruction-v1.py \
+            --input-root combined \
+            --output-root .nexus-f2-understat-full-reconstruction-v1-1-final \
+            --run-id '${{ github.run_id }}' \
+            2>&1 | tee .nexus-f2-understat-full-reconstruction-v1-1-final/RUN.log
+          code=${PIPESTATUS[0]}
+          echo "$code" > .nexus-f2-understat-full-reconstruction-v1-1-final/EXIT_CODE.txt
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Package complete reconstruction evidence
+        if: always()
+        shell: bash
+        run: |
+          tar -czf nexus-f2-understat-full-reconstruction-v1-1.tar.gz combined .nexus-f2-understat-full-reconstruction-v1-1-final
+          sha256sum nexus-f2-understat-full-reconstruction-v1-1.tar.gz > .nexus-f2-understat-full-reconstruction-v1-1-final/PACKAGE_SHA256.txt
+          printf '%s\n' '${{ github.run_id }}' > .nexus-f2-understat-full-reconstruction-v1-1-final/RUN_ID.txt
+      - name: Upload complete reconstruction diagnostic package
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f2-understat-full-reconstruction-v1-1
+          path: |
+            nexus-f2-understat-full-reconstruction-v1-1.tar.gz
+            .nexus-f2-understat-full-reconstruction-v1-1-final
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
+      - name: Persist compact full-audit status
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p .nexus-f2-understat-full-reconstruction-v1-1-status
+          for f in FULL_AUDIT.json MANIFEST.json RUN.log EXIT_CODE.txt PACKAGE_SHA256.txt RUN_ID.txt; do
+            if [ -f ".nexus-f2-understat-full-reconstruction-v1-1-final/$f" ]; then
+              cp ".nexus-f2-understat-full-reconstruction-v1-1-final/$f" ".nexus-f2-understat-full-reconstruction-v1-1-status/$f"
+            fi
+          done
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f .nexus-f2-understat-full-reconstruction-v1-1-status
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus f2: persist full Understat temporal reconstruction audit v1.1 [skip ci]'
+            git push origin HEAD:feat/f2-understat-player-match-temporal-probe
+          fi
+      - name: Enforce full audit result
+        if: always()
+        shell: bash
+        run: |
+          code='${{ steps.audit.outputs.exit_code }}'
+          [ -n "$code" ] || exit 1
+          [ "$code" = "0" ] || exit "$code"
