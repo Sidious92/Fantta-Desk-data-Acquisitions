@@ -1,0 +1,100 @@
+name: F2 Understat Residual Remediation v1
+
+on:
+  push:
+    branches:
+      - feat/f2-understat-player-match-temporal-probe
+    paths:
+      - '.github/workflows/f2-understat-residual-remediation-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  remediate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/f2-understat-player-match-temporal-probe
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download frozen F2B v1.1 diagnostic artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nexus-f2-understat-full-reconstruction-v1-1
+          path: source-artifact
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: Sidious92/Fantta-Desk-data-Acquisitions
+          run-id: '32663544437'
+      - name: Verify and extract source package
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected='00a60a8a8b645e9bf171a354a4adb547c85b70085974596b093ea3dd7d5b329c'
+          file='source-artifact/nexus-f2-understat-full-reconstruction-v1-1.tar.gz'
+          observed="$(sha256sum "$file" | awk '{print $1}')"
+          [ "$observed" = "$expected" ]
+          mkdir -p source-extracted
+          tar -xzf "$file" -C source-extracted
+      - name: Run preregistered deterministic residual remediation
+        id: remediation
+        shell: bash
+        run: |
+          mkdir -p .nexus-f2-understat-residual-remediation-v1
+          set +e
+          python scripts/nexus-f2-remediate-understat-residuals-v1.py \
+            --input-root source-extracted/combined \
+            --output-root .nexus-f2-understat-residual-remediation-v1 \
+            --delay 0.35 \
+            2>&1 | tee .nexus-f2-understat-residual-remediation-v1/RUN.log
+          code=${PIPESTATUS[0]}
+          echo "$code" > .nexus-f2-understat-residual-remediation-v1/EXIT_CODE.txt
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Package remediation evidence
+        if: always()
+        shell: bash
+        run: |
+          tar -czf nexus-f2-understat-residual-remediation-v1.tar.gz .nexus-f2-understat-residual-remediation-v1
+          sha256sum nexus-f2-understat-residual-remediation-v1.tar.gz > .nexus-f2-understat-residual-remediation-v1/PACKAGE_SHA256.txt
+          printf '%s\n' '${{ github.run_id }}' > .nexus-f2-understat-residual-remediation-v1/RUN_ID.txt
+      - name: Upload immutable remediation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f2-understat-residual-remediation-v1
+          path: |
+            nexus-f2-understat-residual-remediation-v1.tar.gz
+            .nexus-f2-understat-residual-remediation-v1
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
+      - name: Persist compact remediation status
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p .nexus-f2-understat-residual-remediation-v1-status
+          for f in REMEDIATION_AUDIT.json MANIFEST.json RUN.log EXIT_CODE.txt PACKAGE_SHA256.txt RUN_ID.txt duplicate-match-dedup-audit.json roster-resolution-audit.json roster-fetch-manifest.json; do
+            if [ -f ".nexus-f2-understat-residual-remediation-v1/$f" ]; then
+              cp ".nexus-f2-understat-residual-remediation-v1/$f" ".nexus-f2-understat-residual-remediation-v1-status/$f"
+            fi
+          done
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f .nexus-f2-understat-residual-remediation-v1-status
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus f2: persist Understat residual remediation v1 [skip ci]'
+            git push origin HEAD:feat/f2-understat-player-match-temporal-probe
+          fi
+      - name: Enforce remediation gate
+        if: always()
+        shell: bash
+        run: |
+          code='${{ steps.remediation.outputs.exit_code }}'
+          [ -n "$code" ] || exit 1
+          [ "$code" = '0' ] || exit "$code"
