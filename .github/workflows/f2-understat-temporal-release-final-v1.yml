@@ -1,0 +1,107 @@
+name: F2 Understat Temporal Release Final v1
+
+on:
+  push:
+    branches:
+      - feat/f2-understat-player-match-temporal-probe
+    paths:
+      - '.github/workflows/f2-understat-temporal-release-final-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/f2-understat-player-match-temporal-probe
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download frozen remediation v1.1
+        uses: actions/download-artifact@v4
+        with:
+          name: nexus-f2-understat-residual-remediation-v1-1
+          path: source-remediation
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: Sidious92/Fantta-Desk-data-Acquisitions
+          run-id: '32666217602'
+      - name: Download frozen duplicate-event probe v2
+        uses: actions/download-artifact@v4
+        with:
+          name: nexus-f2-understat-duplicate-event-probe-v2
+          path: source-probe
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: Sidious92/Fantta-Desk-data-Acquisitions
+          run-id: '32666541055'
+      - name: Verify and extract frozen inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          rem='source-remediation/nexus-f2-understat-residual-remediation-v1-1.tar.gz'
+          probe='source-probe/nexus-f2-understat-duplicate-event-probe-v2.tar.gz'
+          [ "$(sha256sum "$rem" | awk '{print $1}')" = 'dcb0b65999e4321b495c8217733cff40472b54a21d2ddd3b69e647a4e6321d30' ]
+          [ "$(sha256sum "$probe" | awk '{print $1}')" = '07ad16e604ae28baf0e2a9a0877c5e788300eefd7d7f5d1da6336dc872bbfe53' ]
+          mkdir -p input-remediation input-probe
+          tar -xzf "$rem" -C input-remediation
+          tar -xzf "$probe" -C input-probe
+      - name: Execute final amendment-aware audit
+        id: final
+        shell: bash
+        run: |
+          mkdir -p .nexus-f2-understat-temporal-release-final-v1
+          set +e
+          python scripts/nexus-f2-finalize-understat-temporal-release-v1.py \
+            --remediation-root input-remediation/.nexus-f2-understat-residual-remediation-v1-1 \
+            --probe-root input-probe/.nexus-f2-understat-duplicate-event-probe-v2 \
+            --output-root .nexus-f2-understat-temporal-release-final-v1 \
+            2>&1 | tee .nexus-f2-understat-temporal-release-final-v1/RUN.log
+          code=${PIPESTATUS[0]}
+          echo "$code" > .nexus-f2-understat-temporal-release-final-v1/EXIT_CODE.txt
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Package final temporal release evidence
+        if: always()
+        shell: bash
+        run: |
+          tar -czf nexus-f2-understat-temporal-release-final-v1.tar.gz .nexus-f2-understat-temporal-release-final-v1
+          sha256sum nexus-f2-understat-temporal-release-final-v1.tar.gz > .nexus-f2-understat-temporal-release-final-v1/PACKAGE_SHA256.txt
+          printf '%s\n' '${{ github.run_id }}' > .nexus-f2-understat-temporal-release-final-v1/RUN_ID.txt
+      - name: Upload final temporal release evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f2-understat-temporal-release-final-v1
+          path: |
+            nexus-f2-understat-temporal-release-final-v1.tar.gz
+            .nexus-f2-understat-temporal-release-final-v1
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+      - name: Persist compact final status
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p .nexus-f2-understat-temporal-release-final-v1-status
+          for f in F2B_FINAL_AUDIT.json MANIFEST.json RUN.log EXIT_CODE.txt PACKAGE_SHA256.txt RUN_ID.txt; do
+            if [ -f ".nexus-f2-understat-temporal-release-final-v1/$f" ]; then cp ".nexus-f2-understat-temporal-release-final-v1/$f" ".nexus-f2-understat-temporal-release-final-v1-status/$f"; fi
+          done
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f .nexus-f2-understat-temporal-release-final-v1-status
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus f2: persist final Understat temporal release v1 [skip ci]'
+            git push origin HEAD:feat/f2-understat-player-match-temporal-probe
+          fi
+      - name: Enforce final temporal gate
+        if: always()
+        shell: bash
+        run: |
+          code='${{ steps.final.outputs.exit_code }}'
+          [ -n "$code" ] || exit 1
+          [ "$code" = '0' ] || exit "$code"
