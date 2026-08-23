@@ -1,0 +1,103 @@
+{
+  "capturedAt": "2026-08-23T21:09:53.976214+00:00",
+  "counts": {
+    "d1ExactUnderstatPlayers": 2048,
+    "exactPinnedReferences": 8397,
+    "releasedObservedSegments": 8738,
+    "sourceReferences": 8399,
+    "typedDuplicateEventContaminatedReferences": 2,
+    "unexplainedMismatches": 0,
+    "unresolvedClubAssignments": 0,
+    "validatedDuplicatePlayerMatchPairs": 4
+  },
+  "exceptionSet": [
+    {
+      "league": "La_Liga",
+      "matchId": "23028",
+      "playerId": "10561",
+      "requiredDelta": {
+        "assists": 0,
+        "games": 1,
+        "goals": 0,
+        "key_passes": 0,
+        "npg": 0,
+        "shots": 1,
+        "time": 64
+      },
+      "season": "2023/24"
+    },
+    {
+      "league": "La_Liga",
+      "matchId": "23028",
+      "playerId": "2437",
+      "requiredDelta": {
+        "assists": 0,
+        "games": 1,
+        "goals": 0,
+        "key_passes": 0,
+        "npg": 0,
+        "shots": 1,
+        "time": 90
+      },
+      "season": "2023/24"
+    }
+  ],
+  "failures": [],
+  "files": {
+    "reconciliation": {
+      "bytes": 6829562,
+      "path": ".nexus-f2-understat-temporal-release-final-v1/released-observed-reconciliation-v1.jsonl",
+      "rows": 8399,
+      "sha256": "872b8cb21508c18f8b398d8026fa47a9a46230cdf1bb3e1b81b4b9ff823834ae"
+    },
+    "segments": {
+      "bytes": 3956343,
+      "path": ".nexus-f2-understat-temporal-release-final-v1/released-observed-segments-v1.jsonl",
+      "rows": 8738,
+      "sha256": "fad9b73aa2a3a961ba1c97e2bd365d2695283fdf1095cd3cdc324de18f47ea70"
+    }
+  },
+  "frozenInputs": {
+    "duplicateEventProbeV2PackageSha256": "07ad16e604ae28baf0e2a9a0877c5e788300eefd7d7f5d1da6336dc872bbfe53",
+    "fullReconstructionPackageSha256": "00a60a8a8b645e9bf171a354a4adb547c85b70085974596b093ea3dd7d5b329c",
+    "residualRemediationV1_1PackageSha256": "dcb0b65999e4321b495c8217733cff40472b54a21d2ddd3b69e647a4e6321d30"
+  },
+  "schema": "NEXUS_F2B_UNDERSTAT_TEMPORAL_RELEASE_FINAL_AUDIT_V1",
+  "status": "PASS",
+  "temporalDecision": {
+    "aggregateReferenceRole": "QA_ONLY_WITH_TWO_TYPED_CONTAMINATED_REFERENCES",
+    "expectedFields": [
+      "xG",
+      "npxG",
+      "xA",
+      "xGChain",
+      "xGBuildup"
+    ],
+    "expectedFieldsStatus": "QUARANTINED_VINTAGE_REQUIRED",
+    "observedFieldsStatus": "VERIFIED_EVENT_RECONSTRUCTION",
+    "releasedObservedFields": [
+      "games",
+      "time",
+      "goals",
+      "npg",
+      "assists",
+      "shots",
+      "key_passes"
+    ]
+  },
+  "validation": {
+    "aggregateUsedAsPrimaryEvidence": false,
+    "canonicalPredictiveEngineModified": false,
+    "clubAssignmentsResolved": true,
+    "expectedMetricsReleased": false,
+    "f2ParametersFitted": false,
+    "fuzzyMatchingUsed": false,
+    "impossibleSegmentValues": 0,
+    "ordinaryReferencesExact": true,
+    "rawDuplicateRowsPreservedUpstream": true,
+    "referenceKeysUnique": true,
+    "segmentKeysUnique": true,
+    "typedContaminatedReferencesExact": true,
+    "unexplainedMismatchCountZero": true
+  }
+}

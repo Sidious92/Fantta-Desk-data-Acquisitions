@@ -1,0 +1,32 @@
+{
+  "audit": {
+    "bytes": 2989,
+    "path": ".nexus-f2-understat-temporal-release-final-v1/F2B_FINAL_AUDIT.json",
+    "sha256": "5321f4790d83e61309f5fa20cbcea541b0664bb73aded78750095ec67d66f60a"
+  },
+  "files": [
+    {
+      "bytes": 2989,
+      "path": "F2B_FINAL_AUDIT.json",
+      "sha256": "5321f4790d83e61309f5fa20cbcea541b0664bb73aded78750095ec67d66f60a"
+    },
+    {
+      "bytes": 0,
+      "path": "RUN.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 6829562,
+      "path": "released-observed-reconciliation-v1.jsonl",
+      "sha256": "872b8cb21508c18f8b398d8026fa47a9a46230cdf1bb3e1b81b4b9ff823834ae"
+    },
+    {
+      "bytes": 3956343,
+      "path": "released-observed-segments-v1.jsonl",
+      "sha256": "fad9b73aa2a3a961ba1c97e2bd365d2695283fdf1095cd3cdc324de18f47ea70"
+    }
+  ],
+  "schema": "NEXUS_F2B_UNDERSTAT_TEMPORAL_RELEASE_MANIFEST_V1",
+  "status": "PASS",
+  "treeDigestSha256": "698019826f5df87a88c77b820079508a6b7939ef7a8928e7643eb4d119b4f801"
+}

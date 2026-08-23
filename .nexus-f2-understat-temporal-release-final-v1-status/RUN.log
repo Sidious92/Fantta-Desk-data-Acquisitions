@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "references": 8399,
+  "exact": 8397,
+  "contaminated": 2,
+  "unexplained": 0,
+  "segments": 8738,
+  "failures": 0,
+  "treeDigest": "698019826f5df87a88c77b820079508a6b7939ef7a8928e7643eb4d119b4f801"
+}
