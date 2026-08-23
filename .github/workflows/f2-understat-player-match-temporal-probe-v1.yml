@@ -1,0 +1,33 @@
+name: F2 Understat Player Match Temporal Probe v1
+
+on:
+  push:
+    branches:
+      - feat/f2-understat-player-match-temporal-probe
+    paths:
+      - 'scripts/nexus-f2-probe-understat-player-matches-v1.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/f2-understat-player-match-temporal-probe
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run fail-closed temporal probe
+        run: python scripts/nexus-f2-probe-understat-player-matches-v1.py
+      - name: Upload immutable probe evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f2-understat-player-match-temporal-probe-v1
+          path: .nexus-f2-understat-player-match-temporal-probe-v1
+          if-no-files-found: error
+          retention-days: 90
