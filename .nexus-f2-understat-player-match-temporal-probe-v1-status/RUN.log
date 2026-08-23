@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-f2-probe-understat-player-matches-v1.py", line 299, in <module>
+    main()
+  File "/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-f2-probe-understat-player-matches-v1.py", line 143, in main
+    season = source_season_label(row["season"])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Fantta-Desk-data-Acquisitions/Fantta-Desk-data-Acquisitions/scripts/nexus-f2-probe-understat-player-matches-v1.py", line 95, in source_season_label
+    year = int(str(raw))
+           ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: '2014/15'
