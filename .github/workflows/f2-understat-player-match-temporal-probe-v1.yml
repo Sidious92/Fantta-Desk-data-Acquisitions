@@ -6,6 +6,7 @@ on:
       - feat/f2-understat-player-match-temporal-probe
     paths:
       - 'scripts/nexus-f2-probe-understat-player-matches-v1.py'
+      - '.nexus-f2-understat-player-match-temporal-probe-v1-trigger'
   workflow_dispatch:
 
 permissions:
