@@ -1,0 +1,192 @@
+{
+  "capturedAt": "2026-08-23T20:56:54.383283+00:00",
+  "counts": {
+    "identicalDuplicatePlayerMatchRowsDeduped": 0,
+    "players": 2048,
+    "postRemediationMismatches": 2,
+    "postRemediationUnresolvedAssignments": 0,
+    "preRemediationAmbiguousPlayerMatchPairs": 378,
+    "rosterResolutions": 378,
+    "segments": 8738,
+    "sourceReferences": 8399,
+    "uniqueRosterMatchRequests": 357
+  },
+  "failures": [
+    {
+      "code": "NON_IDENTICAL_DUPLICATE_PROVIDER_MATCH_ID",
+      "matchId": "23028",
+      "playerId": "2437",
+      "rows": 2
+    },
+    {
+      "code": "NON_IDENTICAL_DUPLICATE_PROVIDER_MATCH_ID",
+      "matchId": "23028",
+      "playerId": "10561",
+      "rows": 2
+    },
+    {
+      "code": "NON_IDENTICAL_DUPLICATE_PROVIDER_MATCH_ID",
+      "matchId": "29482",
+      "playerId": "11383",
+      "rows": 2
+    },
+    {
+      "code": "NON_IDENTICAL_DUPLICATE_PROVIDER_MATCH_ID",
+      "matchId": "29482",
+      "playerId": "12322",
+      "rows": 2
+    },
+    {
+      "code": "POST_REMEDIATION_RECONCILIATION_MISMATCH",
+      "count": 2,
+      "examples": [
+        {
+          "allObservedFieldsExact": false,
+          "assignedMatchRows": 24,
+          "fieldResults": {
+            "assists": {
+              "equal": true,
+              "matchReconstruction": 2,
+              "sourceAggregate": 2
+            },
+            "games": {
+              "equal": false,
+              "matchReconstruction": 24,
+              "sourceAggregate": 26
+            },
+            "goals": {
+              "equal": true,
+              "matchReconstruction": 1,
+              "sourceAggregate": 1
+            },
+            "key_passes": {
+              "equal": true,
+              "matchReconstruction": 11,
+              "sourceAggregate": 11
+            },
+            "npg": {
+              "equal": true,
+              "matchReconstruction": 1,
+              "sourceAggregate": 1
+            },
+            "shots": {
+              "equal": false,
+              "matchReconstruction": 13,
+              "sourceAggregate": 15
+            },
+            "time": {
+              "equal": false,
+              "matchReconstruction": 1610,
+              "sourceAggregate": 1790
+            }
+          },
+          "league": "La_Liga",
+          "personKey": "nexus-person-v1-322bbfccabe82c32cd57d680",
+          "playerId": "2437",
+          "season": "2023/24",
+          "sourceClubs": [
+            "Cadiz"
+          ],
+          "sourceTeamTitle": "Cadiz"
+        },
+        {
+          "allObservedFieldsExact": false,
+          "assignedMatchRows": 13,
+          "fieldResults": {
+            "assists": {
+              "equal": true,
+              "matchReconstruction": 0,
+              "sourceAggregate": 0
+            },
+            "games": {
+              "equal": false,
+              "matchReconstruction": 13,
+              "sourceAggregate": 15
+            },
+            "goals": {
+              "equal": true,
+              "matchReconstruction": 1,
+              "sourceAggregate": 1
+            },
+            "key_passes": {
+              "equal": true,
+              "matchReconstruction": 7,
+              "sourceAggregate": 7
+            },
+            "npg": {
+              "equal": true,
+              "matchReconstruction": 1,
+              "sourceAggregate": 1
+            },
+            "shots": {
+              "equal": false,
+              "matchReconstruction": 4,
+              "sourceAggregate": 6
+            },
+            "time": {
+              "equal": false,
+              "matchReconstruction": 613,
+              "sourceAggregate": 741
+            }
+          },
+          "league": "La_Liga",
+          "personKey": "nexus-person-v1-0a3755d527fc302a37da222d",
+          "playerId": "10561",
+          "season": "2023/24",
+          "sourceClubs": [
+            "Getafe"
+          ],
+          "sourceTeamTitle": "Getafe"
+        }
+      ]
+    }
+  ],
+  "files": {
+    "duplicateAudit": {
+      "bytes": 3,
+      "path": ".nexus-f2-understat-residual-remediation-v1/duplicate-match-dedup-audit.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "reconciliation": {
+      "bytes": 6056390,
+      "path": ".nexus-f2-understat-residual-remediation-v1/reconciliation-v1-2.jsonl",
+      "rows": 8399,
+      "sha256": "040009e83144c44e6fbd8507c72537437a2cac08a272cf8a5f0b8efb4c6e2042"
+    },
+    "resolutionAudit": {
+      "bytes": 148832,
+      "path": ".nexus-f2-understat-residual-remediation-v1/roster-resolution-audit.json",
+      "sha256": "b7f61cc0041b73b47074fba7a3640f44e622a73d4430706d66aaba472dd63a85"
+    },
+    "rosterManifest": {
+      "bytes": 102648,
+      "path": ".nexus-f2-understat-residual-remediation-v1/roster-fetch-manifest.json",
+      "sha256": "02ba572b6bfd7d21676a2257124dc95692cd5a18df8ea1f27e71d7eee9efe55b"
+    },
+    "segments": {
+      "bytes": 3956343,
+      "path": ".nexus-f2-understat-residual-remediation-v1/segments-v1-2.jsonl",
+      "rows": 8738,
+      "sha256": "f6ecb756071c1d5023f7cce83d66f990b807a56f792adde2aae00f6dfcd36ec7"
+    }
+  },
+  "governance": {
+    "canonicalPredictiveEngineModified": false,
+    "currentGroupsUsedToOverridePinnedAggregate": false,
+    "expectedMetricsReleased": false,
+    "f2ParametersFitted": false,
+    "fuzzyMatchingUsed": false
+  },
+  "schema": "NEXUS_F2B_UNDERSTAT_RESIDUAL_REMEDIATION_V1",
+  "source": {
+    "artifactDigestSha256": "bcb9237887828e60fe2b862b7c18e4139266948bf2ba796885ed839f95ccc01f",
+    "packageSha256": "00a60a8a8b645e9bf171a354a4adb547c85b70085974596b093ea3dd7d5b329c",
+    "pinnedAggregateSha256": "b78fad5f01844a0fdab0d89474dafba9b86c586d2f0ce88f0ce2c9af70d2bc64",
+    "runId": "32663544437"
+  },
+  "status": "FAIL",
+  "temporalDecision": {
+    "expectedFieldsStatus": "QUARANTINED_VINTAGE_REQUIRED",
+    "observedFieldsStatus": "BLOCKED"
+  }
+}

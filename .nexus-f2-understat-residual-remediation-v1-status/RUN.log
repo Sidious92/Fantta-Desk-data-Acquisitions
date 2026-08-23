@@ -1,0 +1,11 @@
+{
+  "status": "FAIL",
+  "players": 2048,
+  "references": 8399,
+  "ambiguousPairs": 378,
+  "resolutions": 378,
+  "dedupedDuplicateRows": 0,
+  "mismatches": 2,
+  "unresolvedAssignments": 0,
+  "failures": 5
+}
