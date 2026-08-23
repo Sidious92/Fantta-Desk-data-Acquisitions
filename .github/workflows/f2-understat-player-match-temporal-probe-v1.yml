@@ -7,6 +7,7 @@ on:
     paths:
       - 'scripts/nexus-f2-probe-understat-player-matches-v1.py'
       - '.nexus-f2-understat-player-match-temporal-probe-v1-trigger'
+      - '.github/workflows/f2-understat-player-match-temporal-probe-v1.yml'
   workflow_dispatch:
 
 permissions:
@@ -23,9 +24,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run fail-closed temporal probe
-        run: python scripts/nexus-f2-probe-understat-player-matches-v1.py
+      - name: Run fail-closed temporal probe with diagnostics
+        id: probe
+        shell: bash
+        run: |
+          mkdir -p .nexus-f2-understat-player-match-temporal-probe-v1
+          set +e
+          python scripts/nexus-f2-probe-understat-player-matches-v1.py 2>&1 | tee .nexus-f2-understat-player-match-temporal-probe-v1/RUN.log
+          code=${PIPESTATUS[0]}
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          echo "$code" > .nexus-f2-understat-player-match-temporal-probe-v1/EXIT_CODE.txt
+          exit 0
       - name: Upload immutable probe evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: nexus-f2-understat-player-match-temporal-probe-v1
@@ -33,16 +44,32 @@ jobs:
           if-no-files-found: error
           retention-days: 90
       - name: Persist compact probe status
+        if: always()
+        shell: bash
         run: |
           mkdir -p .nexus-f2-understat-player-match-temporal-probe-v1-status
-          cp .nexus-f2-understat-player-match-temporal-probe-v1/PROBE.json .nexus-f2-understat-player-match-temporal-probe-v1-status/PROBE.json
-          cp .nexus-f2-understat-player-match-temporal-probe-v1/MANIFEST.json .nexus-f2-understat-player-match-temporal-probe-v1-status/MANIFEST.json
+          for f in PROBE.json MANIFEST.json RUN.log EXIT_CODE.txt; do
+            if [ -f ".nexus-f2-understat-player-match-temporal-probe-v1/$f" ]; then
+              cp ".nexus-f2-understat-player-match-temporal-probe-v1/$f" ".nexus-f2-understat-player-match-temporal-probe-v1-status/$f"
+            fi
+          done
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add .nexus-f2-understat-player-match-temporal-probe-v1-status
-          if git diff --cached --quiet; then
-            echo 'No status changes.'
-            exit 0
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus f2: persist Understat player-match temporal probe v1 [skip ci]'
+            git push origin HEAD:feat/f2-understat-player-match-temporal-probe
           fi
-          git commit -m 'nexus f2: persist Understat player-match temporal probe v1 [skip ci]'
-          git push origin HEAD:feat/f2-understat-player-match-temporal-probe
+      - name: Enforce probe result
+        if: always()
+        shell: bash
+        run: |
+          code='${{ steps.probe.outputs.exit_code }}'
+          if [ -z "$code" ]; then
+            echo 'Probe did not emit exit code.'
+            exit 1
+          fi
+          if [ "$code" != "0" ]; then
+            echo "Probe failed closed with exit code $code."
+            exit "$code"
+          fi
