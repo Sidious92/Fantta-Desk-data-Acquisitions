@@ -1,0 +1,7940 @@
+[
+  {
+    "aTeam": "Celta Vigo",
+    "candidates": [
+      [
+        "Celta Vigo",
+        "La_Liga"
+      ],
+      [
+        "Valencia",
+        "La_Liga"
+      ]
+    ],
+    "hTeam": "Valencia",
+    "league": "La_Liga",
+    "matchId": "10011",
+    "playerId": "1884",
+    "resolvedClub": "Celta Vigo",
+    "rosterSide": "a",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Crotone",
+    "candidates": [
+      [
+        "Crotone",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sassuolo",
+    "league": "Serie_A",
+    "matchId": "1007",
+    "playerId": "1360",
+    "resolvedClub": "Crotone",
+    "rosterSide": "a",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Valencia",
+    "candidates": [
+      [
+        "Celta Vigo",
+        "La_Liga"
+      ],
+      [
+        "Valencia",
+        "La_Liga"
+      ]
+    ],
+    "hTeam": "Celta Vigo",
+    "league": "La_Liga",
+    "matchId": "10154",
+    "playerId": "1884",
+    "resolvedClub": "Celta Vigo",
+    "rosterSide": "h",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Inter",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Inter",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "1017",
+    "playerId": "1496",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Mainz 05",
+    "candidates": [
+      [
+        "Bayer Leverkusen",
+        "Bundesliga"
+      ],
+      [
+        "Mainz 05",
+        "Bundesliga"
+      ]
+    ],
+    "hTeam": "Bayer Leverkusen",
+    "league": "Bundesliga",
+    "matchId": "1072",
+    "playerId": "193",
+    "resolvedClub": "Bayer Leverkusen",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Marseille",
+    "candidates": [
+      [
+        "Marseille",
+        "Ligue_1"
+      ],
+      [
+        "Nice",
+        "Ligue_1"
+      ]
+    ],
+    "hTeam": "Nice",
+    "league": "Ligue_1",
+    "matchId": "10738",
+    "playerId": "1817",
+    "resolvedClub": "Nice",
+    "rosterSide": "h",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Nice",
+    "candidates": [
+      [
+        "Marseille",
+        "Ligue_1"
+      ],
+      [
+        "Nice",
+        "Ligue_1"
+      ]
+    ],
+    "hTeam": "Marseille",
+    "league": "Ligue_1",
+    "matchId": "10922",
+    "playerId": "1817",
+    "resolvedClub": "Marseille",
+    "rosterSide": "h",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Southampton",
+    "candidates": [
+      [
+        "Arsenal",
+        "EPL"
+      ],
+      [
+        "Southampton",
+        "EPL"
+      ]
+    ],
+    "hTeam": "Arsenal",
+    "league": "EPL",
+    "matchId": "11763",
+    "playerId": "847",
+    "resolvedClub": "Southampton",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Getafe",
+    "candidates": [
+      [
+        "Espanyol",
+        "La_Liga"
+      ],
+      [
+        "Getafe",
+        "La_Liga"
+      ]
+    ],
+    "hTeam": "Espanyol",
+    "league": "La_Liga",
+    "matchId": "12155",
+    "playerId": "6168",
+    "resolvedClub": "Getafe",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Bayer Leverkusen",
+    "candidates": [
+      [
+        "Bayer Leverkusen",
+        "Bundesliga"
+      ],
+      [
+        "Mainz 05",
+        "Bundesliga"
+      ]
+    ],
+    "hTeam": "Mainz 05",
+    "league": "Bundesliga",
+    "matchId": "1226",
+    "playerId": "193",
+    "resolvedClub": "Mainz 05",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Espanyol",
+    "candidates": [
+      [
+        "Espanyol",
+        "La_Liga"
+      ],
+      [
+        "Getafe",
+        "La_Liga"
+      ]
+    ],
+    "hTeam": "Getafe",
+    "league": "La_Liga",
+    "matchId": "12304",
+    "playerId": "6168",
+    "resolvedClub": "Espanyol",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Barcelona",
+    "candidates": [
+      [
+        "Barcelona",
+        "La_Liga"
+      ],
+      [
+        "Celta Vigo",
+        "La_Liga"
+      ]
+    ],
+    "hTeam": "Celta Vigo",
+    "league": "La_Liga",
+    "matchId": "12335",
+    "playerId": "2100",
+    "resolvedClub": "Celta Vigo",
+    "rosterSide": "h",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Bordeaux",
+    "candidates": [
+      [
+        "Bordeaux",
+        "Ligue_1"
+      ],
+      [
+        "Reims",
+        "Ligue_1"
+      ]
+    ],
+    "hTeam": "Reims",
+    "league": "Ligue_1",
+    "matchId": "12850",
+    "playerId": "6884",
+    "resolvedClub": "Reims",
+    "rosterSide": "h",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Strasbourg",
+    "candidates": [
+      [
+        "Monaco",
+        "Ligue_1"
+      ],
+      [
+        "Strasbourg",
+        "Ligue_1"
+      ]
+    ],
+    "hTeam": "Monaco",
+    "league": "Ligue_1",
+    "matchId": "12910",
+    "playerId": "6945",
+    "resolvedClub": "Strasbourg",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "13106",
+    "playerId": "7091",
+    "resolvedClub": "Genoa",
+    "rosterSide": "h",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Parma Calcio 1913",
+    "candidates": [
+      [
+        "Parma Calcio 1913",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Udinese",
+    "league": "Serie_A",
+    "matchId": "13108",
+    "playerId": "1281",
+    "resolvedClub": "Parma Calcio 1913",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "13111",
+    "playerId": "1485",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Parma Calcio 1913",
+    "candidates": [
+      [
+        "Parma Calcio 1913",
+        "Serie_A"
+      ],
+      [
+        "SPAL 2013",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "SPAL 2013",
+    "league": "Serie_A",
+    "matchId": "13157",
+    "playerId": "1492",
+    "resolvedClub": "SPAL 2013",
+    "rosterSide": "h",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "SPAL 2013",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "SPAL 2013",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "13160",
+    "playerId": "1333",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "h",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Brescia",
+    "candidates": [
+      [
+        "Brescia",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "13172",
+    "playerId": "1849",
+    "resolvedClub": "Brescia",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sassuolo",
+    "league": "Serie_A",
+    "matchId": "13187",
+    "playerId": "1474",
+    "resolvedClub": "Sassuolo",
+    "rosterSide": "h",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Parma Calcio 1913",
+    "candidates": [
+      [
+        "Parma Calcio 1913",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "13234",
+    "playerId": "1170",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Bologna",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Bologna",
+    "league": "Serie_A",
+    "matchId": "13239",
+    "playerId": "6512",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Udinese",
+    "candidates": [
+      [
+        "Lecce",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Lecce",
+    "league": "Serie_A",
+    "matchId": "13264",
+    "playerId": "6208",
+    "resolvedClub": "Udinese",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "13299",
+    "playerId": "1485",
+    "resolvedClub": "Genoa",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "AC Milan",
+    "league": "Serie_A",
+    "matchId": "13305",
+    "playerId": "737",
+    "resolvedClub": "Verona",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "SPAL 2013",
+    "candidates": [
+      [
+        "Parma Calcio 1913",
+        "Serie_A"
+      ],
+      [
+        "SPAL 2013",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Parma Calcio 1913",
+    "league": "Serie_A",
+    "matchId": "13345",
+    "playerId": "1492",
+    "resolvedClub": "Parma Calcio 1913",
+    "rosterSide": "h",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cagliari",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "SPAL 2013",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "SPAL 2013",
+    "league": "Serie_A",
+    "matchId": "13356",
+    "playerId": "1333",
+    "resolvedClub": "SPAL 2013",
+    "rosterSide": "h",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cagliari",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "SPAL 2013",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "SPAL 2013",
+    "league": "Serie_A",
+    "matchId": "13356",
+    "playerId": "4906",
+    "resolvedClub": "SPAL 2013",
+    "rosterSide": "h",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Brescia",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Brescia",
+    "league": "Serie_A",
+    "matchId": "13359",
+    "playerId": "1849",
+    "resolvedClub": "Brescia",
+    "rosterSide": "h",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sassuolo",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "13371",
+    "playerId": "1474",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "h",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Inter",
+    "candidates": [
+      [
+        "Inter",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "13398",
+    "playerId": "1324",
+    "resolvedClub": "Verona",
+    "rosterSide": "h",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Lecce",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Lecce",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "13408",
+    "playerId": "1634",
+    "resolvedClub": "Lecce",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "13411",
+    "playerId": "1185",
+    "resolvedClub": "Genoa",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Lecce",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Lecce",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "13422",
+    "playerId": "1313",
+    "resolvedClub": "Lecce",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Parma Calcio 1913",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Parma Calcio 1913",
+    "league": "Serie_A",
+    "matchId": "13426",
+    "playerId": "1170",
+    "resolvedClub": "Parma Calcio 1913",
+    "rosterSide": "h",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Bologna",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Bologna",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "13429",
+    "playerId": "6512",
+    "resolvedClub": "Bologna",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Lecce",
+    "candidates": [
+      [
+        "Bologna",
+        "Serie_A"
+      ],
+      [
+        "Lecce",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Bologna",
+    "league": "Serie_A",
+    "matchId": "13439",
+    "playerId": "6973",
+    "resolvedClub": "Lecce",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Atalanta",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "AC Milan",
+    "league": "Serie_A",
+    "matchId": "13440",
+    "playerId": "4699",
+    "resolvedClub": "AC Milan",
+    "rosterSide": "h",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Napoli",
+    "candidates": [
+      [
+        "Inter",
+        "Serie_A"
+      ],
+      [
+        "Napoli",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Inter",
+    "league": "Serie_A",
+    "matchId": "13450",
+    "playerId": "1473",
+    "resolvedClub": "Napoli",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Lecce",
+    "candidates": [
+      [
+        "Lecce",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Udinese",
+    "league": "Serie_A",
+    "matchId": "13453",
+    "playerId": "6208",
+    "resolvedClub": "Lecce",
+    "rosterSide": "a",
+    "season": "2019/20",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Benevento",
+    "candidates": [
+      [
+        "Benevento",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "14125",
+    "playerId": "1624",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Udinese",
+    "candidates": [
+      [
+        "Udinese",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "14129",
+    "playerId": "1903",
+    "resolvedClub": "Udinese",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Arsenal",
+    "candidates": [
+      [
+        "Arsenal",
+        "EPL"
+      ],
+      [
+        "West Bromwich Albion",
+        "EPL"
+      ]
+    ],
+    "hTeam": "West Bromwich Albion",
+    "league": "EPL",
+    "matchId": "14600",
+    "playerId": "1750",
+    "resolvedClub": "Arsenal",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atletico Madrid",
+    "candidates": [
+      [
+        "Atletico Madrid",
+        "La_Liga"
+      ],
+      [
+        "Valencia",
+        "La_Liga"
+      ]
+    ],
+    "hTeam": "Valencia",
+    "league": "La_Liga",
+    "matchId": "14882",
+    "playerId": "1516",
+    "resolvedClub": "Atletico Madrid",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Valencia",
+    "candidates": [
+      [
+        "Atletico Madrid",
+        "La_Liga"
+      ],
+      [
+        "Valencia",
+        "La_Liga"
+      ]
+    ],
+    "hTeam": "Atletico Madrid",
+    "league": "La_Liga",
+    "matchId": "14973",
+    "playerId": "1516",
+    "resolvedClub": "Atletico Madrid",
+    "rosterSide": "h",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Union Berlin",
+    "candidates": [
+      [
+        "Bayer Leverkusen",
+        "Bundesliga"
+      ],
+      [
+        "Union Berlin",
+        "Bundesliga"
+      ]
+    ],
+    "hTeam": "Bayer Leverkusen",
+    "league": "Bundesliga",
+    "matchId": "15430",
+    "playerId": "5222",
+    "resolvedClub": "Union Berlin",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "15466",
+    "playerId": "1624",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "h",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Crotone",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Crotone",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "15468",
+    "playerId": "3259",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "h",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cagliari",
+    "candidates": [
+      [
+        "Bologna",
+        "Serie_A"
+      ],
+      [
+        "Cagliari",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Bologna",
+    "league": "Serie_A",
+    "matchId": "15476",
+    "playerId": "4912",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Parma Calcio 1913",
+    "candidates": [
+      [
+        "Inter",
+        "Serie_A"
+      ],
+      [
+        "Parma Calcio 1913",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Inter",
+    "league": "Serie_A",
+    "matchId": "15478",
+    "playerId": "557",
+    "resolvedClub": "Inter",
+    "rosterSide": "h",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Spezia",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Spezia",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "15509",
+    "playerId": "1634",
+    "resolvedClub": "Spezia",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Parma Calcio 1913",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Parma Calcio 1913",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "15510",
+    "playerId": "6212",
+    "resolvedClub": "Genoa",
+    "rosterSide": "h",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Udinese",
+    "candidates": [
+      [
+        "Torino",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "15535",
+    "playerId": "3821",
+    "resolvedClub": "Udinese",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "15549",
+    "playerId": "1370",
+    "resolvedClub": "Verona",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Juventus",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Juventus",
+    "league": "Serie_A",
+    "matchId": "15558",
+    "playerId": "1433",
+    "resolvedClub": "Juventus",
+    "rosterSide": "h",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Benevento",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Benevento",
+    "league": "Serie_A",
+    "matchId": "15586",
+    "playerId": "1624",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Napoli",
+    "candidates": [
+      [
+        "Napoli",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Udinese",
+    "league": "Serie_A",
+    "matchId": "15594",
+    "playerId": "1728",
+    "resolvedClub": "Napoli",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Crotone",
+    "candidates": [
+      [
+        "Crotone",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "15595",
+    "playerId": "8035",
+    "resolvedClub": "Verona",
+    "rosterSide": "h",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Benevento",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Benevento",
+    "league": "Serie_A",
+    "matchId": "15632",
+    "playerId": "1624",
+    "resolvedClub": "Benevento",
+    "rosterSide": "h",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Udinese",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Udinese",
+    "league": "Serie_A",
+    "matchId": "15635",
+    "playerId": "1903",
+    "resolvedClub": "Verona",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Spezia",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Spezia",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "15652",
+    "playerId": "1313",
+    "resolvedClub": "Spezia",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "15655",
+    "playerId": "1296",
+    "resolvedClub": "Verona",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cagliari",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Crotone",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Crotone",
+    "league": "Serie_A",
+    "matchId": "15658",
+    "playerId": "3259",
+    "resolvedClub": "Crotone",
+    "rosterSide": "h",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Inter",
+    "candidates": [
+      [
+        "Inter",
+        "Serie_A"
+      ],
+      [
+        "Parma Calcio 1913",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Parma Calcio 1913",
+    "league": "Serie_A",
+    "matchId": "15666",
+    "playerId": "557",
+    "resolvedClub": "Inter",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Parma Calcio 1913",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Parma Calcio 1913",
+    "league": "Serie_A",
+    "matchId": "15699",
+    "playerId": "6212",
+    "resolvedClub": "Parma Calcio 1913",
+    "rosterSide": "h",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "15705",
+    "playerId": "2019",
+    "resolvedClub": "Torino",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cagliari",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Inter",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Inter",
+    "league": "Serie_A",
+    "matchId": "15718",
+    "playerId": "1251",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "AC Milan",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Parma Calcio 1913",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Parma Calcio 1913",
+    "league": "Serie_A",
+    "matchId": "15722",
+    "playerId": "1487",
+    "resolvedClub": "Parma Calcio 1913",
+    "rosterSide": "h",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Torino",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Udinese",
+    "league": "Serie_A",
+    "matchId": "15725",
+    "playerId": "3821",
+    "resolvedClub": "Torino",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Benevento",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Benevento",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "15776",
+    "playerId": "1624",
+    "resolvedClub": "Benevento",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Fiorentina",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "15777",
+    "playerId": "1474",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "h",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "AC Milan",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "15780",
+    "playerId": "3739",
+    "resolvedClub": "AC Milan",
+    "rosterSide": "a",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Dijon",
+    "candidates": [
+      [
+        "Dijon",
+        "Ligue_1"
+      ],
+      [
+        "Rennes",
+        "Ligue_1"
+      ]
+    ],
+    "hTeam": "Rennes",
+    "league": "Ligue_1",
+    "matchId": "16091",
+    "playerId": "1455",
+    "resolvedClub": "Rennes",
+    "rosterSide": "h",
+    "season": "2020/21",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Everton",
+    "candidates": [
+      [
+        "Aston Villa",
+        "EPL"
+      ],
+      [
+        "Everton",
+        "EPL"
+      ]
+    ],
+    "hTeam": "Aston Villa",
+    "league": "EPL",
+    "matchId": "16422",
+    "playerId": "1823",
+    "resolvedClub": "Everton",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Aston Villa",
+    "candidates": [
+      [
+        "Aston Villa",
+        "EPL"
+      ],
+      [
+        "Everton",
+        "EPL"
+      ]
+    ],
+    "hTeam": "Everton",
+    "league": "EPL",
+    "matchId": "16600",
+    "playerId": "1823",
+    "resolvedClub": "Aston Villa",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Everton",
+    "candidates": [
+      [
+        "Everton",
+        "EPL"
+      ],
+      [
+        "Tottenham",
+        "EPL"
+      ]
+    ],
+    "hTeam": "Tottenham",
+    "league": "EPL",
+    "matchId": "16653",
+    "playerId": "645",
+    "resolvedClub": "Everton",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sassuolo",
+    "league": "Serie_A",
+    "matchId": "16772",
+    "playerId": "6980",
+    "resolvedClub": "Sassuolo",
+    "rosterSide": "h",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Inter",
+    "candidates": [
+      [
+        "Inter",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "16783",
+    "playerId": "1465",
+    "resolvedClub": "Inter",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sassuolo",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "16796",
+    "playerId": "3544",
+    "resolvedClub": "Sassuolo",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Inter",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Inter",
+    "league": "Serie_A",
+    "matchId": "16808",
+    "playerId": "6155",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Salernitana",
+    "candidates": [
+      [
+        "Salernitana",
+        "Serie_A"
+      ],
+      [
+        "Venezia",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Venezia",
+    "league": "Serie_A",
+    "matchId": "16855",
+    "playerId": "9902",
+    "resolvedClub": "Venezia",
+    "rosterSide": "h",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "16865",
+    "playerId": "1099",
+    "resolvedClub": "Torino",
+    "rosterSide": "h",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Cagliari",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "16866",
+    "playerId": "8522",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Juventus",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Juventus",
+    "league": "Serie_A",
+    "matchId": "16868",
+    "playerId": "7084",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Salernitana",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Salernitana",
+    "league": "Serie_A",
+    "matchId": "16883",
+    "playerId": "9105",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cagliari",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "16900",
+    "playerId": "1102",
+    "resolvedClub": "Verona",
+    "rosterSide": "h",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Empoli",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "16905",
+    "playerId": "7530",
+    "resolvedClub": "Empoli",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "16907",
+    "playerId": "1182",
+    "resolvedClub": "Torino",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "16937",
+    "playerId": "7375",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Venezia",
+    "candidates": [
+      [
+        "Salernitana",
+        "Serie_A"
+      ],
+      [
+        "Venezia",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Salernitana",
+    "league": "Serie_A",
+    "matchId": "16952",
+    "playerId": "9902",
+    "resolvedClub": "Salernitana",
+    "rosterSide": "h",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "16973",
+    "playerId": "1099",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cagliari",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Cagliari",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "16986",
+    "playerId": "8522",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sassuolo",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "16993",
+    "playerId": "6980",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "AC Milan",
+    "league": "Serie_A",
+    "matchId": "17001",
+    "playerId": "1487",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Inter",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Inter",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "17018",
+    "playerId": "2116",
+    "resolvedClub": "Inter",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Salernitana",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Salernitana",
+    "league": "Serie_A",
+    "matchId": "17062",
+    "playerId": "1445",
+    "resolvedClub": "Salernitana",
+    "rosterSide": "h",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sassuolo",
+    "league": "Serie_A",
+    "matchId": "17073",
+    "playerId": "3544",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "AC Milan",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "17074",
+    "playerId": "4932",
+    "resolvedClub": "Torino",
+    "rosterSide": "h",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "17089",
+    "playerId": "1624",
+    "resolvedClub": "Verona",
+    "rosterSide": "h",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "17097",
+    "playerId": "1102",
+    "resolvedClub": "Verona",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Empoli",
+    "league": "Serie_A",
+    "matchId": "17098",
+    "playerId": "7530",
+    "resolvedClub": "Torino",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Juventus",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Juventus",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "17127",
+    "playerId": "7084",
+    "resolvedClub": "Juventus",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Lazio",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Lazio",
+    "league": "Serie_A",
+    "matchId": "17130",
+    "playerId": "1958",
+    "resolvedClub": "Lazio",
+    "rosterSide": "h",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "VfB Stuttgart",
+    "candidates": [
+      [
+        "Hertha Berlin",
+        "Bundesliga"
+      ],
+      [
+        "VfB Stuttgart",
+        "Bundesliga"
+      ]
+    ],
+    "hTeam": "Hertha Berlin",
+    "league": "Bundesliga",
+    "matchId": "17789",
+    "playerId": "4291",
+    "resolvedClub": "Hertha Berlin",
+    "rosterSide": "h",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Nice",
+    "candidates": [
+      [
+        "Clermont Foot",
+        "Ligue_1"
+      ],
+      [
+        "Nice",
+        "Ligue_1"
+      ]
+    ],
+    "hTeam": "Clermont Foot",
+    "league": "Ligue_1",
+    "matchId": "17954",
+    "playerId": "8182",
+    "resolvedClub": "Nice",
+    "rosterSide": "a",
+    "season": "2021/22",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Arsenal",
+    "candidates": [
+      [
+        "Arsenal",
+        "EPL"
+      ],
+      [
+        "Chelsea",
+        "EPL"
+      ]
+    ],
+    "hTeam": "Chelsea",
+    "league": "EPL",
+    "matchId": "18343",
+    "playerId": "1389",
+    "resolvedClub": "Chelsea",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Wolverhampton Wanderers",
+    "candidates": [
+      [
+        "Aston Villa",
+        "EPL"
+      ],
+      [
+        "Wolverhampton Wanderers",
+        "EPL"
+      ]
+    ],
+    "hTeam": "Aston Villa",
+    "league": "EPL",
+    "matchId": "18383",
+    "playerId": "7236",
+    "resolvedClub": "Aston Villa",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Chelsea",
+    "candidates": [
+      [
+        "Arsenal",
+        "EPL"
+      ],
+      [
+        "Chelsea",
+        "EPL"
+      ]
+    ],
+    "hTeam": "Arsenal",
+    "league": "EPL",
+    "matchId": "18532",
+    "playerId": "1389",
+    "resolvedClub": "Arsenal",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cremonese",
+    "candidates": [
+      [
+        "Cremonese",
+        "Serie_A"
+      ],
+      [
+        "Fiorentina",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "18587",
+    "playerId": "1183",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Napoli",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Napoli",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "18611",
+    "playerId": "1841",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "18627",
+    "playerId": "1624",
+    "resolvedClub": "Verona",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "18627",
+    "playerId": "7092",
+    "resolvedClub": "Verona",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Empoli",
+    "candidates": [
+      [
+        "Bologna",
+        "Serie_A"
+      ],
+      [
+        "Empoli",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Bologna",
+    "league": "Serie_A",
+    "matchId": "18642",
+    "playerId": "4943",
+    "resolvedClub": "Bologna",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "18644",
+    "playerId": "6208",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Juventus",
+    "candidates": [
+      [
+        "Juventus",
+        "Serie_A"
+      ],
+      [
+        "Monza",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Monza",
+    "league": "Serie_A",
+    "matchId": "18646",
+    "playerId": "7411",
+    "resolvedClub": "Monza",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Udinese",
+    "league": "Serie_A",
+    "matchId": "18671",
+    "playerId": "8639",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sassuolo",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "18672",
+    "playerId": "9866",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sassuolo",
+    "candidates": [
+      [
+        "Napoli",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Napoli",
+    "league": "Serie_A",
+    "matchId": "18699",
+    "playerId": "7500",
+    "resolvedClub": "Napoli",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sassuolo",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Empoli",
+    "league": "Serie_A",
+    "matchId": "18704",
+    "playerId": "9851",
+    "resolvedClub": "Empoli",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "18721",
+    "playerId": "10899",
+    "resolvedClub": "Torino",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sassuolo",
+    "candidates": [
+      [
+        "Bologna",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Bologna",
+    "league": "Serie_A",
+    "matchId": "18723",
+    "playerId": "8034",
+    "resolvedClub": "Sassuolo",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Torino",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "18740",
+    "playerId": "8828",
+    "resolvedClub": "Verona",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Napoli",
+    "candidates": [
+      [
+        "Napoli",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "18750",
+    "playerId": "9876",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Empoli",
+    "league": "Serie_A",
+    "matchId": "18754",
+    "playerId": "6980",
+    "resolvedClub": "Empoli",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Empoli",
+    "league": "Serie_A",
+    "matchId": "18754",
+    "playerId": "8870",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Udinese",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "18770",
+    "playerId": "6206",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Monza",
+    "candidates": [
+      [
+        "Juventus",
+        "Serie_A"
+      ],
+      [
+        "Monza",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Juventus",
+    "league": "Serie_A",
+    "matchId": "18776",
+    "playerId": "7411",
+    "resolvedClub": "Monza",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sassuolo",
+    "league": "Serie_A",
+    "matchId": "18789",
+    "playerId": "9866",
+    "resolvedClub": "Sassuolo",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "18819",
+    "playerId": "6208",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Cremonese",
+        "Serie_A"
+      ],
+      [
+        "Fiorentina",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cremonese",
+    "league": "Serie_A",
+    "matchId": "18833",
+    "playerId": "1183",
+    "resolvedClub": "Cremonese",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Lecce",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Lecce",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "18843",
+    "playerId": "9893",
+    "resolvedClub": "Lecce",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "18848",
+    "playerId": "1624",
+    "resolvedClub": "Verona",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "18848",
+    "playerId": "7092",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "18848",
+    "playerId": "9041",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Spezia",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Spezia",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "18863",
+    "playerId": "7910",
+    "resolvedClub": "Spezia",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cremonese",
+    "candidates": [
+      [
+        "Cremonese",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "18869",
+    "playerId": "1454",
+    "resolvedClub": "Cremonese",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Empoli",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sassuolo",
+    "league": "Serie_A",
+    "matchId": "18899",
+    "playerId": "9851",
+    "resolvedClub": "Sassuolo",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "18910",
+    "playerId": "10899",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Napoli",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Napoli",
+    "league": "Serie_A",
+    "matchId": "18917",
+    "playerId": "1841",
+    "resolvedClub": "Napoli",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Udinese",
+    "league": "Serie_A",
+    "matchId": "18921",
+    "playerId": "6206",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Torino",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "18924",
+    "playerId": "8828",
+    "resolvedClub": "Torino",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Empoli",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "18930",
+    "playerId": "6980",
+    "resolvedClub": "Empoli",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Empoli",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "18930",
+    "playerId": "8870",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Empoli",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "18944",
+    "playerId": "7375",
+    "resolvedClub": "Empoli",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Napoli",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Napoli",
+    "league": "Serie_A",
+    "matchId": "18957",
+    "playerId": "4907",
+    "resolvedClub": "Napoli",
+    "rosterSide": "h",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Napoli",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Napoli",
+    "league": "Serie_A",
+    "matchId": "18957",
+    "playerId": "9876",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Spezia",
+    "candidates": [
+      [
+        "Roma",
+        "Serie_A"
+      ],
+      [
+        "Spezia",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Roma",
+    "league": "Serie_A",
+    "matchId": "18958",
+    "playerId": "5954",
+    "resolvedClub": "Spezia",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Villarreal",
+    "candidates": [
+      [
+        "Elche",
+        "La_Liga"
+      ],
+      [
+        "Villarreal",
+        "La_Liga"
+      ]
+    ],
+    "hTeam": "Elche",
+    "league": "La_Liga",
+    "matchId": "19156",
+    "playerId": "6242",
+    "resolvedClub": "Villarreal",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Borussia M.Gladbach",
+    "candidates": [
+      [
+        "Bayern Munich",
+        "Bundesliga"
+      ],
+      [
+        "Borussia M.Gladbach",
+        "Bundesliga"
+      ]
+    ],
+    "hTeam": "Bayern Munich",
+    "league": "Bundesliga",
+    "matchId": "19375",
+    "playerId": "199",
+    "resolvedClub": "Borussia M.Gladbach",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Nice",
+    "candidates": [
+      [
+        "Nice",
+        "Ligue_1"
+      ],
+      [
+        "Saint-Etienne",
+        "Ligue_1"
+      ]
+    ],
+    "hTeam": "Saint-Etienne",
+    "league": "Ligue_1",
+    "matchId": "1947",
+    "playerId": "3515",
+    "resolvedClub": "Saint-Etienne",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Bayern Munich",
+    "candidates": [
+      [
+        "Bayern Munich",
+        "Bundesliga"
+      ],
+      [
+        "Borussia M.Gladbach",
+        "Bundesliga"
+      ]
+    ],
+    "hTeam": "Borussia M.Gladbach",
+    "league": "Bundesliga",
+    "matchId": "19525",
+    "playerId": "199",
+    "resolvedClub": "Bayern Munich",
+    "rosterSide": "a",
+    "season": "2022/23",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Saint-Etienne",
+    "candidates": [
+      [
+        "Nice",
+        "Ligue_1"
+      ],
+      [
+        "Saint-Etienne",
+        "Ligue_1"
+      ]
+    ],
+    "hTeam": "Nice",
+    "league": "Ligue_1",
+    "matchId": "2228",
+    "playerId": "3515",
+    "resolvedClub": "Saint-Etienne",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Frosinone",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Frosinone",
+    "league": "Serie_A",
+    "matchId": "22315",
+    "playerId": "9866",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Sassuolo",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sassuolo",
+    "league": "Serie_A",
+    "matchId": "22325",
+    "playerId": "11023",
+    "resolvedClub": "Verona",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Empoli",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Roma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Roma",
+    "league": "Serie_A",
+    "matchId": "22342",
+    "playerId": "9951",
+    "resolvedClub": "Empoli",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Salernitana",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Salernitana",
+    "league": "Serie_A",
+    "matchId": "22343",
+    "playerId": "8522",
+    "resolvedClub": "Salernitana",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "AC Milan",
+    "league": "Serie_A",
+    "matchId": "22352",
+    "playerId": "8512",
+    "resolvedClub": "Verona",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "22362",
+    "playerId": "11053",
+    "resolvedClub": "Verona",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Napoli",
+    "candidates": [
+      [
+        "Napoli",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "22387",
+    "playerId": "11306",
+    "resolvedClub": "Verona",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Salernitana",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Salernitana",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "22396",
+    "playerId": "9425",
+    "resolvedClub": "Salernitana",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Monza",
+    "candidates": [
+      [
+        "Monza",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "22409",
+    "playerId": "3856",
+    "resolvedClub": "Verona",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Napoli",
+    "candidates": [
+      [
+        "Napoli",
+        "Serie_A"
+      ],
+      [
+        "Salernitana",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Salernitana",
+    "league": "Serie_A",
+    "matchId": "22413",
+    "playerId": "9902",
+    "resolvedClub": "Salernitana",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "22436",
+    "playerId": "1148",
+    "resolvedClub": "Torino",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Lecce",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Lecce",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Empoli",
+    "league": "Serie_A",
+    "matchId": "22447",
+    "playerId": "7375",
+    "resolvedClub": "Lecce",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Frosinone",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Frosinone",
+    "league": "Serie_A",
+    "matchId": "22448",
+    "playerId": "10396",
+    "resolvedClub": "Torino",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cagliari",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Napoli",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Napoli",
+    "league": "Serie_A",
+    "matchId": "22460",
+    "playerId": "7507",
+    "resolvedClub": "Napoli",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Udinese",
+    "candidates": [
+      [
+        "Torino",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "22468",
+    "playerId": "1441",
+    "resolvedClub": "Udinese",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Monza",
+    "candidates": [
+      [
+        "Monza",
+        "Serie_A"
+      ],
+      [
+        "Napoli",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Napoli",
+    "league": "Serie_A",
+    "matchId": "22484",
+    "playerId": "4911",
+    "resolvedClub": "Napoli",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Monza",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Monza",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Empoli",
+    "league": "Serie_A",
+    "matchId": "22506",
+    "playerId": "8163",
+    "resolvedClub": "Monza",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Napoli",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Napoli",
+    "league": "Serie_A",
+    "matchId": "22525",
+    "playerId": "11306",
+    "resolvedClub": "Napoli",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Salernitana",
+    "candidates": [
+      [
+        "Salernitana",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "22529",
+    "playerId": "8522",
+    "resolvedClub": "Torino",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Monza",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Monza",
+    "league": "Serie_A",
+    "matchId": "22543",
+    "playerId": "3856",
+    "resolvedClub": "Monza",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Napoli",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Napoli",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "22556",
+    "playerId": "7507",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sassuolo",
+    "candidates": [
+      [
+        "Sassuolo",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "22567",
+    "playerId": "11023",
+    "resolvedClub": "Sassuolo",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Roma",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Roma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "22577",
+    "playerId": "1186",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Torino",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Udinese",
+    "league": "Serie_A",
+    "matchId": "22593",
+    "playerId": "1441",
+    "resolvedClub": "Torino",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Napoli",
+    "candidates": [
+      [
+        "Monza",
+        "Serie_A"
+      ],
+      [
+        "Napoli",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Monza",
+    "league": "Serie_A",
+    "matchId": "22610",
+    "playerId": "4911",
+    "resolvedClub": "Monza",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Bologna",
+    "candidates": [
+      [
+        "Bologna",
+        "Serie_A"
+      ],
+      [
+        "Frosinone",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Frosinone",
+    "league": "Serie_A",
+    "matchId": "22614",
+    "playerId": "3951",
+    "resolvedClub": "Frosinone",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Empoli",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Lecce",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Lecce",
+    "league": "Serie_A",
+    "matchId": "22617",
+    "playerId": "7375",
+    "resolvedClub": "Lecce",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "22624",
+    "playerId": "11053",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Frosinone",
+    "candidates": [
+      [
+        "Frosinone",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "22632",
+    "playerId": "10396",
+    "resolvedClub": "Frosinone",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sassuolo",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "22643",
+    "playerId": "3772",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "22649",
+    "playerId": "3978",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "22675",
+    "playerId": "1148",
+    "resolvedClub": "Torino",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Fiorentina",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "22676",
+    "playerId": "6521",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Salernitana",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Salernitana",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "AC Milan",
+    "league": "Serie_A",
+    "matchId": "22682",
+    "playerId": "11994",
+    "resolvedClub": "Salernitana",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Bayer Leverkusen",
+    "candidates": [
+      [
+        "Bayer Leverkusen",
+        "Bundesliga"
+      ],
+      [
+        "Mainz 05",
+        "Bundesliga"
+      ]
+    ],
+    "hTeam": "Mainz 05",
+    "league": "Bundesliga",
+    "matchId": "23114",
+    "playerId": "82",
+    "resolvedClub": "Bayer Leverkusen",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Werder Bremen",
+    "candidates": [
+      [
+        "Borussia Dortmund",
+        "Bundesliga"
+      ],
+      [
+        "Werder Bremen",
+        "Bundesliga"
+      ]
+    ],
+    "hTeam": "Borussia Dortmund",
+    "league": "Bundesliga",
+    "matchId": "23128",
+    "playerId": "6098",
+    "resolvedClub": "Borussia Dortmund",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Mainz 05",
+    "candidates": [
+      [
+        "Bayer Leverkusen",
+        "Bundesliga"
+      ],
+      [
+        "Mainz 05",
+        "Bundesliga"
+      ]
+    ],
+    "hTeam": "Bayer Leverkusen",
+    "league": "Bundesliga",
+    "matchId": "23268",
+    "playerId": "82",
+    "resolvedClub": "Mainz 05",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Borussia Dortmund",
+    "candidates": [
+      [
+        "Borussia Dortmund",
+        "Bundesliga"
+      ],
+      [
+        "Werder Bremen",
+        "Bundesliga"
+      ]
+    ],
+    "hTeam": "Werder Bremen",
+    "league": "Bundesliga",
+    "matchId": "23286",
+    "playerId": "6098",
+    "resolvedClub": "Borussia Dortmund",
+    "rosterSide": "a",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Lyon",
+    "candidates": [
+      [
+        "Lyon",
+        "Ligue_1"
+      ],
+      [
+        "Rennes",
+        "Ligue_1"
+      ]
+    ],
+    "hTeam": "Rennes",
+    "league": "Ligue_1",
+    "matchId": "23470",
+    "playerId": "697",
+    "resolvedClub": "Rennes",
+    "rosterSide": "h",
+    "season": "2023/24",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Dinamo Moscow",
+    "candidates": [
+      [
+        "Dinamo Moscow",
+        "RFPL"
+      ],
+      [
+        "Zenit St. Petersburg",
+        "RFPL"
+      ]
+    ],
+    "hTeam": "Zenit St. Petersburg",
+    "league": "RFPL",
+    "matchId": "2352",
+    "playerId": "3066",
+    "resolvedClub": "Dinamo Moscow",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Zenit St. Petersburg",
+    "candidates": [
+      [
+        "Dinamo Moscow",
+        "RFPL"
+      ],
+      [
+        "Zenit St. Petersburg",
+        "RFPL"
+      ]
+    ],
+    "hTeam": "Dinamo Moscow",
+    "league": "RFPL",
+    "matchId": "2587",
+    "playerId": "3066",
+    "resolvedClub": "Zenit St. Petersburg",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fulham",
+    "candidates": [
+      [
+        "Crystal Palace",
+        "EPL"
+      ],
+      [
+        "Fulham",
+        "EPL"
+      ]
+    ],
+    "hTeam": "Crystal Palace",
+    "league": "EPL",
+    "matchId": "26706",
+    "playerId": "6314",
+    "resolvedClub": "Fulham",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Brighton",
+    "candidates": [
+      [
+        "Brighton",
+        "EPL"
+      ],
+      [
+        "West Ham",
+        "EPL"
+      ]
+    ],
+    "hTeam": "West Ham",
+    "league": "EPL",
+    "matchId": "26767",
+    "playerId": "10177",
+    "resolvedClub": "Brighton",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Crystal Palace",
+    "candidates": [
+      [
+        "Crystal Palace",
+        "EPL"
+      ],
+      [
+        "Fulham",
+        "EPL"
+      ]
+    ],
+    "hTeam": "Fulham",
+    "league": "EPL",
+    "matchId": "26856",
+    "playerId": "6314",
+    "resolvedClub": "Fulham",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Southampton",
+    "candidates": [
+      [
+        "Everton",
+        "EPL"
+      ],
+      [
+        "Southampton",
+        "EPL"
+      ]
+    ],
+    "hTeam": "Everton",
+    "league": "EPL",
+    "matchId": "26968",
+    "playerId": "11297",
+    "resolvedClub": "Everton",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Monza",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Monza",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "27388",
+    "playerId": "8380",
+    "resolvedClub": "Monza",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Napoli",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Napoli",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "27395",
+    "playerId": "1158",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Lazio",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Lazio",
+    "league": "Serie_A",
+    "matchId": "27396",
+    "playerId": "11049",
+    "resolvedClub": "Verona",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Bologna",
+    "candidates": [
+      [
+        "Bologna",
+        "Serie_A"
+      ],
+      [
+        "Monza",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Monza",
+    "league": "Serie_A",
+    "matchId": "27409",
+    "playerId": "9503",
+    "resolvedClub": "Bologna",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Bologna",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Bologna",
+    "league": "Serie_A",
+    "matchId": "27412",
+    "playerId": "5329",
+    "resolvedClub": "Bologna",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Fiorentina",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Empoli",
+    "league": "Serie_A",
+    "matchId": "27415",
+    "playerId": "7091",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Inter",
+    "candidates": [
+      [
+        "Inter",
+        "Serie_A"
+      ],
+      [
+        "Roma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Roma",
+    "league": "Serie_A",
+    "matchId": "27441",
+    "playerId": "9036",
+    "resolvedClub": "Roma",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "AC Milan",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Bologna",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Bologna",
+    "league": "Serie_A",
+    "matchId": "27442",
+    "playerId": "1574",
+    "resolvedClub": "Bologna",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Como",
+    "candidates": [
+      [
+        "Como",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "27450",
+    "playerId": "8819",
+    "resolvedClub": "Torino",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Monza",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Monza",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "27452",
+    "playerId": "8163",
+    "resolvedClub": "Monza",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Napoli",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Napoli",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "AC Milan",
+    "league": "Serie_A",
+    "matchId": "27459",
+    "playerId": "11966",
+    "resolvedClub": "AC Milan",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "AC Milan",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Monza",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Monza",
+    "league": "Serie_A",
+    "matchId": "27465",
+    "playerId": "10898",
+    "resolvedClub": "Monza",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Parma Calcio 1913",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Parma Calcio 1913",
+    "league": "Serie_A",
+    "matchId": "27469",
+    "playerId": "12124",
+    "resolvedClub": "Genoa",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "27470",
+    "playerId": "1164",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Empoli",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Pescara",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Pescara",
+    "league": "Serie_A",
+    "matchId": "2748",
+    "playerId": "1552",
+    "resolvedClub": "Empoli",
+    "rosterSide": "a",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Como",
+        "Serie_A"
+      ],
+      [
+        "Fiorentina",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Como",
+    "league": "Serie_A",
+    "matchId": "27482",
+    "playerId": "5661",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Empoli",
+    "league": "Serie_A",
+    "matchId": "27513",
+    "playerId": "8030",
+    "resolvedClub": "Torino",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Juventus",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Juventus",
+    "league": "Serie_A",
+    "matchId": "27537",
+    "playerId": "7379",
+    "resolvedClub": "Juventus",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Roma",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Roma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "AC Milan",
+    "league": "Serie_A",
+    "matchId": "27538",
+    "playerId": "702",
+    "resolvedClub": "AC Milan",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Roma",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Roma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "AC Milan",
+    "league": "Serie_A",
+    "matchId": "27538",
+    "playerId": "8297",
+    "resolvedClub": "Roma",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Monza",
+    "candidates": [
+      [
+        "Monza",
+        "Serie_A"
+      ],
+      [
+        "Parma Calcio 1913",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Parma Calcio 1913",
+    "league": "Serie_A",
+    "matchId": "27540",
+    "playerId": "3856",
+    "resolvedClub": "Monza",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Monza",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Monza",
+    "league": "Serie_A",
+    "matchId": "27552",
+    "playerId": "8380",
+    "resolvedClub": "Monza",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Monza",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Monza",
+    "league": "Serie_A",
+    "matchId": "27552",
+    "playerId": "9322",
+    "resolvedClub": "Monza",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Lazio",
+    "candidates": [
+      [
+        "Lazio",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "27566",
+    "playerId": "11049",
+    "resolvedClub": "Verona",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "27584",
+    "playerId": "6412",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Bologna",
+    "candidates": [
+      [
+        "Bologna",
+        "Serie_A"
+      ],
+      [
+        "Lecce",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Lecce",
+    "league": "Serie_A",
+    "matchId": "27597",
+    "playerId": "12006",
+    "resolvedClub": "Lecce",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Lazio",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Lazio",
+    "league": "Serie_A",
+    "matchId": "2760",
+    "playerId": "1206",
+    "resolvedClub": "Lazio",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Monza",
+    "candidates": [
+      [
+        "Lazio",
+        "Serie_A"
+      ],
+      [
+        "Monza",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Lazio",
+    "league": "Serie_A",
+    "matchId": "27601",
+    "playerId": "7909",
+    "resolvedClub": "Monza",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Como",
+    "candidates": [
+      [
+        "Como",
+        "Serie_A"
+      ],
+      [
+        "Fiorentina",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "27611",
+    "playerId": "5661",
+    "resolvedClub": "Como",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Fiorentina",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Empoli",
+    "league": "Serie_A",
+    "matchId": "2762",
+    "playerId": "1313",
+    "resolvedClub": "Empoli",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Juventus",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Juventus",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "27644",
+    "playerId": "7379",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Empoli",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "27649",
+    "playerId": "8030",
+    "resolvedClub": "Torino",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Napoli",
+    "candidates": [
+      [
+        "Napoli",
+        "Serie_A"
+      ],
+      [
+        "Venezia",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Venezia",
+    "league": "Serie_A",
+    "matchId": "27651",
+    "playerId": "4911",
+    "resolvedClub": "Venezia",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Fiorentina",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "27661",
+    "playerId": "6686",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Como",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Como",
+    "league": "Serie_A",
+    "matchId": "27675",
+    "playerId": "8819",
+    "resolvedClub": "Como",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Roma",
+    "candidates": [
+      [
+        "Inter",
+        "Serie_A"
+      ],
+      [
+        "Roma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Inter",
+    "league": "Serie_A",
+    "matchId": "27697",
+    "playerId": "9036",
+    "resolvedClub": "Inter",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Monza",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Monza",
+    "league": "Serie_A",
+    "matchId": "27708",
+    "playerId": "8163",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Juventus",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Juventus",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "2771",
+    "playerId": "1099",
+    "resolvedClub": "Genoa",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Bologna",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Bologna",
+    "league": "Serie_A",
+    "matchId": "2772",
+    "playerId": "1451",
+    "resolvedClub": "Bologna",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "AC Milan",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Roma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Roma",
+    "league": "Serie_A",
+    "matchId": "27730",
+    "playerId": "8297",
+    "resolvedClub": "Roma",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Werder Bremen",
+    "candidates": [
+      [
+        "RasenBallsport Leipzig",
+        "Bundesliga"
+      ],
+      [
+        "Werder Bremen",
+        "Bundesliga"
+      ]
+    ],
+    "hTeam": "RasenBallsport Leipzig",
+    "league": "Bundesliga",
+    "matchId": "27877",
+    "playerId": "6170",
+    "resolvedClub": "RasenBallsport Leipzig",
+    "rosterSide": "h",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Rennes",
+    "candidates": [
+      [
+        "Marseille",
+        "Ligue_1"
+      ],
+      [
+        "Rennes",
+        "Ligue_1"
+      ]
+    ],
+    "hTeam": "Marseille",
+    "league": "Ligue_1",
+    "matchId": "28346",
+    "playerId": "13069",
+    "resolvedClub": "Rennes",
+    "rosterSide": "a",
+    "season": "2024/25",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Chievo",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Chievo",
+    "league": "Serie_A",
+    "matchId": "3074",
+    "playerId": "1581",
+    "resolvedClub": "Genoa",
+    "rosterSide": "a",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Napoli",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Napoli",
+    "league": "Serie_A",
+    "matchId": "3092",
+    "playerId": "1184",
+    "resolvedClub": "Torino",
+    "rosterSide": "a",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Palermo",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Palermo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "3096",
+    "playerId": "1284",
+    "resolvedClub": "Palermo",
+    "rosterSide": "a",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Pescara",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Pescara",
+    "league": "Serie_A",
+    "matchId": "3287",
+    "playerId": "1168",
+    "resolvedClub": "Pescara",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sassuolo",
+    "candidates": [
+      [
+        "Pescara",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Pescara",
+    "league": "Serie_A",
+    "matchId": "3545",
+    "playerId": "1167",
+    "resolvedClub": "Sassuolo",
+    "rosterSide": "a",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Napoli",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Napoli",
+    "league": "Serie_A",
+    "matchId": "3572",
+    "playerId": "1104",
+    "resolvedClub": "Napoli",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Roma",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Roma",
+    "league": "Serie_A",
+    "matchId": "3590",
+    "playerId": "827",
+    "resolvedClub": "Torino",
+    "rosterSide": "a",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sassuolo",
+    "candidates": [
+      [
+        "Crotone",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Crotone",
+    "league": "Serie_A",
+    "matchId": "3611",
+    "playerId": "1360",
+    "resolvedClub": "Crotone",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Inter",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Inter",
+    "league": "Serie_A",
+    "matchId": "3612",
+    "playerId": "1496",
+    "resolvedClub": "Inter",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "AC Milan",
+    "league": "Serie_A",
+    "matchId": "3624",
+    "playerId": "1109",
+    "resolvedClub": "AC Milan",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Napoli",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Napoli",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Empoli",
+    "league": "Serie_A",
+    "matchId": "3628",
+    "playerId": "1385",
+    "resolvedClub": "Empoli",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Pescara",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Pescara",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "3630",
+    "playerId": "1168",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "3632",
+    "playerId": "1494",
+    "resolvedClub": "Genoa",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Empoli",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Fiorentina",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "3656",
+    "playerId": "1313",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Lazio",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Lazio",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "3658",
+    "playerId": "1206",
+    "resolvedClub": "Genoa",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Juventus",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Juventus",
+    "league": "Serie_A",
+    "matchId": "3666",
+    "playerId": "1099",
+    "resolvedClub": "Juventus",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Osasuna",
+    "candidates": [
+      [
+        "Osasuna",
+        "La_Liga"
+      ],
+      [
+        "Sevilla",
+        "La_Liga"
+      ]
+    ],
+    "hTeam": "Sevilla",
+    "league": "La_Liga",
+    "matchId": "4098",
+    "playerId": "3301",
+    "resolvedClub": "Osasuna",
+    "rosterSide": "a",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Montpellier",
+    "candidates": [
+      [
+        "Montpellier",
+        "Ligue_1"
+      ],
+      [
+        "Paris Saint Germain",
+        "Ligue_1"
+      ]
+    ],
+    "hTeam": "Paris Saint Germain",
+    "league": "Ligue_1",
+    "matchId": "4250",
+    "playerId": "5661",
+    "resolvedClub": "Montpellier",
+    "rosterSide": "a",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Queens Park Rangers",
+    "candidates": [
+      [
+        "Queens Park Rangers",
+        "EPL"
+      ],
+      [
+        "West Ham",
+        "EPL"
+      ]
+    ],
+    "hTeam": "West Ham",
+    "league": "EPL",
+    "matchId": "4698",
+    "playerId": "939",
+    "resolvedClub": "West Ham",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Roma",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Roma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "AC Milan",
+    "league": "Serie_A",
+    "matchId": "4790",
+    "playerId": "1580",
+    "resolvedClub": "AC Milan",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Udinese",
+    "league": "Serie_A",
+    "matchId": "4792",
+    "playerId": "1229",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "a",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "4803",
+    "playerId": "1494",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Chievo",
+    "candidates": [
+      [
+        "Chievo",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "4805",
+    "playerId": "1188",
+    "resolvedClub": "Torino",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "AC Milan",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Atalanta",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "4820",
+    "playerId": "1121",
+    "resolvedClub": "AC Milan",
+    "rosterSide": "a",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Parma",
+    "candidates": [
+      [
+        "Parma",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "4822",
+    "playerId": "1192",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sassuolo",
+    "league": "Serie_A",
+    "matchId": "4825",
+    "playerId": "1104",
+    "resolvedClub": "Genoa",
+    "rosterSide": "a",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Parma",
+    "candidates": [
+      [
+        "Inter",
+        "Serie_A"
+      ],
+      [
+        "Parma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Inter",
+    "league": "Serie_A",
+    "matchId": "4830",
+    "playerId": "1141",
+    "resolvedClub": "Inter",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Roma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Roma",
+    "league": "Serie_A",
+    "matchId": "4857",
+    "playerId": "1844",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "a",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Palermo",
+    "candidates": [
+      [
+        "Palermo",
+        "Serie_A"
+      ],
+      [
+        "Parma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Parma",
+    "league": "Serie_A",
+    "matchId": "4864",
+    "playerId": "1274",
+    "resolvedClub": "Palermo",
+    "rosterSide": "a",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Napoli",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Napoli",
+    "league": "Serie_A",
+    "matchId": "4870",
+    "playerId": "1383",
+    "resolvedClub": "Napoli",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "AC Milan",
+    "league": "Serie_A",
+    "matchId": "4878",
+    "playerId": "1126",
+    "resolvedClub": "Genoa",
+    "rosterSide": "a",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Juventus",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Juventus",
+    "league": "Serie_A",
+    "matchId": "4912",
+    "playerId": "1296",
+    "resolvedClub": "Juventus",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Juventus",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Juventus",
+    "league": "Serie_A",
+    "matchId": "4912",
+    "playerId": "1472",
+    "resolvedClub": "Juventus",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Parma",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Parma",
+    "league": "Serie_A",
+    "matchId": "4918",
+    "playerId": "2048",
+    "resolvedClub": "Parma",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "4941",
+    "playerId": "1996",
+    "resolvedClub": "Verona",
+    "rosterSide": "a",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Chievo",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Chievo",
+    "league": "Serie_A",
+    "matchId": "4964",
+    "playerId": "1188",
+    "resolvedClub": "Chievo",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Atalanta",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "AC Milan",
+    "league": "Serie_A",
+    "matchId": "4980",
+    "playerId": "1121",
+    "resolvedClub": "AC Milan",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "4997",
+    "playerId": "1352",
+    "resolvedClub": "Genoa",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Napoli",
+    "candidates": [
+      [
+        "Napoli",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "4999",
+    "playerId": "1383",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "AC Milan",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "5005",
+    "playerId": "1126",
+    "resolvedClub": "AC Milan",
+    "rosterSide": "a",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "AC Milan",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "5005",
+    "playerId": "1590",
+    "resolvedClub": "Genoa",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "AC Milan",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Roma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Roma",
+    "league": "Serie_A",
+    "matchId": "5023",
+    "playerId": "1580",
+    "resolvedClub": "Roma",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Inter",
+    "candidates": [
+      [
+        "Inter",
+        "Serie_A"
+      ],
+      [
+        "Parma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Parma",
+    "league": "Serie_A",
+    "matchId": "5032",
+    "playerId": "1141",
+    "resolvedClub": "Parma",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Parma",
+    "candidates": [
+      [
+        "Palermo",
+        "Serie_A"
+      ],
+      [
+        "Parma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Palermo",
+    "league": "Serie_A",
+    "matchId": "5064",
+    "playerId": "1274",
+    "resolvedClub": "Parma",
+    "rosterSide": "a",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Parma",
+    "candidates": [
+      [
+        "Parma",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "5100",
+    "playerId": "2018",
+    "resolvedClub": "Torino",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Juventus",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Juventus",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "5107",
+    "playerId": "1472",
+    "resolvedClub": "Genoa",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "5114",
+    "playerId": "1352",
+    "resolvedClub": "Genoa",
+    "rosterSide": "a",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cagliari",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Roma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Roma",
+    "league": "Serie_A",
+    "matchId": "5123",
+    "playerId": "947",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "a",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Napoli",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Napoli",
+    "league": "Serie_A",
+    "matchId": "566",
+    "playerId": "1224",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "571",
+    "playerId": "1885",
+    "resolvedClub": "Genoa",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "586",
+    "playerId": "1230",
+    "resolvedClub": "Torino",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Roma",
+    "candidates": [
+      [
+        "Roma",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "594",
+    "playerId": "1497",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "AC Milan",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "603",
+    "playerId": "1123",
+    "resolvedClub": "AC Milan",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Chievo",
+    "candidates": [
+      [
+        "Chievo",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sassuolo",
+    "league": "Serie_A",
+    "matchId": "605",
+    "playerId": "1338",
+    "resolvedClub": "Sassuolo",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Marseille",
+    "candidates": [
+      [
+        "Marseille",
+        "Ligue_1"
+      ],
+      [
+        "Monaco",
+        "Ligue_1"
+      ]
+    ],
+    "hTeam": "Monaco",
+    "league": "Ligue_1",
+    "matchId": "6065",
+    "playerId": "1109",
+    "resolvedClub": "Monaco",
+    "rosterSide": "h",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Inter",
+    "candidates": [
+      [
+        "Inter",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "615",
+    "playerId": "1514",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Frosinone",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Frosinone",
+    "league": "Serie_A",
+    "matchId": "624",
+    "playerId": "1807",
+    "resolvedClub": "Frosinone",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Udinese",
+    "candidates": [
+      [
+        "Udinese",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "626",
+    "playerId": "1151",
+    "resolvedClub": "Verona",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Carpi",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Carpi",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "628",
+    "playerId": "1405",
+    "resolvedClub": "Carpi",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "634",
+    "playerId": "1221",
+    "resolvedClub": "Verona",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Rubin Kazan",
+    "candidates": [
+      [
+        "FC Rostov",
+        "RFPL"
+      ],
+      [
+        "Rubin Kazan",
+        "RFPL"
+      ]
+    ],
+    "hTeam": "FC Rostov",
+    "league": "RFPL",
+    "matchId": "6396",
+    "playerId": "2774",
+    "resolvedClub": "Rubin Kazan",
+    "rosterSide": "a",
+    "season": "2014/15",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Roma",
+    "candidates": [
+      [
+        "Inter",
+        "Serie_A"
+      ],
+      [
+        "Roma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Inter",
+    "league": "Serie_A",
+    "matchId": "652",
+    "playerId": "1187",
+    "resolvedClub": "Inter",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Carpi",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Carpi",
+    "league": "Serie_A",
+    "matchId": "656",
+    "playerId": "1643",
+    "resolvedClub": "Carpi",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Arsenal",
+    "candidates": [
+      [
+        "Arsenal",
+        "EPL"
+      ],
+      [
+        "Chelsea",
+        "EPL"
+      ]
+    ],
+    "hTeam": "Chelsea",
+    "league": "EPL",
+    "matchId": "7167",
+    "playerId": "502",
+    "resolvedClub": "Arsenal",
+    "rosterSide": "a",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Manchester United",
+    "candidates": [
+      [
+        "Arsenal",
+        "EPL"
+      ],
+      [
+        "Manchester United",
+        "EPL"
+      ]
+    ],
+    "hTeam": "Arsenal",
+    "league": "EPL",
+    "matchId": "7266",
+    "playerId": "498",
+    "resolvedClub": "Arsenal",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Arsenal",
+    "candidates": [
+      [
+        "Arsenal",
+        "EPL"
+      ],
+      [
+        "Manchester United",
+        "EPL"
+      ]
+    ],
+    "hTeam": "Manchester United",
+    "league": "EPL",
+    "matchId": "7473",
+    "playerId": "317",
+    "resolvedClub": "Arsenal",
+    "rosterSide": "a",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Arsenal",
+    "candidates": [
+      [
+        "Arsenal",
+        "EPL"
+      ],
+      [
+        "Manchester United",
+        "EPL"
+      ]
+    ],
+    "hTeam": "Manchester United",
+    "league": "EPL",
+    "matchId": "7473",
+    "playerId": "498",
+    "resolvedClub": "Manchester United",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Benevento",
+    "candidates": [
+      [
+        "Benevento",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "7505",
+    "playerId": "1220",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Benevento",
+    "candidates": [
+      [
+        "Benevento",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "7505",
+    "playerId": "1233",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Benevento",
+    "candidates": [
+      [
+        "Benevento",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "7505",
+    "playerId": "1908",
+    "resolvedClub": "Benevento",
+    "rosterSide": "a",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Crotone",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Crotone",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "7522",
+    "playerId": "1408",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Napoli",
+    "candidates": [
+      [
+        "Napoli",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "754",
+    "playerId": "1224",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Bologna",
+    "candidates": [
+      [
+        "Bologna",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sassuolo",
+    "league": "Serie_A",
+    "matchId": "756",
+    "playerId": "1446",
+    "resolvedClub": "Bologna",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Chievo",
+        "Serie_A"
+      ],
+      [
+        "Fiorentina",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Chievo",
+    "league": "Serie_A",
+    "matchId": "7561",
+    "playerId": "1435",
+    "resolvedClub": "Chievo",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Udinese",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "7572",
+    "playerId": "1147",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Crotone",
+    "candidates": [
+      [
+        "Crotone",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "7585",
+    "playerId": "1602",
+    "resolvedClub": "Crotone",
+    "rosterSide": "a",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "SPAL 2013",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "SPAL 2013",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Atalanta",
+    "league": "Serie_A",
+    "matchId": "7609",
+    "playerId": "1492",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sassuolo",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "7642",
+    "playerId": "1360",
+    "resolvedClub": "Sassuolo",
+    "rosterSide": "a",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sassuolo",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "7642",
+    "playerId": "1434",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "7643",
+    "playerId": "6130",
+    "resolvedClub": "Verona",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "768",
+    "playerId": "1885",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Benevento",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Benevento",
+    "league": "Serie_A",
+    "matchId": "7696",
+    "playerId": "1908",
+    "resolvedClub": "Benevento",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cagliari",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Crotone",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Crotone",
+    "league": "Serie_A",
+    "matchId": "7712",
+    "playerId": "1408",
+    "resolvedClub": "Crotone",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sampdoria",
+    "league": "Serie_A",
+    "matchId": "778",
+    "playerId": "1230",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "SPAL 2013",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "SPAL 2013",
+    "league": "Serie_A",
+    "matchId": "7799",
+    "playerId": "1492",
+    "resolvedClub": "SPAL 2013",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Chievo",
+    "candidates": [
+      [
+        "Chievo",
+        "Serie_A"
+      ],
+      [
+        "Napoli",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Napoli",
+    "league": "Serie_A",
+    "matchId": "7802",
+    "playerId": "1033",
+    "resolvedClub": "Chievo",
+    "rosterSide": "a",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Crotone",
+    "candidates": [
+      [
+        "Crotone",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "7810",
+    "playerId": "1470",
+    "resolvedClub": "Crotone",
+    "rosterSide": "a",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Bologna",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Bologna",
+    "league": "Serie_A",
+    "matchId": "7811",
+    "playerId": "4930",
+    "resolvedClub": "Verona",
+    "rosterSide": "a",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Sassuolo",
+    "league": "Serie_A",
+    "matchId": "7832",
+    "playerId": "1360",
+    "resolvedClub": "Fiorentina",
+    "rosterSide": "a",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "7833",
+    "playerId": "6130",
+    "resolvedClub": "Genoa",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Roma",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Roma",
+    "league": "Serie_A",
+    "matchId": "790",
+    "playerId": "1497",
+    "resolvedClub": "Roma",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sassuolo",
+    "candidates": [
+      [
+        "Chievo",
+        "Serie_A"
+      ],
+      [
+        "Sassuolo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Chievo",
+    "league": "Serie_A",
+    "matchId": "794",
+    "playerId": "1338",
+    "resolvedClub": "Chievo",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "AC Milan",
+    "league": "Serie_A",
+    "matchId": "796",
+    "playerId": "1129",
+    "resolvedClub": "Genoa",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "AC Milan",
+    "league": "Serie_A",
+    "matchId": "796",
+    "playerId": "2006",
+    "resolvedClub": "Genoa",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Inter",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Inter",
+    "league": "Serie_A",
+    "matchId": "803",
+    "playerId": "1514",
+    "resolvedClub": "Inter",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Inter",
+        "Serie_A"
+      ],
+      [
+        "Sampdoria",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Inter",
+    "league": "Serie_A",
+    "matchId": "803",
+    "playerId": "1522",
+    "resolvedClub": "Sampdoria",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Carpi",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Carpi",
+    "league": "Serie_A",
+    "matchId": "817",
+    "playerId": "1405",
+    "resolvedClub": "Atalanta",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Inter",
+    "candidates": [
+      [
+        "Inter",
+        "Serie_A"
+      ],
+      [
+        "Juventus",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Juventus",
+    "league": "Serie_A",
+    "matchId": "818",
+    "playerId": "1291",
+    "resolvedClub": "Juventus",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Sampdoria",
+    "candidates": [
+      [
+        "Sampdoria",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "822",
+    "playerId": "1845",
+    "resolvedClub": "Verona",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Carpi",
+    "candidates": [
+      [
+        "Bologna",
+        "Serie_A"
+      ],
+      [
+        "Carpi",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Bologna",
+    "league": "Serie_A",
+    "matchId": "828",
+    "playerId": "1902",
+    "resolvedClub": "Carpi",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Carpi",
+    "candidates": [
+      [
+        "Bologna",
+        "Serie_A"
+      ],
+      [
+        "Carpi",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Bologna",
+    "league": "Serie_A",
+    "matchId": "828",
+    "playerId": "1981",
+    "resolvedClub": "Carpi",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Wolfsburg",
+    "candidates": [
+      [
+        "VfB Stuttgart",
+        "Bundesliga"
+      ],
+      [
+        "Wolfsburg",
+        "Bundesliga"
+      ]
+    ],
+    "hTeam": "VfB Stuttgart",
+    "league": "Bundesliga",
+    "matchId": "8290",
+    "playerId": "5353",
+    "resolvedClub": "VfB Stuttgart",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Verona",
+    "candidates": [
+      [
+        "Fiorentina",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Fiorentina",
+    "league": "Serie_A",
+    "matchId": "837",
+    "playerId": "1852",
+    "resolvedClub": "Verona",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Hoffenheim",
+    "candidates": [
+      [
+        "Borussia Dortmund",
+        "Bundesliga"
+      ],
+      [
+        "Hoffenheim",
+        "Bundesliga"
+      ]
+    ],
+    "hTeam": "Borussia Dortmund",
+    "league": "Bundesliga",
+    "matchId": "8403",
+    "playerId": "257",
+    "resolvedClub": "Borussia Dortmund",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Inter",
+    "candidates": [
+      [
+        "Inter",
+        "Serie_A"
+      ],
+      [
+        "Roma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Roma",
+    "league": "Serie_A",
+    "matchId": "842",
+    "playerId": "1187",
+    "resolvedClub": "Inter",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Carpi",
+    "candidates": [
+      [
+        "Carpi",
+        "Serie_A"
+      ],
+      [
+        "Verona",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Verona",
+    "league": "Serie_A",
+    "matchId": "844",
+    "playerId": "1643",
+    "resolvedClub": "Verona",
+    "rosterSide": "h",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "VfB Stuttgart",
+    "candidates": [
+      [
+        "VfB Stuttgart",
+        "Bundesliga"
+      ],
+      [
+        "Wolfsburg",
+        "Bundesliga"
+      ]
+    ],
+    "hTeam": "Wolfsburg",
+    "league": "Bundesliga",
+    "matchId": "8446",
+    "playerId": "5353",
+    "resolvedClub": "Wolfsburg",
+    "rosterSide": "h",
+    "season": "2017/18",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Zenit St. Petersburg",
+    "candidates": [
+      [
+        "Rubin Kazan",
+        "RFPL"
+      ],
+      [
+        "Zenit St. Petersburg",
+        "RFPL"
+      ]
+    ],
+    "hTeam": "Rubin Kazan",
+    "league": "RFPL",
+    "matchId": "8967",
+    "playerId": "2774",
+    "resolvedClub": "Rubin Kazan",
+    "rosterSide": "h",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Roma",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Roma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "909",
+    "playerId": "1539",
+    "resolvedClub": "Roma",
+    "rosterSide": "a",
+    "season": "2015/16",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Crotone",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Crotone",
+    "league": "Serie_A",
+    "matchId": "949",
+    "playerId": "1361",
+    "resolvedClub": "Crotone",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "AC Milan",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "AC Milan",
+    "league": "Serie_A",
+    "matchId": "9581",
+    "playerId": "7090",
+    "resolvedClub": "Genoa",
+    "rosterSide": "a",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cagliari",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Empoli",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Empoli",
+    "league": "Serie_A",
+    "matchId": "9584",
+    "playerId": "1605",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "a",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Lazio",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Lazio",
+    "league": "Serie_A",
+    "matchId": "9621",
+    "playerId": "1849",
+    "resolvedClub": "Genoa",
+    "rosterSide": "a",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cagliari",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Parma Calcio 1913",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Parma Calcio 1913",
+    "league": "Serie_A",
+    "matchId": "9623",
+    "playerId": "1634",
+    "resolvedClub": "Parma Calcio 1913",
+    "rosterSide": "h",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Chievo",
+    "candidates": [
+      [
+        "Chievo",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "9630",
+    "playerId": "1341",
+    "resolvedClub": "Chievo",
+    "rosterSide": "a",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Udinese",
+    "candidates": [
+      [
+        "Bologna",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Bologna",
+    "league": "Serie_A",
+    "matchId": "9640",
+    "playerId": "1431",
+    "resolvedClub": "Bologna",
+    "rosterSide": "h",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Chievo",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Chievo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "9668",
+    "playerId": "1336",
+    "resolvedClub": "Chievo",
+    "rosterSide": "a",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Udinese",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "9670",
+    "playerId": "817",
+    "resolvedClub": "Genoa",
+    "rosterSide": "h",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Roma",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Roma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "9724",
+    "playerId": "4970",
+    "resolvedClub": "Roma",
+    "rosterSide": "a",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Napoli",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Napoli",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "974",
+    "playerId": "1104",
+    "resolvedClub": "Genoa",
+    "rosterSide": "h",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Torino",
+    "candidates": [
+      [
+        "Pescara",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Pescara",
+    "league": "Serie_A",
+    "matchId": "976",
+    "playerId": "1197",
+    "resolvedClub": "Torino",
+    "rosterSide": "a",
+    "season": "2016/17",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Empoli",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Empoli",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "9767",
+    "playerId": "1605",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "h",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Atalanta",
+    "candidates": [
+      [
+        "Atalanta",
+        "Serie_A"
+      ],
+      [
+        "Frosinone",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Frosinone",
+    "league": "Serie_A",
+    "matchId": "9769",
+    "playerId": "3998",
+    "resolvedClub": "Frosinone",
+    "rosterSide": "h",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Parma Calcio 1913",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Parma Calcio 1913",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "9808",
+    "playerId": "1634",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "h",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Lazio",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Lazio",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Genoa",
+    "league": "Serie_A",
+    "matchId": "9810",
+    "playerId": "1849",
+    "resolvedClub": "Lazio",
+    "rosterSide": "a",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Chievo",
+        "Serie_A"
+      ],
+      [
+        "Genoa",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Chievo",
+    "league": "Serie_A",
+    "matchId": "9818",
+    "playerId": "1341",
+    "resolvedClub": "Genoa",
+    "rosterSide": "a",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Bologna",
+    "candidates": [
+      [
+        "Bologna",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Udinese",
+    "league": "Serie_A",
+    "matchId": "9829",
+    "playerId": "1431",
+    "resolvedClub": "Udinese",
+    "rosterSide": "h",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Fiorentina",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Cagliari",
+    "league": "Serie_A",
+    "matchId": "9848",
+    "playerId": "1147",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "h",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Bologna",
+    "candidates": [
+      [
+        "Bologna",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "9855",
+    "playerId": "1810",
+    "resolvedClub": "Bologna",
+    "rosterSide": "a",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Bologna",
+    "candidates": [
+      [
+        "Bologna",
+        "Serie_A"
+      ],
+      [
+        "Torino",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Torino",
+    "league": "Serie_A",
+    "matchId": "9855",
+    "playerId": "6252",
+    "resolvedClub": "Bologna",
+    "rosterSide": "a",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cagliari",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Chievo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Chievo",
+    "league": "Serie_A",
+    "matchId": "9858",
+    "playerId": "1329",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "a",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cagliari",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Chievo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Chievo",
+    "league": "Serie_A",
+    "matchId": "9858",
+    "playerId": "1336",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "a",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cagliari",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Chievo",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Chievo",
+    "league": "Serie_A",
+    "matchId": "9858",
+    "playerId": "2603",
+    "resolvedClub": "Chievo",
+    "rosterSide": "h",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Genoa",
+    "candidates": [
+      [
+        "Genoa",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Udinese",
+    "league": "Serie_A",
+    "matchId": "9865",
+    "playerId": "817",
+    "resolvedClub": "Udinese",
+    "rosterSide": "h",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Lazio",
+    "candidates": [
+      [
+        "Lazio",
+        "Serie_A"
+      ],
+      [
+        "SPAL 2013",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "SPAL 2013",
+    "league": "Serie_A",
+    "matchId": "9875",
+    "playerId": "1212",
+    "resolvedClub": "SPAL 2013",
+    "rosterSide": "h",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Cagliari",
+    "candidates": [
+      [
+        "Cagliari",
+        "Serie_A"
+      ],
+      [
+        "Roma",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Roma",
+    "league": "Serie_A",
+    "matchId": "9908",
+    "playerId": "4970",
+    "resolvedClub": "Cagliari",
+    "rosterSide": "a",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Fiorentina",
+    "candidates": [
+      [
+        "Empoli",
+        "Serie_A"
+      ],
+      [
+        "Fiorentina",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Empoli",
+    "league": "Serie_A",
+    "matchId": "9918",
+    "playerId": "1555",
+    "resolvedClub": "Empoli",
+    "rosterSide": "h",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  },
+  {
+    "aTeam": "Udinese",
+    "candidates": [
+      [
+        "Frosinone",
+        "Serie_A"
+      ],
+      [
+        "Udinese",
+        "Serie_A"
+      ]
+    ],
+    "hTeam": "Frosinone",
+    "league": "Serie_A",
+    "matchId": "9934",
+    "playerId": "1151",
+    "resolvedClub": "Udinese",
+    "rosterSide": "a",
+    "season": "2018/19",
+    "status": "EXACT_PROVIDER_ROSTER_PLAYER_ID"
+  }
+]

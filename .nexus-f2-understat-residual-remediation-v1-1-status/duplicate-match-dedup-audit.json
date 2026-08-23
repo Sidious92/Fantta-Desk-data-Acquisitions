@@ -1,0 +1,53 @@
+[
+  {
+    "differingFields": [
+      "npxG",
+      "roster_id",
+      "xG",
+      "xGBuildup",
+      "xGChain"
+    ],
+    "duplicateRows": 2,
+    "matchId": "23028",
+    "playerId": "2437",
+    "rawRowsPreservedInUpstreamArtifact": true,
+    "releasedObservedFieldsEqual": true,
+    "status": "OBSERVED_EVENT_DUPLICATE_COLLAPSED_PER_F2B_AMENDMENT_V1"
+  },
+  {
+    "differingFields": [
+      "npxG",
+      "roster_id",
+      "xG",
+      "xGChain"
+    ],
+    "duplicateRows": 2,
+    "matchId": "23028",
+    "playerId": "10561",
+    "rawRowsPreservedInUpstreamArtifact": true,
+    "releasedObservedFieldsEqual": true,
+    "status": "OBSERVED_EVENT_DUPLICATE_COLLAPSED_PER_F2B_AMENDMENT_V1"
+  },
+  {
+    "differingFields": [
+      "roster_id"
+    ],
+    "duplicateRows": 2,
+    "matchId": "29482",
+    "playerId": "11383",
+    "rawRowsPreservedInUpstreamArtifact": true,
+    "releasedObservedFieldsEqual": true,
+    "status": "OBSERVED_EVENT_DUPLICATE_COLLAPSED_PER_F2B_AMENDMENT_V1"
+  },
+  {
+    "differingFields": [
+      "roster_id"
+    ],
+    "duplicateRows": 2,
+    "matchId": "29482",
+    "playerId": "12322",
+    "rawRowsPreservedInUpstreamArtifact": true,
+    "releasedObservedFieldsEqual": true,
+    "status": "OBSERVED_EVENT_DUPLICATE_COLLAPSED_PER_F2B_AMENDMENT_V1"
+  }
+]
