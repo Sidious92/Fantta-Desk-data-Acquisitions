@@ -1,0 +1,109 @@
+name: F2 Understat Residual Remediation v1.1
+
+on:
+  push:
+    branches:
+      - feat/f2-understat-player-match-temporal-probe
+    paths:
+      - '.github/workflows/f2-understat-residual-remediation-v1-1.yml'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  remediate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/f2-understat-player-match-temporal-probe
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download frozen F2B v1.1 reconstruction
+        uses: actions/download-artifact@v4
+        with:
+          name: nexus-f2-understat-full-reconstruction-v1-1
+          path: source-reconstruction
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: Sidious92/Fantta-Desk-data-Acquisitions
+          run-id: '32663544437'
+      - name: Download frozen roster-resolution evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: nexus-f2-understat-residual-remediation-v1
+          path: source-roster
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: Sidious92/Fantta-Desk-data-Acquisitions
+          run-id: '32665685119'
+      - name: Verify and extract frozen inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          recon='source-reconstruction/nexus-f2-understat-full-reconstruction-v1-1.tar.gz'
+          roster='source-roster/nexus-f2-understat-residual-remediation-v1.tar.gz'
+          [ "$(sha256sum "$recon" | awk '{print $1}')" = '00a60a8a8b645e9bf171a354a4adb547c85b70085974596b093ea3dd7d5b329c' ]
+          [ "$(sha256sum "$roster" | awk '{print $1}')" = '406292ed47fc89dbb39b94ce1c161bf31c911e90e683629e86db0705657e6b0b' ]
+          mkdir -p input-reconstruction input-roster
+          tar -xzf "$recon" -C input-reconstruction
+          tar -xzf "$roster" -C input-roster
+      - name: Run amended observed-family remediation
+        id: remediation
+        shell: bash
+        run: |
+          mkdir -p .nexus-f2-understat-residual-remediation-v1-1
+          set +e
+          python scripts/nexus-f2-remediate-understat-residuals-v1-1.py \
+            --input-root input-reconstruction/combined \
+            --roster-root input-roster/.nexus-f2-understat-residual-remediation-v1/match-roster-raw \
+            --output-root .nexus-f2-understat-residual-remediation-v1-1 \
+            2>&1 | tee .nexus-f2-understat-residual-remediation-v1-1/RUN.log
+          code=${PIPESTATUS[0]}
+          echo "$code" > .nexus-f2-understat-residual-remediation-v1-1/EXIT_CODE.txt
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Package amended remediation evidence
+        if: always()
+        shell: bash
+        run: |
+          tar -czf nexus-f2-understat-residual-remediation-v1-1.tar.gz .nexus-f2-understat-residual-remediation-v1-1
+          sha256sum nexus-f2-understat-residual-remediation-v1-1.tar.gz > .nexus-f2-understat-residual-remediation-v1-1/PACKAGE_SHA256.txt
+          printf '%s\n' '${{ github.run_id }}' > .nexus-f2-understat-residual-remediation-v1-1/RUN_ID.txt
+      - name: Upload amended remediation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f2-understat-residual-remediation-v1-1
+          path: |
+            nexus-f2-understat-residual-remediation-v1-1.tar.gz
+            .nexus-f2-understat-residual-remediation-v1-1
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+      - name: Persist compact amended status
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p .nexus-f2-understat-residual-remediation-v1-1-status
+          for f in REMEDIATION_AUDIT.json MANIFEST.json RUN.log EXIT_CODE.txt PACKAGE_SHA256.txt RUN_ID.txt duplicate-match-dedup-audit.json roster-resolution-audit.json roster-fetch-manifest.json; do
+            if [ -f ".nexus-f2-understat-residual-remediation-v1-1/$f" ]; then
+              cp ".nexus-f2-understat-residual-remediation-v1-1/$f" ".nexus-f2-understat-residual-remediation-v1-1-status/$f"
+            fi
+          done
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f .nexus-f2-understat-residual-remediation-v1-1-status
+          if ! git diff --cached --quiet; then
+            git commit -m 'nexus f2: persist Understat residual remediation v1.1 [skip ci]'
+            git push origin HEAD:feat/f2-understat-player-match-temporal-probe
+          fi
+      - name: Enforce amended remediation gate
+        if: always()
+        shell: bash
+        run: |
+          code='${{ steps.remediation.outputs.exit_code }}'
+          [ -n "$code" ] || exit 1
+          [ "$code" = '0' ] || exit "$code"
