@@ -1,0 +1,12 @@
+{
+  "audit": {
+    "bytes": 1898,
+    "path": ".nexus-f2-understat-full-reconstruction-v1-final/FULL_AUDIT.json",
+    "sha256": "fd5c1abdf748153eae3e3c8ac56ae238b22e0e9962950d90e5fa14369a1e300b"
+  },
+  "githubRunId": "32662221406",
+  "inputFiles": [],
+  "inputTreeContentDigestSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "schema": "NEXUS_F2_UNDERSTAT_FULL_TEMPORAL_RECONSTRUCTION_MANIFEST_V1",
+  "status": "FAIL"
+}

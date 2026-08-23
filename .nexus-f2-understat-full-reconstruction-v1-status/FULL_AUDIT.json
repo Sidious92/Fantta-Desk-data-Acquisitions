@@ -1,0 +1,72 @@
+{
+  "capturedAt": "2026-08-23T20:07:12.634528+00:00",
+  "counts": {
+    "d1ExactUnderstatPlayers": 0,
+    "exactSourceReferenceComparisons": 0,
+    "manifestFiles": 0,
+    "observedClubSegments": 0,
+    "rawFiles": 0,
+    "shards": 0,
+    "sourceReferenceComparisons": 0
+  },
+  "failures": [
+    {
+      "code": "SHARD_COUNT_MISMATCH",
+      "expected": 8,
+      "observed": 0
+    },
+    {
+      "code": "SHARD_INDEX_SET_INVALID",
+      "observed": []
+    },
+    {
+      "code": "FULL_PLAYER_COUNT_MISMATCH",
+      "expected": 2048,
+      "observed": 0
+    }
+  ],
+  "githubRunId": "32662221406",
+  "schema": "NEXUS_F2_UNDERSTAT_FULL_TEMPORAL_RECONSTRUCTION_AUDIT_V1",
+  "segmentsByLeague": {},
+  "segmentsBySeason": {},
+  "shards": [],
+  "sourceAuthority": {
+    "d1Sha256": "952bdf1d4cfb81a0683bff1f78d949b6350b11be1cc27d20059f7ace651bb53c",
+    "endpoint": "getPlayerData/{player_id}",
+    "provider": "UNDERSTAT",
+    "understatAggregateSha256": "b78fad5f01844a0fdab0d89474dafba9b86c586d2f0ce88f0ce2c9af70d2bc64"
+  },
+  "status": "FAIL",
+  "temporalDecision": {
+    "expectedFields": [
+      "xG",
+      "npxG",
+      "xA",
+      "xGChain",
+      "xGBuildup"
+    ],
+    "expectedFieldsStatus": "QUARANTINED_VINTAGE_REQUIRED",
+    "observedFields": [
+      "games",
+      "time",
+      "goals",
+      "npg",
+      "assists",
+      "shots",
+      "key_passes"
+    ],
+    "releaseIfPass": "VERIFIED_EVENT_RECONSTRUCTION"
+  },
+  "treeContentDigestSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "validation": {
+    "aggregateUsedAsPrimaryEvidence": false,
+    "allD1AliasesFetchedExactlyOnce": false,
+    "allSourceReferenceComparisonsExact": true,
+    "canonicalPredictiveEngineModified": false,
+    "expectedMetricsReleased": false,
+    "fuzzyMatchingUsed": false,
+    "impossibleValues": 0,
+    "uniqueReconciliationKeys": true,
+    "uniqueSegmentKeys": true
+  }
+}

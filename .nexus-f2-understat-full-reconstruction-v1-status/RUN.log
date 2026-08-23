@@ -1,0 +1,10 @@
+{
+  "status": "FAIL",
+  "players": 0,
+  "comparisons": 0,
+  "segments": 0,
+  "inputTreeDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "auditSha256": "fd5c1abdf748153eae3e3c8ac56ae238b22e0e9962950d90e5fa14369a1e300b",
+  "manifestSha256": "664acbc215b49cc39d8e95f271e683bcfb29a9f11d100397a5db7041c6d89d44",
+  "failures": 3
+}
