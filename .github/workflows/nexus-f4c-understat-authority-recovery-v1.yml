@@ -1,0 +1,61 @@
+name: Nexus F4C Understat Authority Recovery v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/f4c-recover-understat-authority-v1.mjs'
+      - '.github/workflows/nexus-f4c-understat-authority-recovery-v1.yml'
+      - '.nexus-f4c-recovery-trigger'
+
+permissions:
+  contents: read
+
+env:
+  NEXUS_F4C_RECOVERY_OUT: .nexus-f4c-understat-recovery-v1
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Recover and verify frozen raw bytes
+        id: recover
+        continue-on-error: true
+        run: node scripts/f4c-recover-understat-authority-v1.mjs
+      - name: Add workflow provenance
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='.nexus-f4c-understat-recovery-v1/recovery-audit.json';
+          if (fs.existsSync(p)) {
+            const x=JSON.parse(fs.readFileSync(p,'utf8'));
+            x.workflow={repository:process.env.GITHUB_REPOSITORY,runId:Number(process.env.GITHUB_RUN_ID),runAttempt:Number(process.env.GITHUB_RUN_ATTEMPT),headSha:process.env.GITHUB_SHA};
+            fs.writeFileSync(p,JSON.stringify(x,null,2)+'\n');
+          }
+          NODE
+      - name: Hash evidence
+        if: always()
+        run: |
+          find "$NEXUS_F4C_RECOVERY_OUT" -type f -print0 | sort -z | xargs -0 sha256sum > "$NEXUS_F4C_RECOVERY_OUT/FILES.sha256" || true
+          sha256sum "$NEXUS_F4C_RECOVERY_OUT/recovery-audit.json" > "$NEXUS_F4C_RECOVERY_OUT/recovery-audit.sha256" || true
+      - name: Upload recovery evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f4c-understat-authority-recovery-v1
+          path: .nexus-f4c-understat-recovery-v1/
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
+      - name: Enforce exact authority gate
+        if: always()
+        run: |
+          test -f "$NEXUS_F4C_RECOVERY_OUT/recovery-audit.json"
+          node -e "const x=require('./$NEXUS_F4C_RECOVERY_OUT/recovery-audit.json'); if(x.status!=='PASS_EXACT_FROZEN_RAW_RECOVERED'||x.exactRawHashMatches!==11||x.exactRawHashMismatches!==0) process.exit(2)"
