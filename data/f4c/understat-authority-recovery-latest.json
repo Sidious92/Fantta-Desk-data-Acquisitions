@@ -1,0 +1,166 @@
+{
+  "schema": "NEXUS_F4C_UNDERSTAT_AUTHORITY_RECOVERY_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS_EXACT_FROZEN_RAW_RECOVERED",
+  "generatedAt": "2026-08-24T18:45:42.168Z",
+  "scientificUse": "SOURCE_RECOVERY_AND_SCHEMA_GATE_ONLY_NO_FEATURE_MATERIALIZATION",
+  "seasons": [
+    {
+      "seasonStartYear": 2014,
+      "season": "2014/15",
+      "apiUrl": "https://understat.com/getLeagueData/Serie_A/2014",
+      "expectedRawSha256": "2d7cb9017045897e05d6dc5e41dff3a41e7b3981384af02ca18f310a956f1fbb",
+      "actualRawSha256": "2d7cb9017045897e05d6dc5e41dff3a41e7b3981384af02ca18f310a956f1fbb",
+      "exactRawHashMatch": true,
+      "schema": {
+        "teamCount": 20,
+        "teamHistoryRows": 760,
+        "playerCount": 574
+      }
+    },
+    {
+      "seasonStartYear": 2015,
+      "season": "2015/16",
+      "apiUrl": "https://understat.com/getLeagueData/Serie_A/2015",
+      "expectedRawSha256": "6b972b30bf15bf43dc89a9226af35e24b2cb318a1a9f8a2f184bb09e31366545",
+      "actualRawSha256": "6b972b30bf15bf43dc89a9226af35e24b2cb318a1a9f8a2f184bb09e31366545",
+      "exactRawHashMatch": true,
+      "schema": {
+        "teamCount": 20,
+        "teamHistoryRows": 760,
+        "playerCount": 551
+      }
+    },
+    {
+      "seasonStartYear": 2016,
+      "season": "2016/17",
+      "apiUrl": "https://understat.com/getLeagueData/Serie_A/2016",
+      "expectedRawSha256": "e73d5bc115a7310893f605217615f1b154560bdca7b8431e57eb5fb5c5adf942",
+      "actualRawSha256": "e73d5bc115a7310893f605217615f1b154560bdca7b8431e57eb5fb5c5adf942",
+      "exactRawHashMatch": true,
+      "schema": {
+        "teamCount": 20,
+        "teamHistoryRows": 760,
+        "playerCount": 560
+      }
+    },
+    {
+      "seasonStartYear": 2017,
+      "season": "2017/18",
+      "apiUrl": "https://understat.com/getLeagueData/Serie_A/2017",
+      "expectedRawSha256": "96077940562478f350b699304359c53e2c4dd24e76528505fce52d6a464d8137",
+      "actualRawSha256": "96077940562478f350b699304359c53e2c4dd24e76528505fce52d6a464d8137",
+      "exactRawHashMatch": true,
+      "schema": {
+        "teamCount": 20,
+        "teamHistoryRows": 760,
+        "playerCount": 533
+      }
+    },
+    {
+      "seasonStartYear": 2018,
+      "season": "2018/19",
+      "apiUrl": "https://understat.com/getLeagueData/Serie_A/2018",
+      "expectedRawSha256": "a93625ceda10fd7e115d1bdbfd39473cd3f1a5485142332402432d70df4a0e4e",
+      "actualRawSha256": "a93625ceda10fd7e115d1bdbfd39473cd3f1a5485142332402432d70df4a0e4e",
+      "exactRawHashMatch": true,
+      "schema": {
+        "teamCount": 20,
+        "teamHistoryRows": 760,
+        "playerCount": 543
+      }
+    },
+    {
+      "seasonStartYear": 2019,
+      "season": "2019/20",
+      "apiUrl": "https://understat.com/getLeagueData/Serie_A/2019",
+      "expectedRawSha256": "d865ec6d76e24ace677bdbf2404478f1fa54f348ba27d4b17230436ee6a67625",
+      "actualRawSha256": "d865ec6d76e24ace677bdbf2404478f1fa54f348ba27d4b17230436ee6a67625",
+      "exactRawHashMatch": true,
+      "schema": {
+        "teamCount": 20,
+        "teamHistoryRows": 760,
+        "playerCount": 572
+      }
+    },
+    {
+      "seasonStartYear": 2020,
+      "season": "2020/21",
+      "apiUrl": "https://understat.com/getLeagueData/Serie_A/2020",
+      "expectedRawSha256": "00828384f05817f514ed1bef4835c636347aed3f0e08f1d9ee0606faf72bd83a",
+      "actualRawSha256": "00828384f05817f514ed1bef4835c636347aed3f0e08f1d9ee0606faf72bd83a",
+      "exactRawHashMatch": true,
+      "schema": {
+        "teamCount": 20,
+        "teamHistoryRows": 760,
+        "playerCount": 594
+      }
+    },
+    {
+      "seasonStartYear": 2021,
+      "season": "2021/22",
+      "apiUrl": "https://understat.com/getLeagueData/Serie_A/2021",
+      "expectedRawSha256": "51f3fde84c0a87188c96f352b78185005c9bf8ba40bc8d31a72a31c38022aa9c",
+      "actualRawSha256": "51f3fde84c0a87188c96f352b78185005c9bf8ba40bc8d31a72a31c38022aa9c",
+      "exactRawHashMatch": true,
+      "schema": {
+        "teamCount": 20,
+        "teamHistoryRows": 760,
+        "playerCount": 608
+      }
+    },
+    {
+      "seasonStartYear": 2022,
+      "season": "2022/23",
+      "apiUrl": "https://understat.com/getLeagueData/Serie_A/2022",
+      "expectedRawSha256": "3f46c1788dcf22deef2673bfd7d9547211ee0fdfec62b0eb3d18e922b2cbdb49",
+      "actualRawSha256": "3f46c1788dcf22deef2673bfd7d9547211ee0fdfec62b0eb3d18e922b2cbdb49",
+      "exactRawHashMatch": true,
+      "schema": {
+        "teamCount": 20,
+        "teamHistoryRows": 760,
+        "playerCount": 577
+      }
+    },
+    {
+      "seasonStartYear": 2023,
+      "season": "2023/24",
+      "apiUrl": "https://understat.com/getLeagueData/Serie_A/2023",
+      "expectedRawSha256": "5c424c7a334d9bf43c15fb5f83f0eceec5cfdae8a5891b7b35a61d0b0794731f",
+      "actualRawSha256": "5c424c7a334d9bf43c15fb5f83f0eceec5cfdae8a5891b7b35a61d0b0794731f",
+      "exactRawHashMatch": true,
+      "schema": {
+        "teamCount": 20,
+        "teamHistoryRows": 760,
+        "playerCount": 590
+      }
+    },
+    {
+      "seasonStartYear": 2024,
+      "season": "2024/25",
+      "apiUrl": "https://understat.com/getLeagueData/Serie_A/2024",
+      "expectedRawSha256": "56ae389329b7e5ff6b3c7954923bbdfd4b64f0e1ccc5fc091d9453792d084884",
+      "actualRawSha256": "56ae389329b7e5ff6b3c7954923bbdfd4b64f0e1ccc5fc091d9453792d084884",
+      "exactRawHashMatch": true,
+      "schema": {
+        "teamCount": 20,
+        "teamHistoryRows": 760,
+        "playerCount": 599
+      }
+    }
+  ],
+  "exactRawHashMatches": 11,
+  "exactRawHashMismatches": 0,
+  "governance": {
+    "downstreamFantasyOutcomesUsed": false,
+    "canonicalPredictiveEngineModified": false,
+    "f5Started": false
+  },
+  "workflow": {
+    "repository": "Sidious92/Fantta-Desk-data-Acquisitions",
+    "runId": 32764220267,
+    "runAttempt": 1,
+    "headSha": "d0c0b0189e8fa2700e16816c35bcb463700e1266",
+    "recoveryStepOutcome": "success"
+  }
+}
