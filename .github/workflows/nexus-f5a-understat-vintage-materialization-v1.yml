@@ -1,0 +1,211 @@
+name: Nexus F5A Understat Vintage Materialization v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/nexus-f5a-understat-vintage-materialization-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  materialize-vintages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout runner repository
+        uses: actions/checkout@v4
+
+      - name: Materialize value-blind historical Understat vintages
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv, hashlib, io, json, pathlib, subprocess, shutil
+          from datetime import datetime, timezone
+
+          out = pathlib.Path('artifact')
+          out.mkdir(parents=True, exist_ok=True)
+
+          douglas_repo = pathlib.Path('/tmp/douglas-understat')
+          subprocess.run([
+              'git','clone','--filter=blob:none','--no-checkout',
+              'https://github.com/douglasbc/scraping-understat-dataset.git',
+              str(douglas_repo)
+          ], check=True)
+          terminal = '0e474a6197b9707d92b21db9bb47e5ab1b6bb876'
+          subprocess.run(['git','-C',str(douglas_repo),'cat-file','-e',terminal+'^{commit}'], check=True)
+
+          leagues = ['serie_a','epl','bundesliga','la_liga','ligue_1','rfpl']
+          seasons = ['14-15','15-16','16-17','17-18','18-19','19-20','20-21']
+          manifest = {
+              'schema':'NEXUS_F5A_UNDERSTAT_VINTAGE_MATERIALIZATION_V1',
+              'selectionUsesPredictiveValues':False,
+              'selectionUsesFantasyOutcomes':False,
+              'fuzzyIdentityUsed':False,
+              'sources':[],
+              'files':[]
+          }
+
+          def git_show(repo, commit, path):
+              return subprocess.check_output(['git','-C',str(repo),'show',f'{commit}:{path}'])
+
+          def commit_iso(repo, commit):
+              return subprocess.check_output(['git','-C',str(repo),'show','-s','--format=%cI',commit], text=True).strip()
+
+          def blob_sha(repo, commit, path):
+              return subprocess.check_output(['git','-C',str(repo),'rev-parse',f'{commit}:{path}'], text=True).strip()
+
+          def parse_iso(s):
+              return datetime.fromisoformat(s.replace('Z','+00:00')).astimezone(timezone.utc)
+
+          # Douglas: derive completion boundary from the terminal frozen shot surface,
+          # then choose the earliest immutable player-file commit strictly after it.
+          for league in leagues:
+              for season in seasons:
+                  ppath = f'datasets/{league}/players_{league}_{season}.csv'
+                  spath = f'datasets/{league}/shots_{league}_{season}.csv'
+                  shots = git_show(douglas_repo, terminal, spath).decode('utf-8-sig')
+                  sr = csv.DictReader(io.StringIO(shots))
+                  dates=[]
+                  for r in sr:
+                      d=(r.get('date') or '').strip()
+                      if d:
+                          dates.append(datetime.fromisoformat(d).replace(tzinfo=timezone.utc))
+                  if not dates:
+                      raise SystemExit(f'No completion-date evidence in {spath}')
+                  season_end=max(dates)
+
+                  log = subprocess.check_output([
+                      'git','-C',str(douglas_repo),'log','--all','--reverse','--format=%H|%cI','--',ppath
+                  ], text=True).splitlines()
+                  selected=None
+                  for line in log:
+                      sha, iso=line.split('|',1)
+                      if parse_iso(iso) <= season_end:
+                          continue
+                      try:
+                          raw=git_show(douglas_repo, sha, ppath)
+                      except subprocess.CalledProcessError:
+                          continue
+                      rr=csv.DictReader(io.StringIO(raw.decode('utf-8-sig')))
+                      fields=set(rr.fieldnames or [])
+                      if {'id','time','npxG','xA'} <= fields:
+                          selected=(sha,iso,raw)
+                          break
+                  if selected is None:
+                      raise SystemExit(f'No eligible post-completion vintage for {ppath}')
+                  sha, iso, raw = selected
+                  rel=pathlib.Path('douglas')/league/f'players_{league}_{season}.csv'
+                  dest=out/rel
+                  dest.parent.mkdir(parents=True,exist_ok=True)
+                  dest.write_bytes(raw)
+                  rows=list(csv.DictReader(io.StringIO(raw.decode('utf-8-sig'))))
+                  ids=[str(r['id']).strip() for r in rows]
+                  if len(ids)!=len(set(ids)):
+                      raise SystemExit(f'Duplicate Understat id in {rel}')
+                  manifest['files'].append({
+                      'sourceId':'DOUGLASBC_HISTORICAL_UNDERSTAT',
+                      'league':league,
+                      'season':season,
+                      'seasonCompletionEvidenceUtc':season_end.isoformat(),
+                      'selectedCommit':sha,
+                      'selectedCommitTimestamp':iso,
+                      'path':ppath,
+                      'gitBlobSha':blob_sha(douglas_repo,sha,ppath),
+                      'sha256':hashlib.sha256(raw).hexdigest(),
+                      'bytes':len(raw),
+                      'rows':len(rows),
+                      'uniqueUnderstatIds':len(set(ids))
+                  })
+
+          manifest['sources'].append({
+              'sourceId':'DOUGLASBC_HISTORICAL_UNDERSTAT',
+              'repository':'douglasbc/scraping-understat-dataset',
+              'terminalReferenceCommit':terminal
+          })
+
+          # Vaastav: exact post-GW38 2021/22 EPL player-match surface.
+          vaastav_repo=pathlib.Path('/tmp/vaastav-fpl')
+          vcommit='969ebcc35cf19520b6c6318bf833a54074b7dfab'
+          subprocess.run([
+              'git','clone','--filter=blob:none','--no-checkout','--depth=1',
+              'https://github.com/vaastav/Fantasy-Premier-League.git',str(vaastav_repo)
+          ], check=True)
+          subprocess.run(['git','-C',str(vaastav_repo),'fetch','--depth=1','origin',vcommit],check=True)
+          subprocess.run(['git','-C',str(vaastav_repo),'checkout','--detach','FETCH_HEAD'],check=True)
+          actual=subprocess.check_output(['git','-C',str(vaastav_repo),'rev-parse','HEAD'],text=True).strip()
+          if actual!=vcommit:
+              raise SystemExit('Vaastav commit mismatch')
+
+          tree=subprocess.check_output([
+              'git','-C',str(vaastav_repo),'ls-tree','-r','--name-only',vcommit,'data/2021-22/understat'
+          ],text=True).splitlines()
+          files=[p for p in tree if p.endswith('.csv') and pathlib.PurePosixPath(p).name!='understat_player.csv']
+          if not files:
+              raise SystemExit('No Vaastav Understat player-match CSVs')
+          vout=out/'vaastav'/'epl'/'2021-22'
+          vout.mkdir(parents=True,exist_ok=True)
+          player_files=0
+          id_set=set()
+          for p in files:
+              name=pathlib.PurePosixPath(p).name
+              stem=name[:-4]
+              if '_' not in stem:
+                  continue
+              pid=stem.rsplit('_',1)[-1]
+              if not pid.isdigit():
+                  continue
+              raw=git_show(vaastav_repo,vcommit,p)
+              rr=list(csv.DictReader(io.StringIO(raw.decode('utf-8-sig'))))
+              fields=set(rr[0].keys() if rr else [])
+              if not {'time','npxG','xA'} <= fields:
+                  raise SystemExit(f'Missing required fields in {p}')
+              if pid in id_set:
+                  raise SystemExit(f'Duplicate Vaastav Understat player id {pid}')
+              id_set.add(pid)
+              (vout/name).write_bytes(raw)
+              player_files+=1
+              manifest['files'].append({
+                  'sourceId':'VAASTAV_EPL_2021_22_FINAL',
+                  'league':'epl','season':'21-22','understatPlayerId':pid,
+                  'selectedCommit':vcommit,
+                  'selectedCommitTimestamp':commit_iso(vaastav_repo,vcommit),
+                  'path':p,'gitBlobSha':blob_sha(vaastav_repo,vcommit,p),
+                  'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw),'rows':len(rr)
+              })
+          if player_files < 300:
+              raise SystemExit(f'Unexpectedly low Vaastav player-file count {player_files}')
+          manifest['sources'].append({
+              'sourceId':'VAASTAV_EPL_2021_22_FINAL',
+              'repository':'vaastav/Fantasy-Premier-League',
+              'selectedCommit':vcommit,
+              'selectedCommitTimestamp':commit_iso(vaastav_repo,vcommit),
+              'playerFiles':player_files,
+              'uniqueUnderstatIds':len(id_set)
+          })
+
+          manifest['files']=sorted(manifest['files'],key=lambda x:(x['sourceId'],x.get('league',''),x.get('season',''),x.get('understatPlayerId','')))
+          mb=(json.dumps(manifest,indent=2,sort_keys=True)+'\n').encode()
+          (out/'MANIFEST.json').write_bytes(mb)
+          sums=[]
+          for p in sorted(x for x in out.rglob('*') if x.is_file() and x.name!='SHA256SUMS.txt'):
+              sums.append(f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.relative_to(out).as_posix()}")
+          (out/'SHA256SUMS.txt').write_text('\n'.join(sums)+'\n')
+          print(json.dumps({
+              'douglasLeagueSeasons':sum(1 for f in manifest['files'] if f['sourceId']=='DOUGLASBC_HISTORICAL_UNDERSTAT'),
+              'vaastavPlayerFiles':player_files,
+              'totalManifestFiles':len(manifest['files']),
+              'manifestSha256':hashlib.sha256(mb).hexdigest()
+          },indent=2))
+          PY
+
+      - name: Upload content-addressed F5A vintage evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f5a-understat-vintages-v1
+          path: artifact/
+          if-no-files-found: error
+          retention-days: 30
