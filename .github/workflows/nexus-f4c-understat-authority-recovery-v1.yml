@@ -10,7 +10,7 @@ on:
       - '.nexus-f4c-recovery-trigger'
 
 permissions:
-  contents: read
+  contents: write
 
 env:
   NEXUS_F4C_RECOVERY_OUT: .nexus-f4c-understat-recovery-v1
@@ -28,23 +28,37 @@ jobs:
         id: recover
         continue-on-error: true
         run: node scripts/f4c-recover-understat-authority-v1.mjs
-      - name: Add workflow provenance
+      - name: Ensure audit and add workflow provenance
         if: always()
         run: |
+          mkdir -p "$NEXUS_F4C_RECOVERY_OUT"
           node - <<'NODE'
           const fs=require('fs');
           const p='.nexus-f4c-understat-recovery-v1/recovery-audit.json';
-          if (fs.existsSync(p)) {
-            const x=JSON.parse(fs.readFileSync(p,'utf8'));
-            x.workflow={repository:process.env.GITHUB_REPOSITORY,runId:Number(process.env.GITHUB_RUN_ID),runAttempt:Number(process.env.GITHUB_RUN_ATTEMPT),headSha:process.env.GITHUB_SHA};
-            fs.writeFileSync(p,JSON.stringify(x,null,2)+'\n');
-          }
+          let x;
+          if (fs.existsSync(p)) x=JSON.parse(fs.readFileSync(p,'utf8'));
+          else x={schema:'NEXUS_F4C_UNDERSTAT_AUTHORITY_RECOVERY_V1',protocolVersion:'1.1',status:'FAIL_RECOVERY_DID_NOT_PRODUCE_AUDIT',seasons:[],exactRawHashMatches:0,exactRawHashMismatches:null};
+          x.workflow={repository:process.env.GITHUB_REPOSITORY,runId:Number(process.env.GITHUB_RUN_ID),runAttempt:Number(process.env.GITHUB_RUN_ATTEMPT),headSha:process.env.GITHUB_SHA,recoveryStepOutcome:'${{ steps.recover.outcome }}'};
+          fs.writeFileSync(p,JSON.stringify(x,null,2)+'\n');
           NODE
       - name: Hash evidence
         if: always()
         run: |
-          find "$NEXUS_F4C_RECOVERY_OUT" -type f -print0 | sort -z | xargs -0 sha256sum > "$NEXUS_F4C_RECOVERY_OUT/FILES.sha256" || true
-          sha256sum "$NEXUS_F4C_RECOVERY_OUT/recovery-audit.json" > "$NEXUS_F4C_RECOVERY_OUT/recovery-audit.sha256" || true
+          find "$NEXUS_F4C_RECOVERY_OUT" -type f ! -name 'FILES.sha256' -print0 | sort -z | xargs -0 sha256sum > "$NEXUS_F4C_RECOVERY_OUT/FILES.sha256" || true
+          sha256sum "$NEXUS_F4C_RECOVERY_OUT/recovery-audit.json" > "$NEXUS_F4C_RECOVERY_OUT/recovery-audit.sha256"
+      - name: Persist compact recovery receipt
+        if: always()
+        run: |
+          mkdir -p data/f4c
+          cp "$NEXUS_F4C_RECOVERY_OUT/recovery-audit.json" data/f4c/understat-authority-recovery-latest.json
+          cp "$NEXUS_F4C_RECOVERY_OUT/recovery-audit.sha256" data/f4c/understat-authority-recovery-latest.sha256
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/f4c/understat-authority-recovery-latest.json data/f4c/understat-authority-recovery-latest.sha256
+          if ! git diff --cached --quiet; then
+            git commit -m "nexus f4c: persist Understat recovery receipt"
+            git push origin HEAD:main
+          fi
       - name: Upload recovery evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -53,9 +67,8 @@ jobs:
           path: .nexus-f4c-understat-recovery-v1/
           if-no-files-found: error
           include-hidden-files: true
-          retention-days: 30
+          retention-days: 1
       - name: Enforce exact authority gate
         if: always()
         run: |
-          test -f "$NEXUS_F4C_RECOVERY_OUT/recovery-audit.json"
           node -e "const x=require('./$NEXUS_F4C_RECOVERY_OUT/recovery-audit.json'); if(x.status!=='PASS_EXACT_FROZEN_RAW_RECOVERED'||x.exactRawHashMatches!==11||x.exactRawHashMismatches!==0) process.exit(2)"
