@@ -1,0 +1,82 @@
+name: Nexus F5C MV Leonardo Vintage v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/nexus-f5c-mv-leonardo-vintage-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acquire-inspect-mv-vintage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Acquire immutable 2022-23 Fantacalcio statistics snapshot and inspect schema
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, pathlib, subprocess, sys
+          try:
+              import openpyxl
+          except Exception:
+              subprocess.run([sys.executable,'-m','pip','install','--quiet','openpyxl==3.1.5'],check=True)
+              import openpyxl
+
+          out=pathlib.Path('artifact'); out.mkdir(exist_ok=True)
+          repo=pathlib.Path('/tmp/leonardo-fantacalcio')
+          commit='7fd37ad6c37f9ed5cec223711ffe1f0e785e6625'
+          ts='2023-08-02T16:30:51Z'
+          path='Dati Fantacalcio.it/Statistiche/Statistiche_Fantacalcio_2022-23_Italia.xlsx'
+          subprocess.run(['git','clone','--filter=blob:none','--no-checkout','https://github.com/LeonardoAcquaroli/Fantacalcio.git',str(repo)],check=True)
+          subprocess.run(['git','-C',str(repo),'fetch','--depth=1','origin',commit],check=True)
+          raw=subprocess.check_output(['git','-C',str(repo),'show',f'{commit}:{path}'])
+          blob=subprocess.check_output(['git','-C',str(repo),'rev-parse',f'{commit}:{path}'],text=True).strip()
+          dst=out/'Statistiche_Fantacalcio_2022-23_Italia.xlsx'; dst.write_bytes(raw)
+
+          wb=openpyxl.load_workbook(dst, read_only=True, data_only=True)
+          sheets=[]
+          candidate_headers=[]
+          for ws in wb.worksheets:
+              info={'title':ws.title,'maxRow':ws.max_row,'maxColumn':ws.max_column}
+              sheets.append(info)
+              for ridx,row in enumerate(ws.iter_rows(min_row=1,max_row=min(ws.max_row,25),values_only=True),start=1):
+                  vals=[('' if v is None else str(v).strip()) for v in row]
+                  low=[v.lower() for v in vals]
+                  score=sum(any(tok in x for x in low) for tok in ['id','mv','media','pv','pres','nome','giocatore','squadra','ruolo'])
+                  if score>=3:
+                      candidate_headers.append({'sheet':ws.title,'row':ridx,'values':vals,'score':score})
+          wb.close()
+
+          manifest={
+            'schema':'NEXUS_F5C_MV_LEONARDO_VINTAGE_SCHEMA_INSPECTION_V1',
+            'sourceId':'LEONARDOACQUAROLI_FANTACALCIO_STATS_2022_23',
+            'repository':'LeonardoAcquaroli/Fantacalcio','selectedCommit':commit,
+            'selectedCommitTimestamp':ts,'repositoryCreatedAt':'2023-08-02T16:29:23Z',
+            'path':path,'gitBlobSha':blob,'sha256':hashlib.sha256(raw).hexdigest(),
+            'bytes':len(raw),'sheets':sheets,'candidateHeaders':candidate_headers,
+            'sourcePathExplicitlyNamesFantacalcioIt':True,
+            'completedSeasonNamedByFile':'2022-23',
+            'cutoffDateFor2023_24':'2023-08-02',
+            'sameCalendarDayAsCutoff':True,
+            'cutoffTimeEligibilityNotAssumed':True,
+            'predictivePerformanceUsedForSelection':False,
+            'fantasyTargetPerformanceUsedForSelection':False
+          }
+          mb=(json.dumps(manifest,ensure_ascii=False,indent=2,sort_keys=True)+'\n').encode()
+          (out/'MANIFEST.json').write_bytes(mb)
+          (out/'SHA256SUMS.txt').write_text(f"{hashlib.sha256(raw).hexdigest()}  {dst.name}\n{hashlib.sha256(mb).hexdigest()}  MANIFEST.json\n",encoding='utf-8')
+          print(json.dumps(manifest,ensure_ascii=False,indent=2,sort_keys=True))
+          PY
+      - name: Upload MV vintage inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f5c-mv-leonardo-vintage-v1
+          path: artifact/
+          if-no-files-found: error
+          retention-days: 30
