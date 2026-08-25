@@ -1,0 +1,64 @@
+name: Nexus F6 B0 FantaStat History v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/f5-understat-invariance-audit
+    paths:
+      - .github/workflows/nexus-f6-b0-fantastat-history-v1.yml
+
+permissions:
+  contents: read
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SOURCE_REPO: dandolodavid/FantaStat
+      SOURCE_COMMIT: e92ae5eb33d47d60ed1d9b515ac37788b408d672
+    steps:
+      - uses: actions/checkout@v6
+      - name: Acquire pinned historical file
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifact
+          curl --fail --location --silent --show-error \
+            "https://raw.githubusercontent.com/${SOURCE_REPO}/${SOURCE_COMMIT}/dataset/player_history%5E(Stagione%202021_22).csv" \
+            -o 'artifact/player_history_2021_22.csv'
+      - name: Audit historical seasons and schema
+        shell: python
+        run: |
+          import csv, hashlib, json
+          from collections import Counter
+          from pathlib import Path
+          p=Path('artifact/player_history_2021_22.csv')
+          raw=p.read_bytes(); sha=hashlib.sha256(raw).hexdigest()
+          text=raw.decode('utf-8-sig')
+          rows=list(csv.DictReader(text.splitlines()))
+          if not rows: raise SystemExit('empty player history')
+          cols=list(rows[0].keys())
+          required_any=[['Id','Stagione'],['id','Stagione'],['Id','stagione'],['id','stagione']]
+          if not any(all(x in cols for x in r) for r in required_any):
+              raise SystemExit(f'identity/season columns missing: {cols[:40]}')
+          season_col='Stagione' if 'Stagione' in cols else 'stagione'
+          id_col='Id' if 'Id' in cols else 'id'
+          seasons=Counter(str(r.get(season_col,'')).strip() for r in rows)
+          wanted={k:v for k,v in seasons.items() if any(y in k for y in ['2020','2021'])}
+          if not any('2020' in k for k in seasons): raise SystemExit(f'2020/21 history absent: {sorted(seasons)}')
+          if not any('2021' in k for k in seasons): raise SystemExit(f'2021/22 history absent: {sorted(seasons)}')
+          audit={'schema':'NEXUS_F6_B0_FANTASTAT_HISTORY_ACQUISITION_V1','sourceRepo':'dandolodavid/FantaStat','sourceCommit':'e92ae5eb33d47d60ed1d9b515ac37788b408d672','file':p.name,'sha256':sha,'bytes':len(raw),'rows':len(rows),'columns':cols,'seasonCounts':dict(sorted(seasons.items())),'wantedSeasonCounts':wanted,'uniqueIds':len({str(r.get(id_col,'')).strip() for r in rows if str(r.get(id_col,'')).strip()})}
+          Path('artifact/HISTORY_AUDIT.json').write_text(json.dumps(audit,sort_keys=True,separators=(',',':'))+'\n')
+          sums=[]
+          for f in sorted(Path('artifact').iterdir()): sums.append(f'{hashlib.sha256(f.read_bytes()).hexdigest()}  {f.name}')
+          Path('artifact/SHA256SUMS.txt').write_text('\n'.join(sums)+'\n')
+          print(json.dumps(audit,indent=2))
+      - name: Upload pinned B0 history
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f6-b0-fantastat-history-v1
+          path: artifact/
+          if-no-files-found: error
+          retention-days: 30
