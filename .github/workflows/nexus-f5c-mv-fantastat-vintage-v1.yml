@@ -1,0 +1,61 @@
+name: Nexus F5C MV FantaStat Vintage v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/nexus-f5c-mv-fantastat-vintage-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acquire-mv-vintage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Acquire immutable pre-cutoff FantaStat/Fantacalcio vote snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv, hashlib, json, pathlib, subprocess
+          out=pathlib.Path('artifact'); out.mkdir(exist_ok=True)
+          repo=pathlib.Path('/tmp/FantaStat')
+          commit='e92ae5eb33d47d60ed1d9b515ac37788b408d672'
+          ts='2022-08-03T19:37:59Z'
+          path='dataset/stat_info^(Stagione 2021_22).csv'
+          subprocess.run(['git','clone','--filter=blob:none','--no-checkout','https://github.com/dandolodavid/FantaStat.git',str(repo)],check=True)
+          subprocess.run(['git','-C',str(repo),'fetch','--depth=1','origin',commit],check=True)
+          raw=subprocess.check_output(['git','-C',str(repo),'show',f'{commit}:{path}'])
+          blob=subprocess.check_output(['git','-C',str(repo),'rev-parse',f'{commit}:{path}'],text=True).strip()
+          rows=list(csv.DictReader(raw.decode('utf-8-sig').splitlines()))
+          required={'Id','partite_voto','media_voto','Stagione','Ruolo','Squadra','Nome'}
+          fields=set(rows[0].keys() if rows else [])
+          if not required <= fields: raise SystemExit(f'Missing required fields: {sorted(required-fields)}')
+          ids=[str(r['Id']).strip() for r in rows if str(r.get('Id','')).strip()]
+          if len(ids)!=len(set(ids)): raise SystemExit('Duplicate Fantacalcio Id in snapshot')
+          if not rows or any(str(r['Stagione']).strip()!='2021_22' for r in rows): raise SystemExit('Unexpected season rows')
+          dst=out/'stat_info_2021_22.csv'; dst.write_bytes(raw)
+          manifest={
+            'schema':'NEXUS_F5C_MV_FANTASTAT_VINTAGE_V1',
+            'sourceId':'FANTASTAT_FANTACALCIO_VOTES_2021_22',
+            'repository':'dandolodavid/FantaStat','selectedCommit':commit,'selectedCommitTimestamp':ts,
+            'path':path,'gitBlobSha':blob,'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw),'rows':len(rows),
+            'uniqueFantacalcioIds':len(set(ids)),'requiredFields':sorted(required),
+            'outerCutoffEligibility':'2022-08-11_AND_LATER','predictivePerformanceUsedForSelection':False,
+            'fantasyTargetPerformanceUsedForSelection':False
+          }
+          mb=(json.dumps(manifest,indent=2,sort_keys=True)+'\n').encode(); (out/'MANIFEST.json').write_bytes(mb)
+          (out/'SHA256SUMS.txt').write_text(f"{hashlib.sha256(raw).hexdigest()}  stat_info_2021_22.csv\n{hashlib.sha256(mb).hexdigest()}  MANIFEST.json\n")
+          print(json.dumps(manifest,indent=2,sort_keys=True))
+          PY
+      - name: Upload MV vintage
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f5c-mv-fantastat-vintage-v1
+          path: artifact/
+          if-no-files-found: error
+          retention-days: 30
