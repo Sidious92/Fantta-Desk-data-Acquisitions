@@ -21,12 +21,8 @@ jobs:
         run: |
           set -euo pipefail
           python - <<'PY'
-          import hashlib, json, pathlib, subprocess, sys
-          try:
-              import openpyxl
-          except Exception:
-              subprocess.run([sys.executable,'-m','pip','install','--quiet','openpyxl==3.1.5'],check=True)
-              import openpyxl
+          import hashlib, json, pathlib, re, subprocess, zipfile
+          import xml.etree.ElementTree as ET
 
           out=pathlib.Path('artifact'); out.mkdir(exist_ok=True)
           repo=pathlib.Path('/tmp/leonardo-fantacalcio')
@@ -39,22 +35,59 @@ jobs:
           blob=subprocess.check_output(['git','-C',str(repo),'rev-parse',f'{commit}:{path}'],text=True).strip()
           dst=out/'Statistiche_Fantacalcio_2022-23_Italia.xlsx'; dst.write_bytes(raw)
 
-          wb=openpyxl.load_workbook(dst, read_only=True, data_only=True)
-          sheets=[]
-          candidate_headers=[]
-          for ws in wb.worksheets:
-              info={'title':ws.title,'maxRow':ws.max_row,'maxColumn':ws.max_column}
-              sheets.append(info)
-              for ridx,row in enumerate(ws.iter_rows(min_row=1,max_row=min(ws.max_row,25),values_only=True),start=1):
-                  vals=[('' if v is None else str(v).strip()) for v in row]
-                  low=[v.lower() for v in vals]
-                  score=sum(any(tok in x for x in low) for tok in ['id','mv','media','pv','pres','nome','giocatore','squadra','ruolo'])
-                  if score>=3:
-                      candidate_headers.append({'sheet':ws.title,'row':ridx,'values':vals,'score':score})
-          wb.close()
+          ns={'m':'http://schemas.openxmlformats.org/spreadsheetml/2006/main','r':'http://schemas.openxmlformats.org/officeDocument/2006/relationships','p':'http://schemas.openxmlformats.org/package/2006/relationships'}
+          with zipfile.ZipFile(dst) as z:
+              shared=[]
+              if 'xl/sharedStrings.xml' in z.namelist():
+                  root=ET.fromstring(z.read('xl/sharedStrings.xml'))
+                  for si in root.findall('m:si',ns):
+                      shared.append(''.join(t.text or '' for t in si.iter('{%s}t'%ns['m'])))
+              wb=ET.fromstring(z.read('xl/workbook.xml'))
+              relroot=ET.fromstring(z.read('xl/_rels/workbook.xml.rels'))
+              relmap={r.attrib['Id']:r.attrib['Target'] for r in relroot}
+              sheets=[]; candidate_headers=[]
+              for sh in wb.find('m:sheets',ns):
+                  title=sh.attrib['name']; rid=sh.attrib['{%s}id'%ns['r']]
+                  target=relmap[rid].lstrip('/')
+                  if not target.startswith('xl/'): target='xl/'+target
+                  root=ET.fromstring(z.read(target))
+                  dimension=root.find('m:dimension',ns)
+                  ref=dimension.attrib.get('ref','') if dimension is not None else ''
+                  maxrow=0; maxcol=0
+                  def colnum(ref):
+                      m=re.match(r'([A-Z]+)',ref or '')
+                      if not m: return 0
+                      n=0
+                      for ch in m.group(1): n=n*26+ord(ch)-64
+                      return n
+                  row_samples=[]
+                  sheetdata=root.find('m:sheetData',ns)
+                  if sheetdata is not None:
+                      for row in sheetdata.findall('m:row',ns):
+                          ridx=int(row.attrib.get('r','0') or 0); maxrow=max(maxrow,ridx)
+                          vals={}
+                          for c in row.findall('m:c',ns):
+                              cref=c.attrib.get('r',''); cidx=colnum(cref); maxcol=max(maxcol,cidx)
+                              typ=c.attrib.get('t'); v=c.find('m:v',ns); val=''
+                              if typ=='inlineStr':
+                                  isel=c.find('m:is',ns); val=''.join(t.text or '' for t in isel.iter('{%s}t'%ns['m'])) if isel is not None else ''
+                              elif v is not None and v.text is not None:
+                                  val=v.text
+                                  if typ=='s': val=shared[int(val)]
+                              vals[cidx]=str(val).strip()
+                          if ridx<=30:
+                              arr=[vals.get(i,'') for i in range(1,max(vals.keys(),default=0)+1)]
+                              row_samples.append((ridx,arr))
+                  sheets.append({'title':title,'dimension':ref,'maxRowObserved':maxrow,'maxColumnObserved':maxcol})
+                  for ridx,vals in row_samples:
+                      low=[v.lower() for v in vals]
+                      tokens=['id','mv','media','pv','pres','nome','giocatore','squadra','ruolo']
+                      score=sum(any(tok in x for x in low) for tok in tokens)
+                      if score>=3:
+                          candidate_headers.append({'sheet':title,'row':ridx,'values':vals,'score':score})
 
           manifest={
-            'schema':'NEXUS_F5C_MV_LEONARDO_VINTAGE_SCHEMA_INSPECTION_V1',
+            'schema':'NEXUS_F5C_MV_LEONARDO_VINTAGE_SCHEMA_INSPECTION_V1_1',
             'sourceId':'LEONARDOACQUAROLI_FANTACALCIO_STATS_2022_23',
             'repository':'LeonardoAcquaroli/Fantacalcio','selectedCommit':commit,
             'selectedCommitTimestamp':ts,'repositoryCreatedAt':'2023-08-02T16:29:23Z',
