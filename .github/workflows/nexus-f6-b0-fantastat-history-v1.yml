@@ -28,7 +28,7 @@ jobs:
           curl --fail --location --silent --show-error \
             "https://raw.githubusercontent.com/${SOURCE_REPO}/${SOURCE_COMMIT}/dataset/player_history%5E(Stagione%202021_22).csv" \
             -o 'artifact/player_history_2021_22.csv'
-      - name: Audit historical seasons and schema
+      - name: Describe schema without promotion
         shell: python
         run: |
           import csv, hashlib, json
@@ -40,22 +40,19 @@ jobs:
           rows=list(csv.DictReader(text.splitlines()))
           if not rows: raise SystemExit('empty player history')
           cols=list(rows[0].keys())
-          required_any=[['Id','Stagione'],['id','Stagione'],['Id','stagione'],['id','stagione']]
-          if not any(all(x in cols for x in r) for r in required_any):
-              raise SystemExit(f'identity/season columns missing: {cols[:40]}')
-          season_col='Stagione' if 'Stagione' in cols else 'stagione'
-          id_col='Id' if 'Id' in cols else 'id'
-          seasons=Counter(str(r.get(season_col,'')).strip() for r in rows)
-          wanted={k:v for k,v in seasons.items() if any(y in k for y in ['2020','2021'])}
-          if not any('2020' in k for k in seasons): raise SystemExit(f'2020/21 history absent: {sorted(seasons)}')
-          if not any('2021' in k for k in seasons): raise SystemExit(f'2021/22 history absent: {sorted(seasons)}')
-          audit={'schema':'NEXUS_F6_B0_FANTASTAT_HISTORY_ACQUISITION_V1','sourceRepo':'dandolodavid/FantaStat','sourceCommit':'e92ae5eb33d47d60ed1d9b515ac37788b408d672','file':p.name,'sha256':sha,'bytes':len(raw),'rows':len(rows),'columns':cols,'seasonCounts':dict(sorted(seasons.items())),'wantedSeasonCounts':wanted,'uniqueIds':len({str(r.get(id_col,'')).strip() for r in rows if str(r.get(id_col,'')).strip()})}
+          season_candidates=[c for c in cols if 'stag' in str(c).lower() or 'season' in str(c).lower()]
+          id_candidates=[c for c in cols if str(c).lower() in {'id','player_id','playerid','fantacalcio_id','fantacalcioid'} or str(c).lower().endswith('_id')]
+          season_counts={}
+          for c in season_candidates:
+              cnt=Counter(str(r.get(c,'')).strip() for r in rows)
+              season_counts[c]=dict(cnt.most_common(30))
+          audit={'schema':'NEXUS_F6_B0_FANTASTAT_HISTORY_ACQUISITION_DIAGNOSTIC_V1','promotionStatus':'NOT_ACCEPTED_BY_THIS_STEP','sourceRepo':'dandolodavid/FantaStat','sourceCommit':'e92ae5eb33d47d60ed1d9b515ac37788b408d672','file':p.name,'sha256':sha,'bytes':len(raw),'rows':len(rows),'columns':cols,'seasonCandidates':season_candidates,'idCandidates':id_candidates,'seasonCounts':season_counts,'firstTwoRows':rows[:2]}
           Path('artifact/HISTORY_AUDIT.json').write_text(json.dumps(audit,sort_keys=True,separators=(',',':'))+'\n')
           sums=[]
           for f in sorted(Path('artifact').iterdir()): sums.append(f'{hashlib.sha256(f.read_bytes()).hexdigest()}  {f.name}')
           Path('artifact/SHA256SUMS.txt').write_text('\n'.join(sums)+'\n')
           print(json.dumps(audit,indent=2))
-      - name: Upload pinned B0 history
+      - name: Upload pinned B0 history diagnostic
         uses: actions/upload-artifact@v4
         with:
           name: nexus-f6-b0-fantastat-history-v1
