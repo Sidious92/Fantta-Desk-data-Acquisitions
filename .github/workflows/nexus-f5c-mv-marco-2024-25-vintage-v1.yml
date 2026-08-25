@@ -23,6 +23,7 @@ jobs:
           python - <<'PY'
           import hashlib, json, math, pathlib, re, subprocess, zipfile
           import xml.etree.ElementTree as ET
+          from datetime import datetime, timezone
 
           out=pathlib.Path('artifact'); out.mkdir(exist_ok=True)
           repo=pathlib.Path('/tmp/marco-fmp')
@@ -36,10 +37,12 @@ jobs:
           subprocess.run(['git','-C',str(repo),'fetch','--depth=1','origin',commit],check=True)
           resolved=subprocess.check_output(['git','-C',str(repo),'rev-parse','FETCH_HEAD'],text=True).strip()
           if resolved != commit: raise SystemExit(f'Commit mismatch: {resolved} != {commit}')
-          ts=subprocess.check_output(['git','-C',str(repo),'show','-s','--format=%cI',commit],text=True).strip()
-          if ts != expected_ts: raise SystemExit(f'Commit timestamp mismatch: {ts} != {expected_ts}')
-          from datetime import datetime
-          if datetime.fromisoformat(ts) >= datetime.fromisoformat(cutoff): raise SystemExit('Snapshot commit is not strictly pre-cutoff')
+          ts_git=subprocess.check_output(['git','-C',str(repo),'show','-s','--format=%cI',commit],text=True).strip()
+          ts_utc=datetime.fromisoformat(ts_git).astimezone(timezone.utc)
+          expected_utc=datetime.fromisoformat(expected_ts).astimezone(timezone.utc)
+          cutoff_utc=datetime.fromisoformat(cutoff).astimezone(timezone.utc)
+          if ts_utc != expected_utc: raise SystemExit(f'Commit timestamp mismatch after UTC normalization: {ts_utc.isoformat()} != {expected_utc.isoformat()}')
+          if ts_utc >= cutoff_utc: raise SystemExit('Snapshot commit is not strictly pre-cutoff')
           blob=subprocess.check_output(['git','-C',str(repo),'rev-parse',f'{commit}:{path}'],text=True).strip()
           if blob != expected_blob: raise SystemExit(f'Git blob mismatch: {blob} != {expected_blob}')
           raw=subprocess.check_output(['git','-C',str(repo),'show',f'{commit}:{path}'])
@@ -121,10 +124,12 @@ jobs:
           if zero_mv_positive: raise SystemExit(f'Zero Mv with positive Pv: {zero_mv_positive}')
           if not positive: raise SystemExit('No positive vote exposure rows')
 
+          canonical_ts=ts_utc.isoformat().replace('+00:00','Z')
           manifest={
             'schema':'NEXUS_F5C_MV_MARCO_2024_25_VINTAGE_V1',
             'sourceId':'MARCOMAKER_FANTACALCIO_STATS_2024_25',
-            'repository':'Marco-Maker/FMP','selectedCommit':commit,'selectedCommitTimestamp':ts,
+            'repository':'Marco-Maker/FMP','selectedCommit':commit,
+            'selectedCommitTimestamp':canonical_ts,'selectedCommitTimestampGitLiteral':ts_git,
             'path':path,'gitBlobSha':blob,'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw),
             'completedSeason':'2024/25','sheet':sheet,'headerRow':header_row,
             'requiredFields':sorted(required),'rows':data_rows,'uniqueFantacalcioIds':len(set(ids)),
