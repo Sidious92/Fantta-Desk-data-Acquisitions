@@ -20,8 +20,6 @@ jobs:
       FANTADESK_BRANCH: feat/decision-layer-d2-fantasy-utility-v1
       FANTADESK_EXPECTED_HEAD: 577267004594c01f42b537c4b02a3f07e426fb12
       D1B_ARTIFACT_ID: '9194392739'
-      D1B_ARTIFACT_SHA256: 3f6647e326947141fc7f7f7dba9c58903dfa453591338d2064b3dddcf0ce5c
-      D1B_BENCHMARK_SHA256: fe3d8bf4451e70a68491d079bbf8c87bcae0ec67ce2e6e76b314917b95029548
       NEXUS_D2A_D1B_BENCHMARK: /tmp/d2a-d1b/opportunity-v1-benchmark.json
       NEXUS_D2A_V2_OUTPUT: /tmp/d2a-v2
       NEXUS_REQUEST_SPACING_MS: '650'
@@ -74,11 +72,11 @@ jobs:
             -o /tmp/d2a-d1b.zip
           ACTUAL_ARTIFACT_SHA="$(sha256sum /tmp/d2a-d1b.zip | cut -d' ' -f1)"
           echo "D1B artifact SHA: ${ACTUAL_ARTIFACT_SHA}"
-          test "$ACTUAL_ARTIFACT_SHA" = "$D1B_ARTIFACT_SHA256"
+          test "$ACTUAL_ARTIFACT_SHA" = '3f6647e326947141fc7f7f7f7dba9c58903dfa453591338d2064b3dddcf0ce5c'
           unzip -q /tmp/d2a-d1b.zip -d /tmp/d2a-d1b
           ACTUAL_BENCHMARK_SHA="$(sha256sum "$NEXUS_D2A_D1B_BENCHMARK" | cut -d' ' -f1)"
           echo "D1B benchmark SHA: ${ACTUAL_BENCHMARK_SHA}"
-          test "$ACTUAL_BENCHMARK_SHA" = "$D1B_BENCHMARK_SHA256"
+          test "$ACTUAL_BENCHMARK_SHA" = 'fe3d8bf4451e70a68491d079bbf8c87bcae0ec67ce2e6e76b314917b95029548'
 
       - name: Run preregistered calibration
         working-directory: fantadesk-private
