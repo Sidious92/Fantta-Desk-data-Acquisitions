@@ -1,0 +1,57 @@
+name: D2A Runtime Verification
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.d2a-runtime-verification/EXECUTE'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      FANTADESK_REPO: Sidious92/FantaDesk
+      FANTADESK_BRANCH: feat/decision-layer-d2-fantasy-utility-v1
+      FANTADESK_EXPECTED_HEAD: cfe2d7d42390df01835b551e22a888bdfa5460b0
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Clone pinned FantaDesk branch
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
+            "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
+          test "$(git -C fantadesk-private rev-parse HEAD)" = "$FANTADESK_EXPECTED_HEAD"
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          package-manager-cache: false
+
+      - name: Install isolated test dependencies
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/d2a-test-node
+          cd /tmp/d2a-test-node
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund vitest@3.2.4 jsdom@24.1.3
+          ln -s /tmp/d2a-test-node/node_modules "$GITHUB_WORKSPACE/fantadesk-private/node_modules"
+          cat > /tmp/d2a-vitest.config.mjs <<'EOF'
+          import { defineConfig } from 'vitest/config';
+          export default defineConfig({ test: { environment: 'node' } });
+          EOF
+
+      - name: Run D2A and Fantasy Utility serving tests
+        working-directory: fantadesk-private
+        run: |
+          /tmp/d2a-test-node/node_modules/.bin/vitest run \
+            src/features/nexus/decision/voteAppearanceRuntime.test.ts \
+            src/features/nexus/decision/fantasyUtilityRuntime.test.ts \
+            --config /tmp/d2a-vitest.config.mjs
