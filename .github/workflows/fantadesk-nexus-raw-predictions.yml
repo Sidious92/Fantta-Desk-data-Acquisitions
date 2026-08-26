@@ -1,0 +1,191 @@
+name: FantaDesk Nexus Raw Predictions
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/fantadesk-nexus-raw-predictions.yml
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  raw-predictions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout private FantaDesk ephemerally
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: b23e7098a6083afe39c1bb148ad8bb1d565c4e6f
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Materialize embedded Nexus runtime
+        run: npm run nexus:runtime:build
+
+      - name: Download frozen training inputs ephemerally
+        env:
+          GH_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p .raw-inputs/{prepared,full,historical,expanded-2018}
+          download_artifact() {
+            local id="$1" expected="$2" zip="$3" out="$4"
+            curl --fail --location --silent --show-error \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/Sidious92/FantaDesk/actions/artifacts/${id}/zip" \
+              --output "${zip}"
+            echo "${expected}  ${zip}" | sha256sum --check --strict
+            unzip -q "${zip}" -d "${out}"
+          }
+          download_artifact 9162967092 555e012b8e992d04a088aa5809c20b6efc023aa442bbf6a904435df17038d721 prepared.zip .raw-inputs/prepared
+          download_artifact 9162966124 1a47f252091004902578e88db37b04ea2eb1dc7e275326cd8b99f657cfdff27e full.zip .raw-inputs/full
+          download_artifact 9120837492 5031c4577d431d78091fb0c173548f238acd18811048fcbf1ccb7e5b94f07055 historical.zip .raw-inputs/historical
+          download_artifact 9177914691 0a53a77b048e38dc86be2888d516f0db1dd95bc7648a4b73d9cba41e1740cb29 expanded-2018.zip .raw-inputs/expanded-2018
+
+      - name: Capture current official Listone ephemerally
+        env:
+          NEXUS_LIVE_LISTONE_OUTPUT_ROOT: .raw-current-listone
+        run: node scripts/nexus-acquire-current-listone-2026-27.mjs
+
+      - name: Create ephemeral raw experiment
+        run: |
+          cat > src/features/nexus/runtime/rawCurrentListone.integration.test.ts <<'TS'
+          import { readFile, writeFile } from 'node:fs/promises';
+          import { resolve } from 'node:path';
+          import { beforeAll, describe, expect, it, vi } from 'vitest';
+          import type { RosterEntry, RosterSnapshot } from '../../../db/schema';
+          import { loadNexusReplayV3FrozenDataset } from '../replay/fullSeasonReplayV3DatasetLoader';
+          import { loadNexusFullSeasonOpportunityV1Dataset } from '../replay/fullSeasonOpportunityV1Loader';
+          import { NEXUS_FULL_SEASON_OPPORTUNITY_V1_POLICY } from '../replay/fullSeasonOpportunityV1Policy';
+          import { buildNexusFullSeasonPlayerIntelligenceFeatureSnapshot } from '../features/fullSeasonPlayerIntelligenceFeatureBuilder';
+          import { applyCanonicalRuntimePer90Reliability } from '../model/canonicalRuntimeFeaturePolicy';
+          import { NEXUS_CANONICAL_PREDICTIVE_FEATURES } from '../model/canonicalPredictivePolicy';
+          import { fitNexusCountStatisticalModel, predictNexusCountStatisticalModel } from '../model/countStatisticalModels';
+          import { fitNexusStatisticalModel, predictNexusStatisticalModel } from '../model/statisticalModels';
+          import { runNexusPredictiveIntelligence2026_27 } from '../model/predictiveIntelligenceRuntime';
+          import {
+            NEXUS_RUNTIME_PRIVATE_SUPPLEMENT_ASSET,
+            resetNexusRuntimePrivateSupplementCacheForTests,
+          } from './privateRuntimeSupplement';
+          import {
+            NEXUS_RUNTIME_UNIVERSE_ASSET,
+            resetNexusRuntimeUniverseCacheForTests,
+          } from './runtimeUniverse';
+          import { buildNexusServingDatasetForFantacalcioIds } from './servingDataset';
+
+          type Target = 'AVERAGE_VOTE' | 'GOALS' | 'ASSISTS' | 'MINUTES';
+          type CurrentListone = {
+            targetSeason: '2026/27'; capturedAt: string; rawSha256: string;
+            players: Array<{ playerId: number; name: string; club: string; classicRole: 'P'|'D'|'C'|'A'; quotation: number; fvm: number; sourceRow: number }>;
+          };
+          const TRAINING_AS_OF = '2026-08-13T15:00:00Z';
+          const env = {
+            listone: '.raw-current-listone/current-listone.json',
+            prepared: '.raw-inputs/prepared', historical: '.raw-inputs/historical', full: '.raw-inputs/full', expanded2018: '.raw-inputs/expanded-2018',
+            importedAt: '2026-08-13T10:44:04Z',
+          };
+
+          function eligible(examples: any[], target: Target) {
+            const cutoff = Date.parse(TRAINING_AS_OF);
+            return examples.filter((example) => example.target === target && example.horizon === 'FULL_SEASON')
+              .filter((example) => Date.parse(example.labelAvailableAt) <= cutoff && Date.parse(example.asOf) <= cutoff);
+          }
+          function modelInput(entry: RosterEntry, snapshot: any, target: Target) {
+            return { exampleId: `raw:${target}:${snapshot.id}`, playerId: entry.playerId, playerName: entry.observedName, classicRole: entry.classicRole,
+              targetSeason: entry.season, asOf: snapshot.asOf, horizon: 'FULL_SEASON' as const, featureSnapshotId: snapshot.id, featureSnapshot: snapshot, target };
+          }
+          function quantile(values: number[], q: number) {
+            const sorted = [...values].sort((a,b)=>a-b); if (!sorted.length) return null;
+            const i=(sorted.length-1)*q, lo=Math.floor(i), hi=Math.ceil(i), w=i-lo; return lo===hi ? sorted[lo]! : sorted[lo]!*(1-w)+sorted[hi]!*w;
+          }
+          function dist(values: number[]) { return { min: Math.min(...values), p10: quantile(values,.1), p25: quantile(values,.25), median: quantile(values,.5), p75: quantile(values,.75), p90: quantile(values,.9), p95: quantile(values,.95), max: Math.max(...values) }; }
+          function csv(value: unknown) { const s=String(value ?? ''); return /[",\n]/.test(s) ? `"${s.replaceAll('"','""')}"` : s; }
+
+          beforeAll(async () => {
+            resetNexusRuntimeUniverseCacheForTests(); resetNexusRuntimePrivateSupplementCacheForTests();
+            vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL) => {
+              const url=String(input); const asset=url.includes(NEXUS_RUNTIME_PRIVATE_SUPPLEMENT_ASSET) ? NEXUS_RUNTIME_PRIVATE_SUPPLEMENT_ASSET : url.includes(NEXUS_RUNTIME_UNIVERSE_ASSET) ? NEXUS_RUNTIME_UNIVERSE_ASSET : null;
+              if (!asset) return new Response('not found',{status:404});
+              return new Response(await readFile(resolve('public',asset),'utf8'),{status:200});
+            }));
+          });
+
+          describe('ephemeral RAW unregularized current Listone', () => {
+            it('fits lambda=0 challengers and emits current population predictions', async () => {
+              const roster=JSON.parse(await readFile(env.listone,'utf8')) as CurrentListone;
+              const snapshot: RosterSnapshot={ id:`raw:${roster.rawSha256}`, season:roster.targetSeason, fileName:'current-listone-live.json', sheetName:'live', rawSha256:roster.rawSha256, capturedAt:roster.capturedAt, playerCount:roster.players.length, origin:'listone_import', createdAt:roster.capturedAt };
+              const entries: RosterEntry[]=roster.players.map(p=>({ id:`${snapshot.id}:${p.playerId}`, snapshotId:snapshot.id, season:roster.targetSeason, playerId:p.playerId, observedName:p.name, club:p.club, classicRole:p.classicRole, outOfList:false, quotation:p.quotation, fvm:p.fvm, sourceRow:p.sourceRow, capturedAt:roster.capturedAt }));
+              const serving=await buildNexusServingDatasetForFantacalcioIds(entries.map(e=>e.playerId));
+              const rawSnapshots=entries.map(entry=>buildNexusFullSeasonPlayerIntelligenceFeatureSnapshot({ rosterSnapshot:snapshot, rosterEntry:entry, asOf:roster.capturedAt, history:serving.history, metrics:serving.metrics, teamEnvironment:[], coachContext:[], createdAt:roster.capturedAt }));
+              const filteredSnapshots=rawSnapshots.map(s=>applyCanonicalRuntimePer90Reliability({snapshot:s,metrics:serving.metrics}));
+              const canonical=runNexusPredictiveIntelligence2026_27({ players:entries.map((entry,index)=>({playerId:entry.playerId,playerName:entry.observedName,classicRole:entry.classicRole,targetSeason:entry.season,asOf:roster.capturedAt,rosterSnapshotId:snapshot.id,snapshot:filteredSnapshots[index]!})), metrics:serving.metrics, createdAt:roster.capturedAt });
+
+              const replay=await loadNexusReplayV3FrozenDataset({preparedRoot:env.prepared,historicalRoot:env.historical,fullRoot:env.full,expanded2018Root:env.expanded2018,expanded2018ImportedAt:env.importedAt,createdAt:roster.capturedAt});
+              const opportunity=await loadNexusFullSeasonOpportunityV1Dataset({preparedRoot:env.prepared,historicalRoot:env.historical,fullRoot:env.full,expanded2018Root:env.expanded2018,expanded2018ImportedAt:env.importedAt,createdAt:roster.capturedAt});
+              const avgModel=fitNexusStatisticalModel({target:'AVERAGE_VOTE',trainingExamples:eligible(replay.datasets.AVERAGE_VOTE,'AVERAGE_VOTE'),config:{featureKeys:[...NEXUS_CANONICAL_PREDICTIVE_FEATURES.AVERAGE_VOTE],includeRoleIndicators:true,lambda:0}});
+              const goalModel=fitNexusCountStatisticalModel({target:'GOALS',trainingExamples:eligible(replay.datasets.GOALS,'GOALS'),config:{featureKeys:[...NEXUS_CANONICAL_PREDICTIVE_FEATURES.GOALS],includeRoleIndicators:true,lambda:0,maxIterations:500,convergenceTolerance:1e-9}});
+              const assistModel=fitNexusCountStatisticalModel({target:'ASSISTS',trainingExamples:eligible(replay.datasets.ASSISTS,'ASSISTS'),config:{featureKeys:[...NEXUS_CANONICAL_PREDICTIVE_FEATURES.ASSISTS],includeRoleIndicators:true,lambda:0,maxIterations:500,convergenceTolerance:1e-9}});
+              const minuteEligible=eligible(opportunity.examples as any[],'MINUTES');
+              const minuteModel=fitNexusStatisticalModel({target:'MINUTES',trainingExamples:minuteEligible,config:{featureKeys:[...NEXUS_FULL_SEASON_OPPORTUNITY_V1_POLICY.primaryFeatures],includeRoleIndicators:true,lambda:0}});
+
+              const rawMv=predictNexusStatisticalModel(avgModel,entries.map((e,i)=>modelInput(e,rawSnapshots[i]!,'AVERAGE_VOTE') as any));
+              const rawGoals=predictNexusCountStatisticalModel(goalModel,entries.map((e,i)=>modelInput(e,rawSnapshots[i]!,'GOALS') as any));
+              const rawAssists=predictNexusCountStatisticalModel(assistModel,entries.map((e,i)=>modelInput(e,rawSnapshots[i]!,'ASSISTS') as any));
+              const rawMinutes=predictNexusStatisticalModel(minuteModel,entries.map((e,i)=>modelInput(e,rawSnapshots[i]!,'MINUTES') as any));
+              const lambda0FilteredGoals=predictNexusCountStatisticalModel(goalModel,entries.map((e,i)=>modelInput(e,filteredSnapshots[i]!,'GOALS') as any));
+
+              const rows=entries.map((e,i)=>({ id:e.playerId,name:e.observedName,club:e.club,role:e.classicRole,quotation:e.quotation,fvm:e.fvm,
+                canonicalMv:canonical[i]!.prediction.expectedBaseVote,canonicalGoals:canonical[i]!.prediction.expectedGoals,canonicalAssists:canonical[i]!.prediction.expectedAssists,canonicalMinutes:canonical[i]!.opportunityPrediction.value,
+                rawMv:rawMv[i]!,rawGoals:rawGoals[i]!,rawAssists:rawAssists[i]!,rawMinutes:rawMinutes[i]!,lambda0FilteredGoals:lambda0FilteredGoals[i]!,
+                goalDelta:rawGoals[i]!-canonical[i]!.prediction.expectedGoals,minuteDelta:rawMinutes[i]!-canonical[i]!.opportunityPrediction.value,
+                opportunitySupport:canonical[i]!.opportunityPrediction.support,sourceRow:e.sourceRow }));
+              const summary={ definition:'RAW = same frozen historical training universe and same current serving dataset, refit with lambda=0 and no runtime per90 reliability masking. No clipping/calibration/post-processing.', roster:{playerCount:rows.length,capturedAt:roster.capturedAt,rawSha256:roster.rawSha256}, lambdas:{AVERAGE_VOTE:avgModel.lambda,GOALS:goalModel.lambda,ASSISTS:assistModel.lambda,MINUTES:minuteModel.lambda}, servingCoverage:serving.coverage,
+                goals:{canonical:dist(rows.map(r=>r.canonicalGoals)),lambda0Filtered:dist(rows.map(r=>r.lambda0FilteredGoals)),raw:dist(rows.map(r=>r.rawGoals)),canonicalGt10:rows.filter(r=>r.canonicalGoals>10).length,lambda0FilteredGt10:rows.filter(r=>r.lambda0FilteredGoals>10).length,rawGt10:rows.filter(r=>r.rawGoals>10).length,rawGt15:rows.filter(r=>r.rawGoals>15).length,rawGt20:rows.filter(r=>r.rawGoals>20).length,top30:[...rows].sort((a,b)=>b.rawGoals-a.rawGoals).slice(0,30)},
+                minutes:{canonical:dist(rows.map(r=>r.canonicalMinutes)),raw:dist(rows.map(r=>r.rawMinutes)),rawNegative:rows.filter(r=>r.rawMinutes<0).length,rawGt2500:rows.filter(r=>r.rawMinutes>2500).length,rawGt3000:rows.filter(r=>r.rawMinutes>3000).length,rawGt3420:rows.filter(r=>r.rawMinutes>3420).length,top20:[...rows].sort((a,b)=>b.rawMinutes-a.rawMinutes).slice(0,20)},
+                assists:{canonical:dist(rows.map(r=>r.canonicalAssists)),raw:dist(rows.map(r=>r.rawAssists)),rawGt5:rows.filter(r=>r.rawAssists>5).length,rawGt10:rows.filter(r=>r.rawAssists>10).length,top20:[...rows].sort((a,b)=>b.rawAssists-a.rawAssists).slice(0,20)}};
+              const headers=['id','name','club','role','quotation','fvm','raw_mv','raw_goals','raw_assists','raw_minutes','canonical_mv','canonical_goals','canonical_assists','canonical_minutes','lambda0_filtered_goals','goal_delta','minute_delta','opportunity_support','source_row'];
+              const ordered=[...rows].sort((a,b)=>b.rawGoals-a.rawGoals || b.rawMinutes-a.rawMinutes);
+              const csvRows=ordered.map(r=>[r.id,r.name,r.club,r.role,r.quotation,r.fvm,r.rawMv,r.rawGoals,r.rawAssists,r.rawMinutes,r.canonicalMv,r.canonicalGoals,r.canonicalAssists,r.canonicalMinutes,r.lambda0FilteredGoals,r.goalDelta,r.minuteDelta,r.opportunitySupport,r.sourceRow].map(csv).join(','));
+              await writeFile('.raw-predictions.csv',`${headers.join(',')}\n${csvRows.join('\n')}\n`,'utf8');
+              await writeFile('.raw-summary.json',`${JSON.stringify(summary,null,2)}\n`,'utf8');
+              console.log(`RAW_NEXUS_SUMMARY=${JSON.stringify(summary)}`);
+              expect(rows).toHaveLength(roster.players.length);
+            });
+          });
+          TS
+
+      - name: Run raw experiment
+        run: npx vitest run src/features/nexus/runtime/rawCurrentListone.integration.test.ts --reporter=verbose
+
+      - name: Print raw summary
+        if: always()
+        run: |
+          if [ -f .raw-summary.json ]; then cat .raw-summary.json; fi
+
+      - name: Upload temporary raw prediction files
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fantadesk-nexus-raw-predictions
+          path: |
+            .raw-predictions.csv
+            .raw-summary.json
+          if-no-files-found: error
+          retention-days: 1
+          include-hidden-files: true
