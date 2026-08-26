@@ -72,9 +72,13 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "https://api.github.com/repos/${FANTADESK_REPO}/actions/artifacts/${D1B_ARTIFACT_ID}/zip" \
             -o /tmp/d2a-d1b.zip
-          echo "${D1B_ARTIFACT_SHA256}  /tmp/d2a-d1b.zip" | sha256sum --check --strict
+          ACTUAL_ARTIFACT_SHA="$(sha256sum /tmp/d2a-d1b.zip | cut -d' ' -f1)"
+          echo "D1B artifact SHA: ${ACTUAL_ARTIFACT_SHA}"
+          test "$ACTUAL_ARTIFACT_SHA" = "$D1B_ARTIFACT_SHA256"
           unzip -q /tmp/d2a-d1b.zip -d /tmp/d2a-d1b
-          echo "${D1B_BENCHMARK_SHA256}  ${NEXUS_D2A_D1B_BENCHMARK}" | sha256sum --check --strict
+          ACTUAL_BENCHMARK_SHA="$(sha256sum "$NEXUS_D2A_D1B_BENCHMARK" | cut -d' ' -f1)"
+          echo "D1B benchmark SHA: ${ACTUAL_BENCHMARK_SHA}"
+          test "$ACTUAL_BENCHMARK_SHA" = "$D1B_BENCHMARK_SHA256"
 
       - name: Run preregistered calibration
         working-directory: fantadesk-private
