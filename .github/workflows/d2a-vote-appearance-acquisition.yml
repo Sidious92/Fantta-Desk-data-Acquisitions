@@ -1,0 +1,61 @@
+name: D2A Vote Appearance Public Acquisition
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .d2a-vote-appearance-launch/EXECUTE
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  acquire-d2a-pv:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXUS_D2A_PV_OUTPUT: .nexus-d2a-pv-public
+      NEXUS_REQUEST_SPACING_SECONDS: '0.65'
+      NEXUS_REQUEST_TIMEOUT_SECONDS: '30'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install acquisition dependencies
+        run: pip install requests beautifulsoup4 openpyxl
+
+      - name: Acquire archived Listoni and final PV
+        run: python scripts/d2a_vote_appearance_acquisition.py
+
+      - name: Publish acquisition summary
+        if: always()
+        run: |
+          echo '## D2A public PV acquisition' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f .nexus-d2a-pv-public/dataset.json ]; then
+            python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          with open('.nexus-d2a-pv-public/dataset.json', encoding='utf-8') as f:
+              d = json.load(f)
+          for row in d['seasons']:
+              print(f"- {row['targetSeason']}: listone={row['listonePlayers']}; labels={row['observedLabels']}; missing={row['missingLabels']}; lag1={row['lag1Observed']}; lag2={row['lag2Observed']}")
+          PY
+          else
+            echo '- Dataset not produced.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload D2A public acquisition artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: d2a-vote-appearance-public-acquisition-v1
+          path: .nexus-d2a-pv-public/
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
