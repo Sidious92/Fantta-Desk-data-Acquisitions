@@ -1,0 +1,20 @@
+name: Purge Temporary FantaDesk APK Artifact
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/fantadesk-apk-artifact-cleanup.yml
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete temporary APK artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method DELETE repos/${{ github.repository }}/actions/artifacts/9623420080
