@@ -1,0 +1,102 @@
+name: FantaDesk Tablet APK Test Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Exact FantaDesk branch, tag or commit to package
+        required: false
+        default: cdbb3e07d896d136032200a076b89e40bd908d03
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/fantadesk-apk-test-build.yml
+
+permissions:
+  contents: read
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || 'cdbb3e07d896d136032200a076b89e40bd908d03' }}
+    steps:
+      - name: Checkout private FantaDesk ephemerally
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.FANTADESK_REF }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          package-manager-cache: false
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install app dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Verify typecheck
+        run: npm run typecheck
+
+      - name: Verify tests
+        run: npm run test:run
+
+      - name: Build FantaDesk web runtime
+        run: npm run build
+
+      - name: Install ephemeral Capacitor toolchain
+        run: npm install --no-save --no-audit --no-fund @capacitor/core@7 @capacitor/cli@7 @capacitor/android@7
+
+      - name: Create Android wrapper
+        run: |
+          npx cap init FantaDesk com.fantadesk.app --web-dir=dist
+          npx cap add android
+          npx cap sync android
+
+      - name: Force tablet landscape orientation
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('android/app/src/main/AndroidManifest.xml')
+          text = path.read_text()
+          marker = 'android:name=".MainActivity"'
+          if marker not in text:
+              raise SystemExit('MainActivity marker not found')
+          if 'android:screenOrientation="landscape"' not in text:
+              text = text.replace(marker, marker + '\n            android:screenOrientation="landscape"', 1)
+          path.write_text(text)
+          PY
+
+      - name: Assemble debug APK
+        working-directory: android
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: Prepare APK
+        id: apk
+        run: |
+          test -f android/app/build/outputs/apk/debug/app-debug.apk
+          SHORT_SHA="${FANTADESK_REF:0:8}"
+          OUT="FantaDesk-tablet-test-${SHORT_SHA}.apk"
+          cp android/app/build/outputs/apk/debug/app-debug.apk "$OUT"
+          echo "file=$OUT" >> "$GITHUB_OUTPUT"
+          sha256sum "$OUT"
+
+      - name: Upload APK temporarily
+        uses: actions/upload-artifact@v4
+        with:
+          name: FantaDesk-tablet-test-apk
+          path: ${{ steps.apk.outputs.file }}
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
