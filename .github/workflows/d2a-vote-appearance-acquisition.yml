@@ -31,8 +31,28 @@ jobs:
       - name: Install acquisition dependencies
         run: pip install requests beautifulsoup4 openpyxl
 
+      - name: Use canonical TLS-valid mirror host
+        run: |
+          sed -i 's#https://www.chiccheinformatiche.com/#https://chiccheinformatiche.com/#g' scripts/d2a_vote_appearance_acquisition.py
+
       - name: Acquire archived Listoni and final PV
         run: python scripts/d2a_vote_appearance_acquisition.py
+
+      - name: Verify frozen historical Listone fingerprints
+        run: |
+          python - <<'PY'
+          import json
+          with open('.nexus-d2a-pv-public/dataset.json', encoding='utf-8') as f:
+              d = json.load(f)
+          expected = {'2022/23': 554, '2023/24': 535, '2024/25': 480, '2025/26': 521}
+          actual = {row['targetSeason']: row['listonePlayers'] for row in d['seasons']}
+          assert actual == expected, f'Historical Listone fingerprint mismatch: {actual} != {expected}'
+          assert d['targetUniverse'] == 'ARCHIVED_PRESEASON_FANTACALCIO_LISTONE'
+          assert d['identity'] == 'FANTACALCIO_NUMERIC_ID_EXACT'
+          assert d['missingTargetPolicy'].startswith('MISSING_NOT_ZERO')
+          assert d['marketOrQuotationFeaturesUsed'] is False
+          print('Historical Listone fingerprints match the previously validated replay authority.')
+          PY
 
       - name: Publish acquisition summary
         if: always()
