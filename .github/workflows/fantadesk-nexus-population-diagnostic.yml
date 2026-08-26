@@ -1,0 +1,54 @@
+name: FantaDesk Nexus Population Diagnostic
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/fantadesk-nexus-population-diagnostic.yml
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout private FantaDesk ephemerally
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: a7864885690d7772b92f7664210dcaa36dba62cd
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Materialize embedded Nexus runtime
+        run: npm run nexus:runtime:build
+
+      - name: Capture current official Listone ephemerally
+        env:
+          NEXUS_LIVE_LISTONE_OUTPUT_ROOT: .nexus-current-listone
+        run: node scripts/nexus-acquire-current-listone-2026-27.mjs
+
+      - name: Diagnose current population
+        env:
+          NEXUS_CURRENT_LISTONE_JSON: .nexus-current-listone/current-listone.json
+          NEXUS_POPULATION_DIAGNOSTIC_JSON: .nexus-population-diagnostic.json
+        run: npx vitest run src/features/nexus/runtime/currentListonePopulationDiagnostic.integration.test.ts --reporter=verbose
+
+      - name: Print diagnostic report
+        if: always()
+        run: |
+          if [ -f .nexus-population-diagnostic.json ]; then
+            cat .nexus-population-diagnostic.json
+          fi
