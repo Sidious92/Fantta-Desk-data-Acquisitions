@@ -1,4 +1,4 @@
-name: Purge Temporary FantaDesk APK Artifact
+name: Purge Temporary FantaDesk Raw Artifact
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
   purge:
     runs-on: ubuntu-latest
     steps:
-      - name: Delete temporary APK artifact
+      - name: Delete temporary raw prediction artifact
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh api --method DELETE repos/${{ github.repository }}/actions/artifacts/9623420080
+        run: gh api --method DELETE repos/${{ github.repository }}/actions/artifacts/9625727967
