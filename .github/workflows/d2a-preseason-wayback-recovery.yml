@@ -1,0 +1,54 @@
+name: D2A Preseason Wayback Recovery
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .d2a-wayback-launch/EXECUTE
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NEXUS_D2A_WAYBACK_OUTPUT: .nexus-d2a-wayback
+      NEXUS_REQUEST_TIMEOUT_SECONDS: '30'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests openpyxl
+
+      - name: Recover genuine pre-kickoff Listoni
+        run: python scripts/d2a_recover_preseason_wayback.py
+
+      - name: Publish manifest
+        if: always()
+        run: |
+          echo '## D2A Wayback preseason recovery' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f .nexus-d2a-wayback/manifest.json ]; then
+            cat .nexus-d2a-wayback/manifest.json >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'manifest not produced' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload recovery artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: d2a-preseason-wayback-recovery-v1
+          path: .nexus-d2a-wayback/
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
