@@ -1,3 +1,4 @@
-launch=2026-08-26T20:07:00Z
+launch=2026-08-26T20:10:00Z
 fantadesk_head=577267004594c01f42b537c4b02a3f07e426fb12
 protocol=D2A_EXPECTED_VOTE_APPEARANCE_PROTOCOL_V2
+runner_revision=isolated-jsdom
