@@ -1,0 +1,50 @@
+name: FantaDesk Private CI Verification
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: FantaDesk branch, tag or commit to verify
+        required: false
+        default: feat/nexus-listone-runtime-serving
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/fantadesk-private-ci-verify.yml
+
+permissions:
+  contents: read
+
+jobs:
+  verify-private-fantadesk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || 'feat/nexus-listone-runtime-serving' }}
+    steps:
+      - name: Checkout private FantaDesk ephemerally
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.FANTADESK_REF }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Tests
+        run: npm run test:run
+
+      - name: Build
+        run: npm run build
