@@ -17,7 +17,7 @@ jobs:
     env:
       FANTADESK_REPO: Sidious92/FantaDesk
       FANTADESK_BRANCH: feat/decision-layer-d2-fantasy-utility-v1
-      FANTADESK_EXPECTED_HEAD: cfe2d7d42390df01835b551e22a888bdfa5460b0
+      FANTADESK_EXPECTED_HEAD: 5d2bdf57103caedfd715822f11f4eea9386397de
     steps:
       - uses: actions/checkout@v6
 
