@@ -1,0 +1,228 @@
+name: FantaDesk Logo Rebrand
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/fantadesk-logo-rebrand.yml
+
+permissions:
+  contents: read
+
+jobs:
+  rebrand-private-fantadesk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout private FantaDesk
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: main
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: true
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install image dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y fonts-lato
+          python -m pip install --disable-pip-version-check pillow numpy
+
+      - name: Rebrand only the three canonical logo PNGs
+        shell: bash
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageChops
+          import numpy as np
+          from pathlib import Path
+
+          ROOT = Path('.')
+          BLACK = ROOT / 'Logo Black.png'
+          FULL = ROOT / 'Logo Trasparent Full.png'
+          ICON = ROOT / 'Logo Trasparent.png'
+          FONT = '/usr/share/fonts/truetype/lato/Lato-Black.ttf'
+
+          expected = {
+              BLACK: ((1536, 1024), 'RGB'),
+              FULL: ((1536, 1024), 'RGBA'),
+              ICON: ((1254, 1254), 'RGBA'),
+          }
+          for path, (size, mode) in expected.items():
+              if not path.exists():
+                  raise SystemExit(f'Missing canonical logo: {path}')
+              im = Image.open(path)
+              if im.size != size:
+                  raise SystemExit(f'Unexpected dimensions for {path}: {im.size} != {size}')
+              if mode == 'RGBA' and im.mode != 'RGBA':
+                  raise SystemExit(f'Unexpected mode for {path}: {im.mode} != RGBA')
+
+          def glyph_mask(text, target):
+              tw, th = target
+              scale = 4
+              font = ImageFont.truetype(FONT, int(th * 1.55 * scale))
+              tmp = Image.new('L', (tw * scale * 2, th * scale * 3), 0)
+              d = ImageDraw.Draw(tmp)
+              bb = d.textbbox((0, 0), text, font=font)
+              d.text((-bb[0], -bb[1]), text, font=font, fill=255)
+              crop = tmp.crop(tmp.getbbox())
+              crop = crop.resize((tw * scale, th * scale), Image.Resampling.LANCZOS)
+              return crop.resize((tw, th), Image.Resampling.LANCZOS)
+
+          def gradient_rgba(mask, stops):
+              w, h = mask.size
+              arr = np.zeros((h, w, 4), dtype=np.uint8)
+              for y in range(h):
+                  t = y / max(1, h - 1)
+                  color = np.array(stops[-1][1], dtype=float)
+                  for i in range(len(stops) - 1):
+                      t0, c0 = stops[i]
+                      t1, c1 = stops[i + 1]
+                      if t <= t1:
+                          u = (t - t0) / (t1 - t0) if t1 > t0 else 0
+                          color = np.array(c0) * (1 - u) + np.array(c1) * u
+                          break
+                  arr[y, :, :3] = np.clip(color, 0, 255).astype(np.uint8)
+              arr[:, :, 3] = np.array(mask)
+              return Image.fromarray(arr)
+
+          def stylized_text(text, target, kind):
+              mask = glyph_mask(text, target)
+              if kind == 'green':
+                  fill = gradient_rgba(mask, [
+                      (0.00, (18, 255, 188)),
+                      (0.16, (0, 225, 158)),
+                      (0.48, (0, 180, 125)),
+                      (0.78, (0, 138, 95)),
+                      (1.00, (0, 94, 68)),
+                  ])
+                  outline_color = (0, 50, 35, 255)
+                  glow_color = (0, 255, 170, 120)
+              else:
+                  fill = gradient_rgba(mask, [
+                      (0.00, (255, 255, 255)),
+                      (0.18, (246, 246, 244)),
+                      (0.48, (217, 218, 217)),
+                      (0.78, (173, 176, 179)),
+                      (1.00, (118, 124, 130)),
+                  ])
+                  outline_color = (16, 22, 22, 255)
+                  glow_color = (0, 210, 145, 70)
+              outer = mask.filter(ImageFilter.MaxFilter(9))
+              outline = ImageChops.subtract(outer, mask)
+              comp = Image.new('RGBA', target, (0, 0, 0, 0))
+              glow = outer.filter(ImageFilter.GaussianBlur(5))
+              glow_layer = Image.new('RGBA', target, glow_color)
+              glow_layer.putalpha(glow.point(lambda p: int(p * 0.28)))
+              comp.alpha_composite(glow_layer)
+              edge = Image.new('RGBA', target, outline_color)
+              edge.putalpha(outline)
+              comp.alpha_composite(edge)
+              comp.alpha_composite(fill)
+              return comp
+
+          def custom_d_layer(size, outer, inner):
+              w, h = size
+              mask = Image.new('L', size, 0)
+              d = ImageDraw.Draw(mask)
+              d.polygon(outer, fill=255)
+              d.polygon(inner, fill=0)
+              fill = gradient_rgba(mask, [
+                  (0.00, (255, 255, 255)),
+                  (0.16, (246, 246, 244)),
+                  (0.48, (218, 219, 219)),
+                  (0.78, (172, 176, 180)),
+                  (1.00, (120, 126, 132)),
+              ])
+              outer_mask = mask.filter(ImageFilter.MaxFilter(11))
+              outline = ImageChops.subtract(outer_mask, mask)
+              comp = Image.new('RGBA', size, (0, 0, 0, 0))
+              glow = outer_mask.filter(ImageFilter.GaussianBlur(5))
+              glow_layer = Image.new('RGBA', size, (0, 220, 145, 70))
+              glow_layer.putalpha(glow.point(lambda p: int(p * 0.25)))
+              comp.alpha_composite(glow_layer)
+              edge = Image.new('RGBA', size, (8, 14, 16, 255))
+              edge.putalpha(outline)
+              comp.alpha_composite(edge)
+              comp.alpha_composite(fill)
+              return comp
+
+          def composite_hole_texture(im, inner, xy, patch):
+              x0, y0 = xy
+              xs = [p[0] for p in inner]
+              ys = [p[1] for p in inner]
+              bx0, bx1 = min(xs), max(xs)
+              by0, by1 = min(ys), max(ys)
+              w, h = bx1 - bx0 + 1, by1 - by0 + 1
+              mask = Image.new('L', (w, h), 0)
+              ImageDraw.Draw(mask).polygon([(x - bx0, y - by0) for x, y in inner], fill=255)
+              tex = patch.resize((w, h), Image.Resampling.BICUBIC).convert('RGBA')
+              tex.putalpha(mask)
+              im.alpha_composite(tex, (x0 + bx0, y0 + by0))
+
+          # Source texture: clean honeycomb area from the canonical standalone mark.
+          icon_src = Image.open(ICON).convert('RGBA')
+          honey = icon_src.crop((580, 240, 680, 340))
+
+          # Logo Black: preserve every original pixel except the N->D monogram and Nexus->Desk wordmark.
+          src = Image.open(BLACK).convert('RGBA')
+          out = src.copy()
+          ImageDraw.Draw(out).rectangle((995, 410, 1485, 560), fill=(0, 0, 0, 255))
+          out.alpha_composite(stylized_text('Desk', (440, 130), 'green'), (995, 420))
+          x0, y0, W, H = 282, 380, 165, 165
+          outer = [(3,3),(148,3),(162,17),(162,148),(148,162),(3,162)]
+          inner = [(45,40),(103,40),(130,64),(130,101),(103,125),(45,125)]
+          composite_hole_texture(out, inner, (x0, y0), honey)
+          out.alpha_composite(custom_d_layer((W,H), outer, inner), (x0, y0))
+          out.convert('RGB').save(BLACK, optimize=True, compress_level=9)
+
+          # Full transparent lockup.
+          src = Image.open(FULL).convert('RGBA')
+          out = src.copy()
+          ImageDraw.Draw(out).rectangle((1015, 385, 1515, 555), fill=(0, 0, 0, 0))
+          out.alpha_composite(stylized_text('Desk', (450, 135), 'green'), (1018, 400))
+          x0, y0, W, H = 276, 350, 175, 185
+          outer = [(3,3),(158,3),(172,17),(172,168),(158,182),(3,182)]
+          inner = [(48,45),(110,45),(138,70),(138,115),(110,140),(48,140)]
+          composite_hole_texture(out, inner, (x0, y0), honey)
+          out.alpha_composite(custom_d_layer((W,H), outer, inner), (x0, y0))
+          out.save(FULL, optimize=True, compress_level=9)
+
+          # Standalone transparent monogram: only N -> D; shield, pitch, glow and palette remain untouched.
+          src = Image.open(ICON).convert('RGBA')
+          out = src.copy()
+          x0, y0, W, H = 540, 350, 390, 350
+          outer = [(5,5),(350,5),(385,40),(385,310),(350,345),(5,345)]
+          inner = [(105,82),(255,82),(315,135),(315,215),(255,268),(105,268)]
+          composite_hole_texture(out, inner, (x0, y0), honey)
+          out.alpha_composite(custom_d_layer((W,H), outer, inner), (x0, y0))
+          out.save(ICON, optimize=True, compress_level=9)
+
+          print('Rebranded canonical PNGs only:')
+          for path in (BLACK, FULL, ICON):
+              im = Image.open(path)
+              print(f'  {path}: {im.size} {im.mode}')
+          PY
+
+      - name: Fail if anything except canonical logos changed
+        run: |
+          mapfile -t changed < <(git diff --name-only)
+          printf '%s\n' "${changed[@]}"
+          test "${#changed[@]}" -eq 3
+          printf '%s\n' "${changed[@]}" | sort > /tmp/changed.txt
+          printf '%s\n' 'Logo Black.png' 'Logo Trasparent Full.png' 'Logo Trasparent.png' | sort > /tmp/expected.txt
+          diff -u /tmp/expected.txt /tmp/changed.txt
+
+      - name: Commit only to private FantaDesk
+        run: |
+          git config user.name 'FantaDesk Actions'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -- 'Logo Black.png' 'Logo Trasparent Full.png' 'Logo Trasparent.png'
+          git commit -m 'chore(branding): rebrand canonical logos to FantaDesk'
+          git push origin HEAD:main
