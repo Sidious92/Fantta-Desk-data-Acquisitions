@@ -6,7 +6,7 @@ on:
       ref:
         description: FantaDesk branch, tag or commit to verify
         required: false
-        default: feat/nexus-listone-runtime-serving
+        default: 5abae506ea88e88ef1cb97c035441f9ec6eab6cf
   push:
     branches: [main]
     paths:
@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || 'feat/nexus-listone-runtime-serving' }}
+      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || '5abae506ea88e88ef1cb97c035441f9ec6eab6cf' }}
     steps:
       - name: Checkout private FantaDesk ephemerally
         uses: actions/checkout@v6
