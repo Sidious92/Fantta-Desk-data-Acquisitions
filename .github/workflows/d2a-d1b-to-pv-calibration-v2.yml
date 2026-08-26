@@ -1,0 +1,110 @@
+name: D2A D1B to PV Calibration v2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.d2a-d1b-to-pv-v2/EXECUTE'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  calibrate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      FANTADESK_REPO: Sidious92/FantaDesk
+      FANTADESK_BRANCH: feat/decision-layer-d2-fantasy-utility-v1
+      FANTADESK_EXPECTED_HEAD: 577267004594c01f42b537c4b02a3f07e426fb12
+      D1B_ARTIFACT_ID: '9194392739'
+      D1B_ARTIFACT_SHA256: 3f6647e326947141fc7f7f7dba9c58903dfa453591338d2064b3dddcf0ce5c
+      D1B_BENCHMARK_SHA256: fe3d8bf4451e70a68491d079bbf8c87bcae0ec67ce2e6e76b314917b95029548
+      NEXUS_D2A_D1B_BENCHMARK: /tmp/d2a-d1b/opportunity-v1-benchmark.json
+      NEXUS_D2A_V2_OUTPUT: /tmp/d2a-v2
+      NEXUS_REQUEST_SPACING_MS: '650'
+      NEXUS_REQUEST_TIMEOUT_MS: '30000'
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v6
+
+      - name: Clone pinned FantaDesk branch
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$TOKEN"
+          git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
+            "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
+          ACTUAL="$(git -C fantadesk-private rev-parse HEAD)"
+          echo "FantaDesk HEAD: $ACTUAL"
+          test "$ACTUAL" = "$FANTADESK_EXPECTED_HEAD"
+          test -f fantadesk-private/data/nexus/decision-layer/d2/D2A_EXPECTED_VOTE_APPEARANCE_PROTOCOL_V2.json
+          test -f fantadesk-private/scripts/nexus-d2a-calibrate-vote-appearance-v2.mjs
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          package-manager-cache: false
+
+      - name: Install FantaDesk dependencies
+        working-directory: fantadesk-private
+        run: npm install --no-audit --no-fund
+
+      - name: Typecheck pinned D2A branch
+        working-directory: fantadesk-private
+        run: npm run typecheck
+
+      - name: Recover hash-pinned D1B historical authority
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/d2a-d1b
+          curl --fail --silent --show-error --location \
+            -H "Authorization: Bearer ${TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${FANTADESK_REPO}/actions/artifacts/${D1B_ARTIFACT_ID}/zip" \
+            -o /tmp/d2a-d1b.zip
+          echo "${D1B_ARTIFACT_SHA256}  /tmp/d2a-d1b.zip" | sha256sum --check --strict
+          unzip -q /tmp/d2a-d1b.zip -d /tmp/d2a-d1b
+          echo "${D1B_BENCHMARK_SHA256}  ${NEXUS_D2A_D1B_BENCHMARK}" | sha256sum --check --strict
+
+      - name: Run preregistered calibration
+        working-directory: fantadesk-private
+        run: node scripts/nexus-d2a-calibrate-vote-appearance-v2.mjs
+
+      - name: Publish summary
+        if: always()
+        run: |
+          echo '## D2A D1B → Fantacalcio PV Calibration V2' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f /tmp/d2a-v2/D2A_EXPECTED_VOTE_APPEARANCE_CALIBRATION_RESULT_V2.json ]; then
+            node --input-type=module <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          import { readFile } from 'node:fs/promises';
+          const r = JSON.parse(await readFile('/tmp/d2a-v2/D2A_EXPECTED_VOTE_APPEARANCE_CALIBRATION_RESULT_V2.json', 'utf8'));
+          console.log(`- Status: ${r.status}`);
+          console.log(`- Selected: ${r.selectedCandidate ?? 'NONE'}`);
+          console.log(`- M0: MAE ${r.pooled.M0.mae}; RMSE ${r.pooled.M0.rmse}; Spearman ${r.pooled.M0.spearman}; N ${r.pooled.M0.n}`);
+          console.log(`- M1: MAE ${r.pooled.M1_PRIMARY.mae}; RMSE ${r.pooled.M1_PRIMARY.rmse}; Spearman ${r.pooled.M1_PRIMARY.spearman}; N ${r.pooled.M1_PRIMARY.n}`);
+          console.log(`- Relative MAE improvement: ${r.comparison.relativeMaeImprovementVsM0}`);
+          console.log(`- Improved MAE folds: ${r.comparison.improvedMaeFolds}/3`);
+          console.log(`- Gate: ${r.comparison.pass}`);
+          for (const c of r.labelCoverage) console.log(`- ${c.season}: PV ${c.observedPvLabels}/${c.universeRows}; missing ${c.missingPvLabels}`);
+          NODE
+          else
+            echo '- No calibration result produced.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload D2A V2 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: d2a-d1b-to-pv-calibration-v2
+          path: /tmp/d2a-v2/
+          if-no-files-found: warn
+          include-hidden-files: true
+          retention-days: 90
