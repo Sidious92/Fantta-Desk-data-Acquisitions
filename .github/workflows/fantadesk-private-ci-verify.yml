@@ -6,7 +6,7 @@ on:
       ref:
         description: FantaDesk branch, tag or commit to verify
         required: false
-        default: feat/nexus-predictive-v2-challenger
+        default: main
   push:
     branches: [main]
     paths:
@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || 'feat/nexus-predictive-v2-challenger' }}
+      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || 'main' }}
     steps:
       - name: Checkout private FantaDesk ephemerally
         uses: actions/checkout@v6
