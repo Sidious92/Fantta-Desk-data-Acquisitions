@@ -1,0 +1,101 @@
+name: Nexus v1.2 2025-26 development labels v1
+
+on:
+  push:
+    branches:
+      - feat/v12-2025-development-labels
+    paths:
+      - '.github/workflows/nexus-v12-2025-development-labels-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout runner
+        uses: actions/checkout@v4
+
+      - name: Acquire pinned Fantacalcio-derived source and materialize labels
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC_REPO='https://github.com/Tails03/SerieAstori_website.git'
+          SRC_COMMIT='8c20989bac3403a86393889c9c697aa29bfa81c3'
+          SRC_PATH='data/seriea-2025-26.js'
+          SRC_BLOB='dda81cf2ebc201906de40c7846de18b2e095f1a4'
+          git clone --filter=blob:none --no-checkout "$SRC_REPO" source
+          git -C source fetch --depth 1 origin "$SRC_COMMIT"
+          git -C source checkout --detach FETCH_HEAD
+          test "$(git -C source rev-parse HEAD)" = "$SRC_COMMIT"
+          test "$(git -C source hash-object "$SRC_PATH")" = "$SRC_BLOB"
+          mkdir -p artifact
+          python - <<'PY'
+          import hashlib, json, pathlib, re
+          src = pathlib.Path('source/data/seriea-2025-26.js')
+          text = src.read_text(encoding='utf-8')
+          m = re.fullmatch(r'FANTA\.set\("seriea-2025-26",(\[[^\n]+\]),(\[.*\])\);\s*', text, flags=re.S)
+          if not m:
+              raise SystemExit('unexpected FANTA.set wrapper/schema')
+          header = json.loads(m.group(1))
+          rows = json.loads(m.group(2))
+          required = ['Id','R','Nome','Squadra','Pv','Gf','Ass']
+          missing = [c for c in required if c not in header]
+          if missing:
+              raise SystemExit(f'missing required columns: {missing}')
+          idx = {c:i for i,c in enumerate(header)}
+          ids=[]; labels=[]; teams=set(); max_pv=0; positive_pv=0
+          for row in rows:
+              if len(row) != len(header):
+                  raise SystemExit('row width mismatch')
+              pid = int(row[idx['Id']])
+              pv = int(row[idx['Pv']])
+              g = row[idx['Gf']]; a = row[idx['Ass']]
+              if isinstance(g, bool) or isinstance(a, bool):
+                  raise SystemExit('boolean count value')
+              g=float(g); a=float(a)
+              if g < 0 or a < 0 or abs(g-round(g)) > 1e-12 or abs(a-round(a)) > 1e-12:
+                  raise SystemExit(f'invalid count label for {pid}')
+              ids.append(pid); teams.add(str(row[idx['Squadra']]))
+              max_pv=max(max_pv,pv); positive_pv += int(pv>0)
+              labels.append({'schema':'NEXUS_V1_2_2025_26_DEVELOPMENT_LABEL_ROW_V1','targetSeason':'2025-26','fantacalcioPlayerId':pid,'finalGoals':int(round(g)),'finalAssists':int(round(a))})
+          if len(ids) != len(set(ids)):
+              raise SystemExit('duplicate Fantacalcio ID')
+          if max_pv != 38:
+              raise SystemExit(f'completed-season diagnostic failed: max Pv={max_pv}')
+          if len(teams) < 20:
+              raise SystemExit(f'team coverage diagnostic failed: {len(teams)}')
+          labels.sort(key=lambda r:r['fantacalcioPlayerId'])
+          lp=pathlib.Path('artifact/nexus-v12-2025-26-development-labels-v1.jsonl')
+          with lp.open('w',encoding='utf-8',newline='\n') as f:
+              for r in labels: f.write(json.dumps(r,sort_keys=True,separators=(',',':'),ensure_ascii=False)+'\n')
+          src_sha=hashlib.sha256(src.read_bytes()).hexdigest()
+          label_sha=hashlib.sha256(lp.read_bytes()).hexdigest()
+          audit={
+            'schema':'NEXUS_V1_2_2025_26_DEVELOPMENT_LABEL_ACQUISITION_AUDIT_V1',
+            'purpose':'DEVELOPMENT_ONLY_NOT_PROMOTION',
+            'source':{'repository':'Tails03/SerieAstori_website','commit':'8c20989bac3403a86393889c9c697aa29bfa81c3','path':'data/seriea-2025-26.js','gitBlobSha':'dda81cf2ebc201906de40c7846de18b2e095f1a4','sha256':src_sha},
+            'schemaHeader':header,
+            'rowCount':len(rows),'uniqueFantacalcioIds':len(set(ids)),'duplicateIds':0,
+            'maxPv':max_pv,'positivePvRows':positive_pv,'teamCount':len(teams),'teams':sorted(teams),
+            'labelsSha256':label_sha,
+            'metricsComputed':False,'nexusPredictionsRead':False
+          }
+          ap=pathlib.Path('artifact/AUDIT.json')
+          ap.write_text(json.dumps(audit,sort_keys=True,separators=(',',':'),ensure_ascii=False)+'\n',encoding='utf-8')
+          with pathlib.Path('artifact/SHA256SUMS.txt').open('w',encoding='utf-8',newline='\n') as f:
+              for p in sorted(pathlib.Path('artifact').iterdir()):
+                  if p.name == 'SHA256SUMS.txt': continue
+                  f.write(f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}\n")
+          print(json.dumps({'rows':len(rows),'uniqueIds':len(set(ids)),'maxPv':max_pv,'teamCount':len(teams),'labelsSha256':label_sha},sort_keys=True))
+          PY
+
+      - name: Upload immutable acquisition artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-v12-2025-development-labels-v1
+          path: artifact/
+          if-no-files-found: error
+          retention-days: 90
