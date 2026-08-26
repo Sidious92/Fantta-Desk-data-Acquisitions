@@ -50,13 +50,15 @@ jobs:
           node-version: 22
           package-manager-cache: false
 
-      - name: Install FantaDesk dependencies
-        working-directory: fantadesk-private
-        run: npm install --no-audit --no-fund
-
-      - name: Typecheck pinned D2A branch
-        working-directory: fantadesk-private
-        run: npm run typecheck
+      - name: Install isolated parser dependency
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/d2a-node
+          cd /tmp/d2a-node
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund jsdom@24.1.3
+          ln -s /tmp/d2a-node/node_modules "$GITHUB_WORKSPACE/fantadesk-private/node_modules"
+          node --check "$GITHUB_WORKSPACE/fantadesk-private/scripts/nexus-d2a-calibrate-vote-appearance-v2.mjs"
 
       - name: Recover hash-pinned D1B historical authority
         env:
