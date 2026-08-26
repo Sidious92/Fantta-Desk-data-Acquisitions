@@ -48,10 +48,11 @@ jobs:
           export default defineConfig({ test: { environment: 'node' } });
           EOF
 
-      - name: Run D2A and Fantasy Utility serving tests
+      - name: Run D2A and Fantasy Utility regression tests
         working-directory: fantadesk-private
         run: |
           /tmp/d2a-test-node/node_modules/.bin/vitest run \
             src/features/nexus/decision/voteAppearanceRuntime.test.ts \
             src/features/nexus/decision/fantasyUtilityRuntime.test.ts \
+            src/features/nexus/decision/fantasyUtility.test.ts \
             --config /tmp/d2a-test-node/vitest.config.mjs
