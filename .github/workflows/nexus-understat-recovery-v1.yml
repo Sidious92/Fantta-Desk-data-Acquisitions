@@ -1,0 +1,107 @@
+name: Nexus Understat Recovery v1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/nexus-understat-recovery-v1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install acquisition dependency
+        run: python -m pip install --disable-pip-version-check --no-cache-dir understat aiohttp
+
+      - name: Acquire Understat player-season evidence ephemerally
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .nexus-understat-recovery/raw
+          cat > /tmp/recover_understat.py <<'PY'
+          import asyncio, aiohttp, hashlib, json, pathlib, datetime
+          from understat import Understat
+
+          OUT = pathlib.Path('.nexus-understat-recovery/raw')
+          LEAGUES = ['EPL', 'La_liga', 'Bundesliga', 'Serie_A', 'Ligue_1']
+          SEASONS = [2021, 2022, 2023, 2024, 2025]
+
+          def stable(obj):
+              return (json.dumps(obj, ensure_ascii=False, sort_keys=True, separators=(',', ':')) + '\n').encode()
+
+          async def main():
+              manifest = {
+                  'schema': 'NEXUS_UNDERSTAT_PLAYER_SEASON_RECOVERY_V1',
+                  'capturedAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                  'source': 'Understat via understat Python client',
+                  'leagues': LEAGUES,
+                  'seasons': SEASONS,
+                  'files': [],
+                  'canonicalPromotionGranted': False,
+                  'purpose': 'raw challenger acquisition only'
+              }
+              async with aiohttp.ClientSession() as session:
+                  u = Understat(session)
+                  for league in LEAGUES:
+                      for season in SEASONS:
+                          rows = await u.get_league_players(league, season)
+                          payload = {
+                              'schema': 'NEXUS_UNDERSTAT_LEAGUE_PLAYERS_RAW_V1',
+                              'league': league,
+                              'season': season,
+                              'rows': rows
+                          }
+                          raw = stable(payload)
+                          path = OUT / f'{league}-{season}.json'
+                          path.write_bytes(raw)
+                          manifest['files'].append({
+                              'path': str(path),
+                              'rows': len(rows),
+                              'bytes': len(raw),
+                              'sha256': hashlib.sha256(raw).hexdigest()
+                          })
+              mraw = (json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + '\n').encode()
+              pathlib.Path('.nexus-understat-recovery/MANIFEST.json').write_bytes(mraw)
+              print(json.dumps({
+                  'status': 'PASS',
+                  'files': len(manifest['files']),
+                  'rows': sum(x['rows'] for x in manifest['files']),
+                  'manifestSha256': hashlib.sha256(mraw).hexdigest()
+              }, indent=2))
+
+          asyncio.run(main())
+          PY
+          python /tmp/recover_understat.py
+
+      - name: Verify recovered surface
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          m=json.loads(pathlib.Path('.nexus-understat-recovery/MANIFEST.json').read_text())
+          assert m['canonicalPromotionGranted'] is False
+          assert len(m['files']) == 25
+          assert all(x['rows'] > 0 for x in m['files'])
+          print('PASS files=', len(m['files']), 'rows=', sum(x['rows'] for x in m['files']))
+          PY
+
+      - name: Upload recovery artifact only
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-understat-player-stats-recovery-v1
+          path: .nexus-understat-recovery
+          if-no-files-found: error
+          retention-days: 3
+
+      - name: Cleanup ephemeral data
+        if: always()
+        run: rm -rf .nexus-understat-recovery /tmp/recover_understat.py
