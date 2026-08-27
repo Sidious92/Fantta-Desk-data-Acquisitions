@@ -99,6 +99,7 @@ jobs:
         with:
           name: nexus-understat-player-stats-recovery-v1
           path: .nexus-understat-recovery
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 3
 
