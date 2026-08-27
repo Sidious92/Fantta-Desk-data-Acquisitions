@@ -18,10 +18,10 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.11'
 
       - name: Install acquisition dependency
-        run: python -m pip install --disable-pip-version-check --no-cache-dir understat aiohttp
+        run: python -m pip install --disable-pip-version-check --no-cache-dir understat
 
       - name: Acquire Understat player-season evidence ephemerally
         shell: bash
