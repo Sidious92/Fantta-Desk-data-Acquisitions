@@ -94,3 +94,38 @@ test('materializzazione conserva date sorgente ma lascia null le semantiche temp
   assert.equal(event.knownAt, null)
   assert.equal(event.observedAt, '2026-08-29T12:05:00Z')
 })
+
+test('club di origine mancante nella fonte ufficiale resta null e SOURCE_MISSING', () => {
+  const source = item('missing-origin')
+  delete source.fields.clubFrom
+  const event = materializeEvent(source, '2026-08-29T12:06:00Z')
+  assert.equal(event.originClubSource, null)
+  assert.equal(event.destinationClubSource, 'club b')
+  assert.equal(event.sourceFieldStatus.originClub, 'SOURCE_MISSING')
+  assert.equal(event.sourceFieldStatus.destinationClub, 'PRESENT')
+  assert.equal(event.sourceRecordRaw.fields.clubFrom, undefined)
+})
+
+test('transfer type e transferDate mancanti restano esplicitamente unresolved/source-missing', () => {
+  const source = item('missing-optional')
+  delete source.fields.transferType
+  delete source.fields.transferDate
+  const event = materializeEvent(source, '2026-08-29T12:07:00Z')
+  assert.equal(event.transferTypeSource, null)
+  assert.equal(event.transferTypeNormalized, 'UNRESOLVED')
+  assert.equal(event.sourceTemporalFields.transferDate, null)
+  assert.equal(event.sourceFieldStatus.transferType, 'SOURCE_MISSING')
+  assert.equal(event.sourceFieldStatus.transferDate, 'SOURCE_MISSING')
+  assert.equal(event.effectiveAt, null)
+  assert.equal(event.publishedAt, null)
+  assert.equal(event.knownAt, null)
+})
+
+test('club di destinazione resta requisito strutturale fail-closed', () => {
+  const source = item('missing-destination')
+  delete source.fields.clubTo
+  assert.throws(
+    () => materializeEvent(source, '2026-08-29T12:08:00Z'),
+    /clubTo mancante/,
+  )
+})
