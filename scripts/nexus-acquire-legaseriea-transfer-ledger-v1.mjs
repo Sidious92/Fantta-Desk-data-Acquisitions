@@ -30,6 +30,15 @@ export function sha256(value) {
   return createHash('sha256').update(value).digest('hex')
 }
 
+function sourceString(value) {
+  const normalized = String(value ?? '').trim()
+  return normalized || null
+}
+
+function sourceFieldStatus(value) {
+  return sourceString(value) ? 'PRESENT' : 'SOURCE_MISSING'
+}
+
 export function normalizeTransferType(value) {
   const normalized = String(value ?? '').trim().toLocaleLowerCase('it-IT')
   if (normalized === 'definitivo') return 'PERMANENT'
@@ -65,11 +74,10 @@ function validateItem(item) {
     throw new Error(`Transfer acquisition: entityCode inatteso ${item.entityCode}`)
   }
   if (!item.fields || typeof item.fields !== 'object') throw new Error(`Transfer acquisition: fields mancanti per ${item._entityId}`)
-  if (!String(item.fields.clubFrom ?? '').trim()) throw new Error(`Transfer acquisition: clubFrom mancante per ${item._entityId}`)
-  if (!String(item.fields.clubTo ?? '').trim()) throw new Error(`Transfer acquisition: clubTo mancante per ${item._entityId}`)
+  if (!sourceString(item.fields.clubTo)) throw new Error(`Transfer acquisition: clubTo mancante per ${item._entityId}`)
 
-  const sourceName = String(item.title ?? '').trim()
-    || [item.fields.playerName, item.fields.playerSurname].map((v) => String(v ?? '').trim()).filter(Boolean).join(' ')
+  const sourceName = sourceString(item.title)
+    || [item.fields.playerName, item.fields.playerSurname].map(sourceString).filter(Boolean).join(' ')
   if (!sourceName) throw new Error(`Transfer acquisition: nome giocatore mancante per ${item._entityId}`)
 }
 
@@ -77,16 +85,19 @@ export function materializeEvent(item, observedAt) {
   validateItem(item)
   const sourceRecordCanonical = canonicalJson(item)
   const sourceRecordSha256 = sha256(sourceRecordCanonical)
-  const transferTypeSource = item.fields.transferType == null ? null : String(item.fields.transferType).trim()
-  const playerNameSource = String(item.title ?? '').trim()
-    || [item.fields.playerName, item.fields.playerSurname].map((v) => String(v ?? '').trim()).filter(Boolean).join(' ')
+  const originClubSource = sourceString(item.fields.clubFrom)
+  const destinationClubSource = sourceString(item.fields.clubTo)
+  const transferTypeSource = sourceString(item.fields.transferType)
+  const transferDateSource = sourceString(item.fields.transferDate)
+  const playerNameSource = sourceString(item.title)
+    || [item.fields.playerName, item.fields.playerSurname].map(sourceString).filter(Boolean).join(' ')
 
   return {
     eventId: `LEGA_SERIE_A_DAPI:${String(item._entityId).trim()}`,
     nexusPlayerId: null,
     playerNameSource,
-    originClubSource: String(item.fields.clubFrom).trim(),
-    destinationClubSource: String(item.fields.clubTo).trim(),
+    originClubSource,
+    destinationClubSource,
     originLeague: null,
     destinationLeague: null,
     transferTypeSource,
@@ -96,9 +107,15 @@ export function materializeEvent(item, observedAt) {
     knownAt: null,
     observedAt,
     sourceTemporalFields: {
-      transferDate: item.fields.transferDate ?? null,
-      contentDate: item.contentDate ?? null,
-      lastUpdatedDate: item.lastUpdatedDate ?? null,
+      transferDate: transferDateSource,
+      contentDate: sourceString(item.contentDate),
+      lastUpdatedDate: sourceString(item.lastUpdatedDate),
+    },
+    sourceFieldStatus: {
+      originClub: sourceFieldStatus(item.fields.clubFrom),
+      destinationClub: sourceFieldStatus(item.fields.clubTo),
+      transferType: sourceFieldStatus(item.fields.transferType),
+      transferDate: sourceFieldStatus(item.fields.transferDate),
     },
     sourceProvider: 'LEGA_SERIE_A_OFFICIAL_DAPI',
     sourceUrl: String(item.selfUrl ?? ENDPOINT),
