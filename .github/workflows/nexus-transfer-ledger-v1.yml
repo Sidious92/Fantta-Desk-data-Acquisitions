@@ -7,6 +7,7 @@ on:
     paths:
       - 'scripts/nexus-acquire-legaseriea-transfer-ledger-v1.mjs'
       - 'scripts/nexus-acquire-legaseriea-transfer-ledger-v1.test.mjs'
+      - 'scripts/nexus-run-legaseriea-transfer-ledger-v1.mjs'
       - '.github/workflows/nexus-transfer-ledger-v1.yml'
   workflow_dispatch:
 
@@ -34,12 +35,7 @@ jobs:
       - name: Acquire stable official Lega Serie A transfer ledger
         env:
           NEXUS_TRANSFER_OUTPUT_ROOT: nexus-transfer-ledger-v1
-        run: |
-          node --input-type=module <<'NODE' | tee acquisition-stdout.json
-          import { resolve } from 'node:path'
-          process.argv[1] = resolve('scripts/nexus-acquire-legaseriea-transfer-ledger-v1.mjs')
-          await import('./scripts/nexus-acquire-legaseriea-transfer-ledger-v1.mjs')
-          NODE
+        run: node scripts/nexus-run-legaseriea-transfer-ledger-v1.mjs | tee acquisition-stdout.json
 
       - name: Verify acquisition manifest
         run: |
@@ -77,6 +73,7 @@ jobs:
             generatedAt: new Date().toISOString(),
             collectorSha256: await sha('scripts/nexus-acquire-legaseriea-transfer-ledger-v1.mjs'),
             testSha256: await sha('scripts/nexus-acquire-legaseriea-transfer-ledger-v1.test.mjs'),
+            harnessSha256: await sha('scripts/nexus-run-legaseriea-transfer-ledger-v1.mjs'),
             manifestSha256: await sha('nexus-transfer-ledger-v1/manifest.json'),
             ledgerSha256: await sha('nexus-transfer-ledger-v1/transfer-events-current-v1.json'),
           }
