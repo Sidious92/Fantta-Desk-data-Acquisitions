@@ -8,6 +8,7 @@ on:
       - 'scripts/nexus-acquire-legaseriea-transfer-ledger-v1.mjs'
       - 'scripts/nexus-acquire-legaseriea-transfer-ledger-v1.test.mjs'
       - 'scripts/nexus-run-legaseriea-transfer-ledger-v1.mjs'
+      - 'scripts/nexus-audit-legaseriea-transfer-source-shape-v1.mjs'
       - '.github/workflows/nexus-transfer-ledger-v1.yml'
   workflow_dispatch:
 
@@ -31,6 +32,11 @@ jobs:
 
       - name: Run deterministic collector tests
         run: node --test scripts/nexus-acquire-legaseriea-transfer-ledger-v1.test.mjs
+
+      - name: Audit official DAPI source shape
+        env:
+          NEXUS_TRANSFER_DIAGNOSTIC_OUTPUT_ROOT: nexus-transfer-source-shape-v1
+        run: node scripts/nexus-audit-legaseriea-transfer-source-shape-v1.mjs | tee source-shape-stdout.json
 
       - name: Acquire stable official Lega Serie A transfer ledger
         env:
@@ -74,6 +80,7 @@ jobs:
             collectorSha256: await sha('scripts/nexus-acquire-legaseriea-transfer-ledger-v1.mjs'),
             testSha256: await sha('scripts/nexus-acquire-legaseriea-transfer-ledger-v1.test.mjs'),
             harnessSha256: await sha('scripts/nexus-run-legaseriea-transfer-ledger-v1.mjs'),
+            sourceShapeAuditSha256: await sha('nexus-transfer-source-shape-v1/source-shape-audit-v1.json'),
             manifestSha256: await sha('nexus-transfer-ledger-v1/manifest.json'),
             ledgerSha256: await sha('nexus-transfer-ledger-v1/transfer-events-current-v1.json'),
           }
@@ -81,12 +88,14 @@ jobs:
           console.log(JSON.stringify(receipt, null, 2))
           NODE
 
-      - name: Upload acquisition evidence
+      - name: Upload acquisition and diagnostic evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: nexus-transfer-ledger-v1
           path: |
+            nexus-transfer-source-shape-v1/
+            source-shape-stdout.json
             nexus-transfer-ledger-v1/
             runner-receipt.json
             acquisition-stdout.json
