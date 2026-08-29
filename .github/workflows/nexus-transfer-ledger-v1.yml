@@ -1,0 +1,86 @@
+name: Nexus Transfer Ledger v1 Acquisition
+
+on:
+  push:
+    branches:
+      - feat/transfer-ledger-v1
+    paths:
+      - 'scripts/nexus-acquire-legaseriea-transfer-ledger-v1.mjs'
+      - 'scripts/nexus-acquire-legaseriea-transfer-ledger-v1.test.mjs'
+      - '.github/workflows/nexus-transfer-ledger-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout acquisition runner
+        uses: actions/checkout@v4
+        with:
+          ref: feat/transfer-ledger-v1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run deterministic collector tests
+        run: node --test scripts/nexus-acquire-legaseriea-transfer-ledger-v1.test.mjs
+
+      - name: Acquire stable official Lega Serie A transfer ledger
+        env:
+          NEXUS_TRANSFER_OUTPUT_ROOT: nexus-transfer-ledger-v1
+        run: node scripts/nexus-acquire-legaseriea-transfer-ledger-v1.mjs | tee acquisition-stdout.json
+
+      - name: Verify acquisition manifest
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFile } from 'node:fs/promises'
+          const manifest = JSON.parse(await readFile('nexus-transfer-ledger-v1/manifest.json', 'utf8'))
+          if (manifest.status !== 'PASS_STABLE_FULL_ENUMERATION') throw new Error(`Unexpected status: ${manifest.status}`)
+          if (!Number.isInteger(manifest.recordCount) || manifest.recordCount <= 0) throw new Error(`Invalid recordCount: ${manifest.recordCount}`)
+          if (manifest.duplicateEntityIds?.length) throw new Error(`Duplicate entity IDs: ${manifest.duplicateEntityIds.join(',')}`)
+          if (!Array.isArray(manifest.stablePair) || manifest.stablePair.length !== 2) throw new Error('Missing stablePair')
+          if (manifest.identityJoinPerformed !== false) throw new Error('Identity join must remain false')
+          if (manifest.historicalReplayAuthorized !== false) throw new Error('Historical replay must remain false')
+          console.log(JSON.stringify({ status: manifest.status, recordCount: manifest.recordCount, pageCount: manifest.pageCount, sourceSnapshotSha256: manifest.sourceSnapshotSha256, eventsSha256: manifest.eventsSha256 }, null, 2))
+          NODE
+
+      - name: Freeze runner receipt
+        run: |
+          node --input-type=module <<'NODE'
+          import { createHash } from 'node:crypto'
+          import { readFile, writeFile } from 'node:fs/promises'
+          const sha = async (path) => createHash('sha256').update(await readFile(path)).digest('hex')
+          const receipt = {
+            schema: 'NEXUS_TRANSFER_LEDGER_RUNNER_RECEIPT_V1',
+            repository: process.env.GITHUB_REPOSITORY,
+            workflow: process.env.GITHUB_WORKFLOW,
+            runId: Number(process.env.GITHUB_RUN_ID),
+            runAttempt: Number(process.env.GITHUB_RUN_ATTEMPT),
+            gitSha: process.env.GITHUB_SHA,
+            branch: process.env.GITHUB_REF_NAME,
+            generatedAt: new Date().toISOString(),
+            collectorSha256: await sha('scripts/nexus-acquire-legaseriea-transfer-ledger-v1.mjs'),
+            testSha256: await sha('scripts/nexus-acquire-legaseriea-transfer-ledger-v1.test.mjs'),
+            manifestSha256: await sha('nexus-transfer-ledger-v1/manifest.json'),
+            ledgerSha256: await sha('nexus-transfer-ledger-v1/transfer-events-current-v1.json'),
+          }
+          await writeFile('runner-receipt.json', `${JSON.stringify(receipt, null, 2)}\n`, 'utf8')
+          console.log(JSON.stringify(receipt, null, 2))
+          NODE
+
+      - name: Upload content-addressed acquisition evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-transfer-ledger-v1
+          path: |
+            nexus-transfer-ledger-v1/
+            runner-receipt.json
+            acquisition-stdout.json
+          if-no-files-found: error
+          retention-days: 30
