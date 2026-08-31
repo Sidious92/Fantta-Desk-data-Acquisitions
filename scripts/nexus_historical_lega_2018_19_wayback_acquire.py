@@ -5,13 +5,14 @@ import json
 import os
 import time
 from pathlib import Path
+from urllib.parse import urlencode
 
 import requests
 from bs4 import BeautifulSoup
 
 OUT = Path(os.environ.get("NEXUS_HIST_LEGA_2018_19_OUT", ".nexus-historical-lega-2018-19-wayback"))
 TIMEOUT = float(os.environ.get("NEXUS_REQUEST_TIMEOUT_SECONDS", "60"))
-USER_AGENT = "FantaNexus-Historical-Lega-Recovery/1.1"
+USER_AGENT = "FantaNexus-Historical-Lega-Recovery/1.2"
 
 TARGETS = [
     {
@@ -19,10 +20,6 @@ TARGETS = [
         "capture_timestamp": "20190220002802",
         "cdx_digest": "2JZK7WDKNEDAEYK3ZWAKFPYKXKP2M55A",
         "source_url": "https://www.legaseriea.it/it/serie-a/calcio-mercato",
-        "snapshot_urls": [
-            "https://web.archive.org/web/20190220002802id_/https://www.legaseriea.it/it/serie-a/calcio-mercato",
-            "https://web.archive.org/web/20190220002802id_/http://www.legaseriea.it/it/serie-a/calcio-mercato",
-        ],
         "expected_data_rows": 521,
         "filename": "legaseriea-calcio-mercato-2018-19-summer-20190220002802.html",
     },
@@ -31,16 +28,13 @@ TARGETS = [
         "capture_timestamp": "20190202153813",
         "cdx_digest": "2MSZZX5D35JIDZ6QUNMSYBOXYGTO4IZN",
         "source_url": "https://www.legaseriea.it/it/serie-a/calcio-mercato",
-        "snapshot_urls": [
-            "https://web.archive.org/web/20190202153813id_/https://www.legaseriea.it/it/serie-a/calcio-mercato",
-            "https://web.archive.org/web/20190202153813id_/http://www.legaseriea.it/it/serie-a/calcio-mercato",
-        ],
         "expected_data_rows": 270,
         "filename": "legaseriea-calcio-mercato-2018-19-winter-20190202153813.html",
     },
 ]
 
 REQUIRED_HEADERS = ["DATA", "CALCIATORE", "PROVENIENZA", "DESTINAZIONE", "TIPO. TRASF"]
+CDX_FIELDS = ["timestamp", "original", "statuscode", "mimetype", "digest", "length"]
 
 
 def sha256(data: bytes) -> str:
@@ -54,9 +48,8 @@ def validate_market_html(payload: bytes, expected_rows: int) -> tuple[int, str]:
     title = " ".join(soup.title.stripped_strings) if soup.title else ""
     if "Calciomercato" not in title:
         raise RuntimeError(f"unexpected page title: {title!r}")
-    tables = soup.find_all("table")
     candidates = []
-    for table in tables:
+    for table in soup.find_all("table"):
         headers = [" ".join(th.stripped_strings).upper() for th in table.find_all("th")]
         header_blob = " | ".join(headers)
         if all(required in header_blob for required in REQUIRED_HEADERS):
@@ -69,6 +62,43 @@ def validate_market_html(payload: bytes, expected_rows: int) -> tuple[int, str]:
     return row_count, title
 
 
+def cdx_exact_matches(session: requests.Session, target: dict) -> tuple[str, list[dict]]:
+    day = target["capture_timestamp"][:8]
+    params = {
+        "url": "www.legaseriea.it/it/serie-a/calcio-mercato*",
+        "output": "json",
+        "fl": ",".join(CDX_FIELDS),
+        "filter": "statuscode:200",
+        "from": day,
+        "to": day,
+        "limit": "1000",
+    }
+    cdx_url = "https://web.archive.org/cdx/search/cdx?" + urlencode(params)
+    response = session.get(cdx_url, timeout=TIMEOUT)
+    response.raise_for_status()
+    payload = response.json()
+    if not isinstance(payload, list) or not payload:
+        raise RuntimeError("CDX returned no rows")
+    header = payload[0]
+    if header != CDX_FIELDS:
+        raise RuntimeError(f"unexpected CDX header: {header!r}")
+    rows = [dict(zip(header, row)) for row in payload[1:] if len(row) == len(header)]
+    matches = [
+        row for row in rows
+        if row["timestamp"] == target["capture_timestamp"] and row["digest"] == target["cdx_digest"]
+    ]
+    return cdx_url, matches
+
+
+def fallback_snapshot_urls(target: dict) -> list[str]:
+    ts = target["capture_timestamp"]
+    path = "www.legaseriea.it/it/serie-a/calcio-mercato"
+    return [
+        f"https://web.archive.org/web/{ts}id_/https://{path}",
+        f"https://web.archive.org/web/{ts}id_/http://{path}",
+    ]
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     session = requests.Session()
@@ -77,11 +107,33 @@ def main() -> None:
     records = []
     failures = []
     for target in TARGETS:
-        rec = {k: v for k, v in target.items() if k != "snapshot_urls"}
+        rec = dict(target)
+        cdx_url = None
+        cdx_matches = []
+        cdx_error = None
+        try:
+            cdx_url, cdx_matches = cdx_exact_matches(session, target)
+        except Exception as exc:
+            cdx_error = f"{type(exc).__name__}: {exc}"
+        rec["cdx_query_url"] = cdx_url
+        rec["cdx_matches"] = cdx_matches
+        if cdx_error:
+            rec["cdx_error"] = cdx_error
+
+        candidate_urls = []
+        for row in cdx_matches:
+            original = row["original"]
+            candidate_urls.append(
+                f"https://web.archive.org/web/{target['capture_timestamp']}id_/{original}"
+            )
+        candidate_urls.extend(fallback_snapshot_urls(target))
+        # stable dedupe preserving priority
+        candidate_urls = list(dict.fromkeys(candidate_urls))
+
         attempts = []
         accepted = None
         last_error = None
-        for snapshot_url in target["snapshot_urls"]:
+        for snapshot_url in candidate_urls:
             attempt = {"snapshot_url": snapshot_url}
             try:
                 response = session.get(snapshot_url, timeout=TIMEOUT, allow_redirects=True)
@@ -136,13 +188,14 @@ def main() -> None:
         time.sleep(1.0)
 
     manifest = {
-        "schema": "NEXUS_HISTORICAL_LEGA_2018_19_WAYBACK_RAW_ACQUISITION_V1_1",
+        "schema": "NEXUS_HISTORICAL_LEGA_2018_19_WAYBACK_RAW_ACQUISITION_V1_2",
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "authority": "ARCHIVED_FIRST_PARTY_LEGA_SERIE_A_HTML",
         "custodian": "INTERNET_ARCHIVE_WAYBACK_MACHINE",
         "claim_complete_league_ledger": False,
         "allowed_use": "EVENT_SPECIFIC_EVIDENCE_ONLY",
         "validation": {
+            "cdx_timestamp_and_digest_match_preferred": True,
             "page_title_contains": "Calciomercato",
             "required_market_headers": REQUIRED_HEADERS,
             "expected_data_rows": {t["period"]: t["expected_data_rows"] for t in TARGETS},
