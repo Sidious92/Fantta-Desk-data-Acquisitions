@@ -1,0 +1,51 @@
+name: Nexus Historical Residual Exact Provenance
+
+on:
+  push:
+    branches:
+      - feat/nexus-historical-residual-10-wayback-acquisition-v1
+    paths:
+      - scripts/nexus_historical_residual_run1_exact_provenance.py
+      - .github/workflows/nexus-historical-residual-exact-provenance.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      NEXUS_RESIDUAL_EXACT_OUT: .nexus-historical-residual-exact
+      NEXUS_REQUEST_TIMEOUT_SECONDS: '20'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install requests
+      - name: Verify exact archived first-party provenance
+        run: python scripts/nexus_historical_residual_run1_exact_provenance.py
+      - name: Publish manifest
+        if: always()
+        run: |
+          echo '## Nexus historical exact archive provenance' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f .nexus-historical-residual-exact/manifest.json ]; then
+            cat .nexus-historical-residual-exact/manifest.json >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'manifest not produced' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Upload exact provenance artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-historical-residual-exact-provenance-v1
+          path: .nexus-historical-residual-exact/
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
