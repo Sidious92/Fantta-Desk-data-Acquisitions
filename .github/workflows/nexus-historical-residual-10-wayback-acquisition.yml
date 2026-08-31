@@ -1,0 +1,61 @@
+name: Nexus Historical Residual 10 Wayback Acquisition
+
+on:
+  push:
+    branches:
+      - feat/nexus-historical-residual-10-wayback-acquisition-v1
+    paths:
+      - scripts/nexus_historical_residual_10_wayback_acquire.py
+      - .github/workflows/nexus-historical-residual-10-wayback-acquisition.yml
+      - .nexus-historical-residual-10-wayback-launch/EXECUTE
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXUS_HIST_RESIDUAL10_OUT: .nexus-historical-residual-10-wayback
+      NEXUS_REQUEST_TIMEOUT_SECONDS: '60'
+      NEXUS_CDX_MAX_ROWS: '2000'
+      NEXUS_MAX_FETCHES_PER_SOURCE: '12'
+      NEXUS_REQUEST_SLEEP_SECONDS: '0.35'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Acquire archived first-party residual evidence
+        run: python scripts/nexus_historical_residual_10_wayback_acquire.py
+
+      - name: Publish manifest
+        if: always()
+        run: |
+          echo '## Nexus historical 2018/19 residual-10 Wayback acquisition' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f .nexus-historical-residual-10-wayback/manifest.json ]; then
+            cat .nexus-historical-residual-10-wayback/manifest.json >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'manifest not produced' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload acquisition artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-historical-residual-10-wayback-v1
+          path: .nexus-historical-residual-10-wayback/
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
