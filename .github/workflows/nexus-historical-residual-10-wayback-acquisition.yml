@@ -20,10 +20,10 @@ jobs:
     timeout-minutes: 20
     env:
       NEXUS_HIST_RESIDUAL10_OUT: .nexus-historical-residual-10-wayback
-      NEXUS_REQUEST_TIMEOUT_SECONDS: '60'
+      NEXUS_REQUEST_TIMEOUT_SECONDS: '20'
       NEXUS_CDX_MAX_ROWS: '2000'
-      NEXUS_MAX_FETCHES_PER_SOURCE: '12'
-      NEXUS_REQUEST_SLEEP_SECONDS: '0.35'
+      NEXUS_MAX_FETCHES_PER_SOURCE: '6'
+      NEXUS_REQUEST_SLEEP_SECONDS: '0.25'
 
     steps:
       - name: Checkout
