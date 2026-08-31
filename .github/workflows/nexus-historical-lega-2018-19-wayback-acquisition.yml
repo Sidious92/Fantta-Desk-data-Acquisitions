@@ -28,7 +28,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install requests beautifulsoup4
 
       - name: Acquire archived official Lega HTML
         run: python scripts/nexus_historical_lega_2018_19_wayback_acquire.py
