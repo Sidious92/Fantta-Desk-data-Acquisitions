@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-import scripts.nexus_historical_residual_10_wayback_acquire as base
+import nexus_historical_residual_10_wayback_acquire as base
 
 UNRESOLVED_AFTER_RUN1 = {
     "Bruno Alves",
