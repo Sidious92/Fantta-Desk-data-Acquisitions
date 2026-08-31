@@ -1,0 +1,54 @@
+name: Nexus Historical Lega 2018-19 Wayback Acquisition
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .nexus-historical-lega-2018-19-wayback-launch/EXECUTE
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      NEXUS_HIST_LEGA_2018_19_OUT: .nexus-historical-lega-2018-19-wayback
+      NEXUS_REQUEST_TIMEOUT_SECONDS: '60'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Acquire archived official Lega HTML
+        run: python scripts/nexus_historical_lega_2018_19_wayback_acquire.py
+
+      - name: Publish manifest
+        if: always()
+        run: |
+          echo '## Nexus historical Lega 2018-19 Wayback acquisition' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f .nexus-historical-lega-2018-19-wayback/manifest.json ]; then
+            cat .nexus-historical-lega-2018-19-wayback/manifest.json >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'manifest not produced' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload acquisition artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-historical-lega-2018-19-wayback-v1
+          path: .nexus-historical-lega-2018-19-wayback/
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
