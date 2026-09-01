@@ -18,10 +18,17 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: Sidious92/FantaDesk
-          ref: a7864885690d7772b92f7664210dcaa36dba62cd
+          ref: f66cb5d3195f6d4e8bb8fcd3bcce9162d3c3c1b3
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
           fetch-depth: 1
+
+      - name: Verify exact private commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "f66cb5d3195f6d4e8bb8fcd3bcce9162d3c3c1b3"
+          echo "Verified FantaDesk commit $(git rev-parse HEAD)"
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
