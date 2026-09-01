@@ -1,0 +1,57 @@
+name: Nexus Historical Bruno Alves t.co Wayback
+
+on:
+  push:
+    branches:
+      - feat/nexus-historical-residual-10-wayback-acquisition-v1
+    paths:
+      - scripts/nexus_historical_bruno_alves_tco_wayback.py
+      - .github/workflows/nexus-historical-bruno-alves-tco-wayback.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      NEXUS_BRUNO_ALVES_OUT: .nexus-historical-bruno-alves-exact
+      NEXUS_REQUEST_TIMEOUT_SECONDS: '25'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Recover exact archived Parma first-party page
+        run: python scripts/nexus_historical_bruno_alves_tco_wayback.py
+
+      - name: Publish manifest
+        if: always()
+        run: |
+          echo '## Nexus historical Bruno Alves t.co Wayback' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f .nexus-historical-bruno-alves-exact/manifest.json ]; then
+            cat .nexus-historical-bruno-alves-exact/manifest.json >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'manifest not produced' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload recovery artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-historical-bruno-alves-tco-wayback-v1
+          path: .nexus-historical-bruno-alves-exact/
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
