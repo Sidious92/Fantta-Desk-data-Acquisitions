@@ -132,10 +132,8 @@ jobs:
           text, count = re.subn(r'versionName\s+"[^"]+"', f'versionName "{os.environ["APP_VERSION_NAME"]}"', text, count=1)
           if count != 1:
               raise SystemExit('versionName marker not found')
-          release = re.compile(r'(release\s*\{)')
-          text, count = release.subn(r'\1\n            signingConfig signingConfigs.debug', text, count=1)
-          if count != 1:
-              raise SystemExit('release buildType marker not found')
+          # Keep release unsigned here. The workflow performs explicit deterministic
+          # zipalign + apksigner v2/v3 signing after the release build.
           gradle.write_text(text)
           PY
 
@@ -158,16 +156,56 @@ jobs:
         working-directory: android
         run: ./gradlew :app:lintRelease --no-daemon --stacktrace
 
-      - name: Assemble signed non-debuggable UAT release APK
+      - name: Assemble unsigned non-debuggable UAT release APK
         working-directory: android
         run: ./gradlew :app:assembleRelease --no-daemon --stacktrace
 
-      - name: Verify APK policy, manifest and signature
+      - name: Explicitly align and sign UAT APK with v2 and v3
+        id: sign_apk
+        shell: bash
+        run: |
+          set -euo pipefail
+          UNSIGNED="android/app/build/outputs/apk/release/app-release-unsigned.apk"
+          test -f "$UNSIGNED"
+          ZIPALIGN="$(find "$ANDROID_HOME/build-tools" -type f -name zipalign | sort -V | tail -1)"
+          APKSIGNER="$(find "$ANDROID_HOME/build-tools" -type f -name apksigner | sort -V | tail -1)"
+          test -x "$ZIPALIGN"
+          test -x "$APKSIGNER"
+
+          keytool -genkeypair \
+            -keystore /tmp/fantadesk-uat.jks \
+            -storepass fantadesk-uat-ci \
+            -keypass fantadesk-uat-ci \
+            -alias fantadesk-uat \
+            -keyalg RSA \
+            -keysize 3072 \
+            -validity 3650 \
+            -dname "CN=FantaDesk UAT,O=FantaDesk,C=IT" \
+            -noprompt
+
+          "$ZIPALIGN" -f -p 4 "$UNSIGNED" /tmp/fantadesk-uat-aligned.apk
+          "$APKSIGNER" sign \
+            --ks /tmp/fantadesk-uat.jks \
+            --ks-key-alias fantadesk-uat \
+            --ks-pass pass:fantadesk-uat-ci \
+            --key-pass pass:fantadesk-uat-ci \
+            --v1-signing-enabled false \
+            --v2-signing-enabled true \
+            --v3-signing-enabled true \
+            --out /tmp/fantadesk-uat-signed.apk \
+            /tmp/fantadesk-uat-aligned.apk
+
+          SHORT_SHA="${FANTADESK_REF:0:8}"
+          OUT="FantaDesk-auction-uat-android16-${SHORT_SHA}.apk"
+          cp /tmp/fantadesk-uat-signed.apk "$OUT"
+          echo "file=$OUT" >> "$GITHUB_OUTPUT"
+
+      - name: Verify APK policy, merged manifest and signature
         id: verify_apk
         shell: bash
         run: |
           set -euo pipefail
-          APK="android/app/build/outputs/apk/release/app-release.apk"
+          APK="${{ steps.sign_apk.outputs.file }}"
           test -f "$APK"
           AAPT="$(find "$ANDROID_HOME/build-tools" -type f -name aapt | sort -V | tail -1)"
           APKSIGNER="$(find "$ANDROID_HOME/build-tools" -type f -name apksigner | sort -V | tail -1)"
@@ -183,17 +221,19 @@ jobs:
           "$APKSIGNER" verify --verbose --print-certs "$APK" | tee /tmp/signature.txt
           grep -q 'Verified using v2 scheme (APK Signature Scheme v2): true' /tmp/signature.txt
           grep -q 'Verified using v3 scheme (APK Signature Scheme v3): true' /tmp/signature.txt
+          grep -q 'V3 Signer: certificate DN: C=IT, O=FantaDesk, CN=FantaDesk UAT' /tmp/signature.txt
 
           "$AAPT" dump permissions "$APK" | tee /tmp/permissions.txt
-          test "$(grep -c '^uses-permission:' /tmp/permissions.txt)" -eq 1
-          grep -q 'android.permission.INTERNET' /tmp/permissions.txt
-          ! grep -Eq 'READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE|MANAGE_EXTERNAL_STORAGE|REQUEST_INSTALL_PACKAGES|QUERY_ALL_PACKAGES|ACCESS_FINE_LOCATION|ACCESS_COARSE_LOCATION|CAMERA|RECORD_AUDIO' /tmp/permissions.txt
+          grep -q "uses-permission: name='android.permission.INTERNET'" /tmp/permissions.txt
+          grep -q "uses-permission: name='${APP_ID}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'" /tmp/permissions.txt
+          test "$(grep -c '^uses-permission:' /tmp/permissions.txt)" -eq 2
+          ! grep -Eq 'READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE|MANAGE_EXTERNAL_STORAGE|REQUEST_INSTALL_PACKAGES|QUERY_ALL_PACKAGES|ACCESS_FINE_LOCATION|ACCESS_COARSE_LOCATION|CAMERA|RECORD_AUDIO|READ_MEDIA_|POST_NOTIFICATIONS|BLUETOOTH_|NEARBY_WIFI_DEVICES|BODY_SENSORS' /tmp/permissions.txt
 
-          SHORT_SHA="${FANTADESK_REF:0:8}"
-          OUT="FantaDesk-auction-uat-android16-${SHORT_SHA}.apk"
-          cp "$APK" "$OUT"
-          SHA="$(sha256sum "$OUT" | awk '{print $1}')"
-          echo "file=$OUT" >> "$GITHUB_OUTPUT"
+          "$AAPT" dump xmltree "$APK" AndroidManifest.xml | tee /tmp/manifest-tree.txt
+          grep -q "${APP_ID}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" /tmp/manifest-tree.txt
+          grep -Eq 'android:protectionLevel.*0x2' /tmp/manifest-tree.txt
+
+          SHA="$(sha256sum "$APK" | awk '{print $1}')"
           echo "sha256=$SHA" >> "$GITHUB_OUTPUT"
 
           {
@@ -209,12 +249,14 @@ jobs:
             echo "Cleartext traffic: disabled"
             echo "Backups: disabled"
             echo "Orientation: sensorLandscape"
-            echo "Declared permissions: INTERNET only"
+            echo "Runtime permissions: INTERNET plus AndroidX app-scoped signature permission only"
+            echo "Dangerous/special permissions: none"
             echo "APK Signature Scheme v2: verified"
             echo "APK Signature Scheme v3: verified"
+            echo "UAT signer: CN=FantaDesk UAT,O=FantaDesk,C=IT"
             echo "SHA-256: $SHA"
             echo
-            echo "NOTE: this UAT APK is sideloaded and uses the CI test signing key. Android can still show the normal Unknown app/source installation confirmation; that is distribution provenance, not an obsolete-target security failure. A later build from another ephemeral runner may require uninstalling this UAT package first because the test signing key is not a production update key."
+            echo "NOTE: this UAT APK is sideloaded and uses an ephemeral CI UAT signing key. Android can still show the normal Unknown app/source installation confirmation; that is distribution provenance, not an obsolete-target security failure. A later UAT build from another ephemeral runner may require uninstalling this package first because the UAT key is not a production update key."
           } > FantaDesk-auction-uat-security-report.txt
 
       - name: Upload UAT APK and security report
@@ -222,7 +264,7 @@ jobs:
         with:
           name: FantaDesk-auction-uat-android16
           path: |
-            ${{ steps.verify_apk.outputs.file }}
+            ${{ steps.sign_apk.outputs.file }}
             FantaDesk-auction-uat-security-report.txt
           if-no-files-found: error
           retention-days: 3
@@ -239,5 +281,6 @@ jobs:
           echo "- Cleartext: **disabled**" >> "$GITHUB_STEP_SUMMARY"
           echo "- Backup: **disabled**" >> "$GITHUB_STEP_SUMMARY"
           echo "- Dangerous/special permissions: **none**" >> "$GITHUB_STEP_SUMMARY"
+          echo "- AndroidX dynamic receiver permission: **signature-scoped**" >> "$GITHUB_STEP_SUMMARY"
           echo "- APK signing v2/v3: **verified**" >> "$GITHUB_STEP_SUMMARY"
           echo "- SHA-256: \`${{ steps.verify_apk.outputs.sha256 }}\`" >> "$GITHUB_STEP_SUMMARY"
