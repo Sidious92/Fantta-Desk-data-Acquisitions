@@ -24,7 +24,7 @@ jobs:
       CAPACITOR_VERSION: 8.5.0
       APP_ID: com.fantadesk.app
       APP_VERSION_NAME: 0.9.0-auction-rc1
-      APP_VERSION_CODE: 2026090101
+      APP_VERSION_CODE: 26090101
     steps:
       - name: Checkout private FantaDesk ephemerally
         uses: actions/checkout@v6
