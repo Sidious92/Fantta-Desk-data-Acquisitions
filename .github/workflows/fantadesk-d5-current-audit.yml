@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      FANTADESK_EXPECTED_HEAD: 2b398f9938400a30ffb7550aa1751f360e7a128b
+      FANTADESK_EXPECTED_HEAD: fcb1ff38f88a2ac90d9a06dfd0457e896ecc6208
       NEXUS_D2B_ROSTER_JSON: /tmp/nexus-d5/frozen-roster.json
       NEXUS_D2B_OUTPUT_ROOT: /tmp/nexus-d5/d2
       NEXUS_D2B_ROWS_JSON: /tmp/nexus-d5/d2/D2B_ROWS_V3.json
@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: Sidious92/FantaDesk
-          ref: 2b398f9938400a30ffb7550aa1751f360e7a128b
+          ref: fcb1ff38f88a2ac90d9a06dfd0457e896ecc6208
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
           fetch-depth: 1
