@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - '.d2b-current-serving-v2/EXECUTE'
+      - '.d2b-current-serving-v2/RUN-*'
   workflow_dispatch:
 
 permissions:
