@@ -1,0 +1,131 @@
+name: Nexus F6 Fantacalcio Label Authority v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/f5-understat-invariance-audit
+    paths:
+      - .github/workflows/nexus-f6-fantacalcio-label-authority-v1.yml
+
+permissions:
+  contents: read
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SOURCE_REPO: LBrontesi/Applicazione-fantacalcio
+      SOURCE_COMMIT: b9f5032c5fa8aa8df1b10acb4e2782a533eead70
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Acquire pinned final-season Fantacalcio files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifact
+          for s in 2022_23 2023_24 2024_25; do
+            f="Statistiche_Fantacalcio_Stagione_${s}.xlsx"
+            curl --fail --location --silent --show-error \
+              "https://raw.githubusercontent.com/${SOURCE_REPO}/${SOURCE_COMMIT}/${f}" \
+              -o "artifact/${f}"
+          done
+
+      - name: Audit schema and completed-season evidence
+        shell: python
+        run: |
+          import hashlib, json, zipfile, xml.etree.ElementTree as ET
+          from pathlib import Path
+
+          root = Path('artifact')
+          ns = {'m':'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+                'r':'http://schemas.openxmlformats.org/officeDocument/2006/relationships'}
+
+          def sha(p):
+              return hashlib.sha256(p.read_bytes()).hexdigest()
+
+          def col(cell_ref):
+              return ''.join(c for c in cell_ref if c.isalpha())
+
+          def read_xlsx(path):
+              with zipfile.ZipFile(path) as z:
+                  shared=[]
+                  if 'xl/sharedStrings.xml' in z.namelist():
+                      sr=ET.fromstring(z.read('xl/sharedStrings.xml'))
+                      for si in sr.findall('m:si',ns):
+                          shared.append(''.join(t.text or '' for t in si.iterfind('.//m:t',ns)))
+                  wb=ET.fromstring(z.read('xl/workbook.xml'))
+                  rel=ET.fromstring(z.read('xl/_rels/workbook.xml.rels'))
+                  relmap={e.attrib['Id']:e.attrib['Target'] for e in rel}
+                  sheets=[]
+                  for s in wb.find('m:sheets',ns):
+                      name=s.attrib['name']; rid=s.attrib['{'+ns['r']+'}id']
+                      target=relmap[rid]
+                      if target.startswith('/'): target=target.lstrip('/')
+                      elif not target.startswith('xl/'): target='xl/'+target
+                      sheets.append((name,target))
+                  target = next((t for n,t in sheets if n.lower()=='tutti'), sheets[0][1])
+                  sh=ET.fromstring(z.read(target))
+                  rows=[]
+                  for row in sh.findall('.//m:sheetData/m:row',ns):
+                      vals={}
+                      for c in row.findall('m:c',ns):
+                          ref=c.attrib.get('r',''); typ=c.attrib.get('t'); v=c.find('m:v',ns)
+                          if typ=='inlineStr':
+                              isel=c.find('m:is',ns); value=''.join(t.text or '' for t in isel.iterfind('.//m:t',ns)) if isel is not None else ''
+                          elif v is None: value=''
+                          elif typ=='s': value=shared[int(v.text)]
+                          else: value=v.text or ''
+                          vals[col(ref)] = value
+                      rows.append(vals)
+                  return rows, [n for n,_ in sheets]
+
+          files={
+            '2022-23':root/'Statistiche_Fantacalcio_Stagione_2022_23.xlsx',
+            '2023-24':root/'Statistiche_Fantacalcio_Stagione_2023_24.xlsx',
+            '2024-25':root/'Statistiche_Fantacalcio_Stagione_2024_25.xlsx',
+          }
+          audit={'schema':'NEXUS_F6_FANTACALCIO_LABEL_ACQUISITION_V1','sourceRepo':'LBrontesi/Applicazione-fantacalcio','sourceCommit':'b9f5032c5fa8aa8df1b10acb4e2782a533eead70','seasons':{}}
+          for season,p in files.items():
+              rows,sheets=read_xlsx(p)
+              header_i=None; headers={}
+              for i,r in enumerate(rows[:10]):
+                  inv={str(v).strip():k for k,v in r.items()}
+                  if all(k in inv for k in ['Id','R','Nome','Pv','Mv','Gf','Ass']):
+                      header_i=i; headers=inv; break
+              if header_i is None: raise SystemExit(f'{season}: required header not found')
+              data=[]
+              for r in rows[header_i+1:]:
+                  if not str(r.get(headers['Id'],'')).strip(): continue
+                  try:
+                      data.append({'id':int(float(r[headers['Id']])), 'pv':int(float(r.get(headers['Pv'],0) or 0)), 'mv':float(r.get(headers['Mv'],0) or 0), 'gf':int(float(r.get(headers['Gf'],0) or 0)), 'ass':int(float(r.get(headers['Ass'],0) or 0))})
+                  except Exception as e: raise SystemExit(f'{season}: parse error {e}')
+              ids=[x['id'] for x in data]
+              if len(ids)!=len(set(ids)): raise SystemExit(f'{season}: duplicate IDs')
+              max_pv=max(x['pv'] for x in data)
+              # Serie A final-season files must demonstrate a completed-season scale; a partial early-season snapshot fails.
+              if max_pv < 30: raise SystemExit(f'{season}: appears partial, max Pv={max_pv}')
+              pos=[x for x in data if x['pv']>0]
+              if any(x['mv']<=0 for x in pos): raise SystemExit(f'{season}: nonpositive MV with positive Pv')
+              audit['seasons'][season]={
+                'file':p.name,'sha256':sha(p),'bytes':p.stat().st_size,'sheets':sheets,
+                'rows':len(data),'uniqueIds':len(set(ids)),'positiveVoteRows':len(pos),
+                'maxPv':max_pv,'rowsPvGe30':sum(x['pv']>=30 for x in data),
+                'maxGoals':max(x['gf'] for x in data),'maxAssists':max(x['ass'] for x in data),
+                'requiredColumns':['Id','R','Nome','Pv','Mv','Gf','Ass']
+              }
+          (root/'LABEL_AUDIT.json').write_text(json.dumps(audit,sort_keys=True,separators=(',',':'))+'\n')
+          sums=[]
+          for p in sorted(root.iterdir()): sums.append(f'{sha(p)}  {p.name}')
+          (root/'SHA256SUMS.txt').write_text('\n'.join(sums)+'\n')
+          print(json.dumps(audit,indent=2))
+
+      - name: Upload pinned label authority
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f6-fantacalcio-label-authority-v1
+          path: artifact/
+          if-no-files-found: error
+          retention-days: 30

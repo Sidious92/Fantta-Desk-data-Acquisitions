@@ -1,0 +1,157 @@
+name: Nexus F5C MV Marco 2024-25 Vintage v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/nexus-f5c-mv-marco-2024-25-vintage-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acquire-inspect-mv-vintage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Acquire immutable completed 2024-25 Fantacalcio statistics snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, math, pathlib, re, subprocess, zipfile
+          import xml.etree.ElementTree as ET
+          from datetime import datetime, timezone
+
+          out=pathlib.Path('artifact'); out.mkdir(exist_ok=True)
+          repo=pathlib.Path('/tmp/marco-fmp')
+          commit='4294c4a4e55e78d889035f4e7f772c34798005c8'
+          expected_ts='2025-08-02T13:13:22+00:00'
+          cutoff='2025-08-14T00:00:00+00:00'
+          path='Statistiche_Fantacalcio_Stagione_2024_25.xlsx'
+          expected_blob='2f908fb5937e195aede7eb3ddeb90c6589a0804d'
+
+          subprocess.run(['git','clone','--filter=blob:none','--no-checkout','https://github.com/Marco-Maker/FMP.git',str(repo)],check=True)
+          subprocess.run(['git','-C',str(repo),'fetch','--depth=1','origin',commit],check=True)
+          resolved=subprocess.check_output(['git','-C',str(repo),'rev-parse','FETCH_HEAD'],text=True).strip()
+          if resolved != commit: raise SystemExit(f'Commit mismatch: {resolved} != {commit}')
+          ts_git=subprocess.check_output(['git','-C',str(repo),'show','-s','--format=%cI',commit],text=True).strip()
+          ts_utc=datetime.fromisoformat(ts_git).astimezone(timezone.utc)
+          expected_utc=datetime.fromisoformat(expected_ts).astimezone(timezone.utc)
+          cutoff_utc=datetime.fromisoformat(cutoff).astimezone(timezone.utc)
+          if ts_utc != expected_utc: raise SystemExit(f'Commit timestamp mismatch after UTC normalization: {ts_utc.isoformat()} != {expected_utc.isoformat()}')
+          if ts_utc >= cutoff_utc: raise SystemExit('Snapshot commit is not strictly pre-cutoff')
+          blob=subprocess.check_output(['git','-C',str(repo),'rev-parse',f'{commit}:{path}'],text=True).strip()
+          if blob != expected_blob: raise SystemExit(f'Git blob mismatch: {blob} != {expected_blob}')
+          raw=subprocess.check_output(['git','-C',str(repo),'show',f'{commit}:{path}'])
+          dst=out/'Statistiche_Fantacalcio_Stagione_2024_25.xlsx'; dst.write_bytes(raw)
+
+          ns={'m':'http://schemas.openxmlformats.org/spreadsheetml/2006/main','r':'http://schemas.openxmlformats.org/officeDocument/2006/relationships'}
+          def colnum(ref):
+              m=re.match(r'([A-Z]+)',ref or '')
+              if not m: return 0
+              n=0
+              for ch in m.group(1): n=n*26+ord(ch)-64
+              return n
+          def as_float(v):
+              try: return float(str(v).replace(',','.'))
+              except Exception: return None
+
+          with zipfile.ZipFile(dst) as z:
+              shared=[]
+              if 'xl/sharedStrings.xml' in z.namelist():
+                  root=ET.fromstring(z.read('xl/sharedStrings.xml'))
+                  for si in root.findall('m:si',ns):
+                      shared.append(''.join(t.text or '' for t in si.iter('{%s}t'%ns['m'])))
+              wb=ET.fromstring(z.read('xl/workbook.xml'))
+              relroot=ET.fromstring(z.read('xl/_rels/workbook.xml.rels'))
+              relmap={r.attrib['Id']:r.attrib['Target'] for r in relroot}
+              parsed=[]
+              for sh in wb.find('m:sheets',ns):
+                  title=sh.attrib['name']; rid=sh.attrib['{%s}id'%ns['r']]
+                  target=relmap[rid].lstrip('/')
+                  if not target.startswith('xl/'): target='xl/'+target
+                  root=ET.fromstring(z.read(target))
+                  rows=[]
+                  sheetdata=root.find('m:sheetData',ns)
+                  if sheetdata is not None:
+                      for row in sheetdata.findall('m:row',ns):
+                          ridx=int(row.attrib.get('r','0') or 0); vals={}
+                          for c in row.findall('m:c',ns):
+                              idx=colnum(c.attrib.get('r','')); typ=c.attrib.get('t'); v=c.find('m:v',ns); val=''
+                              if typ=='inlineStr':
+                                  isel=c.find('m:is',ns); val=''.join(t.text or '' for t in isel.iter('{%s}t'%ns['m'])) if isel is not None else ''
+                              elif v is not None and v.text is not None:
+                                  val=v.text
+                                  if typ=='s': val=shared[int(val)]
+                              vals[idx]=str(val).strip()
+                          rows.append((ridx,vals))
+                  parsed.append((title,rows))
+
+          required={'Id','R','Nome','Squadra','Pv','Mv'}
+          selected=None
+          for title,rows in parsed:
+              for ridx,vals in rows[:10]:
+                  header={v:i for i,v in vals.items() if v}
+                  if required <= set(header):
+                      selected=(title,ridx,header,rows)
+                      break
+              if selected: break
+          if not selected: raise SystemExit('No worksheet/header with required Fantacalcio Id/R/Nome/Squadra/Pv/Mv schema')
+          sheet,header_row,header,rows=selected
+          ids=[]; positive=0; zero=0; nonfinite=0; zero_mv_positive=0; mv_vals=[]; pv_vals=[]; data_rows=0
+          for ridx,vals in rows:
+              if ridx <= header_row: continue
+              pid=vals.get(header['Id'],'').strip()
+              if not pid: continue
+              data_rows += 1; ids.append(pid)
+              pv=as_float(vals.get(header['Pv'],'')); mv=as_float(vals.get(header['Mv'],''))
+              if pv is None or not math.isfinite(pv) or pv < 0: raise SystemExit(f'Invalid Pv at row {ridx}')
+              pv_vals.append(pv)
+              if pv > 0:
+                  positive += 1
+                  if mv is None or not math.isfinite(mv): nonfinite += 1
+                  else:
+                      mv_vals.append(mv)
+                      if mv == 0: zero_mv_positive += 1
+              else:
+                  zero += 1
+          if not ids: raise SystemExit('No player rows')
+          if len(ids) != len(set(ids)): raise SystemExit('Duplicate Fantacalcio Id in snapshot')
+          if nonfinite: raise SystemExit(f'Non-finite Mv with positive Pv: {nonfinite}')
+          if zero_mv_positive: raise SystemExit(f'Zero Mv with positive Pv: {zero_mv_positive}')
+          if not positive: raise SystemExit('No positive vote exposure rows')
+
+          canonical_ts=ts_utc.isoformat().replace('+00:00','Z')
+          manifest={
+            'schema':'NEXUS_F5C_MV_MARCO_2024_25_VINTAGE_V1',
+            'sourceId':'MARCOMAKER_FANTACALCIO_STATS_2024_25',
+            'repository':'Marco-Maker/FMP','selectedCommit':commit,
+            'selectedCommitTimestamp':canonical_ts,'selectedCommitTimestampGitLiteral':ts_git,
+            'path':path,'gitBlobSha':blob,'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw),
+            'completedSeason':'2024/25','sheet':sheet,'headerRow':header_row,
+            'requiredFields':sorted(required),'rows':data_rows,'uniqueFantacalcioIds':len(set(ids)),
+            'positiveVoteExposureRows':positive,'zeroVoteExposureRows':zero,
+            'nonFiniteMvWithPositiveExposure':nonfinite,'zeroMvWithPositiveExposure':zero_mv_positive,
+            'mvRangeWhenPvPositive':[min(mv_vals),max(mv_vals)] if mv_vals else None,
+            'pvRange':[min(pv_vals),max(pv_vals)] if pv_vals else None,
+            'zeroExposurePolicy':'Pv=0 is not an MV observation and MUST NOT be converted into a zero-valued observation during stabilization',
+            'outerCutoffEligibility':'2025-26_ONLY_WITHIN_CURRENT_F5_REPLAY_SET',
+            'outerCutoff':'2025-08-14T00:00:00Z','strictlyPreCutoff':True,
+            'predictivePerformanceUsedForSelection':False,'fantasyTargetPerformanceUsedForSelection':False,
+            'mvMagnitudeUsedForSourceSelection':False
+          }
+          mb=(json.dumps(manifest,ensure_ascii=False,indent=2,sort_keys=True)+'\n').encode()
+          (out/'MANIFEST.json').write_bytes(mb)
+          (out/'SHA256SUMS.txt').write_text(f"{hashlib.sha256(raw).hexdigest()}  {dst.name}\n{hashlib.sha256(mb).hexdigest()}  MANIFEST.json\n",encoding='utf-8')
+          print(json.dumps(manifest,ensure_ascii=False,indent=2,sort_keys=True))
+          PY
+      - name: Upload MV vintage
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f5c-mv-marco-2024-25-vintage-v1
+          path: artifact/
+          if-no-files-found: error
+          retention-days: 30

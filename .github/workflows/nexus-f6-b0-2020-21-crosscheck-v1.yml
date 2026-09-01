@@ -1,0 +1,112 @@
+name: Nexus F6 B0 2020-21 Crosscheck v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/f5-understat-invariance-audit
+    paths:
+      - .github/workflows/nexus-f6-b0-2020-21-crosscheck-v1.yml
+
+permissions:
+  contents: read
+
+jobs:
+  crosscheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      ARCHIVE_REPO: diegoercoli/asta_fantacalcio
+      ARCHIVE_COMMIT: c19f0dfb6c1d28ca2a110e7490e3c57768773e09
+      VINTAGE_REPO: dandolodavid/FantaStat
+      VINTAGE_COMMIT: e92ae5eb33d47d60ed1d9b515ac37788b408d672
+    steps:
+      - uses: actions/checkout@v6
+      - name: Acquire pinned archive and pre-cutoff vintage
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifact
+          for s in 2020_21 2021_22; do
+            f="Statistiche_Fantacalcio_Stagione_${s}_Italia.xlsx"
+            curl --fail --location --silent --show-error \
+              "https://raw.githubusercontent.com/${ARCHIVE_REPO}/${ARCHIVE_COMMIT}/data/raw/statistiche_italia/${f}" \
+              -o "artifact/${f}"
+          done
+          curl --fail --location --silent --show-error \
+            "https://raw.githubusercontent.com/${VINTAGE_REPO}/${VINTAGE_COMMIT}/dataset/stat_info%5E(Stagione%202021_22).csv" \
+            -o 'artifact/stat_info_2021_22_vintage.csv'
+      - name: Cross-check exact IDs and official-stat fields
+        shell: python
+        run: |
+          import csv, hashlib, io, json, math, zipfile, xml.etree.ElementTree as ET
+          from pathlib import Path
+          root=Path('artifact')
+          ns={'m':'http://schemas.openxmlformats.org/spreadsheetml/2006/main','r':'http://schemas.openxmlformats.org/officeDocument/2006/relationships'}
+          def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+          def col(ref): return ''.join(x for x in ref if x.isalpha())
+          def xlsx_rows(path):
+            with zipfile.ZipFile(path) as z:
+              shared=[]
+              if 'xl/sharedStrings.xml' in z.namelist():
+                sr=ET.fromstring(z.read('xl/sharedStrings.xml'))
+                for si in sr.findall('m:si',ns): shared.append(''.join(t.text or '' for t in si.iterfind('.//m:t',ns)))
+              wb=ET.fromstring(z.read('xl/workbook.xml')); rel=ET.fromstring(z.read('xl/_rels/workbook.xml.rels'))
+              relmap={e.attrib['Id']:e.attrib['Target'] for e in rel}
+              target=None
+              for s in wb.find('m:sheets',ns):
+                if s.attrib['name'].lower()=='tutti':
+                  t=relmap[s.attrib['{'+ns['r']+'}id']]; target=t.lstrip('/') if t.startswith('/') else ('xl/'+t if not t.startswith('xl/') else t); break
+              if not target: raise SystemExit(f'{path}: Tutti sheet absent')
+              sh=ET.fromstring(z.read(target)); rows=[]
+              for row in sh.findall('.//m:sheetData/m:row',ns):
+                vals={}
+                for c in row.findall('m:c',ns):
+                  ref=c.attrib.get('r',''); typ=c.attrib.get('t'); v=c.find('m:v',ns)
+                  if typ=='inlineStr':
+                    ii=c.find('m:is',ns); value=''.join(t.text or '' for t in ii.iterfind('.//m:t',ns)) if ii is not None else ''
+                  elif v is None: value=''
+                  elif typ=='s': value=shared[int(v.text)]
+                  else: value=v.text or ''
+                  vals[col(ref)]=value
+                rows.append(vals)
+              hi=None; h={}
+              for i,r in enumerate(rows[:10]):
+                inv={str(v).strip():k for k,v in r.items()}
+                if all(k in inv for k in ['Id','R','Nome','Pv','Mv','Gf','Ass']): hi=i; h=inv; break
+              if hi is None: raise SystemExit(f'{path}: header absent')
+              out={}
+              for r in rows[hi+1:]:
+                if not str(r.get(h['Id'],'')).strip(): continue
+                pid=int(float(r[h['Id']]))
+                if pid in out: raise SystemExit(f'{path}: duplicate ID {pid}')
+                out[pid]={'role':str(r.get(h['R'],'')).strip(),'name':str(r.get(h['Nome'],'')).strip(),'pv':int(float(r.get(h['Pv'],0) or 0)),'mv':float(r.get(h['Mv'],0) or 0),'goals':int(float(r.get(h['Gf'],0) or 0)),'assists':int(float(r.get(h['Ass'],0) or 0))}
+              return out
+          arc20=xlsx_rows(root/'Statistiche_Fantacalcio_Stagione_2020_21_Italia.xlsx')
+          arc21=xlsx_rows(root/'Statistiche_Fantacalcio_Stagione_2021_22_Italia.xlsx')
+          with open(root/'stat_info_2021_22_vintage.csv',encoding='utf-8-sig',newline='') as f: vintage=list(csv.DictReader(f))
+          vin={int(float(r['Id'])):{'role':r['Ruolo'].strip(),'name':r['Nome'].strip(),'pv':int(float(r['partite_voto'] or 0)),'mv':float(r['media_voto'] or 0),'goals':int(float(r['Gol'] or 0)),'assists':int(float(r['Assist'] or 0))} for r in vintage if str(r.get('Id','')).strip()}
+          common=sorted(set(arc21)&set(vin)); diffs={k:0 for k in ['role','pv','mv','goals','assists']}; exact_all=0
+          mv_abs=[]
+          for pid in common:
+            a=arc21[pid]; b=vin[pid]
+            ok=True
+            for k in ['role','pv','goals','assists']:
+              if a[k]!=b[k]: diffs[k]+=1; ok=False
+            if abs(a['mv']-b['mv'])>1e-9: diffs['mv']+=1; mv_abs.append(abs(a['mv']-b['mv'])); ok=False
+            if ok: exact_all+=1
+          audit={'schema':'NEXUS_F6_B0_2020_21_RETROSPECTIVE_CROSSCHECK_V1','promotionStatus':'DIAGNOSTIC_ONLY_PENDING_SCIENTIFIC_RECEIPT','archiveRepo': 'diegoercoli/asta_fantacalcio','archiveCommit':'c19f0dfb6c1d28ca2a110e7490e3c57768773e09','vintageRepo':'dandolodavid/FantaStat','vintageCommit':'e92ae5eb33d47d60ed1d9b515ac37788b408d672','archive2020_21':{'rows':len(arc20),'sha256':sha(root/'Statistiche_Fantacalcio_Stagione_2020_21_Italia.xlsx'),'maxPv':max(x['pv'] for x in arc20.values())},'archive2021_22':{'rows':len(arc21),'sha256':sha(root/'Statistiche_Fantacalcio_Stagione_2021_22_Italia.xlsx'),'maxPv':max(x['pv'] for x in arc21.values())},'precutoffVintage2021_22':{'rows':len(vin),'sha256':sha(root/'stat_info_2021_22_vintage.csv')},'crosscheck2021_22':{'commonExactIds':len(common),'archiveOnlyIds':len(set(arc21)-set(vin)),'vintageOnlyIds':len(set(vin)-set(arc21)),'exactAllComparedFields':exact_all,'fieldDifferenceCounts':diffs,'mvMaxAbsoluteDifference':max(mv_abs) if mv_abs else 0.0}}
+          if len(common)<450: raise SystemExit(f'insufficient common IDs: {len(common)}')
+          if max(x['pv'] for x in arc20.values())<30: raise SystemExit('2020/21 appears partial')
+          (root/'CROSSCHECK_AUDIT.json').write_text(json.dumps(audit,sort_keys=True,separators=(',',':'))+'\n')
+          sums=[]
+          for p in sorted(root.iterdir()): sums.append(f'{sha(p)}  {p.name}')
+          (root/'SHA256SUMS.txt').write_text('\n'.join(sums)+'\n')
+          print(json.dumps(audit,indent=2))
+      - name: Upload diagnostic
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f6-b0-2020-21-crosscheck-v1
+          path: artifact/
+          if-no-files-found: error
+          retention-days: 30

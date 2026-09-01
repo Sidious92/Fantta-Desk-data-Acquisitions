@@ -1,0 +1,75 @@
+name: Nexus F5A Understat Historical Invariance Evidence
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/nexus-f5-understat-invariance-historical-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package-historical-authority:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout runner repository
+        uses: actions/checkout@v4
+
+      - name: Fetch exact pinned historical Understat snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          PIN='0e474a6197b9707d92b21db9bb47e5ab1b6bb876'
+          REPO='https://github.com/douglasbc/scraping-understat-dataset.git'
+          git clone --filter=blob:none --no-checkout "$REPO" /tmp/understat-history
+          git -C /tmp/understat-history fetch --depth=1 origin "$PIN"
+          git -C /tmp/understat-history checkout --detach FETCH_HEAD
+          ACTUAL="$(git -C /tmp/understat-history rev-parse HEAD)"
+          test "$ACTUAL" = "$PIN"
+
+          mkdir -p artifact/serie_a
+          for season in 14-15 15-16 16-17 17-18 18-19 19-20 20-21; do
+            src="/tmp/understat-history/datasets/serie_a/players_serie_a_${season}.csv"
+            test -f "$src"
+            cp "$src" artifact/serie_a/
+          done
+
+          printf '%s\n' "$PIN" > artifact/PINNED_COMMIT.txt
+          printf '%s\n' "$REPO" > artifact/SOURCE_REPOSITORY.txt
+          (cd artifact && sha256sum serie_a/*.csv | LC_ALL=C sort > SHA256SUMS.txt)
+          python - <<'PY'
+          import csv, json, pathlib
+          root=pathlib.Path('artifact')
+          rows=[]
+          for p in sorted((root/'serie_a').glob('*.csv')):
+              with p.open(newline='',encoding='utf-8-sig') as f:
+                  rr=list(csv.DictReader(f))
+              required={'id','xG','npxG','xA'}
+              missing=sorted(required-set(rr[0].keys() if rr else []))
+              if missing:
+                  raise SystemExit(f'{p}: missing {missing}')
+              ids=[str(r['id']).strip() for r in rr]
+              if len(ids)!=len(set(ids)):
+                  raise SystemExit(f'{p}: duplicate id')
+              rows.append({'file':p.name,'rows':len(rr),'uniqueIds':len(set(ids))})
+          (root/'MANIFEST.json').write_text(json.dumps({
+              'schema':'NEXUS_F5A_UNDERSTAT_HISTORICAL_SNAPSHOT_V1',
+              'pinnedCommit':'0e474a6197b9707d92b21db9bb47e5ab1b6bb876',
+              'league':'Serie A',
+              'fields':['id','xG','npxG','xA'],
+              'files':rows,
+              'fuzzyMatchingUsed':False,
+              'predictiveOutcomesUsed':False
+          },indent=2,sort_keys=True)+'\n')
+          PY
+
+      - name: Upload immutable comparison side
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f5a-understat-historical-serie-a-v1
+          path: artifact/
+          if-no-files-found: error
+          retention-days: 30
