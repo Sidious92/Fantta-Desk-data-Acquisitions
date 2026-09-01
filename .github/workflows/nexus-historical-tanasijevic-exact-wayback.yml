@@ -1,0 +1,57 @@
+name: Nexus Historical Tanasijevic Exact Wayback
+
+on:
+  push:
+    branches:
+      - feat/nexus-historical-residual-10-wayback-acquisition-v1
+    paths:
+      - scripts/nexus_historical_tanasijevic_exact_wayback.py
+      - .github/workflows/nexus-historical-tanasijevic-exact-wayback.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      NEXUS_TANASIJEVIC_EXACT_OUT: .nexus-historical-tanasijevic-exact
+      NEXUS_REQUEST_TIMEOUT_SECONDS: '25'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Verify exact archived Chievo first-party page
+        run: python scripts/nexus_historical_tanasijevic_exact_wayback.py
+
+      - name: Publish manifest
+        if: always()
+        run: |
+          echo '## Nexus historical Tanasijevic exact Wayback' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f .nexus-historical-tanasijevic-exact/manifest.json ]; then
+            cat .nexus-historical-tanasijevic-exact/manifest.json >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'manifest not produced' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload exact provenance artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-historical-tanasijevic-exact-wayback-v1
+          path: .nexus-historical-tanasijevic-exact/
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
