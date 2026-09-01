@@ -1,0 +1,131 @@
+name: FantaDesk D6 Auction UI Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/fantadesk-d6-auction-ui-audit.yml
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  d6-auction-ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      FANTADESK_EXPECTED_HEAD: 84b4a1991d94f48ac53e572e18de5e457731123b
+      NEXUS_D2B_ROSTER_JSON: /tmp/nexus-d6/frozen-roster.json
+      NEXUS_D2B_OUTPUT_ROOT: /tmp/nexus-d6/d2
+      NEXUS_D2B_ROWS_JSON: /tmp/nexus-d6/d2/D2B_ROWS_V3.json
+      NEXUS_D5_OUTPUT_ROOT: /tmp/nexus-d6/d5
+    steps:
+      - name: Checkout private FantaDesk ephemerally
+        id: checkout
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 84b4a1991d94f48ac53e572e18de5e457731123b
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Verify exact private commit
+        id: verify
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$FANTADESK_EXPECTED_HEAD"
+
+      - name: Setup Node.js
+        id: setup
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          package-manager-cache: false
+
+      - name: Install dependencies
+        id: install
+        run: npm install --no-audit --no-fund
+
+      - name: Typecheck D6 branch
+        id: typecheck
+        run: npm run typecheck
+
+      - name: Production build including Nexus runtime materialization
+        id: build
+        run: npm run build
+
+      - name: Materialize frozen 523-player Listone
+        id: roster
+        run: node scripts/nexus-d2b-prepare-frozen-roster-2026-27-v2.mjs
+
+      - name: Run D5 regression tests
+        id: d5unit
+        run: npx vitest run src/features/nexus/decision/liveMaxBid.test.ts --reporter=verbose
+
+      - name: Re-materialize audited D2 rows
+        id: d2
+        run: npx vitest run src/features/nexus/decision/d2bCurrentServing2026_27.v3.integration.test.ts --reporter=verbose
+
+      - name: Re-run current-pool D5 representative audit
+        id: d5
+        continue-on-error: true
+        run: npx vitest run src/features/nexus/decision/d5Current2026_27.integration.test.ts --reporter=verbose
+
+      - name: Publish step statuses
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          const steps = {
+            checkout: '${{ steps.checkout.outcome }}', verify: '${{ steps.verify.outcome }}', setup: '${{ steps.setup.outcome }}', install: '${{ steps.install.outcome }}',
+            typecheck: '${{ steps.typecheck.outcome }}', build: '${{ steps.build.outcome }}', roster: '${{ steps.roster.outcome }}',
+            d5unit: '${{ steps.d5unit.outcome }}', d2: '${{ steps.d2.outcome }}', d5: '${{ steps.d5.outcome }}',
+          };
+          for (const [name, outcome] of Object.entries(steps)) {
+            const state = outcome === 'success' ? 'success' : outcome === 'skipped' ? 'error' : 'failure';
+            const response = await fetch(`https://api.github.com/repos/${process.env.GITHUB_REPOSITORY}/statuses/${process.env.GITHUB_SHA}`, {
+              method: 'POST',
+              headers: { Authorization: `Bearer ${process.env.GH_TOKEN}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28', 'Content-Type': 'application/json' },
+              body: JSON.stringify({ state, context: `d6-step-${name}`, description: `${name}=${outcome}` }),
+            });
+            if (!response.ok) throw new Error(`${name}: HTTP ${response.status}`);
+          }
+          NODE
+
+      - name: Publish D6 gate status
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          state=failure
+          description="D6 auction UI delivery failed"
+          if [ "${{ steps.checkout.outcome }}" = "success" ] \
+            && [ "${{ steps.verify.outcome }}" = "success" ] \
+            && [ "${{ steps.setup.outcome }}" = "success" ] \
+            && [ "${{ steps.install.outcome }}" = "success" ] \
+            && [ "${{ steps.typecheck.outcome }}" = "success" ] \
+            && [ "${{ steps.build.outcome }}" = "success" ] \
+            && [ "${{ steps.roster.outcome }}" = "success" ] \
+            && [ "${{ steps.d5unit.outcome }}" = "success" ] \
+            && [ "${{ steps.d2.outcome }}" = "success" ] \
+            && [ "${{ steps.d5.outcome }}" = "success" ]; then
+            state=success
+            description="D6 tablet auction cockpit PASS"
+          fi
+          curl --fail --silent --show-error -X POST \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
+            -d "{\"state\":\"${state}\",\"context\":\"d6-gate\",\"description\":\"${description}\"}"
+
+      - name: Enforce fail-closed D6 gate
+        if: always() && (steps.checkout.outcome != 'success' || steps.verify.outcome != 'success' || steps.setup.outcome != 'success' || steps.install.outcome != 'success' || steps.typecheck.outcome != 'success' || steps.build.outcome != 'success' || steps.roster.outcome != 'success' || steps.d5unit.outcome != 'success' || steps.d2.outcome != 'success' || steps.d5.outcome != 'success')
+        run: exit 1
