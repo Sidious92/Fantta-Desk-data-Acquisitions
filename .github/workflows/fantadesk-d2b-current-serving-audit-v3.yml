@@ -50,7 +50,11 @@ jobs:
 
       - name: Typecheck branch
         id: typecheck
-        run: npm run typecheck
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run typecheck 2>&1 | tee /tmp/d2b-v3-typecheck.log
 
       - name: Materialize embedded Nexus runtime from frozen authorities
         id: materialize
@@ -67,7 +71,10 @@ jobs:
       - name: Run artifact-independent D2B V3 audit
         id: audit
         continue-on-error: true
-        run: npx vitest run src/features/nexus/decision/d2bCurrentServing2026_27.v3.integration.test.ts --reporter=verbose
+        shell: bash
+        run: |
+          set -o pipefail
+          npx vitest run src/features/nexus/decision/d2bCurrentServing2026_27.v3.integration.test.ts --reporter=verbose 2>&1 | tee /tmp/d2b-v3-audit.log
 
       - name: Print D2B V3 report
         if: always()
@@ -75,6 +82,77 @@ jobs:
           if [ -f "$NEXUS_D2B_OUTPUT_ROOT/D2B_AUDIT_V3.json" ]; then
             cat "$NEXUS_D2B_OUTPUT_ROOT/D2B_AUDIT_V3.json"
           fi
+
+      - name: Publish typecheck diagnostic contexts
+        if: always() && steps.typecheck.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' > /tmp/tc-contexts.txt
+          import re
+          from pathlib import Path
+          lines = Path('/tmp/d2b-v3-typecheck.log').read_text(errors='replace').splitlines()
+          found = []
+          for line in lines:
+              if 'error TS' not in line:
+                  continue
+              m = re.search(r'([^/\\()]+\.tsx?|[^/\\()]+\.ts)\((\d+),(\d+)\): error (TS\d+):\s*(.*)', line)
+              if m:
+                  file, row, col, code, msg = m.groups()
+                  tokens = re.sub(r'[^A-Za-z0-9]+', '-', msg).strip('-')[:35]
+                  found.append(f'{code}-{file}-L{row}C{col}-{tokens}')
+              else:
+                  code = re.search(r'(TS\d+)', line)
+                  found.append((code.group(1) if code else 'TSERR') + '-unparsed')
+          for i, item in enumerate(found[:12], 1):
+              print(f'{i}-{item}'[:82])
+          if not found:
+              print('1-typecheck-failed-no-parsed-error')
+          PY
+          while IFS= read -r suffix; do
+            curl --fail --silent --show-error \
+              -X POST \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
+              -d "{\"state\":\"failure\",\"context\":\"d2b-v3-tc-${suffix}\",\"description\":\"typecheck diagnostic\"}"
+          done < /tmp/tc-contexts.txt
+
+      - name: Publish audit diagnostic contexts
+        if: always() && steps.audit.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' > /tmp/audit-contexts.txt
+          import re
+          from pathlib import Path
+          lines = Path('/tmp/d2b-v3-audit.log').read_text(errors='replace').splitlines()
+          candidates = []
+          for line in lines:
+              s = line.strip()
+              if 'D2B V3:' in s or 'AssertionError' in s or ('expected' in s.lower() and 'received' in s.lower()):
+                  s = re.sub(r'[^A-Za-z0-9._-]+', '-', s).strip('-')
+                  if s and s not in candidates:
+                      candidates.append(s[:76])
+          for i, item in enumerate(candidates[:8], 1):
+              print(f'{i}-{item}'[:82])
+          if not candidates:
+              print('1-audit-failed-no-parsed-error')
+          PY
+          while IFS= read -r suffix; do
+            curl --fail --silent --show-error \
+              -X POST \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
+              -d "{\"state\":\"failure\",\"context\":\"d2b-v3-auditdiag-${suffix}\",\"description\":\"audit diagnostic\"}"
+          done < /tmp/audit-contexts.txt
 
       - name: Publish per-step status contexts
         if: always()
