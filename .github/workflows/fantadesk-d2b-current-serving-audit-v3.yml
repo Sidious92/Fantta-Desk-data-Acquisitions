@@ -76,6 +76,48 @@ jobs:
             cat "$NEXUS_D2B_OUTPUT_ROOT/D2B_AUDIT_V3.json"
           fi
 
+      - name: Publish per-step status contexts
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          STEP_CHECKOUT: ${{ steps.checkout.outcome }}
+          STEP_VERIFY: ${{ steps.verify.outcome }}
+          STEP_SETUP: ${{ steps.setup.outcome }}
+          STEP_INSTALL: ${{ steps.install.outcome }}
+          STEP_TYPECHECK: ${{ steps.typecheck.outcome }}
+          STEP_MATERIALIZE: ${{ steps.materialize.outcome }}
+          STEP_ROSTER: ${{ steps.roster.outcome }}
+          STEP_D1C: ${{ steps.d1c.outcome }}
+          STEP_AUDIT: ${{ steps.audit.outcome }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          publish() {
+            local context="$1" outcome="$2" state
+            case "$outcome" in
+              success) state=success ;;
+              failure) state=failure ;;
+              cancelled|skipped) state=error ;;
+              *) state=error ;;
+            esac
+            curl --fail --silent --show-error \
+              -X POST \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
+              -d "{\"state\":\"${state}\",\"context\":\"d2b-v3-step-${context}\",\"description\":\"${outcome}\"}"
+          }
+          publish checkout "$STEP_CHECKOUT"
+          publish verify "$STEP_VERIFY"
+          publish setup "$STEP_SETUP"
+          publish install "$STEP_INSTALL"
+          publish typecheck "$STEP_TYPECHECK"
+          publish materialize "$STEP_MATERIALIZE"
+          publish roster "$STEP_ROSTER"
+          publish d1c "$STEP_D1C"
+          publish audit "$STEP_AUDIT"
+
       - name: Publish compact D2B V3 evidence statuses
         if: always() && steps.audit.outcome == 'success'
         env:
