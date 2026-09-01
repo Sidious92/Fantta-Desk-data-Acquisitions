@@ -1,0 +1,135 @@
+name: D2B Current 2026/27 Serving Audit V2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.d2b-current-serving-v2/EXECUTE'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  d2b-v2:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      FANTADESK_REPO: Sidious92/FantaDesk
+      FANTADESK_BRANCH: feat/nexus-auction-delivery-v1
+      FANTADESK_EXPECTED_HEAD: f0a63bcf0d21a74d0f1d06122fe8d7f39a37ab57
+      PREPARED_ARTIFACT_ID: '9162967092'
+      PREPARED_ARTIFACT_SHA256: '555e012b8e992d04a088aa5809c20b6efc023aa442bbf6a904435df17038d721'
+      FULL_ARTIFACT_ID: '9162966124'
+      FULL_ARTIFACT_SHA256: '1a47f252091004902578e88db37b04ea2eb1dc7e275326cd8b99f657cfdff27e'
+      NEXUS_D2B_ROSTER_JSON: /tmp/d2b-v2/frozen-roster.json
+      NEXUS_LIVE_PREPARED_ROOT: /tmp/d2b-v2-inputs/prepared
+      NEXUS_LIVE_FULL_ROOT: /tmp/d2b-v2-inputs/full
+      NEXUS_LIVE_INPUT_OUTPUT_ROOT: /tmp/d2b-v2/serving-inputs
+      NEXUS_D2B_INPUTS_JSON: /tmp/d2b-v2/serving-inputs/live-serving-inputs.json
+      NEXUS_D2B_OUTPUT_ROOT: /tmp/d2b-v2/output
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v6
+
+      - name: Clone pinned FantaDesk auction branch
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$TOKEN"
+          git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
+            "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
+          ACTUAL="$(git -C fantadesk-private rev-parse HEAD)"
+          echo "FantaDesk HEAD: $ACTUAL"
+          test "$ACTUAL" = "$FANTADESK_EXPECTED_HEAD"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          package-manager-cache: false
+
+      - name: Materialize frozen current 523-player roster
+        working-directory: fantadesk-private
+        run: node scripts/nexus-d2b-prepare-frozen-roster-2026-27-v2.mjs
+
+      - name: Recover hash-pinned frozen serving inputs
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$NEXUS_LIVE_PREPARED_ROOT" "$NEXUS_LIVE_FULL_ROOT"
+          download_artifact() {
+            local id="$1" expected="$2" zip="$3" out="$4"
+            curl --fail --silent --show-error --location \
+              -H "Authorization: Bearer ${TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${FANTADESK_REPO}/actions/artifacts/${id}/zip" \
+              -o "$zip"
+            local actual
+            actual="$(sha256sum "$zip" | cut -d' ' -f1)"
+            echo "artifact ${id}: ${actual}"
+            test "$actual" = "$expected"
+            unzip -q "$zip" -d "$out"
+          }
+          download_artifact "$PREPARED_ARTIFACT_ID" "$PREPARED_ARTIFACT_SHA256" /tmp/prepared-v2.zip "$NEXUS_LIVE_PREPARED_ROOT"
+          download_artifact "$FULL_ARTIFACT_ID" "$FULL_ARTIFACT_SHA256" /tmp/full-v2.zip "$NEXUS_LIVE_FULL_ROOT"
+
+      - name: Build frozen serving history for exact 523 universe
+        working-directory: fantadesk-private
+        env:
+          NEXUS_LIVE_LISTONE_JSON: ${{ env.NEXUS_D2B_ROSTER_JSON }}
+        run: node scripts/nexus-prepare-live-serving-inputs-2026-27.mjs
+
+      - name: Install isolated audit dependency
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/d2b-v2-node
+          cd /tmp/d2b-v2-node
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund vitest@4.1.10
+          ln -s /tmp/d2b-v2-node/node_modules "$GITHUB_WORKSPACE/fantadesk-private/node_modules"
+          cat > /tmp/d2b-v2-node/vitest.config.mjs <<'EOF'
+          import { defineConfig } from 'vitest/config';
+          export default defineConfig({ test: { environment: 'node' } });
+          EOF
+
+      - name: Run D1C serving parser tests
+        working-directory: fantadesk-private
+        run: |
+          /tmp/d2b-v2-node/node_modules/.bin/vitest run \
+            src/features/nexus/decision/d1cCurrentServing.test.ts \
+            --config /tmp/d2b-v2-node/vitest.config.mjs
+
+      - name: Run D2B fail-closed current serving audit V2
+        working-directory: fantadesk-private
+        run: |
+          /tmp/d2b-v2-node/node_modules/.bin/vitest run \
+            src/features/nexus/decision/d2bCurrentServing2026_27.v2.integration.test.ts \
+            --config /tmp/d2b-v2-node/vitest.config.mjs
+
+      - name: Publish D2B V2 summary
+        if: always()
+        run: |
+          if [ -f "$NEXUS_D2B_OUTPUT_ROOT/D2B_SUMMARY.md" ]; then
+            cat "$NEXUS_D2B_OUTPUT_ROOT/D2B_SUMMARY.md" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo '## D2B Current 2026/27 Serving Audit V2' >> "$GITHUB_STEP_SUMMARY"
+            echo 'No PASS report produced. Inspect logs and evidence.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload D2B V2 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: d2b-current-2026-27-serving-audit-v2
+          path: |
+            /tmp/d2b-v2/frozen-roster.json
+            /tmp/d2b-v2/serving-inputs/input-audit.json
+            /tmp/d2b-v2/output/
+          if-no-files-found: warn
+          include-hidden-files: true
+          retention-days: 90
