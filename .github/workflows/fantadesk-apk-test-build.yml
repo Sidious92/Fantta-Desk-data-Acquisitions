@@ -132,8 +132,6 @@ jobs:
           text, count = re.subn(r'versionName\s+"[^"]+"', f'versionName "{os.environ["APP_VERSION_NAME"]}"', text, count=1)
           if count != 1:
               raise SystemExit('versionName marker not found')
-          # Keep release unsigned here. The workflow performs explicit deterministic
-          # zipalign + apksigner v2/v3 signing after the release build.
           gradle.write_text(text)
           PY
 
@@ -221,7 +219,7 @@ jobs:
           "$APKSIGNER" verify --verbose --print-certs "$APK" | tee /tmp/signature.txt
           grep -q 'Verified using v2 scheme (APK Signature Scheme v2): true' /tmp/signature.txt
           grep -q 'Verified using v3 scheme (APK Signature Scheme v3): true' /tmp/signature.txt
-          grep -q 'V3 Signer: certificate DN: C=IT, O=FantaDesk, CN=FantaDesk UAT' /tmp/signature.txt
+          grep -Eq 'V3(\.0)? Signer: certificate DN: CN=FantaDesk UAT, O=FantaDesk, C=IT' /tmp/signature.txt
 
           "$AAPT" dump permissions "$APK" | tee /tmp/permissions.txt
           grep -q "uses-permission: name='android.permission.INTERNET'" /tmp/permissions.txt
