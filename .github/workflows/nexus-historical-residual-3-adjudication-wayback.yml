@@ -1,0 +1,57 @@
+name: Nexus Historical Residual 3 Adjudication Wayback
+
+on:
+  push:
+    branches:
+      - feat/nexus-historical-residual-10-wayback-acquisition-v1
+    paths:
+      - scripts/nexus_historical_residual_3_adjudication_wayback.py
+      - .github/workflows/nexus-historical-residual-3-adjudication-wayback.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      NEXUS_RESIDUAL_3_OUT: .nexus-historical-residual-3-adjudication
+      NEXUS_REQUEST_TIMEOUT_SECONDS: '90'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Verify residual-3 archived first-party pages
+        run: python scripts/nexus_historical_residual_3_adjudication_wayback.py
+
+      - name: Publish manifest
+        if: always()
+        run: |
+          echo '## Nexus historical residual-3 adjudication Wayback' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f .nexus-historical-residual-3-adjudication/manifest.json ]; then
+            cat .nexus-historical-residual-3-adjudication/manifest.json >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'manifest not produced' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload residual-3 provenance artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-historical-residual-3-adjudication-wayback-v1
+          path: .nexus-historical-residual-3-adjudication/
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
