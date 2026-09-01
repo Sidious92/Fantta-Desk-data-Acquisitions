@@ -7,14 +7,14 @@ import re
 import time
 import unicodedata
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, urlparse
 
 import requests
 from bs4 import BeautifulSoup
 
 OUT = Path(os.environ.get("NEXUS_BRUNO_ALVES_OUT", ".nexus-historical-bruno-alves-exact"))
 TIMEOUT = float(os.environ.get("NEXUS_REQUEST_TIMEOUT_SECONDS", "25"))
-USER_AGENT = "FantaNexus-Historical-Bruno-Alves-Wayback/1.0"
+USER_AGENT = "FantaNexus-Historical-Bruno-Alves-Wayback/1.1"
 SHORT_URL = "https://t.co/GbiQO0i3ZC"
 
 TARGET = {
@@ -62,6 +62,37 @@ def raw_snapshot_url(snapshot_url: str, timestamp: str) -> str:
     return f"https://web.archive.org/web/{timestamp}id_/{original}"
 
 
+def official_candidates(resolve: requests.Response) -> list[str]:
+    urls: list[str] = []
+    for h in resolve.history:
+        location = h.headers.get("location")
+        if location and "parmacalcio1913.com" in location.lower() and "404.php" not in location.lower():
+            urls.append(location)
+        if "parmacalcio1913.com" in h.url.lower() and "404.php" not in h.url.lower():
+            urls.append(h.url)
+    if "parmacalcio1913.com" in resolve.url.lower() and "404.php" not in resolve.url.lower():
+        urls.append(resolve.url)
+
+    expanded: list[str] = []
+    for url in urls:
+        parsed = urlparse(url)
+        path = parsed.path.rstrip("/")
+        if not path:
+            continue
+        for scheme in ("http", "https"):
+            for host in ("parmacalcio1913.com", "www.parmacalcio1913.com"):
+                expanded.append(f"{scheme}://{host}{path}")
+                expanded.append(f"{scheme}://{host}{path}/")
+
+    deduped = []
+    seen = set()
+    for url in urls + expanded:
+        if url not in seen:
+            seen.add(url)
+            deduped.append(url)
+    return deduped
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     raw_dir = OUT / "raw"
@@ -80,36 +111,58 @@ def main() -> None:
             {"status": h.status_code, "url": h.url, "location": h.headers.get("location")}
             for h in resolve.history
         ]
-        official_url = resolve.url
-        if "parmacalcio1913.com" not in official_url.lower():
-            # Some t.co clients terminate on a Twitter interstitial. Prefer the first
-            # redirect target on the official Parma domain when present.
-            candidates = [
-                h.headers.get("location") for h in resolve.history if h.headers.get("location")
-            ]
-            candidates += [resolve.headers.get("location")] if resolve.headers.get("location") else []
-            official = next((u for u in candidates if "parmacalcio1913.com" in u.lower()), None)
-            if official:
-                official_url = official
-        if "parmacalcio1913.com" not in official_url.lower():
-            raise RuntimeError(f"short URL did not resolve to official Parma domain: {official_url}")
-        rec["resolved_official_url"] = official_url
+
+        candidates = official_candidates(resolve)
+        if not candidates:
+            raise RuntimeError("short URL redirect chain exposed no non-404 official Parma URL")
+        rec["official_url_candidates_from_redirect_chain"] = candidates
 
         probes = []
         chosen = None
-        for timestamp in ("20180712000000", "20180713000000", "20180720000000", "20180801000000", "20181231000000"):
-            avail = availability(session, official_url, timestamp)
-            closest = avail["payload"].get("archived_snapshots", {}).get("closest") or {}
-            probes.append({"requested_timestamp": timestamp, "api_url": avail["api_url"], "closest": closest})
-            if closest.get("available") is True and str(closest.get("status")) == "200":
-                capture_ts = str(closest.get("timestamp") or "")
-                if capture_ts.startswith("2018"):
-                    chosen = closest
-                    break
-            time.sleep(0.2)
+        chosen_official_url = None
+        for official_url in candidates:
+            for timestamp in (
+                "20180712000000",
+                "20180713000000",
+                "20180720000000",
+                "20180801000000",
+                "20181231000000",
+            ):
+                try:
+                    avail = availability(session, official_url, timestamp)
+                    closest = avail["payload"].get("archived_snapshots", {}).get("closest") or {}
+                    probes.append(
+                        {
+                            "official_url": official_url,
+                            "requested_timestamp": timestamp,
+                            "api_url": avail["api_url"],
+                            "closest": closest,
+                            "status": "PASS",
+                        }
+                    )
+                    if closest.get("available") is True and str(closest.get("status")) == "200":
+                        capture_ts = str(closest.get("timestamp") or "")
+                        archived_original = str(closest.get("url") or "").lower()
+                        if capture_ts.startswith("2018") and "parmacalcio1913.com" in archived_original:
+                            chosen = closest
+                            chosen_official_url = official_url
+                            break
+                except Exception as exc:
+                    probes.append(
+                        {
+                            "official_url": official_url,
+                            "requested_timestamp": timestamp,
+                            "status": "FAIL",
+                            "error": f"{type(exc).__name__}: {exc}",
+                        }
+                    )
+                time.sleep(0.15)
+            if chosen:
+                break
         rec["availability_probes"] = probes
-        if not chosen:
-            raise RuntimeError("no 2018 Wayback capture found for resolved official Parma URL")
+        if not chosen or not chosen_official_url:
+            raise RuntimeError("no 2018 Wayback capture found for any official Parma slug variant")
+        rec["resolved_official_url"] = chosen_official_url
 
         capture_ts = str(chosen["timestamp"])
         snap = str(chosen["url"])
@@ -127,12 +180,9 @@ def main() -> None:
         if missing:
             raise RuntimeError(f"required first-party semantic terms missing: {missing}")
 
-        idx = normalized.find("bruno eduardo regufe alves")
-        excerpt = " ".join(text.split())
-        if idx >= 0:
-            excerpt = excerpt[max(0, idx - 900): idx + 2200]
-        else:
-            excerpt = excerpt[:3000]
+        compact = " ".join(text.split())
+        idx = normalize(compact).find("bruno eduardo regufe alves")
+        excerpt = compact[max(0, idx - 900): idx + 2400] if idx >= 0 else compact[:3300]
 
         filename = f"historical_2018-19_1864__{capture_ts}.html"
         (raw_dir / filename).write_bytes(data)
@@ -161,11 +211,11 @@ def main() -> None:
         failures.append(rec["error"])
 
     manifest = {
-        "schema": "NEXUS_HISTORICAL_BRUNO_ALVES_TCO_WAYBACK_V1",
+        "schema": "NEXUS_HISTORICAL_BRUNO_ALVES_TCO_WAYBACK_V1_1",
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "authority": "ARCHIVED_FIRST_PARTY_CLUB_PAGE_IF_PASS",
         "custodian": "INTERNET_ARCHIVE_WAYBACK_MACHINE",
-        "short_link_is_discovery_only": True,
+        "short_link_and_redirect_chain_are_discovery_only": True,
         "semantic_event_acceptance_performed": False,
         "knownAt_created": False,
         "replay_admissibility_created": False,
