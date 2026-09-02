@@ -1,9 +1,9 @@
-name: Acquire Serie A five-season transfer ledgers v1
+name: Acquire Serie A five-season transfer ledgers v2
 
 on:
   push:
     paths:
-      - 'scripts/acquire_serie_a_transfermarkt_ledgers_v1.py'
+      - 'scripts/acquire_serie_a_transfer_ledgers_from_datasets_v2.py'
       - '.github/workflows/acquire-serie-a-five-season-transfer-ledgers-v1.yml'
   workflow_dispatch:
 
@@ -20,14 +20,14 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install dependencies
-        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+        run: python -m pip install --disable-pip-version-check requests
       - name: Acquire and reconcile ledgers
-        run: python scripts/acquire_serie_a_transfermarkt_ledgers_v1.py
+        run: python scripts/acquire_serie_a_transfer_ledgers_from_datasets_v2.py
       - name: Upload acquisition artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: serie-a-five-season-transfer-ledgers-v1
-          path: artifacts/serie-a-five-season-transfer-ledgers-v1
+          name: serie-a-five-season-transfer-ledgers-v2
+          path: artifacts/serie-a-five-season-transfer-ledgers-v2
           if-no-files-found: error
           retention-days: 14
