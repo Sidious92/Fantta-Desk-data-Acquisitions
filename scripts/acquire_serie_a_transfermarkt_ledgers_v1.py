@@ -94,13 +94,15 @@ def parse_season(season: int):
     url = BASE.format(season=season)
     r = requests.get(url, headers=HEADERS, timeout=45)
     raw = r.content
-    if r.status_code != 200:
+    # Transfermarkt can answer 202 to automated clients while still returning the
+    # requested document. Authority is therefore established structurally below,
+    # not from HTTP=200 alone. Any non-200/202 response remains fail-closed.
+    if r.status_code not in (200, 202):
         raise RuntimeError(f"season {season}: HTTP {r.status_code}")
     soup = BeautifulSoup(raw, "html.parser")
     rows = []
     clubs = []
 
-    # Transfermarkt club transfer blocks are generally div.box with two table.items.
     for box in soup.select("div.box"):
         tables = box.select("table.items")
         if not tables:
@@ -108,13 +110,11 @@ def parse_season(season: int):
         team = extract_team_name(box)
         if not team:
             continue
-        # Require at least one player-profile row to reject summary/market tables.
         if not box.find("a", href=re.compile(r"/profil/spieler/|/spieler/")):
             continue
         if team not in clubs:
             clubs.append(team)
         for ti, table in enumerate(tables):
-            # Direction from nearby headline, else first/second table convention.
             prev = table.find_previous(["h2", "h3", "h4"])
             d = detect_direction(text(prev) if prev else "", ti)
             for tr in table.select("tbody tr"):
@@ -144,7 +144,6 @@ def parse_season(season: int):
                     "rawCells": raw_cells,
                 })
 
-    # Deduplicate exact accidental DOM repeats while preserving legitimate repeated movements.
     seen = set()
     dedup = []
     for x in rows:
@@ -156,26 +155,23 @@ def parse_season(season: int):
 
     clubset = sorted(set(x["team"] for x in rows))
     if len(clubset) != 20:
-        raise RuntimeError(f"season {season}: expected 20 clubs, parsed {len(clubset)}: {clubset}")
+        preview = re.sub(r"\s+", " ", soup.get_text(" ", strip=True))[:600]
+        raise RuntimeError(f"season {season}: HTTP {r.status_code}; expected 20 clubs, parsed {len(clubset)}: {clubset}; bodyPreview={preview!r}")
     if not any(x["direction"] == "IN" for x in rows) or not any(x["direction"] == "OUT" for x in rows):
         raise RuntimeError(f"season {season}: missing direction")
 
-    # Pair internal Serie A faces occurrence-by-occurrence.
     current_norm_clubs = {norm(c): c for c in clubset}
     groups = defaultdict(lambda: {"IN": [], "OUT": []})
-    singles = []
     for i, x in enumerate(rows):
         internal = x["normalizedOrigin"] in current_norm_clubs and x["normalizedDestination"] in current_norm_clubs
         if internal and x["normalizedOrigin"] and x["normalizedDestination"]:
             k = (x["normalizedPlayer"], x["normalizedOrigin"], x["normalizedDestination"])
             groups[k][x["direction"]].append((i, x))
-        else:
-            singles.append((i, x))
 
     events = []
     used = set()
     paired = 0
-    for k, g in groups.items():
+    for _, g in groups.items():
         n = min(len(g["IN"]), len(g["OUT"]))
         for j in range(n):
             ii, a = g["IN"][j]
