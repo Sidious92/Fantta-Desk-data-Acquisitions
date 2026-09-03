@@ -1,0 +1,43 @@
+name: Nexus Post-Deadline El Shaarawy A3
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/nexus-post-deadline-el-shaarawy-a3.py'
+      - '.github/workflows/nexus-post-deadline-el-shaarawy-a3.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  recover-a3:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check beautifulsoup4==4.12.3
+      - run: python -m py_compile scripts/nexus-post-deadline-29-domestic-history-recovery-v1.py scripts/nexus-post-deadline-el-shaarawy-a3.py
+      - name: Run A3 bounded recovery
+        run: python scripts/nexus-post-deadline-el-shaarawy-a3.py
+      - name: Hard gate A3
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('/tmp/nexus-post-deadline-el-shaarawy-a3/summary.json').read_text())
+          assert s['status']=='PASS_A3_EL_SHAARAWY_RESOLVED'
+          assert s['allHistoryRowsHaveMinutesPlayed']
+          assert not s['scientificBoundary']['modelFitPerformed']
+          print(json.dumps(s,indent=2,ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexus-post-deadline-el-shaarawy-a3
+          path: /tmp/nexus-post-deadline-el-shaarawy-a3
+          if-no-files-found: error
+          retention-days: 30
