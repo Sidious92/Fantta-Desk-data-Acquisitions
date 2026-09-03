@@ -1,0 +1,63 @@
+name: Nexus Post-Deadline 29 Domestic History Recovery V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/nexus-post-deadline-29-domestic-history-recovery-v1.py'
+      - '.github/workflows/nexus-post-deadline-29-domestic-history-recovery-v1.yml'
+
+permissions:
+  contents: read
+
+env:
+  PYTHONUNBUFFERED: '1'
+
+jobs:
+  recover-post-deadline-29:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout public acquisition repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install parser dependency
+        run: python -m pip install --disable-pip-version-check beautifulsoup4==4.12.3
+
+      - name: Compile targeted recovery
+        run: python -m py_compile scripts/nexus-post-deadline-29-domestic-history-recovery-v1.py
+
+      - name: Recover identities and domestic history for canonical 29 added active IDs
+        run: python scripts/nexus-post-deadline-29-domestic-history-recovery-v1.py
+
+      - name: Hard-gate recovery summary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('/tmp/nexus-post-deadline-29-domestic-history-recovery-v1/summary.json')
+          if not p.exists():
+              raise SystemExit('summary missing')
+          s=json.loads(p.read_text())
+          if s['authority']['expectedTargets'] != 29 or s['authority']['fantacalcioSelectedTargets'] != 29:
+              raise SystemExit(f'target cardinality drift: {s}')
+          if not s['allHistoryRowsHaveMinutesPlayed']:
+              raise SystemExit('history minute schema gate failed')
+          if s['scientificBoundary']['modelFitPerformed'] or s['scientificBoundary']['predictiveEngineModified']:
+              raise SystemExit('scientific boundary violation')
+          print(json.dumps(s, indent=2, ensure_ascii=False))
+          PY
+
+      - name: Upload targeted recovery artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-post-deadline-29-domestic-history-recovery-v1
+          path: /tmp/nexus-post-deadline-29-domestic-history-recovery-v1
+          if-no-files-found: error
+          retention-days: 30
