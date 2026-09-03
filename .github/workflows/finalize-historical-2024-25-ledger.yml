@@ -43,7 +43,6 @@ jobs:
           from pathlib import Path
           p=Path('data/nexus/transfer-events/v1/historical-2024-25-internal-pair-reconciliation-audit-v1.json')
           d=json.loads(p.read_text())
-          print(json.dumps({k:{'faces':v['teamSideFaces'],'pairs':v['pairedInternalSerieAEvents'],'events':v['preCanonicalUniqueSemanticEvents'],'unresolved':len(v['unresolvedInternalCandidateGroups'])} for k,v in d['windows'].items()},indent=2))
           if d['status'] != 'PASS': raise SystemExit('reconciliation not PASS')
           if any(v['unresolvedInternalCandidateGroups'] for v in d['windows'].values()): raise SystemExit('unresolved candidate groups remain')
           PY
@@ -62,10 +61,29 @@ jobs:
           d=json.loads(p.read_text())
           print(json.dumps(d['totals'],indent=2))
           assert d['status']=='CLOSED'
-          assert d['totals']['teamSideFaces']==625
-          assert d['totals']['internalSerieAPairs']==90
-          assert d['totals']['uniqueSemanticEvents']==535
+          assert d['totals']=={'teamSideFaces':625,'internalSerieAPairs':90,'uniqueSemanticEvents':535}
           PY
+
+      - name: Publish canonical outputs to private authority
+        working-directory: fantadesk-private
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config user.name "fantanexus-public-runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/nexus/transfer-events/v1/historical-2024-25-summer-internal-pair-reconciliation-v1.csv
+          git add data/nexus/transfer-events/v1/historical-2024-25-winter-internal-pair-reconciliation-v1.csv
+          git add data/nexus/transfer-events/v1/historical-2024-25-internal-pair-reconciliation-audit-v1.json
+          git add data/nexus/transfer-events/v1/historical-2024-25-canonical-unique-event-ledger-status-v1.json
+          git add data/nexus/transfer-events/v1/historical-2024-25-summer-unique-event-ledger-v1-part-*.csv
+          git add data/nexus/transfer-events/v1/historical-2024-25-winter-unique-event-ledger-v1-part-*.csv
+          if git diff --cached --quiet; then
+            echo "Canonical outputs already published"
+          else
+            git commit -m "nexus transfer: close canonical 2024-25 ledger"
+            git push "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" HEAD:"$FANTADESK_BRANCH"
+          fi
 
       - name: Stage canonical artifact
         if: always()
