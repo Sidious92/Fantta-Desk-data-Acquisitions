@@ -9,6 +9,7 @@ on:
       - 'scripts/patch_builder_playwright.py'
       - 'scripts/patch_builder_current_dom.py'
       - 'scripts/patch_builder_include_2026.py'
+      - 'scripts/patch_builder_only_2026.py'
       - '.github/workflows/nexus-five-season-transfer-ledgers.yml'
 
 permissions:
@@ -27,12 +28,13 @@ jobs:
         run: |
           pip install requests beautifulsoup4 playwright
           python -m playwright install --with-deps chromium
-      - name: Patch acquisition, current DOM, and 2026 scope
+      - name: Patch acquisition and isolate 2026-27
         run: |
           python scripts/patch_builder_playwright.py
           python scripts/patch_builder_current_dom.py
           python scripts/patch_builder_include_2026.py
-      - name: Build and validate ledgers
+          python scripts/patch_builder_only_2026.py
+      - name: Build and validate 2026-27 ledger
         run: python scripts/build_five_season_transfer_ledgers.py
       - name: Show manifests
         if: always()
@@ -42,7 +44,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: nexus-five-season-transfer-ledgers
+          name: nexus-five-season-transfer-ledgers-2026
           path: artifacts/five-season-transfer-ledgers/
           if-no-files-found: error
           retention-days: 14
