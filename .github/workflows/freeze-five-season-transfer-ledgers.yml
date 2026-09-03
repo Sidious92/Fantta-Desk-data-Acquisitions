@@ -1,0 +1,58 @@
+name: Freeze five-season transfer ledger artifacts
+
+on:
+  push:
+    branches:
+      - feat/nexus-five-season-transfer-ledgers-v1
+    paths:
+      - '.github/workflows/freeze-five-season-transfer-ledgers.yml'
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Download successful immutable run artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/nexus-ledgers
+          mkdir -p /tmp/nexus-ledgers/historical /tmp/nexus-ledgers/current
+          gh run download 33784027553 -n nexus-five-season-transfer-ledgers -D /tmp/nexus-ledgers/historical
+          gh run download 33784567606 -n nexus-five-season-transfer-ledgers-2026 -D /tmp/nexus-ledgers/current
+      - name: Freeze receipts in repository
+        run: |
+          set -euo pipefail
+          dest='data/nexus/five-season-transfer-ledgers/v1'
+          rm -rf "$dest"
+          mkdir -p "$dest/2022-2025" "$dest/2026-27"
+          cp -a /tmp/nexus-ledgers/historical/. "$dest/2022-2025/"
+          cp -a /tmp/nexus-ledgers/current/. "$dest/2026-27/"
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json
+          root=Path('data/nexus/five-season-transfer-ledgers/v1')
+          rows=[]
+          for p in sorted(root.rglob('*')):
+              if p.is_file():
+                  b=p.read_bytes()
+                  rows.append({'path':str(p),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()})
+          m={'schema':'NEXUS_FIVE_SEASON_TRANSFER_LEDGER_FROZEN_FILE_INDEX_V1','files':rows,'fileCount':len(rows)}
+          (root/'frozen-file-index.json').write_text(json.dumps(m,indent=2),encoding='utf-8')
+          print(json.dumps({'fileCount':len(rows),'totalBytes':sum(r['bytes'] for r in rows)},indent=2))
+          PY
+      - name: Commit frozen receipts
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/nexus/five-season-transfer-ledgers/v1
+          git commit -m 'nexus: freeze five-season expanded transfer ledger receipts'
+          git push origin HEAD:feat/nexus-five-season-transfer-ledgers-v1
