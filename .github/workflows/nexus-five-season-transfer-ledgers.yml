@@ -6,6 +6,7 @@ on:
       - feat/nexus-five-season-transfer-ledgers-v1
     paths:
       - 'scripts/build_five_season_transfer_ledgers.py'
+      - 'scripts/patch_builder_playwright.py'
       - '.github/workflows/nexus-five-season-transfer-ledgers.yml'
 
 permissions:
@@ -14,14 +15,18 @@ permissions:
 jobs:
   build-ledgers:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - name: Install parser dependencies
-        run: pip install requests beautifulsoup4
+        run: |
+          pip install requests beautifulsoup4 playwright
+          python -m playwright install --with-deps chromium
+      - name: Patch browser fallback
+        run: python scripts/patch_builder_playwright.py
       - name: Build and validate ledgers
         run: python scripts/build_five_season_transfer_ledgers.py
       - name: Show manifests
