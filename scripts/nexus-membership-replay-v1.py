@@ -7,7 +7,7 @@ from pathlib import Path
 SRC = Path('data/nexus/membership-replay/v1/membership-replay-mirror-v1.csv.xz.b64')
 OUT = Path('/tmp/nexus-membership-replay-v1')
 OUT.mkdir(parents=True, exist_ok=True)
-XZ_SHA = 'f5c7c6640cfc146b6dd8951ba04dea4082c7dbe9d2940da442d7d2673a0d108a'
+EXPECTED_XZ_SHA = 'f5c7c6640cfc146b6dd8951ba04dea4082c7dbe9d2940da442d7d2673a0d108a'
 RAW_SHA = '9a27966a07cd18a1966b8c86100bf468fbad3c07e3ec981af23b807f4bb3eec1'
 NEW = 'NEWCOMER_CLUB_SEASON_TRANSITION'
 CONT = 'NOT_NEWCOMER_AT_SEASON_BOUNDARY'
@@ -35,9 +35,11 @@ def corr(cls, role, t):
 
 def main():
     xz=base64.b64decode(SRC.read_text().strip())
-    assert hashlib.sha256(xz).hexdigest()==XZ_SHA
+    actual_xz_sha=hashlib.sha256(xz).hexdigest()
+    print(json.dumps({'expectedXzSha256':EXPECTED_XZ_SHA,'actualXzSha256':actual_xz_sha,'xzBytes':len(xz)}))
     raw=lzma.decompress(xz)
-    assert hashlib.sha256(raw).hexdigest()==RAW_SHA
+    actual_raw_sha=hashlib.sha256(raw).hexdigest()
+    assert actual_raw_sha==RAW_SHA, (actual_raw_sha, RAW_SHA)
     rows=list(csv.DictReader(raw.decode().splitlines()))
     by={s:[r for r in rows if r['season']==s] for s in ('2023-24','2024-25','2025-26')}
     assert {k:len(v) for k,v in by.items()}=={'2023-24':162,'2024-25':85,'2025-26':120}
@@ -64,7 +66,8 @@ def main():
            'bothSeasonsNotWorse':all(v['combinedMae']<=v['a1Mae'] for v in by_season.values())}
     accepted=all(gates.values())
     summary={'schema':'NEXUS_MEMBERSHIP_REPLAY_V1','status':'PASS_MEMBERSHIP_INCREMENT' if accepted else 'REJECT_MEMBERSHIP_INCREMENT_KEEP_A7_A1',
-      'mirror':{'rows':len(rows),'seedRows':162,'developmentRows':205,'rawSha256':RAW_SHA,'xzSha256':XZ_SHA,
+      'mirror':{'rows':len(rows),'seedRows':162,'developmentRows':205,'rawSha256':actual_raw_sha,'transportXzSha256':actual_xz_sha,
+                'expectedOriginalXzSha256':EXPECTED_XZ_SHA,
                 'joinNote':'Exact same-season normalized playerNameCandidate + targetClubCode mapping; only rows with frozen verified F3 target labels retained.'},
       'development':{'overall':overall,'bySeason':by_season,'deltaVsA1':overall['combinedMae']-overall['a1Mae']},
       'subgroups':sub,'gates':gates,
