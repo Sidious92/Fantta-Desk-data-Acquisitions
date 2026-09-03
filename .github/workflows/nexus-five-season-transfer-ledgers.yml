@@ -1,0 +1,38 @@
+name: Nexus five-season transfer ledgers
+
+on:
+  push:
+    branches:
+      - feat/nexus-five-season-transfer-ledgers-v1
+    paths:
+      - 'scripts/build_five_season_transfer_ledgers.py'
+      - '.github/workflows/nexus-five-season-transfer-ledgers.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build-ledgers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install parser dependencies
+        run: pip install requests beautifulsoup4
+      - name: Build and validate ledgers
+        run: python scripts/build_five_season_transfer_ledgers.py
+      - name: Show manifests
+        if: always()
+        run: |
+          find artifacts/five-season-transfer-ledgers -name '*manifest.json' -maxdepth 1 -print -exec cat {} \; || true
+      - name: Upload ledger artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-five-season-transfer-ledgers
+          path: artifacts/five-season-transfer-ledgers/
+          if-no-files-found: error
+          retention-days: 14
