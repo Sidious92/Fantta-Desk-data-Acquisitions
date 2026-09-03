@@ -1,0 +1,192 @@
+name: Nexus F1 Lega Opportunity Snapshot v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/nexus-input-v1-1-f1-lega-snapshot
+    paths:
+      - 'config/nexus-f1-lega-snapshot-v1.json'
+      - 'scripts/nexus-f1-acquire-lega-snapshot-v2.mjs'
+      - 'scripts/nexus-f1-normalize-lega-snapshot-v1.mjs'
+      - 'scripts/lib/nexus-f1-opportunity-normalization-v1.mjs'
+      - 'scripts/lib/nexus-f1-surface-integrity-v1.mjs'
+      - '.github/workflows/nexus-f1-lega-raw-snapshot-v1.yml'
+      - '.nexus-f1-lega-snapshot-trigger'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nexus-f1-lega-opportunity-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  acquire-normalize-preserve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout isolated F1 acquisition branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Static syntax check
+        id: syntax
+        run: |
+          node --check scripts/nexus-f1-acquire-lega-snapshot-v2.mjs
+          node --check scripts/nexus-f1-normalize-lega-snapshot-v1.mjs
+          node --check scripts/lib/nexus-f1-opportunity-normalization-v1.mjs
+          node --check scripts/lib/nexus-f1-surface-integrity-v1.mjs
+
+      - name: Acquire fresh Lega Serie A RAW snapshot
+        id: acquire_raw
+        run: node scripts/nexus-f1-acquire-lega-snapshot-v2.mjs
+
+      - name: Require RAW acquisition PASS
+        id: raw_audit
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const a=JSON.parse(fs.readFileSync('.nexus-f1-lega-snapshot-v1/audit.json','utf8'));
+          if(a.status!=='PASS_RAW_ACQUISITION_ONLY'||a.observedMatches!==1900||a.observedLineupPayloads!==1900||a.oldArtifactRecovered!==false||a.availableAtAssigned!==false) throw new Error(JSON.stringify(a));
+          console.log(JSON.stringify(a,null,2));
+          NODE
+
+      - name: Normalize participation and source stints
+        id: normalize
+        run: node scripts/nexus-f1-normalize-lega-snapshot-v1.mjs
+
+      - name: Require normalization and integrity PASS
+        id: integrity
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const a=JSON.parse(fs.readFileSync('.nexus-f1-lega-snapshot-v1/normalized/opportunity-normalization-audit-v1.json','utf8'));
+          if(a.status!=='PASS'||a.normalizationAudit?.status!=='PASS'||a.integrity?.status!=='PASS') throw new Error(JSON.stringify(a.integrity?.violations?.slice(0,20)));
+          if(a.normalizationAudit.matchesInput!==1900)throw new Error('expected 1900 normalization inputs');
+          console.log(JSON.stringify({status:a.status,normalization:a.normalizationAudit,integrity:a.integrity.status,quarantinedMatches:a.quarantinedMatches.length},null,2));
+          NODE
+
+      - name: Build deterministic combined preservation bundle
+        id: meta
+        shell: bash
+        run: |
+          set -euo pipefail
+          tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner -cf - .nexus-f1-lega-snapshot-v1 | gzip -n > nexus-f1-lega-opportunity-v1.tar.gz
+          BUNDLE_SHA=$(sha256sum nexus-f1-lega-opportunity-v1.tar.gz | awk '{print $1}')
+          RAW_MANIFEST_SHA=$(sha256sum .nexus-f1-lega-snapshot-v1/manifest.json | awk '{print $1}')
+          RAW_AUDIT_SHA=$(sha256sum .nexus-f1-lega-snapshot-v1/audit.json | awk '{print $1}')
+          NORMALIZATION_AUDIT_SHA=$(sha256sum .nexus-f1-lega-snapshot-v1/normalized/opportunity-normalization-audit-v1.json | awk '{print $1}')
+          mkdir -p bundle-parts
+          split -b 40m -d -a 3 nexus-f1-lega-opportunity-v1.tar.gz bundle-parts/part-
+          BUNDLE_SHA="$BUNDLE_SHA" node - <<'NODE'
+          const fs=require('fs'),crypto=require('crypto'),path=require('path');
+          const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+          const parts=fs.readdirSync('bundle-parts').sort().map(name=>{const b=fs.readFileSync(path.join('bundle-parts',name));return{name,bytes:b.length,sha256:sha(b)}});
+          fs.writeFileSync('BUNDLE_PARTS.json',JSON.stringify({schema:'NEXUS_F1_LEGA_OPPORTUNITY_BUNDLE_PARTS_V1',status:'PASS',bundleSha256:process.env.BUNDLE_SHA,parts},null,2)+'\n');
+          NODE
+          echo "bundle_sha=$BUNDLE_SHA" >> "$GITHUB_OUTPUT"
+          echo "raw_manifest_sha=$RAW_MANIFEST_SHA" >> "$GITHUB_OUTPUT"
+          echo "raw_audit_sha=$RAW_AUDIT_SHA" >> "$GITHUB_OUTPUT"
+          echo "normalization_audit_sha=$NORMALIZATION_AUDIT_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Persist immutable content-addressed F1 Opportunity snapshot
+        id: persist
+        env:
+          BUNDLE_SHA: ${{ steps.meta.outputs.bundle_sha }}
+          RAW_MANIFEST_SHA: ${{ steps.meta.outputs.raw_manifest_sha }}
+          RAW_AUDIT_SHA: ${{ steps.meta.outputs.raw_audit_sha }}
+          NORMALIZATION_AUDIT_SHA: ${{ steps.meta.outputs.normalization_audit_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          DEST="data/nexus-f1/lega-opportunity-v1/$BUNDLE_SHA"
+          mkdir -p "$DEST/parts"
+          cp bundle-parts/* "$DEST/parts/"
+          cp BUNDLE_PARTS.json "$DEST/BUNDLE_PARTS.json"
+          cp .nexus-f1-lega-snapshot-v1/manifest.json "$DEST/raw-manifest.json"
+          cp .nexus-f1-lega-snapshot-v1/audit.json "$DEST/raw-audit.json"
+          cp .nexus-f1-lega-snapshot-v1/normalized/opportunity-normalization-audit-v1.json "$DEST/normalization-audit.json"
+          cp .nexus-f1-lega-snapshot-v1/normalized/NORMALIZED.sha256 "$DEST/NORMALIZED.sha256"
+          node - <<'NODE'
+          const fs=require('fs');
+          const dest=`data/nexus-f1/lega-opportunity-v1/${process.env.BUNDLE_SHA}`;
+          const receipt={schema:'NEXUS_F1_LEGA_OPPORTUNITY_DURABLE_PRESERVATION_RECEIPT_V1',protocolVersion:'1.1',status:'PERSISTED_PENDING_REMOTE_READBACK',sourceCommit:process.env.GITHUB_SHA,githubRunId:Number(process.env.GITHUB_RUN_ID),bundleSha256:process.env.BUNDLE_SHA,rawManifestSha256:process.env.RAW_MANIFEST_SHA,rawAuditSha256:process.env.RAW_AUDIT_SHA,normalizationAuditSha256:process.env.NORMALIZATION_AUDIT_SHA,remoteReadbackSha256Pass:false,immutablePath:dest,governance:{rawMutation:false,expectedMinutesBuilt:false,canonicalIdentityApplied:false,f1Closed:false,f2PlusAuthorized:false,canonicalMutation:false}};
+          fs.writeFileSync(`${dest}/PRESERVATION_RECEIPT.json`,JSON.stringify(receipt,null,2)+'\n');
+          NODE
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$DEST"
+          git commit -m "nexus f1: persist Lega Opportunity snapshot $BUNDLE_SHA [skip ci]"
+          git push origin HEAD:feat/nexus-input-v1-1-f1-lega-snapshot
+
+      - name: Verify remote Git read-back and freeze receipt
+        id: readback
+        env:
+          BUNDLE_SHA: ${{ steps.meta.outputs.bundle_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          BRANCH='feat/nexus-input-v1-1-f1-lega-snapshot'
+          DEST="data/nexus-f1/lega-opportunity-v1/$BUNDLE_SHA"
+          git fetch origin "$BRANCH"
+          node - <<'NODE'
+          const fs=require('fs'),cp=require('child_process'),crypto=require('crypto');
+          const dest=`data/nexus-f1/lega-opportunity-v1/${process.env.BUNDLE_SHA}`;
+          const m=JSON.parse(fs.readFileSync(`${dest}/BUNDLE_PARTS.json`,'utf8'));
+          for(const p of m.parts){const b=cp.execFileSync('git',['show',`origin/feat/nexus-input-v1-1-f1-lega-snapshot:${dest}/parts/${p.name}`],{maxBuffer:64*1024*1024});const h=crypto.createHash('sha256').update(b).digest('hex');if(h!==p.sha256)throw new Error(`remote part hash mismatch ${p.name}`)}
+          const rpath=`${dest}/PRESERVATION_RECEIPT.json`;const r=JSON.parse(fs.readFileSync(rpath,'utf8'));r.status='PASS_DURABLY_PRESERVED_REMOTE_GIT_READBACK_SHA256';r.remoteReadbackSha256Pass=true;r.verifiedAt=new Date().toISOString();fs.writeFileSync(rpath,JSON.stringify(r,null,2)+'\n');
+          NODE
+          git add "$DEST/PRESERVATION_RECEIPT.json"
+          git commit -m "nexus f1: verify Lega Opportunity readback $BUNDLE_SHA [skip ci]"
+          git push origin HEAD:"$BRANCH"
+
+      - name: Persist run outcome receipt
+        if: always()
+        env:
+          SYNTAX_OUTCOME: ${{ steps.syntax.outcome }}
+          ACQUIRE_OUTCOME: ${{ steps.acquire_raw.outcome }}
+          RAW_AUDIT_OUTCOME: ${{ steps.raw_audit.outcome }}
+          NORMALIZE_OUTCOME: ${{ steps.normalize.outcome }}
+          INTEGRITY_OUTCOME: ${{ steps.integrity.outcome }}
+          BUNDLE_OUTCOME: ${{ steps.meta.outcome }}
+          PERSIST_OUTCOME: ${{ steps.persist.outcome }}
+          READBACK_OUTCOME: ${{ steps.readback.outcome }}
+          BUNDLE_SHA: ${{ steps.meta.outputs.bundle_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p data/nexus-f1/run-status/lega
+          node - <<'NODE'
+          const fs=require('fs');
+          const stages={syntax:process.env.SYNTAX_OUTCOME||'not-run',acquireRaw:process.env.ACQUIRE_OUTCOME||'not-run',rawAudit:process.env.RAW_AUDIT_OUTCOME||'not-run',normalize:process.env.NORMALIZE_OUTCOME||'not-run',integrity:process.env.INTEGRITY_OUTCOME||'not-run',bundle:process.env.BUNDLE_OUTCOME||'not-run',persist:process.env.PERSIST_OUTCOME||'not-run',readback:process.env.READBACK_OUTCOME||'not-run'};
+          const success=Object.values(stages).every(v=>v==='success');
+          const receipt={schema:'NEXUS_F1_LEGA_RUN_RECEIPT_V1',protocolVersion:'1.1',status:success?'PASS':'FAIL_CLOSED',generatedAt:new Date().toISOString(),sourceCommit:process.env.GITHUB_SHA,githubRunId:Number(process.env.GITHUB_RUN_ID),githubRunAttempt:Number(process.env.GITHUB_RUN_ATTEMPT),stages,bundleSha256:process.env.BUNDLE_SHA||null,governance:{f1Closed:false,f2PlusAuthorized:false,canonicalMutation:false}};
+          fs.writeFileSync('data/nexus-f1/run-status/lega/latest.json',JSON.stringify(receipt,null,2)+'\n');
+          NODE
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/nexus-f1/run-status/lega
+          git commit -m "nexus f1: record Lega runner outcome [skip ci]" || true
+          git push origin HEAD:feat/nexus-input-v1-1-f1-lega-snapshot || true
+
+      - name: Upload transient audit artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f1-lega-opportunity-v1
+          path: |
+            BUNDLE_PARTS.json
+            .nexus-f1-lega-snapshot-v1/audit.json
+            .nexus-f1-lega-snapshot-v1/normalized/opportunity-normalization-audit-v1.json
+            .nexus-f1-lega-snapshot-v1/normalized/NORMALIZED.sha256
+            data/nexus-f1/run-status/lega/latest.json
+            data/nexus-f1/run-status/lega/match-shape-probe-latest.json
+          if-no-files-found: warn
+          retention-days: 7

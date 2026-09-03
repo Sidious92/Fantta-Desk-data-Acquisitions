@@ -1,0 +1,12 @@
+{
+  "schema": "NEXUS_F1_LEGA_OPPORTUNITY_BUNDLE_PARTS_V1",
+  "status": "PASS",
+  "bundleSha256": "2e8031d999c32aad01319ff54d6c9101112150379b0c4f2ca8f80069481dc043",
+  "parts": [
+    {
+      "name": "part-000",
+      "bytes": 16899070,
+      "sha256": "2e8031d999c32aad01319ff54d6c9101112150379b0c4f2ca8f80069481dc043"
+    }
+  ]
+}

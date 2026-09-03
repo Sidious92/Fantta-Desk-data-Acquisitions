@@ -1,0 +1,110 @@
+name: Nexus F1 Lega Opportunity Materialize v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/nexus-input-v1-1-f1-lega-snapshot
+    paths:
+      - '.github/workflows/nexus-f1-lega-materialize-v1.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Reassemble frozen content-addressed bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          SHA='2e8031d999c32aad01319ff54d6c9101112150379b0c4f2ca8f80069481dc043'
+          ROOT="data/nexus-f1/lega-opportunity-v1/$SHA"
+          test -f "$ROOT/PRESERVATION_RECEIPT.json"
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='data/nexus-f1/lega-opportunity-v1/2e8031d999c32aad01319ff54d6c9101112150379b0c4f2ca8f80069481dc043/PRESERVATION_RECEIPT.json';
+          const r=JSON.parse(fs.readFileSync(p,'utf8'));
+          if(r.status!=='PASS_DURABLY_PRESERVED_REMOTE_GIT_READBACK_SHA256'||r.remoteReadbackSha256Pass!==true) throw new Error('frozen Lega receipt not PASS');
+          if(r.bundleSha256!=='2e8031d999c32aad01319ff54d6c9101112150379b0c4f2ca8f80069481dc043') throw new Error('bundle SHA authority mismatch');
+          NODE
+          cat "$ROOT"/parts/part-* > lega-opportunity-v1.tar.gz
+          ACTUAL=$(sha256sum lega-opportunity-v1.tar.gz | awk '{print $1}')
+          test "$ACTUAL" = "$SHA"
+          mkdir materialized
+          tar -xzf lega-opportunity-v1.tar.gz -C materialized
+
+      - name: Verify normalized outputs and source accounting
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT='materialized/.nexus-f1-lega-snapshot-v1'
+          P="$ROOT/normalized/opportunity-participation-raw-v1.ndjson"
+          S="$ROOT/normalized/opportunity-source-stints-v1.json"
+          A="$ROOT/normalized/opportunity-normalization-audit-v1.json"
+          test -f "$P" && test -f "$S" && test -f "$A"
+          test "$(sha256sum "$P" | awk '{print $1}')" = '390970bf574241ed54fb212a60d85d481a3d40fea4378ee0539836a7a6461c41'
+          test "$(sha256sum "$S" | awk '{print $1}')" = '77ebc0b94ad43e57c29c6d16212fc0b95d506a41c493f76871705d1ed3cb0327'
+          test "$(sha256sum "$A" | awk '{print $1}')" = '12640bd303969ac87f7ed20b5513d7edbd01a2c1bbcc23b20826ac6975a3d644'
+          test "$(wc -l < "$P" | tr -d ' ')" = '87889'
+          node - <<'NODE'
+          const fs=require('fs');
+          const root='materialized/.nexus-f1-lega-snapshot-v1';
+          const s=JSON.parse(fs.readFileSync(`${root}/normalized/opportunity-source-stints-v1.json`,'utf8'));
+          const a=JSON.parse(fs.readFileSync(`${root}/normalized/opportunity-normalization-audit-v1.json`,'utf8'));
+          if(s.schema!=='NEXUS_F1_OPPORTUNITY_SOURCE_STINT_DATASET_V1'||s.records?.length!==4030) throw new Error('stint dataset count/schema mismatch');
+          if(a.status!=='PASS'||a.normalizationAudit?.status!=='PASS'||a.integrity?.status!=='PASS') throw new Error('normalization/integrity not PASS');
+          if(a.normalizationAudit.participationRecords!==87889||a.normalizationAudit.sourceMatchRefs!==87889||a.normalizationAudit.sourceStints!==4030) throw new Error('additive reconciliation mismatch');
+          if(a.sourceAccounting?.sourceMatchRows!==1901||a.sourceAccounting?.admittedRegularMatches!==1900||a.sourceAccounting?.explicitExcludedSourceMatches!==1||a.sourceAccounting?.accountingPass!==true) throw new Error('raw source accounting mismatch');
+          NODE
+
+      - name: Record verified materialization run
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p data/nexus-f1/run-status/lega-materialize-v1
+          node - <<'NODE'
+          const fs=require('fs');
+          const receipt={
+            schema:'NEXUS_F1_LEGA_MATERIALIZATION_RUN_V1',
+            protocolVersion:'1.1',
+            status:'PASS_VERIFIED_MATERIALIZATION',
+            generatedAt:new Date().toISOString(),
+            sourceCommit:process.env.GITHUB_SHA,
+            githubRunId:Number(process.env.GITHUB_RUN_ID),
+            githubRunAttempt:Number(process.env.GITHUB_RUN_ATTEMPT),
+            frozenBundleSha256:'2e8031d999c32aad01319ff54d6c9101112150379b0c4f2ca8f80069481dc043',
+            participationSha256:'390970bf574241ed54fb212a60d85d481a3d40fea4378ee0539836a7a6461c41',
+            sourceStintsSha256:'77ebc0b94ad43e57c29c6d16212fc0b95d506a41c493f76871705d1ed3cb0327',
+            participationRecords:87889,
+            sourceStints:4030,
+            governance:{materializationOnly:true,f1Closed:false,f2PlusAuthorized:false,canonicalMutation:false}
+          };
+          fs.writeFileSync('data/nexus-f1/run-status/lega-materialize-v1/latest.json',JSON.stringify(receipt,null,2)+'\n');
+          NODE
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/nexus-f1/run-status/lega-materialize-v1/latest.json
+          git commit -m "nexus f1: record Lega materialization run [skip ci]"
+          git push origin HEAD:feat/nexus-input-v1-1-f1-lega-snapshot
+
+      - name: Upload verified materialization artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-f1-lega-opportunity-v1-materialized
+          path: |
+            materialized/.nexus-f1-lega-snapshot-v1/normalized/opportunity-participation-raw-v1.ndjson
+            materialized/.nexus-f1-lega-snapshot-v1/normalized/opportunity-source-stints-v1.json
+            materialized/.nexus-f1-lega-snapshot-v1/normalized/opportunity-normalization-audit-v1.json
+            materialized/.nexus-f1-lega-snapshot-v1/manifest.json
+            materialized/.nexus-f1-lega-snapshot-v1/audit.json
+            data/nexus-f1/lega-opportunity-v1/2e8031d999c32aad01319ff54d6c9101112150379b0c4f2ca8f80069481dc043/PRESERVATION_RECEIPT.json
+            data/nexus-f1/run-status/lega-materialize-v1/latest.json
+          if-no-files-found: error
+          retention-days: 7

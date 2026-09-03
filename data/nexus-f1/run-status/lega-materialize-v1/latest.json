@@ -1,0 +1,20 @@
+{
+  "schema": "NEXUS_F1_LEGA_MATERIALIZATION_RUN_V1",
+  "protocolVersion": "1.1",
+  "status": "PASS_VERIFIED_MATERIALIZATION",
+  "generatedAt": "2026-08-22T22:23:33.151Z",
+  "sourceCommit": "84e7690ea27ddd217fc3b42a6748daf1b8bce5a3",
+  "githubRunId": 32602294034,
+  "githubRunAttempt": 1,
+  "frozenBundleSha256": "2e8031d999c32aad01319ff54d6c9101112150379b0c4f2ca8f80069481dc043",
+  "participationSha256": "390970bf574241ed54fb212a60d85d481a3d40fea4378ee0539836a7a6461c41",
+  "sourceStintsSha256": "77ebc0b94ad43e57c29c6d16212fc0b95d506a41c493f76871705d1ed3cb0327",
+  "participationRecords": 87889,
+  "sourceStints": 4030,
+  "governance": {
+    "materializationOnly": true,
+    "f1Closed": false,
+    "f2PlusAuthorized": false,
+    "canonicalMutation": false
+  }
+}
