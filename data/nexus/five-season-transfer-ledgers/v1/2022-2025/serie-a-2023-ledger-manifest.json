@@ -1,0 +1,31 @@
+{
+  "season": "2023/24",
+  "source_url": "https://www.transfermarkt.com/serie-a/transfers/wettbewerb/IT1/saison_id/2023/leihe/1/intern/1/plus/",
+  "expected_transfermarkt_arrivals": 704,
+  "expected_transfermarkt_departures": 723,
+  "parsed_arrivals": 704,
+  "parsed_departures": 723,
+  "team_side_faces": 1427,
+  "unique_semantic_events": 1251,
+  "paired_internal_events": 176,
+  "structured_backbone_rows": 1011,
+  "completeness_gate": "PASS",
+  "files": {
+    "team_side": {
+      "path": "serie-a-2023-team-side-expanded.csv",
+      "sha256": "bc57d0ccd31408a8667e72e6c36aee37a40b1569adbdae27169f0464b90cfac1"
+    },
+    "unique_events": {
+      "path": "serie-a-2023-unique-semantic-events.csv",
+      "sha256": "01bd3545e9c93a373ae16f80b0938abd18632da3151a052aa8ec8f54e32d1fe6"
+    },
+    "structured_backbone": {
+      "path": "serie-a-2023-structured-backbone.csv",
+      "sha256": "bb5749d32750186626684571e69d914c6f6603c66a3ea0ede33f9fd9e7d5ed8a"
+    },
+    "raw_html": {
+      "path": "transfermarkt-serie-a-2023-expanded.html",
+      "sha256": "01522bd195e2bbf48629cd859f8b8a3063773d23e9ca11af5b6210bcaf9b659c"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "NEXUS_FIVE_SEASON_TRANSFER_LEDGER_RUN_V1",
+  "seasons": [
+    {
+      "season": "2026/27",
+      "source_url": "https://www.transfermarkt.com/serie-a/transfers/wettbewerb/IT1/saison_id/2026/leihe/1/intern/1/plus/",
+      "expected_transfermarkt_arrivals": 531,
+      "expected_transfermarkt_departures": 469,
+      "parsed_arrivals": 531,
+      "parsed_departures": 469,
+      "team_side_faces": 1000,
+      "unique_semantic_events": 887,
+      "paired_internal_events": 113,
+      "structured_backbone_rows": 0,
+      "completeness_gate": "PASS",
+      "files": {
+        "team_side": {
+          "path": "serie-a-2026-team-side-expanded.csv",
+          "sha256": "3cba1a21fa763b3eadaab5efb8af0ea215604e4e036bcae05a673513260627f1"
+        },
+        "unique_events": {
+          "path": "serie-a-2026-unique-semantic-events.csv",
+          "sha256": "d8a68ecbc06f21dcd23b060a0e563f0169857321ab5cff27d0caccc230d0b33a"
+        },
+        "structured_backbone": {
+          "path": "serie-a-2026-structured-backbone.csv",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "raw_html": {
+          "path": "transfermarkt-serie-a-2026-expanded.html",
+          "sha256": "e37a603328a4940e52f1d1869104f9449d8a2ea97c3ef2441e09d1f2639ab4cf"
+        }
+      }
+    }
+  ]
+}

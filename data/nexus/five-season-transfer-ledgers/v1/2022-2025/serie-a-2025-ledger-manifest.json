@@ -1,0 +1,31 @@
+{
+  "season": "2025/26",
+  "source_url": "https://www.transfermarkt.com/serie-a/transfers/wettbewerb/IT1/saison_id/2025/leihe/1/intern/1/plus/",
+  "expected_transfermarkt_arrivals": 704,
+  "expected_transfermarkt_departures": 730,
+  "parsed_arrivals": 704,
+  "parsed_departures": 730,
+  "team_side_faces": 1434,
+  "unique_semantic_events": 1289,
+  "paired_internal_events": 145,
+  "structured_backbone_rows": 754,
+  "completeness_gate": "PASS",
+  "files": {
+    "team_side": {
+      "path": "serie-a-2025-team-side-expanded.csv",
+      "sha256": "dadc8caf8ce03c2b75d1613a179356d782ddc666d2de8219116794100e6b2b82"
+    },
+    "unique_events": {
+      "path": "serie-a-2025-unique-semantic-events.csv",
+      "sha256": "a1efbd0872e8bb635399d70217112301011217902d7505170519b9167d8b2689"
+    },
+    "structured_backbone": {
+      "path": "serie-a-2025-structured-backbone.csv",
+      "sha256": "2bb09fcb444ec2196971b3c7dd9652503030fd178152b21ad6dfca3015fccea0"
+    },
+    "raw_html": {
+      "path": "transfermarkt-serie-a-2025-expanded.html",
+      "sha256": "e67933abb2e86e067b18a172b4003f183b01cefc3fd85fcaf2a00f54c5ee7407"
+    }
+  }
+}

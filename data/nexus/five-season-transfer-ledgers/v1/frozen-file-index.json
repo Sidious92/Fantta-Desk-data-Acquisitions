@@ -1,0 +1,141 @@
+{
+  "schema": "NEXUS_FIVE_SEASON_TRANSFER_LEDGER_FROZEN_FILE_INDEX_V1",
+  "files": [
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/five-season-ledger-run-manifest.json",
+      "bytes": 5115,
+      "sha256": "e6e29e9bd780a275f7c91441e2dd30eb43064d008d87f524afec9df3e13dbb77"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/serie-a-2022-ledger-manifest.json",
+      "bytes": 1134,
+      "sha256": "418221f3458ad8545486ddc5884fb8498a466e24b34483361479b2e2fa4a4f3e"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/serie-a-2022-structured-backbone.csv",
+      "bytes": 135759,
+      "sha256": "4a1bd73b812d612e985533ee260aec5ba3050e475928574d649260d5e1b668a9"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/serie-a-2022-team-side-expanded.csv",
+      "bytes": 238455,
+      "sha256": "6d6dc8beea31c074dbd4f241303bd84bc287b68f0ecf265e86364dfa9e828c87"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/serie-a-2022-unique-semantic-events.csv",
+      "bytes": 172166,
+      "sha256": "b55b95e2e2c19db059f4d1d37286c51903298c39248b96af5fce741ec1381638"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/serie-a-2023-ledger-manifest.json",
+      "bytes": 1134,
+      "sha256": "9f4f5998fea57abe083c107cada116ec9393488a6ec00fe52b7fd0a4f9fa2f91"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/serie-a-2023-structured-backbone.csv",
+      "bytes": 126024,
+      "sha256": "bb5749d32750186626684571e69d914c6f6603c66a3ea0ede33f9fd9e7d5ed8a"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/serie-a-2023-team-side-expanded.csv",
+      "bytes": 214282,
+      "sha256": "bc57d0ccd31408a8667e72e6c36aee37a40b1569adbdae27169f0464b90cfac1"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/serie-a-2023-unique-semantic-events.csv",
+      "bytes": 153187,
+      "sha256": "01bd3545e9c93a373ae16f80b0938abd18632da3151a052aa8ec8f54e32d1fe6"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/serie-a-2024-ledger-manifest.json",
+      "bytes": 1133,
+      "sha256": "6fd7abc9b5397dcc46c226f88b85f815c9283606c39dde61142c8a9365d6e4e9"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/serie-a-2024-structured-backbone.csv",
+      "bytes": 120222,
+      "sha256": "88b569228500dc71ab3137ea5f8854fad53148331f799c519ce2c2f0e706bee6"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/serie-a-2024-team-side-expanded.csv",
+      "bytes": 200556,
+      "sha256": "a9bfd4fa297696bdaeca3e79a6847447cfd70ee92d1c2dd8c63461ea610f3b7b"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/serie-a-2024-unique-semantic-events.csv",
+      "bytes": 146198,
+      "sha256": "696e291ff30dac13fbb8e0ccc61dc2977f99a5d55968569f3271c000bdc4936e"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/serie-a-2025-ledger-manifest.json",
+      "bytes": 1133,
+      "sha256": "86079e034ec06d6033d74599aeac6157c3202fa288eeb8ec62457684f3b719f6"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/serie-a-2025-structured-backbone.csv",
+      "bytes": 94410,
+      "sha256": "2bb09fcb444ec2196971b3c7dd9652503030fd178152b21ad6dfca3015fccea0"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/serie-a-2025-team-side-expanded.csv",
+      "bytes": 217029,
+      "sha256": "dadc8caf8ce03c2b75d1613a179356d782ddc666d2de8219116794100e6b2b82"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/serie-a-2025-unique-semantic-events.csv",
+      "bytes": 158441,
+      "sha256": "a1efbd0872e8bb635399d70217112301011217902d7505170519b9167d8b2689"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/transfermarkt-serie-a-2022-expanded.html",
+      "bytes": 3246169,
+      "sha256": "c777ff19421b513a9a1f709df158bac55c1a325c3a31bf336e5846a103eaa836"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/transfermarkt-serie-a-2023-expanded.html",
+      "bytes": 2950841,
+      "sha256": "01522bd195e2bbf48629cd859f8b8a3063773d23e9ca11af5b6210bcaf9b659c"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/transfermarkt-serie-a-2024-expanded.html",
+      "bytes": 2821178,
+      "sha256": "6f1b71b0d519d92f1f902a94bb508e78dd3c571fbf9e9dceeda06a5695f0f5b7"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2022-2025/transfermarkt-serie-a-2025-expanded.html",
+      "bytes": 2980208,
+      "sha256": "e67933abb2e86e067b18a172b4003f183b01cefc3fd85fcaf2a00f54c5ee7407"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2026-27/five-season-ledger-run-manifest.json",
+      "bytes": 1333,
+      "sha256": "5835975628ad6b93f2b2e4e8b4613661558397564627c7ec0e4e4513611eb31a"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2026-27/serie-a-2026-ledger-manifest.json",
+      "bytes": 1130,
+      "sha256": "595a493fd28deb7962b1bee466284812b09028a37ad408f7f0597386fb7f328e"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2026-27/serie-a-2026-structured-backbone.csv",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2026-27/serie-a-2026-team-side-expanded.csv",
+      "bytes": 150606,
+      "sha256": "3cba1a21fa763b3eadaab5efb8af0ea215604e4e036bcae05a673513260627f1"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2026-27/serie-a-2026-unique-semantic-events.csv",
+      "bytes": 108926,
+      "sha256": "d8a68ecbc06f21dcd23b060a0e563f0169857321ab5cff27d0caccc230d0b33a"
+    },
+    {
+      "path": "data/nexus/five-season-transfer-ledgers/v1/2026-27/transfermarkt-serie-a-2026-expanded.html",
+      "bytes": 2158834,
+      "sha256": "e37a603328a4940e52f1d1869104f9449d8a2ea97c3ef2441e09d1f2639ab4cf"
+    }
+  ],
+  "fileCount": 27
+}

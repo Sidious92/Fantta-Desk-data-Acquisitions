@@ -1,0 +1,129 @@
+{
+  "schema": "NEXUS_FIVE_SEASON_TRANSFER_LEDGER_RUN_V1",
+  "seasons": [
+    {
+      "season": "2022/23",
+      "source_url": "https://www.transfermarkt.com/serie-a/transfers/wettbewerb/IT1/saison_id/2022/leihe/1/intern/1/plus/",
+      "expected_transfermarkt_arrivals": 798,
+      "expected_transfermarkt_departures": 789,
+      "parsed_arrivals": 798,
+      "parsed_departures": 789,
+      "team_side_faces": 1587,
+      "unique_semantic_events": 1405,
+      "paired_internal_events": 182,
+      "structured_backbone_rows": 1095,
+      "completeness_gate": "PASS",
+      "files": {
+        "team_side": {
+          "path": "serie-a-2022-team-side-expanded.csv",
+          "sha256": "6d6dc8beea31c074dbd4f241303bd84bc287b68f0ecf265e86364dfa9e828c87"
+        },
+        "unique_events": {
+          "path": "serie-a-2022-unique-semantic-events.csv",
+          "sha256": "b55b95e2e2c19db059f4d1d37286c51903298c39248b96af5fce741ec1381638"
+        },
+        "structured_backbone": {
+          "path": "serie-a-2022-structured-backbone.csv",
+          "sha256": "4a1bd73b812d612e985533ee260aec5ba3050e475928574d649260d5e1b668a9"
+        },
+        "raw_html": {
+          "path": "transfermarkt-serie-a-2022-expanded.html",
+          "sha256": "c777ff19421b513a9a1f709df158bac55c1a325c3a31bf336e5846a103eaa836"
+        }
+      }
+    },
+    {
+      "season": "2023/24",
+      "source_url": "https://www.transfermarkt.com/serie-a/transfers/wettbewerb/IT1/saison_id/2023/leihe/1/intern/1/plus/",
+      "expected_transfermarkt_arrivals": 704,
+      "expected_transfermarkt_departures": 723,
+      "parsed_arrivals": 704,
+      "parsed_departures": 723,
+      "team_side_faces": 1427,
+      "unique_semantic_events": 1251,
+      "paired_internal_events": 176,
+      "structured_backbone_rows": 1011,
+      "completeness_gate": "PASS",
+      "files": {
+        "team_side": {
+          "path": "serie-a-2023-team-side-expanded.csv",
+          "sha256": "bc57d0ccd31408a8667e72e6c36aee37a40b1569adbdae27169f0464b90cfac1"
+        },
+        "unique_events": {
+          "path": "serie-a-2023-unique-semantic-events.csv",
+          "sha256": "01bd3545e9c93a373ae16f80b0938abd18632da3151a052aa8ec8f54e32d1fe6"
+        },
+        "structured_backbone": {
+          "path": "serie-a-2023-structured-backbone.csv",
+          "sha256": "bb5749d32750186626684571e69d914c6f6603c66a3ea0ede33f9fd9e7d5ed8a"
+        },
+        "raw_html": {
+          "path": "transfermarkt-serie-a-2023-expanded.html",
+          "sha256": "01522bd195e2bbf48629cd859f8b8a3063773d23e9ca11af5b6210bcaf9b659c"
+        }
+      }
+    },
+    {
+      "season": "2024/25",
+      "source_url": "https://www.transfermarkt.com/serie-a/transfers/wettbewerb/IT1/saison_id/2024/leihe/1/intern/1/plus/",
+      "expected_transfermarkt_arrivals": 692,
+      "expected_transfermarkt_departures": 662,
+      "parsed_arrivals": 692,
+      "parsed_departures": 662,
+      "team_side_faces": 1354,
+      "unique_semantic_events": 1207,
+      "paired_internal_events": 147,
+      "structured_backbone_rows": 972,
+      "completeness_gate": "PASS",
+      "files": {
+        "team_side": {
+          "path": "serie-a-2024-team-side-expanded.csv",
+          "sha256": "a9bfd4fa297696bdaeca3e79a6847447cfd70ee92d1c2dd8c63461ea610f3b7b"
+        },
+        "unique_events": {
+          "path": "serie-a-2024-unique-semantic-events.csv",
+          "sha256": "696e291ff30dac13fbb8e0ccc61dc2977f99a5d55968569f3271c000bdc4936e"
+        },
+        "structured_backbone": {
+          "path": "serie-a-2024-structured-backbone.csv",
+          "sha256": "88b569228500dc71ab3137ea5f8854fad53148331f799c519ce2c2f0e706bee6"
+        },
+        "raw_html": {
+          "path": "transfermarkt-serie-a-2024-expanded.html",
+          "sha256": "6f1b71b0d519d92f1f902a94bb508e78dd3c571fbf9e9dceeda06a5695f0f5b7"
+        }
+      }
+    },
+    {
+      "season": "2025/26",
+      "source_url": "https://www.transfermarkt.com/serie-a/transfers/wettbewerb/IT1/saison_id/2025/leihe/1/intern/1/plus/",
+      "expected_transfermarkt_arrivals": 704,
+      "expected_transfermarkt_departures": 730,
+      "parsed_arrivals": 704,
+      "parsed_departures": 730,
+      "team_side_faces": 1434,
+      "unique_semantic_events": 1289,
+      "paired_internal_events": 145,
+      "structured_backbone_rows": 754,
+      "completeness_gate": "PASS",
+      "files": {
+        "team_side": {
+          "path": "serie-a-2025-team-side-expanded.csv",
+          "sha256": "dadc8caf8ce03c2b75d1613a179356d782ddc666d2de8219116794100e6b2b82"
+        },
+        "unique_events": {
+          "path": "serie-a-2025-unique-semantic-events.csv",
+          "sha256": "a1efbd0872e8bb635399d70217112301011217902d7505170519b9167d8b2689"
+        },
+        "structured_backbone": {
+          "path": "serie-a-2025-structured-backbone.csv",
+          "sha256": "2bb09fcb444ec2196971b3c7dd9652503030fd178152b21ad6dfca3015fccea0"
+        },
+        "raw_html": {
+          "path": "transfermarkt-serie-a-2025-expanded.html",
+          "sha256": "e67933abb2e86e067b18a172b4003f183b01cefc3fd85fcaf2a00f54c5ee7407"
+        }
+      }
+    }
+  ]
+}

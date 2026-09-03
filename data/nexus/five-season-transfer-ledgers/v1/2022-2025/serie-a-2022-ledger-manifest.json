@@ -1,0 +1,31 @@
+{
+  "season": "2022/23",
+  "source_url": "https://www.transfermarkt.com/serie-a/transfers/wettbewerb/IT1/saison_id/2022/leihe/1/intern/1/plus/",
+  "expected_transfermarkt_arrivals": 798,
+  "expected_transfermarkt_departures": 789,
+  "parsed_arrivals": 798,
+  "parsed_departures": 789,
+  "team_side_faces": 1587,
+  "unique_semantic_events": 1405,
+  "paired_internal_events": 182,
+  "structured_backbone_rows": 1095,
+  "completeness_gate": "PASS",
+  "files": {
+    "team_side": {
+      "path": "serie-a-2022-team-side-expanded.csv",
+      "sha256": "6d6dc8beea31c074dbd4f241303bd84bc287b68f0ecf265e86364dfa9e828c87"
+    },
+    "unique_events": {
+      "path": "serie-a-2022-unique-semantic-events.csv",
+      "sha256": "b55b95e2e2c19db059f4d1d37286c51903298c39248b96af5fce741ec1381638"
+    },
+    "structured_backbone": {
+      "path": "serie-a-2022-structured-backbone.csv",
+      "sha256": "4a1bd73b812d612e985533ee260aec5ba3050e475928574d649260d5e1b668a9"
+    },
+    "raw_html": {
+      "path": "transfermarkt-serie-a-2022-expanded.html",
+      "sha256": "c777ff19421b513a9a1f709df158bac55c1a325c3a31bf336e5846a103eaa836"
+    }
+  }
+}

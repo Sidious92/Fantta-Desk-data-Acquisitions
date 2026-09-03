@@ -1,0 +1,31 @@
+{
+  "season": "2024/25",
+  "source_url": "https://www.transfermarkt.com/serie-a/transfers/wettbewerb/IT1/saison_id/2024/leihe/1/intern/1/plus/",
+  "expected_transfermarkt_arrivals": 692,
+  "expected_transfermarkt_departures": 662,
+  "parsed_arrivals": 692,
+  "parsed_departures": 662,
+  "team_side_faces": 1354,
+  "unique_semantic_events": 1207,
+  "paired_internal_events": 147,
+  "structured_backbone_rows": 972,
+  "completeness_gate": "PASS",
+  "files": {
+    "team_side": {
+      "path": "serie-a-2024-team-side-expanded.csv",
+      "sha256": "a9bfd4fa297696bdaeca3e79a6847447cfd70ee92d1c2dd8c63461ea610f3b7b"
+    },
+    "unique_events": {
+      "path": "serie-a-2024-unique-semantic-events.csv",
+      "sha256": "696e291ff30dac13fbb8e0ccc61dc2977f99a5d55968569f3271c000bdc4936e"
+    },
+    "structured_backbone": {
+      "path": "serie-a-2024-structured-backbone.csv",
+      "sha256": "88b569228500dc71ab3137ea5f8854fad53148331f799c519ce2c2f0e706bee6"
+    },
+    "raw_html": {
+      "path": "transfermarkt-serie-a-2024-expanded.html",
+      "sha256": "6f1b71b0d519d92f1f902a94bb508e78dd3c571fbf9e9dceeda06a5695f0f5b7"
+    }
+  }
+}
