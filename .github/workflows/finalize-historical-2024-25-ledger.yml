@@ -5,14 +5,13 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/finalize-historical-2024-25-ledger.yml'
-      - 'scripts/finalize_historical_2024_25_runner.py'
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  reconcile:
+  finalize:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
@@ -36,7 +35,7 @@ jobs:
         working-directory: fantadesk-private
         run: python scripts/nexus/reconcile_historical_2024_25_internal_pairs_v2.py
 
-      - name: Validate reconciliation result
+      - name: Require reconciliation PASS
         working-directory: fantadesk-private
         run: |
           python - <<'PY'
@@ -45,22 +44,45 @@ jobs:
           p=Path('data/nexus/transfer-events/v1/historical-2024-25-internal-pair-reconciliation-audit-v1.json')
           d=json.loads(p.read_text())
           print(json.dumps({k:{'faces':v['teamSideFaces'],'pairs':v['pairedInternalSerieAEvents'],'events':v['preCanonicalUniqueSemanticEvents'],'unresolved':len(v['unresolvedInternalCandidateGroups'])} for k,v in d['windows'].items()},indent=2))
-          print('status=',d['status'])
+          if d['status'] != 'PASS': raise SystemExit('reconciliation not PASS')
+          if any(v['unresolvedInternalCandidateGroups'] for v in d['windows'].values()): raise SystemExit('unresolved candidate groups remain')
           PY
 
-      - name: Stage reconciliation artifact
+      - name: Materialize canonical unique-event ledger
+        working-directory: fantadesk-private
+        run: python scripts/nexus/materialize_historical_2024_25_unique_events.py
+
+      - name: Validate canonical accounting
+        working-directory: fantadesk-private
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('data/nexus/transfer-events/v1/historical-2024-25-canonical-unique-event-ledger-status-v1.json')
+          d=json.loads(p.read_text())
+          print(json.dumps(d['totals'],indent=2))
+          assert d['status']=='CLOSED'
+          assert d['totals']['teamSideFaces']==625
+          assert d['totals']['internalSerieAPairs']==90
+          assert d['totals']['uniqueSemanticEvents']==535
+          PY
+
+      - name: Stage canonical artifact
         if: always()
         run: |
           mkdir -p out
           cp fantadesk-private/data/nexus/transfer-events/v1/historical-2024-25-summer-internal-pair-reconciliation-v1.csv out/ || true
           cp fantadesk-private/data/nexus/transfer-events/v1/historical-2024-25-winter-internal-pair-reconciliation-v1.csv out/ || true
           cp fantadesk-private/data/nexus/transfer-events/v1/historical-2024-25-internal-pair-reconciliation-audit-v1.json out/ || true
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2024-25-canonical-unique-event-ledger-status-v1.json out/ || true
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2024-25-summer-unique-event-ledger-v1-part-*.csv out/ || true
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2024-25-winter-unique-event-ledger-v1-part-*.csv out/ || true
 
-      - name: Upload reconciliation artifact
+      - name: Upload canonical artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: historical-2024-25-reconciliation
+          name: historical-2024-25-canonical-ledger
           path: out
           if-no-files-found: error
           retention-days: 14
