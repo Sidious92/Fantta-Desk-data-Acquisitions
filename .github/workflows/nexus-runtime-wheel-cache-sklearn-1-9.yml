@@ -18,12 +18,12 @@ jobs:
         run: |
           mkdir -p /tmp/nexus-wheels
           python -m pip download --only-binary=:all: --dest /tmp/nexus-wheels \
-            numpy==2.5.2 scipy==1.18.1 scikit-learn==1.9.0 joblib==1.6.0 \
-            threadpoolctl==3.6.0 cloudpickle==3.1.2
+            numpy==2.5.2 pandas==3.0.5 scipy==1.18.1 scikit-learn==1.9.0 joblib==1.6.0 \
+            threadpoolctl==3.6.0 cloudpickle==3.1.2 python-dateutil==2.9.0.post0 six==1.17.0
           sha256sum /tmp/nexus-wheels/* | sort | tee /tmp/nexus-wheels/SHA256SUMS.txt
       - uses: actions/upload-artifact@v4
         with:
-          name: nexus-sklearn-1-9-py313-runtime-wheels
+          name: nexus-sklearn-1-9-pandas-3-py313-runtime-wheels
           path: /tmp/nexus-wheels
           if-no-files-found: error
           retention-days: 7
