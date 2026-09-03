@@ -1,0 +1,29 @@
+name: Nexus Runtime Wheel Cache sklearn 1.9
+on:
+  push:
+    paths:
+      - '.github/workflows/nexus-runtime-wheel-cache-sklearn-1-9.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cache-runtime:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Download exact runtime wheels
+        run: |
+          mkdir -p /tmp/nexus-wheels
+          python -m pip download --only-binary=:all: --dest /tmp/nexus-wheels \
+            numpy==2.5.2 scipy==1.18.1 scikit-learn==1.9.0 joblib==1.6.0 \
+            threadpoolctl==3.6.0 cloudpickle==3.1.2
+          sha256sum /tmp/nexus-wheels/* | sort | tee /tmp/nexus-wheels/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexus-sklearn-1-9-py313-runtime-wheels
+          path: /tmp/nexus-wheels
+          if-no-files-found: error
+          retention-days: 7
