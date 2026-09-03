@@ -31,3 +31,5 @@ jobs:
           path: artifacts/serie-a-five-season-transfer-ledgers-v2
           if-no-files-found: error
           retention-days: 14
+
+# FantaNexus ledger completion rerun 2026-09-04
