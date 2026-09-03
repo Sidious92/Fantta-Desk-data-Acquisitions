@@ -7,6 +7,7 @@ on:
     paths:
       - 'scripts/build_five_season_transfer_ledgers.py'
       - 'scripts/patch_builder_playwright.py'
+      - 'scripts/patch_builder_current_dom.py'
       - '.github/workflows/nexus-five-season-transfer-ledgers.yml'
 
 permissions:
@@ -25,8 +26,10 @@ jobs:
         run: |
           pip install requests beautifulsoup4 playwright
           python -m playwright install --with-deps chromium
-      - name: Patch browser fallback
-        run: python scripts/patch_builder_playwright.py
+      - name: Patch acquisition and current DOM
+        run: |
+          python scripts/patch_builder_playwright.py
+          python scripts/patch_builder_current_dom.py
       - name: Build and validate ledgers
         run: python scripts/build_five_season_transfer_ledgers.py
       - name: Show manifests
