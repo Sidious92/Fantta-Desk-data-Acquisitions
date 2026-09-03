@@ -1,0 +1,53 @@
+name: Nexus Membership Replay V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'data/nexus/membership-replay/v1/membership-replay-mirror-v1.csv.xz.b64'
+      - 'scripts/nexus-membership-replay-v1.py'
+      - '.github/workflows/nexus-membership-replay-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  membership-replay:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile replay
+        run: python -m py_compile scripts/nexus-membership-replay-v1.py
+      - name: Run content-addressed membership replay
+        run: python scripts/nexus-membership-replay-v1.py
+      - name: Hard gate expected scientific rejection and boundary
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/nexus-membership-replay-v1/summary.json'))
+          assert d['mirror']['rows']==367
+          assert d['mirror']['developmentRows']==205
+          assert d['status']=='REJECT_MEMBERSHIP_INCREMENT_KEEP_A7_A1'
+          assert not any(d['gates'].values())
+          b=d['scientificBoundary']
+          assert not any(b.values())
+          print(json.dumps(d,indent=2))
+          PY
+      - name: Publish summary
+        if: always()
+        run: |
+          if [ -f /tmp/nexus-membership-replay-v1/summary.json ]; then
+            cat /tmp/nexus-membership-replay-v1/summary.json >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Upload replay evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-membership-replay-v1
+          path: /tmp/nexus-membership-replay-v1/
+          if-no-files-found: error
+          retention-days: 30
