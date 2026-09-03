@@ -4,10 +4,11 @@ import base64, csv, hashlib, json, lzma
 from collections import defaultdict
 from pathlib import Path
 
-SRC = Path('data/nexus/membership-replay/v1/membership-replay-mirror-v1.csv.xz.b64')
+ROOT = Path('data/nexus/membership-replay/v1')
+PARTS = [ROOT / f'membership-replay-mirror-v1.part0{i}.b64' for i in range(1,5)]
 OUT = Path('/tmp/nexus-membership-replay-v1')
 OUT.mkdir(parents=True, exist_ok=True)
-EXPECTED_XZ_SHA = 'f5c7c6640cfc146b6dd8951ba04dea4082c7dbe9d2940da442d7d2673a0d108a'
+XZ_SHA = 'f5c7c6640cfc146b6dd8951ba04dea4082c7dbe9d2940da442d7d2673a0d108a'
 RAW_SHA = '9a27966a07cd18a1966b8c86100bf468fbad3c07e3ec981af23b807f4bb3eec1'
 NEW = 'NEWCOMER_CLUB_SEASON_TRANSITION'
 CONT = 'NOT_NEWCOMER_AT_SEASON_BOUNDARY'
@@ -34,9 +35,11 @@ def corr(cls, role, t):
     return max(-900.0,min(900.0,n*m/(n+20.0))),level,n
 
 def main():
-    xz=base64.b64decode(SRC.read_text().strip())
+    encoded=''.join(p.read_text().strip() for p in PARTS)
+    assert len(encoded)==16892, len(encoded)
+    xz=base64.b64decode(encoded)
     actual_xz_sha=hashlib.sha256(xz).hexdigest()
-    print(json.dumps({'expectedXzSha256':EXPECTED_XZ_SHA,'actualXzSha256':actual_xz_sha,'xzBytes':len(xz)}))
+    assert actual_xz_sha==XZ_SHA, (actual_xz_sha,XZ_SHA)
     raw=lzma.decompress(xz)
     actual_raw_sha=hashlib.sha256(raw).hexdigest()
     assert actual_raw_sha==RAW_SHA, (actual_raw_sha, RAW_SHA)
@@ -66,8 +69,7 @@ def main():
            'bothSeasonsNotWorse':all(v['combinedMae']<=v['a1Mae'] for v in by_season.values())}
     accepted=all(gates.values())
     summary={'schema':'NEXUS_MEMBERSHIP_REPLAY_V1','status':'PASS_MEMBERSHIP_INCREMENT' if accepted else 'REJECT_MEMBERSHIP_INCREMENT_KEEP_A7_A1',
-      'mirror':{'rows':len(rows),'seedRows':162,'developmentRows':205,'rawSha256':actual_raw_sha,'transportXzSha256':actual_xz_sha,
-                'expectedOriginalXzSha256':EXPECTED_XZ_SHA,
+      'mirror':{'rows':len(rows),'seedRows':162,'developmentRows':205,'rawSha256':actual_raw_sha,'xzSha256':actual_xz_sha,
                 'joinNote':'Exact same-season normalized playerNameCandidate + targetClubCode mapping; only rows with frozen verified F3 target labels retained.'},
       'development':{'overall':overall,'bySeason':by_season,'deltaVsA1':overall['combinedMae']-overall['a1Mae']},
       'subgroups':sub,'gates':gates,
