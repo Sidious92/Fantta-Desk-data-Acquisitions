@@ -10,7 +10,6 @@ on:
 permissions:
   contents: read
 
-# trigger: promoted bulk Primavera layer + post-bulk residual/completeness/reconciliation
 jobs:
   audit:
     runs-on: ubuntu-24.04
@@ -49,7 +48,7 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
-          p=Path('data/nexus/transfer-events/v1/historical-2023-24-winter-primavera-discovery-audit-v2.json')
+          p=Path('data/nexus/transfer-events/v1/historical-2023-24-winter-primavera-discovery-audit-v3.json')
           s=json.loads(p.read_text())
           assert s['status']=='PASS', s
           assert s['residualDiscoveryCandidates']==0, s['residualDiscoveryCandidates']
@@ -81,7 +80,7 @@ jobs:
           D=fantadesk-private/data/nexus/transfer-events/v1
           cp "$D"/historical-2023-24-winter-primavera-bulk-team-side-ledger-v1.csv out/
           cp "$D"/historical-2023-24-winter-primavera-bulk-ledger-audit-v1.json out/
-          cp "$D"/historical-2023-24-winter-primavera-discovery-audit-v2.json out/
+          cp "$D"/historical-2023-24-winter-primavera-discovery-audit-v3.json out/
           cp "$D"/historical-2023-24-completeness-diagnostic-v4.json out/
           cp "$D"/historical-2023-24-summer-internal-pair-reconciliation-v1.csv out/
           cp "$D"/historical-2023-24-winter-internal-pair-reconciliation-v1.csv out/
@@ -89,7 +88,7 @@ jobs:
           cp "$D"/historical-2023-24-winter-juventus-official-recap-audit-v2.json out/
       - uses: actions/upload-artifact@v4
         with:
-          name: historical-2023-24-post-bulk-youth-e2e-validation
+          name: historical-2023-24-post-bulk-youth-e2e-validation-v2
           path: out
           if-no-files-found: error
           retention-days: 14
