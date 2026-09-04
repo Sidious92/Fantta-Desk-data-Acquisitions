@@ -10,7 +10,7 @@ on:
 permissions:
   contents: read
 
-# Runner trigger revision: robust parser v2
+# Runner trigger revision: cited-evidence challenger v2
 jobs:
   materialize:
     runs-on: ubuntu-24.04
@@ -31,7 +31,7 @@ jobs:
             "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
           git -C fantadesk-private rev-parse HEAD
       - name: Install parser dependencies
-        run: python -m pip install --disable-pip-version-check pandas lxml requests
+        run: python -m pip install --disable-pip-version-check pandas lxml requests beautifulsoup4
       - name: Materialize completeness challenger
         working-directory: fantadesk-private
         run: python scripts/nexus/materialize_historical_2023_24_wikipedia_challenger.py
@@ -39,12 +39,12 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p out
-          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-summer-wikipedia-transfer-challenger-v1.csv out/
-          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-winter-wikipedia-transfer-challenger-v1.csv out/
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-summer-wikipedia-transfer-challenger-v2.csv out/
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-winter-wikipedia-transfer-challenger-v2.csv out/
       - name: Upload challenger
         uses: actions/upload-artifact@v4
         with:
-          name: historical-2023-24-wikipedia-transfer-challenger-v1
+          name: historical-2023-24-wikipedia-transfer-challenger-v2
           path: out
           if-no-files-found: error
           retention-days: 14
