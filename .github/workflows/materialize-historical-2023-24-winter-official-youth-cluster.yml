@@ -1,0 +1,43 @@
+name: Materialize historical 2023-24 winter official youth cluster
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/materialize-historical-2023-24-winter-official-youth-cluster.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      FANTADESK_REPO: Sidious92/FantaDesk
+      FANTADESK_BRANCH: feat/nexus-five-season-transfer-ledgers-v1
+    steps:
+      - uses: actions/checkout@v4
+      - name: Clone private scientific authority
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$TOKEN"
+          git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
+      - name: Materialize candidate
+        working-directory: fantadesk-private
+        run: python scripts/nexus/materialize_historical_2023_24_winter_official_youth_cluster_candidate.py
+      - name: Stage candidate
+        run: |
+          mkdir -p out
+          D=fantadesk-private/data/nexus/transfer-events/v1
+          cp "$D"/historical-2023-24-winter-official-youth-cluster-candidate-v1.csv out/
+          cp "$D"/historical-2023-24-winter-official-youth-cluster-candidate-audit-v1.json out/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: historical-2023-24-winter-official-youth-cluster-candidate
+          path: out
+          if-no-files-found: error
+          retention-days: 14
