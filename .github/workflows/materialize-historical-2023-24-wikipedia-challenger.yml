@@ -10,6 +10,7 @@ on:
 permissions:
   contents: read
 
+# Runner trigger revision: robust parser v2
 jobs:
   materialize:
     runs-on: ubuntu-24.04
