@@ -1,0 +1,49 @@
+name: Audit historical 2023-24 challenger routes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/audit-historical-2023-24-challenger-routes.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      FANTADESK_REPO: Sidious92/FantaDesk
+      FANTADESK_BRANCH: feat/nexus-five-season-transfer-ledgers-v1
+    steps:
+      - uses: actions/checkout@v4
+      - name: Clone private scientific authority
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$TOKEN"
+          git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
+            "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
+      - name: Install challenger dependencies
+        run: python -m pip install --disable-pip-version-check pandas lxml requests beautifulsoup4
+      - name: Materialize challenger v3
+        working-directory: fantadesk-private
+        run: python scripts/nexus/materialize_historical_2023_24_wikipedia_challenger.py
+      - name: Compare reviewed routes
+        working-directory: fantadesk-private
+        run: python scripts/nexus/audit_historical_2023_24_challenger_routes.py
+      - name: Stage audit
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-challenger-route-audit-v1.json out/
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-challenger-only-routes-v1.csv out/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: historical-2023-24-challenger-route-audit-v1
+          path: out
+          if-no-files-found: error
+          retention-days: 14
