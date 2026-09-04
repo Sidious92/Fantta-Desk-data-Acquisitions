@@ -10,7 +10,7 @@ on:
 permissions:
   contents: read
 
-# trigger: challenger route audit v7 reviewed route dispositions
+# trigger: Sporting CP alias + Cuni Bayern II reviewed correction
 jobs:
   audit:
     runs-on: ubuntu-24.04
