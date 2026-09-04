@@ -1,0 +1,84 @@
+name: Close historical 2023-24 end-to-end diagnostic
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/close-historical-2023-24-end-to-end-diagnostic.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnostic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      FANTADESK_REPO: Sidious92/FantaDesk
+      FANTADESK_BRANCH: feat/nexus-five-season-transfer-ledgers-v1
+    steps:
+      - uses: actions/checkout@v4
+      - name: Clone private scientific authority
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$TOKEN"
+          git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
+            "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
+      - name: Install acquisition dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+      - name: Materialize row-faithful challenger
+        working-directory: fantadesk-private
+        run: python scripts/nexus/materialize_historical_2023_24_wikipedia_challenger.py
+      - name: Audit baseline challenger residual
+        working-directory: fantadesk-private
+        run: python scripts/nexus/audit_historical_2023_24_challenger_routes.py
+      - name: Materialize reviewed secondary supplement
+        working-directory: fantadesk-private
+        run: python scripts/nexus/materialize_historical_2023_24_secondary_supplement.py
+      - name: Re-audit challenger after supplement
+        working-directory: fantadesk-private
+        run: python scripts/nexus/audit_historical_2023_24_challenger_routes.py
+      - name: Reconcile internal Serie A pairs
+        working-directory: fantadesk-private
+        run: python scripts/nexus/reconcile_historical_2023_24_internal_pairs.py
+      - name: Run completeness diagnostic
+        working-directory: fantadesk-private
+        run: python scripts/nexus/audit_historical_2023_24_completeness.py
+      - name: Fail closed unless route residual is zero and pair reconciliation passes
+        working-directory: fantadesk-private
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=Path('data/nexus/transfer-events/v1')
+          route=json.loads((d/'historical-2023-24-challenger-route-audit-v5.json').read_text())
+          pair=json.loads((d/'historical-2023-24-internal-pair-reconciliation-audit-v1.json').read_text())
+          residual={w:route['windows'][w]['challengerOnlyRoutes'] for w in ('summer','winter')}
+          print('postSupplementResidual=',residual)
+          print('pairStatus=',pair.get('status'))
+          if any(residual.values()): raise SystemExit(f'non-zero challenger residual: {residual}')
+          if pair.get('status')!='PASS': raise SystemExit(f"pair reconciliation not PASS: {pair.get('status')}")
+          PY
+      - name: Stage diagnostic artifacts
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          D=fantadesk-private/data/nexus/transfer-events/v1
+          cp "$D"/historical-2023-24-challenger-route-audit-v5.json out/
+          cp "$D"/historical-2023-24-challenger-only-routes-v5.csv out/
+          cp "$D"/historical-2023-24-secondary-completeness-supplement-audit-v2.json out/
+          cp "$D"/historical-2023-24-summer-secondary-completeness-team-side-ledger-v1.csv out/
+          cp "$D"/historical-2023-24-winter-secondary-completeness-team-side-ledger-v1.csv out/
+          cp "$D"/historical-2023-24-summer-internal-pair-reconciliation-v1.csv out/
+          cp "$D"/historical-2023-24-winter-internal-pair-reconciliation-v1.csv out/
+          cp "$D"/historical-2023-24-internal-pair-reconciliation-audit-v1.json out/
+          cp "$D"/historical-2023-24-completeness-diagnostic-v3.json out/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: historical-2023-24-end-to-end-diagnostic
+          path: out
+          if-no-files-found: error
+          retention-days: 14
