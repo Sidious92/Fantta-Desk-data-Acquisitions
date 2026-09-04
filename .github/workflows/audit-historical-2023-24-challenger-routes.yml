@@ -32,18 +32,18 @@ jobs:
       - name: Materialize challenger v3
         working-directory: fantadesk-private
         run: python scripts/nexus/materialize_historical_2023_24_wikipedia_challenger.py
-      - name: Compare reviewed routes v3
+      - name: Compare reviewed routes v4
         working-directory: fantadesk-private
         run: python scripts/nexus/audit_historical_2023_24_challenger_routes.py
       - name: Stage audit
         run: |
           set -euo pipefail
           mkdir -p out
-          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-challenger-route-audit-v3.json out/
-          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-challenger-only-routes-v3.csv out/
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-challenger-route-audit-v4.json out/
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-challenger-only-routes-v4.csv out/
       - uses: actions/upload-artifact@v4
         with:
-          name: historical-2023-24-challenger-route-audit-v3
+          name: historical-2023-24-challenger-route-audit-v4
           path: out
           if-no-files-found: error
           retention-days: 14
