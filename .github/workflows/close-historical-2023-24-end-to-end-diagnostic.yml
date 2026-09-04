@@ -1,3 +1,4 @@
+# Reproduction trigger for five-season canonical freeze.
 name: Close historical 2023-24 end-to-end diagnostic
 
 on:
