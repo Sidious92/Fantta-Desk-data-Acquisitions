@@ -1,0 +1,82 @@
+name: Nexus T0A Exact-Scope Official Reacquisition v1
+
+on:
+  push:
+    branches:
+      - feat/nexus-t0a-exact-scope-official-reacquisition-v1
+    paths:
+      - 'scripts/nexus-t0a-exact-scope-official-reacquisition.mjs'
+      - '.github/workflows/nexus-t0a-exact-scope-official-reacquisition-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reacquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    env:
+      NEXUS_T0A_OUTPUT: .nexus-t0a-official-reacquisition-v1
+      NEXUS_REQUEST_SPACING_MS: 500
+      NEXUS_REQUEST_TIMEOUT_MS: 30000
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          package-manager-cache: false
+
+      - name: Reacquire official Lega Serie A exact-scope surface
+        run: node scripts/nexus-t0a-exact-scope-official-reacquisition.mjs
+
+      - name: Verify internal file manifest by read-back SHA-256
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const crypto = require('crypto');
+          const root = process.env.NEXUS_T0A_OUTPUT;
+          const m = JSON.parse(fs.readFileSync(path.join(root, 'MANIFEST.json'), 'utf8'));
+          let failures = 0;
+          for (const f of m.files) {
+            const p = path.join(root, f.path);
+            const b = fs.readFileSync(p);
+            const h = crypto.createHash('sha256').update(b).digest('hex');
+            if (h !== f.sha256 || b.length !== f.bytes) { console.error('READBACK_MISMATCH', f.path); failures++; }
+          }
+          if (failures) process.exit(2);
+          fs.writeFileSync(path.join(root, 'READBACK_SHA256_PASS.json'), JSON.stringify({schema:'NEXUS_T0A_READBACK_SHA256_V1',status:'PASS',verifiedFiles:m.files.length,verifiedAt:new Date().toISOString()}, null, 2)+'\n');
+          NODE
+
+      - name: Create preservation archive and SHA-256
+        run: |
+          tar -C "$NEXUS_T0A_OUTPUT" -czf nexus-t0a-official-lineup-participation-reacquired-v1.tar.gz .
+          sha256sum nexus-t0a-official-lineup-participation-reacquired-v1.tar.gz | tee nexus-t0a-official-lineup-participation-reacquired-v1.tar.gz.sha256
+          stat --printf='%s\n' nexus-t0a-official-lineup-participation-reacquired-v1.tar.gz | tee nexus-t0a-official-lineup-participation-reacquired-v1.tar.gz.bytes
+
+      - name: Print coverage checkpoint
+        if: always()
+        run: |
+          test -f "$NEXUS_T0A_OUTPUT/normalized/coverage-manifest.json" && cat "$NEXUS_T0A_OUTPUT/normalized/coverage-manifest.json" || true
+          test -f "$NEXUS_T0A_OUTPUT/MANIFEST.json" && cat "$NEXUS_T0A_OUTPUT/MANIFEST.json" || true
+
+      - name: Upload T0A preservation artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-t0a-official-lineup-participation-reacquired-v1
+          path: |
+            nexus-t0a-official-lineup-participation-reacquired-v1.tar.gz
+            nexus-t0a-official-lineup-participation-reacquired-v1.tar.gz.sha256
+            nexus-t0a-official-lineup-participation-reacquired-v1.tar.gz.bytes
+            .nexus-t0a-official-reacquisition-v1/MANIFEST.json
+            .nexus-t0a-official-reacquisition-v1/READBACK_SHA256_PASS.json
+            .nexus-t0a-official-reacquisition-v1/normalized/coverage-manifest.json
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 90
+          compression-level: 0
