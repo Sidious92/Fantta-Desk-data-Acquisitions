@@ -10,6 +10,7 @@ on:
 permissions:
   contents: read
 
+# trigger: Croatian D-stroke transliteration fix 2026-09-04
 jobs:
   audit:
     runs-on: ubuntu-24.04
