@@ -10,6 +10,7 @@ on:
 permissions:
   contents: read
 
+# trigger: generic Date/Name rowspan expansion 2026-09-04
 jobs:
   audit:
     runs-on: ubuntu-24.04
@@ -34,7 +35,6 @@ jobs:
         run: |
           set -euo pipefail
           python scripts/nexus/materialize_historical_2023_24_wikipedia_challenger.py
-          # Compatibility copy for the current route-audit reader; ephemeral only.
           cp data/nexus/transfer-events/v1/historical-2023-24-summer-wikipedia-transfer-challenger-v4.csv data/nexus/transfer-events/v1/historical-2023-24-summer-wikipedia-transfer-challenger-v3.csv
           cp data/nexus/transfer-events/v1/historical-2023-24-winter-wikipedia-transfer-challenger-v4.csv data/nexus/transfer-events/v1/historical-2023-24-winter-wikipedia-transfer-challenger-v3.csv
       - name: Compare reviewed routes
