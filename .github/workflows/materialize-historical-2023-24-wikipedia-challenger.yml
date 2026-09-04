@@ -10,7 +10,7 @@ on:
 permissions:
   contents: read
 
-# Runner trigger revision: cited-evidence challenger v2.1
+# Runner trigger revision: cited-evidence challenger v2.2
 jobs:
   materialize:
     runs-on: ubuntu-24.04
