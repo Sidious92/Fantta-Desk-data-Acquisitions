@@ -1,4 +1,4 @@
-name: Audit historical 2023-24 winter Primavera discovery
+name: Audit historical 2023-24 winter youth discovery
 
 on:
   push:
@@ -39,14 +39,19 @@ jobs:
       - name: Audit Primavera discovery residual
         working-directory: fantadesk-private
         run: python scripts/nexus/audit_historical_2023_24_winter_primavera_discovery.py
-      - name: Stage diagnostic
+      - name: Audit Juventus complete official winter recap
+        working-directory: fantadesk-private
+        run: python scripts/nexus/audit_historical_2023_24_winter_juventus_official_recap.py
+      - name: Stage diagnostics
         run: |
           set -euo pipefail
           mkdir -p out
-          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-winter-primavera-discovery-audit-v1.json out/
+          D=fantadesk-private/data/nexus/transfer-events/v1
+          cp "$D"/historical-2023-24-winter-primavera-discovery-audit-v1.json out/
+          cp "$D"/historical-2023-24-winter-juventus-official-recap-audit-v1.json out/
       - uses: actions/upload-artifact@v4
         with:
-          name: historical-2023-24-winter-primavera-discovery-audit-v1
+          name: historical-2023-24-winter-youth-discovery-audits
           path: out
           if-no-files-found: error
           retention-days: 14
