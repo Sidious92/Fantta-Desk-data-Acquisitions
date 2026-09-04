@@ -1,0 +1,76 @@
+name: Materialize historical 2023-24 summer backbone
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/materialize-historical-2023-24-summer-backbone.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  materialize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      FANTADESK_REPO: Sidious92/FantaDesk
+      FANTADESK_BRANCH: feat/nexus-five-season-transfer-ledgers-v1
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v4
+
+      - name: Clone private scientific authority
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$TOKEN"
+          git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
+            "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
+          git -C fantadesk-private rev-parse HEAD
+
+      - name: Install parser dependencies
+        run: python -m pip install --disable-pip-version-check --no-cache-dir requests beautifulsoup4
+
+      - name: Materialize 20-club summer backbone
+        working-directory: fantadesk-private
+        run: python scripts/nexus/materialize_historical_2023_24_summer_backbone.py
+
+      - name: Validate summer backbone
+        working-directory: fantadesk-private
+        run: |
+          python - <<'PY'
+          import csv,json
+          from pathlib import Path
+          root=Path('data/nexus/transfer-events/v1')
+          d=json.loads((root/'historical-2023-24-summer-backbone-status-v1.json').read_text())
+          assert d['clubs']==20
+          assert d['teamSideFaces']>=400
+          assert d['part01Faces']+d['part02Faces']==d['teamSideFaces']
+          rows=[]
+          for p in [root/'historical-2023-24-summer-team-side-ledger-part-01.csv',root/'historical-2023-24-summer-team-side-ledger-part-02.csv']:
+              rows += list(csv.DictReader(p.open()))
+          assert len(rows)==d['teamSideFaces']
+          assert len({r['faceId'] for r in rows})==len(rows)
+          assert len({r['serieAClub'] for r in rows})==20
+          print(json.dumps(d,ensure_ascii=False,indent=2))
+          PY
+
+      - name: Stage outputs
+        if: always()
+        run: |
+          mkdir -p out
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-summer-team-side-ledger-part-01.csv out/ || true
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-summer-team-side-ledger-part-02.csv out/ || true
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-summer-backbone-status-v1.json out/ || true
+
+      - name: Upload summer backbone
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: historical-2023-24-summer-backbone
+          path: out
+          if-no-files-found: error
+          retention-days: 14
