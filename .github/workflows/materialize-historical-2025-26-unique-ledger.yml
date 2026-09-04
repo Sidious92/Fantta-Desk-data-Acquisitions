@@ -1,0 +1,76 @@
+name: Materialize historical 2025-26 canonical unique ledger
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/materialize-historical-2025-26-unique-ledger.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  materialize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      FANTADESK_REPO: Sidious92/FantaDesk
+      FANTADESK_BRANCH: feat/nexus-five-season-transfer-ledgers-v1
+    steps:
+      - uses: actions/checkout@v4
+      - name: Clone private scientific authority
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$TOKEN"
+          git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
+            "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
+      - name: Materialize canonical 2025-26 ledger
+        working-directory: fantadesk-private
+        run: |
+          set -euo pipefail
+          python scripts/nexus/materialize_historical_2025_26_unique_events.py
+      - name: Verify fail-closed accounting
+        working-directory: fantadesk-private
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+          d=Path('data/nexus/transfer-events/v1')
+          s=json.loads((d/'historical-2025-26-canonical-unique-event-ledger-status-v1.json').read_text())
+          assert s['status']=='CLOSED', s
+          assert s['totals']=={'teamSideFaces':982,'internalSerieAPairs':97,'uniqueSemanticEvents':885}, s['totals']
+          assert s['windows']['summer']['uniqueSemanticEvents']==625
+          assert s['windows']['winter']['uniqueSemanticEvents']==260
+          summer=[]
+          for p in sorted(d.glob('historical-2025-26-summer-unique-event-ledger-v1-part-*.csv')):
+              summer.extend(csv.DictReader(p.open(encoding='utf-8')))
+          winter=[]
+          for p in sorted(d.glob('historical-2025-26-winter-unique-event-ledger-v1-part-*.csv')):
+              winter.extend(csv.DictReader(p.open(encoding='utf-8')))
+          assert len(summer)==625, len(summer)
+          assert len(winter)==260, len(winter)
+          assert len({r['eventId'] for r in summer+winter})==885
+          print({'summer':len(summer),'winter':len(winter),'season':len(summer)+len(winter)})
+          PY
+      - name: Stage canonical closure artifact
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          D=fantadesk-private/data/nexus/transfer-events/v1
+          cp "$D"/historical-2025-26-canonical-unique-event-ledger-status-v1.json out/
+          cp "$D"/historical-2025-26-summer-unique-event-ledger-v1-part-*.csv out/
+          cp "$D"/historical-2025-26-winter-unique-event-ledger-v1-part-*.csv out/
+          cp "$D"/historical-2025-26-summer-internal-pair-reconciliation-v1.csv out/
+          cp "$D"/historical-2025-26-winter-internal-pair-reconciliation-v1.csv out/
+          cp "$D"/historical-complete-market-ledger-2025-26-reconciliation-gate-v1.json out/
+          cp "$D"/historical-complete-market-ledger-2025-26-evidence-resolution-v1.json out/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: historical-2025-26-canonical-closure
+          path: out
+          if-no-files-found: error
+          retention-days: 14
