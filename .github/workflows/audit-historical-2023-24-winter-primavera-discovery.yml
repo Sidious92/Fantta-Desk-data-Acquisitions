@@ -48,10 +48,10 @@ jobs:
           mkdir -p out
           D=fantadesk-private/data/nexus/transfer-events/v1
           cp "$D"/historical-2023-24-winter-primavera-discovery-audit-v1.json out/
-          cp "$D"/historical-2023-24-winter-juventus-official-recap-audit-v1.json out/
+          cp "$D"/historical-2023-24-winter-juventus-official-recap-audit-v2.json out/
       - uses: actions/upload-artifact@v4
         with:
-          name: historical-2023-24-winter-youth-discovery-audits
+          name: historical-2023-24-winter-youth-discovery-audits-v2
           path: out
           if-no-files-found: error
           retention-days: 14
