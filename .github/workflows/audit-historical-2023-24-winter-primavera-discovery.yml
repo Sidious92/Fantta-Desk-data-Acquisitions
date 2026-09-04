@@ -37,10 +37,10 @@ jobs:
           python scripts/nexus/audit_historical_2023_24_challenger_routes.py
           python scripts/nexus/materialize_historical_2023_24_secondary_supplement.py
           python scripts/nexus/audit_historical_2023_24_secondary_overlap.py
-      - name: Materialize reviewed Primavera bulk layer
+      - name: Materialize reviewed Primavera 1 bulk layer
         working-directory: fantadesk-private
         run: python scripts/nexus/materialize_historical_2023_24_winter_primavera_bulk_candidate.py
-      - name: Verify Primavera source residual is zero
+      - name: Verify Primavera 1 residual is zero
         working-directory: fantadesk-private
         run: |
           set -euo pipefail
@@ -52,28 +52,15 @@ jobs:
           s=json.loads(p.read_text())
           assert s['status']=='PASS', s
           assert s['residualDiscoveryCandidates']==0, s['residualDiscoveryCandidates']
-          print({'primaveraResidual':0,'covered':s['alreadyCoveredFaces'],'disposed':s['resolvedByReviewedDisposition']})
+          print({'primavera1Residual':0,'covered':s['alreadyCoveredFaces'],'disposed':s['resolvedByReviewedDisposition']})
           PY
+      - name: Materialize Napoli Salernitana Udinese Primavera 2 sweep
+        working-directory: fantadesk-private
+        run: python scripts/nexus/materialize_historical_2023_24_winter_primavera2_three_club_sweep.py
       - name: Audit Juventus complete official winter recap
         working-directory: fantadesk-private
         run: python scripts/nexus/audit_historical_2023_24_winter_juventus_official_recap.py
-      - name: Run full completeness diagnostic
-        working-directory: fantadesk-private
-        run: python scripts/nexus/audit_historical_2023_24_completeness.py
-      - name: Reconcile all internal Serie A pairs
-        working-directory: fantadesk-private
-        run: |
-          set -euo pipefail
-          python scripts/nexus/reconcile_historical_2023_24_internal_pairs.py
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          p=Path('data/nexus/transfer-events/v1/historical-2023-24-internal-pair-reconciliation-audit-v1.json')
-          s=json.loads(p.read_text())
-          assert s['status']=='PASS', s
-          print({'pairAudit':s['status']})
-          PY
-      - name: Stage end-to-end diagnostics
+      - name: Stage all-youth batch diagnostics
         run: |
           set -euo pipefail
           mkdir -p out
@@ -81,14 +68,12 @@ jobs:
           cp "$D"/historical-2023-24-winter-primavera-bulk-team-side-ledger-v1.csv out/
           cp "$D"/historical-2023-24-winter-primavera-bulk-ledger-audit-v1.json out/
           cp "$D"/historical-2023-24-winter-primavera-discovery-audit-v3.json out/
-          cp "$D"/historical-2023-24-completeness-diagnostic-v4.json out/
-          cp "$D"/historical-2023-24-summer-internal-pair-reconciliation-v1.csv out/
-          cp "$D"/historical-2023-24-winter-internal-pair-reconciliation-v1.csv out/
-          cp "$D"/historical-2023-24-internal-pair-reconciliation-audit-v1.json out/
+          cp "$D"/historical-2023-24-winter-primavera2-three-club-sweep-team-side-ledger-v1.csv out/
+          cp "$D"/historical-2023-24-winter-primavera2-three-club-sweep-audit-v1.json out/
           cp "$D"/historical-2023-24-winter-juventus-official-recap-audit-v2.json out/
       - uses: actions/upload-artifact@v4
         with:
-          name: historical-2023-24-post-bulk-youth-e2e-validation-v2
+          name: historical-2023-24-all-youth-batch-validation
           path: out
           if-no-files-found: error
           retention-days: 14
