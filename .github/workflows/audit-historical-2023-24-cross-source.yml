@@ -1,0 +1,59 @@
+name: Audit historical 2023-24 cross source
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/audit-historical-2023-24-cross-source.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      FANTADESK_REPO: Sidious92/FantaDesk
+      FANTADESK_BRANCH: feat/nexus-five-season-transfer-ledgers-v1
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v4
+      - name: Clone private scientific authority
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$TOKEN"
+          git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
+            "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
+          git -C fantadesk-private rev-parse HEAD
+      - name: Snapshot current private reconstruction
+        run: |
+          set -euo pipefail
+          mkdir -p baseline
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-summer-team-side-ledger-part-*.csv baseline/
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-winter-team-side-ledger-part-*.csv baseline/
+      - name: Install parser dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+      - name: Materialize independent post-window backbones in ephemeral clone
+        working-directory: fantadesk-private
+        run: |
+          set -euo pipefail
+          python scripts/nexus/materialize_historical_2023_24_summer_backbone.py
+          python scripts/nexus/materialize_historical_2023_24_winter_backbone.py
+      - name: Cross-source audit
+        working-directory: fantadesk-private
+        run: |
+          python scripts/nexus/audit_historical_2023_24_cross_source.py \
+            --baseline-dir ../baseline \
+            --candidate-dir data/nexus/transfer-events/v1 \
+            --out-dir ../out
+      - name: Upload cross-source audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: historical-2023-24-cross-source-audit
+          path: out
+          if-no-files-found: error
+          retention-days: 14
