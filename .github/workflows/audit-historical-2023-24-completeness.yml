@@ -1,0 +1,45 @@
+name: Audit historical 2023-24 completeness
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/audit-historical-2023-24-completeness.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      FANTADESK_REPO: Sidious92/FantaDesk
+      FANTADESK_BRANCH: feat/nexus-five-season-transfer-ledgers-v1
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v4
+      - name: Clone private scientific authority
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$TOKEN"
+          git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
+            "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
+          git -C fantadesk-private rev-parse HEAD
+      - name: Run completeness diagnostic
+        working-directory: fantadesk-private
+        run: python scripts/nexus/audit_historical_2023_24_completeness.py
+      - name: Stage diagnostic
+        run: |
+          mkdir -p out
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-completeness-diagnostic-v1.json out/
+      - name: Upload diagnostic
+        uses: actions/upload-artifact@v4
+        with:
+          name: historical-2023-24-completeness-diagnostic
+          path: out
+          if-no-files-found: error
+          retention-days: 14
