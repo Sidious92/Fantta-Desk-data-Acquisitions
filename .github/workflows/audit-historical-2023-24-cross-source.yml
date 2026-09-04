@@ -43,17 +43,17 @@ jobs:
           set -euo pipefail
           python scripts/nexus/materialize_historical_2023_24_summer_backbone.py
           python scripts/nexus/materialize_historical_2023_24_winter_backbone.py
-      - name: Cross-source audit
+      - name: Cross-source audit v2
         working-directory: fantadesk-private
         run: |
-          python scripts/nexus/audit_historical_2023_24_cross_source.py \
+          python scripts/nexus/audit_historical_2023_24_cross_source_v2.py \
             --baseline-dir ../baseline \
             --candidate-dir data/nexus/transfer-events/v1 \
             --out-dir ../out
       - name: Upload cross-source audit
         uses: actions/upload-artifact@v4
         with:
-          name: historical-2023-24-cross-source-audit
+          name: historical-2023-24-cross-source-audit-v2
           path: out
           if-no-files-found: error
           retention-days: 14
