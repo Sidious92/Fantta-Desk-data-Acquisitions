@@ -28,6 +28,15 @@ jobs:
           git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
             "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
 
+      - name: Reproduce historical canonical shards from closed authorities
+        working-directory: fantadesk-private
+        run: |
+          set -euo pipefail
+          python scripts/nexus/materialize_historical_2022_23_unique_events.py
+          python scripts/nexus/materialize_historical_2023_24_unique_events.py
+          python scripts/nexus/materialize_historical_2024_25_unique_events.py
+          python scripts/nexus/materialize_historical_2025_26_unique_events.py
+
       - name: Materialize five-season freeze
         working-directory: fantadesk-private
         run: |
