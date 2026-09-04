@@ -10,7 +10,6 @@ on:
 permissions:
   contents: read
 
-# trigger: Croatian D-stroke transliteration fix 2026-09-04
 jobs:
   audit:
     runs-on: ubuntu-24.04
@@ -29,22 +28,29 @@ jobs:
           git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
             "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
       - name: Install challenger dependencies
-        run: python -m pip install --disable-pip-version-check pandas lxml requests beautifulsoup4
-      - name: Materialize challenger v3
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+      - name: Materialize row-faithful challenger v4
         working-directory: fantadesk-private
-        run: python scripts/nexus/materialize_historical_2023_24_wikipedia_challenger.py
-      - name: Compare reviewed routes v4
+        run: |
+          set -euo pipefail
+          python scripts/nexus/materialize_historical_2023_24_wikipedia_challenger.py
+          # Compatibility copy for the current route-audit reader; ephemeral only.
+          cp data/nexus/transfer-events/v1/historical-2023-24-summer-wikipedia-transfer-challenger-v4.csv data/nexus/transfer-events/v1/historical-2023-24-summer-wikipedia-transfer-challenger-v3.csv
+          cp data/nexus/transfer-events/v1/historical-2023-24-winter-wikipedia-transfer-challenger-v4.csv data/nexus/transfer-events/v1/historical-2023-24-winter-wikipedia-transfer-challenger-v3.csv
+      - name: Compare reviewed routes
         working-directory: fantadesk-private
         run: python scripts/nexus/audit_historical_2023_24_challenger_routes.py
-      - name: Stage audit
+      - name: Stage audit and challenger
         run: |
           set -euo pipefail
           mkdir -p out
           cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-challenger-route-audit-v4.json out/
           cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-challenger-only-routes-v4.csv out/
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-summer-wikipedia-transfer-challenger-v4.csv out/
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-winter-wikipedia-transfer-challenger-v4.csv out/
       - uses: actions/upload-artifact@v4
         with:
-          name: historical-2023-24-challenger-route-audit-v4
+          name: historical-2023-24-row-faithful-challenger-audit
           path: out
           if-no-files-found: error
           retention-days: 14
