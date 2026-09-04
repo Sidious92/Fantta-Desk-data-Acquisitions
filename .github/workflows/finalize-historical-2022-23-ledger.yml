@@ -1,0 +1,127 @@
+name: Finalize historical 2022-23 transfer ledger
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/finalize-historical-2022-23-ledger.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      FANTADESK_REPO: Sidious92/FantaDesk
+      FANTADESK_BRANCH: feat/nexus-five-season-transfer-ledgers-v1
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v4
+
+      - name: Clone private scientific authority
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$TOKEN"
+          git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
+            "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
+          git -C fantadesk-private rev-parse HEAD
+
+      - name: Reconcile final 2022-23 internal Serie A faces
+        working-directory: fantadesk-private
+        run: python scripts/nexus/reconcile_historical_2022_23_internal_pairs.py
+
+      - name: Require pair reconciliation PASS and close local completeness gate
+        working-directory: fantadesk-private
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('data/nexus/transfer-events/v1')
+          a=json.loads((root/'historical-2022-23-internal-pair-reconciliation-audit-v1.json').read_text())
+          assert a['status']=='PASS', a
+          assert not any(v['unresolvedInternalCandidateGroups'] for v in a['windows'].values()), a
+          assert a['windows']['summer']['effectiveTeamSideFaces']==576, a['windows']['summer']
+          assert a['windows']['winter']['effectiveTeamSideFaces']==182, a['windows']['winter']
+          gpath=root/'historical-2022-23-completeness-gate-v1.json'
+          g=json.loads(gpath.read_text())
+          assert g['winterLoanReturnPatchComplete'] is True
+          assert g['officialYouthU23PrimaveraPatchComplete'] is True
+          g['sourceAuditComplete']=True
+          g['status']='COMPLETE_FOR_CANONICALIZATION'
+          g['canonicalizationAllowed']=True
+          g['blockingReasons']=[]
+          g['pairReconciliation']={
+            'status':'PASS',
+            'auditFile':'historical-2022-23-internal-pair-reconciliation-audit-v1.json',
+            'summerInternalSerieAPairs':a['windows']['summer']['pairedInternalSerieAEvents'],
+            'winterInternalSerieAPairs':a['windows']['winter']['pairedInternalSerieAEvents'],
+            'unresolvedCandidateGroups':0
+          }
+          gpath.write_text(json.dumps(g,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(g['pairReconciliation'],indent=2))
+          PY
+
+      - name: Materialize canonical unique-event ledger
+        working-directory: fantadesk-private
+        run: python scripts/nexus/materialize_historical_2022_23_unique_events.py
+
+      - name: Validate canonical accounting
+        working-directory: fantadesk-private
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('data/nexus/transfer-events/v1')
+          d=json.loads((root/'historical-2022-23-canonical-unique-event-ledger-status-v1.json').read_text())
+          assert d['status']=='CLOSED'
+          assert d['totals']['effectiveTeamSideFaces']==758
+          assert d['totals']['uniqueSemanticEvents']==d['totals']['effectiveTeamSideFaces']-d['totals']['internalSerieAPairs']
+          assert all(v==0 for v in d['validation'].values())
+          print(json.dumps(d['totals'],indent=2))
+          PY
+
+      - name: Mark local gate canonical closed
+        working-directory: fantadesk-private
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('data/nexus/transfer-events/v1')
+          sp=root/'historical-2022-23-canonical-unique-event-ledger-status-v1.json'
+          s=json.loads(sp.read_text())
+          gp=root/'historical-2022-23-completeness-gate-v1.json'
+          g=json.loads(gp.read_text())
+          g['status']='CLOSED_CANONICAL'
+          g['canonicalizationAllowed']=True
+          g['canonicalStatusFile']=sp.name
+          g['canonicalStatus']='CLOSED'
+          g['canonicalAccounting']=s['totals']
+          g['validation']=s['validation']
+          gp.write_text(json.dumps(g,ensure_ascii=False,indent=2)+'\n')
+          PY
+
+      - name: Stage canonical artifact
+        if: always()
+        run: |
+          mkdir -p out
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2022-23-summer-internal-pair-reconciliation-v1.csv out/ || true
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2022-23-winter-internal-pair-reconciliation-v1.csv out/ || true
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2022-23-internal-pair-reconciliation-audit-v1.json out/ || true
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2022-23-completeness-gate-v1.json out/ || true
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2022-23-canonical-unique-event-ledger-status-v1.json out/ || true
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2022-23-summer-unique-event-ledger-v1-part-*.csv out/ || true
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2022-23-winter-unique-event-ledger-v1-part-*.csv out/ || true
+
+      - name: Upload canonical artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: historical-2022-23-canonical-ledger
+          path: out
+          if-no-files-found: error
+          retention-days: 14
