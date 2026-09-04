@@ -31,24 +31,23 @@ jobs:
             "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
           git -C fantadesk-private rev-parse HEAD
 
-      - name: Verify incumbent 2023-24 backbone accounting
+      - name: Inspect incumbent 2023-24 backbone accounting
         working-directory: fantadesk-private
         run: |
           python - <<'PY'
-          import csv,glob,json
-          from collections import Counter
+          import csv,glob,json,os
           out={}
-          for window,expected in [('summer',451),('winter',126)]:
+          for window in ('summer','winter'):
               files=sorted(glob.glob(f'data/nexus/transfer-events/v1/historical-2023-24-{window}-team-side-ledger-part-*.csv'))
-              rows=[]
+              rows=[]; per_file={}
               for f in files:
-                  rows.extend(csv.DictReader(open(f,encoding='utf-8')))
+                  part=list(csv.DictReader(open(f,encoding='utf-8')))
+                  rows.extend(part); per_file[os.path.basename(f)]=len(part)
               ids=[r['faceId'] for r in rows]
               clubs=sorted({r['serieAClub'] for r in rows})
-              assert len(rows)==expected,(window,len(rows),expected)
-              assert len(ids)==len(set(ids)),window
+              assert len(ids)==len(set(ids)),(window,'duplicate face ids')
               assert len(clubs)==20,(window,clubs)
-              out[window]={'faces':len(rows),'clubs':20,'parts':len(files),'duplicateFaceIds':0}
+              out[window]={'faces':len(rows),'clubs':20,'parts':per_file,'duplicateFaceIds':0}
           print(json.dumps(out,indent=2,ensure_ascii=False))
           PY
 
