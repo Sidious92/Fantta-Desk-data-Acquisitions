@@ -1,0 +1,55 @@
+name: Materialize historical 2023-24 secondary supplement
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/materialize-historical-2023-24-secondary-supplement.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  materialize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      FANTADESK_REPO: Sidious92/FantaDesk
+      FANTADESK_BRANCH: feat/nexus-five-season-transfer-ledgers-v1
+    steps:
+      - uses: actions/checkout@v4
+      - name: Clone private scientific authority
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$TOKEN"
+          git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
+            "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
+      - name: Install acquisition dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+      - name: Build row-faithful challenger and audit
+        working-directory: fantadesk-private
+        run: |
+          set -euo pipefail
+          python scripts/nexus/materialize_historical_2023_24_wikipedia_challenger.py
+          cp data/nexus/transfer-events/v1/historical-2023-24-summer-wikipedia-transfer-challenger-v4.csv data/nexus/transfer-events/v1/historical-2023-24-summer-wikipedia-transfer-challenger-v3.csv
+          cp data/nexus/transfer-events/v1/historical-2023-24-winter-wikipedia-transfer-challenger-v4.csv data/nexus/transfer-events/v1/historical-2023-24-winter-wikipedia-transfer-challenger-v3.csv
+          python scripts/nexus/audit_historical_2023_24_challenger_routes.py
+      - name: Materialize fail-closed secondary supplement
+        working-directory: fantadesk-private
+        run: python scripts/nexus/materialize_historical_2023_24_secondary_supplement.py
+      - name: Stage supplement artifacts
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-summer-secondary-completeness-team-side-ledger-v1.csv out/
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-winter-secondary-completeness-team-side-ledger-v1.csv out/
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-secondary-completeness-supplement-audit-v1.json out/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: historical-2023-24-secondary-completeness-supplement-v1
+          path: out
+          if-no-files-found: error
+          retention-days: 14
