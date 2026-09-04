@@ -1,0 +1,96 @@
+name: Diagnose historical 2023-24 transfer pairing
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/diagnose-historical-2023-24-pairs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      FANTADESK_REPO: Sidious92/FantaDesk
+      FANTADESK_BRANCH: feat/nexus-five-season-transfer-ledgers-v1
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v4
+
+      - name: Clone private scientific authority
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$TOKEN"
+          git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
+            "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
+          git -C fantadesk-private rev-parse HEAD
+
+      - name: Verify incumbent 2023-24 backbone accounting
+        working-directory: fantadesk-private
+        run: |
+          python - <<'PY'
+          import csv,glob,json
+          from collections import Counter
+          out={}
+          for window,expected in [('summer',451),('winter',126)]:
+              files=sorted(glob.glob(f'data/nexus/transfer-events/v1/historical-2023-24-{window}-team-side-ledger-part-*.csv'))
+              rows=[]
+              for f in files:
+                  rows.extend(csv.DictReader(open(f,encoding='utf-8')))
+              ids=[r['faceId'] for r in rows]
+              clubs=sorted({r['serieAClub'] for r in rows})
+              assert len(rows)==expected,(window,len(rows),expected)
+              assert len(ids)==len(set(ids)),window
+              assert len(clubs)==20,(window,clubs)
+              out[window]={'faces':len(rows),'clubs':20,'parts':len(files),'duplicateFaceIds':0}
+          print(json.dumps(out,indent=2,ensure_ascii=False))
+          PY
+
+      - name: Run fail-closed pairing diagnostic
+        working-directory: fantadesk-private
+        run: python scripts/nexus/reconcile_historical_2023_24_internal_pairs.py
+
+      - name: Summarize diagnostic
+        working-directory: fantadesk-private
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('data/nexus/transfer-events/v1/historical-2023-24-internal-pair-reconciliation-audit-v1.json')
+          d=json.loads(p.read_text())
+          summary={
+            'status':d['status'],
+            'windows':{
+              k:{
+                'teamSideFaces':v['teamSideFaces'],
+                'pairedInternalSerieAEvents':v['pairedInternalSerieAEvents'],
+                'derivedUniqueSemanticEventsBeforeCompletenessGate':v['derivedUniqueSemanticEventsBeforeCompletenessGate'],
+                'unresolvedInternalCandidateGroups':len(v['unresolvedInternalCandidateGroups'])
+              } for k,v in d['windows'].items()
+            }
+          }
+          print(json.dumps(summary,indent=2,ensure_ascii=False))
+          PY
+
+      - name: Stage diagnostic evidence
+        if: always()
+        run: |
+          mkdir -p out
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-internal-pair-reconciliation-audit-v1.json out/ || true
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-summer-internal-pair-reconciliation-v1.csv out/ || true
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-winter-internal-pair-reconciliation-v1.csv out/ || true
+
+      - name: Upload diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: historical-2023-24-pair-diagnostic
+          path: out
+          if-no-files-found: error
+          retention-days: 14
