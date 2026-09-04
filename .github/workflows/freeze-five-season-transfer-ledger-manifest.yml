@@ -1,0 +1,89 @@
+name: Freeze five-season transfer ledger manifest
+
+on:
+  push:
+    paths:
+      - '.github/workflows/freeze-five-season-transfer-ledger-manifest.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  FANTADESK_REPO: Sidious92/FantaDesk
+  FANTADESK_BRANCH: feat/nexus-five-season-transfer-ledgers-v1
+
+jobs:
+  freeze:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone private scientific authority
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$TOKEN"
+          git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
+            "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
+
+      - name: Materialize five-season freeze
+        working-directory: fantadesk-private
+        run: |
+          set -euo pipefail
+          python scripts/nexus/materialize_five_season_transfer_ledger_manifest.py | tee ../five-season-freeze.log
+
+      - name: Verify generated freeze accounting
+        working-directory: fantadesk-private
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('data/nexus/transfer-events/v1/five-season-complete-market-ledger-manifest-v1.json')
+          d = json.loads(p.read_text())
+          assert d['status'] == 'CLOSED_CANONICAL_FIVE_SEASON_FREEZE'
+          assert d['targetSeasons'] == ['2022/23','2023/24','2024/25','2025/26','2026/27']
+          assert d['totals']['uniqueSemanticEvents'] == 3456
+          assert d['totals']['seasons'] == 5
+          assert all(d['validation'].values())
+          print(json.dumps({'status':'PASS','totals':d['totals'],'aggregateContentDigestSha256':d['aggregateContentDigestSha256']}))
+          PY
+
+      - name: Stage self-contained canonical freeze artifact
+        run: |
+          set -euo pipefail
+          mkdir -p artifact/data/nexus/transfer-events/v1
+          cp fantadesk-private/data/nexus/transfer-events/v1/five-season-complete-market-ledger-manifest-v1.json artifact/data/nexus/transfer-events/v1/
+          cp fantadesk-private/data/nexus/transfer-events/v1/five-season-complete-market-ledger-shard-index-v1.csv artifact/data/nexus/transfer-events/v1/
+          cp fantadesk-private/data/nexus/transfer-events/v1/five-season-complete-market-ledger-preregistration-v1.json artifact/data/nexus/transfer-events/v1/
+          for f in \
+            historical-2022-23-canonical-unique-event-ledger-status-v1.json \
+            historical-2023-24-canonical-unique-event-ledger-status-v1.json \
+            historical-2024-25-canonical-unique-event-ledger-status-v1.json \
+            historical-2025-26-canonical-unique-event-ledger-status-v1.json \
+            current-post-deadline-unique-event-ledger-status-2026-27-v2.json; do
+            cp "fantadesk-private/data/nexus/transfer-events/v1/$f" artifact/data/nexus/transfer-events/v1/
+          done
+          python - <<'PY'
+          import json, shutil
+          from pathlib import Path
+          src = Path('fantadesk-private')
+          dst = Path('artifact')
+          m = json.loads((src/'data/nexus/transfer-events/v1/five-season-complete-market-ledger-manifest-v1.json').read_text())
+          for season in m['seasons']:
+              for shard in season['canonicalShards']:
+                  p = Path(shard['path'])
+                  out = dst/p
+                  out.parent.mkdir(parents=True, exist_ok=True)
+                  shutil.copy2(src/p, out)
+          PY
+          cp five-season-freeze.log artifact/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: five-season-complete-market-ledger-freeze-v1
+          path: artifact
+          if-no-files-found: error
+          retention-days: 30
