@@ -1,3 +1,4 @@
+# Reproduction trigger for five-season canonical freeze.
 name: Finalize historical 2023-24 ledger
 
 on:
@@ -84,7 +85,7 @@ jobs:
         working-directory: fantadesk-private
         run: |
           python - <<'PY'
-          import json,glob,csv
+          import json
           from pathlib import Path
           D=Path('data/nexus/transfer-events/v1')
           g=json.loads((D/'historical-2023-24-completeness-gate-v1.json').read_text())
@@ -93,6 +94,7 @@ jobs:
           assert s['status']=='CLOSED', s
           faces=s['totals']['teamSideFaces'];pairs=s['totals']['internalSerieAPairs'];events=s['totals']['uniqueSemanticEvents']
           assert events==faces-pairs,(faces,pairs,events)
+          assert events==829,(faces,pairs,events)
           print({'gate':g['status'],'faces':faces,'pairs':pairs,'uniqueEvents':events})
           PY
       - name: Stage canonical closure artifact
