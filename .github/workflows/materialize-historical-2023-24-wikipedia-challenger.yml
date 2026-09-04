@@ -10,7 +10,7 @@ on:
 permissions:
   contents: read
 
-# Runner trigger revision: cited-evidence challenger v2.2
+# Runner trigger revision: citation-id challenger v3
 jobs:
   materialize:
     runs-on: ubuntu-24.04
@@ -39,12 +39,12 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p out
-          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-summer-wikipedia-transfer-challenger-v2.csv out/
-          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-winter-wikipedia-transfer-challenger-v2.csv out/
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-summer-wikipedia-transfer-challenger-v3.csv out/
+          cp fantadesk-private/data/nexus/transfer-events/v1/historical-2023-24-winter-wikipedia-transfer-challenger-v3.csv out/
       - name: Upload challenger
         uses: actions/upload-artifact@v4
         with:
-          name: historical-2023-24-wikipedia-transfer-challenger-v2
+          name: historical-2023-24-wikipedia-transfer-challenger-v3
           path: out
           if-no-files-found: error
           retention-days: 14
