@@ -1,4 +1,4 @@
-name: Audit historical 2023-24 winter youth discovery
+name: Finalize historical 2023-24 ledger
 
 on:
   push:
@@ -11,9 +11,9 @@ permissions:
   contents: read
 
 jobs:
-  audit:
+  finalize:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 25
     env:
       FANTADESK_REPO: Sidious92/FantaDesk
       FANTADESK_BRANCH: feat/nexus-five-season-transfer-ledgers-v1
@@ -27,9 +27,10 @@ jobs:
           test -n "$TOKEN"
           git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
             "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
+          git -C fantadesk-private rev-parse HEAD
       - name: Install acquisition dependencies
         run: python -m pip install --disable-pip-version-check requests beautifulsoup4
-      - name: Build secondary completeness layer
+      - name: Rebuild all reviewed completeness layers
         working-directory: fantadesk-private
         run: |
           set -euo pipefail
@@ -37,30 +38,64 @@ jobs:
           python scripts/nexus/audit_historical_2023_24_challenger_routes.py
           python scripts/nexus/materialize_historical_2023_24_secondary_supplement.py
           python scripts/nexus/audit_historical_2023_24_secondary_overlap.py
-      - name: Materialize reviewed Primavera 1 bulk layer
-        working-directory: fantadesk-private
-        run: python scripts/nexus/materialize_historical_2023_24_winter_primavera_bulk_candidate.py
-      - name: Verify Primavera 1 residual is zero
+          python scripts/nexus/materialize_historical_2023_24_winter_primavera_bulk_candidate.py
+          python scripts/nexus/audit_historical_2023_24_winter_primavera_discovery.py
+          python scripts/nexus/materialize_historical_2023_24_winter_primavera2_three_club_sweep.py
+          python scripts/nexus/audit_historical_2023_24_winter_juventus_official_recap.py
+      - name: Assert all youth/source residuals closed
         working-directory: fantadesk-private
         run: |
-          set -euo pipefail
-          python scripts/nexus/audit_historical_2023_24_winter_primavera_discovery.py
           python - <<'PY'
           import json
           from pathlib import Path
-          p=Path('data/nexus/transfer-events/v1/historical-2023-24-winter-primavera-discovery-audit-v3.json')
-          s=json.loads(p.read_text())
-          assert s['status']=='PASS', s
-          assert s['residualDiscoveryCandidates']==0, s['residualDiscoveryCandidates']
-          print({'primavera1Residual':0,'covered':s['alreadyCoveredFaces'],'disposed':s['resolvedByReviewedDisposition']})
+          D=Path('data/nexus/transfer-events/v1')
+          y=json.loads((D/'historical-2023-24-winter-primavera-discovery-audit-v3.json').read_text())
+          p=json.loads((D/'historical-2023-24-winter-primavera2-three-club-sweep-audit-v1.json').read_text())
+          j=json.loads((D/'historical-2023-24-winter-juventus-official-recap-audit-v2.json').read_text())
+          assert y['status']=='PASS' and y['residualDiscoveryCandidates']==0, y
+          assert p['status']=='MATERIALIZED_REVIEWED' and p['conflicts']==0, p
+          assert j['safeMissingRoutes']==0 and j['conflictReviewRequiredRoutes']==0 and j['coveredRoutes']==j['sourceMoves'], j
+          print({'primavera1Residual':0,'primavera2SweepFaces':p['materializedFaces'],'juventus':f"{j['coveredRoutes']}/{j['sourceMoves']}"})
           PY
-      - name: Materialize Napoli Salernitana Udinese Primavera 2 sweep
+      - name: Full completeness diagnostic
         working-directory: fantadesk-private
-        run: python scripts/nexus/materialize_historical_2023_24_winter_primavera2_three_club_sweep.py
-      - name: Audit Juventus complete official winter recap
+        run: python scripts/nexus/audit_historical_2023_24_completeness.py
+      - name: Final internal Serie A reconciliation
         working-directory: fantadesk-private
-        run: python scripts/nexus/audit_historical_2023_24_winter_juventus_official_recap.py
-      - name: Stage all-youth batch diagnostics
+        run: |
+          set -euo pipefail
+          python scripts/nexus/reconcile_historical_2023_24_internal_pairs.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('data/nexus/transfer-events/v1/historical-2023-24-internal-pair-reconciliation-audit-v1.json').read_text())
+          assert s['status']=='PASS', s
+          assert not s['windows']['summer']['unresolvedInternalCandidateGroups'], s['windows']['summer']
+          assert not s['windows']['winter']['unresolvedInternalCandidateGroups'], s['windows']['winter']
+          print({'status':'PASS','summerPairs':s['windows']['summer']['pairedInternalSerieAEvents'],'winterPairs':s['windows']['winter']['pairedInternalSerieAEvents']})
+          PY
+      - name: Close completeness gate
+        working-directory: fantadesk-private
+        run: python scripts/nexus/close_historical_2023_24_completeness_gate.py
+      - name: Materialize canonical unique-event ledger
+        working-directory: fantadesk-private
+        run: python scripts/nexus/materialize_historical_2023_24_unique_events.py
+      - name: Final accounting assertions
+        working-directory: fantadesk-private
+        run: |
+          python - <<'PY'
+          import json,glob,csv
+          from pathlib import Path
+          D=Path('data/nexus/transfer-events/v1')
+          g=json.loads((D/'historical-2023-24-completeness-gate-v1.json').read_text())
+          s=json.loads((D/'historical-2023-24-canonical-unique-event-ledger-status-v1.json').read_text())
+          assert g['status']=='COMPLETE_FOR_CANONICALIZATION' and g['canonicalizationAllowed'] is True, g
+          assert s['status']=='CLOSED', s
+          faces=s['totals']['teamSideFaces'];pairs=s['totals']['internalSerieAPairs'];events=s['totals']['uniqueSemanticEvents']
+          assert events==faces-pairs,(faces,pairs,events)
+          print({'gate':g['status'],'faces':faces,'pairs':pairs,'uniqueEvents':events})
+          PY
+      - name: Stage canonical closure artifact
         run: |
           set -euo pipefail
           mkdir -p out
@@ -70,10 +105,17 @@ jobs:
           cp "$D"/historical-2023-24-winter-primavera-discovery-audit-v3.json out/
           cp "$D"/historical-2023-24-winter-primavera2-three-club-sweep-team-side-ledger-v1.csv out/
           cp "$D"/historical-2023-24-winter-primavera2-three-club-sweep-audit-v1.json out/
-          cp "$D"/historical-2023-24-winter-juventus-official-recap-audit-v2.json out/
+          cp "$D"/historical-2023-24-completeness-diagnostic-v5.json out/
+          cp "$D"/historical-2023-24-summer-internal-pair-reconciliation-v1.csv out/
+          cp "$D"/historical-2023-24-winter-internal-pair-reconciliation-v1.csv out/
+          cp "$D"/historical-2023-24-internal-pair-reconciliation-audit-v1.json out/
+          cp "$D"/historical-2023-24-completeness-gate-v1.json out/
+          cp "$D"/historical-2023-24-canonical-unique-event-ledger-status-v1.json out/
+          cp "$D"/historical-2023-24-summer-unique-event-ledger-v1-part-*.csv out/
+          cp "$D"/historical-2023-24-winter-unique-event-ledger-v1-part-*.csv out/
       - uses: actions/upload-artifact@v4
         with:
-          name: historical-2023-24-all-youth-batch-validation
+          name: historical-2023-24-canonical-closure
           path: out
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 30
