@@ -10,7 +10,7 @@ on:
 permissions:
   contents: read
 
-# trigger: audited Juventus complete-winter patch candidate
+# trigger: Juventus candidate v2 skips already-covered internal mirrors
 jobs:
   audit:
     runs-on: ubuntu-24.04
@@ -63,7 +63,7 @@ jobs:
           cp "$D"/historical-2023-24-winter-juventus-official-patch-candidate-audit-v1.json out/
       - uses: actions/upload-artifact@v4
         with:
-          name: historical-2023-24-juventus-official-patch-candidate
+          name: historical-2023-24-juventus-official-patch-candidate-v2
           path: out
           if-no-files-found: error
           retention-days: 14
