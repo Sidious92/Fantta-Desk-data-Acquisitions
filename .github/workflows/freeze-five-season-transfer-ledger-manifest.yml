@@ -16,6 +16,7 @@ env:
 jobs:
   freeze:
     runs-on: ubuntu-24.04
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -28,14 +29,59 @@ jobs:
           git clone --quiet --branch "$FANTADESK_BRANCH" --single-branch \
             "https://x-access-token:${TOKEN}@github.com/${FANTADESK_REPO}.git" fantadesk-private
 
-      - name: Reproduce historical canonical shards from closed authorities
+      - name: Install reproduction dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+
+      - name: Reproduce 2022-23 canonical shards
         working-directory: fantadesk-private
         run: |
           set -euo pipefail
           python scripts/nexus/materialize_historical_2022_23_unique_events.py
+
+      - name: Rebuild finalized 2023-24 completeness layers
+        working-directory: fantadesk-private
+        run: |
+          set -euo pipefail
+          python scripts/nexus/materialize_historical_2023_24_wikipedia_challenger.py
+          python scripts/nexus/audit_historical_2023_24_challenger_routes.py
+          python scripts/nexus/materialize_historical_2023_24_secondary_supplement.py
+          python scripts/nexus/audit_historical_2023_24_secondary_overlap.py
+          python scripts/nexus/materialize_historical_2023_24_winter_primavera_bulk_candidate.py
+          python scripts/nexus/audit_historical_2023_24_winter_primavera_discovery.py
+          python scripts/nexus/materialize_historical_2023_24_winter_primavera2_three_club_sweep.py
+          python scripts/nexus/audit_historical_2023_24_winter_juventus_official_recap.py
+          python scripts/nexus/audit_historical_2023_24_completeness.py
+          python scripts/nexus/reconcile_historical_2023_24_internal_pairs.py
+          python scripts/nexus/close_historical_2023_24_completeness_gate.py
           python scripts/nexus/materialize_historical_2023_24_unique_events.py
+
+      - name: Reproduce 2024-25 and 2025-26 canonical shards
+        working-directory: fantadesk-private
+        run: |
+          set -euo pipefail
           python scripts/nexus/materialize_historical_2024_25_unique_events.py
           python scripts/nexus/materialize_historical_2025_26_unique_events.py
+
+      - name: Assert all historical authorities reproduced exactly
+        working-directory: fantadesk-private
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          D=Path('data/nexus/transfer-events/v1')
+          expected={
+              'historical-2022-23-canonical-unique-event-ledger-status-v1.json':667,
+              'historical-2023-24-canonical-unique-event-ledger-status-v1.json':829,
+              'historical-2024-25-canonical-unique-event-ledger-status-v1.json':535,
+              'historical-2025-26-canonical-unique-event-ledger-status-v1.json':885,
+          }
+          for name,n in expected.items():
+              d=json.loads((D/name).read_text())
+              assert d['status']=='CLOSED',(name,d.get('status'))
+              assert d['totals']['uniqueSemanticEvents']==n,(name,d['totals'])
+          print({'status':'PASS','historicalUniqueEvents':sum(expected.values())})
+          PY
 
       - name: Materialize five-season freeze
         working-directory: fantadesk-private
@@ -50,12 +96,12 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
-          p = Path('data/nexus/transfer-events/v1/five-season-complete-market-ledger-manifest-v1.json')
-          d = json.loads(p.read_text())
-          assert d['status'] == 'CLOSED_CANONICAL_FIVE_SEASON_FREEZE'
-          assert d['targetSeasons'] == ['2022/23','2023/24','2024/25','2025/26','2026/27']
-          assert d['totals']['uniqueSemanticEvents'] == 3456
-          assert d['totals']['seasons'] == 5
+          p=Path('data/nexus/transfer-events/v1/five-season-complete-market-ledger-manifest-v1.json')
+          d=json.loads(p.read_text())
+          assert d['status']=='CLOSED_CANONICAL_FIVE_SEASON_FREEZE'
+          assert d['targetSeasons']==['2022/23','2023/24','2024/25','2025/26','2026/27']
+          assert d['totals']['uniqueSemanticEvents']==3456
+          assert d['totals']['seasons']==5
           assert all(d['validation'].values())
           print(json.dumps({'status':'PASS','totals':d['totals'],'aggregateContentDigestSha256':d['aggregateContentDigestSha256']}))
           PY
@@ -76,17 +122,13 @@ jobs:
             cp "fantadesk-private/data/nexus/transfer-events/v1/$f" artifact/data/nexus/transfer-events/v1/
           done
           python - <<'PY'
-          import json, shutil
+          import json,shutil
           from pathlib import Path
-          src = Path('fantadesk-private')
-          dst = Path('artifact')
-          m = json.loads((src/'data/nexus/transfer-events/v1/five-season-complete-market-ledger-manifest-v1.json').read_text())
+          src=Path('fantadesk-private');dst=Path('artifact')
+          m=json.loads((src/'data/nexus/transfer-events/v1/five-season-complete-market-ledger-manifest-v1.json').read_text())
           for season in m['seasons']:
               for shard in season['canonicalShards']:
-                  p = Path(shard['path'])
-                  out = dst/p
-                  out.parent.mkdir(parents=True, exist_ok=True)
-                  shutil.copy2(src/p, out)
+                  p=Path(shard['path']);out=dst/p;out.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(src/p,out)
           PY
           cp five-season-freeze.log artifact/
 
