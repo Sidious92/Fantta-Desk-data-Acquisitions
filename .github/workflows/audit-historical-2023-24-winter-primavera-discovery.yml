@@ -10,7 +10,7 @@ on:
 permissions:
   contents: read
 
-# trigger: Cuni Bayern II alias + Almqvist Rostov route + Popovic free-agent disposition
+# trigger: audited Juventus complete-winter patch candidate
 jobs:
   audit:
     runs-on: ubuntu-24.04
@@ -46,6 +46,9 @@ jobs:
       - name: Audit Juventus complete official winter recap
         working-directory: fantadesk-private
         run: python scripts/nexus/audit_historical_2023_24_winter_juventus_official_recap.py
+      - name: Materialize Juventus reviewed patch candidate
+        working-directory: fantadesk-private
+        run: python scripts/nexus/materialize_historical_2023_24_winter_juventus_official_patch_candidate.py
       - name: Stage diagnostics
         run: |
           set -euo pipefail
@@ -56,9 +59,11 @@ jobs:
           cp "$D"/historical-2023-24-secondary-overlap-audit-v1.json out/
           cp "$D"/historical-2023-24-winter-primavera-discovery-audit-v1.json out/
           cp "$D"/historical-2023-24-winter-juventus-official-recap-audit-v2.json out/
+          cp "$D"/historical-2023-24-winter-juventus-official-patch-candidate-v1.csv out/
+          cp "$D"/historical-2023-24-winter-juventus-official-patch-candidate-audit-v1.json out/
       - uses: actions/upload-artifact@v4
         with:
-          name: historical-2023-24-reviewed-route-disposition-audits
+          name: historical-2023-24-juventus-official-patch-candidate
           path: out
           if-no-files-found: error
           retention-days: 14
