@@ -10,7 +10,7 @@ on:
 permissions:
   contents: read
 
-# trigger: challenger route audit v6 alias/name normalization
+# trigger: challenger route audit v6 mirrored-face collapse fix
 jobs:
   audit:
     runs-on: ubuntu-24.04
