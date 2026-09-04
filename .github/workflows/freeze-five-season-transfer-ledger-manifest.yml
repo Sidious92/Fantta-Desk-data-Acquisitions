@@ -102,7 +102,10 @@ jobs:
           assert d['targetSeasons']==['2022/23','2023/24','2024/25','2025/26','2026/27']
           assert d['totals']['uniqueSemanticEvents']==3456
           assert d['totals']['seasons']==5
-          assert all(d['validation'].values())
+          v=d['validation']
+          for key in ('allFiveAuthoritiesClosed','allReferencedCanonicalShardsPresent','allSeasonShardRowCountsMatchAuthority','all2026_27EmbeddedShardReceiptsMatch','fiveSeasonUniqueEventAccountingMatches'):
+              assert v[key] is True,(key,v[key])
+          assert v['duplicateTargetSeasons']==0,v
           print(json.dumps({'status':'PASS','totals':d['totals'],'aggregateContentDigestSha256':d['aggregateContentDigestSha256']}))
           PY
 
