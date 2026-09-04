@@ -36,6 +36,9 @@ jobs:
           python scripts/nexus/materialize_historical_2023_24_wikipedia_challenger.py
           python scripts/nexus/audit_historical_2023_24_challenger_routes.py
           python scripts/nexus/materialize_historical_2023_24_secondary_supplement.py
+      - name: Audit secondary supplement overlap
+        working-directory: fantadesk-private
+        run: python scripts/nexus/audit_historical_2023_24_secondary_overlap.py
       - name: Audit Primavera discovery residual
         working-directory: fantadesk-private
         run: python scripts/nexus/audit_historical_2023_24_winter_primavera_discovery.py
@@ -47,11 +50,12 @@ jobs:
           set -euo pipefail
           mkdir -p out
           D=fantadesk-private/data/nexus/transfer-events/v1
+          cp "$D"/historical-2023-24-secondary-overlap-audit-v1.json out/
           cp "$D"/historical-2023-24-winter-primavera-discovery-audit-v1.json out/
           cp "$D"/historical-2023-24-winter-juventus-official-recap-audit-v2.json out/
       - uses: actions/upload-artifact@v4
         with:
-          name: historical-2023-24-winter-youth-discovery-audits-v2
+          name: historical-2023-24-winter-youth-and-overlap-audits
           path: out
           if-no-files-found: error
           retention-days: 14
