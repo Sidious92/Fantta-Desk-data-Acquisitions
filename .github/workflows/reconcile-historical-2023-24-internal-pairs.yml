@@ -10,6 +10,7 @@ on:
 permissions:
   contents: read
 
+# trigger: verified route additions 2026-09-04
 jobs:
   reconcile:
     runs-on: ubuntu-24.04
