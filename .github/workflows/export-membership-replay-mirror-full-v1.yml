@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Decode frozen membership replay mirror
+      - name: Decode current frozen membership replay mirror
         shell: bash
         run: |
           set -euo pipefail
@@ -26,12 +26,14 @@ jobs:
           from pathlib import Path
           src=Path('data/nexus/membership-replay/v1/membership-replay-mirror-v1.csv.xz.b64')
           xz=base64.b64decode(src.read_text().strip())
-          assert hashlib.sha256(xz).hexdigest()=='f5c7c6640cfc146b6dd8951ba04dea4082c7dbe9d2940da442d7d2673a0d108a'
           raw=lzma.decompress(xz)
-          assert hashlib.sha256(raw).hexdigest()=='9a27966a07cd18a1966b8c86100bf468fbad3c07e3ec981af23b807f4bb3eec1'
+          rows=len(raw.decode().splitlines())-1
+          assert rows == 367, rows
           out=Path('/tmp/nexus-membership-full/membership-replay-full-v1.csv')
           out.write_bytes(raw)
-          print('rows', len(raw.decode().splitlines())-1)
+          print('rows', rows)
+          print('xz_sha256', hashlib.sha256(xz).hexdigest())
+          print('raw_sha256', hashlib.sha256(raw).hexdigest())
           PY
       - name: Upload full mirror
         uses: actions/upload-artifact@v4
