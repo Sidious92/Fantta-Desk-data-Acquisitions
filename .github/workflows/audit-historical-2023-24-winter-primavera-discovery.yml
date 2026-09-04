@@ -10,7 +10,7 @@ on:
 permissions:
   contents: read
 
-# trigger: Sporting CP alias + Cuni Bayern II reviewed correction
+# trigger: Cuni Bayern II alias + Almqvist Rostov route + Popovic free-agent disposition
 jobs:
   audit:
     runs-on: ubuntu-24.04
