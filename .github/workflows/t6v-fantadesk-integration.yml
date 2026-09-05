@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: 90326682b8c5b761432c7e67e21497a47b9657a1
+          ref: dc4fc4fb27efb81c3ec8900eaba22d2837fcfd72
           token: ${{ secrets.FANTADESK_READ_TOKEN || github.token }}
           persist-credentials: false
           fetch-depth: 1
@@ -28,7 +28,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "90326682b8c5b761432c7e67e21497a47b9657a1"
+          test "$(git rev-parse HEAD)" = "dc4fc4fb27efb81c3ec8900eaba22d2837fcfd72"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -37,6 +37,16 @@ jobs:
 
       - name: Install dependencies (npm Arborist compatibility)
         run: npm install --legacy-peer-deps --no-audit --no-fund
+
+      - name: Verify T6 source snapshot baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE=public/nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64
+          test -f "$FILE"
+          test "$(wc -c < "$FILE" | tr -d ' ')" = "42961"
+          test "$(sha256sum "$FILE" | awk '{print $1}')" = "ec352a82131258d8d53f17453acbb0beb3a749832dce5ccd58870c461d3c0d7c"
+          test "$(head -c 4 "$FILE")" = "H4sI"
 
       - name: Global typecheck
         run: npm run typecheck
@@ -49,15 +59,6 @@ jobs:
 
       - name: Production build
         run: npm run build
-
-      - name: Verify T6 source snapshot baseline
-        shell: bash
-        run: |
-          set -euo pipefail
-          FILE=public/nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64
-          test -f "$FILE"
-          test "$(wc -c < "$FILE" | tr -d ' ')" = "42961"
-          test "$(sha256sum "$FILE" | awk '{print $1}')" = "ec352a82131258d8d53f17453acbb0beb3a749832dce5ccd58870c461d3c0d7c"
 
       - name: Verify production artifact and PWA precache
         shell: bash
