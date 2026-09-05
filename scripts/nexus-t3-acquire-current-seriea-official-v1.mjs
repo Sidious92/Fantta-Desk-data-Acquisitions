@@ -20,6 +20,7 @@ async function getJson(url) {
   return await r.json();
 }
 
+// Official completed match evidence.
 const matchesUrl = `${BASE}/seasons/${encodeURIComponent(SEASON_ID)}/matches?locale=en-GB`;
 const matchesPayload = await getJson(matchesUrl);
 const allMatches = Array.isArray(matchesPayload?.matches) ? matchesPayload.matches : [];
@@ -49,6 +50,53 @@ const lineupsText = rows.map(r=>JSON.stringify(r)).join('\n') + (rows.length?'\n
 const lineupsBytes = Buffer.from(lineupsText);
 fs.writeFileSync(path.join(OUT,'lineups.ndjson'), lineupsBytes);
 
+// Identity-only projection. The provider response contains performance stats, but T3 is forbidden
+// from acquiring/persisting productive statistics: metrics are discarded in memory and never written.
+const identityRows = [];
+let identityPage = 1;
+let identityPagesRead = 0;
+for (;;) {
+  const url = `${BASE}/seasons/${encodeURIComponent(SEASON_ID)}/stats/players?category=General&page=${identityPage}&locale=en-GB`;
+  const payload = await getJson(url);
+  identityPagesRead += 1;
+  const players = Array.isArray(payload?.players) ? payload.players
+    : Array.isArray(payload?.items) ? payload.items
+    : Array.isArray(payload?.results) ? payload.results
+    : [];
+  for (const p of players) {
+    const t = p.team || {};
+    identityRows.push({
+      playerId:p.playerId ?? null,
+      providerId:p.providerId ?? null,
+      displayName:p.displayName ?? null,
+      mediaFirstName:p.mediaFirstName ?? null,
+      mediaLastName:p.mediaLastName ?? null,
+      shortName:p.shortName ?? null,
+      shirtName:p.shirtName ?? null,
+      role:p.role ?? null,
+      roleLabel:p.roleLabel ?? null,
+      team:{teamId:t.teamId ?? null,providerId:t.providerId ?? null,shortName:t.shortName ?? null,officialName:t.officialName ?? null}
+    });
+  }
+  const pg = payload?.pagination || {};
+  const totalPages = Number(pg.totalPages || 0);
+  const isLast = pg.isLastPage === true || (totalPages > 0 && identityPage >= totalPages);
+  if (isLast) break;
+  if (!players.length && totalPages === 0) throw new Error(`Identity endpoint shape unsupported at page ${identityPage}; no identity rows and no pagination.`);
+  identityPage += 1;
+  if (identityPage > 100) throw new Error('Identity pagination exceeded safety bound 100 pages.');
+}
+identityRows.sort((a,b)=>String(a.team?.teamId).localeCompare(String(b.team?.teamId)) || String(a.playerId).localeCompare(String(b.playerId)));
+const identityDoc = {
+  schemaVersion:'nexus.t3.current-seriea-official-identity-projection.v1',
+  source:SOURCE,capturedAt,seasonId:SEASON_ID,season:SEASON,
+  endpoint:`${BASE}/seasons/{seasonId}/stats/players?category=General&page={N}&locale=en-GB`,
+  projectionOnly:true,productiveStatsPersisted:false,productiveStatsUsed:false,
+  pagesRead:identityPagesRead,rows:identityRows
+};
+const identityBytes=Buffer.from(stableJson(identityDoc));
+fs.writeFileSync(path.join(OUT,'player-identity.json'),identityBytes);
+
 const manifest = {
   schemaVersion:'nexus.t3.current-seriea-official-acquisition.v1',
   status: failures.length === 0 ? 'ACQUIRED_ALL_COMPLETED_MATCHES_BY_CUTOFF' : 'PARTIAL_FAIL_CLOSED',
@@ -62,9 +110,14 @@ const manifest = {
   completedMatchesByCutoff:completed.length,
   lineupPayloadsAcquired:rows.length,
   lineupFailures:failures,
+  identityProjectionRows:identityRows.length,
+  identityPagesRead,
+  productiveStatsPersisted:false,
+  productiveStatsUsed:false,
   files:{
     'matches.json':{bytes:matchesBytes.length,sha256:sha256(matchesBytes)},
-    'lineups.ndjson':{bytes:lineupsBytes.length,sha256:sha256(lineupsBytes)}
+    'lineups.ndjson':{bytes:lineupsBytes.length,sha256:sha256(lineupsBytes)},
+    'player-identity.json':{bytes:identityBytes.length,sha256:sha256(identityBytes)}
   },
   acquisitionOnly:true,
   absenceOfRowNeverMeansDnp:true,
