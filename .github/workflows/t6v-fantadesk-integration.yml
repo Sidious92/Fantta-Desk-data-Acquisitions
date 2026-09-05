@@ -1,0 +1,79 @@
+name: T6V FantaDesk Integration Verification
+
+on:
+  push:
+    branches:
+      - chore/t6v-public-runner
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout private FantaDesk T6V head
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: d387a2ec5e2a5220821d9841b430d4caea42658f
+          token: ${{ secrets.FANTADESK_READ_TOKEN || github.token }}
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Verify exact private commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "d387a2ec5e2a5220821d9841b430d4caea42658f"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Global typecheck
+        run: npm run typecheck
+
+      - name: Global tests
+        run: npm run test:run
+
+      - name: T6-owned runtime tests
+        run: npx vitest run src/features/nexus/titolarita/titolaritaRuntimeRepository.test.ts
+
+      - name: Production build
+        run: npm run build
+
+      - name: Verify T6 source snapshot baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE=public/nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64
+          test -f "$FILE"
+          test "$(wc -c < "$FILE" | tr -d ' ')" = "42961"
+          test "$(sha256sum "$FILE" | awk '{print $1}')" = "ec352a82131258d8d53f17453acbb0beb3a749832dce5ccd58870c461d3c0d7c"
+
+      - name: Verify production artifact and PWA precache
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE=dist/nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64
+          test -f "$FILE"
+          test "$(wc -c < "$FILE" | tr -d ' ')" = "42961"
+          test "$(sha256sum "$FILE" | awk '{print $1}')" = "ec352a82131258d8d53f17453acbb0beb3a749832dce5ccd58870c461d3c0d7c"
+          grep -R -F 'nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64' dist/sw.js dist/workbox-*.js >/dev/null
+
+      - name: Audit browser/runtime boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! grep -R -E 'drive\.google\.com|googleapis\.com/drive|Authorization: Bearer|FANTADESK_READ_TOKEN' dist --exclude='*.map'
+          test ! -e dist/data/nexus/research-v3/titolarita-mvp/t5/T5_TITOLARITA_OPERATIONAL_SURFACE_V1.json
+          du -sh dist
+          find dist -type f -printf '%s %p\n' | sort -nr | head -20
