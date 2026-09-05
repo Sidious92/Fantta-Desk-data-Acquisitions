@@ -1,9 +1,12 @@
 name: T6V FantaDesk Integration Verification
 
+# Verification harness for private FantaDesk T6V; no private source is persisted here.
 on:
-  push:
+  pull_request:
     branches:
-      - chore/t6v-public-runner
+      - main
+    paths:
+      - '.github/workflows/t6v-fantadesk-integration.yml'
   workflow_dispatch:
 
 permissions:
