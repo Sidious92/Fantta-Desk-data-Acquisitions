@@ -1,0 +1,39 @@
+name: Nexus T3 current Serie A official evidence v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/nexus-t3-acquire-current-seriea-official-v1.mjs'
+      - '.github/workflows/nexus-t3-current-seriea-official-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Acquire official completed Serie A matches and lineups
+        run: node scripts/nexus-t3-acquire-current-seriea-official-v1.mjs
+      - name: Pack artifact
+        if: always()
+        run: |
+          tar -czf nexus-t3-current-seriea-official-v1.tar.gz -C out nexus-t3-current-seriea-official-v1
+          sha256sum nexus-t3-current-seriea-official-v1.tar.gz > nexus-t3-current-seriea-official-v1.tar.gz.sha256
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-t3-current-seriea-official-v1
+          path: |
+            nexus-t3-current-seriea-official-v1.tar.gz
+            nexus-t3-current-seriea-official-v1.tar.gz.sha256
+          if-no-files-found: error
+          retention-days: 30
