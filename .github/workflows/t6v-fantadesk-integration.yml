@@ -2,11 +2,9 @@ name: T6V FantaDesk Integration Verification
 
 # Verification harness for private FantaDesk T6V; no private source is persisted here.
 on:
-  pull_request:
+  push:
     branches:
-      - main
-    paths:
-      - '.github/workflows/t6v-fantadesk-integration.yml'
+      - chore/t6v-public-runner
   workflow_dispatch:
 
 permissions:
@@ -36,10 +34,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          package-manager-cache: false
 
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
+      - name: Install dependencies (npm Arborist compatibility)
+        run: npm install --legacy-peer-deps --no-audit --no-fund
 
       - name: Global typecheck
         run: npm run typecheck
