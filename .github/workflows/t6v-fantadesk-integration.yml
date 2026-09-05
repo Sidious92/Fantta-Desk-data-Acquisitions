@@ -44,6 +44,10 @@ jobs:
           set -euo pipefail
           FILE=public/nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64
           test -f "$FILE"
+          echo "BYTES=$(wc -c < "$FILE" | tr -d ' ')"
+          echo "SHA256=$(sha256sum "$FILE" | awk '{print $1}')"
+          echo "PREFIX_TEXT=$(head -c 8 "$FILE")"
+          printf 'PREFIX_HEX='; od -An -tx1 -N8 "$FILE" | tr -d ' \n'; echo
           test "$(wc -c < "$FILE" | tr -d ' ')" = "42961"
           test "$(sha256sum "$FILE" | awk '{print $1}')" = "ec352a82131258d8d53f17453acbb0beb3a749832dce5ccd58870c461d3c0d7c"
           test "$(head -c 4 "$FILE")" = "H4sI"
