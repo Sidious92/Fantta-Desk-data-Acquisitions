@@ -1,6 +1,6 @@
 name: T6V FantaDesk Integration Verification
 
-# Verification harness for private FantaDesk T6V; no private source is persisted here.
+# Read-only verification harness for private FantaDesk T6V; no private source is persisted here.
 on:
   push:
     branches:
@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: d76e30a5a8698bf0889baaddba3391890e51cbed
+          ref: da11f251508d9bfde5d2604723aa8480efcd7f06
           token: ${{ secrets.FANTADESK_READ_TOKEN || github.token }}
           persist-credentials: false
           fetch-depth: 1
@@ -28,7 +28,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "d76e30a5a8698bf0889baaddba3391890e51cbed"
+          test "$(git rev-parse HEAD)" = "da11f251508d9bfde5d2604723aa8480efcd7f06"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -38,22 +38,24 @@ jobs:
       - name: Install dependencies (npm Arborist compatibility)
         run: npm install --legacy-peer-deps --no-audit --no-fund
 
-      - name: Reconstruct canonical T6 runtime snapshot
+      - name: Verify committed multipart T6 snapshot
         shell: bash
         run: |
           set -euo pipefail
-          FILE=public/nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64
-          P1=tmp/t6v-runtime-prefix-1.txt
-          P2=tmp/t6v-runtime-prefix-2.txt
-          test "$(wc -c < "$FILE" | tr -d ' ')" = "19999"
-          test "$(sha256sum "$FILE" | awk '{print $1}')" = "79ff8d70498470cc026013011752033cfd3147b6c05cf545173a1ef8ac3a1103"
-          test "$(wc -c < "$P1" | tr -d ' ')" = "15000"
-          test "$(wc -c < "$P2" | tr -d ' ')" = "7962"
-          cat "$P1" "$P2" "$FILE" > "$FILE.repaired"
-          mv "$FILE.repaired" "$FILE"
-          test "$(wc -c < "$FILE" | tr -d ' ')" = "42961"
-          test "$(sha256sum "$FILE" | awk '{print $1}')" = "ec352a82131258d8d53f17453acbb0beb3a749832dce5ccd58870c461d3c0d7c"
-          test "$(head -c 4 "$FILE")" = "H4sI"
+          BASE=public/nexus/runtime/nexus-titolarita-runtime-2026-27-v1
+          test ! -e "$BASE.json.gz.b64"
+          test "$(wc -c < "$BASE.part-000.b64" | tr -d ' ')" = "11481"
+          test "$(wc -c < "$BASE.part-001.b64" | tr -d ' ')" = "11481"
+          test "$(wc -c < "$BASE.part-002.b64" | tr -d ' ')" = "19999"
+          test "$(sha256sum "$BASE.part-000.b64" | awk '{print $1}')" = "55537ebda6e80715a98ac373b62d898aca2c10f6576e1a9f16d64aa772b96bc1"
+          test "$(sha256sum "$BASE.part-001.b64" | awk '{print $1}')" = "e028ce43153574fa8e50e25c47a758132bd850687fb9a550e0da926115038ac8"
+          test "$(sha256sum "$BASE.part-002.b64" | awk '{print $1}')" = "79ff8d70498470cc026013011752033cfd3147b6c05cf545173a1ef8ac3a1103"
+          cat "$BASE.part-000.b64" "$BASE.part-001.b64" "$BASE.part-002.b64" > /tmp/t6-runtime.b64
+          test "$(wc -c < /tmp/t6-runtime.b64 | tr -d ' ')" = "42961"
+          test "$(sha256sum /tmp/t6-runtime.b64 | awk '{print $1}')" = "ec352a82131258d8d53f17453acbb0beb3a749832dce5ccd58870c461d3c0d7c"
+          test "$(head -c 4 /tmp/t6-runtime.b64)" = "H4sI"
+          test ! -e tmp/t6v-runtime-prefix-1.txt
+          test ! -e tmp/t6v-runtime-prefix-2.txt
 
       - name: Global typecheck
         run: npm run typecheck
@@ -67,15 +69,18 @@ jobs:
       - name: Production build
         run: npm run build
 
-      - name: Verify production artifact and PWA precache
+      - name: Verify production multipart artifact and PWA precache
         shell: bash
         run: |
           set -euo pipefail
-          FILE=dist/nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64
-          test -f "$FILE"
-          test "$(wc -c < "$FILE" | tr -d ' ')" = "42961"
-          test "$(sha256sum "$FILE" | awk '{print $1}')" = "ec352a82131258d8d53f17453acbb0beb3a749832dce5ccd58870c461d3c0d7c"
-          grep -R -F 'nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64' dist/sw.js dist/workbox-*.js >/dev/null
+          BASE=dist/nexus/runtime/nexus-titolarita-runtime-2026-27-v1
+          test ! -e "$BASE.json.gz.b64"
+          cat "$BASE.part-000.b64" "$BASE.part-001.b64" "$BASE.part-002.b64" > /tmp/t6-dist-runtime.b64
+          test "$(wc -c < /tmp/t6-dist-runtime.b64 | tr -d ' ')" = "42961"
+          test "$(sha256sum /tmp/t6-dist-runtime.b64 | awk '{print $1}')" = "ec352a82131258d8d53f17453acbb0beb3a749832dce5ccd58870c461d3c0d7c"
+          for part in 000 001 002; do
+            grep -R -F "nexus/runtime/nexus-titolarita-runtime-2026-27-v1.part-${part}.b64" dist/sw.js dist/workbox-*.js >/dev/null
+          done
 
       - name: Audit browser/runtime boundary
         shell: bash
@@ -84,19 +89,3 @@ jobs:
           ! grep -R -E 'drive\.google\.com|googleapis\.com/drive|Authorization: Bearer|FANTADESK_READ_TOKEN' dist --exclude='*.map'
           test ! -e dist/data/nexus/research-v3/titolarita-mvp/t5/T5_TITOLARITA_OPERATIONAL_SURFACE_V1.json
           du -sh dist
-
-      - name: Commit canonical snapshot back to private T6 branch
-        shell: bash
-        env:
-          FANTADESK_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
-        run: |
-          set -euo pipefail
-          test -n "${FANTADESK_TOKEN:-}"
-          git config user.name 'FantaNexus CI'
-          git config user.email 'actions@users.noreply.github.com'
-          git rm tmp/t6v-runtime-prefix-1.txt
-          git rm tmp/t6v-runtime-prefix-2.txt
-          git add public/nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64
-          git commit -m 'fix(titolarita): restore canonical runtime snapshot'
-          git remote set-url origin "https://x-access-token:${FANTADESK_TOKEN}@github.com/Sidious92/FantaDesk.git"
-          git push origin HEAD:feat/nexus-titolarita-mvp-t6-runtime-integration-v1
