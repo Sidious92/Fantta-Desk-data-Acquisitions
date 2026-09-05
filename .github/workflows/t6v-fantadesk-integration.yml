@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: dc4fc4fb27efb81c3ec8900eaba22d2837fcfd72
+          ref: 00221c69cfce665a773a21c2a8e6c4fe7a697906
           token: ${{ secrets.FANTADESK_READ_TOKEN || github.token }}
           persist-credentials: false
           fetch-depth: 1
@@ -28,7 +28,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "dc4fc4fb27efb81c3ec8900eaba22d2837fcfd72"
+          test "$(git rev-parse HEAD)" = "00221c69cfce665a773a21c2a8e6c4fe7a697906"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -38,16 +38,19 @@ jobs:
       - name: Install dependencies (npm Arborist compatibility)
         run: npm install --legacy-peer-deps --no-audit --no-fund
 
-      - name: Verify T6 source snapshot baseline
+      - name: Reconstruct canonical T6 runtime snapshot
         shell: bash
         run: |
           set -euo pipefail
           FILE=public/nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64
-          test -f "$FILE"
-          echo "BYTES=$(wc -c < "$FILE" | tr -d ' ')"
-          echo "SHA256=$(sha256sum "$FILE" | awk '{print $1}')"
-          echo "PREFIX_TEXT=$(head -c 8 "$FILE")"
-          printf 'PREFIX_HEX='; od -An -tx1 -N8 "$FILE" | tr -d ' \n'; echo
+          P0=data/nexus/research-v3/titolarita-mvp/t6v/_runtime_repair_prefix_0.b64part
+          P1=data/nexus/research-v3/titolarita-mvp/t6v/_runtime_repair_prefix_1.b64part
+          test "$(wc -c < "$FILE" | tr -d ' ')" = "19999"
+          test "$(sha256sum "$FILE" | awk '{print $1}')" = "79ff8d70498470cc026013011752033cfd3147b6c05cf545173a1ef8ac3a1103"
+          test "$(wc -c < "$P0" | tr -d ' ')" = "11481"
+          test "$(wc -c < "$P1" | tr -d ' ')" = "11481"
+          cat "$P0" "$P1" "$FILE" > "$FILE.repaired"
+          mv "$FILE.repaired" "$FILE"
           test "$(wc -c < "$FILE" | tr -d ' ')" = "42961"
           test "$(sha256sum "$FILE" | awk '{print $1}')" = "ec352a82131258d8d53f17453acbb0beb3a749832dce5ccd58870c461d3c0d7c"
           test "$(head -c 4 "$FILE")" = "H4sI"
@@ -81,4 +84,19 @@ jobs:
           ! grep -R -E 'drive\.google\.com|googleapis\.com/drive|Authorization: Bearer|FANTADESK_READ_TOKEN' dist --exclude='*.map'
           test ! -e dist/data/nexus/research-v3/titolarita-mvp/t5/T5_TITOLARITA_OPERATIONAL_SURFACE_V1.json
           du -sh dist
-          find dist -type f -printf '%s %p\n' | sort -nr | head -20
+
+      - name: Commit canonical snapshot back to private T6 branch
+        shell: bash
+        env:
+          FANTADESK_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "${FANTADESK_TOKEN:-}"
+          git config user.name 'FantaNexus CI'
+          git config user.email 'actions@users.noreply.github.com'
+          git rm data/nexus/research-v3/titolarita-mvp/t6v/_runtime_repair_prefix_0.b64part
+          git rm data/nexus/research-v3/titolarita-mvp/t6v/_runtime_repair_prefix_1.b64part
+          git add public/nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64
+          git commit -m 'fix(titolarita): restore canonical runtime snapshot'
+          git remote set-url origin "https://x-access-token:${FANTADESK_TOKEN}@github.com/Sidious92/FantaDesk.git"
+          git push origin HEAD:feat/nexus-titolarita-mvp-t6-runtime-integration-v1
