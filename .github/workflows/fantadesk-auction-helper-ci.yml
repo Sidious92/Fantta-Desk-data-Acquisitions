@@ -6,7 +6,7 @@ on:
       ref:
         description: Exact private FantaDesk commit to verify
         required: false
-        default: 84e9e0f03d0f7e8689afd28b03951b669f8ce23f
+        default: 3ef107574ac60731a8398a0cf7d0c3e417e7e58d
   push:
     branches: [main]
     paths:
@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || '84e9e0f03d0f7e8689afd28b03951b669f8ce23f' }}
+      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || '3ef107574ac60731a8398a0cf7d0c3e417e7e58d' }}
     steps:
       - name: Checkout private FantaDesk ephemerally
         uses: actions/checkout@v6
