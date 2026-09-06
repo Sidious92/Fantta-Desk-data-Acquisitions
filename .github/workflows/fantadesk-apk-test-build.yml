@@ -6,7 +6,7 @@ on:
       ref:
         description: Exact FantaDesk branch, tag or commit to package
         required: false
-        default: 44f7a952226df985609ba66ffc205023c27181b1
+        default: 044f7033cced9e363c6bbd9f43076d670248beef
   push:
     branches: [main]
     paths:
@@ -20,11 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 55
     env:
-      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || '44f7a952226df985609ba66ffc205023c27181b1' }}
+      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || '044f7033cced9e363c6bbd9f43076d670248beef' }}
       CAPACITOR_VERSION: 8.5.0
       APP_ID: com.fantadesk.app
-      APP_VERSION_NAME: 0.9.0-auction-setup-uat
-      APP_VERSION_CODE: 26090601
+      APP_VERSION_NAME: 0.9.0-auction-setup-v2-uat
+      APP_VERSION_CODE: 26090602
     steps:
       - name: Checkout private FantaDesk ephemerally
         uses: actions/checkout@v6
