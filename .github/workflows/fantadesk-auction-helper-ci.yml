@@ -46,7 +46,11 @@ jobs:
           package-manager-cache: false
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm cache clean --force
+          npm install --legacy-peer-deps --no-audit --no-fund
 
       - name: Typecheck
         run: npm run typecheck
