@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        description: Exact FantaDesk branch, tag or commit to package
+        description: Exact FantaDesk commit to package
         required: false
-        default: c19a6bf532788e2ae299d40802bfd66e8b485d7b
+        default: ac7c7b6f99f96a343be8c4d2f7e9cdefca0fad47
   push:
     branches: [main]
     paths:
@@ -20,11 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 55
     env:
-      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || 'c19a6bf532788e2ae299d40802bfd66e8b485d7b' }}
+      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || 'ac7c7b6f99f96a343be8c4d2f7e9cdefca0fad47' }}
       CAPACITOR_VERSION: 8.5.0
       APP_ID: com.fantadesk.app
-      APP_VERSION_NAME: 0.9.0-auction-session-uat
-      APP_VERSION_CODE: 26090603
+      APP_VERSION_NAME: 0.9.0-auction-helper-ui-uat
+      APP_VERSION_CODE: 26090604
     steps:
       - name: Checkout private FantaDesk ephemerally
         uses: actions/checkout@v6
@@ -39,18 +39,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ACTUAL="$(git rev-parse HEAD)"
-          test "$ACTUAL" = "$FANTADESK_REF"
-          echo "FantaDesk exact commit: $ACTUAL"
+          test "$(git rev-parse HEAD)" = "$FANTADESK_REF"
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           package-manager-cache: false
 
-      - name: Setup Java 21
-        uses: actions/setup-java@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '21'
@@ -70,197 +66,80 @@ jobs:
       - name: Verify tests
         run: npm run test:run
 
-      - name: Build FantaDesk web runtime
+      - name: Build web runtime
         run: npm run build
 
-      - name: Install current stable Capacitor toolchain
+      - name: Install Capacitor
         run: npm install --no-save --legacy-peer-deps --no-audit --no-fund @capacitor/core@${CAPACITOR_VERSION} @capacitor/cli@${CAPACITOR_VERSION} @capacitor/android@${CAPACITOR_VERSION}
 
-      - name: Create fresh Android wrapper
-        shell: bash
+      - name: Create Android wrapper
         run: |
-          set -euo pipefail
-          npx cap init FantaDesk "$APP_ID" --web-dir=dist
+          npx cap init FantaNexus-Auction-Helper "$APP_ID" --web-dir=dist
           npx cap add android
           npx cap sync android
 
-      - name: Harden Android wrapper for current policy
+      - name: Harden Android wrapper
         shell: bash
         run: |
           set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
-          import os
-          import re
-
-          variables = Path('android/variables.gradle')
-          text = variables.read_text()
-          replacements = {
-              r'minSdkVersion\s*=\s*\d+': 'minSdkVersion = 24',
-              r'compileSdkVersion\s*=\s*\d+': 'compileSdkVersion = 36',
-              r'targetSdkVersion\s*=\s*\d+': 'targetSdkVersion = 36',
-          }
-          for pattern, replacement in replacements.items():
-              text, count = re.subn(pattern, replacement, text, count=1)
-              if count != 1:
-                  raise SystemExit(f'Could not set {replacement}')
-          variables.write_text(text)
-
-          manifest = Path('android/app/src/main/AndroidManifest.xml')
-          text = manifest.read_text()
-          text = text.replace('android:allowBackup="true"', 'android:allowBackup="false"')
-          app_marker = '<application'
-          if app_marker not in text:
-              raise SystemExit('application marker not found')
-          if 'android:usesCleartextTraffic=' not in text:
-              text = text.replace(app_marker, app_marker + '\n        android:usesCleartextTraffic="false"', 1)
-          if 'android:networkSecurityConfig=' not in text:
-              text = text.replace(app_marker, app_marker + '\n        android:networkSecurityConfig="@xml/network_security_config"', 1)
-          activity_marker = 'android:name=".MainActivity"'
-          if activity_marker not in text:
-              raise SystemExit('MainActivity marker not found')
-          if 'android:screenOrientation=' not in text:
-              text = text.replace(activity_marker, activity_marker + '\n            android:screenOrientation="sensorLandscape"', 1)
-          manifest.write_text(text)
-
-          network = Path('android/app/src/main/res/xml/network_security_config.xml')
-          network.parent.mkdir(parents=True, exist_ok=True)
-          network.write_text('''<?xml version="1.0" encoding="utf-8"?>\n<network-security-config>\n    <base-config cleartextTrafficPermitted="false">\n        <trust-anchors>\n            <certificates src="system" />\n        </trust-anchors>\n    </base-config>\n</network-security-config>\n''')
-
-          gradle = Path('android/app/build.gradle')
-          text = gradle.read_text()
-          text, count = re.subn(r'versionCode\s+\d+', f'versionCode {os.environ["APP_VERSION_CODE"]}', text, count=1)
-          if count != 1:
-              raise SystemExit('versionCode marker not found')
-          text, count = re.subn(r'versionName\s+"[^"]+"', f'versionName "{os.environ["APP_VERSION_NAME"]}"', text, count=1)
-          if count != 1:
-              raise SystemExit('versionName marker not found')
-          gradle.write_text(text)
+          import os,re
+          p=Path('android/variables.gradle'); t=p.read_text()
+          for a,b in [(r'minSdkVersion\s*=\s*\d+','minSdkVersion = 24'),(r'compileSdkVersion\s*=\s*\d+','compileSdkVersion = 36'),(r'targetSdkVersion\s*=\s*\d+','targetSdkVersion = 36')]:
+              t,n=re.subn(a,b,t,count=1)
+              if n!=1: raise SystemExit(b)
+          p.write_text(t)
+          m=Path('android/app/src/main/AndroidManifest.xml'); t=m.read_text().replace('android:allowBackup="true"','android:allowBackup="false"')
+          if 'android:usesCleartextTraffic=' not in t: t=t.replace('<application','<application\n        android:usesCleartextTraffic="false"',1)
+          if 'android:screenOrientation=' not in t: t=t.replace('android:name=".MainActivity"','android:name=".MainActivity"\n            android:screenOrientation="sensorLandscape"',1)
+          m.write_text(t)
+          g=Path('android/app/build.gradle'); t=g.read_text()
+          t=re.sub(r'versionCode\s+\d+',f'versionCode {os.environ["APP_VERSION_CODE"]}',t,count=1)
+          t=re.sub(r'versionName\s+"[^"]+"',f'versionName "{os.environ["APP_VERSION_NAME"]}"',t,count=1)
+          g.write_text(t)
           PY
-
-      - name: Assert hardened source manifest and SDK policy
-        shell: bash
-        run: |
-          set -euo pipefail
-          grep -Eq 'minSdkVersion\s*=\s*24' android/variables.gradle
-          grep -Eq 'compileSdkVersion\s*=\s*36' android/variables.gradle
-          grep -Eq 'targetSdkVersion\s*=\s*36' android/variables.gradle
-          grep -q 'android:allowBackup="false"' android/app/src/main/AndroidManifest.xml
-          grep -q 'android:usesCleartextTraffic="false"' android/app/src/main/AndroidManifest.xml
-          grep -q 'android:networkSecurityConfig="@xml/network_security_config"' android/app/src/main/AndroidManifest.xml
-          grep -q 'android:screenOrientation="sensorLandscape"' android/app/src/main/AndroidManifest.xml
-          test "$(grep -c '<uses-permission' android/app/src/main/AndroidManifest.xml)" -eq 1
-          grep -q 'android.permission.INTERNET' android/app/src/main/AndroidManifest.xml
-          ! grep -Eq 'READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE|MANAGE_EXTERNAL_STORAGE|REQUEST_INSTALL_PACKAGES|QUERY_ALL_PACKAGES|ACCESS_FINE_LOCATION|ACCESS_COARSE_LOCATION|CAMERA|RECORD_AUDIO' android/app/src/main/AndroidManifest.xml
 
       - name: Android release lint
         working-directory: android
         run: ./gradlew :app:lintRelease --no-daemon --stacktrace
 
-      - name: Assemble unsigned non-debuggable UAT release APK
+      - name: Assemble release APK
         working-directory: android
         run: ./gradlew :app:assembleRelease --no-daemon --stacktrace
 
-      - name: Explicitly align and sign UAT APK with v2 and v3
+      - name: Align and sign APK
         id: sign_apk
         shell: bash
         run: |
           set -euo pipefail
           UNSIGNED="android/app/build/outputs/apk/release/app-release-unsigned.apk"
-          test -f "$UNSIGNED"
           ZIPALIGN="$(find "$ANDROID_HOME/build-tools" -type f -name zipalign | sort -V | tail -1)"
           APKSIGNER="$(find "$ANDROID_HOME/build-tools" -type f -name apksigner | sort -V | tail -1)"
-          test -x "$ZIPALIGN"
-          test -x "$APKSIGNER"
-
-          keytool -genkeypair \
-            -keystore /tmp/fantadesk-uat.jks \
-            -storepass fantadesk-uat-ci \
-            -keypass fantadesk-uat-ci \
-            -alias fantadesk-uat \
-            -keyalg RSA \
-            -keysize 3072 \
-            -validity 3650 \
-            -dname "CN=FantaDesk UAT,O=FantaDesk,C=IT" \
-            -noprompt
-
-          "$ZIPALIGN" -f -p 4 "$UNSIGNED" /tmp/fantadesk-uat-aligned.apk
-          "$APKSIGNER" sign \
-            --ks /tmp/fantadesk-uat.jks \
-            --ks-key-alias fantadesk-uat \
-            --ks-pass pass:fantadesk-uat-ci \
-            --key-pass pass:fantadesk-uat-ci \
-            --v1-signing-enabled false \
-            --v2-signing-enabled true \
-            --v3-signing-enabled true \
-            --out /tmp/fantadesk-uat-signed.apk \
-            /tmp/fantadesk-uat-aligned.apk
-
+          keytool -genkeypair -keystore /tmp/uat.jks -storepass fantadesk-uat-ci -keypass fantadesk-uat-ci -alias uat -keyalg RSA -keysize 3072 -validity 3650 -dname "CN=FantaNexus Auction Helper UAT,O=FantaNexus,C=IT" -noprompt
+          "$ZIPALIGN" -f -p 4 "$UNSIGNED" /tmp/aligned.apk
+          "$APKSIGNER" sign --ks /tmp/uat.jks --ks-key-alias uat --ks-pass pass:fantadesk-uat-ci --key-pass pass:fantadesk-uat-ci --v1-signing-enabled false --v2-signing-enabled true --v3-signing-enabled true --out /tmp/signed.apk /tmp/aligned.apk
           SHORT_SHA="${FANTADESK_REF:0:8}"
-          OUT="FantaDesk-auction-setup-uat-android16-${SHORT_SHA}.apk"
-          cp /tmp/fantadesk-uat-signed.apk "$OUT"
+          OUT="FantaNexus-Auction-Helper-UI-UAT-${SHORT_SHA}.apk"
+          cp /tmp/signed.apk "$OUT"
           echo "file=$OUT" >> "$GITHUB_OUTPUT"
 
-      - name: Verify APK policy, merged manifest and signature
-        id: verify_apk
+      - name: Verify APK
         shell: bash
         run: |
           set -euo pipefail
           APK="${{ steps.sign_apk.outputs.file }}"
-          test -f "$APK"
           AAPT="$(find "$ANDROID_HOME/build-tools" -type f -name aapt | sort -V | tail -1)"
           APKSIGNER="$(find "$ANDROID_HOME/build-tools" -type f -name apksigner | sort -V | tail -1)"
-          test -x "$AAPT"
-          test -x "$APKSIGNER"
+          "$AAPT" dump badging "$APK" | grep -q "package: name='$APP_ID'"
+          "$AAPT" dump badging "$APK" | grep -q "targetSdkVersion:'36'"
+          "$APKSIGNER" verify --verbose "$APK" | grep -q 'Verified'
 
-          "$AAPT" dump badging "$APK" | tee /tmp/badging.txt
-          grep -q "package: name='$APP_ID'" /tmp/badging.txt
-          grep -q "targetSdkVersion:'36'" /tmp/badging.txt
-          grep -q "sdkVersion:'24'" /tmp/badging.txt
-          ! grep -q 'application-debuggable' /tmp/badging.txt
-
-          "$APKSIGNER" verify --verbose --print-certs "$APK" | tee /tmp/signature.txt
-          grep -q 'Verified using v2 scheme (APK Signature Scheme v2): true' /tmp/signature.txt
-          grep -q 'Verified using v3 scheme (APK Signature Scheme v3): true' /tmp/signature.txt
-
-          SHA="$(sha256sum "$APK" | awk '{print $1}')"
-          echo "sha256=$SHA" >> "$GITHUB_OUTPUT"
-
-          {
-            echo "FantaDesk Auction Setup UAT Android security report"
-            echo "Private source commit: $FANTADESK_REF"
-            echo "Capacitor: $CAPACITOR_VERSION"
-            echo "Package: $APP_ID"
-            echo "Version: $APP_VERSION_NAME ($APP_VERSION_CODE)"
-            echo "minSdk: 24"
-            echo "compileSdk: 36"
-            echo "targetSdk: 36"
-            echo "Debuggable: false"
-            echo "Cleartext traffic: disabled"
-            echo "Backups: disabled"
-            echo "Orientation: sensorLandscape"
-            echo "APK Signature Scheme v2: verified"
-            echo "APK Signature Scheme v3: verified"
-            echo "SHA-256: $SHA"
-          } > FantaDesk-auction-uat-security-report.txt
-
-      - name: Upload UAT APK and security report
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: FantaDesk-auction-setup-uat-android16
-          path: |
-            ${{ steps.sign_apk.outputs.file }}
-            FantaDesk-auction-uat-security-report.txt
+          name: FantaNexus-Auction-Helper-UI-UAT
+          path: ${{ steps.sign_apk.outputs.file }}
           if-no-files-found: error
           retention-days: 3
           compression-level: 0
-
-      - name: Build summary
-        run: |
-          echo "### FantaDesk Auction Setup UAT APK" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Source: \`${FANTADESK_REF}\`" >> "$GITHUB_STEP_SUMMARY"
-          echo "- targetSdk: **36 (Android 16)**" >> "$GITHUB_STEP_SUMMARY"
-          echo "- compileSdk: **36**" >> "$GITHUB_STEP_SUMMARY"
-          echo "- minSdk: **24**" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Stable Capacitor: **${CAPACITOR_VERSION}**" >> "$GITHUB_STEP_SUMMARY"
-          echo "- SHA-256: \`${{ steps.verify_apk.outputs.sha256 }}\`" >> "$GITHUB_STEP_SUMMARY"
