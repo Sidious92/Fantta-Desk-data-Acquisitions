@@ -1,0 +1,65 @@
+name: FantaDesk Auction Helper CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Exact private FantaDesk commit to verify
+        required: false
+        default: 44f7a952226df985609ba66ffc205023c27181b1
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/fantadesk-auction-helper-ci.yml
+
+permissions:
+  contents: read
+
+jobs:
+  verify-auction-helper:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || '44f7a952226df985609ba66ffc205023c27181b1' }}
+    steps:
+      - name: Checkout private FantaDesk ephemerally
+        uses: actions/checkout@v6
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.FANTADESK_REF }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Verify exact private commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          ACTUAL="$(git rev-parse HEAD)"
+          test "$ACTUAL" = "$FANTADESK_REF"
+          echo "FantaDesk exact commit: $ACTUAL"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Tests
+        run: npm run test:run
+
+      - name: Build
+        run: npm run build
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### FantaDesk Auction Helper CI" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Private source: \`${FANTADESK_REF}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Typecheck + tests + build executed from the public runner." >> "$GITHUB_STEP_SUMMARY"
