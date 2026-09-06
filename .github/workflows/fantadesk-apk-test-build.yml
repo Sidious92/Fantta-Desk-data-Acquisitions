@@ -55,8 +55,11 @@ jobs:
           distribution: temurin
           java-version: '21'
 
+      - name: Upgrade npm
+        run: npm install -g npm@11.6.0
+
       - name: Install app dependencies
-        run: npm ci --legacy-peer-deps --no-audit --no-fund
+        run: npm install --legacy-peer-deps --no-audit --no-fund
 
       - name: Production dependency audit
         run: npm audit --omit=dev --audit-level=high
