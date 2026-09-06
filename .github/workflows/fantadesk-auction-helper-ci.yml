@@ -6,7 +6,7 @@ on:
       ref:
         description: Exact private FantaDesk commit to verify
         required: false
-        default: 44f7a952226df985609ba66ffc205023c27181b1
+        default: 044f7033cced9e363c6bbd9f43076d670248beef
   push:
     branches: [main]
     paths:
@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || '44f7a952226df985609ba66ffc205023c27181b1' }}
+      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || '044f7033cced9e363c6bbd9f43076d670248beef' }}
     steps:
       - name: Checkout private FantaDesk ephemerally
         uses: actions/checkout@v6
@@ -45,12 +45,11 @@ jobs:
           node-version: 22
           package-manager-cache: false
 
+      - name: Upgrade npm
+        run: npm install --global npm@11
+
       - name: Install dependencies
-        shell: bash
-        run: |
-          set -euo pipefail
-          npm cache clean --force
-          npm install --legacy-peer-deps --no-audit --no-fund
+        run: npm install --legacy-peer-deps --no-audit --no-fund
 
       - name: Typecheck
         run: npm run typecheck
