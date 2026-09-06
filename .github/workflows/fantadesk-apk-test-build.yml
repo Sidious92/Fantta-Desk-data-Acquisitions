@@ -6,7 +6,7 @@ on:
       ref:
         description: Exact FantaDesk commit to package
         required: false
-        default: e83b1163e80578a27ad014327eeba2db6339baa0
+        default: 1cab67fd34ea899e24f31a89c63184d269bd6136
   push:
     branches: [main]
     paths:
@@ -20,11 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 55
     env:
-      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || 'e83b1163e80578a27ad014327eeba2db6339baa0' }}
+      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || '1cab67fd34ea899e24f31a89c63184d269bd6136' }}
       CAPACITOR_VERSION: 8.5.0
       APP_ID: com.fantadesk.app
-      APP_VERSION_NAME: 0.9.4-auction-recovery-uat
-      APP_VERSION_CODE: 26090608
+      APP_VERSION_NAME: 0.9.5-auction-ux-uat
+      APP_VERSION_CODE: 26090609
     steps:
       - name: Checkout private FantaDesk ephemerally
         uses: actions/checkout@v6
@@ -120,7 +120,7 @@ jobs:
           "$ZIPALIGN" -f -p 4 "$UNSIGNED" /tmp/aligned.apk
           "$APKSIGNER" sign --ks /tmp/uat.jks --ks-key-alias uat --ks-pass pass:fantadesk-uat-ci --key-pass pass:fantadesk-uat-ci --v1-signing-enabled false --v2-signing-enabled true --v3-signing-enabled true --out /tmp/signed.apk /tmp/aligned.apk
           SHORT_SHA="${FANTADESK_REF:0:8}"
-          OUT="FantaNexus-Auction-Helper-Recovery-UAT-${SHORT_SHA}.apk"
+          OUT="FantaNexus-Auction-Helper-UX-UAT-${SHORT_SHA}.apk"
           cp /tmp/signed.apk "$OUT"
           echo "file=$OUT" >> "$GITHUB_OUTPUT"
 
@@ -138,7 +138,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: FantaNexus-Auction-Helper-Recovery-UAT
+          name: FantaNexus-Auction-Helper-UX-UAT
           path: ${{ steps.sign_apk.outputs.file }}
           if-no-files-found: error
           retention-days: 3
