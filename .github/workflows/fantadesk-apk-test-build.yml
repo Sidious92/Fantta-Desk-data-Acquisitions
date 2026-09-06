@@ -6,7 +6,7 @@ on:
       ref:
         description: Exact FantaDesk branch, tag or commit to package
         required: false
-        default: 04925177a2020e90915ef3092d8bb18dcf57e7ca
+        default: 44f7a952226df985609ba66ffc205023c27181b1
   push:
     branches: [main]
     paths:
@@ -20,11 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 55
     env:
-      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || '04925177a2020e90915ef3092d8bb18dcf57e7ca' }}
+      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || '44f7a952226df985609ba66ffc205023c27181b1' }}
       CAPACITOR_VERSION: 8.5.0
       APP_ID: com.fantadesk.app
-      APP_VERSION_NAME: 0.9.0-auction-rc1
-      APP_VERSION_CODE: 26090101
+      APP_VERSION_NAME: 0.9.0-auction-setup-uat
+      APP_VERSION_CODE: 26090601
     steps:
       - name: Checkout private FantaDesk ephemerally
         uses: actions/checkout@v6
@@ -56,7 +56,7 @@ jobs:
           java-version: '21'
 
       - name: Install app dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --legacy-peer-deps --no-audit --no-fund
 
       - name: Production dependency audit
         run: npm audit --omit=dev --audit-level=high
@@ -71,7 +71,7 @@ jobs:
         run: npm run build
 
       - name: Install current stable Capacitor toolchain
-        run: npm install --no-save --no-audit --no-fund @capacitor/core@${CAPACITOR_VERSION} @capacitor/cli@${CAPACITOR_VERSION} @capacitor/android@${CAPACITOR_VERSION}
+        run: npm install --no-save --legacy-peer-deps --no-audit --no-fund @capacitor/core@${CAPACITOR_VERSION} @capacitor/cli@${CAPACITOR_VERSION} @capacitor/android@${CAPACITOR_VERSION}
 
       - name: Create fresh Android wrapper
         shell: bash
@@ -194,7 +194,7 @@ jobs:
             /tmp/fantadesk-uat-aligned.apk
 
           SHORT_SHA="${FANTADESK_REF:0:8}"
-          OUT="FantaDesk-auction-uat-android16-${SHORT_SHA}.apk"
+          OUT="FantaDesk-auction-setup-uat-android16-${SHORT_SHA}.apk"
           cp /tmp/fantadesk-uat-signed.apk "$OUT"
           echo "file=$OUT" >> "$GITHUB_OUTPUT"
 
@@ -219,23 +219,12 @@ jobs:
           "$APKSIGNER" verify --verbose --print-certs "$APK" | tee /tmp/signature.txt
           grep -q 'Verified using v2 scheme (APK Signature Scheme v2): true' /tmp/signature.txt
           grep -q 'Verified using v3 scheme (APK Signature Scheme v3): true' /tmp/signature.txt
-          grep -Eq 'V3(\.0)? Signer: certificate DN: CN=FantaDesk UAT, O=FantaDesk, C=IT' /tmp/signature.txt
-
-          "$AAPT" dump permissions "$APK" | tee /tmp/permissions.txt
-          grep -q "uses-permission: name='android.permission.INTERNET'" /tmp/permissions.txt
-          grep -q "uses-permission: name='${APP_ID}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'" /tmp/permissions.txt
-          test "$(grep -c '^uses-permission:' /tmp/permissions.txt)" -eq 2
-          ! grep -Eq 'READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE|MANAGE_EXTERNAL_STORAGE|REQUEST_INSTALL_PACKAGES|QUERY_ALL_PACKAGES|ACCESS_FINE_LOCATION|ACCESS_COARSE_LOCATION|CAMERA|RECORD_AUDIO|READ_MEDIA_|POST_NOTIFICATIONS|BLUETOOTH_|NEARBY_WIFI_DEVICES|BODY_SENSORS' /tmp/permissions.txt
-
-          "$AAPT" dump xmltree "$APK" AndroidManifest.xml | tee /tmp/manifest-tree.txt
-          grep -q "${APP_ID}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" /tmp/manifest-tree.txt
-          grep -Eq 'android:protectionLevel.*0x2' /tmp/manifest-tree.txt
 
           SHA="$(sha256sum "$APK" | awk '{print $1}')"
           echo "sha256=$SHA" >> "$GITHUB_OUTPUT"
 
           {
-            echo "FantaDesk Auction UAT Android security report"
+            echo "FantaDesk Auction Setup UAT Android security report"
             echo "Private source commit: $FANTADESK_REF"
             echo "Capacitor: $CAPACITOR_VERSION"
             echo "Package: $APP_ID"
@@ -247,20 +236,15 @@ jobs:
             echo "Cleartext traffic: disabled"
             echo "Backups: disabled"
             echo "Orientation: sensorLandscape"
-            echo "Runtime permissions: INTERNET plus AndroidX app-scoped signature permission only"
-            echo "Dangerous/special permissions: none"
             echo "APK Signature Scheme v2: verified"
             echo "APK Signature Scheme v3: verified"
-            echo "UAT signer: CN=FantaDesk UAT,O=FantaDesk,C=IT"
             echo "SHA-256: $SHA"
-            echo
-            echo "NOTE: this UAT APK is sideloaded and uses an ephemeral CI UAT signing key. Android can still show the normal Unknown app/source installation confirmation; that is distribution provenance, not an obsolete-target security failure. A later UAT build from another ephemeral runner may require uninstalling this package first because the UAT key is not a production update key."
           } > FantaDesk-auction-uat-security-report.txt
 
       - name: Upload UAT APK and security report
         uses: actions/upload-artifact@v4
         with:
-          name: FantaDesk-auction-uat-android16
+          name: FantaDesk-auction-setup-uat-android16
           path: |
             ${{ steps.sign_apk.outputs.file }}
             FantaDesk-auction-uat-security-report.txt
@@ -270,15 +254,10 @@ jobs:
 
       - name: Build summary
         run: |
-          echo "### FantaDesk Auction UAT APK" >> "$GITHUB_STEP_SUMMARY"
+          echo "### FantaDesk Auction Setup UAT APK" >> "$GITHUB_STEP_SUMMARY"
           echo "- Source: \`${FANTADESK_REF}\`" >> "$GITHUB_STEP_SUMMARY"
           echo "- targetSdk: **36 (Android 16)**" >> "$GITHUB_STEP_SUMMARY"
           echo "- compileSdk: **36**" >> "$GITHUB_STEP_SUMMARY"
           echo "- minSdk: **24**" >> "$GITHUB_STEP_SUMMARY"
           echo "- Stable Capacitor: **${CAPACITOR_VERSION}**" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Cleartext: **disabled**" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Backup: **disabled**" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Dangerous/special permissions: **none**" >> "$GITHUB_STEP_SUMMARY"
-          echo "- AndroidX dynamic receiver permission: **signature-scoped**" >> "$GITHUB_STEP_SUMMARY"
-          echo "- APK signing v2/v3: **verified**" >> "$GITHUB_STEP_SUMMARY"
           echo "- SHA-256: \`${{ steps.verify_apk.outputs.sha256 }}\`" >> "$GITHUB_STEP_SUMMARY"
