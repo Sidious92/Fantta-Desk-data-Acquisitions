@@ -6,7 +6,7 @@ on:
       ref:
         description: Exact FantaDesk commit to package
         required: false
-        default: 820b9c993ce3a5ffcb972f40070ebbee4276672c
+        default: 6f00e13a48f5b1f7cbc9160fe5b2595f1a8fc0ea
   push:
     branches: [main]
     paths:
@@ -20,11 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 55
     env:
-      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || '820b9c993ce3a5ffcb972f40070ebbee4276672c' }}
+      FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || '6f00e13a48f5b1f7cbc9160fe5b2595f1a8fc0ea' }}
       CAPACITOR_VERSION: 8.5.0
       APP_ID: com.fantadesk.app
-      APP_VERSION_NAME: 0.9.2-auction-rosters-listone-uat
-      APP_VERSION_CODE: 26090606
+      APP_VERSION_NAME: 0.9.3-auction-listone-import-uat
+      APP_VERSION_CODE: 26090607
     steps:
       - name: Checkout private FantaDesk ephemerally
         uses: actions/checkout@v6
@@ -120,7 +120,7 @@ jobs:
           "$ZIPALIGN" -f -p 4 "$UNSIGNED" /tmp/aligned.apk
           "$APKSIGNER" sign --ks /tmp/uat.jks --ks-key-alias uat --ks-pass pass:fantadesk-uat-ci --key-pass pass:fantadesk-uat-ci --v1-signing-enabled false --v2-signing-enabled true --v3-signing-enabled true --out /tmp/signed.apk /tmp/aligned.apk
           SHORT_SHA="${FANTADESK_REF:0:8}"
-          OUT="FantaNexus-Auction-Helper-Rosters-Listone-UAT-${SHORT_SHA}.apk"
+          OUT="FantaNexus-Auction-Helper-Listone-Import-UAT-${SHORT_SHA}.apk"
           cp /tmp/signed.apk "$OUT"
           echo "file=$OUT" >> "$GITHUB_OUTPUT"
 
@@ -138,7 +138,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: FantaNexus-Auction-Helper-Rosters-Listone-UAT
+          name: FantaNexus-Auction-Helper-Listone-Import-UAT
           path: ${{ steps.sign_apk.outputs.file }}
           if-no-files-found: error
           retention-days: 3
