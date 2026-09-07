@@ -18,6 +18,7 @@ const soldSegment = segment.filter((p) => sold.has(p.playerId));
 const availableSegment = segment.filter((p) => !sold.has(p.playerId));
 const availableRole = activeRole.filter((p) => !sold.has(p.playerId));
 const remainingRoleSlotsTotal = remainingSlots.reduce((a, b) => a + b, 0);
+const teamsWithOpenRoleSlot = remainingSlots.filter((slots) => slots > 0).length;
 
 assert.equal(segment.length, 2);
 assert.equal(soldSegment.length, 1);
@@ -27,6 +28,7 @@ assert.equal((soldSegment.length / segment.length) * 100, 50);
 assert.equal(availableRole.length, 3);
 assert.equal(availableRole.filter((p) => p.tierKey === undefined).length, 1);
 assert.equal(remainingRoleSlotsTotal, 11);
+assert.equal(teamsWithOpenRoleSlot, 2);
 assert.equal(availableSegment.length / remainingRoleSlotsTotal, 1 / 11);
 assert.equal(availableRole.length / remainingRoleSlotsTotal, 3 / 11);
 
