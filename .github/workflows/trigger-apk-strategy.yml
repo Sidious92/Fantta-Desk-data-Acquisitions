@@ -1,0 +1,20 @@
+name: Trigger Strategy Catalog APK
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/trigger-apk-strategy.yml
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch APK build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run fantadesk-apk-test-build.yml --repo Sidious92/Fantta-Desk-data-Acquisitions -f ref=75598235f8871d95beb8bbbdecda11db10bd39e9
