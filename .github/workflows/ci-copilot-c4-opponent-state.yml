@@ -1,0 +1,20 @@
+name: CI Copilot C4 Opponent State
+
+on:
+  pull_request:
+    paths:
+      - 'ci/copilot-c4/**'
+      - '.github/workflows/ci-copilot-c4-opponent-state.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout public runner repo
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run C4 verification harness
+        run: node ci/copilot-c4/opponent-state-check.mjs
