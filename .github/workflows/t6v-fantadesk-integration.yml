@@ -1,4 +1,4 @@
-name: T9 FantaDesk Presentation Contract Verification
+name: T10 FantaDesk Player UI Verification
 
 on:
   pull_request:
@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Checkout exact private FantaDesk T7B head
+      - name: Checkout exact private FantaDesk T10 head
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: 30b842f074c73573169920bd0d62a544d41e8f6f
+          ref: 7f8cd1757bd5aae06779f612e1d2230ea0b6c798
           token: ${{ secrets.FANTADESK_READ_TOKEN || github.token }}
           persist-credentials: false
           fetch-depth: 1
@@ -29,7 +29,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "30b842f074c73573169920bd0d62a544d41e8f6f"
+          test "$(git rev-parse HEAD)" = "7f8cd1757bd5aae06779f612e1d2230ea0b6c798"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -59,6 +59,9 @@ jobs:
 
       - name: T9 presentation contract tests
         run: npx vitest run src/features/nexus/titolarita/titolaritaPresentationAdapter.test.ts
+
+      - name: T10 player UI tests
+        run: npx vitest run src/features/nexus/titolarita/TitolaritaEvidencePanel.test.tsx
 
       - name: Production build
         run: npm run build
