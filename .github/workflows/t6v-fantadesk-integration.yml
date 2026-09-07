@@ -61,11 +61,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          T6=public/nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64
           T7=public/nexus/runtime/nexus-titolarita-named-risk-challenger-2026-27-v1.json.gz.b64
-          test -f "$T6"
-          test "$(wc -c < "$T6" | tr -d ' ')" = "42961"
-          test "$(sha256sum "$T6" | awk '{print $1}')" = "ec352a82131258d8d53f17453acbb0beb3a749832dce5ccd58870c461d3c0d7c"
+          cat public/nexus/runtime/nexus-titolarita-runtime-2026-27-v1.part-*.b64 > /tmp/t6-runtime.b64
+          test "$(wc -c < /tmp/t6-runtime.b64 | tr -d ' ')" = "42961"
+          test "$(sha256sum /tmp/t6-runtime.b64 | awk '{print $1}')" = "ec352a82131258d8d53f17453acbb0beb3a749832dce5ccd58870c461d3c0d7c"
           test -f "$T7"
           test "$(wc -c < "$T7" | tr -d ' ')" = "12789"
           test "$(sha256sum "$T7" | awk '{print $1}')" = "a67b81d2cdb0a15c178ccd5295862815ff7e8067434a63e90fcf16af9034fa18"
@@ -74,10 +73,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for NAME in nexus-titolarita-runtime-2026-27-v1.json.gz.b64 nexus-titolarita-named-risk-challenger-2026-27-v1.json.gz.b64; do
+          for NAME in nexus-titolarita-runtime-2026-27-v1.part-000.b64 nexus-titolarita-runtime-2026-27-v1.part-001.b64 nexus-titolarita-runtime-2026-27-v1.part-002.b64 nexus-titolarita-named-risk-challenger-2026-27-v1.json.gz.b64; do
             test -f "dist/nexus/runtime/$NAME"
             grep -R -F "nexus/runtime/$NAME" dist/sw.js dist/workbox-*.js >/dev/null
           done
+          cat dist/nexus/runtime/nexus-titolarita-runtime-2026-27-v1.part-*.b64 > /tmp/dist-t6-runtime.b64
+          test "$(sha256sum /tmp/dist-t6-runtime.b64 | awk '{print $1}')" = "ec352a82131258d8d53f17453acbb0beb3a749832dce5ccd58870c461d3c0d7c"
           test "$(sha256sum dist/nexus/runtime/nexus-titolarita-named-risk-challenger-2026-27-v1.json.gz.b64 | awk '{print $1}')" = "a67b81d2cdb0a15c178ccd5295862815ff7e8067434a63e90fcf16af9034fa18"
 
       - name: Audit browser and scientific boundaries
