@@ -1,4 +1,4 @@
-name: T10 FantaDesk Player UI Verification
+name: T11 FantaDesk Target UI Verification
 
 on:
   pull_request:
@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Checkout exact private FantaDesk T10 head
+      - name: Checkout exact private FantaDesk T11 head
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: 7f8cd1757bd5aae06779f612e1d2230ea0b6c798
+          ref: 9a53f5082344bf1351f860b96394d72318577b21
           token: ${{ secrets.FANTADESK_READ_TOKEN || github.token }}
           persist-credentials: false
           fetch-depth: 1
@@ -29,7 +29,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "7f8cd1757bd5aae06779f612e1d2230ea0b6c798"
+          test "$(git rev-parse HEAD)" = "9a53f5082344bf1351f860b96394d72318577b21"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -62,6 +62,9 @@ jobs:
 
       - name: T10 player UI tests
         run: npx vitest run src/features/nexus/titolarita/TitolaritaEvidencePanel.test.tsx
+
+      - name: T11 Target integration tests
+        run: npx vitest run src/features/targets/TargetPage.titolarita.test.ts
 
       - name: Production build
         run: npm run build
