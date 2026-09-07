@@ -1,0 +1,24 @@
+name: CI Copilot C2 Historical Market
+
+on:
+  pull_request:
+    paths:
+      - 'ci/copilot-c2/**'
+      - '.github/workflows/ci-copilot-c2-historical-market.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout public runner repo
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run C2 verification harness
+        run: node ci/copilot-c2/historical-market-check.mjs
