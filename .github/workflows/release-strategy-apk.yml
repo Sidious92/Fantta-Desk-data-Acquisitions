@@ -1,0 +1,37 @@
+name: Release Strategy APK
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/release-strategy-apk.yml
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download existing APK artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api repos/Sidious92/Fantta-Desk-data-Acquisitions/actions/artifacts/10013465913/zip > artifact.zip
+          unzip artifact.zip
+          APK="$(find . -maxdepth 2 -type f -name '*.apk' | head -1)"
+          test -n "$APK"
+          cp "$APK" FantaNexus-Auction-Helper-Strategy-Catalog-UAT-75598235.apk
+      - name: Publish direct APK release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG="strategy-uat-75598235"
+          if gh release view "$TAG" --repo Sidious92/Fantta-Desk-data-Acquisitions >/dev/null 2>&1; then
+            gh release upload "$TAG" FantaNexus-Auction-Helper-Strategy-Catalog-UAT-75598235.apk --repo Sidious92/Fantta-Desk-data-Acquisitions --clobber
+          else
+            gh release create "$TAG" FantaNexus-Auction-Helper-Strategy-Catalog-UAT-75598235.apk --repo Sidious92/Fantta-Desk-data-Acquisitions --title "FantaNexus Auction Helper Strategy UAT" --notes "UAT build for private app commit 75598235f8871d95beb8bbbdecda11db10bd39e9"
+          fi
