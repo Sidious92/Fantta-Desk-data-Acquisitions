@@ -28,6 +28,7 @@ const liveF1Count = liveSales.filter((sale) => sale.tierKey === 'F1').length;
 const budgetSpentPct = (currentTeam.spent / currentTeam.initialBudget) * 100;
 const structuralEligibility = currentTeam.remainingSlots.A > 0 && currentTeam.remainingBudget >= 120;
 
+assert.equal(new Set(aliases).size, aliases.length);
 assert.equal(matched.length, 3);
 assert.equal(new Set(matched.map((sale) => sale.season)).size, 2);
 assert.equal(historicalSpend, 215);
@@ -36,6 +37,7 @@ assert.equal(liveF1Count, 1);
 assert.equal(currentTeam.remainingBudget, 350);
 assert.ok(Math.abs(budgetSpentPct - 22.22222222222222) < 1e-12);
 assert.equal(structuralEligibility, true);
+assert.equal(currentTeam.remainingSlots.A > 0 && currentTeam.remainingBudget >= 400, false);
 
 const unknownTierSales = [{ playerId: 4, role: 'D', price: 10, tierKey: undefined }];
 assert.equal(unknownTierSales.filter((sale) => sale.tierKey === undefined).length, 1);
