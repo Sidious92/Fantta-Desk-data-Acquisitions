@@ -1,4 +1,4 @@
-name: T8 FantaDesk Operational Evidence Verification
+name: T9 FantaDesk Presentation Contract Verification
 
 on:
   pull_request:
@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: 0d53eed45c8d7367c20dd4151bcb5fa1c56dfe4b
+          ref: 4747dea8828b8647eae3a96e8f58d4c50a6c4ce5
           token: ${{ secrets.FANTADESK_READ_TOKEN || github.token }}
           persist-credentials: false
           fetch-depth: 1
@@ -29,7 +29,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "0d53eed45c8d7367c20dd4151bcb5fa1c56dfe4b"
+          test "$(git rev-parse HEAD)" = "4747dea8828b8647eae3a96e8f58d4c50a6c4ce5"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -56,6 +56,9 @@ jobs:
 
       - name: T8 operational evidence tests
         run: npx vitest run src/features/nexus/titolarita/titolaritaOperationalEvidenceRepository.test.ts
+
+      - name: T9 presentation contract tests
+        run: npx vitest run src/features/nexus/titolarita/titolaritaPresentationAdapter.test.ts
 
       - name: Production build
         run: npm run build
