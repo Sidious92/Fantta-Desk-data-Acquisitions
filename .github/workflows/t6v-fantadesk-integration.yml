@@ -1,4 +1,4 @@
-name: T6V FantaDesk Integration Verification
+name: T7B FantaDesk Challenger Runtime Verification
 
 on:
   pull_request:
@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Checkout private FantaDesk T6V head
+      - name: Checkout exact private FantaDesk T7B head
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: d387a2ec5e2a5220821d9841b430d4caea42658f
+          ref: 2258319d2c39cc320cfa63f959a9f7176804501f
           token: ${{ secrets.FANTADESK_READ_TOKEN || github.token }}
           persist-credentials: false
           fetch-depth: 1
@@ -29,7 +29,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "d387a2ec5e2a5220821d9841b430d4caea42658f"
+          test "$(git rev-parse HEAD)" = "2258319d2c39cc320cfa63f959a9f7176804501f"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -46,36 +46,43 @@ jobs:
       - name: Global tests
         run: npm run test:run
 
-      - name: T6-owned runtime tests
+      - name: T6 runtime regression tests
         run: npx vitest run src/features/nexus/titolarita/titolaritaRuntimeRepository.test.ts
+
+      - name: T7B challenger runtime tests
+        run: npx vitest run src/features/nexus/titolarita/titolaritaNamedRiskChallengerRepository.test.ts
 
       - name: Production build
         run: npm run build
 
-      - name: Verify T6 source snapshot baseline
+      - name: Verify canonical source snapshots
         shell: bash
         run: |
           set -euo pipefail
-          FILE=public/nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64
-          test -f "$FILE"
-          test "$(wc -c < "$FILE" | tr -d ' ')" = "42961"
-          test "$(sha256sum "$FILE" | awk '{print $1}')" = "ec352a82131258d8d53f17453acbb0beb3a749832dce5ccd58870c461d3c0d7c"
+          T6=public/nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64
+          T7=public/nexus/runtime/nexus-titolarita-named-risk-challenger-2026-27-v1.json.gz.b64
+          test -f "$T6"
+          test "$(wc -c < "$T6" | tr -d ' ')" = "42961"
+          test "$(sha256sum "$T6" | awk '{print $1}')" = "ec352a82131258d8d53f17453acbb0beb3a749832dce5ccd58870c461d3c0d7c"
+          test -f "$T7"
+          test "$(wc -c < "$T7" | tr -d ' ')" = "12789"
+          test "$(sha256sum "$T7" | awk '{print $1}')" = "a67b81d2cdb0a15c178ccd5295862815ff7e8067434a63e90fcf16af9034fa18"
 
-      - name: Verify production artifact and PWA precache
+      - name: Verify production artifacts and PWA precache
         shell: bash
         run: |
           set -euo pipefail
-          FILE=dist/nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64
-          test -f "$FILE"
-          test "$(wc -c < "$FILE" | tr -d ' ')" = "42961"
-          test "$(sha256sum "$FILE" | awk '{print $1}')" = "ec352a82131258d8d53f17453acbb0beb3a749832dce5ccd58870c461d3c0d7c"
-          grep -R -F 'nexus/runtime/nexus-titolarita-runtime-2026-27-v1.json.gz.b64' dist/sw.js dist/workbox-*.js >/dev/null
+          for NAME in nexus-titolarita-runtime-2026-27-v1.json.gz.b64 nexus-titolarita-named-risk-challenger-2026-27-v1.json.gz.b64; do
+            test -f "dist/nexus/runtime/$NAME"
+            grep -R -F "nexus/runtime/$NAME" dist/sw.js dist/workbox-*.js >/dev/null
+          done
+          test "$(sha256sum dist/nexus/runtime/nexus-titolarita-named-risk-challenger-2026-27-v1.json.gz.b64 | awk '{print $1}')" = "a67b81d2cdb0a15c178ccd5295862815ff7e8067434a63e90fcf16af9034fa18"
 
-      - name: Audit browser/runtime boundary
+      - name: Audit browser and scientific boundaries
         shell: bash
         run: |
           set -euo pipefail
           ! grep -R -E 'drive\.google\.com|googleapis\.com/drive|Authorization: Bearer|FANTADESK_READ_TOKEN' dist --exclude='*.map'
-          test ! -e dist/data/nexus/research-v3/titolarita-mvp/t5/T5_TITOLARITA_OPERATIONAL_SURFACE_V1.json
+          ! grep -R -E '"(pNamed|combinedProbability|combinedPStart|marginalPStart|expectedMinutes)"[[:space:]]*:' public/nexus/runtime/nexus-titolarita-named-risk-challenger-2026-27-v1.json.gz.b64
+          test ! -e dist/data/nexus/research-v3/titolarita-mvp/t7
           du -sh dist
-          find dist -type f -printf '%s %p\n' | sort -nr | head -20
