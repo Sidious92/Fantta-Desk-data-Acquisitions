@@ -33,3 +33,5 @@ jobs:
           path: artifacts/n1b-match-program-full-coverage-v1
           if-no-files-found: error
           retention-days: 14
+
+# Trigger after workflow indexing; no scientific logic change.
