@@ -1,25 +1,43 @@
 #!/usr/bin/env python3
-import json, time
+import json,time,re
 from pathlib import Path
-from urllib.parse import urlencode
+from urllib.parse import quote
 import requests
 
 OUT=Path('artifacts/n1b-wayback-match-program-probe-v1'); OUT.mkdir(parents=True,exist_ok=True)
-S=requests.Session(); S.headers.update({'User-Agent':'FantaNexus-N1B-Wayback-Probe/1.0'})
-filename='2021-22_A_UNICO_UNI_29_MILEMP.pdf'
-variants=[
- ('wildcard_exact',{'url':f'img.legaseriea.it/vimages/*/{filename}','output':'json','fl':'timestamp,original,statuscode,mimetype,digest','filter':'statuscode:200','collapse':'urlkey'}),
- ('wildcard_exact_http',{'url':f'http://img.legaseriea.it/vimages/*/{filename}','output':'json','fl':'timestamp,original,statuscode,mimetype,digest','filter':'statuscode:200','collapse':'urlkey'}),
- ('prefix_filter',{'url':'img.legaseriea.it/vimages/*','output':'json','fl':'timestamp,original,statuscode,mimetype,digest','filter':[f'original:.*{filename.replace(".","\\.")}$','statuscode:200'],'collapse':'urlkey','limit':'50'}),
+S=requests.Session(); S.headers.update({'User-Agent':'FantaNexus-N1B-Wayback-Probe/1.1'})
+HASH='632862b6'
+FILENAMES=[
+ '2021-22_A_UNICO_UNI_1_INTGEN.pdf',
+ '2021-22_A_UNICO_UNI_1_VERSAS.pdf',
+ '2021-22_A_UNICO_UNI_1_SAMMIL.pdf',
+ '2021-22_A_UNICO_UNI_5_ROMUDI.pdf',
+ '2021-22_A_UNICO_UNI_10_NAPBOL.pdf',
+ '2021-22_A_UNICO_UNI_15_LAZUDI.pdf',
+ '2021-22_A_UNICO_UNI_21_GENSPE.pdf',
+ '2021-22_A_UNICO_UNI_26_FIOATA.pdf',
+ '2021-22_A_UNICO_UNI_29_MILEMP.pdf',
+ '2021-22_A_UNICO_UNI_31_ATANAP.pdf',
+ '2021-22_A_UNICO_UNI_38_VENCAG.pdf',
 ]
 rows=[]
-for name,params in variants:
+for fn in FILENAMES:
+    rec={'filename':fn}
+    exact=f'https://img.legaseriea.it/vimages/{HASH}/{fn}'
+    rec['exact_url']=exact
     try:
-        url='https://web.archive.org/cdx/search/cdx?'+urlencode(params,doseq=True)
-        r=S.get(url,timeout=45)
-        rows.append({'name':name,'url':url,'http':r.status_code,'content_type':r.headers.get('content-type'),'text_prefix':r.text[:4000]})
+        api='https://archive.org/wayback/available?url='+quote(exact,safe='')+'&timestamp=20220920000000'
+        r=S.get(api,timeout=30)
+        rec['availability_http']=r.status_code
+        payload=r.json(); rec['availability']=payload
+        cl=(payload.get('archived_snapshots') or {}).get('closest') or {}
+        rec['available_200']=bool(cl.get('available') is True and str(cl.get('status'))=='200')
+        if cl:
+            rec['capture_timestamp']=cl.get('timestamp'); rec['snapshot_url']=cl.get('url')
     except Exception as e:
-        rows.append({'name':name,'error':f'{type(e).__name__}:{e}'})
-    time.sleep(1)
-(OUT/'probe.json').write_text(json.dumps(rows,indent=2,ensure_ascii=False),encoding='utf-8')
-print(json.dumps(rows,indent=2,ensure_ascii=False))
+        rec['error']=f'{type(e).__name__}:{e}'
+    rows.append(rec)
+    time.sleep(.4)
+summary={'hash':HASH,'hash_as_unix':int(HASH,16),'tested':len(rows),'available_200':sum(r.get('available_200') is True for r in rows),'known_positive_filename':'2021-22_A_UNICO_UNI_29_MILEMP.pdf','rows':rows}
+(OUT/'probe.json').write_text(json.dumps(summary,indent=2,ensure_ascii=False),encoding='utf-8')
+print(json.dumps(summary,indent=2,ensure_ascii=False))
