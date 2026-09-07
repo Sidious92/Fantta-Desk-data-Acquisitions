@@ -21,6 +21,7 @@ assert.equal(evidence.opponents.structurallyEligibleAtObservedPrice, 1);
 const forbiddenOutputs = ['INTRINSIC_VALUE', 'TARGET_PRICE', 'MAX_BID', 'GLOBAL_SCORE', 'BUY_PASS_SIGNAL'];
 assert.equal(forbiddenOutputs.includes('GLOBAL_SCORE'), true);
 assert.equal(forbiddenOutputs.includes('BUY_PASS_SIGNAL'), true);
+assert.equal(forbiddenOutputs.length, 5);
 
 const partialPrice = { status: 'PARTIAL', currentPrice: 60, historicalSampleCount: 0 };
 assert.equal(partialPrice.status, 'PARTIAL');
