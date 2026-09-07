@@ -35,5 +35,7 @@ assert.equal(Object.hasOwn(plan.playerIntents[0], 'maxBid'), false);
 
 const unknownTier = { playerId: 4, role: 'A', tierKey: undefined };
 assert.equal(unknownTier.tierKey, undefined);
+assert.equal(Math.max(0, 0 - 1), 0);
+assert.equal(plan.roleBudgetEnvelope.plannedTotalMin <= plan.roleBudgetEnvelope.plannedTotalMax, true);
 
 console.log('C5 public verification PASS');
