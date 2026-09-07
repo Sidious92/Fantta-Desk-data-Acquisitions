@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: 8a7025abd630076cd7ae873e8b9d5bdd39cb3f5a
+          ref: 0d53eed45c8d7367c20dd4151bcb5fa1c56dfe4b
           token: ${{ secrets.FANTADESK_READ_TOKEN || github.token }}
           persist-credentials: false
           fetch-depth: 1
@@ -29,7 +29,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "8a7025abd630076cd7ae873e8b9d5bdd39cb3f5a"
+          test "$(git rev-parse HEAD)" = "0d53eed45c8d7367c20dd4151bcb5fa1c56dfe4b"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
