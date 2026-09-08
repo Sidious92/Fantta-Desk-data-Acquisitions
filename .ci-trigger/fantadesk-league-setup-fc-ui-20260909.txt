@@ -1,0 +1,1 @@
+Trigger Android validation for private FantaDesk main after league setup UI rebuild.
