@@ -31,3 +31,4 @@ assert.equal(forbidden.includes('PREDICTIVE_ENGINE'), true);
 assert.equal(forbidden.includes('MAX_BID'), true);
 
 console.log('Copilot in-app authority bindings PASS');
+// verification trigger
