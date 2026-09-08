@@ -32,5 +32,6 @@ assert.equal(runtimePolicy.maxBidAllowed, false);
 const pipeline = ['C1_REPLAY', 'C3_SUPPLY_DEMAND', 'C4_OPPONENT_STATE', 'C5_OPTIONAL', 'C2_OPTIONAL_HISTORY', 'C6_RESOLVE', 'C7_RENDER'];
 assert.equal(pipeline.at(-1), 'C7_RENDER');
 assert.equal(pipeline.includes('C6_RESOLVE'), true);
+assert.equal(new Set(events.map((event) => event.sequence)).size, events.length);
 
 console.log('C7R public verification PASS');
