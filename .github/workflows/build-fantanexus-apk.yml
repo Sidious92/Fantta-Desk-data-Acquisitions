@@ -24,10 +24,10 @@ jobs:
       - name: Require private-repo token
         shell: bash
         env:
-          FANTADESK_REPO_TOKEN: ${{ secrets.FANTADESK_REPO_TOKEN }}
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
         run: |
-          if [ -z "$FANTADESK_REPO_TOKEN" ]; then
-            echo "Missing repository secret FANTADESK_REPO_TOKEN."
+          if [ -z "$FANTADESK_READ_TOKEN" ]; then
+            echo "Missing repository secret FANTADESK_READ_TOKEN."
             exit 1
           fi
 
@@ -36,7 +36,7 @@ jobs:
         with:
           repository: Sidious92/FantaDesk
           ref: ${{ github.event.inputs.fantadesk_ref || 'main' }}
-          token: ${{ secrets.FANTADESK_REPO_TOKEN }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
 
