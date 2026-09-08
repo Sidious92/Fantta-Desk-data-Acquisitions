@@ -53,11 +53,11 @@ jobs:
 
       - name: Install app dependencies
         working-directory: app
-        run: npm install
+        run: npm install --legacy-peer-deps --no-package-lock
 
       - name: Install Android wrapper tooling
         working-directory: app
-        run: npm install --no-save @capacitor/core@latest @capacitor/cli@latest @capacitor/android@latest
+        run: npm install --no-save --legacy-peer-deps --no-package-lock @capacitor/core@latest @capacitor/cli@latest @capacitor/android@latest
 
       - name: Build complete web app
         working-directory: app
