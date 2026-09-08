@@ -1,0 +1,20 @@
+name: CI Copilot C7 Live UI
+
+on:
+  pull_request:
+    paths:
+      - 'ci/copilot-c7/**'
+      - '.github/workflows/ci-copilot-c7-live-ui.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout public runner repo
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run C7 verification harness
+        run: node ci/copilot-c7/live-ui-check.mjs
