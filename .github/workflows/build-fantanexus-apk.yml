@@ -1,6 +1,8 @@
 name: Build FantaNexus APK
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       fantadesk_ref:
@@ -33,7 +35,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: ${{ inputs.fantadesk_ref }}
+          ref: ${{ github.event.inputs.fantadesk_ref || 'main' }}
           token: ${{ secrets.FANTADESK_REPO_TOKEN }}
           path: app
           persist-credentials: false
