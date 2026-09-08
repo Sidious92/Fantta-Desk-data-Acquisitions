@@ -1,0 +1,92 @@
+name: Build FantaNexus APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      fantadesk_ref:
+        description: FantaDesk ref to build
+        required: true
+        default: main
+
+permissions:
+  contents: read
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v4
+
+      - name: Require private-repo token
+        shell: bash
+        env:
+          FANTADESK_REPO_TOKEN: ${{ secrets.FANTADESK_REPO_TOKEN }}
+        run: |
+          if [ -z "$FANTADESK_REPO_TOKEN" ]; then
+            echo "Missing repository secret FANTADESK_REPO_TOKEN."
+            exit 1
+          fi
+
+      - name: Checkout private FantaDesk authority
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ inputs.fantadesk_ref }}
+          token: ${{ secrets.FANTADESK_REPO_TOKEN }}
+          path: app
+          persist-credentials: false
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Install app dependencies
+        working-directory: app
+        run: npm ci
+
+      - name: Install Android wrapper tooling
+        working-directory: app
+        run: npm install --no-save @capacitor/core@latest @capacitor/cli@latest @capacitor/android@latest
+
+      - name: Build complete web app
+        working-directory: app
+        run: |
+          npm run nexus:runtime:build
+          npx tsc -b
+          npx vite build --base=./
+
+      - name: Generate Capacitor Android project
+        working-directory: app
+        run: |
+          npx cap init FantaNexus com.fantanexus.app --web-dir=dist
+          npx cap add android
+          npx cap sync android
+
+      - name: Build debug APK
+        working-directory: app/android
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: Stage APK
+        run: cp app/android/app/build/outputs/apk/debug/app-debug.apk FantaNexus-complete-debug.apk
+
+      - name: Verify APK exists
+        run: test -s FantaNexus-complete-debug.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: FantaNexus-complete-apk
+          path: FantaNexus-complete-debug.apk
+          if-no-files-found: error
+          retention-days: 14
