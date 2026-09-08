@@ -1,0 +1,20 @@
+name: CI Auction Role Calling
+
+on:
+  pull_request:
+    paths:
+      - 'ci/auction-role-calling/**'
+      - '.github/workflows/ci-auction-role-calling.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout public runner repo
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run role-calling verification harness
+        run: node ci/auction-role-calling/role-calling-check.mjs
