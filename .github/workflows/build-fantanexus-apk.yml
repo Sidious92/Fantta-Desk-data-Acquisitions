@@ -8,7 +8,7 @@ on:
       fantadesk_ref:
         description: FantaDesk ref to build
         required: true
-        default: feat/copilot-secas-history-summary
+        default: main
 
 permissions:
   contents: read
@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: ${{ github.event.inputs.fantadesk_ref || 'feat/copilot-secas-history-summary' }}
+          ref: ${{ github.event.inputs.fantadesk_ref || 'main' }}
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -77,18 +77,43 @@ jobs:
           npx cap add android
           npx cap sync android
 
-      - name: Apply FantaDesk launcher icon
+      - name: Prepare FantaDesk launcher icon
         working-directory: app
         shell: bash
         run: |
-          set -e
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq imagemagick
           ICON="public/fantadesk-logo.png"
           test -s "$ICON"
+
+          # Remove any outer white/transparent padding, keep only the FantaDesk mark,
+          # then enlarge the visible mark by 20% on a transparent square canvas.
+          magick "$ICON" -alpha on -fuzz 3% -trim +repage /tmp/fd-trim.png
+          W=$(magick identify -format '%w' /tmp/fd-trim.png)
+          H=$(magick identify -format '%h' /tmp/fd-trim.png)
+          BASE=$(( W > H ? W : H ))
+          TARGET=$(( BASE * 120 / 100 ))
+          magick /tmp/fd-trim.png -resize "${TARGET}x${TARGET}>" /tmp/fd-logo-120.png
+          TW=$(magick identify -format '%w' /tmp/fd-logo-120.png)
+          TH=$(magick identify -format '%h' /tmp/fd-logo-120.png)
+          CANVAS=$(( TW > TH ? TW : TH ))
+          magick -size "${CANVAS}x${CANVAS}" canvas:none /tmp/fd-logo-120.png -gravity center -composite /tmp/fd-launcher-master.png
+
           rm -f android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
-          for dir in mipmap-mdpi mipmap-hdpi mipmap-xhdpi mipmap-xxhdpi mipmap-xxxhdpi; do
+
+          declare -A SIZES=(
+            [mipmap-mdpi]=48
+            [mipmap-hdpi]=72
+            [mipmap-xhdpi]=96
+            [mipmap-xxhdpi]=144
+            [mipmap-xxxhdpi]=192
+          )
+          for dir in "${!SIZES[@]}"; do
+            size="${SIZES[$dir]}"
             mkdir -p "android/app/src/main/res/$dir"
-            cp "$ICON" "android/app/src/main/res/$dir/ic_launcher.png"
-            cp "$ICON" "android/app/src/main/res/$dir/ic_launcher_round.png"
+            magick /tmp/fd-launcher-master.png -resize "${size}x${size}" "android/app/src/main/res/$dir/ic_launcher.png"
+            cp "android/app/src/main/res/$dir/ic_launcher.png" "android/app/src/main/res/$dir/ic_launcher_round.png"
           done
 
       - name: Build debug APK
@@ -104,7 +129,7 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: FantaDesk-copilot-secas-history-apk
+          name: FantaDesk-logo120-copilot-secas-apk
           path: FantaDesk-debug.apk
           if-no-files-found: error
           retention-days: 14
