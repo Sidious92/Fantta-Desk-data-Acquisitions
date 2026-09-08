@@ -1,4 +1,4 @@
-name: Build FantaNexus APK
+name: Build FantaDesk APK
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
       fantadesk_ref:
         description: FantaDesk ref to build
         required: true
-        default: main
+        default: feat/fantadesk-official-ui-copilot
 
 permissions:
   contents: read
@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: ${{ github.event.inputs.fantadesk_ref || 'main' }}
+          ref: ${{ github.event.inputs.fantadesk_ref || 'feat/fantadesk-official-ui-copilot' }}
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -69,24 +69,38 @@ jobs:
       - name: Generate Capacitor Android project
         working-directory: app
         run: |
-          npx cap init FantaNexus com.fantanexus.app --web-dir=dist
+          npx cap init FantaDesk com.fantadesk.app --web-dir=dist
           npx cap add android
           npx cap sync android
+
+      - name: Apply FantaDesk launcher icon
+        working-directory: app
+        shell: bash
+        run: |
+          set -e
+          ICON="public/fantadesk-logo.png"
+          test -s "$ICON"
+          rm -f android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
+          for dir in mipmap-mdpi mipmap-hdpi mipmap-xhdpi mipmap-xxhdpi mipmap-xxxhdpi; do
+            mkdir -p "android/app/src/main/res/$dir"
+            cp "$ICON" "android/app/src/main/res/$dir/ic_launcher.png"
+            cp "$ICON" "android/app/src/main/res/$dir/ic_launcher_round.png"
+          done
 
       - name: Build debug APK
         working-directory: app/android
         run: ./gradlew assembleDebug --no-daemon
 
       - name: Stage APK
-        run: cp app/android/app/build/outputs/apk/debug/app-debug.apk FantaNexus-complete-debug.apk
+        run: cp app/android/app/build/outputs/apk/debug/app-debug.apk FantaDesk-debug.apk
 
       - name: Verify APK exists
-        run: test -s FantaNexus-complete-debug.apk
+        run: test -s FantaDesk-debug.apk
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: FantaNexus-complete-apk
-          path: FantaNexus-complete-debug.apk
+          name: FantaDesk-official-apk
+          path: FantaDesk-debug.apk
           if-no-files-found: error
           retention-days: 14
