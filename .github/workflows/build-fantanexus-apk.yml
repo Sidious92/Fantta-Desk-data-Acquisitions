@@ -87,18 +87,18 @@ jobs:
           ICON="public/fantadesk-logo.png"
           test -s "$ICON"
 
-          # Remove any outer white/transparent padding, keep only the FantaDesk mark,
-          # then enlarge the visible mark by 20% on a transparent square canvas.
-          magick "$ICON" -alpha on -fuzz 3% -trim +repage /tmp/fd-trim.png
-          W=$(magick identify -format '%w' /tmp/fd-trim.png)
-          H=$(magick identify -format '%h' /tmp/fd-trim.png)
+          # ImageMagick 6 on Ubuntu: strip outer white/transparent padding,
+          # preserve the FantaDesk mark only, then enlarge it by 20%.
+          convert "$ICON" -alpha on -fuzz 3% -trim +repage /tmp/fd-trim.png
+          W=$(identify -format '%w' /tmp/fd-trim.png)
+          H=$(identify -format '%h' /tmp/fd-trim.png)
           BASE=$(( W > H ? W : H ))
           TARGET=$(( BASE * 120 / 100 ))
-          magick /tmp/fd-trim.png -resize "${TARGET}x${TARGET}>" /tmp/fd-logo-120.png
-          TW=$(magick identify -format '%w' /tmp/fd-logo-120.png)
-          TH=$(magick identify -format '%h' /tmp/fd-logo-120.png)
+          convert /tmp/fd-trim.png -resize "${TARGET}x${TARGET}>" /tmp/fd-logo-120.png
+          TW=$(identify -format '%w' /tmp/fd-logo-120.png)
+          TH=$(identify -format '%h' /tmp/fd-logo-120.png)
           CANVAS=$(( TW > TH ? TW : TH ))
-          magick -size "${CANVAS}x${CANVAS}" canvas:none /tmp/fd-logo-120.png -gravity center -composite /tmp/fd-launcher-master.png
+          convert -size "${CANVAS}x${CANVAS}" canvas:none /tmp/fd-logo-120.png -gravity center -composite /tmp/fd-launcher-master.png
 
           rm -f android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
 
@@ -112,7 +112,7 @@ jobs:
           for dir in "${!SIZES[@]}"; do
             size="${SIZES[$dir]}"
             mkdir -p "android/app/src/main/res/$dir"
-            magick /tmp/fd-launcher-master.png -resize "${size}x${size}" "android/app/src/main/res/$dir/ic_launcher.png"
+            convert /tmp/fd-launcher-master.png -resize "${size}x${size}" "android/app/src/main/res/$dir/ic_launcher.png"
             cp "android/app/src/main/res/$dir/ic_launcher.png" "android/app/src/main/res/$dir/ic_launcher_round.png"
           done
 
