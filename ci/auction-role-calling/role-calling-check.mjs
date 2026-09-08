@@ -28,3 +28,4 @@ assert.equal(rules.advanceRequiresAllTeamsComplete, true);
 assert.equal(rules.roleTransitionEvent, 'ROLE_PHASE_ADVANCED');
 
 console.log('Auction role-by-role calling verification PASS');
+// trigger: 2026-09-08 role-calling fix
