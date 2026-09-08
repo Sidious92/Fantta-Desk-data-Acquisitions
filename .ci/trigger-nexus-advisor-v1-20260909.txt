@@ -1,0 +1,1 @@
+Trigger APK build for FantaDesk private main after Nexus Advisor v1 individual pricing merge 59ee0a47bf163c36f0886eb45523608ff22245d5.
