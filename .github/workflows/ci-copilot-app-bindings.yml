@@ -1,0 +1,20 @@
+name: CI Copilot App Bindings
+
+on:
+  pull_request:
+    paths:
+      - 'ci/copilot-app-bindings/**'
+      - '.github/workflows/ci-copilot-app-bindings.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout public runner repo
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run app bindings verification harness
+        run: node ci/copilot-app-bindings/app-bindings-check.mjs
