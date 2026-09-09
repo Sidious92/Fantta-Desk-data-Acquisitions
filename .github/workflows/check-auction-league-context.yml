@@ -19,11 +19,11 @@ jobs:
         env:
           FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
         run: test -n "$FANTADESK_READ_TOKEN"
-      - name: Checkout FantaDesk main
+      - name: Checkout FantaDesk league context advisor lite
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: main
+          ref: feat/league-context-advisor-lite-v1
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -35,10 +35,10 @@ jobs:
         run: npm install --legacy-peer-deps --ignore-scripts
       - name: Tests
         working-directory: app
-        run: npx vitest run src/features/auction/auctionLeagueContext.test.ts src/features/auction/secasHistoricalMarket.test.ts src/features/auction/auctionSession.test.ts
+        run: npx vitest run src/features/auction/auctionLeagueContext.test.ts src/features/auction/secasHistoricalMarket.test.ts src/features/auction/auctionSession.test.ts src/features/auction/leagueContextAdvisorLite.test.ts
       - name: TypeScript and production build
         working-directory: app
         run: |
           npx tsc -b
           npx vite build --base=./
-      # post-merge regression gate: short/long season aliases accepted, true mismatches rejected
+      # feature validation: league budget adapts PMA, modifier gates strategy recommendations, plan fit remains qualitative
