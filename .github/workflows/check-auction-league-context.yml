@@ -41,4 +41,4 @@ jobs:
         run: |
           npx tsc -b
           npx vite build --base=./
-      # validates persisted setup draft, full optional rule UI and auction-only freeze gate
+      # final UX gate: persistent drafts, full optional rules, auction-only context and explicit strategy choice
