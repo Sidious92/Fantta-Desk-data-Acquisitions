@@ -19,11 +19,11 @@ jobs:
         env:
           FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
         run: test -n "$FANTADESK_READ_TOKEN"
-      - name: Checkout FantaDesk main
+      - name: Checkout FantaDesk player popup war room v3
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: main
+          ref: feat/player-popup-warroom-v3
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -41,4 +41,4 @@ jobs:
         run: |
           npx tsc -b
           npx vite build --base=./
-      # post-merge regression gate: league budget adapts PMA, modifier gates strategy recommendations, plan fit remains qualitative
+      # feature validation: popup war room v3 keeps the full Advisor surface visible on tablet landscape without changing auction logic
