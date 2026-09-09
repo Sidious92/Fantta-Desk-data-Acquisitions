@@ -35,9 +35,10 @@ jobs:
         run: npm install --legacy-peer-deps --ignore-scripts
       - name: Tests
         working-directory: app
-        run: npx vitest run src/features/auction/auctionLeagueContext.test.ts src/features/auction/secasHistoricalMarket.test.ts
+        run: npx vitest run src/features/auction/auctionLeagueContext.test.ts src/features/auction/secasHistoricalMarket.test.ts src/features/auction/auctionSession.test.ts
       - name: TypeScript and production build
         working-directory: app
         run: |
           npx tsc -b
           npx vite build --base=./
+      # second pass: legacy session compatibility included
