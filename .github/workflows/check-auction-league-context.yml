@@ -41,4 +41,4 @@ jobs:
         run: |
           npx tsc -b
           npx vite build --base=./
-      # final UX gate: persistent drafts, full optional rules, auction-only context and explicit strategy choice
+      # final post-cleanup gate on private branch; CI authority remains public repo
