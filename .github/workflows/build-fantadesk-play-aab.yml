@@ -6,7 +6,7 @@ on:
       fantadesk_ref:
         description: Private FantaDesk ref
         required: true
-        default: chore/android-play-internal-readiness
+        default: main
       version_code:
         description: Android versionCode (integer, must increase for Play)
         required: true
@@ -140,10 +140,11 @@ jobs:
           export ANDROID_UPLOAD_KEYSTORE_PATH="$RUNNER_TEMP/fantadesk-upload.jks"
           python3 - <<'PY'
           from pathlib import Path
+          import os
           p=Path('android/app/build.gradle')
           s=p.read_text()
-          s=s.replace('versionCode 1', f'versionCode {__import__("os").environ["VERSION_CODE"]}', 1)
-          s=s.replace('versionName "1.0"', f'versionName "{__import__("os").environ["VERSION_NAME"]}"', 1)
+          s=s.replace('versionCode 1', f'versionCode {os.environ["VERSION_CODE"]}', 1)
+          s=s.replace('versionName "1.0"', f'versionName "{os.environ["VERSION_NAME"]}"', 1)
           marker='    buildTypes {'
           signing='''    signingConfigs {\n        release {\n            storeFile file(System.getenv("ANDROID_UPLOAD_KEYSTORE_PATH"))\n            storePassword System.getenv("ANDROID_UPLOAD_STORE_PASSWORD")\n            keyAlias System.getenv("ANDROID_UPLOAD_KEY_ALIAS")\n            keyPassword System.getenv("ANDROID_UPLOAD_KEY_PASSWORD")\n        }\n    }\n'''
           if marker not in s: raise SystemExit('buildTypes marker not found')
