@@ -1,0 +1,220 @@
+name: Build FantaDesk Play AAB
+
+on:
+  workflow_dispatch:
+    inputs:
+      fantadesk_ref:
+        description: Private FantaDesk ref
+        required: true
+        default: chore/android-play-internal-readiness
+      version_code:
+        description: Android versionCode (integer, must increase for Play)
+        required: true
+        default: '1'
+      version_name:
+        description: Android versionName
+        required: true
+        default: '0.1.0'
+
+permissions:
+  contents: read
+
+jobs:
+  build-play-aab:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      APP_ID: com.deepfieldresearch.fantadesk
+      APP_NAME: FantaDesk
+      CAPACITOR_VERSION: 8.5.1
+      EXPECTED_PACKAGE_LOCK_SHA256: a22c8e1ee3b9d81d6cd75cb3af0e5082b7e9f156c860d347f0eb1ac2dbf9557d
+      VERSION_CODE: ${{ github.event.inputs.version_code }}
+      VERSION_NAME: ${{ github.event.inputs.version_name }}
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v4
+
+      - name: Require private-repo and Android upload-key secrets
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+          ANDROID_UPLOAD_KEYSTORE_BASE64: ${{ secrets.ANDROID_UPLOAD_KEYSTORE_BASE64 }}
+          ANDROID_UPLOAD_STORE_PASSWORD: ${{ secrets.ANDROID_UPLOAD_STORE_PASSWORD }}
+          ANDROID_UPLOAD_KEY_ALIAS: ${{ secrets.ANDROID_UPLOAD_KEY_ALIAS }}
+          ANDROID_UPLOAD_KEY_PASSWORD: ${{ secrets.ANDROID_UPLOAD_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          for name in FANTADESK_READ_TOKEN ANDROID_UPLOAD_KEYSTORE_BASE64 ANDROID_UPLOAD_STORE_PASSWORD ANDROID_UPLOAD_KEY_ALIAS ANDROID_UPLOAD_KEY_PASSWORD; do
+            test -n "${!name:-}" || { echo "Missing required secret: $name"; exit 1; }
+          done
+          [[ "$VERSION_CODE" =~ ^[1-9][0-9]*$ ]] || { echo "versionCode must be a positive integer"; exit 1; }
+          test -n "$VERSION_NAME"
+
+      - name: Checkout private FantaDesk authority
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ github.event.inputs.fantadesk_ref }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: app
+          persist-credentials: false
+
+      - name: Setup Node 22.23.2
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+
+      - name: Setup Java 21.0.12
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21.0.12
+
+      - name: Install Android API 36
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDKROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          SDKMANAGER="$(find "$SDKROOT" -type f -name sdkmanager | head -1)"
+          test -x "$SDKMANAGER"
+          yes | "$SDKMANAGER" "platforms;android-36" "build-tools;36.0.0" >/dev/null || true
+          test -d "$SDKROOT/platforms/android-36"
+
+      - name: Recreate deterministic dependency lock
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f package-lock.json
+          npm install --package-lock-only --legacy-peer-deps --ignore-scripts
+          ACTUAL="$(sha256sum package-lock.json | awk '{print $1}')"
+          test "$ACTUAL" = "$EXPECTED_PACKAGE_LOCK_SHA256" || { echo "Dependency lock drift: $ACTUAL"; exit 1; }
+          npm ci --legacy-peer-deps --ignore-scripts
+          node -e "for (const n of ['core','cli','android']) { const p=require('./node_modules/@capacitor/'+n+'/package.json'); if(p.version!==process.env.CAPACITOR_VERSION) throw new Error(n+' '+p.version); }"
+
+      - name: Regression tests and web build
+        working-directory: app
+        run: |
+          npx vitest run src/features/auction/secasHistoricalMarket.test.ts
+          npm run nexus:runtime:build
+          npx tsc -b
+          npx vite build --base=./
+
+      - name: Generate isolated Android project
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e android
+          npx cap init "$APP_NAME" "$APP_ID" --web-dir=dist
+          npx cap add android
+          npx cap sync android
+          grep -Eq 'compileSdkVersion[[:space:]]*=[[:space:]]*36' android/variables.gradle
+          grep -Eq 'targetSdkVersion[[:space:]]*=[[:space:]]*36' android/variables.gradle
+          grep -Eq 'minSdkVersion[[:space:]]*=[[:space:]]*24' android/variables.gradle
+          grep -Fq 'com.android.tools.build:gradle:8.13.0' android/build.gradle
+          grep -Fq 'gradle-8.14.3-' android/gradle/wrapper/gradle-wrapper.properties
+          grep -Fq "applicationId \"$APP_ID\"" android/app/build.gradle
+          grep -Fq "namespace = \"$APP_ID\"" android/app/build.gradle
+          grep -Fq '<string name="app_name">FantaDesk</string>' android/app/src/main/res/values/strings.xml
+
+      - name: Decode ephemeral upload keystore
+        shell: bash
+        env:
+          ANDROID_UPLOAD_KEYSTORE_BASE64: ${{ secrets.ANDROID_UPLOAD_KEYSTORE_BASE64 }}
+        run: |
+          set -euo pipefail
+          umask 077
+          printf '%s' "$ANDROID_UPLOAD_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/fantadesk-upload.jks"
+          test -s "$RUNNER_TEMP/fantadesk-upload.jks"
+
+      - name: Configure generated release signing and version metadata
+        working-directory: app
+        shell: bash
+        env:
+          ANDROID_UPLOAD_STORE_PASSWORD: ${{ secrets.ANDROID_UPLOAD_STORE_PASSWORD }}
+          ANDROID_UPLOAD_KEY_ALIAS: ${{ secrets.ANDROID_UPLOAD_KEY_ALIAS }}
+          ANDROID_UPLOAD_KEY_PASSWORD: ${{ secrets.ANDROID_UPLOAD_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          export ANDROID_UPLOAD_KEYSTORE_PATH="$RUNNER_TEMP/fantadesk-upload.jks"
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('android/app/build.gradle')
+          s=p.read_text()
+          s=s.replace('versionCode 1', f'versionCode {__import__("os").environ["VERSION_CODE"]}', 1)
+          s=s.replace('versionName "1.0"', f'versionName "{__import__("os").environ["VERSION_NAME"]}"', 1)
+          marker='    buildTypes {'
+          signing='''    signingConfigs {\n        release {\n            storeFile file(System.getenv("ANDROID_UPLOAD_KEYSTORE_PATH"))\n            storePassword System.getenv("ANDROID_UPLOAD_STORE_PASSWORD")\n            keyAlias System.getenv("ANDROID_UPLOAD_KEY_ALIAS")\n            keyPassword System.getenv("ANDROID_UPLOAD_KEY_PASSWORD")\n        }\n    }\n'''
+          if marker not in s: raise SystemExit('buildTypes marker not found')
+          s=s.replace(marker, signing+marker, 1)
+          release='''        release {\n'''
+          if release not in s: raise SystemExit('release buildType not found')
+          s=s.replace(release, release+'            signingConfig signingConfigs.release\n', 1)
+          p.write_text(s)
+          PY
+          keytool -list -keystore "$ANDROID_UPLOAD_KEYSTORE_PATH" -storepass "$ANDROID_UPLOAD_STORE_PASSWORD" -alias "$ANDROID_UPLOAD_KEY_ALIAS" >/dev/null
+
+      - name: Preserve existing launcher packaging
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq imagemagick
+          ICON="public/fantadesk-logo.png"; test -s "$ICON"
+          convert "$ICON" -alpha on -fuzz 3% -trim +repage /tmp/fd-trim.png
+          W=$(identify -format '%w' /tmp/fd-trim.png); H=$(identify -format '%h' /tmp/fd-trim.png); BASE=$(( W > H ? W : H )); TARGET=$(( BASE * 120 / 100 ))
+          convert /tmp/fd-trim.png -resize "${TARGET}x${TARGET}>" /tmp/fd-logo-120.png
+          TW=$(identify -format '%w' /tmp/fd-logo-120.png); TH=$(identify -format '%h' /tmp/fd-logo-120.png); CANVAS=$(( TW > TH ? TW : TH ))
+          convert -size "${CANVAS}x${CANVAS}" canvas:none /tmp/fd-logo-120.png -gravity center -composite /tmp/fd-launcher-master.png
+          rm -f android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
+          declare -A SIZES=([mipmap-mdpi]=48 [mipmap-hdpi]=72 [mipmap-xhdpi]=96 [mipmap-xxhdpi]=144 [mipmap-xxxhdpi]=192)
+          for dir in "${!SIZES[@]}"; do size="${SIZES[$dir]}"; mkdir -p "android/app/src/main/res/$dir"; convert /tmp/fd-launcher-master.png -resize "${size}x${size}" "android/app/src/main/res/$dir/ic_launcher.png"; cp "android/app/src/main/res/$dir/ic_launcher.png" "android/app/src/main/res/$dir/ic_launcher_round.png"; done
+
+      - name: Build signed release AAB
+        working-directory: app/android
+        env:
+          ANDROID_UPLOAD_KEYSTORE_PATH: ${{ runner.temp }}/fantadesk-upload.jks
+          ANDROID_UPLOAD_STORE_PASSWORD: ${{ secrets.ANDROID_UPLOAD_STORE_PASSWORD }}
+          ANDROID_UPLOAD_KEY_ALIAS: ${{ secrets.ANDROID_UPLOAD_KEY_ALIAS }}
+          ANDROID_UPLOAD_KEY_PASSWORD: ${{ secrets.ANDROID_UPLOAD_KEY_PASSWORD }}
+        run: ./gradlew bundleRelease --no-daemon
+
+      - name: Verify signed Play bundle and manifest
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          AAB=android/app/build/outputs/bundle/release/app-release.aab
+          test -s "$AAB"
+          jarsigner -verify -strict "$AAB" >/dev/null
+          MANIFEST="$(find android/app/build/intermediates -path '*release*' -name AndroidManifest.xml | grep merged_manifests | head -1)"; test -s "$MANIFEST"
+          ! grep -Fq 'android:debuggable="true"' "$MANIFEST"
+          grep -Fq 'android.permission.INTERNET' "$MANIFEST"
+          strings "$AAB" | grep -Eai '(BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|ANDROID_UPLOAD_(STORE|KEY)_PASSWORD|FANTADESK_READ_TOKEN)' && { echo 'Potential secret material detected'; exit 1; } || true
+          {
+            echo "APP_ID=$APP_ID"
+            echo "APP_NAME=$APP_NAME"
+            echo "VERSION_CODE=$VERSION_CODE"
+            echo "VERSION_NAME=$VERSION_NAME"
+            echo "TARGET_SDK=36"
+            echo "COMPILE_SDK=36"
+            echo "CAPACITOR=$CAPACITOR_VERSION"
+            echo "AAB_SHA256=$(sha256sum "$AAB" | awk '{print $1}')"
+          } > /tmp/play-release-report.txt
+
+      - name: Upload signed Internal Testing AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: FantaDesk-Play-Internal-${{ github.event.inputs.version_code }}
+          path: |
+            app/android/app/build/outputs/bundle/release/app-release.aab
+            /tmp/play-release-report.txt
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Remove upload keystore
+        if: always()
+        shell: bash
+        run: rm -f "$RUNNER_TEMP/fantadesk-upload.jks"
