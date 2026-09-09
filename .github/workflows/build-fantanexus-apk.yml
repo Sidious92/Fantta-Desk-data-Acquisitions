@@ -133,3 +133,5 @@ jobs:
           path: FantaDesk-debug.apk
           if-no-files-found: error
           retention-days: 14
+
+# rebuild trigger: setup-listone return-flow fix merged on private main
