@@ -19,11 +19,11 @@ jobs:
         env:
           FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
         run: test -n "$FANTADESK_READ_TOKEN"
-      - name: Checkout FantaDesk main
+      - name: Checkout FantaDesk season alias fix
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: main
+          ref: fix/auction-season-alias
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -41,4 +41,4 @@ jobs:
         run: |
           npx tsc -b
           npx vite build --base=./
-      # post-merge validation: public CI checks private authority main
+      # regression gate: 26/27 and 2026/27 must be treated as the same season
