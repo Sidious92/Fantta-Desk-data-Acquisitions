@@ -41,4 +41,4 @@ jobs:
         run: |
           npx tsc -b
           npx vite build --base=./
-      # final validation includes latest strategy invalidation and legacy error contract
+      # validates persisted setup draft, full optional rule UI and auction-only freeze gate
