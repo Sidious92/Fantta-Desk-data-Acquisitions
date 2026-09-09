@@ -19,11 +19,11 @@ jobs:
         env:
           FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
         run: test -n "$FANTADESK_READ_TOKEN"
-      - name: Checkout FantaDesk league context advisor lite
+      - name: Checkout FantaDesk main
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: feat/league-context-advisor-lite-v1
+          ref: main
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -41,4 +41,4 @@ jobs:
         run: |
           npx tsc -b
           npx vite build --base=./
-      # feature validation: league budget adapts PMA, modifier gates strategy recommendations, plan fit remains qualitative
+      # post-merge regression gate: league budget adapts PMA, modifier gates strategy recommendations, plan fit remains qualitative
