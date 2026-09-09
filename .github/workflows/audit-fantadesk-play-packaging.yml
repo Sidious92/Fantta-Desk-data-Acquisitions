@@ -1,0 +1,213 @@
+name: Audit FantaDesk Play Packaging
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/audit-fantadesk-play-packaging.yml
+  workflow_dispatch:
+    inputs:
+      fantadesk_ref:
+        description: FantaDesk ref to audit
+        required: true
+        default: chore/android-play-internal-readiness
+
+permissions:
+  contents: read
+
+jobs:
+  audit-play-packaging:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      APP_ID: com.deepfieldresearch.fantadesk
+      APP_NAME: FantaDesk
+      CAPACITOR_VERSION: 8.5.1
+      EXPECTED_PACKAGE_LOCK_SHA256: a22c8e1ee3b9d81d6cd75cb3af0e5082b7e9f156c860d347f0eb1ac2dbf9557d
+      VERSION_CODE: 1
+      VERSION_NAME: 0.1.0
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v4
+
+      - name: Require private-repo token
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+
+      - name: Checkout private FantaDesk authority
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ github.event.inputs.fantadesk_ref || 'chore/android-play-internal-readiness' }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: app
+          persist-credentials: false
+
+      - name: Assert packaging-only private diff
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main --depth=1
+          CHANGED="$(git diff --name-only origin/main...HEAD)"
+          printf '%s\n' "$CHANGED"
+          BAD="$(printf '%s\n' "$CHANGED" | grep -Ev '^(package\.json|package-lock\.json)$' || true)"
+          if [ -n "$BAD" ]; then
+            echo "Non-packaging files changed in Play readiness branch:"
+            echo "$BAD"
+            exit 1
+          fi
+
+      - name: Setup Node 22.23.2
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+
+      - name: Setup Java 21.0.12
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21.0.12
+
+      - name: Install Android API 36
+        shell: bash
+        run: |
+          set -euo pipefail
+          yes | sdkmanager "platforms;android-36" "build-tools;36.0.0" >/dev/null
+
+      - name: Recreate and verify dependency lock
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f package-lock.json
+          npm install --package-lock-only --legacy-peer-deps --ignore-scripts
+          ACTUAL="$(sha256sum package-lock.json | awk '{print $1}')"
+          test "$ACTUAL" = "$EXPECTED_PACKAGE_LOCK_SHA256" || {
+            echo "Dependency lock drift: $ACTUAL"; exit 1;
+          }
+          npm ci --legacy-peer-deps --ignore-scripts
+          node -e "const p=require('./node_modules/@capacitor/core/package.json'); if(p.version!==process.env.CAPACITOR_VERSION) process.exit(1)"
+          node -e "const p=require('./node_modules/@capacitor/cli/package.json'); if(p.version!==process.env.CAPACITOR_VERSION) process.exit(1)"
+          node -e "const p=require('./node_modules/@capacitor/android/package.json'); if(p.version!==process.env.CAPACITOR_VERSION) process.exit(1)"
+
+      - name: Regression tests and web build
+        working-directory: app
+        run: |
+          npx vitest run src/features/auction/secasHistoricalMarket.test.ts
+          npm run nexus:runtime:build
+          npx tsc -b
+          npx vite build --base=./
+
+      - name: Generate isolated Android project
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e android
+          npx cap init "$APP_NAME" "$APP_ID" --web-dir=dist
+          npx cap add android
+          npx cap sync android
+
+      - name: Assert generated Android toolchain
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -Eq 'compileSdkVersion[[:space:]]*=[[:space:]]*36' android/variables.gradle
+          grep -Eq 'targetSdkVersion[[:space:]]*=[[:space:]]*36' android/variables.gradle
+          grep -Eq 'minSdkVersion[[:space:]]*=[[:space:]]*24' android/variables.gradle
+          grep -Fq 'com.android.tools.build:gradle:8.13.0' android/build.gradle
+          grep -Fq 'gradle-8.14.3-' android/gradle/wrapper/gradle-wrapper.properties
+          grep -Fq "applicationId \"$APP_ID\"" android/app/build.gradle
+          grep -Fq "namespace = \"$APP_ID\"" android/app/build.gradle
+          grep -Fq '<string name="app_name">FantaDesk</string>' android/app/src/main/res/values/strings.xml
+
+      - name: Set release version metadata only
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          sed -i -E "s/versionCode [0-9]+/versionCode ${VERSION_CODE}/" android/app/build.gradle
+          sed -i -E "s/versionName \"[^\"]+\"/versionName \"${VERSION_NAME}\"/" android/app/build.gradle
+
+      - name: Preserve existing launcher packaging
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq imagemagick
+          ICON="public/fantadesk-logo.png"
+          test -s "$ICON"
+          convert "$ICON" -alpha on -fuzz 3% -trim +repage /tmp/fd-trim.png
+          W=$(identify -format '%w' /tmp/fd-trim.png); H=$(identify -format '%h' /tmp/fd-trim.png)
+          BASE=$(( W > H ? W : H )); TARGET=$(( BASE * 120 / 100 ))
+          convert /tmp/fd-trim.png -resize "${TARGET}x${TARGET}>" /tmp/fd-logo-120.png
+          TW=$(identify -format '%w' /tmp/fd-logo-120.png); TH=$(identify -format '%h' /tmp/fd-logo-120.png)
+          CANVAS=$(( TW > TH ? TW : TH ))
+          convert -size "${CANVAS}x${CANVAS}" canvas:none /tmp/fd-logo-120.png -gravity center -composite /tmp/fd-launcher-master.png
+          rm -f android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
+          declare -A SIZES=([mipmap-mdpi]=48 [mipmap-hdpi]=72 [mipmap-xhdpi]=96 [mipmap-xxhdpi]=144 [mipmap-xxxhdpi]=192)
+          for dir in "${!SIZES[@]}"; do
+            size="${SIZES[$dir]}"; mkdir -p "android/app/src/main/res/$dir"
+            convert /tmp/fd-launcher-master.png -resize "${size}x${size}" "android/app/src/main/res/$dir/ic_launcher.png"
+            cp "android/app/src/main/res/$dir/ic_launcher.png" "android/app/src/main/res/$dir/ic_launcher_round.png"
+          done
+
+      - name: Build unsigned release AAB and equivalent debug APK
+        working-directory: app/android
+        run: |
+          ./gradlew bundleRelease assembleDebug --no-daemon
+
+      - name: Manifest and release compliance audit
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          AAB=android/app/build/outputs/bundle/release/app-release.aab
+          APK=android/app/build/outputs/apk/debug/app-debug.apk
+          test -s "$AAB"; test -s "$APK"
+          MANIFEST="$(find android/app/build/intermediates -path '*release*' -name AndroidManifest.xml | grep merged_manifests | head -1)"
+          test -n "$MANIFEST"; test -s "$MANIFEST"
+          cp "$MANIFEST" /tmp/AndroidManifest-release.xml
+          grep -Fq 'android.permission.INTERNET' "$MANIFEST"
+          ! grep -Fq 'android:debuggable="true"' "$MANIFEST"
+          grep -Fq 'android:exported="true"' "$MANIFEST"
+          {
+            echo "APP_ID=$APP_ID"
+            echo "APP_NAME=$APP_NAME"
+            echo "VERSION_CODE=$VERSION_CODE"
+            echo "VERSION_NAME=$VERSION_NAME"
+            echo "CAPACITOR=$CAPACITOR_VERSION"
+            echo "COMPILE_SDK=36"
+            echo "TARGET_SDK=36"
+            echo "MIN_SDK=24"
+            echo "AGP=8.13.0"
+            echo "GRADLE=8.14.3"
+            echo "JDK=21.0.12"
+            echo "AAB_SHA256=$(sha256sum "$AAB" | awk '{print $1}')"
+            echo "APK_SHA256=$(sha256sum "$APK" | awk '{print $1}')"
+            echo "--- PERMISSIONS ---"
+            grep -o 'uses-permission[^>]*' "$MANIFEST" || true
+            echo "--- EXPORTED COMPONENTS ---"
+            grep -o '<[^>]*android:exported="true"[^>]*>' "$MANIFEST" || true
+            echo "--- PROVIDER AUTHORITIES ---"
+            grep -o 'android:authorities="[^"]*"' "$MANIFEST" || true
+          } > /tmp/play-packaging-audit.txt
+          ./android/gradlew -p android :app:dependencies --configuration releaseRuntimeClasspath > /tmp/release-dependencies.txt
+
+      - name: Upload unsigned audit outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: FantaDesk-play-packaging-audit
+          path: |
+            app/android/app/build/outputs/bundle/release/app-release.aab
+            app/android/app/build/outputs/apk/debug/app-debug.apk
+            /tmp/AndroidManifest-release.xml
+            /tmp/play-packaging-audit.txt
+            /tmp/release-dependencies.txt
+          if-no-files-found: error
+          retention-days: 14
