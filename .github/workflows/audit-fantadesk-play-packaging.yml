@@ -76,7 +76,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          yes | sdkmanager "platforms;android-36" "build-tools;36.0.0" >/dev/null
+          SDKMANAGER="$(find "${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}" -type f -name sdkmanager | head -1)"
+          test -x "$SDKMANAGER" || { echo "sdkmanager not found in hosted Android SDK"; exit 1; }
+          yes | "$SDKMANAGER" "platforms;android-36" "build-tools;36.0.0" >/dev/null || true
+          test -d "${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}/platforms/android-36"
 
       - name: Recreate and verify dependency lock
         working-directory: app
