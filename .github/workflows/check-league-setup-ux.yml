@@ -38,3 +38,4 @@ jobs:
         run: |
           npx tsc -b
           npx vite build --base=./
+      # UX validation only; no application artifacts are published.
