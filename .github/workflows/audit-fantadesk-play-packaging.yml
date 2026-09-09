@@ -44,13 +44,15 @@ jobs:
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
+          fetch-depth: 2
 
       - name: Assert packaging-only private commit
         working-directory: app
         shell: bash
         run: |
           set -euo pipefail
-          CHANGED="$(git show --pretty='' --name-only HEAD | sed '/^$/d')"
+          test -n "$(git rev-parse HEAD^)"
+          CHANGED="$(git diff --name-only HEAD^ HEAD | sed '/^$/d')"
           printf '%s\n' "$CHANGED"
           BAD="$(printf '%s\n' "$CHANGED" | grep -Ev '^(package\.json|package-lock\.json)$' || true)"
           if [ -n "$BAD" ]; then
