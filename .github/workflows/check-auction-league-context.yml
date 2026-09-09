@@ -19,11 +19,11 @@ jobs:
         env:
           FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
         run: test -n "$FANTADESK_READ_TOKEN"
-      - name: Checkout FantaDesk visual-fix branch
+      - name: Checkout FantaDesk main
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: fix/setup-fantadesk-visual-system
+          ref: main
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -41,4 +41,4 @@ jobs:
         run: |
           npx tsc -b
           npx vite build --base=./
-      # visual-only setup correction: UX unchanged, FantaDesk design tokens restored
+      # post-merge visual gate: UX preserved, canonical FantaDesk design system restored
