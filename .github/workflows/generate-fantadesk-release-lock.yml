@@ -10,7 +10,7 @@ on:
       fantadesk_ref:
         description: FantaDesk ref to lock
         required: true
-        default: main
+        default: chore/android-play-internal-readiness
 
 permissions:
   contents: read
@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: ${{ github.event.inputs.fantadesk_ref || 'main' }}
+          ref: ${{ github.event.inputs.fantadesk_ref || 'chore/android-play-internal-readiness' }}
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
