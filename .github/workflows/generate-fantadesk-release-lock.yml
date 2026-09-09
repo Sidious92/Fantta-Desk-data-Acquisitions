@@ -1,6 +1,10 @@
 name: Generate FantaDesk Release Lock
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/generate-fantadesk-release-lock.yml
   workflow_dispatch:
     inputs:
       fantadesk_ref:
