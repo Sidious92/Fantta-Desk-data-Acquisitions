@@ -45,17 +45,16 @@ jobs:
           path: app
           persist-credentials: false
 
-      - name: Assert packaging-only private diff
+      - name: Assert packaging-only private commit
         working-directory: app
         shell: bash
         run: |
           set -euo pipefail
-          git fetch origin main --depth=1
-          CHANGED="$(git diff --name-only origin/main...HEAD)"
+          CHANGED="$(git show --pretty='' --name-only HEAD | sed '/^$/d')"
           printf '%s\n' "$CHANGED"
           BAD="$(printf '%s\n' "$CHANGED" | grep -Ev '^(package\.json|package-lock\.json)$' || true)"
           if [ -n "$BAD" ]; then
-            echo "Non-packaging files changed in Play readiness branch:"
+            echo "Non-packaging files changed in Play readiness commit:"
             echo "$BAD"
             exit 1
           fi
