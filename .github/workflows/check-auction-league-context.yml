@@ -35,10 +35,18 @@ jobs:
         run: npm install --legacy-peer-deps --ignore-scripts
       - name: Tests
         working-directory: app
-        run: npx vitest run src/features/auction/auctionLeagueContext.test.ts src/features/auction/secasHistoricalMarket.test.ts src/features/auction/auctionSession.test.ts src/features/auction/leagueContextAdvisorLite.test.ts
+        run: >-
+          npx vitest run
+          src/features/auction/auctionLeagueContext.test.ts
+          src/features/auction/secasHistoricalMarket.test.ts
+          src/features/auction/auctionSession.test.ts
+          src/features/auction/leagueContextAdvisorLite.test.ts
+          src/features/auction/nexusPriceBandPolicy.test.ts
+          src/features/auction/secasEmpiricalPriceAuthority.test.ts
+          src/features/auction/secasPlayerAuctionHistory.test.ts
       - name: TypeScript and production build
         working-directory: app
         run: |
           npx tsc -b
           npx vite build --base=./
-      # post-merge validation: larger popup controls and Advisor typography on private main
+      # public CI authority for private FantaDesk auction/advisor main
