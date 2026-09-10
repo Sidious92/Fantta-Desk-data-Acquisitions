@@ -19,11 +19,11 @@ jobs:
         env:
           FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
         run: test -n "$FANTADESK_READ_TOKEN"
-      - name: Checkout FantaDesk main
+      - name: Checkout FantaDesk data-driven budget branch
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: main
+          ref: fix/data-driven-strategy-budget-v1
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -46,11 +46,10 @@ jobs:
           src/features/auction/secasPlayerAuctionHistory.test.ts
           src/features/auction/myTeamBudgetModel.test.ts
           src/features/auction/slotSuggestionDelta.test.ts
-          src/features/auction/strategyBudgetProfiles.test.ts
+          src/features/auction/strategyMarketBudgetAuthority.test.ts
       - name: TypeScript and production build
         working-directory: app
         run: |
           npx tsc -b
           npx vite build --base=./
-      # public CI authority for private FantaDesk auction main
-      # validation target: 8cfb7235099038fa3cb6d9b0680a5380ffd690fb
+      # validation target: data-driven strategy budget authority
