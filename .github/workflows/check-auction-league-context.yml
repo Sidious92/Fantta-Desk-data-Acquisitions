@@ -19,11 +19,11 @@ jobs:
         env:
           FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
         run: test -n "$FANTADESK_READ_TOKEN"
-      - name: Checkout FantaDesk slot-confirm branch
+      - name: Checkout FantaDesk main
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: feat/confirm-slot-on-own-purchase-v1
+          ref: main
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -45,9 +45,10 @@ jobs:
           src/features/auction/secasEmpiricalPriceAuthority.test.ts
           src/features/auction/secasPlayerAuctionHistory.test.ts
           src/features/auction/myTeamBudgetModel.test.ts
+          src/features/auction/slotSuggestionDelta.test.ts
       - name: TypeScript and production build
         working-directory: app
         run: |
           npx tsc -b
           npx vite build --base=./
-      # validation target: 7fe5163aa4e4dbe124fd1f942ec19b3680ef93e1
+      # validation target main: 034fd500928a810fbe0ed8a44dd00c7d48ca38c7
