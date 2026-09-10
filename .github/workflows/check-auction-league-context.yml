@@ -52,4 +52,4 @@ jobs:
         run: |
           npx tsc -b
           npx vite build --base=./
-      # validation target: data-driven strategy budget authority
+      # validation target: data-driven strategy budget authority after slot-count fix
