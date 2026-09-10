@@ -50,3 +50,4 @@ jobs:
           npx tsc -b
           npx vite build --base=./
       # public CI authority for private FantaDesk auction/advisor main
+      # validation target after type-fix merge: 5a06eb09d414a13347c374cb54d657c758155ecb
