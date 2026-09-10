@@ -19,11 +19,11 @@ jobs:
         env:
           FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
         run: test -n "$FANTADESK_READ_TOKEN"
-      - name: Checkout FantaDesk main
+      - name: Checkout FantaDesk operational-slot branch
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: main
+          ref: feat/advisor-operational-slot-budget-v1
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -44,10 +44,11 @@ jobs:
           src/features/auction/nexusPriceBandPolicy.test.ts
           src/features/auction/secasEmpiricalPriceAuthority.test.ts
           src/features/auction/secasPlayerAuctionHistory.test.ts
+          src/features/auction/myTeamBudgetModel.test.ts
       - name: TypeScript and production build
         working-directory: app
         run: |
           npx tsc -b
           npx vite build --base=./
-      # public CI authority for private FantaDesk auction/advisor main
-      # validation target after War Room base v4 merge: 87ec401ea4b571e5eb4c722dae169e7dd4079c3a
+      # public CI authority for private FantaDesk auction/advisor
+      # validation target: feat/advisor-operational-slot-budget-v1
