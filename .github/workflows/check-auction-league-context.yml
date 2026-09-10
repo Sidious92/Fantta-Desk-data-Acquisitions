@@ -19,11 +19,11 @@ jobs:
         env:
           FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
         run: test -n "$FANTADESK_READ_TOKEN"
-      - name: Checkout FantaDesk operational-slot branch
+      - name: Checkout FantaDesk main
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: feat/advisor-operational-slot-budget-v1
+          ref: main
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -50,5 +50,5 @@ jobs:
         run: |
           npx tsc -b
           npx vite build --base=./
-      # public CI authority for private FantaDesk auction/advisor
-      # validation target private head: 6f1fe643829e74fceb8c8c2ec12d1a3f179f47bc
+      # public CI authority for private FantaDesk auction/advisor main
+      # validation target after operational-slot merge: bc88a0aa40414b16675080cda6af907b0ee2e6f1
