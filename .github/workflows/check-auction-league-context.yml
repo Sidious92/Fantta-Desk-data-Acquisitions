@@ -50,4 +50,4 @@ jobs:
         run: |
           npx tsc -b
           npx vite build --base=./
-      # validation target: c132a9e2698572f48a9b6606184d49a20e8edacb
+      # validation target: 7fe5163aa4e4dbe124fd1f942ec19b3680ef93e1
