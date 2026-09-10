@@ -19,11 +19,11 @@ jobs:
         env:
           FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
         run: test -n "$FANTADESK_READ_TOKEN"
-      - name: Checkout FantaDesk main
+      - name: Checkout FantaDesk strategy-budget branch
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: main
+          ref: fix/modifier-core-slot-budget-v1
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -46,9 +46,10 @@ jobs:
           src/features/auction/secasPlayerAuctionHistory.test.ts
           src/features/auction/myTeamBudgetModel.test.ts
           src/features/auction/slotSuggestionDelta.test.ts
+          src/features/auction/strategyBudgetProfiles.test.ts
       - name: TypeScript and production build
         working-directory: app
         run: |
           npx tsc -b
           npx vite build --base=./
-      # validation target main: 034fd500928a810fbe0ed8a44dd00c7d48ca38c7
+      # validation target: strategy-specific budget authority
