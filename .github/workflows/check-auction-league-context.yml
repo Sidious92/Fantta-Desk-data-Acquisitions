@@ -19,11 +19,11 @@ jobs:
         env:
           FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
         run: test -n "$FANTADESK_READ_TOKEN"
-      - name: Checkout FantaDesk main
+      - name: Checkout FantaDesk slot-confirm branch
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: main
+          ref: feat/confirm-slot-on-own-purchase-v1
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -50,5 +50,4 @@ jobs:
         run: |
           npx tsc -b
           npx vite build --base=./
-      # public CI authority for private FantaDesk auction/advisor main
-      # validation target after operational-slot merge: bc88a0aa40414b16675080cda6af907b0ee2e6f1
+      # validation target: c132a9e2698572f48a9b6606184d49a20e8edacb
