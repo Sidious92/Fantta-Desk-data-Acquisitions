@@ -19,11 +19,11 @@ jobs:
         env:
           FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
         run: test -n "$FANTADESK_READ_TOKEN"
-      - name: Checkout FantaDesk strategy-budget branch
+      - name: Checkout FantaDesk main
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: fix/modifier-core-slot-budget-v1
+          ref: main
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -52,4 +52,5 @@ jobs:
         run: |
           npx tsc -b
           npx vite build --base=./
-      # validation target: strategy-specific budget authority
+      # public CI authority for private FantaDesk auction main
+      # validation target: 8cfb7235099038fa3cb6d9b0680a5380ffd690fb
