@@ -64,4 +64,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# experimental validation target: exp/nomination-advisor-v2-high-complexity
+# experimental validation target: exp/nomination-advisor-v2-high-complexity · optimized replacement-loss pass
