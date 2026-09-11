@@ -54,7 +54,7 @@ jobs:
 
       - name: Call engine + Advisor V2 real-listone audits
         working-directory: app
-        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/auctionCallOrder.simulation.test.ts src/features/auction/nominationAdvisorV2.real.test.ts src/features/auction/nominationAdvisorV2.afirst.test.ts
+        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/auctionCallOrder.simulation.test.ts src/features/auction/nominationAdvisorV2.real.test.ts src/features/auction/nominationAdvisorV2.afirst.test.ts src/features/auction/nominationAdvisorV2.noAttackers.test.ts
 
       - name: Typecheck
         working-directory: app
@@ -64,4 +64,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# experimental validation target: exp/nomination-advisor-v2-high-complexity · targeted A-first 25k trajectory audit
+# experimental validation target: exp/nomination-advisor-v2-high-complexity · targeted no-attacker 25k tactical trajectory audit
