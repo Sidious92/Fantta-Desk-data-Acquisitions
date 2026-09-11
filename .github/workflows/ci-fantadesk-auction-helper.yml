@@ -57,4 +57,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# tactical structural v0.3; public CI runner only
+# tactical structural v0.3 optimized slot-quality audit; public CI runner only
