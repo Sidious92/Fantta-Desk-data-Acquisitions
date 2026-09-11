@@ -57,4 +57,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# separated tactical deltas v0.1; public CI runner only
+# optimized separated tactical deltas v0.1; public CI runner only
