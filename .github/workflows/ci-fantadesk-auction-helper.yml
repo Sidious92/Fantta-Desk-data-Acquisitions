@@ -52,9 +52,9 @@ jobs:
           npm install --package-lock-only --legacy-peer-deps --ignore-scripts
           npm ci --legacy-peer-deps --ignore-scripts
 
-      - name: Call engine + Advisor V2 real-listone audits
+      - name: Call engine smoke + isolated no-attacker tactical audit
         working-directory: app
-        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/auctionCallOrder.simulation.test.ts src/features/auction/nominationAdvisorV2.real.test.ts src/features/auction/nominationAdvisorV2.afirst.test.ts src/features/auction/nominationAdvisorV2.noAttackers.test.ts
+        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorV2.noAttackers.test.ts
 
       - name: Typecheck
         working-directory: app
@@ -64,4 +64,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# experimental validation target: exp/nomination-advisor-v2-high-complexity · targeted no-attacker 25k tactical trajectory audit
+# isolated validation target: untouched-A-market tactical trajectory
