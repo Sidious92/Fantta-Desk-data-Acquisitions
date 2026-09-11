@@ -64,4 +64,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# experimental contract v0.1 validation only; private main is never used as CI runner
+# experimental contract v0.1 validation only; right-sized 5k-state audit; public CI runner
