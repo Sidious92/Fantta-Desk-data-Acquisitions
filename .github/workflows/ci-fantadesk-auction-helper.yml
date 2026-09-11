@@ -52,9 +52,9 @@ jobs:
           npm install --package-lock-only --legacy-peer-deps --ignore-scripts
           npm ci --legacy-peer-deps --ignore-scripts
 
-      - name: Auction helper regression and Monte Carlo tests
+      - name: Auction helper regression and real-listone audits
         working-directory: app
-        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisor.test.ts src/features/auction/nominationAdvisor.simulation.test.ts
+        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisor.test.ts src/features/auction/nominationAdvisor.simulation.test.ts src/features/auction/nominationAdvisor.realListone.test.ts
 
       - name: Typecheck
         working-directory: app
@@ -64,4 +64,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# validation target: feat/nomination-advisor-v1 · 50k deep audit
+# validation target: feat/nomination-advisor-v1 · real 532-player listone audit
