@@ -10,7 +10,7 @@ on:
       fantadesk_ref:
         description: FantaDesk ref to validate
         required: true
-        default: fix/auction-dynamic-calling-v1
+        default: exp/nomination-advisor-v2-high-complexity
 
 permissions:
   contents: read
@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: ${{ github.event.inputs.fantadesk_ref || 'fix/auction-dynamic-calling-v1' }}
+          ref: ${{ github.event.inputs.fantadesk_ref || 'exp/nomination-advisor-v2-high-complexity' }}
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -52,9 +52,9 @@ jobs:
           npm install --package-lock-only --legacy-peer-deps --ignore-scripts
           npm ci --legacy-peer-deps --ignore-scripts
 
-      - name: Dynamic call engine regression and stress audits
+      - name: Call engine + Advisor V2 real-listone audits
         working-directory: app
-        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/auctionCallOrder.simulation.test.ts
+        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/auctionCallOrder.simulation.test.ts src/features/auction/nominationAdvisorV2.real.test.ts
 
       - name: Typecheck
         working-directory: app
@@ -64,4 +64,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# validation target: fix/auction-dynamic-calling-v1 · integrated official Secas goalkeeper exemption + large call-engine stress audit
+# experimental validation target: exp/nomination-advisor-v2-high-complexity
