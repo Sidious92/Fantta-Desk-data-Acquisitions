@@ -57,4 +57,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# buyer support scaling v0.1; public CI runner only
+# value-adjusted opponent damage v0.1; public CI runner only
