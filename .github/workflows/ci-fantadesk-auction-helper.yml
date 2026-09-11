@@ -64,4 +64,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# validation target: feat/nomination-advisor-v1 · real 532-player listone audit
+# validation target: feat/nomination-advisor-v1 · goalkeeper excluded from D/C/A gap
