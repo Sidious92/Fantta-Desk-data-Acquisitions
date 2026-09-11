@@ -8,7 +8,7 @@ on:
       fantadesk_ref:
         description: FantaDesk ref to build
         required: true
-        default: main
+        default: feat/nomination-advisor-v1
 
 permissions:
   contents: read
@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: ${{ github.event.inputs.fantadesk_ref || 'main' }}
+          ref: ${{ github.event.inputs.fantadesk_ref || 'feat/nomination-advisor-v1' }}
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -55,9 +55,9 @@ jobs:
         working-directory: app
         run: npm install --legacy-peer-deps --no-package-lock
 
-      - name: Test Secas market authority
+      - name: Test Auction Helper and Nomination Advisor
         working-directory: app
-        run: npx vitest run src/features/auction/secasHistoricalMarket.test.ts
+        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisor.test.ts
 
       - name: Install Android wrapper tooling
         working-directory: app
@@ -86,29 +86,13 @@ jobs:
           sudo apt-get install -y -qq imagemagick
           ICON="public/fantadesk-logo.png"
           test -s "$ICON"
-
-          # Full-bleed launcher: remove every transparent/near-white outer margin,
-          # then scale with cover semantics so the visible mark occupies 100%
-          # of the launcher square. No extra safety padding is reintroduced.
           convert "$ICON" -alpha on -fuzz 3% -trim +repage /tmp/fd-logo-trimmed.png
-
           rm -f android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
-
-          declare -A SIZES=(
-            [mipmap-mdpi]=48
-            [mipmap-hdpi]=72
-            [mipmap-xhdpi]=96
-            [mipmap-xxhdpi]=144
-            [mipmap-xxxhdpi]=192
-          )
+          declare -A SIZES=([mipmap-mdpi]=48 [mipmap-hdpi]=72 [mipmap-xhdpi]=96 [mipmap-xxhdpi]=144 [mipmap-xxxhdpi]=192)
           for dir in "${!SIZES[@]}"; do
             size="${SIZES[$dir]}"
             mkdir -p "android/app/src/main/res/$dir"
-            convert /tmp/fd-logo-trimmed.png \
-              -resize "${size}x${size}^" \
-              -gravity center \
-              -extent "${size}x${size}" \
-              "android/app/src/main/res/$dir/ic_launcher.png"
+            convert /tmp/fd-logo-trimmed.png -resize "${size}x${size}^" -gravity center -extent "${size}x${size}" "android/app/src/main/res/$dir/ic_launcher.png"
             cp "android/app/src/main/res/$dir/ic_launcher.png" "android/app/src/main/res/$dir/ic_launcher_round.png"
           done
 
@@ -117,17 +101,15 @@ jobs:
         run: ./gradlew assembleDebug --no-daemon
 
       - name: Stage APK
-        run: cp app/android/app/build/outputs/apk/debug/app-debug.apk FantaDesk-debug.apk
+        run: cp app/android/app/build/outputs/apk/debug/app-debug.apk FantaDesk-nomination-advisor.apk
 
       - name: Verify APK exists
-        run: test -s FantaDesk-debug.apk
+        run: test -s FantaDesk-nomination-advisor.apk
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: FantaDesk-fullbleed-logo-apk
-          path: FantaDesk-debug.apk
+          name: FantaDesk-nomination-advisor-apk
+          path: FantaDesk-nomination-advisor.apk
           if-no-files-found: error
           retention-days: 14
-
-# launcher icon full-bleed: trimmed mark covers 100% of the square
