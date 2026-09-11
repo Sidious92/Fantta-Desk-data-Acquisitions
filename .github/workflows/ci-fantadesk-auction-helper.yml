@@ -47,9 +47,9 @@ jobs:
           rm -f package-lock.json
           npm install --package-lock-only --legacy-peer-deps --ignore-scripts
           npm ci --legacy-peer-deps --ignore-scripts
-      - name: Call engine + Advisor contract v0.1 quick audit
+      - name: Call engine + Advisor contract v0.1 separated tactical audit
         working-directory: app
-        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorContractV01.quickAudit.test.ts
+        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorContractV01.separation.test.ts
       - name: Typecheck
         working-directory: app
         run: npx tsc -b
@@ -57,4 +57,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# simplified counterfactual state model v0.1; public CI runner only
+# separated tactical deltas v0.1; public CI runner only
