@@ -64,4 +64,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# validation target: feat/nomination-advisor-v1 · deep 30k-state audit
+# validation target: feat/nomination-advisor-v1 · slot-priority/tactical-independence fix
