@@ -1,1 +1,1 @@
-validate private branch fix/role-ordered-call-deadlock-v1 @ 1e2925d8c47b8eb4ee7e4a05dff5cb6bdeb772b6
+validate fix/role-ordered-call-deadlock-v1 @ 257f4bcd0cf0e1bfcf33dbb43ba538b14f98f251
