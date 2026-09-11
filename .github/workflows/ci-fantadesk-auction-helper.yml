@@ -57,4 +57,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# experimental contract v0.1 quick audit; public CI runner only
+# simplified counterfactual state model v0.1; public CI runner only
