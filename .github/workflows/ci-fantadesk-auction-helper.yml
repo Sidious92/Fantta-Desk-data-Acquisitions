@@ -64,4 +64,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# experimental validation target: exp/nomination-advisor-v2-high-complexity · cross-role market calibration over refined timing/depth model
+# experimental validation target: exp/nomination-advisor-v2-high-complexity · simple roster-workload correction over refined timing/depth model
