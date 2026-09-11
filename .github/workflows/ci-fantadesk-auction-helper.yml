@@ -10,7 +10,7 @@ on:
       fantadesk_ref:
         description: FantaDesk ref to validate
         required: true
-        default: fix/auction-dynamic-calling-v1
+        default: feat/nomination-advisor-v1
 
 permissions:
   contents: read
@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: ${{ github.event.inputs.fantadesk_ref || 'fix/auction-dynamic-calling-v1' }}
+          ref: ${{ github.event.inputs.fantadesk_ref || 'feat/nomination-advisor-v1' }}
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -52,9 +52,9 @@ jobs:
           npm install --package-lock-only --legacy-peer-deps --ignore-scripts
           npm ci --legacy-peer-deps --ignore-scripts
 
-      - name: Auction call-order regression tests
+      - name: Auction helper regression tests
         working-directory: app
-        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts
+        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisor.test.ts
 
       - name: Typecheck
         working-directory: app
