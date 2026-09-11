@@ -1,4 +1,4 @@
-name: CI FantaDesk public UI polish
+name: CI FantaDesk main
 
 on:
   push:
@@ -25,11 +25,11 @@ jobs:
         run: |
           test -n "$FANTADESK_READ_TOKEN"
 
-      - name: Checkout private FantaDesk branch
+      - name: Checkout private FantaDesk main
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: feat/public-ui-polish-v1
+          ref: main
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
