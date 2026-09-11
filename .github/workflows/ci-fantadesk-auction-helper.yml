@@ -64,4 +64,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# validation target: feat/nomination-advisor-v1
+# validation target: feat/nomination-advisor-v1 · urgency model v2
