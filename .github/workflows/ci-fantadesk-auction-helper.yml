@@ -47,7 +47,7 @@ jobs:
           rm -f package-lock.json
           npm install --package-lock-only --legacy-peer-deps --ignore-scripts
           npm ci --legacy-peer-deps --ignore-scripts
-      - name: Call engine + Advisor contract v0.1 damage diagnostic
+      - name: Call engine + Advisor contract v0.1 independent damage audit
         working-directory: app
         run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorContractV01.separation.test.ts
       - name: Typecheck
@@ -57,4 +57,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# opponent-damage diagnostic only; public CI runner only
+# independent opponent-damage question; public CI runner only
