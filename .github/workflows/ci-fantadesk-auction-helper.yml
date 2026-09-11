@@ -63,3 +63,5 @@ jobs:
       - name: Web build
         working-directory: app
         run: npx vite build --base=./
+
+# validation target: feat/nomination-advisor-v1
