@@ -57,4 +57,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# 6000-state separated tactical deltas v0.1; public CI runner only
+# calibrated buyer plausibility v0.1; public CI runner only
