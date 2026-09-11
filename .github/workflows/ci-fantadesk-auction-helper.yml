@@ -10,7 +10,7 @@ on:
       fantadesk_ref:
         description: FantaDesk ref to validate
         required: true
-        default: exp/nomination-advisor-v2-high-complexity
+        default: exp/nomination-advisor-contract-v0.1
 
 permissions:
   contents: read
@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: ${{ github.event.inputs.fantadesk_ref || 'exp/nomination-advisor-v2-high-complexity' }}
+          ref: ${{ github.event.inputs.fantadesk_ref || 'exp/nomination-advisor-contract-v0.1' }}
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -52,9 +52,9 @@ jobs:
           npm install --package-lock-only --legacy-peer-deps --ignore-scripts
           npm ci --legacy-peer-deps --ignore-scripts
 
-      - name: Call engine smoke + isolated no-attacker tactical audit
+      - name: Call engine + Advisor contract v0.1 simulations
         working-directory: app
-        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorV2.noAttackers.test.ts
+        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorContractV01.simulation.test.ts
 
       - name: Typecheck
         working-directory: app
@@ -64,4 +64,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# isolated validation target: untouched-A-market tactical trajectory
+# experimental contract v0.1 validation only; private main is never used as CI runner
