@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: 7b99cc5ae7df9b68dd083d612cbca590b76aab72
+          ref: b2cf0605f1d6b237213314734c7316a461fb3685
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -32,7 +32,7 @@ jobs:
 
       - name: Assert exact private SHA
         working-directory: app
-        run: test "$(git rev-parse HEAD)" = "7b99cc5ae7df9b68dd083d612cbca590b76aab72"
+        run: test "$(git rev-parse HEAD)" = "b2cf0605f1d6b237213314734c7316a461fb3685"
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -43,9 +43,9 @@ jobs:
         working-directory: app
         run: npm install --legacy-peer-deps --no-package-lock
 
-      - name: Run Buy Advisor tests
+      - name: Run Buy Advisor tests and real-listone simulation
         working-directory: app
-        run: npx vitest run src/features/auction/buyAdvisorV01.test.ts --reporter=verbose
+        run: npx vitest run src/features/auction/buyAdvisorV01.test.ts src/features/auction/buyAdvisorV01.realSimulation.test.ts --reporter=verbose
 
       - name: Typecheck
         working-directory: app
