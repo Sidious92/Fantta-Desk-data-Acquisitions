@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: a88fa4dc2a4ef98e7dc1bceb3c6372aa6957653d
+          ref: 494a1fc224940ca8de5e2c4a7e1d4dfe1a559a2a
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -35,7 +35,7 @@ jobs:
 
       - name: Assert exact private SHA
         working-directory: app
-        run: test "$(git rev-parse HEAD)" = "a88fa4dc2a4ef98e7dc1bceb3c6372aa6957653d"
+        run: test "$(git rev-parse HEAD)" = "494a1fc224940ca8de5e2c4a7e1d4dfe1a559a2a"
 
       - name: Setup Node 22.23.2
         uses: actions/setup-node@v4
@@ -54,7 +54,7 @@ jobs:
 
       - name: Validate auction, advisor, export and injury integration
         working-directory: app
-        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorPresentationV01.test.ts src/features/auction/fantacalcioLeagueExport.test.ts src/features/auction/injurySnapshot20260912.test.ts src/features/auction/PlayerInjuryNotice.test.tsx
+        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorPresentationV01.test.ts src/features/auction/nominationAdvisorTacticalV06.activation.test.ts src/features/auction/fantacalcioLeagueExport.test.ts src/features/auction/injurySnapshot20260912.test.ts src/features/auction/PlayerInjuryNotice.test.tsx
 
       - name: Install Android wrapper tooling
         working-directory: app
