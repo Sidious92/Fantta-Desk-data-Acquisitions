@@ -12,7 +12,7 @@ permissions:
 jobs:
   audit-real-simulations:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - name: Checkout public runner
         uses: actions/checkout@v4
@@ -50,6 +50,7 @@ jobs:
         working-directory: app
         run: |
           npx vitest run \
+            src/features/auction/nominationAdvisorContractV01.simulation.test.ts \
             src/features/auction/nominationAdvisorTacticalV06.activation.test.ts \
             src/features/auction/nominationAdvisorTacticalV06.strengthAudit.sim.test.ts \
             src/features/auction/nominationAdvisorTacticalV06.targetedAudit.sim.test.ts \
