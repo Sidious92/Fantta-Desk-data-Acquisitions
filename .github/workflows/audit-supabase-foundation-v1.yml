@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: 1c2e82184cbd012c1984744c068a1b1401dd25f8
+          ref: cea1b6d742657e5092002353aa05815392ac2b4e
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -33,7 +33,7 @@ jobs:
 
       - name: Assert exact private SHA
         working-directory: app
-        run: test "$(git rev-parse HEAD)" = "1c2e82184cbd012c1984744c068a1b1401dd25f8"
+        run: test "$(git rev-parse HEAD)" = "cea1b6d742657e5092002353aa05815392ac2b4e"
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -50,7 +50,7 @@ jobs:
 
       - name: Run core auction tests
         working-directory: app
-        run: npx vitest run src/features/auction/auctionSession.test.ts src/features/auction/auctionCallOrder.test.ts src/features/auction/buyAdvisorV01.test.ts
+        run: npx vitest run src/features/auction/auctionSession.test.ts src/features/auction/auctionCallOrder.test.ts src/features/auction/buyAdvisorV01.test.ts src/features/auction/auctionLedger.test.ts
 
       - name: Build web app
         working-directory: app
