@@ -47,9 +47,9 @@ jobs:
           rm -f package-lock.json
           npm install --package-lock-only --legacy-peer-deps --ignore-scripts
           npm ci --legacy-peer-deps --ignore-scripts
-      - name: Call engine + Tactical v0.6 strength simulations
+      - name: Call engine + advisor presentation contract
         working-directory: app
-        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorTacticalV06.strengthAudit.sim.test.ts
+        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorPresentationV01.test.ts
       - name: Typecheck
         working-directory: app
         run: npx tsc -b
@@ -57,4 +57,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# tactical v0.6 optimized mechanism-strength audit; public CI runner only
+# presentation integration validation; public CI runner only
