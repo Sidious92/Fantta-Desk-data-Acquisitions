@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: 9fad63c67d7764dc865daf0c07431b3f073be530
+          ref: a88fa4dc2a4ef98e7dc1bceb3c6372aa6957653d
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -35,7 +35,7 @@ jobs:
 
       - name: Assert exact private SHA
         working-directory: app
-        run: test "$(git rev-parse HEAD)" = "9fad63c67d7764dc865daf0c07431b3f073be530"
+        run: test "$(git rev-parse HEAD)" = "a88fa4dc2a4ef98e7dc1bceb3c6372aa6957653d"
 
       - name: Setup Node 22.23.2
         uses: actions/setup-node@v4
