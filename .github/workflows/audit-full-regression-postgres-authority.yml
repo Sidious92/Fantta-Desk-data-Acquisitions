@@ -12,7 +12,7 @@ permissions:
 jobs:
   full-regression:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - name: Require private-repo token
@@ -23,20 +23,37 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: f8907b0dc10221173d76fa0d2b0a3b0a211b544d
+          ref: b8a72276e1299810ed7100ae1ef3d1bcd7de63fa
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
           fetch-depth: 1
       - name: Assert exact private SHA
         working-directory: app
-        run: test "$(git rev-parse HEAD)" = "f8907b0dc10221173d76fa0d2b0a3b0a211b544d"
+        run: test "$(git rev-parse HEAD)" = "b8a72276e1299810ed7100ae1ef3d1bcd7de63fa"
       - uses: actions/setup-node@v4
         with:
           node-version: 22.23.2
       - name: Install dependencies
         working-directory: app
         run: npm install --legacy-peer-deps --no-package-lock
+      - name: Typecheck
+        working-directory: app
+        run: npm run typecheck
       - name: Run full test suite
         working-directory: app
-        run: npx vitest run --reporter=verbose
+        shell: bash
+        run: |
+          set -o pipefail
+          npx vitest run --reporter=verbose 2>&1 | tee full-regression.log
+      - name: Build web app
+        working-directory: app
+        run: npm run build
+      - name: Upload full regression log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-regression-log-${{ github.run_id }}
+          path: app/full-regression.log
+          if-no-files-found: warn
+          retention-days: 7
