@@ -1,0 +1,56 @@
+name: Audit Nomination Advisor Real Simulations
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/audit-nomination-advisor-real-simulations.yml
+
+permissions:
+  contents: read
+
+jobs:
+  audit-real-simulations:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v4
+
+      - name: Require private-repo token
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+
+      - name: Checkout exact private FantaDesk main
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 4353147a552ee60f11cdfd8a015c7796649a79b1
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: app
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Assert exact private SHA
+        working-directory: app
+        run: test "$(git rev-parse HEAD)" = "4353147a552ee60f11cdfd8a015c7796649a79b1"
+
+      - name: Setup Node 22.23.2
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+
+      - name: Install dependencies
+        working-directory: app
+        run: npm install --legacy-peer-deps --no-package-lock
+
+      - name: Run real-player advisor simulations
+        working-directory: app
+        run: |
+          npx vitest run \
+            src/features/auction/nominationAdvisorTacticalV06.activation.test.ts \
+            src/features/auction/nominationAdvisorTacticalV06.strengthAudit.sim.test.ts \
+            src/features/auction/nominationAdvisorTacticalV06.targetedAudit.sim.test.ts \
+            --reporter=verbose
