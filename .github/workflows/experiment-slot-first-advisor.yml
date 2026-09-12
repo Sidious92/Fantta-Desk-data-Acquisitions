@@ -1,0 +1,102 @@
+name: Experiment Slot-First Nomination Advisor
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/experiment-slot-first-advisor.yml
+
+permissions:
+  contents: read
+
+jobs:
+  slot-first-experiment:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require private-repo token
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+      - name: Checkout exact private FantaDesk main
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 4353147a552ee60f11cdfd8a015c7796649a79b1
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: app
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+      - name: Install dependencies
+        working-directory: app
+        run: npm install --legacy-peer-deps --no-package-lock
+      - name: Write temporary slot-first experiment
+        working-directory: app
+        shell: bash
+        run: |
+          cat > src/features/auction/slotFirstAdvisor.experiment.test.ts <<'EOF'
+          import { describe, it } from 'vitest';
+          import type { ClassicRole, Player } from '../../db/schema';
+          import type { AuctionDerivedState } from './auctionLedger';
+          import { evaluateCallRoles } from './auctionCallOrder';
+          import type { ContractCallContext } from './nominationAdvisorContractV01';
+          import { buildNominationAdvisorTacticalV06 } from './nominationAdvisorTacticalV06';
+          import { REAL_POST_MARKET_LISTONE_2026_27 } from './realPostMarketListone2026';
+
+          const ROLES: ClassicRole[]=['P','D','C','A'];
+          const CAPS:Record<ClassicRole,number>={P:3,D:8,C:8,A:6};
+          type M=ReturnType<typeof manager>;
+          function manager(i:number){return{managerId:`T${i+1}`,name:`T${i+1}`,callOrderPosition:i,hotkey:String(i+1),isUs:i===0,initialCredits:400,creditsRemaining:400,purchasedTotal:0,purchasedByRole:{P:0,D:0,C:0,A:0} as Record<ClassicRole,number>,remainingSlotsByRole:{...CAPS},remainingSlotsTotal:25};}
+          function rng(seed:number){let x=seed>>>0;return()=>{x^=x<<13;x^=x>>>17;x^=x<<5;return(x>>>0)/0x100000000;};}
+          const pools=Object.fromEntries(ROLES.map(role=>[role,REAL_POST_MARKET_LISTONE_2026_27.filter(p=>p.classicRole===role).sort((a,b)=>b.quotation-a.quotation||a.id-b.id)])) as Record<ClassicRole,Player[]>;
+          function auction(ms:M[],sold:Set<number>):AuctionDerivedState{return{session:{ourManagerId:'T1'} as AuctionDerivedState['session'],managers:ms.map(m=>({...m,purchasedByRole:{...m.purchasedByRole},remainingSlotsByRole:{...m.remainingSlotsByRole}})),activeSales:[],soldPlayerIds:sold,saleByPlayerId:new Map(),spentCreditsByManager:new Map()};}
+          function sell(rand:()=>number,ms:M[],sold:Set<number>,mode:'GEN'|'A'|'NOA'){
+            const bag:ClassicRole[]=mode==='A'?['A']:mode==='NOA'?['P','D','D','D','C','C','C']:['P','D','D','C','C','A','A']; let role:ClassicRole='D';
+            for(let z=0;z<30;z++){const q=bag[Math.floor(rand()*bag.length)];if(ms.some(m=>m.remainingSlotsByRole[q]>0)){role=q;break;}}
+            const buyers=ms.filter(m=>m.remainingSlotsByRole[role]>0); const buyer=buyers[Math.floor(rand()*buyers.length)];
+            const av=pools[role].filter(p=>!sold.has(p.id)); const p=av[Math.floor(rand()*Math.max(1,Math.ceil(av.length*.35)))];
+            sold.add(p.id); buyer.purchasedByRole[role]++; buyer.remainingSlotsByRole[role]--; buyer.purchasedTotal++; buyer.remainingSlotsTotal--;
+            const price=Math.max(1,Math.round(p.quotation*(.85+rand()*1.35))); buyer.creditsRemaining=Math.max(buyer.remainingSlotsTotal,buyer.creditsRemaining-Math.min(price,Math.max(0,buyer.creditsRemaining-buyer.remainingSlotsTotal)));
+          }
+          function allowed(us:M,n:number){return n<24?ROLES.filter(r=>us.remainingSlotsByRole[r]>0):evaluateCallRoles(us,{roleCallMode:'FREE',threePlayerGapRule:true} as Parameters<typeof evaluateCallRoles>[1],null,true).allowed;}
+          function ctx(n:number):ContractCallContext{return n<24?{phase:'FIXED_OPENING_ROUNDS',openingRound:n<8?1:n<16?2:3,fixedCallCursor:0}:{phase:'DYNAMIC_CALL_ORDER',openingRound:null,fixedCallCursor:0};}
+          type AnyRec={name:string;role:ClassicRole;tier?:string;score:number;tacticalStrength?:string;expectedPrice:number};
+          function slotRank(items:AnyRec[]){
+            const groups=new Map<string,AnyRec[]>();
+            for(const x of items){const key=`${x.role}:${x.tier??'UNK'}`;const a=groups.get(key)??[];a.push(x);groups.set(key,a);}
+            return [...groups.entries()].map(([slot,a])=>{
+              a.sort((x,y)=>y.score-x.score); const top=a.slice(0,3); const slotScore=top.reduce((s,x)=>s+x.score,0)/top.length;
+              const strong=top.filter(x=>x.tacticalStrength==='FORTE').length;
+              return {slot,slotScore:+slotScore.toFixed(1),support:a.length,strongTop3:strong,candidates:top.map(x=>`${x.name}(${x.expectedPrice})`)};
+            }).sort((a,b)=>b.slotScore-a.slotScore||b.support-a.support||a.slot.localeCompare(b.slot));
+          }
+          function output(ms:M[],sold:Set<number>,n:number){
+            const out=buildNominationAdvisorTacticalV06({auction:auction(ms,sold),players:REAL_POST_MARKET_LISTONE_2026_27,allowedRoles:allowed(ms[0],n),strategyId:'BALANCED_VALUE',auctionBase:'CURRENT_QUOTATION',callContext:ctx(n),limit:30});
+            return {own:slotRank(out.own as AnyRec[]),future:slotRank(out.futureAdvantage as AnyRec[]),structural:slotRank(out.structuralDamage as AnyRec[])};
+          }
+          function dist(mode:'GEN'|'A'|'NOA',n:number,sims:number,seed:number){const rand=rng(seed);const counts={own:new Map<string,number>(),future:new Map<string,number>(),structural:new Map<string,number>(),none:{own:0,future:0,structural:0}}; const examples:any[]=[];
+            for(let s=0;s<sims;s++){const ms=Array.from({length:8},(_,i)=>manager(i)),sold=new Set<number>();for(let k=0;k<n;k++)sell(rand,ms,sold,mode);const o=output(ms,sold,n);
+              for(const k of ['own','future','structural'] as const){const slot=o[k][0]?.slot;if(slot)counts[k].set(slot,(counts[k].get(slot)??0)+1);else counts.none[k]++;}
+              if(s<3)examples.push({own:o.own.slice(0,3),future:o.future.slice(0,3),structural:o.structural.slice(0,3)});
+            }
+            const conv=(m:Map<string,number>)=>[...m.entries()].sort((a,b)=>b[1]-a[1]).map(([slot,c])=>[slot,+((100*c/sims).toFixed(1))]);
+            return {mode,n,sims,own:conv(counts.own),future:conv(counts.future),structural:conv(counts.structural),none:{own:+((100*counts.none.own/sims).toFixed(1)),future:+((100*counts.none.future/sims).toFixed(1)),structural:+((100*counts.none.structural/sims).toFixed(1))},examples};}
+
+          describe('slot-first advisor experiment',()=>{it('prints real-player slot-first prototype',()=>{
+            const openingMs=Array.from({length:8},(_,i)=>manager(i)); const opening=output(openingMs,new Set(),0);
+            const reports:any[]=[{opening:{own:opening.own.slice(0,5),future:opening.future.slice(0,5),structural:opening.structural.slice(0,5)}}];
+            for(const n of [8,16,24,32,40])reports.push(dist('GEN',n,150,7000+n));
+            for(const n of [16,32,40])reports.push(dist('A',n,75,8000+n));
+            for(const n of [16,32,40])reports.push(dist('NOA',n,75,9000+n));
+            console.log('SLOT_FIRST_EXPERIMENT='+JSON.stringify(reports));
+          },180000);});
+          EOF
+      - name: Run slot-first experiment
+        working-directory: app
+        run: npx vitest run src/features/auction/slotFirstAdvisor.experiment.test.ts --reporter=verbose
