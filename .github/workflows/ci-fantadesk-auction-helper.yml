@@ -57,4 +57,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# decision layer v0.1; public CI runner only
+# decision layer v0.1 using buyer-supported tactical strength; public CI runner only
