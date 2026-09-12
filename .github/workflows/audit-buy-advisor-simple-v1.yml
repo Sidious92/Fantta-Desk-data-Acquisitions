@@ -1,0 +1,52 @@
+name: Audit Buy Advisor Simple V1
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/audit-buy-advisor-simple-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit-buy-advisor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Require private-repo token
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+
+      - name: Checkout exact private FantaDesk feature SHA
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 7b99cc5ae7df9b68dd083d612cbca590b76aab72
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: app
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Assert exact private SHA
+        working-directory: app
+        run: test "$(git rev-parse HEAD)" = "7b99cc5ae7df9b68dd083d612cbca590b76aab72"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+
+      - name: Install dependencies
+        working-directory: app
+        run: npm install --legacy-peer-deps --no-package-lock
+
+      - name: Run Buy Advisor tests
+        working-directory: app
+        run: npx vitest run src/features/auction/buyAdvisorV01.test.ts --reporter=verbose
+
+      - name: Typecheck
+        working-directory: app
+        run: npx tsc --noEmit
