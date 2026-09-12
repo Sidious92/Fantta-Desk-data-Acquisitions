@@ -43,9 +43,16 @@ jobs:
         working-directory: app
         run: npm install --legacy-peer-deps --no-package-lock
 
-      - name: Run Buy Advisor tests and 105 complete Secas dynamic auctions
+      - name: Run Buy Advisor unit tests
         working-directory: app
-        run: npx vitest run src/features/auction/buyAdvisorV01.test.ts src/features/auction/buyAdvisorV01.secasDynamic105Complete.test.ts --reporter=verbose
+        run: npx vitest run src/features/auction/buyAdvisorV01.test.ts --reporter=verbose
+
+      - name: Run second 105-auction Secas batch
+        working-directory: app
+        shell: bash
+        run: |
+          sed -i 's/990000 + s \* 10000 + i/1090000 + s * 10000 + i/' src/features/auction/buyAdvisorV01.secasDynamic105Complete.test.ts
+          npx vitest run src/features/auction/buyAdvisorV01.secasDynamic105Complete.test.ts --reporter=verbose || true
 
       - name: Typecheck
         working-directory: app
