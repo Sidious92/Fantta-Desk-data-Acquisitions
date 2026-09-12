@@ -1,0 +1,57 @@
+name: Audit Supabase Foundation V1
+
+on:
+  push:
+    paths:
+      - '.github/workflows/audit-supabase-foundation-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-supabase-foundation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Require private-repo token
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+
+      - name: Checkout exact private FantaDesk SHA
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 248f8f1479c4d27e3c7794ddc0b1c1edbd794458
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: app
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Assert exact private SHA
+        working-directory: app
+        run: test "$(git rev-parse HEAD)" = "248f8f1479c4d27e3c7794ddc0b1c1edbd794458"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        working-directory: app
+        run: npm install --legacy-peer-deps --no-package-lock
+
+      - name: Typecheck
+        working-directory: app
+        run: npm run typecheck
+
+      - name: Run core auction tests
+        working-directory: app
+        run: npx vitest run src/features/auction/auctionSession.test.ts src/features/auction/auctionCallOrder.test.ts src/features/auction/buyAdvisorV01.test.ts
+
+      - name: Build web app
+        working-directory: app
+        run: npm run build
