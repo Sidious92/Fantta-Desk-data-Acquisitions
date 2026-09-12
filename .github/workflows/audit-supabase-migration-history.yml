@@ -1,0 +1,118 @@
+name: Supabase Migration History Audit
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/audit-supabase-migration-history.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  migrate-clean-postgres:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: fantadesk_migration_audit
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d fantadesk_migration_audit"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: fantadesk_migration_audit
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require private-repo token
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+      - name: Checkout exact private FantaDesk SHA
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: eda1bd05c2146e7c0170b09ac5cbd3d7b54b80b1
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: app
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Assert exact private SHA
+        working-directory: app
+        run: test "$(git rev-parse HEAD)" = "eda1bd05c2146e7c0170b09ac5cbd3d7b54b80b1"
+      - name: Assert migration version parity manifest
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected=$(cat <<'EOF'
+          20260912202755_001_core_operational_schema.sql
+          20260912202821_002_ledger_reversals_and_integrity.sql
+          20260912202850_003_security_hardening.sql
+          20260912202911_004_rls_and_index_tuning.sql
+          20260912203207_005_league_config_versions.sql
+          20260912203215_006_league_config_versions_rls.sql
+          20260912203259_007_lock_league_config_during_live.sql
+          20260912203305_008_guard_auction_config_mutations.sql
+          20260912203322_009_block_league_change_function.sql
+          20260912203329_010_guard_league_mutations.sql
+          20260912203342_011_freeze_config_on_auction_start.sql
+          20260912203351_012_guard_auction_start_trigger.sql
+          20260912203403_013_config_version_rls_owner_insert.sql
+          20260912203412_014_trigger_function_execute_lockdown.sql
+          20260912203419_015_live_config_guard_service_exec.sql
+          20260912203732_016_replace_current_listone_rpc.sql
+          20260912204451_017_remote_auction_bootstrap.sql
+          20260912205003_018_enforce_remote_sale_legality.sql
+          20260912205826_019_close_remote_auction_session.sql
+          20260912210119_020_sync_remote_auction_runtime.sql
+          20260912212619_021_strategic_runtime_state.sql
+          20260912212748_022_clear_team_slot_assignment.sql
+          20260912212830_023_snapshot_strategy_on_auction_start.sql
+          20260912212940_024_index_slot_assignment_sale_event.sql
+          20260912213745_025_operational_injury_snapshot.sql
+          20260912213912_026_ignore_stale_injury_snapshot.sql
+          20260912220213_027_prelive_setup_and_strategy_authority.sql
+          20260912220848_028_prelive_rls_initplan.sql
+          20260912221450_029_setup_ui_state.sql
+          EOF
+          )
+          actual=$(find supabase/migrations -maxdepth 1 -type f -name '*.sql' -printf '%f\n' | sort)
+          diff -u <(printf '%s\n' "$expected" | sed 's/^          //' | sed '/^$/d') <(printf '%s\n' "$actual")
+      - name: Bootstrap Supabase-compatible roles and auth helper
+        shell: bash
+        run: |
+          psql -v ON_ERROR_STOP=1 <<'SQL'
+          create role anon nologin;
+          create role authenticated nologin;
+          create role service_role nologin;
+          create schema auth;
+          create schema extensions;
+          create or replace function auth.uid() returns uuid language sql stable as $$ select null::uuid $$;
+          SQL
+      - name: Apply all migrations to clean PostgreSQL
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          for migration in $(find supabase/migrations -maxdepth 1 -type f -name '*.sql' | sort); do
+            echo "==> $migration"
+            psql -v ON_ERROR_STOP=1 -f "$migration"
+          done
+      - name: Verify reconstructed schema surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(psql -Atqc "select count(*) from pg_tables where schemaname='public' and tablename in ('leagues','listone_imports','players','auction_configs','auction_sessions','auction_managers','auction_events','injury_status','app_settings','league_config_versions','league_strategy_preferences','auction_slot_assignments','league_setup_state','league_player_strategy_profiles')")" = "14"
+          test "$(psql -Atqc "select count(*) from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.proname in ('replace_current_listone','start_auction_session','append_auction_sale','undo_auction_sale','close_auction_session','sync_auction_runtime_state','save_my_team_slot_assignment','clear_my_team_slot_assignment','replace_current_injury_snapshot')")" = "9"
+          test "$(psql -Atqc "select count(*) from pg_tables where schemaname='public' and rowsecurity")" -ge "14"
