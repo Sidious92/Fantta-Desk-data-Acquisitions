@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: 0b6afc73b637b6378c097a2398693397d40e56a0
+          ref: 6b9ac688f840426a4b897b812202895e2597f8b8
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -32,7 +32,7 @@ jobs:
 
       - name: Assert exact private SHA
         working-directory: app
-        run: test "$(git rev-parse HEAD)" = "0b6afc73b637b6378c097a2398693397d40e56a0"
+        run: test "$(git rev-parse HEAD)" = "6b9ac688f840426a4b897b812202895e2597f8b8"
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -45,7 +45,7 @@ jobs:
 
       - name: Run authority tests
         working-directory: app
-        run: npx vitest run src/features/auction/auctionSession.test.ts src/features/auction/auctionLedger.test.ts src/features/auction/nominationAdvisorPresentationV01.test.ts src/features/targets/targetRepository.test.ts src/features/auction/injurySnapshot20260912.test.ts --reporter=verbose
+        run: npx vitest run src/features/auction/auctionSession.test.ts src/features/auction/auctionLedger.test.ts src/features/auction/nominationAdvisorPresentationV01.test.ts src/features/targets/targetRepository.test.ts src/features/auction/injurySnapshot20260912.test.ts src/features/settings/leagueRules.persistence.test.ts --reporter=verbose
 
       - name: Typecheck
         working-directory: app
