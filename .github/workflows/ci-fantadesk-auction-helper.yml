@@ -57,4 +57,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# presentation integration validation; public CI runner only
+# live advisor UI integration validation; public CI runner only
