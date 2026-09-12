@@ -1,0 +1,112 @@
+name: Build Current Advisor APK
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/build-current-advisor-apk.yml
+
+permissions:
+  contents: read
+
+jobs:
+  build-current-advisor-apk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v4
+
+      - name: Require private-repo token
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+
+      - name: Checkout exact private FantaDesk authority
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 20e2ab89a04bc8df940e02459da78b625481be69
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: app
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Assert exact private SHA
+        working-directory: app
+        run: test "$(git rev-parse HEAD)" = "20e2ab89a04bc8df940e02459da78b625481be69"
+
+      - name: Setup Node 22.23.2
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Install app dependencies
+        working-directory: app
+        run: npm install --legacy-peer-deps --no-package-lock
+
+      - name: Validate advisor integration
+        working-directory: app
+        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorPresentationV01.test.ts
+
+      - name: Install Android wrapper tooling
+        working-directory: app
+        run: npm install --no-save --legacy-peer-deps --no-package-lock @capacitor/core@latest @capacitor/cli@latest @capacitor/android@latest
+
+      - name: Build complete web app
+        working-directory: app
+        run: |
+          npm run nexus:runtime:build
+          npx tsc -b
+          npx vite build --base=./
+
+      - name: Generate Capacitor Android project
+        working-directory: app
+        run: |
+          npx cap init FantaDesk com.fantadesk.app --web-dir=dist
+          npx cap add android
+          npx cap sync android
+
+      - name: Prepare FantaDesk launcher icon
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq imagemagick
+          ICON="public/fantadesk-logo.png"
+          test -s "$ICON"
+          convert "$ICON" -alpha on -fuzz 3% -trim +repage /tmp/fd-logo-trimmed.png
+          rm -f android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
+          declare -A SIZES=([mipmap-mdpi]=48 [mipmap-hdpi]=72 [mipmap-xhdpi]=96 [mipmap-xxhdpi]=144 [mipmap-xxxhdpi]=192)
+          for dir in "${!SIZES[@]}"; do
+            size="${SIZES[$dir]}"
+            mkdir -p "android/app/src/main/res/$dir"
+            convert /tmp/fd-logo-trimmed.png -resize "${size}x${size}^" -gravity center -extent "${size}x${size}" "android/app/src/main/res/$dir/ic_launcher.png"
+            cp "android/app/src/main/res/$dir/ic_launcher.png" "android/app/src/main/res/$dir/ic_launcher_round.png"
+          done
+
+      - name: Build debug APK
+        working-directory: app/android
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: Stage APK
+        run: cp app/android/app/build/outputs/apk/debug/app-debug.apk FantaDesk-advisor-current.apk
+
+      - name: Verify APK exists
+        run: test -s FantaDesk-advisor-current.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: FantaDesk-advisor-current-apk
+          path: FantaDesk-advisor-current.apk
+          if-no-files-found: error
+          retention-days: 14
