@@ -1,0 +1,107 @@
+name: CI FantaDesk Injury Popup
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/ci-fantadesk-injury-popup.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate-injury-popup:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout public runner
+        uses: actions/checkout@v4
+
+      - name: Require private-repo token
+        shell: bash
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+
+      - name: Checkout private FantaDesk authority
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: feat/injury-popup-v1
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: app
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Record exact private SHA
+        working-directory: app
+        run: git rev-parse HEAD | tee ../private-sha.txt
+
+      - name: Setup Node 22.23.2
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+
+      - name: Install app dependencies
+        working-directory: app
+        run: npm install --legacy-peer-deps --no-package-lock
+
+      - name: Injury + auction regression tests
+        working-directory: app
+        run: >-
+          npx vitest run
+          src/features/auction/injurySnapshot20260912.test.ts
+          src/features/auction/PlayerInjuryNotice.test.tsx
+          src/features/auction/auctionCallOrder.test.ts
+          src/features/auction/auctionCallOrder.gapRecovery.test.ts
+          src/features/auction/nominationAdvisorPresentationV01.test.ts
+          src/features/auction/fantacalcioLeagueExport.test.ts
+
+      - name: Typecheck
+        working-directory: app
+        run: npm run typecheck
+
+      - name: Lint if project exposes lint
+        working-directory: app
+        run: npm run lint --if-present
+
+      - name: Production build
+        working-directory: app
+        run: npm run build
+
+      - name: Install Playwright for visual audit
+        working-directory: app
+        run: |
+          npm install --no-save --legacy-peer-deps playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start visual proof server
+        working-directory: app
+        run: |
+          nohup npx vite --host 127.0.0.1 --port 4173 > /tmp/fantadesk-vite.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/injury-popup-proof.html >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/fantadesk-vite.log
+          exit 1
+
+      - name: Capture desktop and mobile proof
+        working-directory: app
+        run: node scripts/capture-injury-popup-proof.mjs http://127.0.0.1:4173/injury-popup-proof.html artifacts/injury-popup-proof
+
+      - name: Upload visual proof
+        uses: actions/upload-artifact@v4
+        with:
+          name: FantaDesk-injury-popup-visual-proof
+          path: app/artifacts/injury-popup-proof/*.png
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload exact private SHA
+        uses: actions/upload-artifact@v4
+        with:
+          name: FantaDesk-injury-popup-private-sha
+          path: private-sha.txt
+          if-no-files-found: error
+          retention-days: 14
