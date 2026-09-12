@@ -47,9 +47,9 @@ jobs:
           rm -f package-lock.json
           npm install --package-lock-only --legacy-peer-deps --ignore-scripts
           npm ci --legacy-peer-deps --ignore-scripts
-      - name: Call engine + Tactical v0.5 qualitative simulations
+      - name: Call engine + Tactical v0.6 targeted simulations
         working-directory: app
-        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorTacticalV05.qualitativeAudit.sim.test.ts
+        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorTacticalV06.targetedAudit.sim.test.ts
       - name: Typecheck
         working-directory: app
         run: npx tsc -b
@@ -57,4 +57,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# tactical v0.5 structural-demand qualitative audit; public CI runner only
+# tactical v0.6 targeted qualitative audit; public CI runner only
