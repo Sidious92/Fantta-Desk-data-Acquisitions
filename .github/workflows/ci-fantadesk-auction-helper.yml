@@ -57,4 +57,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# tactical v0.6 mechanism-strength audit; public CI runner only
+# tactical v0.6 optimized mechanism-strength audit; public CI runner only
