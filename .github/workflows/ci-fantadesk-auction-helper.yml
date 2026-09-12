@@ -57,4 +57,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# tactical qualitative recommendation audit; public CI runner only
+# tactical qualitative recommendation audit (fixed); public CI runner only
