@@ -1,0 +1,54 @@
+name: Targeted Postgres Authority Audit
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/audit-postgres-authority-targeted.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  targeted-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require private-repo token
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+      - name: Checkout exact private FantaDesk SHA
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: c42d372ab923d830e0aec2393106e78609e30ed2
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: app
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Assert exact private SHA
+        working-directory: app
+        run: test "$(git rev-parse HEAD)" = "c42d372ab923d830e0aec2393106e78609e30ed2"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+      - name: Install dependencies
+        working-directory: app
+        run: npm install --legacy-peer-deps --no-package-lock
+      - name: Typecheck
+        working-directory: app
+        run: npm run typecheck
+      - name: Run authority regression tests
+        working-directory: app
+        run: >-
+          npx vitest run
+          src/features/auction/injurySnapshotStore.remoteAuthority.test.ts
+          src/features/listone/playerImportPersistence.test.ts
+          src/features/auction/auctionSession.remoteAuthority.test.ts
+          src/features/settings/leagueRules.remoteAuthority.test.ts
+          src/features/auction/nominationAdvisorPresentationV01.test.ts
+      - name: Build web app
+        working-directory: app
+        run: npm run build
