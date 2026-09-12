@@ -8,7 +8,7 @@ on:
       fantadesk_ref:
         description: FantaDesk ref to build
         required: true
-        default: feat/nomination-advisor-v1
+        default: 57af19b1337cefd126636680c267e2f2098f4bca
 
 permissions:
   contents: read
@@ -35,10 +35,16 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: ${{ github.event.inputs.fantadesk_ref || 'feat/nomination-advisor-v1' }}
+          ref: ${{ github.event.inputs.fantadesk_ref || '57af19b1337cefd126636680c267e2f2098f4bca' }}
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
+          fetch-depth: 1
+
+      - name: Assert exact private SHA
+        if: github.event_name == 'push'
+        working-directory: app
+        run: test "$(git rev-parse HEAD)" = "57af19b1337cefd126636680c267e2f2098f4bca"
 
       - name: Setup Node 22
         uses: actions/setup-node@v4
@@ -55,9 +61,9 @@ jobs:
         working-directory: app
         run: npm install --legacy-peer-deps --no-package-lock
 
-      - name: Test Auction Helper and Nomination Advisor
+      - name: Test Auction Helper and Buy Advisor
         working-directory: app
-        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisor.test.ts
+        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/buyAdvisorV01.test.ts
 
       - name: Install Android wrapper tooling
         working-directory: app
@@ -101,15 +107,15 @@ jobs:
         run: ./gradlew assembleDebug --no-daemon
 
       - name: Stage APK
-        run: cp app/android/app/build/outputs/apk/debug/app-debug.apk FantaDesk-nomination-advisor.apk
+        run: cp app/android/app/build/outputs/apk/debug/app-debug.apk FantaDesk-buy-advisor.apk
 
       - name: Verify APK exists
-        run: test -s FantaDesk-nomination-advisor.apk
+        run: test -s FantaDesk-buy-advisor.apk
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: FantaDesk-nomination-advisor-apk
-          path: FantaDesk-nomination-advisor.apk
+          name: FantaDesk-buy-advisor-apk
+          path: FantaDesk-buy-advisor.apk
           if-no-files-found: error
           retention-days: 14
