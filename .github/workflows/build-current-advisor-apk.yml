@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: 20e2ab89a04bc8df940e02459da78b625481be69
+          ref: 15d7a2edc2dfa22d0c344e1d6aea670d0e8b19d7
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -35,7 +35,7 @@ jobs:
 
       - name: Assert exact private SHA
         working-directory: app
-        run: test "$(git rev-parse HEAD)" = "20e2ab89a04bc8df940e02459da78b625481be69"
+        run: test "$(git rev-parse HEAD)" = "15d7a2edc2dfa22d0c344e1d6aea670d0e8b19d7"
 
       - name: Setup Node 22.23.2
         uses: actions/setup-node@v4
@@ -52,9 +52,9 @@ jobs:
         working-directory: app
         run: npm install --legacy-peer-deps --no-package-lock
 
-      - name: Validate advisor integration
+      - name: Validate advisor integration and Fantacalcio export
         working-directory: app
-        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorPresentationV01.test.ts
+        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorPresentationV01.test.ts src/features/auction/fantacalcioLeagueExport.test.ts
 
       - name: Install Android wrapper tooling
         working-directory: app
