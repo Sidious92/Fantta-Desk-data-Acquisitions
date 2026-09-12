@@ -47,9 +47,9 @@ jobs:
           rm -f package-lock.json
           npm install --package-lock-only --legacy-peer-deps --ignore-scripts
           npm ci --legacy-peer-deps --ignore-scripts
-      - name: Call engine + Nomination Decision v0.1 simulations
+      - name: Call engine + Nomination Decision v0.2 simulations
         working-directory: app
-        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorDecisionV01.sim.test.ts
+        run: npx vitest run src/features/auction/auctionCallOrder.test.ts src/features/auction/auctionCallOrder.gapRecovery.test.ts src/features/auction/nominationAdvisorDecisionV02.sim.test.ts
       - name: Typecheck
         working-directory: app
         run: npx tsc -b
@@ -57,4 +57,4 @@ jobs:
         working-directory: app
         run: npx vite build --base=./
 
-# decision layer v0.1 using buyer-supported tactical strength; public CI runner only
+# decision layer v0.2 symmetric counterfactual; public CI runner only
