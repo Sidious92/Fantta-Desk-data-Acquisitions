@@ -1,0 +1,48 @@
+name: Audit Remote Slot Clear v1
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/audit-remote-slot-clear-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require private-repo token
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+      - name: Checkout exact private FantaDesk SHA
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ae75e0cbb5b73bbd6182cd1ffc0a5d20568755b2
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: app
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Assert exact private SHA
+        working-directory: app
+        run: test "$(git rev-parse HEAD)" = "ae75e0cbb5b73bbd6182cd1ffc0a5d20568755b2"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+      - name: Install dependencies
+        working-directory: app
+        run: npm install --legacy-peer-deps --no-package-lock
+      - name: Typecheck
+        working-directory: app
+        run: npm run typecheck
+      - name: Run slot and auction regression tests
+        working-directory: app
+        run: npx vitest run src/features/auction/myTeamBudgetModel.test.ts src/features/auction/auctionLedger.test.ts src/features/auction/auctionSession.test.ts --reporter=verbose
+      - name: Build web app
+        working-directory: app
+        run: npm run build
