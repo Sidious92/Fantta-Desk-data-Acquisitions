@@ -1,4 +1,4 @@
-# QA gate 2026-10-22: includes least-privilege import staging regression.
+# QA gate 2026-10-22: B5 explicit owner-confirmed formation rules and RLS regression.
 name: FantaDesk Campionato B1 Read-only Audit
 on:
   push:
