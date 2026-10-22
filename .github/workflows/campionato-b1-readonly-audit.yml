@@ -45,7 +45,7 @@ jobs:
         run: npx tsc -b --pretty false
       - name: Campionato contracts and UI regressions; auction stability
         working-directory: app
-        run: npx vitest run src/features/campionato/seasonContract.test.ts src/features/campionato/CampionatoPage.test.tsx src/features/auction/secasHistoricalMarket.test.ts
+        run: npx vitest run src/features/campionato/seasonContract.test.ts src/features/campionato/seasonSetup.test.ts src/features/campionato/CampionatoPage.test.tsx src/features/campionato/CampionatoSetupPanel.test.tsx src/features/auction/secasHistoricalMarket.test.ts src/features/auction/auctionSession.remoteAuthority.test.ts
       - name: Nexus runtime and Vite production build (no deploy)
         working-directory: app
         run: |
