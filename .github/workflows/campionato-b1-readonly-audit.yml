@@ -1,4 +1,4 @@
-# QA gate 2026-10-23: FULL genuine 001-038 migration chain + all previous B0-B9 tests. Read-only Supabase production.
+# QA gate 2026-10-23: full 001-038 + read-only LIVE 029 baseline signature parity + B0-B9.
 name: FantaDesk Campionato B0-B9 Integration Gates
 on:
   push:
