@@ -1,4 +1,4 @@
-# QA gate 2026-10-22: B5 explicit owner-confirmed formation rules and RLS regression.
+# QA gate 2026-10-22: B7 verified manual TXT source-preview parser plus availability owner-only RLS regression.
 name: FantaDesk Campionato B1 Read-only Audit
 on:
   push:
