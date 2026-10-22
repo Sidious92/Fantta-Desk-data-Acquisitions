@@ -1,0 +1,44 @@
+name: FantaDesk Campionato B1 Read-only Audit
+on:
+  push:
+    branches: [test/campionato-b1-audit-20261022]
+    paths:
+      - '.github/workflows/campionato-b1-readonly-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  typecheck-tests-build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout private feature branch read-only
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: feat/campionato-foundation-b0-b1-20261022
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+          path: app
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct dependencies without executing postinstall scripts
+        working-directory: app
+        run: |
+          npm install --package-lock-only --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+          npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - name: TypeScript compile gate
+        working-directory: app
+        run: npx tsc -b --pretty false
+      - name: Campionato contracts and UI regressions; auction stability
+        working-directory: app
+        run: npx vitest run src/features/campionato/seasonContract.test.ts src/features/campionato/CampionatoPage.test.tsx src/features/auction/secasHistoricalMarket.test.ts
+      - name: Nexus runtime and Vite production build (no deploy)
+        working-directory: app
+        run: |
+          npm run nexus:runtime:build
+          npx vite build --base=./
