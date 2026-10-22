@@ -94,6 +94,11 @@ jobs:
             psql -h 127.0.0.1 -U postgres -d postgres -v ON_ERROR_STOP=1 -f "$source"
           done
 
+      - name: Verify owner-side backup script syntax (no credentials and no backup)
+        shell: pwsh
+        working-directory: app
+        run: ./scripts/fantadesk-backup-local.ps1 -SelfTest
+
       - name: FULL real 001-038 migration chain on isolated PostgreSQL 17 (no live DB)
         working-directory: app
         env:
