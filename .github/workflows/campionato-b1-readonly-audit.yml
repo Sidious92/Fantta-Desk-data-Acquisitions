@@ -16,7 +16,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Preflight repository authorization
-        run: echo 'Required permission - Contents Read on Sidious92/FantaDesk. Confirm Actions secret availability in repository settings.'
+        env:
+          PRIVATE_REPO_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          if [ -z "$PRIVATE_REPO_TOKEN" ]; then
+            echo 'FANTADESK_READ_TOKEN is missing or unavailable to this workflow.'
+            exit 1
+          fi
+          echo 'Private repository token is present; checkout will test its scope.'
       - name: Checkout private feature branch read-only
         uses: actions/checkout@v4
         with:
