@@ -13,6 +13,18 @@ jobs:
   typecheck-tests-build:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v4
       - name: Preflight repository authorization
@@ -28,7 +40,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: feat/campionato-foundation-b0-b1-20261022
+          ref: feat/campionato-datahub-rules-b2-b3-20261022
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
           path: app
@@ -45,9 +57,26 @@ jobs:
         run: npx tsc -b --pretty false
       - name: Campionato contracts and UI regressions; auction stability
         working-directory: app
-        run: npx vitest run src/features/campionato/seasonContract.test.ts src/features/campionato/seasonSetup.test.ts src/features/campionato/CampionatoPage.test.tsx src/features/campionato/CampionatoSetupPanel.test.tsx src/features/auction/secasHistoricalMarket.test.ts src/features/auction/auctionSession.remoteAuthority.test.ts
+        run: npx vitest run src/features/campionato/ src/features/auction/secasHistoricalMarket.test.ts src/features/auction/auctionSession.remoteAuthority.test.ts
       - name: Nexus runtime and Vite production build (no deploy)
         working-directory: app
         run: |
           npm run nexus:runtime:build
           npx vite build --base=./
+
+      - name: PostgreSQL migration 030+031 and RLS cross-user gate (ephemeral)
+        working-directory: app
+        env:
+          PGPASSWORD: postgres
+        run: |
+          if ! command -v psql >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq postgresql-client
+          fi
+          for source in \
+            scripts/campionato-postgres-smoke-setup.sql \
+            supabase/migrations/20261022183000_030_campionato_season_core.sql \
+            supabase/migrations/20261022210500_031_campionato_italia_vote_staging.sql \
+            scripts/campionato-postgres-smoke-assert.sql; do
+            psql -h 127.0.0.1 -U postgres -d postgres -v ON_ERROR_STOP=1 -f "$source"
+          done
