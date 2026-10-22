@@ -106,3 +106,4 @@ jobs:
             psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f "$source"
           done
           psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-assert.sql
+          psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-legacy-rpc-cross-owner-assert.sql
