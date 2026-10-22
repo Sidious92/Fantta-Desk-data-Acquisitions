@@ -106,8 +106,13 @@ jobs:
         run: |
           psql -h 127.0.0.1 -U postgres -d postgres -v ON_ERROR_STOP=1 -c 'create database campionato_full_chain'
           psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-bootstrap.sql
-          for source in supabase/migrations/*.sql; do
-            echo "Apply full-chain migration: $source"
+          for source in supabase/migrations/202609*.sql; do
+            echo "Apply pre-Campionato real migration: $source"
+            psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f "$source"
+          done
+          psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-live-029-object-parity-assert.sql
+          for source in supabase/migrations/202610*.sql; do
+            echo "Apply Campionato release migration: $source"
             psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f "$source"
           done
           psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-assert.sql
