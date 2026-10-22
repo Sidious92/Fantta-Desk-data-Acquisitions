@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: feat/campionato-datahub-rules-b2-b3-20261022
+          ref: feat/campionato-b2b3-identity-stage-lineups-20261022
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
           path: app
@@ -64,7 +64,7 @@ jobs:
           npm run nexus:runtime:build
           npx vite build --base=./
 
-      - name: PostgreSQL migration 030+031 and RLS cross-user gate (ephemeral)
+      - name: PostgreSQL migration 030-032, atomic staging and RLS cross-user gate (ephemeral)
         working-directory: app
         env:
           PGPASSWORD: postgres
@@ -77,6 +77,8 @@ jobs:
             scripts/campionato-postgres-smoke-setup.sql \
             supabase/migrations/20261022183000_030_campionato_season_core.sql \
             supabase/migrations/20261022210500_031_campionato_italia_vote_staging.sql \
-            scripts/campionato-postgres-smoke-assert.sql; do
+            supabase/migrations/20261022220000_032_campionato_atomic_vote_stage.sql \
+            scripts/campionato-postgres-smoke-assert.sql \
+            scripts/campionato-postgres-vote-atomic-assert.sql; do
             psql -h 127.0.0.1 -U postgres -d postgres -v ON_ERROR_STOP=1 -f "$source"
           done
