@@ -1,4 +1,4 @@
-# QA gate 2026-10-23: FULL genuine 001-037 migration chain + all previous B0-B9 tests. Read-only Supabase production.
+# QA gate 2026-10-23: FULL genuine 001-038 migration chain + all previous B0-B9 tests. Read-only Supabase production.
 name: FantaDesk Campionato B0-B9 Integration Gates
 on:
   push:
@@ -94,7 +94,7 @@ jobs:
             psql -h 127.0.0.1 -U postgres -d postgres -v ON_ERROR_STOP=1 -f "$source"
           done
 
-      - name: FULL real 001-037 migration chain on isolated PostgreSQL 17 (no live DB)
+      - name: FULL real 001-038 migration chain on isolated PostgreSQL 17 (no live DB)
         working-directory: app
         env:
           PGPASSWORD: postgres
