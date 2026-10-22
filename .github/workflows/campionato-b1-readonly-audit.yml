@@ -41,7 +41,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: feat/campionato-b7-scouting-availability-20261022
+          ref: feat/campionato-b8-market-season-planner-20261022
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
           path: app
@@ -65,7 +65,7 @@ jobs:
           npm run nexus:runtime:build
           npx vite build --base=./
 
-      - name: PostgreSQL migration 030-036, B7 availability evidence and RLS gate (ephemeral)
+      - name: PostgreSQL migration 030-037, B8 market plans/RLS/no-trades gate (ephemeral)
         working-directory: app
         env:
           PGPASSWORD: postgres
@@ -88,6 +88,8 @@ jobs:
             supabase/migrations/20261022235000_035_campionato_match_fixtures.sql \
             scripts/campionato-postgres-weekly-fixtures-assert.sql \
             supabase/migrations/20261023001000_036_campionato_availability_reports.sql \
-            scripts/campionato-postgres-availability-assert.sql; do
+            scripts/campionato-postgres-availability-assert.sql \
+            supabase/migrations/20261023003000_037_campionato_market_plan_events.sql \
+            scripts/campionato-postgres-market-plan-assert.sql; do
             psql -h 127.0.0.1 -U postgres -d postgres -v ON_ERROR_STOP=1 -f "$source"
           done
