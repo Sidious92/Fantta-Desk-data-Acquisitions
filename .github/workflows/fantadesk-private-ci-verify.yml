@@ -11,6 +11,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/fantadesk-private-ci-verify.yml
+      - .github/fantadesk-ci-target.txt
 
 permissions:
   contents: read
@@ -22,6 +23,20 @@ jobs:
     env:
       FANTADESK_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || 'main' }}
     steps:
+      - name: Checkout public CI controller
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Resolve explicitly pinned private commit on public push
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          set -euo pipefail
+          ref="$(tr -d '\\r\\n' < .github/fantadesk-ci-target.txt)"
+          [[ "$ref" =~ ^[a-f0-9]{40}$ ]] || { echo 'Invalid pinned private commit SHA'; exit 1; }
+          echo "FANTADESK_REF=$ref" >> "$GITHUB_ENV"
+
       - name: Checkout private FantaDesk ephemerally
         uses: actions/checkout@v6
         with:
@@ -30,6 +45,7 @@ jobs:
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
           fetch-depth: 1
+          path: app
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -38,13 +54,17 @@ jobs:
           package-manager-cache: false
 
       - name: Install dependencies
+        working-directory: app
         run: npm install --no-audit --no-fund
 
       - name: Typecheck
+        working-directory: app
         run: npm run typecheck
 
       - name: Tests
+        working-directory: app
         run: npm run test:run
 
       - name: Build
+        working-directory: app
         run: npm run build
