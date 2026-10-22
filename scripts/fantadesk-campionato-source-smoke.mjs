@@ -23,17 +23,21 @@ async function check(source,fn){
 }
 await check('wikidata',async()=>{
  const r=await get('https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q615&props=labels%7Cclaims&languages=en&format=json');
- return r.status===200?{status:'PASS',...summarizeWikidata(r.data)}:{status:'FAIL',httpStatus:r.status};
+ if(r.status!==200)return{status:'FAIL',httpStatus:r.status};
+ const x=summarizeWikidata(r.data);
+ return{status:x.name&&x.dateOfBirthPresent?'PASS':'FAIL',...x};
 });
 await check('openfootball',async()=>{
  const r=await get('https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/it.1.json');
  if(r.status!==200)return{status:'FAIL',httpStatus:r.status};
  const x=summarizeOpenFootball(r.data,now);
- return{status:x.overdue?'WARN_STALE':'PASS',...x};
+ return{status:(x.matches!==380||x.teams!==20)?'FAIL':x.overdue?'WARN_STALE':'PASS',...x};
 });
 await check('statsbomb-open',async()=>{
  const r=await get('https://raw.githubusercontent.com/hudl/open-data/master/data/competitions.json');
- return r.status===200?{status:'PASS',...summarizeStatsBomb(r.data)}:{status:'FAIL',httpStatus:r.status};
+ if(r.status!==200)return{status:'FAIL',httpStatus:r.status};
+ const x=summarizeStatsBomb(r.data);
+ return{status:x.competitionSeasons.length>0?'PASS':'FAIL',...x};
 });
 await check('football-data.org',async()=>{
  if(!footballDataKey)return{status:'SKIP_NO_KEY',reason:'FOOTBALL_DATA_KEY not configured'};
@@ -70,3 +74,4 @@ const report={schema:'FANTADESK_CAMPIONATO_SOURCE_SMOKE_V1',asOf:now.toISOString
 const output=resolve(process.env.FANTADESK_SMOKE_REPORT??'/tmp/fantadesk-campionato-source-smoke.json');
 await mkdir(dirname(output),{recursive:true});await writeFile(output,JSON.stringify(report,null,2)+'\n','utf8');
 console.log(JSON.stringify(report,null,2));
+if(results.some(x=>x.status==='FAIL'))process.exitCode=1;
