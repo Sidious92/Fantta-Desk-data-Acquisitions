@@ -1,3 +1,4 @@
+# QA gate 2026-10-22: includes least-privilege import staging regression.
 name: FantaDesk Campionato B1 Read-only Audit
 on:
   push:
