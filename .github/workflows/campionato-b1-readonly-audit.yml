@@ -1,5 +1,5 @@
-# QA gate 2026-10-22: B7 verified manual TXT source-preview parser plus availability owner-only RLS regression.
-name: FantaDesk Campionato B1 Read-only Audit
+# QA gate 2026-10-23: FULL genuine 001-037 migration chain + all previous B0-B9 tests. Read-only Supabase production.
+name: FantaDesk Campionato B0-B9 Integration Gates
 on:
   push:
     branches: [test/campionato-b1-audit-20261022]
@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 30
     services:
       postgres:
-        image: postgres:16
+        image: postgres:17
         env:
           POSTGRES_PASSWORD: postgres
         ports:
@@ -41,7 +41,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: feat/campionato-b9-simulation-analytics-almanac-20261022
+          ref: audit/campionato-b0-b9-full-chain-20261023
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
           path: app
@@ -93,3 +93,16 @@ jobs:
             scripts/campionato-postgres-market-plan-assert.sql; do
             psql -h 127.0.0.1 -U postgres -d postgres -v ON_ERROR_STOP=1 -f "$source"
           done
+
+      - name: FULL real 001-037 migration chain on isolated PostgreSQL 17 (no live DB)
+        working-directory: app
+        env:
+          PGPASSWORD: postgres
+        run: |
+          psql -h 127.0.0.1 -U postgres -d postgres -v ON_ERROR_STOP=1 -c 'create database campionato_full_chain'
+          psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-bootstrap.sql
+          for source in supabase/migrations/*.sql; do
+            echo "Apply full-chain migration: $source"
+            psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f "$source"
+          done
+          psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-assert.sql
