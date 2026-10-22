@@ -41,7 +41,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: feat/campionato-b8-market-season-planner-20261022
+          ref: feat/campionato-b9-simulation-analytics-almanac-20261022
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
           path: app
@@ -65,7 +65,7 @@ jobs:
           npm run nexus:runtime:build
           npx vite build --base=./
 
-      - name: PostgreSQL migration 030-037, B8 market plans/RLS/no-trades gate (ephemeral)
+      - name: PostgreSQL 030-037 previous RLS gates + B9 read-only simulation/analytics tests (ephemeral)
         working-directory: app
         env:
           PGPASSWORD: postgres
