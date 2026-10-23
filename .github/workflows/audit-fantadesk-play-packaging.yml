@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/audit-fantadesk-play-packaging.yml
+      - .github/fantadesk-ci-target.txt
   workflow_dispatch:
     inputs:
       fantadesk_ref:
@@ -30,6 +31,15 @@ jobs:
       - name: Checkout public runner
         uses: actions/checkout@v4
 
+      - name: Resolve pinned private revision
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha="$(tr -d '\r\n' < .github/fantadesk-ci-target.txt)"
+          [[ "$sha" =~ ^[a-f0-9]{40}$ ]] || { echo 'Invalid private commit SHA'; exit 1; }
+          echo "PINNED_PRIVATE_REF=$sha" >> "$GITHUB_ENV"
+
       - name: Require private-repo token
         shell: bash
         env:
@@ -40,26 +50,22 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: ${{ github.event.inputs.fantadesk_ref || 'chore/android-play-internal-readiness' }}
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.fantadesk_ref || env.PINNED_PRIVATE_REF }}
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
           fetch-depth: 2
 
-      - name: Assert packaging-only private commit
+      - name: Verify checked-out private revision
         working-directory: app
         shell: bash
         run: |
           set -euo pipefail
-          test -n "$(git rev-parse HEAD^)"
-          CHANGED="$(git diff --name-only HEAD^ HEAD | sed '/^$/d')"
-          printf '%s\n' "$CHANGED"
-          BAD="$(printf '%s\n' "$CHANGED" | grep -Ev '^(package\.json|package-lock\.json)$' || true)"
-          if [ -n "$BAD" ]; then
-            echo "Non-packaging files changed in Play readiness commit:"
-            echo "$BAD"
-            exit 1
+          actual="$(git rev-parse HEAD)"
+          if [[ "${PINNED_PRIVATE_REF:-}" =~ ^[a-f0-9]{40}$ ]]; then
+            test "$actual" = "$PINNED_PRIVATE_REF" || { echo 'Private checkout SHA mismatch'; exit 1; }
           fi
+          echo "Private revision verified: $actual"
 
       - name: Setup Node 22.23.2
         uses: actions/setup-node@v4
@@ -203,15 +209,10 @@ jobs:
           } > /tmp/play-packaging-audit.txt
           ./android/gradlew -p android :app:dependencies --configuration releaseRuntimeClasspath > /tmp/release-dependencies.txt
 
-      - name: Upload unsigned audit outputs
-        uses: actions/upload-artifact@v4
-        with:
-          name: FantaDesk-play-packaging-audit
-          path: |
-            app/android/app/build/outputs/bundle/release/app-release.aab
-            app/android/app/build/outputs/apk/debug/app-debug.apk
-            /tmp/AndroidManifest-release.xml
-            /tmp/play-packaging-audit.txt
-            /tmp/release-dependencies.txt
-          if-no-files-found: error
-          retention-days: 14
+      - name: Show non-sensitive packaging verdict (do not upload private app binaries)
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s /tmp/play-packaging-audit.txt
+          grep -E '^(APP_ID|APP_NAME|VERSION_CODE|VERSION_NAME|CAPACITOR|COMPILE_SDK|TARGET_SDK|MIN_SDK|AGP|GRADLE|JDK|AAB_SHA256|APK_SHA256)=' /tmp/play-packaging-audit.txt
+          echo 'PLAY_PACKAGING_AUDIT_PASS; no AAB/APK uploaded to public artifacts'
