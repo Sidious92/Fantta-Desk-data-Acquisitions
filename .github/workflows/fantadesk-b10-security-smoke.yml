@@ -48,3 +48,10 @@ jobs:
       - name: Verify types
         working-directory: private-app
         run: npx tsc -b --pretty false
+      - name: Install Deno 2 for Edge runtime type validation
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Typecheck disabled-by-default account deletion Edge function
+        working-directory: private-app
+        run: deno check --no-config supabase/functions/delete-account/index.ts
