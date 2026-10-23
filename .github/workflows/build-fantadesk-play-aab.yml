@@ -27,7 +27,7 @@ jobs:
       APP_ID: com.deepfieldresearch.fantadesk
       APP_NAME: FantaDesk
       CAPACITOR_VERSION: 8.5.1
-      EXPECTED_PACKAGE_LOCK_SHA256: a22c8e1ee3b9d81d6cd75cb3af0e5082b7e9f156c860d347f0eb1ac2dbf9557d
+      EXPECTED_PACKAGE_LOCK_SHA256: 8e4163c71393d55e59163be035095576a99ea499180780a0dcb7807b1b963577
       VERSION_CODE: ${{ github.event.inputs.version_code }}
       VERSION_NAME: ${{ github.event.inputs.version_name }}
     steps:
@@ -205,15 +205,14 @@ jobs:
             echo "AAB_SHA256=$(sha256sum "$AAB" | awk '{print $1}')"
           } > /tmp/play-release-report.txt
 
-      - name: Upload signed Internal Testing AAB
-        uses: actions/upload-artifact@v4
-        with:
-          name: FantaDesk-Play-Internal-${{ github.event.inputs.version_code }}
-          path: |
-            app/android/app/build/outputs/bundle/release/app-release.aab
-            /tmp/play-release-report.txt
-          if-no-files-found: error
-          retention-days: 14
+      - name: Report signed build verdict without exposing private app binary
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s /tmp/play-release-report.txt
+          grep -E '^(APP_ID|APP_NAME|VERSION_CODE|VERSION_NAME|TARGET_SDK|COMPILE_SDK|CAPACITOR|AAB_SHA256)=' /tmp/play-release-report.txt
+          echo 'SIGNED_AAB_VERIFIED_IN_EPHEMERAL_RUNNER; NO PUBLIC BINARY UPLOAD'
+          echo 'For actual Play delivery use a separately authorized private distribution path.'
 
       - name: Remove upload keystore
         if: always()
