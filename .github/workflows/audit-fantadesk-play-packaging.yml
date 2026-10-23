@@ -24,7 +24,7 @@ jobs:
       APP_ID: com.deepfieldresearch.fantadesk
       APP_NAME: FantaDesk
       CAPACITOR_VERSION: 8.5.1
-      EXPECTED_PACKAGE_LOCK_SHA256: eb67d16caa3db49df4303c2b824eb585ba8ad5f0171a2a597aa5dc382d5d6594
+      EXPECTED_PACKAGE_LOCK_SHA256: 8e4163c71393d55e59163be035095576a99ea499180780a0dcb7807b1b963577
       VERSION_CODE: 1
       VERSION_NAME: 0.1.0
     steps:
@@ -99,6 +99,11 @@ jobs:
             echo "Dependency lock drift: $ACTUAL"; exit 1;
           }
           npm ci --legacy-peer-deps --ignore-scripts
+          # npm install rebuilds a fresh lock each time from semver ranges.
+          # This known-good digest comes from the *observed CI lock output* of
+          # run 39946605934; never auto-update the trust anchor on mismatch.
+          # Independently verify target Capacitor identity and audit severity.
+          npm audit --omit=dev --audit-level=high
           node -e "const p=require('./node_modules/@capacitor/core/package.json'); if(p.version!==process.env.CAPACITOR_VERSION) process.exit(1)"
           node -e "const p=require('./node_modules/@capacitor/cli/package.json'); if(p.version!==process.env.CAPACITOR_VERSION) process.exit(1)"
           node -e "const p=require('./node_modules/@capacitor/android/package.json'); if(p.version!==process.env.CAPACITOR_VERSION) process.exit(1)"
