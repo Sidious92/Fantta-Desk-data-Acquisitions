@@ -1,0 +1,66 @@
+name: FantaDesk B10 Account Deletion PostgreSQL Audit
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/fantadesk-ci-target.txt
+      - .github/workflows/fantadesk-b10-account-deletion-postgres.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deletion-transaction-rollback:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: fantadesk_b10_ci_only
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres -d fantadesk_b10_ci_only"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 15
+    env:
+      PGHOST: localhost
+      PGPORT: "5432"
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: fantadesk_b10_ci_only
+    steps:
+      - name: Checkout public CI controller
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Resolve exact private commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          ref="$(tr -d '\r\n' < .github/fantadesk-ci-target.txt)"
+          [[ "$ref" =~ ^[a-f0-9]{40}$ ]] || exit 1
+          echo "PRIVATE_REF=$ref" >> "$GITHUB_ENV"
+      - name: Checkout private source ephemerally
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_REF }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Install psql client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client
+      - name: Transactional deletion and rollback in isolated PostgreSQL
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -f tests/account-deletion/integration.sql
+          echo 'Verified: A deleted, B preserved, LIVE guard handled, C rolled back on failure'
