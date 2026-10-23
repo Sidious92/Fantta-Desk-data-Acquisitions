@@ -1,0 +1,100 @@
+name: FantaDesk B10 Local Supabase Real Auth E2E
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/fantadesk-ci-target.txt
+      - .github/workflows/fantadesk-b10-local-supabase-auth.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  local-auth-and-deletion:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout public CI controller
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read immutable FantaDesk SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          rev="$(tr -d '\r\n' < .github/fantadesk-ci-target.txt)"
+          [[ "$rev" =~ ^[0-9a-f]{40}$ ]] || exit 1
+          echo "PRIVATE_REF=$rev" >> "$GITHUB_ENV"
+      - name: Checkout private FantaDesk ephemerally
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_REF }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Install Node 22.23.2
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+      - name: Install JS SDK dependencies
+        working-directory: private-app
+        run: npm install --legacy-peer-deps --no-audit --no-fund
+      - name: Install pinned Supabase local CLI (no hosted project connection)
+        uses: supabase/setup-cli@v1
+        with:
+          version: 2.122.0
+      - name: Initialize isolated Supabase project and start Auth/Postgres
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Creates a LOCAL config only on ephemeral runner; no Supabase login,
+          # link, deploy, or real production project credentials are used.
+          supabase init --force
+          supabase start > /tmp/fd-b10-supabase-start.log 2>&1 || {
+            echo 'Supabase local stack startup failed (redacted diagnostic tail):'
+            grep -E 'error|failed|migration' /tmp/fd-b10-supabase-start.log | tail -25 || true
+            exit 1
+          }
+          supabase status -o env > /tmp/fd-b10-local-secrets.env
+          chmod 600 /tmp/fd-b10-local-secrets.env
+          set -a
+          source /tmp/fd-b10-local-secrets.env
+          set +a
+          echo "API_URL=$API_URL" >> "$GITHUB_ENV"
+          echo "ANON_KEY=$ANON_KEY" >> "$GITHUB_ENV"
+          echo "SERVICE_ROLE_KEY=$SERVICE_ROLE_KEY" >> "$GITHUB_ENV"
+      - name: Verify deletion kill switch OFF with genuine local GoTrue tokens
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf 'FANTADESK_ACCOUNT_DELETION_ENABLED=false\n' > /tmp/fd-b10-edge-off.env
+          supabase functions serve delete-account --env-file /tmp/fd-b10-edge-off.env > /tmp/fd-b10-edge-off.log 2>&1 &
+          echo $! > /tmp/fd-b10-edge.pid
+          sleep 9
+          FANTADESK_E2E_MODE=disabled node scripts/b10-supabase-auth-deletion-e2e.mjs
+          kill "$(cat /tmp/fd-b10-edge.pid)" || true
+          sleep 4
+      - name: Verify authorized deletion, cross-user protection and old JWT rejection
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf 'FANTADESK_ACCOUNT_DELETION_ENABLED=true\n' > /tmp/fd-b10-edge-on.env
+          supabase functions serve delete-account --env-file /tmp/fd-b10-edge-on.env > /tmp/fd-b10-edge-on.log 2>&1 &
+          echo $! > /tmp/fd-b10-edge.pid
+          sleep 9
+          FANTADESK_E2E_MODE=enabled node scripts/b10-supabase-auth-deletion-e2e.mjs || {
+            echo 'Edge startup/runtime diagnostic (only non-secret lines):'
+            grep -E 'error|Error|failed|exception' /tmp/fd-b10-edge-on.log | tail -18 || true
+            exit 1
+          }
+      - name: Stop local-only Supabase containers
+        if: always()
+        working-directory: private-app
+        run: |
+          if [ -f /tmp/fd-b10-edge.pid ]; then kill "$(cat /tmp/fd-b10-edge.pid)" || true; fi
+          supabase stop --no-backup || true
