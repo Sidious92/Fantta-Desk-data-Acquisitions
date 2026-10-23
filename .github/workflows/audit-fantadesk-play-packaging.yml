@@ -223,21 +223,9 @@ jobs:
           pass="$(openssl rand -hex 24)"
           key="$RUNNER_TEMP/fantadesk-ci-only.p12"
           signed="$RUNNER_TEMP/fantadesk-ci-only-signed.aab"
-          keytool -genkeypair -alias ci-only -keyalg RSA -keysize 3072 \
-            -validity 1 -storetype PKCS12 -keystore "$key" \
-            -storepass "$pass" -keypass "$pass" \
-            -dname "CN=FantaDesk CI Test Only, O=Ephemeral Runner" >/dev/null 2>&1
-          jarsigner -keystore "$key" -storepass "$pass" -keypass "$pass" \
-            -sigalg SHA256withRSA -digestalg SHA-256 \
-            -signedjar "$signed" android/app/build/outputs/bundle/release/app-release.aab ci-only >/dev/null
-          unzip -Z1 "$signed" | grep -Eq '^META-INF/[^/]+\\.(RSA|DSA|EC)
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -s /tmp/play-packaging-audit.txt
-          grep -E '^(APP_ID|APP_NAME|VERSION_CODE|VERSION_NAME|CAPACITOR|COMPILE_SDK|TARGET_SDK|MIN_SDK|AGP|GRADLE|JDK|AAB_SHA256|APK_SHA256)=' /tmp/play-packaging-audit.txt
-          echo 'PLAY_PACKAGING_AUDIT_PASS; no AAB/APK uploaded to public artifacts'
-
+          keytool -genkeypair -alias ci-only -keyalg RSA -keysize 3072 -validity 1 -storetype PKCS12 -keystore "$key" -storepass "$pass" -keypass "$pass" -dname "CN=FantaDesk CI Test Only, O=Ephemeral Runner" >/dev/null 2>&1
+          jarsigner -keystore "$key" -storepass "$pass" -keypass "$pass" -sigalg SHA256withRSA -digestalg SHA-256 -signedjar "$signed" android/app/build/outputs/bundle/release/app-release.aab ci-only >/dev/null
+          unzip -Z1 "$signed" | grep -Eq 'META-INF/[^/]+[.](RSA|DSA|EC)$'
           jarsigner -verify "$signed" | grep -Fq 'jar verified'
           rm -f "$key" "$signed"
           echo 'DISPOSABLE_SIGNING_SMOKE_PASS: no Play upload key used; no signed bundle persisted'
