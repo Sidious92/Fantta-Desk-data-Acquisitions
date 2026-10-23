@@ -24,7 +24,7 @@ jobs:
       APP_ID: com.deepfieldresearch.fantadesk
       APP_NAME: FantaDesk
       CAPACITOR_VERSION: 8.5.1
-      EXPECTED_PACKAGE_LOCK_SHA256: a22c8e1ee3b9d81d6cd75cb3af0e5082b7e9f156c860d347f0eb1ac2dbf9557d
+      EXPECTED_PACKAGE_LOCK_SHA256: eb67d16caa3db49df4303c2b824eb585ba8ad5f0171a2a597aa5dc382d5d6594
       VERSION_CODE: 1
       VERSION_NAME: 0.1.0
     steps:
