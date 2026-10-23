@@ -44,7 +44,7 @@ jobs:
       - name: Verify account privacy and onboarding
         working-directory: private-app
         run: |
-          npx vitest run             src/db/accountScopedDatabase.test.ts             src/features/auth/authenticatedLocalBootstrap.test.ts             src/features/auth/deviceCacheIdentity.test.ts src/features/auth/accountLocalStorage.test.ts src/features/auth/accountDeletionRequest.test.ts src/features/auth/AccountDeletionPage.test.tsx src/features/auth/accountDeletionContract.test.ts src/features/auth/scopedStorageBoundary.static.test.ts             src/features/auth/SupabaseAuthGate.test.tsx             src/lib/supabase/auth.test.ts             src/features/help/HelpPage.test.tsx
+          npx vitest run             src/db/accountScopedDatabase.test.ts             src/features/auth/authenticatedLocalBootstrap.test.ts             src/features/auth/deviceCacheIdentity.test.ts src/features/auth/accountLocalStorage.test.ts src/features/auth/accountDeletionRequest.test.ts src/features/auth/deletedAccountLocalCleanup.test.ts src/features/auth/AccountDeletionPage.test.tsx src/features/auth/accountDeletionContract.test.ts src/features/auth/scopedStorageBoundary.static.test.ts             src/features/auth/SupabaseAuthGate.test.tsx             src/lib/supabase/auth.test.ts             src/features/help/HelpPage.test.tsx
       - name: Verify types
         working-directory: private-app
         run: npx tsc -b --pretty false
