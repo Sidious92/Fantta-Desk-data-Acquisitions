@@ -189,7 +189,40 @@ jobs:
           set -euo pipefail
           AAB=android/app/build/outputs/bundle/release/app-release.aab
           test -s "$AAB"
-          jarsigner -verify -strict "$AAB" >/dev/null
+          # A Google Play upload key is self-signed: jarsigner -strict can
+          # reject valid bundles solely for lacking public CA trust/timestamp.
+          # Verify a real JAR signing block plus successful signature checks.
+          unzip -Z1 "$AAB" | grep -Eq '^META-INF/[^/]+\\.(RSA|DSA|EC)
+          MANIFEST="$(find android/app/build/intermediates -path '*release*' -name AndroidManifest.xml | grep merged_manifests | head -1)"; test -s "$MANIFEST"
+          ! grep -Fq 'android:debuggable="true"' "$MANIFEST"
+          grep -Fq 'android.permission.INTERNET' "$MANIFEST"
+          strings "$AAB" | grep -Eai '(BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|ANDROID_UPLOAD_(STORE|KEY)_PASSWORD|FANTADESK_READ_TOKEN)' && { echo 'Potential secret material detected'; exit 1; } || true
+          {
+            echo "APP_ID=$APP_ID"
+            echo "APP_NAME=$APP_NAME"
+            echo "VERSION_CODE=$VERSION_CODE"
+            echo "VERSION_NAME=$VERSION_NAME"
+            echo "TARGET_SDK=36"
+            echo "COMPILE_SDK=36"
+            echo "CAPACITOR=$CAPACITOR_VERSION"
+            echo "AAB_SHA256=$(sha256sum "$AAB" | awk '{print $1}')"
+          } > /tmp/play-release-report.txt
+
+      - name: Report signed build verdict without exposing private app binary
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s /tmp/play-release-report.txt
+          grep -E '^(APP_ID|APP_NAME|VERSION_CODE|VERSION_NAME|TARGET_SDK|COMPILE_SDK|CAPACITOR|AAB_SHA256)=' /tmp/play-release-report.txt
+          echo 'SIGNED_AAB_VERIFIED_IN_EPHEMERAL_RUNNER; NO PUBLIC BINARY UPLOAD'
+          echo 'For actual Play delivery use a separately authorized private distribution path.'
+
+      - name: Remove upload keystore
+        if: always()
+        shell: bash
+        run: rm -f "$RUNNER_TEMP/fantadesk-upload.jks"
+
+          jarsigner -verify "$AAB" | grep -Fq 'jar verified'
           MANIFEST="$(find android/app/build/intermediates -path '*release*' -name AndroidManifest.xml | grep merged_manifests | head -1)"; test -s "$MANIFEST"
           ! grep -Fq 'android:debuggable="true"' "$MANIFEST"
           grep -Fq 'android.permission.INTERNET' "$MANIFEST"
