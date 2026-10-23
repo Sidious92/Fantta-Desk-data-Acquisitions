@@ -41,6 +41,9 @@ jobs:
       - name: Install JS SDK dependencies
         working-directory: private-app
         run: npm install --legacy-peer-deps --no-audit --no-fund
+      - name: Static syntax check before starting heavy local containers
+        working-directory: private-app
+        run: node --check scripts/b10-supabase-auth-deletion-e2e.mjs
       - name: Install pinned Supabase local CLI (no hosted project connection)
         uses: supabase/setup-cli@v1
         with:
