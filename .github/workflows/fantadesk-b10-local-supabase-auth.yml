@@ -56,6 +56,21 @@ jobs:
           # Creates a LOCAL config only on ephemeral runner; no Supabase login,
           # link, deploy, or real production project credentials are used.
           supabase init --force
+          # A single disposable GoTrue instance runs disabled AND enabled test
+          # phases. The CLI default (2 emails/hour for the entire project) is
+          # too low for this multi-account CI protocol. This override is LOCAL
+          # to the temporary runner; it never changes hosted Auth limits.
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p = Path("supabase/config.toml")
+          source = p.read_text()
+          assert source.count("[auth.rate_limit]") == 1, "Unexpected local Auth config"
+          match = re.search(r"(?m)^(email_sent\\s*=\\s*)\\d+", source)
+          assert match is not None, "Missing local email rate setting"
+          updated = source[:match.start()] + match.group(1) + "12" + source[match.end():]
+          p.write_text(updated)
+          PY
           # Local-only OTP template: no changes to the hosted Supabase email configuration.
           cat >> supabase/config.toml <<'TOML'
 
