@@ -65,11 +65,14 @@ jobs:
           import re
           p = Path("supabase/config.toml")
           source = p.read_text()
-          assert source.count("[auth.rate_limit]") == 1, "Unexpected local Auth config"
-          match = re.search(r"(?m)^(email_sent\s*=\s*)\d+", source)
-          assert match is not None, "Missing local email rate setting"
-          updated = source[:match.start()] + match.group(1) + "12" + source[match.end():]
-          p.write_text(updated)
+          if "[auth.rate_limit]" not in source:
+              source += "\n[auth.rate_limit]\nemail_sent = 12\n"
+          else:
+              assert source.count("[auth.rate_limit]") == 1, "Ambiguous local Auth config"
+              match = re.search(r"(?m)^(email_sent\s*=\s*)\d+", source)
+              assert match is not None, "Missing local email rate setting"
+              source = source[:match.start()] + match.group(1) + "12" + source[match.end():]
+          p.write_text(source)
           PY
           # Local-only OTP template: no changes to the hosted Supabase email configuration.
           cat >> supabase/config.toml <<'TOML'
