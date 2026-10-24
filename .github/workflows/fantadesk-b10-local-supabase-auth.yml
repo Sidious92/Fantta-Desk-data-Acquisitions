@@ -56,6 +56,13 @@ jobs:
           # Creates a LOCAL config only on ephemeral runner; no Supabase login,
           # link, deploy, or real production project credentials are used.
           supabase init --force
+          # Local-only OTP template: no changes to the hosted Supabase email configuration.
+          cat >> supabase/config.toml <<'TOML'
+
+          [auth.email.template.magic_link]
+          subject = "FantaDesk CI code"
+          content_path = "./tests/auth-templates/b10-local-deletion-email-code.html"
+          TOML
           supabase start > /tmp/fd-b10-supabase-start.log 2>&1 || {
             echo 'Supabase local stack startup failed (redacted diagnostic tail):'
             grep -E 'error|failed|migration' /tmp/fd-b10-supabase-start.log | tail -25 || true
@@ -86,7 +93,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          printf 'FANTADESK_ACCOUNT_DELETION_ENABLED=true\n' > /tmp/fd-b10-edge-on.env
+          printf 'FANTADESK_ACCOUNT_DELETION_ENABLED=true\nFANTADESK_ACCOUNT_DELETION_EMAIL_OTP_ENABLED=true\n' > /tmp/fd-b10-edge-on.env
           supabase functions serve delete-account --env-file /tmp/fd-b10-edge-on.env > /tmp/fd-b10-edge-on.log 2>&1 &
           echo $! > /tmp/fd-b10-edge.pid
           sleep 9
