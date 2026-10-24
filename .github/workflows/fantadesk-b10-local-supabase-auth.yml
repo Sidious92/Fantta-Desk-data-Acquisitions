@@ -66,7 +66,7 @@ jobs:
           p = Path("supabase/config.toml")
           source = p.read_text()
           assert source.count("[auth.rate_limit]") == 1, "Unexpected local Auth config"
-          match = re.search(r"(?m)^(email_sent\\s*=\\s*)\\d+", source)
+          match = re.search(r"(?m)^(email_sent\s*=\s*)\d+", source)
           assert match is not None, "Missing local email rate setting"
           updated = source[:match.start()] + match.group(1) + "12" + source[match.end():]
           p.write_text(updated)
