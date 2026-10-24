@@ -121,13 +121,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          printf 'FANTADESK_ACCOUNT_DELETION_ENABLED=true\nFANTADESK_ACCOUNT_DELETION_EMAIL_OTP_ENABLED=true\n' > /tmp/fd-b10-edge-on.env
+          printf 'FANTADESK_ACCOUNT_DELETION_ENABLED=true\nFANTADESK_ACCOUNT_DELETION_EMAIL_OTP_ENABLED=true\nFANTADESK_LOCAL_AUTH_DIAGNOSTICS=true\n' > /tmp/fd-b10-edge-on.env
           supabase functions serve delete-account --env-file /tmp/fd-b10-edge-on.env > /tmp/fd-b10-edge-on.log 2>&1 &
           echo $! > /tmp/fd-b10-edge.pid
           sleep 9
           FANTADESK_E2E_MODE=enabled node scripts/b10-supabase-auth-deletion-e2e.mjs || {
             echo 'Edge startup/runtime diagnostic (only non-secret lines):'
-            grep -E 'error|Error|failed|exception' /tmp/fd-b10-edge-on.log | tail -18 || true
+            grep -E 'FANTADESK_LOCAL_OTP_ERROR|error|Error|failed|exception' /tmp/fd-b10-edge-on.log | tail -18 || true
             exit 1
           }
       - name: Stop local-only Supabase containers
