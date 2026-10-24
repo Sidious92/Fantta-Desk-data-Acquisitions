@@ -67,6 +67,15 @@ jobs:
           source = p.read_text()
           updated, count = re.subn(r"(?m)^(email_sent[ \t]*=[ \t]*)\d+", r"\g<1>12", source)
           assert count == 1, "Expected exactly one local email-sent limit"
+          # The passwordless fixture signs in using a local magic link, then
+          # immediately requests a deletion OTP for the SAME synthetic email.
+          # Avoid GoTrue's 1-minute same-address email cooldown in this
+          # throwaway test stack; never relax the hosted setting.
+          updated, cooldown_count = re.subn(
+              r'(?m)^(max_frequency[ \t]*=[ \t]*)"1m"',
+              r'\g<1>"1s"', updated
+          )
+          assert cooldown_count == 1, "Expected exactly one local email cooldown"
           p.write_text(updated)
           PY
           # Local-only OTP template: no changes to the hosted Supabase email configuration.
