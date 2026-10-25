@@ -1,0 +1,54 @@
+name: FantaDesk B13 Android OAuth Dependency Lock
+on:
+  push:
+    branches: [ci/fantadesk-b12-integration-20261025]
+    paths:
+      - .github/workflows/fantadesk-b13-lockfile.yml
+permissions:
+  contents: read
+jobs:
+  derive-native-lockfile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 8f3e3ea9ffc11f67fa00f84914907cf09a29b792
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: app
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+      - name: Update lockfile for pinned App and Browser native plugins
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --package-lock-only --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+          npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+          npm run android:configure:google-oauth:test
+          node --input-type=module <<'EOF'
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const raw=readFileSync('package-lock.json','utf8');
+          const pkg=JSON.parse(raw);
+          if(pkg.lockfileVersion!==3 || pkg.name!=='fantadesk')throw Error('Unexpected lock');
+          for(const name of ['node_modules/@capacitor/app','node_modules/@capacitor/browser']){
+            if(!pkg.packages[name]?.integrity) throw Error('Missing native plugin '+name);
+          }
+          for(const [name,p] of Object.entries(pkg.packages)){
+            if(!p.resolved)continue;
+            const u=new URL(p.resolved);
+            if(u.protocol!=='https:'||u.username||u.password||!['registry.npmjs.org','cdn.sheetjs.com'].includes(u.hostname)||!p.integrity)throw Error('Untrusted package '+name);
+          }
+          console.log('B13_LOCK_SHA256='+createHash('sha256').update(raw).digest('hex'));
+          console.log('B13_LOCK_PACKAGES='+Object.keys(pkg.packages).length);
+          console.log('BEGIN_B13_LOCKFILE');
+          process.stdout.write(raw);
+          if(!raw.endsWith('\n'))console.log('');
+          console.log('END_B13_LOCKFILE');
+          EOF
