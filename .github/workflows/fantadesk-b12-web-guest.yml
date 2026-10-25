@@ -51,4 +51,5 @@ jobs:
             if curl -fsS http://127.0.0.1:4173/ >/dev/null; then break; fi
             sleep 1
           done
-          node ../.github/scripts/fantadesk-b12-web-guest.mjs
+          cp ../.github/scripts/fantadesk-b12-web-guest.mjs ./.fantadesk-b12-guest.mjs
+          node ./.fantadesk-b12-guest.mjs
