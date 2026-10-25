@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: c2aead408d46cb8feb892a40d86aa49b1b23258f
+          ref: 05eb6aebf5a64fbea33236b77bb2d01f0c41e452
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
           path: app
