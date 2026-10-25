@@ -53,3 +53,5 @@ jobs:
           done
           cp ../.github/scripts/fantadesk-b12-web-guest.mjs ./.fantadesk-b12-guest.mjs
           node ./.fantadesk-b12-guest.mjs
+
+# Mobile click hit-target diagnostics; isolated replay
