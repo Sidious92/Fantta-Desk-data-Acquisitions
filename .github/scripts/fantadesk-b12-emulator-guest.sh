@@ -27,7 +27,14 @@ for n in $(seq 1 12); do
 done
 if [ "$FOUND" -ne 1 ]; then
   echo "LOGIN_SCREEN_NOT_OBSERVED_IN_UI_HIERARCHY"
-  echo "No screenshot or private data were exported."
+  XML="$(adb exec-out cat /sdcard/fantadesk-window.xml 2>/dev/null || true)"
+  printf 'UI_XML_BYTES=%s NODE_COUNT=%s WEBVIEW_TAG=%s\\n' "${#XML}" "$(printf '%s' "$XML" | grep -o '<node' | wc -l)" "$(printf '%s' "$XML" | grep -c 'android.webkit.WebView' || true)"
+  adb exec-out screencap -p > /tmp/fantadesk-guest.png
+  file /tmp/fantadesk-guest.png
+  if command -v identify >/dev/null 2>&1; then
+    identify -format 'SCREEN_PIXEL_STDDEV=%[standard-deviation]\\n' /tmp/fantadesk-guest.png
+  fi
+  echo "NO_GUEST_UI_CONFIRMED; do not treat app as operational."
   exit 1
 fi
 echo "FANTADESK_EMULATOR_CHECK: guest login visible and Google native flow disabled"
