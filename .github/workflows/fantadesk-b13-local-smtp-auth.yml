@@ -1,0 +1,128 @@
+name: FantaDesk B13 Local SMTP Auth and Account Deletion Gate
+on:
+  push:
+    branches: [ci/fantadesk-b12-integration-20261025]
+    paths:
+      - .github/workflows/fantadesk-b13-local-smtp-auth.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  local-auth-and-deletion:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout public CI controller
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout private FantaDesk ephemerally
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: a2e96a713488cae74729aaa431db8fec91f7d70a
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Install Node 22.23.2
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+      - name: Install JS SDK dependencies
+        working-directory: private-app
+        run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - name: Enforce isolated Auth endpoints only
+        shell: bash
+        run: |
+          test -z "${SUPABASE_ACCESS_TOKEN:-}" || { echo 'Hosted Supabase credentials forbidden'; exit 1; }
+          echo 'B13_LOCAL_ONLY_AUTH_AND_MAILPIT=true'
+      - name: Static syntax check before starting heavy local containers
+        working-directory: private-app
+        run: node --check scripts/b10-supabase-auth-deletion-e2e.mjs
+      - name: Install pinned Supabase local CLI (no hosted project connection)
+        uses: supabase/setup-cli@v1
+        with:
+          version: 2.122.0
+      - name: Initialize isolated Supabase project and start Auth/Postgres
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Creates a LOCAL config only on ephemeral runner; no Supabase login,
+          # link, deploy, or real production project credentials are used.
+          supabase init --force
+          # The built-in local mailer is capped at two actual emails/hour.
+          # Disabled mode uses no passwordless challenge; enabled mode needs
+          # a synthetic magic-link sign-in and a real delivered deletion OTP.
+          # Lower only the per-address cooldown in this disposable local stack.
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p = Path("supabase/config.toml")
+          text = p.read_text()
+          lines = text.splitlines(keepends=True)
+          headers = [i for i, line in enumerate(lines) if line.strip() == "[auth.email]"]
+          assert len(headers) == 1, "Expected local Auth email config"
+          start = headers[0] + 1
+          end = next((i for i in range(start, len(lines))
+                      if lines[i].lstrip().startswith("[")), len(lines))
+          matching = [i for i in range(start, end) if re.match(r"^\s*max_frequency\s*=", lines[i])]
+          assert len(matching) == 1, "Expected one local email cooldown"
+          i = matching[0]
+          lines[i] = lines[i].split("=", 1)[0] + '= "1s"\n'
+          p.write_text("".join(lines))
+          PY
+          # Local-only OTP template: no changes to the hosted Supabase email configuration.
+          cat >> supabase/config.toml <<'TOML'
+
+          [auth.email.template.magic_link]
+          subject = "FantaDesk CI code"
+          content_path = "./tests/auth-templates/b10-local-deletion-email-code.html"
+          TOML
+          supabase start > /tmp/fd-b10-supabase-start.log 2>&1 || {
+            echo 'Supabase local stack startup failed (redacted diagnostic tail):'
+            grep -E 'error|failed|migration' /tmp/fd-b10-supabase-start.log | tail -25 || true
+            exit 1
+          }
+          supabase status -o env > /tmp/fd-b10-local-secrets.env
+          chmod 600 /tmp/fd-b10-local-secrets.env
+          set -a
+          source /tmp/fd-b10-local-secrets.env
+          set +a
+          echo "API_URL=$API_URL" >> "$GITHUB_ENV"
+          echo "ANON_KEY=$ANON_KEY" >> "$GITHUB_ENV"
+          echo "SERVICE_ROLE_KEY=$SERVICE_ROLE_KEY" >> "$GITHUB_ENV"
+      - name: Verify deletion kill switch OFF with genuine local GoTrue tokens
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf 'FANTADESK_ACCOUNT_DELETION_ENABLED=false\n' > /tmp/fd-b10-edge-off.env
+          supabase functions serve delete-account --env-file /tmp/fd-b10-edge-off.env > /tmp/fd-b10-edge-off.log 2>&1 &
+          echo $! > /tmp/fd-b10-edge.pid
+          sleep 9
+          FANTADESK_E2E_MODE=disabled node scripts/b10-supabase-auth-deletion-e2e.mjs
+          kill "$(cat /tmp/fd-b10-edge.pid)" || true
+          sleep 4
+      - name: Verify authorized deletion, cross-user protection and old JWT rejection
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf 'FANTADESK_ACCOUNT_DELETION_ENABLED=true\nFANTADESK_ACCOUNT_DELETION_EMAIL_OTP_ENABLED=true\nFANTADESK_LOCAL_AUTH_DIAGNOSTICS=true\n' > /tmp/fd-b10-edge-on.env
+          supabase functions serve delete-account --env-file /tmp/fd-b10-edge-on.env > /tmp/fd-b10-edge-on.log 2>&1 &
+          echo $! > /tmp/fd-b10-edge.pid
+          sleep 9
+          FANTADESK_E2E_MODE=enabled node scripts/b10-supabase-auth-deletion-e2e.mjs || {
+            echo 'Edge startup/runtime diagnostic (only non-secret lines):'
+            grep -E 'FANTADESK_LOCAL_OTP_ERROR|error|Error|failed|exception' /tmp/fd-b10-edge-on.log | tail -18 || true
+            exit 1
+          }
+      - name: Stop local-only Supabase containers
+        if: always()
+        working-directory: private-app
+        run: |
+          if [ -f /tmp/fd-b10-edge.pid ]; then kill "$(cat /tmp/fd-b10-edge.pid)" || true; fi
+          supabase stop --no-backup || true
