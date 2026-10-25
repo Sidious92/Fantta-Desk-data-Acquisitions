@@ -70,4 +70,19 @@ if printf '%s' "$CRASH" | grep -Fq "$APP_ID"; then
   echo "FANTADESK_EMULATOR_CHECK: APP_CRASH_OBSERVED"
   exit 1
 fi
+echo "FANTADESK_B13_DEEPLINK_CHECK: resolving exact OAuth intent-filter without real credentials"
+adb shell am force-stop "$APP_ID" || true
+adb shell am start -W -a android.intent.action.VIEW \
+  -c android.intent.category.BROWSABLE \
+  -d 'fantadesk://auth/callback?code=not-a-valid-oauth-code' \
+  -p "$APP_ID"
+sleep 3
+adb shell pidof "$APP_ID" >/dev/null
+CRASH_AFTER="$(adb logcat -d -b crash 2>/dev/null || true)"
+if printf '%s' "$CRASH_AFTER" | grep -Fq "$APP_ID"; then
+  echo "FANTADESK_B13_DEEPLINK_CHECK: APP_CRASH_OBSERVED"
+  exit 1
+fi
+echo "FANTADESK_B13_DEEPLINK_INTENT_PASS: fake code, native OAuth OFF, no exchange or login attempted"
+
 echo "FANTADESK_EMULATOR_SMOKE_PASS: no login issued, no account created, no private binary uploaded"
