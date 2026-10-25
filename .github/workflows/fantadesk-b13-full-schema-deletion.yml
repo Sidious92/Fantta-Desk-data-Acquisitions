@@ -1,0 +1,79 @@
+name: FantaDesk B13 Full 001-039 Deletion Schema Isolation
+on:
+  push:
+    branches: [ci/fantadesk-b12-integration-20261025]
+    paths:
+      - .github/workflows/fantadesk-b13-full-schema-deletion.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  real-schema-deletion:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: fantadesk_full_schema_ci_only
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres -d fantadesk_full_schema_ci_only"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 15
+    env:
+      PGHOST: localhost
+      PGPORT: "5432"
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: fantadesk_full_schema_ci_only
+    steps:
+      - name: Public CI controller
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Ephemeral private source checkout
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: a2e96a713488cae74729aaa431db8fec91f7d70a
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client
+      - name: Apply real schema migrations 001 through 038 in isolation
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-bootstrap.sql
+          psql -v ON_ERROR_STOP=1 -c "create table auth.users(id uuid primary key);"
+          mapfile -t migration_files < <(find supabase/migrations -maxdepth 1 -name '*.sql' ! -name '*_039_*' | sort)
+          test "${#migration_files[@]}" -eq 38
+          i=0
+          for file in "${migration_files[@]}"; do
+            i=$((i+1))
+            echo "Applying migration $i/38: $(basename "$file")"
+            psql -v ON_ERROR_STOP=1 -f "$file" > /dev/null
+            if [ "$i" -eq 29 ]; then
+              psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-live-029-object-parity-assert.sql
+            fi
+          done
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-assert.sql
+      - name: Apply account deletion migration 039 and delete seeded Auth identity
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -c "insert into auth.users(id) values ('11111111-1111-4111-8111-111111111111'),('22222222-2222-4222-8222-222222222222');"
+          psql -v ON_ERROR_STOP=1 -f supabase/migrations/20261023123000_039_account_deletion_auth_cascade.sql
+          psql -v ON_ERROR_STOP=1 -f scripts/b10-postgres-real-schema-delete-assert.sql
+          echo 'Verified actual 001-039 schema: A deletion complete, B untouched, stale JWT owner rejected.'
