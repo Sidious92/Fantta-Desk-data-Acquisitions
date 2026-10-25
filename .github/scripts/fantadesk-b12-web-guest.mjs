@@ -13,7 +13,16 @@ try {
     await page.getByRole('heading',{name:'Accedi',exact:true}).waitFor({timeout:20000});
     assert.equal(await page.getByRole('button',{name:'Continua con Google'}).count(),0,'Google must stay disabled');
     assert.equal(await page.getByText('CONTENUTO PRIVATO').count(),0);
-    await page.getByRole('button',{name:'Non hai un account? Crealo'}).click();
+    if(device.name!=='desktop') {
+      const hit=await page.getByRole('button',{name:'Non hai un account? Crealo'}).evaluate(el=>{
+        const r=el.getBoundingClientRect();
+        const x=Math.round(r.x+r.width/2),y=Math.round(r.y+r.height/2);
+        const node=document.elementFromPoint(x,y);
+        return {width:innerWidth,height:innerHeight,scrollY,docHeight:document.documentElement.scrollHeight,button:{x:r.x,y:r.y,w:r.width,h:r.height},hitTag:node?.tagName,hitClass:typeof node?.className==='string'?node.className:''};
+      });
+      console.log('MOBILE_HIT_TEST_DIAGNOSTIC '+device.name+' '+JSON.stringify(hit));
+    }
+    await page.getByRole('button',{name:'Non hai un account? Crealo'}).click({timeout:7500});
     await page.getByRole('heading',{name:'Crea account',exact:true}).waitFor();
     assert.equal(await page.locator('input[type="password"]').count(),2);
     await page.getByRole('button',{name:'Torna all’accesso'}).click();
