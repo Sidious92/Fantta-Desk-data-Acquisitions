@@ -66,3 +66,5 @@ jobs:
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           emulator-boot-timeout: 600
           script: bash .github/scripts/fantadesk-b12-emulator-guest.sh
+
+# Android WebView access hierarchy diagnostics; isolated replay
