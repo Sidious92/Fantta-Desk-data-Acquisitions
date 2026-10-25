@@ -5,7 +5,7 @@ const url='http://127.0.0.1:4173';
 let count=0;
 try {
   for(const device of [{name:'desktop',w:1440,h:900},{name:'mobile',w:390,h:844},{name:'mobile-small',w:360,h:740}]) {
-    const context=await browser.newContext({viewport:{width:device.w,height:device.h},isMobile:device.name!=='desktop',deviceScaleFactor:1});
+    const context=await browser.newContext({viewport:{width:device.w,height:device.h},isMobile:false,hasTouch:device.name!=='desktop',deviceScaleFactor:1});
     const page=await context.newPage();
     const errors=[];
     page.on('pageerror',e=>errors.push(e.message));
@@ -22,7 +22,10 @@ try {
       });
       console.log('MOBILE_HIT_TEST_DIAGNOSTIC '+device.name+' '+JSON.stringify(hit));
     }
-    await page.getByRole('button',{name:'Non hai un account? Crealo'}).click({timeout:7500});
+    const cssWidth=await page.evaluate(()=>innerWidth);
+    assert.equal(cssWidth,device.w,'CSS viewport emulator mismatch');
+    if(device.name==='desktop') await page.getByRole('button',{name:'Non hai un account? Crealo'}).click({timeout:7500});
+    else await page.getByRole('button',{name:'Non hai un account? Crealo'}).tap({timeout:7500});
     await page.getByRole('heading',{name:'Crea account',exact:true}).waitFor();
     assert.equal(await page.locator('input[type="password"]').count(),2);
     await page.getByRole('button',{name:'Torna all’accesso'}).click();
