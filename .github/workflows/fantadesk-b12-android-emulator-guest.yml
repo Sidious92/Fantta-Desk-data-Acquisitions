@@ -68,3 +68,5 @@ jobs:
           script: bash .github/scripts/fantadesk-b12-emulator-guest.sh
 
 # Android WebView access hierarchy diagnostics; isolated replay
+
+# Local WebView CDP guest DOM verification fallback; no secrets logged
