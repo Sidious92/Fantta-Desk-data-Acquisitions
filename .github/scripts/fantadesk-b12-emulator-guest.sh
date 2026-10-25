@@ -34,8 +34,19 @@ if [ "$FOUND" -ne 1 ]; then
   if command -v identify >/dev/null 2>&1; then
     identify -format 'SCREEN_PIXEL_STDDEV=%[standard-deviation]\\n' /tmp/fantadesk-guest.png
   fi
-  echo "NO_GUEST_UI_CONFIRMED; do not treat app as operational."
-  exit 1
+  PID="$(adb shell pidof "$APP_ID" | tr -d '\\r')"
+  if [ -n "$PID" ]; then
+    adb forward tcp:9222 "localabstract:webview_devtools_remote_${PID}" >/dev/null || true
+    if node .github/scripts/fantadesk-b12-android-cdp.mjs; then
+      FOUND=1
+      echo "ANDROID_ACCESSIBILITY_HIERARCHY_INCOMPLETE: WebView guest DOM validated via debug-only CDP"
+    fi
+    adb forward --remove tcp:9222 >/dev/null 2>&1 || true
+  fi
+  if [ "$FOUND" -ne 1 ]; then
+    echo "NO_GUEST_UI_CONFIRMED; do not treat app as operational."
+    exit 1
+  fi
 fi
 echo "FANTADESK_EMULATOR_CHECK: guest login visible and Google native flow disabled"
 
