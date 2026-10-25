@@ -16,8 +16,8 @@ jobs:
       APP_ID: com.deepfieldresearch.fantadesk
       APP_NAME: FantaDesk
       CAPACITOR_VERSION: 8.5.1
-      EXPECTED_PACKAGE_LOCK_SHA256: 2ff395252ac03abb0cfca5890796a347df7d9d70ca82e9573b070ee124224a9f
-      EXPECTED_PRIVATE_SHA: c2aead408d46cb8feb892a40d86aa49b1b23258f
+      EXPECTED_PACKAGE_LOCK_SHA256: 95628faf5dee76d4df69b2bb6ebcfbd1baa5e7facb39c6cb7b96682b49fcfdb8
+      EXPECTED_PRIVATE_SHA: 10b95cb7339b8699d3a7eb89b5e556d66425ac94
       VERSION_CODE: 1
       VERSION_NAME: 0.1.0
     steps:
@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sidious92/FantaDesk
-          ref: c2aead408d46cb8feb892a40d86aa49b1b23258f
+          ref: 10b95cb7339b8699d3a7eb89b5e556d66425ac94
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -84,6 +84,7 @@ jobs:
             echo "npm ci modified dependency manifests"; exit 1;
           }
           npm audit --omit=dev --audit-level=high
+          npm run android:configure:google-oauth:test
           node -e "const p=require('./node_modules/@capacitor/core/package.json'); if(p.version!==process.env.CAPACITOR_VERSION) process.exit(1)"
           node -e "const p=require('./node_modules/@capacitor/cli/package.json'); if(p.version!==process.env.CAPACITOR_VERSION) process.exit(1)"
           node -e "const p=require('./node_modules/@capacitor/android/package.json'); if(p.version!==process.env.CAPACITOR_VERSION) process.exit(1)"
@@ -105,6 +106,10 @@ jobs:
           npx cap init "$APP_NAME" "$APP_ID" --web-dir=dist
           npx cap add android
           npx cap sync android
+          npm run android:configure:google-oauth
+          grep -Fq 'android:scheme="fantadesk" android:host="auth" android:path="/callback"' android/app/src/main/AndroidManifest.xml
+          grep -Fq 'AppPlugin' android/app/src/main/assets/capacitor.plugins.json
+          grep -Fq 'BrowserPlugin' android/app/src/main/assets/capacitor.plugins.json
 
       - name: Assert generated Android toolchain
         working-directory: app
