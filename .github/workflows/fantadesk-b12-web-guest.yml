@@ -1,0 +1,54 @@
+name: FantaDesk B12 Protected Web Guest E2E
+on:
+  push:
+    branches: [ci/fantadesk-b12-integration-20261025]
+    paths:
+      - .github/workflows/fantadesk-b12-web-guest.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  guest-web:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - name: Checkout exact candidate without deploying or exposing private assets
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: c2aead408d46cb8feb892a40d86aa49b1b23258f
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+          path: app
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+          package-manager-cache: false
+      - name: Build private app locally
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+          npm run build
+      - name: Install pinned ephemeral Chromium automation (no repository changes)
+        shell: bash
+        working-directory: app
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts --legacy-peer-deps --no-audit --no-fund playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Exercise guest navigation and mobile layouts without submitting requests
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd app
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/fantadesk-preview.log 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid" || true' EXIT
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then break; fi
+            sleep 1
+          done
+          node ../.github/scripts/fantadesk-b12-web-guest.mjs
