@@ -1,0 +1,58 @@
+name: FantaDesk Candidate Dependency Lock Generation
+on:
+  push:
+    paths:
+      - .github/workflows/fantadesk-candidate-lock-gate.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  derive-lockfile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - name: Checkout CI controller
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout exact FantaDesk candidate without write access
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: d3b41f5e38774781a8a9cc0eb53b94b090ec88a6
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+          path: app
+      - name: Node exact toolchain
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+      - name: Derive first deterministic lock and preflight
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e package-lock.json
+          npm install --package-lock-only --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+          npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+          node --input-type=module <<'EOF'
+          import { readFileSync } from 'node:fs';
+          import { createHash } from 'node:crypto';
+          const raw=readFileSync('package-lock.json','utf8');
+          const lock=JSON.parse(raw);
+          if(lock.lockfileVersion!==3 || lock.name!=='fantadesk')throw Error('Unexpected npm lock');
+          if(!lock.packages || Object.keys(lock.packages).length<50)throw Error('Incomplete npm lock');
+          for(const [name,pkg] of Object.entries(lock.packages)) {
+            if(!pkg || !pkg.resolved) continue;
+            const url=new URL(pkg.resolved);
+            if(url.protocol!=='https:' || url.username || url.password || !['registry.npmjs.org','cdn.sheetjs.com'].includes(url.hostname))throw Error('Non-public or untrusted package origin: '+name);
+            if(!pkg.integrity || !/^sha(512|1)-/.test(pkg.integrity))throw Error('Missing integrity for '+name);
+          }
+          const hash=createHash('sha256').update(raw).digest('hex');
+          console.log('LOCK_SHA256='+hash);
+          console.log('LOCK_PACKAGES='+Object.keys(lock.packages).length);
+          console.log('BEGIN_FANTADESK_PACKAGE_LOCK_JSON');
+          process.stdout.write(raw);
+          if(!raw.endsWith('\n'))console.log('');
+          console.log('END_FANTADESK_PACKAGE_LOCK_JSON');
+          EOF
