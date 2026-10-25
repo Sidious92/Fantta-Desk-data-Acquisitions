@@ -1,0 +1,33 @@
+name: FantaDesk B13 Native OAuth Focused Tests
+on:
+  push:
+    branches: [ci/fantadesk-b12-integration-20261025]
+    paths: [.github/workflows/fantadesk-b13-auth-focused.yml]
+permissions: {contents: read}
+jobs:
+  native-auth:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: a2e96a713488cae74729aaa431db8fec91f7d70a
+          path: app
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+      - name: Install immutable dependencies and test native OAuth boundary
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(sha256sum package-lock.json | cut -d' ' -f1)" = "95628faf5dee76d4df69b2bb6ebcfbd1baa5e7facb39c6cb7b96682b49fcfdb8"
+          npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+          npm run android:configure:google-oauth:test
+          npm run typecheck
+          npx vitest run src/lib/supabase/androidGoogleOAuth.test.ts src/lib/supabase/googleOAuth.test.ts src/lib/supabase/auth.test.ts src/features/auth/SupabaseAuthGate.test.tsx --reporter=verbose
