@@ -1,0 +1,144 @@
+name: FantaDesk Campionato RC1 - consolidated B22 to B26
+on:
+  push:
+    branches: [ci/fantadesk-campionato-b22-b26-rc1-20261027]
+    paths:
+      - .github/workflows/fantadesk-campionato-b22-b26-rc1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  app:
+    name: RC1 full application test suite and production static build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PRIVATE_SHA: '30b9493ca8e8080ac951b8b5415aa5ceb08b667c'
+      FANTADESK_PUBLIC_WEB_BUILD: 'true'
+      VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Assert immutable source
+        working-directory: private-app
+        run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+      - name: Verify exactly one parent and complete B22-B26 tree
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+          test "$(git rev-parse HEAD^{tree})" = "16349a3505614340a629a1a7869359112fe12574"
+          test "$(git rev-list --parents -n 1 HEAD)" = "$PRIVATE_SHA f631099d38daea3220637ce5c64488cb6d1cdef3"
+          git diff --name-only HEAD^ HEAD > /tmp/campionato-changes.txt
+          test "$(wc -l < /tmp/campionato-changes.txt)" -eq 33
+          if grep -Ev '^(docs/campionato/|scripts/campionato-|src/features/campionato/|supabase/migrations/20261022220000_032_campionato_atomic_vote_stage.sql$|supabase/migrations/20261026125000_040_campionato_identity_revisions.sql$|supabase/migrations/20261026193000_041_campionato_scoring_revisions.sql$)' /tmp/campionato-changes.txt; then
+            echo "ERROR: unrelated release candidate files"; exit 1
+          fi
+          echo RC1_ONE_COMMIT_33_CAMPIONATO_ONLY_FILES_PASS
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+          cache-dependency-path: private-app/package-lock.json
+      - name: Install
+        working-directory: private-app
+        run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - name: Test Campionato and cloud identity
+        working-directory: private-app
+        run: npm run test:run -- --maxWorkers=3
+      - name: Android OAuth and privacy entrypoint regression
+        working-directory: private-app
+        run: npm run android:configure:google-oauth:test
+      - name: Typecheck
+        working-directory: private-app
+        run: npm run typecheck
+      - name: Public web build
+        working-directory: private-app
+        run: npm run build
+      - name: Public asset leak gate
+        working-directory: private-app
+        run: node scripts/assert-public-web-dist.mjs
+
+  pg:
+    name: RC1 PostgreSQL 17 real 001-041, RLS, auth-delete
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: fantadesk_rc1_isolated
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres -d fantadesk_rc1_isolated"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    env:
+      PRIVATE_SHA: '30b9493ca8e8080ac951b8b5415aa5ceb08b667c'
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: fantadesk_rc1_isolated
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Assert immutable source
+        working-directory: private-app
+        run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+      - name: Full historical PostgreSQL migration chain and owner security
+        shell: bash
+        working-directory: private-app
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-bootstrap.sql
+          mapfile -t migrations < <(find supabase/migrations -maxdepth 1 -name '*.sql' | sort)
+          test "${#migrations[@]}" -eq 41
+          for i in "${!migrations[@]}"; do
+            n=$((i+1))
+            if [ "$n" -eq 39 ]; then
+              psql -v ON_ERROR_STOP=1 -c "create table auth.users(id uuid primary key);"
+              psql -v ON_ERROR_STOP=1 -c "insert into auth.users(id) values ('11111111-1111-4111-8111-111111111111'),('22222222-2222-4222-8222-222222222222');"
+            fi
+            echo "Isolated migration $n/41: ${migrations[$i]}"
+            psql -v ON_ERROR_STOP=1 -f "${migrations[$i]}" > /dev/null
+            if [ "$n" -eq 29 ]; then
+              psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-live-029-object-parity-assert.sql
+            fi
+            if [ "$n" -eq 38 ]; then
+              psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-assert.sql
+              psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-vote-atomic-assert.sql
+            fi
+          done
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-identity-revisions-assert.sql
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-scoring-revisions-assert.sql
+          psql -v ON_ERROR_STOP=1 -f scripts/b10-postgres-real-schema-delete-assert.sql
+          psql -v ON_ERROR_STOP=1 -c "do \$\$ begin if exists(select 1 from public.campionato_identity_revisions r where r.season_id='10101010-1010-4010-8010-101010101010') then raise exception 'A identity revisions survived account deletion'; end if; if (select count(*) from public.campionato_identity_revisions)<>1 then raise exception 'Owner B mapping was not preserved after owner A deletion'; end if; end \$\$;"
+          psql -v ON_ERROR_STOP=1 -c "do \$\$ begin if exists(select 1 from public.campionato_scoring_revisions where season_id='10101010-1010-4010-8010-101010101010') then raise exception 'Account A scoring was not deleted'; end if; if (select count(*) from public.campionato_scoring_revisions)<>1 then raise exception 'Owner B scoring lost after deleting A'; end if; end \$\$;"
+          echo RC1_REAL_PG17_001_041_SCORE_CAS_AND_AUTH_DELETE_PASS
+
+# Zero production credentials; no direct Supabase migration or deployment.
