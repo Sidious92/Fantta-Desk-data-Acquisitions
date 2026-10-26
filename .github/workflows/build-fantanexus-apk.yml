@@ -3,6 +3,8 @@ name: Build FantaDesk APK
 on:
   push:
     branches: [main]
+    paths:
+      - .github/workflows/build-fantanexus-apk.yml
   workflow_dispatch:
     inputs:
       fantadesk_ref:
