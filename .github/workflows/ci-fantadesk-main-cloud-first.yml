@@ -1,0 +1,91 @@
+name: FantaDesk Main Cloud-First B20 CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/ci-fantadesk-main-cloud-first.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fantadesk-main-cloud-first-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-pinned-private-main:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      # Immutable merged SHA on Sidious92/FantaDesk/main, not the public CI repo.
+      FANTADESK_SHA: '790c04f62dbfeb3f1e46198ca0bdbc121315af21'
+      # Enforce the production-public web's no-private-static-data policy.
+      FANTADESK_PUBLIC_WEB_BUILD: 'true'
+      VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
+    steps:
+      - name: Checkout public CI controller only
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Confirm private-repo token exists
+        shell: bash
+        env:
+          READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          test -n "$READ_TOKEN" || { echo 'Missing FANTADESK_READ_TOKEN secret in public CI controller'; exit 1; }
+
+      - name: Checkout exact private FantaDesk main commit ephemerally
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.FANTADESK_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Verify immutable source commit
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$FANTADESK_SHA" || { echo 'Unexpected source SHA'; exit 1; }
+          echo "Validating FantaDesk main commit ${FANTADESK_SHA:0:12}"
+
+      - name: Setup Node 22.23.2
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+          cache-dependency-path: private-app/package-lock.json
+
+      - name: Install dependencies without lifecycle hooks
+        working-directory: private-app
+        run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+
+      - name: Test cloud-first auth, leagues, listone, rule CAS and auction recovery
+        working-directory: private-app
+        run: |
+          npm run test:run -- \
+            src/features/auth \
+            src/features/leagues \
+            src/features/listone \
+            src/features/settings \
+            src/lib/supabase/preliveAuthority.cas.test.ts \
+            src/features/auction/PreliveSetupPersistenceBridge.test.tsx \
+            src/features/auction/auctionSession.remoteAuthority.test.ts
+
+      - name: Strict TypeScript check
+        working-directory: private-app
+        run: npm run typecheck
+
+      - name: Build public web and enforce private-asset + PWA gates
+        working-directory: private-app
+        run: npm run build
+
+      - name: Assert no private Nexus data or stale cached shell in dist
+        working-directory: private-app
+        run: node scripts/assert-public-web-dist.mjs
