@@ -1,0 +1,55 @@
+name: FantaDesk RC1 - TARGETS baseline isolation check
+on:
+  push:
+    branches: [ci/fantadesk-campionato-b22-b26-rc1-20261027]
+    paths:
+      - .github/workflows/fantadesk-rc1-target-baseline.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  baseline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      MAIN_SHA: 'f631099d38daea3220637ce5c64488cb6d1cdef3'
+      FANTADESK_PUBLIC_WEB_BUILD: 'true'
+      VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.MAIN_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Verify untouched main baseline
+        working-directory: private-app
+        run: test "$(git rev-parse HEAD)" = "$MAIN_SHA"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+          cache-dependency-path: private-app/package-lock.json
+      - name: Install
+        working-directory: private-app
+        run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - name: Reproduce previously reported TARGETS test failures on MAIN
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -uo pipefail
+          npm run test:run -- src/features/targets/targetRepository.test.ts --maxWorkers=1 > /tmp/baseline-targets.log 2>&1
+          code=$?
+          set -e
+          sed -r 's/\x1B\[[0-9;]*[mK]//g' /tmp/baseline-targets.log | tail -n 60
+          test "$code" -ne 0
+          grep -q "Giocatore non presente nel Listone corrente" /tmp/baseline-targets.log
+          grep -q "4 failed" /tmp/baseline-targets.log
+          echo BASELINE_MAIN_PREEXISTING_FOUR_TARGET_FAILURES_REPRODUCED
+
+# Does not touch live Supabase. Only proves the current main has the same
+# TARGETS fixture failure under exactly the same public CI environment.
