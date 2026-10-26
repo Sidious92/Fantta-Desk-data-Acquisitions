@@ -1,0 +1,64 @@
+name: FantaDesk B27 — Windows backup / restore proof selftests
+on:
+  push:
+    branches: [ci/fantadesk-b27-backup-restore-proof-20261027]
+    paths:
+      - .github/workflows/fantadesk-b27-restore-proof.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  powershell-proof:
+    name: B27 PowerShell fail-closed hashing and archive logic
+    runs-on: windows-2025
+    timeout-minutes: 15
+    env:
+      PRIVATE_SHA: '2f2df670da4ab8b921cb29cb78f8a16139785775'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Verify source SHA
+        working-directory: private-app
+        shell: pwsh
+        run: |
+          if ((git rev-parse HEAD).Trim() -ne $env:PRIVATE_SHA) {
+            throw 'The exact candidate commit was not checked out.'
+          }
+      - name: Parse and syntax-check both PowerShell scripts
+        shell: pwsh
+        working-directory: private-app
+        run: |
+          foreach ($file in @('scripts/fantadesk-backup-local.ps1','scripts/fantadesk-restore-proof.ps1')) {
+            $tokens = $null; $errors = $null
+            [void][System.Management.Automation.Language.Parser]::ParseFile(
+              (Resolve-Path -LiteralPath $file).Path,[ref]$tokens,[ref]$errors)
+            if ($errors.Count -gt 0) {
+              $errors | ForEach-Object { Write-Output $_.Message }
+              throw "Invalid PowerShell syntax: $file"
+            }
+          }
+          Write-Output 'B27_POWERSHELL_PARSE_PASS'
+      - name: Backup project-id selftest
+        shell: pwsh
+        working-directory: private-app
+        run: ./scripts/fantadesk-backup-local.ps1 -SelfTest
+      - name: Backup manifest hash and tamper detection selftest
+        shell: pwsh
+        working-directory: private-app
+        run: ./scripts/fantadesk-restore-proof.ps1 -SelfTest
+      - name: Ensure no production target credentials supplied in test runner
+        shell: pwsh
+        run: |
+          if ($env:FANTADESK_DATABASE_URL -or $env:FANTADESK_RESTORE_TARGET_DATABASE_URL) {
+            throw 'B27 selftest runner must never have database URLs.'
+          }
+          Write-Output 'B27_NO_LIVE_DATABASE_SECRETS_OR_MUTATIONS_PASS'
+# No production credentials, no Supabase migrations and no dump data in Actions.
