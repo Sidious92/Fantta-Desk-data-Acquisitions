@@ -41,10 +41,11 @@ jobs:
         working-directory: private-app
         shell: bash
         run: |
-          set -uo pipefail
+          set +e
           npm run test:run -- src/features/targets/targetRepository.test.ts --maxWorkers=1 > /tmp/baseline-targets.log 2>&1
           code=$?
-          set -e
+          set -euo pipefail
+          echo "Baseline Vitest exit code: $code"
           sed -r 's/\x1B\[[0-9;]*[mK]//g' /tmp/baseline-targets.log | tail -n 60
           test "$code" -ne 0
           grep -q "Giocatore non presente nel Listone corrente" /tmp/baseline-targets.log
