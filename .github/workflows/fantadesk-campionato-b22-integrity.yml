@@ -1,0 +1,114 @@
+name: FantaDesk B22 - atomic Italia staging integrity (isolated)
+
+on:
+  push:
+    branches: [ci/fantadesk-campionato-b22-integrity-20261026]
+    paths:
+      - .github/workflows/fantadesk-campionato-b22-integrity.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  postgres-integrity:
+    name: PG17 real migrations and vote retry integrity
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: fantadesk_b22_ci_only
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres -d fantadesk_b22_ci_only"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    env:
+      PRIVATE_SHA: 'c86b34fd161257b6f81c5ff212a72926e7c62a94'
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: fantadesk_b22_ci_only
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout immutable private candidate read-only
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Assert exact source revision
+        working-directory: private-app
+        run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+      - name: Full historical schema 001-038 and all B22 Voti Italia row-integrity assertions
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-bootstrap.sql
+          mapfile -t migrations < <(find supabase/migrations -maxdepth 1 -name '*.sql' | sort)
+          test "${#migrations[@]}" -eq 39
+          for i in "${!migrations[@]}"; do
+            number=$((i+1))
+            if [ "$number" -gt 38 ]; then break; fi
+            echo "Applying isolated migration $number/38: ${migrations[$i]}"
+            psql -v ON_ERROR_STOP=1 -f "${migrations[$i]}" > /dev/null
+            if [ "$number" -eq 29 ]; then
+              psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-live-029-object-parity-assert.sql
+            fi
+          done
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-assert.sql
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-vote-atomic-assert.sql
+          echo B22_REAL_PG17_VOTE_CONTENT_INTEGRITY_PASS
+
+  app-regression:
+    name: Campionato app tests and typecheck
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PRIVATE_SHA: 'c86b34fd161257b6f81c5ff212a72926e7c62a94'
+      FANTADESK_PUBLIC_WEB_BUILD: 'true'
+      VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Assert exact source revision
+        working-directory: private-app
+        run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+          cache-dependency-path: private-app/package-lock.json
+      - name: Install dependencies
+        working-directory: private-app
+        run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - name: Campionato Vitest and remote authorization regressions
+        working-directory: private-app
+        run: npm run test:run -- src/features/campionato src/features/leagues/cloudCurrentLeague.test.ts
+      - name: TypeScript
+        working-directory: private-app
+        run: npm run typecheck
+      - name: Public web build with Nexus asset gate
+        working-directory: private-app
+        run: npm run build
+
+# Never reads hosted Supabase connection strings or performs live database writes.
