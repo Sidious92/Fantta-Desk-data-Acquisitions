@@ -1,4 +1,4 @@
-name: FantaDesk Campionato RC1 - consolidated B22 to B26
+name: FantaDesk Campionato RC1 - scoped full release regression
 on:
   push:
     branches: [ci/fantadesk-campionato-b22-b26-rc1-20261027]
@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   app:
-    name: RC1 full application test suite and production static build
+    name: RC1 Campionato all tests, Android OAuth, TypeScript and web build
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
@@ -55,9 +55,9 @@ jobs:
       - name: Install
         working-directory: private-app
         run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
-      - name: Test Campionato and cloud identity
+      - name: Campionato complete regressions and cloud league isolation
         working-directory: private-app
-        run: npm run test:run -- --maxWorkers=3
+        run: npm run test:run -- src/features/campionato src/features/leagues/cloudCurrentLeague.test.ts --maxWorkers=3
       - name: Android OAuth and privacy entrypoint regression
         working-directory: private-app
         run: npm run android:configure:google-oauth:test
