@@ -1,0 +1,130 @@
+name: FantaDesk Campionato B21 - isolated full-chain acceptance
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/fantadesk-campionato-b21-gate.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fantadesk-campionato-b21-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  app-tests:
+    name: Campionato app and privacy gates
+    runs-on: ubuntu-24.04
+    timeout-minutes: 22
+    env:
+      PRIVATE_SHA: c45e5349580572a15bc298b12aff9cafcd7bf621
+      FANTADESK_PUBLIC_WEB_BUILD: 'true'
+      VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout immutable private candidate
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Verify exact source commit
+        working-directory: private-app
+        shell: bash
+        run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+          cache-dependency-path: private-app/package-lock.json
+      - name: Install dependencies
+        working-directory: private-app
+        run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - name: Campionato B0-B9 and relevant regression tests
+        working-directory: private-app
+        run: npm run test:run -- src/features/campionato src/features/auth/accountLocalStorage.test.ts src/features/leagues/cloudCurrentLeague.test.ts
+      - name: Strict typecheck
+        working-directory: private-app
+        run: npm run typecheck
+      - name: Public-web build and static Nexus/PWA privacy gate
+        working-directory: private-app
+        run: npm run build
+
+  postgres-migrations:
+    name: Real 001-039 SQL and cross-owner isolation
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: fantadesk_campionato_b21_ci_only
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres -d fantadesk_campionato_b21_ci_only"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    env:
+      PRIVATE_SHA: c45e5349580572a15bc298b12aff9cafcd7bf621
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: fantadesk_campionato_b21_ci_only
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout immutable private candidate
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Verify exact source commit
+        working-directory: private-app
+        shell: bash
+        run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+      - name: PG17 clean baseline, real migrations and security assertions
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-bootstrap.sql
+          mapfile -t migrations < <(find supabase/migrations -maxdepth 1 -name '*.sql' | sort)
+          test "${#migrations[@]}" -eq 39
+          index=0
+          for file in "${migrations[@]}"; do
+            index=$((index+1))
+            version="$(basename "$file" | sed -E 's/^.*_0?([0-9]{2})_.*/\1/')"
+            # The codebase's historical migration filenames are ordered.
+            if [ "$index" -eq 39 ]; then
+              psql -v ON_ERROR_STOP=1 -c "create table auth.users(id uuid primary key);"
+              psql -v ON_ERROR_STOP=1 -c "insert into auth.users(id) values ('11111111-1111-4111-8111-111111111111'),('22222222-2222-4222-8222-222222222222');"
+            fi
+            echo "Applying isolated migration $index/39: $(basename "$file")"
+            psql -v ON_ERROR_STOP=1 -f "$file" > /dev/null
+            if [ "$index" -eq 29 ]; then
+              psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-live-029-object-parity-assert.sql
+            fi
+            if [ "$index" -eq 38 ]; then
+              psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-assert.sql
+              psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-legacy-rpc-cross-owner-assert.sql
+            fi
+          done
+          psql -v ON_ERROR_STOP=1 -f scripts/b10-postgres-real-schema-delete-assert.sql
+          echo 'B21_REAL_PG17_001_039_RLS_AND_DELETE_PASS'
+
+# Ephemeral-only Postgres. No production Supabase credentials, migrations or hosted changes.
