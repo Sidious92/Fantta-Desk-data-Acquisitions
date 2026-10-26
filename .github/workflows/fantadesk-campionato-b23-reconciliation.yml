@@ -1,0 +1,111 @@
+name: FantaDesk B23 - Italia lineup reconciliation isolation
+
+on:
+  push:
+    branches: [ci/fantadesk-campionato-b23-reconciliation-20261026]
+    paths:
+      - .github/workflows/fantadesk-campionato-b23-reconciliation.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  app-b23:
+    name: B23 identity, substitutions, scoring and regression
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PRIVATE_SHA: 'ec676f43a6129473007c238fc5455d6e3a6f2888'
+      FANTADESK_PUBLIC_WEB_BUILD: 'true'
+      VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Verify immutable application commit
+        working-directory: private-app
+        run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+          cache-dependency-path: private-app/package-lock.json
+      - name: Install dependencies
+        working-directory: private-app
+        run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - name: B23 and Campionato regression tests
+        working-directory: private-app
+        run: npm run test:run -- src/features/campionato src/features/leagues/cloudCurrentLeague.test.ts
+      - name: Strict TypeScript
+        working-directory: private-app
+        run: npm run typecheck
+      - name: Public web build and Nexus exclusion
+        working-directory: private-app
+        run: npm run build
+
+  postgres-b22:
+    name: Real 001-038 and unchanged B22 staging integrity
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: fantadesk_b23_isolated
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres -d fantadesk_b23_isolated"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    env:
+      PRIVATE_SHA: 'ec676f43a6129473007c238fc5455d6e3a6f2888'
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: fantadesk_b23_isolated
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Verify immutable application commit
+        working-directory: private-app
+        run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+      - name: Reapply isolated baseline and Campionato chain
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-bootstrap.sql
+          mapfile -t migrations < <(find supabase/migrations -maxdepth 1 -name '*.sql' | sort)
+          test "${#migrations[@]}" -eq 39
+          for i in "${!migrations[@]}"; do
+            n=$((i+1)); test "$n" -le 38 || break
+            psql -v ON_ERROR_STOP=1 -f "${migrations[$i]}" > /dev/null
+            if [ "$n" -eq 29 ]; then
+              psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-live-029-object-parity-assert.sql
+            fi
+          done
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-assert.sql
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-vote-atomic-assert.sql
+          echo B23_REAL_SQL_B22_ATOMIC_INTEGRITY_PASS
+
+# Tests work only with isolated data, no live Supabase credentials or deployment.
