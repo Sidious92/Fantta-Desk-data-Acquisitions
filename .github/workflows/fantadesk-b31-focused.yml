@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
-      PRIVATE_SHA: '461148d0d47a72364ccca73a07b8b5a1b3164b34'
+      PRIVATE_SHA: '19568c32befce60550e158b5a404abf67137a330'
     steps:
       - uses: actions/checkout@v4
         with: {persist-credentials: false}
@@ -34,7 +34,7 @@ jobs:
         run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
       - name: B31 dual fixture and model unit regressions
         working-directory: private-app
-        run: npm run test:run -- src/features/campionato/dualFixtureReconciliation.test.ts src/features/campionato/CampionatoPage.test.tsx --maxWorkers=2
+        run: npm run test:run -- src/features/campionato/dualFixtureReconciliation.test.ts src/features/campionato/opponentLineupRepository.test.ts src/features/campionato/CampionatoPage.test.tsx --maxWorkers=2
       - name: Strict TypeScript
         working-directory: private-app
         run: npm run typecheck
