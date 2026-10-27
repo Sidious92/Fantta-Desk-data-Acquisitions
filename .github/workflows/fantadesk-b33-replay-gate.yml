@@ -27,7 +27,7 @@ jobs:
           --health-timeout 5s
           --health-retries 12
     env:
-      PRIVATE_SHA: '195b3ad5800108b9c1a651ab91b1d6f7c1d1d1fa'
+      PRIVATE_SHA: '6ea92dfaec5b87e1d86eaeb926f7d3959cd925ed'
       PGHOST: localhost
       PGPORT: '5432'
       PGUSER: postgres
@@ -77,6 +77,7 @@ jobs:
           psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-dual-lineup-assert.sql > /dev/null
           psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-match-review-assert.sql > /dev/null
           psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-server-replay-assert.sql
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-server-replay-parity-assert.sql
       - name: Confirm synthetic database only
         shell: bash
         run: |
@@ -88,7 +89,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
-      PRIVATE_SHA: '195b3ad5800108b9c1a651ab91b1d6f7c1d1d1fa'
+      PRIVATE_SHA: '6ea92dfaec5b87e1d86eaeb926f7d3959cd925ed'
       FANTADESK_PUBLIC_WEB_BUILD: 'true'
       VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
     steps:
