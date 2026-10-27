@@ -27,12 +27,14 @@ jobs:
           --health-timeout 5s
           --health-retries 12
     env:
-      PRIVATE_SHA: 'a1df1cb53fe3d13c4201efab44f23e510f963574'
+      PRIVATE_SHA: '06a63287a3b7687550447fb2e6886622662cf4e2'
       PGHOST: localhost
       PGPORT: '5432'
       PGUSER: postgres
       PGPASSWORD: postgres
       PGDATABASE: fantadesk_b33_ephemeral
+      B33_TEST_URL: http://127.0.0.1:3000
+      B33_TEST_JWT_SECRET: B33_test_only_ephemeral_postgrest_signature_secret_2026
     steps:
       - uses: actions/checkout@v4
         with:
@@ -78,6 +80,35 @@ jobs:
           psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-match-review-assert.sql > /dev/null
           psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-server-replay-assert.sql
           psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-server-replay-parity-assert.sql
+      - name: Establish disposable PostgREST authenticated roles
+        working-directory: private-app
+        run: psql -v ON_ERROR_STOP=1 -f scripts/campionato-b28-postgrest-jwt-bootstrap.sql > /dev/null
+      - name: Start isolated signed HTTP Data API
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run -d --rm --name b33_postgrest --network host \
+            -e PGRST_DB_URI='postgres://authenticator:B28_ephemeral_postgrest_only@127.0.0.1:5432/fantadesk_b33_ephemeral' \
+            -e PGRST_DB_SCHEMAS=public \
+            -e PGRST_DB_ANON_ROLE=anon \
+            -e PGRST_JWT_SECRET="$B33_TEST_JWT_SECRET" \
+            -e PGRST_DB_CHANNEL_ENABLED=false \
+            postgrest/postgrest:v16.3
+          for i in $(seq 1 35); do
+            if curl --silent --fail --max-time 3 http://127.0.0.1:3000/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          docker logs b33_postgrest --tail 50
+          exit 1
+      - name: B33 signed HTTP actual owner and forged score rejection
+        working-directory: private-app
+        run: node scripts/campionato-b33-postgrest-replay.test.mjs before-delete
+      - name: Delete synthetic Auth owner A with real database cascade
+        working-directory: private-app
+        run: psql -v ON_ERROR_STOP=1 -f scripts/b10-postgres-real-schema-delete-assert.sql > /dev/null
+      - name: Old bearer cannot read deleted owner replay ledger
+        working-directory: private-app
+        run: node scripts/campionato-b33-postgrest-replay.test.mjs after-delete
       - name: Confirm synthetic database only
         shell: bash
         run: |
@@ -89,7 +120,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
-      PRIVATE_SHA: 'a1df1cb53fe3d13c4201efab44f23e510f963574'
+      PRIVATE_SHA: '06a63287a3b7687550447fb2e6886622662cf4e2'
       FANTADESK_PUBLIC_WEB_BUILD: 'true'
       VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
     steps:
