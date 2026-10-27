@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
-      PRIVATE_SHA: '25a0db7a57cdc454b71a24f2f522c09ed9e8acd3'
+      PRIVATE_SHA: '6152a83d6c539b094de3540fbf32111034ca3c96'
     steps:
       - uses: actions/checkout@v4
         with: {persist-credentials: false}
