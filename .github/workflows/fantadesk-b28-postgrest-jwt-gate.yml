@@ -1,0 +1,128 @@
+name: FantaDesk B28 - real PostgREST JWT owner isolation
+on:
+  push:
+    branches: [ci/fantadesk-b28-postgrest-jwt-20261027]
+    paths:
+      - .github/workflows/fantadesk-b28-postgrest-jwt-gate.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  jwt-postgrest:
+    name: B28 PG17 + PostgREST v16.3 + owner A/B signed JWT over HTTP
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: fantadesk_b28_ephemeral
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres -d fantadesk_b28_ephemeral"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    env:
+      PRIVATE_SHA: '8a477db1aba02ee571d2ea5adf269e2259581fed'
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: fantadesk_b28_ephemeral
+      B28_POSTGREST_URL: http://127.0.0.1:3000
+      B28_JWT_SECRET: 'B28_ci_only_synthetic_signed_jwt_signing_secret_2026'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Exact candidate source
+        working-directory: private-app
+        run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+      - name: Apply actual historical SQL and seed RLS owner fixtures
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-bootstrap.sql > /dev/null
+          mapfile -t migrations < <(find supabase/migrations -maxdepth 1 -name '*.sql' | sort)
+          test "${#migrations[@]}" -eq 41
+          for i in "${!migrations[@]}"; do
+            n=$((i+1))
+            if [ "$n" -eq 39 ]; then
+              psql -v ON_ERROR_STOP=1 -c "create table auth.users(id uuid primary key);"
+              psql -v ON_ERROR_STOP=1 -c "insert into auth.users(id) values ('11111111-1111-4111-8111-111111111111'),('22222222-2222-4222-8222-222222222222');"
+            fi
+            psql -v ON_ERROR_STOP=1 -f "${migrations[$i]}" > /dev/null
+            if [ "$n" -eq 29 ]; then
+              psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-live-029-object-parity-assert.sql > /dev/null
+            fi
+            if [ "$n" -eq 38 ]; then
+              psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-assert.sql > /dev/null
+              psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-vote-atomic-assert.sql > /dev/null
+            fi
+          done
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-identity-revisions-assert.sql > /dev/null
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-scoring-revisions-assert.sql > /dev/null
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-b28-postgrest-jwt-bootstrap.sql
+      - name: Start actual PostgREST HTTP Data API (isolated, no Supabase credentials)
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run -d --rm --name b28_postgrest --network host \
+            -e PGRST_DB_URI='postgres://authenticator:B28_ephemeral_postgrest_only@127.0.0.1:5432/fantadesk_b28_ephemeral' \
+            -e PGRST_DB_SCHEMAS='public' \
+            -e PGRST_DB_ANON_ROLE='anon' \
+            -e PGRST_JWT_SECRET="$B28_JWT_SECRET" \
+            -e PGRST_DB_CHANNEL_ENABLED='false' \
+            -e PGRST_LOG_LEVEL='warn' \
+            postgrest/postgrest:v16.3
+          for i in $(seq 1 50); do
+            if curl --silent --fail --max-time 3 http://127.0.0.1:3000/ > /dev/null; then
+              echo B28_POSTGREST_HTTP_SERVER_READY
+              exit 0
+            fi
+            sleep 1
+          done
+          docker logs b28_postgrest --tail 100
+          exit 1
+      - name: Signed owner A/B JWT tests against real HTTP API before deletion
+        working-directory: private-app
+        run: node scripts/campionato-b28-postgrest-jwt.test.mjs before-delete
+      - name: Verify Auth deletion trigger and foreign-key cascade inside SAME isolated database
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -f scripts/b10-postgres-real-schema-delete-assert.sql > /dev/null
+          psql -v ON_ERROR_STOP=1 -c "do \$\$ begin if exists(select 1 from public.campionato_identity_revisions where season_id='10101010-1010-4010-8010-101010101010') then raise exception 'A identity revisions survived deletion'; end if; if (select count(*) from public.campionato_identity_revisions)<>2 then raise exception 'B identity revisions not preserved'; end if; if exists(select 1 from public.campionato_scoring_revisions where season_id='10101010-1010-4010-8010-101010101010') then raise exception 'A scoring survived deletion'; end if; if (select count(*) from public.campionato_scoring_revisions)<>2 then raise exception 'B scoring revisions not preserved'; end if; end \$\$;"
+      - name: Reuse OLD bearer JWT for deleted A; verify no access and B preserved
+        working-directory: private-app
+        run: node scripts/campionato-b28-postgrest-jwt.test.mjs after-delete
+      - name: Confirm no production credentials, no remote hosts, no service role in this run
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$B28_POSTGREST_URL" = 'http://127.0.0.1:3000'
+          test -z "${FANTADESK_DATABASE_URL:-}"
+          test -z "${SUPABASE_SERVICE_ROLE_KEY:-}"
+          test -z "${SUPABASE_DB_PASSWORD:-}"
+          echo B28_ACTUAL_POSTGREST_2_USER_JWT_HTTP_CAS_AND_DELETE_PASS
+      - name: Docker logs on failure (synthetic fixture only)
+        if: failure()
+        run: docker logs b28_postgrest --tail 60 || true
+# All DB/auth data here is SYNTHETIC, local to one ephemeral Actions runner.
+# Does not use private CI repo, hosted Supabase JWTs, real credentials or production mutations.
