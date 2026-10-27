@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 16
     env:
-      PRIVATE_SHA: '3e77a9a9c4d1443d1eb167346031b606730a2769'
+      PRIVATE_SHA: '98b285dbdbd65fe2bff5f5b6b8a7831481735e43'
       FANTADESK_PUBLIC_WEB_BUILD: 'true'
       VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
     steps:
@@ -40,7 +40,7 @@ jobs:
         run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
       - name: B33 replay contract and existing regression tests
         working-directory: private-app
-        run: npm run test:run -- src/features/campionato/leaguePublicationRepository.test.ts src/features/campionato/leaguePublishedStandings.test.ts src/features/campionato/serverReplayRepository.test.ts src/features/campionato/dualFixtureReconciliation.test.ts src/features/campionato/MatchReviewControl.test.tsx src/features/campionato/CampionatoPage.test.tsx --maxWorkers=2
+        run: npm run test:run -- src/features/campionato/leaguePublicationFreshness.test.ts src/features/campionato/leaguePublicationRepository.test.ts src/features/campionato/leaguePublishedStandings.test.ts src/features/campionato/serverReplayRepository.test.ts src/features/campionato/dualFixtureReconciliation.test.ts src/features/campionato/MatchReviewControl.test.tsx src/features/campionato/CampionatoPage.test.tsx --maxWorkers=2
       - name: Strict TypeScript
         working-directory: private-app
         run: npm run typecheck
