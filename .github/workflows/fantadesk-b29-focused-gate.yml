@@ -1,0 +1,42 @@
+name: FantaDesk B29 - focused calendar unit and UI gate
+on:
+  push:
+    branches: [ci/fantadesk-b29-competitions-calendar-20261027]
+    paths:
+      - .github/workflows/fantadesk-b29-focused-gate.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  unit-ui:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      PRIVATE_SHA: '9e287bbea7ec406f3180658e141517b118886b7f'
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Check code candidate
+        working-directory: private-app
+        run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+          cache-dependency-path: private-app/package-lock.json
+      - name: Install dependencies
+        working-directory: private-app
+        run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - name: Run B29 generator, cloud repository and React UI tests
+        working-directory: private-app
+        run: npm run test:run -- src/features/campionato/calendarGenerator.test.ts src/features/campionato/calendarRepository.test.ts src/features/campionato/CompetitionCalendarPanel.test.tsx --maxWorkers=2
+      - name: TypeScript entire project
+        working-directory: private-app
+        run: npm run typecheck
