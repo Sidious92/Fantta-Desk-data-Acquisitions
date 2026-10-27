@@ -27,7 +27,7 @@ jobs:
           --health-timeout 5s
           --health-retries 12
     env:
-      PRIVATE_SHA: 'c39ab37c27f3a9f2214dd700190d23ed7f465ffa'
+      PRIVATE_SHA: '25a0db7a57cdc454b71a24f2f522c09ed9e8acd3'
       PGHOST: localhost
       PGPORT: '5432'
       PGUSER: postgres
