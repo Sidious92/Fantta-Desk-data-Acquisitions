@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 16
     env:
-      PRIVATE_SHA: 'a1df1cb53fe3d13c4201efab44f23e510f963574'
+      PRIVATE_SHA: '06a63287a3b7687550447fb2e6886622662cf4e2'
       FANTADESK_PUBLIC_WEB_BUILD: 'true'
       VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
     steps:
