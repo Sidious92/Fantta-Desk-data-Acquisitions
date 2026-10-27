@@ -27,7 +27,7 @@ jobs:
           --health-timeout 5s
           --health-retries 12
     env:
-      PRIVATE_SHA: '91c7d335775cfcdf14d4debf894773fb6f525272'
+      PRIVATE_SHA: 'dd53f6195532bb05171ec374be11999475648cb4'
       PGHOST: localhost
       PGPORT: '5432'
       PGUSER: postgres
@@ -114,6 +114,9 @@ jobs:
       - name: B32 two-sided round seal and reviewed revision audit in real PostgreSQL
         working-directory: private-app
         run: psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-match-review-assert.sql
+      - name: B32 owner and cross-owner real signed HTTP revisions
+        working-directory: private-app
+        run: node scripts/campionato-b32-postgrest-review.test.mjs before-delete
       - name: Verify Auth deletion trigger and foreign-key cascade inside SAME isolated database
         working-directory: private-app
         shell: bash
@@ -130,6 +133,9 @@ jobs:
       - name: B31 after account delete, no opponent evidence leakage
         working-directory: private-app
         run: node scripts/campionato-b31-postgrest-opponent.test.mjs after-delete
+      - name: B32 signed bearer cannot read reviews after real synthetic account deletion
+        working-directory: private-app
+        run: node scripts/campionato-b32-postgrest-review.test.mjs after-delete
       - name: Confirm no production credentials, no remote hosts, no service role in this run
         shell: bash
         run: |
@@ -147,7 +153,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
-      PRIVATE_SHA: '91c7d335775cfcdf14d4debf894773fb6f525272'
+      PRIVATE_SHA: 'dd53f6195532bb05171ec374be11999475648cb4'
       FANTADESK_PUBLIC_WEB_BUILD: 'true'
       VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
     steps:
