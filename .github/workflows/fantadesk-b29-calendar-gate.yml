@@ -27,7 +27,7 @@ jobs:
           --health-timeout 5s
           --health-retries 12
     env:
-      PRIVATE_SHA: '0b497df4cd18d98b6310652ffcbd2a53c184970e'
+      PRIVATE_SHA: 'e0908a2ec72bf78ba65d8e4d5a068a8f92cfbd1a'
       PGHOST: localhost
       PGPORT: '5432'
       PGUSER: postgres
@@ -130,7 +130,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
-      PRIVATE_SHA: '0b497df4cd18d98b6310652ffcbd2a53c184970e'
+      PRIVATE_SHA: 'e0908a2ec72bf78ba65d8e4d5a068a8f92cfbd1a'
       FANTADESK_PUBLIC_WEB_BUILD: 'true'
       VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
     steps:
