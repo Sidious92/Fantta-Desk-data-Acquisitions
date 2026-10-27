@@ -13,7 +13,7 @@ jobs:
     runs-on: windows-2025
     timeout-minutes: 15
     env:
-      PRIVATE_SHA: '2f2df670da4ab8b921cb29cb78f8a16139785775'
+      PRIVATE_SHA: '444abf8c6fe7b53950678e74267d3b964b899410'
     steps:
       - uses: actions/checkout@v4
         with:
