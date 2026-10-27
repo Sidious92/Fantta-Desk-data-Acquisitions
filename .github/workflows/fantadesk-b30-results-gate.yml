@@ -27,7 +27,7 @@ jobs:
           --health-timeout 5s
           --health-retries 12
     env:
-      PRIVATE_SHA: 'ae429762d08a4c99c7fa1f5479ed50a36f89f51a'
+      PRIVATE_SHA: 'cb00fac48c422eb9bf3716749d0927b1f2ac3fbd'
       PGHOST: localhost
       PGPORT: '5432'
       PGUSER: postgres
@@ -104,6 +104,9 @@ jobs:
       - name: Signed owner A/B JWT tests against real HTTP API before deletion
         working-directory: private-app
         run: node scripts/campionato-b28-postgrest-jwt.test.mjs before-delete
+      - name: Verify HTTP RLS and CAS for B30 provisional fixture reports and table rules
+        working-directory: private-app
+        run: node scripts/campionato-b30-postgrest-provisional.test.mjs before-delete
       - name: Verify Auth deletion trigger and foreign-key cascade inside SAME isolated database
         working-directory: private-app
         shell: bash
@@ -114,6 +117,9 @@ jobs:
       - name: Reuse OLD bearer JWT for deleted A; verify no access and B preserved
         working-directory: private-app
         run: node scripts/campionato-b28-postgrest-jwt.test.mjs after-delete
+      - name: Confirm old JWT cannot view deleted A B30 reports; B revision survives
+        working-directory: private-app
+        run: node scripts/campionato-b30-postgrest-provisional.test.mjs after-delete
       - name: Confirm no production credentials, no remote hosts, no service role in this run
         shell: bash
         run: |
@@ -131,7 +137,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
-      PRIVATE_SHA: 'ae429762d08a4c99c7fa1f5479ed50a36f89f51a'
+      PRIVATE_SHA: 'cb00fac48c422eb9bf3716749d0927b1f2ac3fbd'
       FANTADESK_PUBLIC_WEB_BUILD: 'true'
       VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
     steps:
