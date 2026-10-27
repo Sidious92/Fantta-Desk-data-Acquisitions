@@ -27,7 +27,7 @@ jobs:
           --health-timeout 5s
           --health-retries 12
     env:
-      PRIVATE_SHA: '8a477db1aba02ee571d2ea5adf269e2259581fed'
+      PRIVATE_SHA: 'de33114ff70f8932fce287625849c3d246c8b25f'
       PGHOST: localhost
       PGPORT: '5432'
       PGUSER: postgres
@@ -124,5 +124,48 @@ jobs:
       - name: Docker logs on failure (synthetic fixture only)
         if: failure()
         run: docker logs b28_postgrest --tail 60 || true
+  app-regression:
+    name: B28 HTTP 409 client revision conflict regression and public build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PRIVATE_SHA: 'de33114ff70f8932fce287625849c3d246c8b25f'
+      FANTADESK_PUBLIC_WEB_BUILD: 'true'
+      VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Assert immutable source
+        working-directory: private-app
+        run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+          cache-dependency-path: private-app/package-lock.json
+      - name: Install
+        working-directory: private-app
+        run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - name: Test Campionato and cloud identity
+        working-directory: private-app
+        run: npm run test:run -- src/features/campionato src/features/leagues/cloudCurrentLeague.test.ts
+      - name: Typecheck
+        working-directory: private-app
+        run: npm run typecheck
+      - name: Public web build
+        working-directory: private-app
+        run: npm run build
+      - name: Public asset leak gate
+        working-directory: private-app
+        run: node scripts/assert-public-web-dist.mjs
+
 # All DB/auth data here is SYNTHETIC, local to one ephemeral Actions runner.
 # Does not use private CI repo, hosted Supabase JWTs, real credentials or production mutations.
