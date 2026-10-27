@@ -1,0 +1,40 @@
+name: FantaDesk B30 - focused provisional standings and UI
+on:
+  push:
+    branches: [ci/fantadesk-b30-provisional-results-20261027]
+    paths: [.github/workflows/fantadesk-b30-focused.yml]
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  unit-ui:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PRIVATE_SHA: 'c68eb20e3617f89301ea2803b7b1345a7aea8c02'
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Verify exact code
+        working-directory: private-app
+        run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+          cache-dependency-path: private-app/package-lock.json
+      - name: Install
+        working-directory: private-app
+        run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - name: B30 standings model, data repository and UI regression
+        working-directory: private-app
+        run: npm run test:run -- src/features/campionato/provisionalStandings.test.ts src/features/campionato/provisionalResultsRepository.test.ts src/features/campionato/ProvisionalResultsPanel.test.tsx src/features/campionato/CampionatoPage.test.tsx --maxWorkers=2
+      - name: Strict TypeScript
+        working-directory: private-app
+        run: npm run typecheck
