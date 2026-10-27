@@ -1,0 +1,127 @@
+name: FantaDesk B33 - independent server scoring gate
+on:
+  push:
+    branches:
+      - ci/fantadesk-b33-server-replay-20261028
+    paths:
+      - .github/workflows/fantadesk-b33-replay-gate.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  postgres-replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: fantadesk_b33_ephemeral
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d fantadesk_b33_ephemeral"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    env:
+      PRIVATE_SHA: 'e63c492bdd5290ba2e691f9b184252820f8e9bad'
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: fantadesk_b33_ephemeral
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+          path: private-app
+      - name: Verify immutable app source
+        working-directory: private-app
+        run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+      - name: Real schema and 46 sequential migrations
+        working-directory: private-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-bootstrap.sql > /dev/null
+          mapfile -t migrations < <(find supabase/migrations -maxdepth 1 -name '*.sql' | sort)
+          test "${#migrations[@]}" -eq 46
+          for i in "${!migrations[@]}"; do
+            n=$((i+1))
+            if [ "$n" -eq 39 ]; then
+              psql -v ON_ERROR_STOP=1 -c "create table auth.users(id uuid primary key);"
+              psql -v ON_ERROR_STOP=1 -c "insert into auth.users(id) values ('11111111-1111-4111-8111-111111111111'),('22222222-2222-4222-8222-222222222222');"
+            fi
+            psql -v ON_ERROR_STOP=1 -f "${migrations[$i]}" > /dev/null
+            if [ "$n" -eq 29 ]; then
+              psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-live-029-object-parity-assert.sql > /dev/null
+            fi
+            if [ "$n" -eq 38 ]; then
+              psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-assert.sql > /dev/null
+              psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-vote-atomic-assert.sql > /dev/null
+            fi
+          done
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-identity-revisions-assert.sql > /dev/null
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-scoring-revisions-assert.sql > /dev/null
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-calendar-assert.sql > /dev/null
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-provisional-results-assert.sql > /dev/null
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-dual-lineup-assert.sql > /dev/null
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-match-review-assert.sql > /dev/null
+          psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-server-replay-assert.sql
+      - name: Confirm synthetic database only
+        shell: bash
+        run: |
+          test "$PGDATABASE" = fantadesk_b33_ephemeral
+          test -z "${SUPABASE_SERVICE_ROLE_KEY:-}"
+          test -z "${FANTADESK_DATABASE_URL:-}"
+          echo B33_SERVER_REPLAY_POSTGRES_001_046_PASS
+  app-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PRIVATE_SHA: 'e63c492bdd5290ba2e691f9b184252820f8e9bad'
+      FANTADESK_PUBLIC_WEB_BUILD: 'true'
+      VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+          path: private-app
+      - name: Verify exact source
+        working-directory: private-app
+        run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+          cache-dependency-path: private-app/package-lock.json
+      - name: Install
+        working-directory: private-app
+        run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - name: Full Vitest regression
+        working-directory: private-app
+        run: npm run test:run -- --maxWorkers=3
+      - name: Strict TypeScript
+        working-directory: private-app
+        run: npm run typecheck
+      - name: Public Vite build
+        working-directory: private-app
+        run: npm run build
+      - name: Check public asset privacy boundary
+        working-directory: private-app
+        run: node scripts/assert-public-web-dist.mjs
