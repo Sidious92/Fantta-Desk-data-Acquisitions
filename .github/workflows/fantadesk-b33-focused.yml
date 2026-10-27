@@ -1,0 +1,52 @@
+name: FantaDesk B33 - focused score replay and UI
+on:
+  push:
+    branches:
+      - ci/fantadesk-b33-server-replay-20261028
+    paths:
+      - .github/workflows/fantadesk-b33-focused.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 16
+    env:
+      PRIVATE_SHA: '195b3ad5800108b9c1a651ab91b1d6f7c1d1d1fa'
+      FANTADESK_PUBLIC_WEB_BUILD: 'true'
+      VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Verify source SHA
+        working-directory: private-app
+        run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+          cache-dependency-path: private-app/package-lock.json
+      - name: Install
+        working-directory: private-app
+        run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - name: B33 replay contract and existing regression tests
+        working-directory: private-app
+        run: npm run test:run -- src/features/campionato/serverReplayRepository.test.ts src/features/campionato/dualFixtureReconciliation.test.ts src/features/campionato/MatchReviewControl.test.tsx src/features/campionato/CampionatoPage.test.tsx --maxWorkers=2
+      - name: Strict TypeScript
+        working-directory: private-app
+        run: npm run typecheck
+      - name: Public build
+        working-directory: private-app
+        run: npm run build
+      - name: Public asset check
+        working-directory: private-app
+        run: node scripts/assert-public-web-dist.mjs
