@@ -27,7 +27,7 @@ jobs:
           --health-timeout 5s
           --health-retries 12
     env:
-      PRIVATE_SHA: '7d6bdf34a3e90c0e188778856593070975e3186a'
+      PRIVATE_SHA: 'b98b2c11941bc242dedf3f7d7b584775c9be2c27'
       PGHOST: localhost
       PGPORT: '5432'
       PGUSER: postgres
@@ -112,6 +112,9 @@ jobs:
       - name: B35 frozen external dossier SHA, CAS, owner RLS and false certification guard
         working-directory: private-app
         run: psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-verification-dossier-assert.sql
+      - name: B35 signed HTTP and Node SHA-256 manifest integrity / isolation
+        working-directory: private-app
+        run: node scripts/campionato-b35-postgrest-dossier.test.mjs before-delete
       - name: Delete synthetic Auth owner A with real database cascade
         working-directory: private-app
         run: psql -v ON_ERROR_STOP=1 -f scripts/b10-postgres-real-schema-delete-assert.sql > /dev/null
@@ -121,6 +124,9 @@ jobs:
       - name: B34 signed JWT cannot read published results after Auth delete
         working-directory: private-app
         run: node scripts/campionato-b34-postgrest-publication.test.mjs after-delete
+      - name: B35 old signed bearer cannot read deleted owner dossier
+        working-directory: private-app
+        run: node scripts/campionato-b35-postgrest-dossier.test.mjs after-delete
       - name: Confirm synthetic database only
         shell: bash
         run: |
@@ -132,7 +138,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
-      PRIVATE_SHA: '7d6bdf34a3e90c0e188778856593070975e3186a'
+      PRIVATE_SHA: 'b98b2c11941bc242dedf3f7d7b584775c9be2c27'
       FANTADESK_PUBLIC_WEB_BUILD: 'true'
       VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
     steps:
