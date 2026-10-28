@@ -1,0 +1,55 @@
+name: FantaDesk B35 - focused cup policy UI and type/build
+on:
+  push:
+    branches:
+      - ci/fantadesk-b35-provenance-cup-20261028
+    paths:
+      - .github/workflows/fantadesk-b35-focused.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 16
+    env:
+      PRIVATE_SHA: 'f7c05ed35aab4c17462da8ceb5eb93c0a7ae5767'
+      FANTADESK_PUBLIC_WEB_BUILD: 'true'
+      VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ${{ env.PRIVATE_SHA }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private-app
+          persist-credentials: false
+      - name: Verify source SHA
+        working-directory: private-app
+        run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+          cache-dependency-path: private-app/package-lock.json
+      - name: Install
+        working-directory: private-app
+        run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - name: B35 cup policy and existing focused regression tests
+        working-directory: private-app
+        run: npm run test:run -- src/features/campionato/cupTiebreakPolicy.test.ts src/features/campionato/leaguePublicationFreshness.test.ts src/features/campionato/leaguePublicationRepository.test.ts src/features/campionato/leaguePublishedStandings.test.ts src/features/campionato/serverReplayRepository.test.ts src/features/campionato/dualFixtureReconciliation.test.ts src/features/campionato/MatchReviewControl.test.tsx src/features/campionato/CampionatoPage.test.tsx --maxWorkers=2
+      - name: Backend-only provider signature tests
+        working-directory: private-app
+        run: node --test scripts/campionato-b35-provider-receipt-verifier.test.mjs
+      - name: Strict TypeScript
+        working-directory: private-app
+        run: npm run typecheck
+      - name: Public build
+        working-directory: private-app
+        run: npm run build
+      - name: Public asset check
+        working-directory: private-app
+        run: node scripts/assert-public-web-dist.mjs
