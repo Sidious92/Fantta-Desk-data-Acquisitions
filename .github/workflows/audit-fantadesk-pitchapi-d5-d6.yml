@@ -1,4 +1,4 @@
-name: Audit FantaDesk D5 D6 PitchAPI Pure Logic
+name: Audit FantaDesk D5 D6 D7 PitchAPI Pure Logic
 
 on:
   workflow_dispatch:
@@ -21,12 +21,12 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: Sidious92/FantaDesk
-          ref: 7f1a950a8045b9b2ee500b7679785b26cd1c5792
+          ref: 85bf1346fc8dc6c8beee1fbe09b4d8d31ed9e3ec
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
           fetch-depth: 1
       - name: Assert exact reviewed SHA
-        run: test "$(git rev-parse HEAD)" = "7f1a950a8045b9b2ee500b7679785b26cd1c5792"
+        run: test "$(git rev-parse HEAD)" = "85bf1346fc8dc6c8beee1fbe09b4d8d31ed9e3ec"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.23.2
@@ -35,5 +35,6 @@ jobs:
           node --check scripts/data/pitchapi-d5-core.mjs
           node --check scripts/data/pitchapi-d5-source.mjs
           node --check scripts/data/pitchapi-d6-identity-review.mjs
-      - name: D5 and D6 tests (no network or keys)
-        run: node --test scripts/data/pitchapi-d5-core.test.mjs scripts/data/pitchapi-d6-identity-review.test.mjs
+          node --check scripts/data/pitchapi-d7-league-candidate-qa.mjs
+      - name: D5 D6 D7 tests and D7 aggregate audit (no network or keys)
+        run: node --test scripts/data/pitchapi-d5-core.test.mjs scripts/data/pitchapi-d6-identity-review.test.mjs scripts/data/pitchapi-d7-league-candidate-qa.test.mjs scripts/data/pitchapi-d7-audit-report.test.mjs
