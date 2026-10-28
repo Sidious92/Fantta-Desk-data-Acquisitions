@@ -27,7 +27,7 @@ jobs:
           --health-timeout 5s
           --health-retries 12
     env:
-      PRIVATE_SHA: '6c83ce75772b46c0f337e61562547df5a4ac9d7b'
+      PRIVATE_SHA: 'bce0e5ad1b9ae49d26724650c548b74848e764bb'
       PGHOST: localhost
       PGPORT: '5432'
       PGUSER: postgres
@@ -118,6 +118,9 @@ jobs:
       - name: B35 signed HTTP and Node SHA-256 manifest integrity / isolation
         working-directory: private-app
         run: node scripts/campionato-b35-postgrest-dossier.test.mjs before-delete
+      - name: B35 real signed HTTP CUP policy updates and denied cross-owner writes
+        working-directory: private-app
+        run: node scripts/campionato-b35-postgrest-cup.test.mjs before-delete
       - name: Delete synthetic Auth owner A with real database cascade
         working-directory: private-app
         run: psql -v ON_ERROR_STOP=1 -f scripts/b10-postgres-real-schema-delete-assert.sql > /dev/null
@@ -130,6 +133,9 @@ jobs:
       - name: B35 old signed bearer cannot read deleted owner dossier
         working-directory: private-app
         run: node scripts/campionato-b35-postgrest-dossier.test.mjs after-delete
+      - name: B35 authenticated old bearer cannot read deleted owner cup rules
+        working-directory: private-app
+        run: node scripts/campionato-b35-postgrest-cup.test.mjs after-delete
       - name: Confirm synthetic database only
         shell: bash
         run: |
@@ -141,7 +147,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
-      PRIVATE_SHA: '6c83ce75772b46c0f337e61562547df5a4ac9d7b'
+      PRIVATE_SHA: 'bce0e5ad1b9ae49d26724650c548b74848e764bb'
       FANTADESK_PUBLIC_WEB_BUILD: 'true'
       VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
     steps:
