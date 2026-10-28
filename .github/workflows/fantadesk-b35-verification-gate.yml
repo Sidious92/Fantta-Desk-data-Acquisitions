@@ -27,7 +27,7 @@ jobs:
           --health-timeout 5s
           --health-retries 12
     env:
-      PRIVATE_SHA: '4770f682df564428ac483e48c3b2aa4666424a7d'
+      PRIVATE_SHA: '6c83ce75772b46c0f337e61562547df5a4ac9d7b'
       PGHOST: localhost
       PGPORT: '5432'
       PGUSER: postgres
@@ -49,14 +49,14 @@ jobs:
       - name: Verify immutable app source
         working-directory: private-app
         run: test "$(git rev-parse HEAD)" = "$PRIVATE_SHA"
-      - name: Real schema and 48 sequential migrations
+      - name: Real schema and 49 sequential migrations
         working-directory: private-app
         shell: bash
         run: |
           set -euo pipefail
           psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-bootstrap.sql > /dev/null
           mapfile -t migrations < <(find supabase/migrations -maxdepth 1 -name '*.sql' | sort)
-          test "${#migrations[@]}" -eq 48
+          test "${#migrations[@]}" -eq 49
           for i in "${!migrations[@]}"; do
             n=$((i+1))
             if [ "$n" -eq 39 ]; then
@@ -112,6 +112,9 @@ jobs:
       - name: B35 frozen external dossier SHA, CAS, owner RLS and false certification guard
         working-directory: private-app
         run: psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-verification-dossier-assert.sql
+      - name: B35 cup tie policies, owner CAS and no automatic win assignment
+        working-directory: private-app
+        run: psql -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-cup-tie-rules-assert.sql
       - name: B35 signed HTTP and Node SHA-256 manifest integrity / isolation
         working-directory: private-app
         run: node scripts/campionato-b35-postgrest-dossier.test.mjs before-delete
@@ -133,12 +136,12 @@ jobs:
           test "$PGDATABASE" = fantadesk_b35_ephemeral
           test -z "${SUPABASE_SERVICE_ROLE_KEY:-}"
           test -z "${FANTADESK_DATABASE_URL:-}"
-          echo B35_UNVERIFIED_DOSSIER_POSTGRES_001_048_PASS
+          echo B35_DOSSIER_CUP_RULES_POSTGRES_001_049_PASS
   app-regression:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
-      PRIVATE_SHA: '4770f682df564428ac483e48c3b2aa4666424a7d'
+      PRIVATE_SHA: '6c83ce75772b46c0f337e61562547df5a4ac9d7b'
       FANTADESK_PUBLIC_WEB_BUILD: 'true'
       VITE_NEXUS_PRIVATE_DATA_ENABLED: 'false'
     steps:
