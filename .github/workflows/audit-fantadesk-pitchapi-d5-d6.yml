@@ -1,0 +1,39 @@
+name: Audit FantaDesk D5 D6 PitchAPI Pure Logic
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/audit-fantadesk-pitchapi-d5-d6.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  data-logic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Require private checkout credential
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 34ee1e5299a863ae75f9f4c5d432fd331a28215c
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Assert exact reviewed SHA
+        run: test "$(git rev-parse HEAD)" = "34ee1e5299a863ae75f9f4c5d432fd331a28215c"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.23.2
+      - name: Compile JS syntax
+        run: |
+          node --check scripts/data/pitchapi-d5-core.mjs
+          node --check scripts/data/pitchapi-d5-source.mjs
+          node --check scripts/data/pitchapi-d6-identity-review.mjs
+      - name: D5 and D6 tests (no network or keys)
+        run: node --test scripts/data/pitchapi-d5-core.test.mjs scripts/data/pitchapi-d6-identity-review.test.mjs
