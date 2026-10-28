@@ -1,4 +1,4 @@
-name: Audit FantaDesk D5-D8 PitchAPI Pure Logic
+name: Audit FantaDesk D5-D9 PitchAPI Pure Logic
 
 on:
   workflow_dispatch:
@@ -21,12 +21,12 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: Sidious92/FantaDesk
-          ref: 6f613a9324668b1e7b6fd99304ff05f0cd24a3be
+          ref: d20b6ab4194487b3f2852c968a5cd6f3bc2bd8e3
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
           fetch-depth: 1
       - name: Assert exact reviewed SHA
-        run: test "$(git rev-parse HEAD)" = "6f613a9324668b1e7b6fd99304ff05f0cd24a3be"
+        run: test "$(git rev-parse HEAD)" = "d20b6ab4194487b3f2852c968a5cd6f3bc2bd8e3"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.23.2
@@ -38,5 +38,6 @@ jobs:
           node --check scripts/data/pitchapi-d7-league-candidate-qa.mjs
           node --check scripts/data/pitchapi-d8-temporal-census.mjs
           node --check scripts/data/pitchapi-d8-secondary-alias-review.mjs
-      - name: D5 D6 D7 D8 offline logic and aggregate audit
-        run: node --test scripts/data/pitchapi-d5-core.test.mjs scripts/data/pitchapi-d6-identity-review.test.mjs scripts/data/pitchapi-d7-league-candidate-qa.test.mjs scripts/data/pitchapi-d7-audit-report.test.mjs scripts/data/pitchapi-d8-temporal-census.test.mjs scripts/data/pitchapi-d8-secondary-alias-review.test.mjs scripts/data/pitchapi-d8-audit-report.test.mjs
+          node --check scripts/data/pitchapi-d9-global-identity-audit.mjs
+      - name: D5 D6 D7 D8 D9 offline logic and aggregate audit
+        run: node --test scripts/data/pitchapi-d5-core.test.mjs scripts/data/pitchapi-d6-identity-review.test.mjs scripts/data/pitchapi-d7-league-candidate-qa.test.mjs scripts/data/pitchapi-d7-audit-report.test.mjs scripts/data/pitchapi-d8-temporal-census.test.mjs scripts/data/pitchapi-d8-secondary-alias-review.test.mjs scripts/data/pitchapi-d8-audit-report.test.mjs scripts/data/pitchapi-d9-global-identity-audit.test.mjs
