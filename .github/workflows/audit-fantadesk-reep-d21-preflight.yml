@@ -89,7 +89,7 @@ jobs:
               const x=await stream.read();
               if(x.done)throw Error('REEP_CSV_TRUNCATED');
               str+=decoder.decode(x.value,{stream:true});
-              if(str.length>100000)throw Error('REEP_CSV_LONG_RECORD');
+              if(str.length>5000000)throw Error('REEP_CSV_LONG_RECORD');
             }
             console.log('REEP_CSV_SCHEMA',name,JSON.stringify(str.split('\\n')[0].replace(/^\\uFEFF/,'').split(',')));
             console.log('REEP_CSV_ROW_LENGTH',name,str.split('\\n')[1].split(',').length);
