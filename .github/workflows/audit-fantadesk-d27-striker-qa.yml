@@ -1,0 +1,42 @@
+name: Audit FantaDesk D27 StrikerAPI Source QA - synthetic
+
+on:
+  push:
+    paths:
+      - '.github/workflows/audit-fantadesk-d27-striker-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Require existing private read-only checkout credential
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: Sidious92/Fantta-Desk-data-Acquisitions
+          path: public
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: Sidious92/FantaDesk
+          ref: dc9f82914443c200c83047a65738cb80936eddd7
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private
+          persist-credentials: false
+      - name: Enforce pinned private source SHA
+        run: test "$(git -C private rev-parse HEAD)" = "dc9f82914443c200c83047a65738cb80936eddd7"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.23.2
+      - name: D27 syntax and synthetic-only source contract tests - no external API calls
+        run: |
+          node --check private/scripts/data/d27-striker-source-qa.mjs
+          node --check private/scripts/data/d27-striker-ten-match-live-cli.mjs
+          node --test private/scripts/data/d27-striker-source-qa.test.mjs
