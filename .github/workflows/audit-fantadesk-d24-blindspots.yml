@@ -33,7 +33,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 1
       - name: Assert pinned private source commit
-        run: test "$(git -C private rev-parse HEAD)" = "85ea281e9020228c013385aecf6e0d2a5aeb8591"
+        run: test "$(git -C private rev-parse HEAD)" = "c9f798e4f5440dc43873be49e1d2cd68b7cb07ae"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.23.2
