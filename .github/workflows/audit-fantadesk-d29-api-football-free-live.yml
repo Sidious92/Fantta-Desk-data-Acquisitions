@@ -1,6 +1,8 @@
 name: D29 API-Football Free 2026-27 Serie A - authorized 12-call live QA
 on:
-  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/audit-fantadesk-d29-api-football-free-live.yml'
 permissions:
   contents: read
 jobs:
