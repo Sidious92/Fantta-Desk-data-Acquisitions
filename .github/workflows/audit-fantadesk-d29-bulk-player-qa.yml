@@ -1,0 +1,33 @@
+name: D29 Bulk Serie A Player Data Contracts - offline source QA
+on:
+  push:
+    paths:
+      - '.github/workflows/audit-fantadesk-d29-bulk-player-qa.yml'
+permissions:
+  contents: read
+jobs:
+  source-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Require existing private checkout credential
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: Sidious92/FantaDesk
+          ref: d2ea1f9dfcda4eda64bd5e8391411b2734793da4
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private
+          persist-credentials: false
+      - name: Verify source immutable revision
+        run: test "$(git -C private rev-parse HEAD)" = "d2ea1f9dfcda4eda64bd5e8391411b2734793da4"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.23.2
+      - name: D29 syntax and synthetic contract tests - no provider key or paid endpoint
+        run: |
+          node --check private/scripts/data/d29-bulk-player-coverage.mjs
+          node --check private/scripts/data/d29-bulk-player-coverage.test.mjs
+          node --test private/scripts/data/d29-bulk-player-coverage.test.mjs
