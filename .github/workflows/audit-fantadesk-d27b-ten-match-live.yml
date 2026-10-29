@@ -1,0 +1,43 @@
+name: D27-B Live Serie A 2026-27 Player Match Coverage - 197 credits max
+on:
+  push:
+    paths:
+      - '.github/workflows/audit-fantadesk-d27b-ten-match-live.yml'
+permissions:
+  contents: read
+concurrency:
+  group: d27b-one-shot-striker-live
+  cancel-in-progress: false
+jobs:
+  player-metrics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Ensure connected credentials exist
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+          STRIKERAPI_API_KEY: ${{ secrets.STRIKERAPI_API_KEY }}
+        run: |
+          test -n "$FANTADESK_READ_TOKEN"
+          test -n "$STRIKERAPI_API_KEY"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 0cd94e994fa05827a321aeac8fed737b190ef5ed
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private
+          persist-credentials: false
+      - name: Pin exact audited private commit
+        run: test "$(git -C private rev-parse HEAD)" = "0cd94e994fa05827a321aeac8fed737b190ef5ed"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.23.2
+      - name: Validate real probe script and source fixture contracts
+        run: |
+          node --check private/scripts/data/d27b-striker-live-2026-27-ten-match-audit.mjs
+          node --test private/scripts/data/d27-striker-source-qa.test.mjs
+      - name: Execute exactly 10 Serie A games, stop after first on schema mismatch
+        env:
+          STRIKERAPI_API_KEY: ${{ secrets.STRIKERAPI_API_KEY }}
+          D27_ALLOW_197_CREDITS: '1'
+        run: node private/scripts/data/d27b-striker-live-2026-27-ten-match-audit.mjs
