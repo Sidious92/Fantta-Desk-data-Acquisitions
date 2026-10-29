@@ -21,12 +21,12 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: Sidious92/FantaDesk
-          ref: fd19ab2313f361e940666c229d028348b8869981
+          ref: 58f90267295af2dd315f53e815222aa54b74f0e4
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
           fetch-depth: 1
       - name: Assert exact reviewed SHA
-        run: test "$(git rev-parse HEAD)" = "fd19ab2313f361e940666c229d028348b8869981"
+        run: test "$(git rev-parse HEAD)" = "58f90267295af2dd315f53e815222aa54b74f0e4"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.23.2
@@ -56,3 +56,18 @@ jobs:
         run: |
           node --check scripts/data/d16-aggregate-governance.test.mjs
           node --test scripts/data/d16-aggregate-governance.test.mjs
+
+      - name: D18 licensed source eligibility and normalized fixture gates
+        run: |
+          node --check scripts/data/d18-source-eligibility.mjs
+          node --check scripts/data/d18-openfootball-normalizer.mjs
+          node --check scripts/data/d18-openfootball-qa-cli.mjs
+          node --test scripts/data/d18-openfootball-normalizer.test.mjs
+
+      - name: D18 pinned public CC0 Serie A fixture dataset (aggregate only)
+        run: |
+          curl -fLsS --connect-timeout 10 --max-time 25 --retry 1 \
+            https://raw.githubusercontent.com/openfootball/football.json/e6744429ee395bc86f247348c6184bb08d4eb361/2026-27/it.1.json \
+            -o /tmp/fantadesk-d18-openfootball.json
+          node scripts/data/d18-openfootball-qa-cli.mjs /tmp/fantadesk-d18-openfootball.json 2026-09-21 2026-10-29
+          rm -f /tmp/fantadesk-d18-openfootball.json
