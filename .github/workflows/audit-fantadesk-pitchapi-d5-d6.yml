@@ -21,12 +21,12 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: Sidious92/FantaDesk
-          ref: c91049469c5f2dad90deaac4fb7c3b9c5bb82357
+          ref: f043b52279defdadaa708862cde4b5a4448764d9
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
           fetch-depth: 1
       - name: Assert exact reviewed SHA
-        run: test "$(git rev-parse HEAD)" = "c91049469c5f2dad90deaac4fb7c3b9c5bb82357"
+        run: test "$(git rev-parse HEAD)" = "f043b52279defdadaa708862cde4b5a4448764d9"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.23.2
@@ -77,3 +77,8 @@ jobs:
           node --check scripts/data/d19-reep-bridge.mjs
           node --check scripts/data/d19-reep-local-audit.mjs
           node --test scripts/data/d19-reep-bridge.test.mjs
+
+      - name: D21 real triple-provider aggregate reconciliation and failed release gate
+        run: |
+          node --check scripts/data/d21-aggregate-evidence.test.mjs
+          node --test scripts/data/d21-aggregate-evidence.test.mjs
