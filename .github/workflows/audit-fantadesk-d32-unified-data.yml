@@ -1,0 +1,43 @@
+name: D32 Provider-neutral Data Architecture — Typecheck and Contract QA
+on:
+  push:
+    paths:
+      - '.github/workflows/audit-fantadesk-d32-unified-data.yml'
+permissions:
+  contents: read
+jobs:
+  contract-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Validate existing private repository read credential
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 23a4245a3df384d31cbd92327e3a74980962c2ea
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private
+          persist-credentials: false
+      - name: Confirm reviewed D32 commit
+        run: test "$(git -C private rev-parse HEAD)" = "23a4245a3df384d31cbd92327e3a74980962c2ea"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.23.2
+          cache: npm
+          cache-dependency-path: private/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+        working-directory: private
+      - name: TypeScript complete static check
+        run: npm run typecheck
+        working-directory: private
+      - name: D32 provider-neutral metrics and Italia staging tests
+        run: npx vitest run src/domain/data/d32DataContracts.test.ts src/features/campionato/serieASourceRegistry.test.ts
+        working-directory: private
+      - name: D32 never changed Supabase migrations or Nexus source
+        run: |
+          test -f private/docs/data/D32_UNAPPLIED_PRIVATE_PROVIDER_SCHEMA.sql
+          test ! -e private/supabase/migrations/20261029190000_040_d32_data_catalog.sql
