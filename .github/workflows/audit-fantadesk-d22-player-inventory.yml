@@ -27,13 +27,13 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: Sidious92/FantaDesk
-          ref: 68e03188a4957bf83406679ad457aee6a55389b9
+          ref: f347681deb40be0d61f0c4764475c82db6cdf98c
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: private
           persist-credentials: false
           fetch-depth: 1
       - name: Pin private D22 audit SHA
-        run: test "$(git -C private rev-parse HEAD)" = "68e03188a4957bf83406679ad457aee6a55389b9"
+        run: test "$(git -C private rev-parse HEAD)" = "f347681deb40be0d61f0c4764475c82db6cdf98c"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.23.2
@@ -42,6 +42,7 @@ jobs:
           node --check private/scripts/data/d22-player-inventory-core.mjs
           node --check private/scripts/data/d22-player-inventory-cli.mjs
           node --test private/scripts/data/d22-player-inventory-core.test.mjs
+          node --test private/scripts/data/d22-aggregate-evidence.test.mjs
       - name: D22 real per-player coverage — print aggregate only
         run: |
           node private/scripts/data/d22-player-inventory-cli.mjs \
