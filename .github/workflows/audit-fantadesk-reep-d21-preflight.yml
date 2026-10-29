@@ -74,23 +74,25 @@ jobs:
           console.log('D1_PERSON_APPROVAL_STATES',JSON.stringify({total:j.persons.length,globalPromotionGranted:approved,notGranted:j.persons.length-approved}));
           NODE
 
-      - name: Inspect official compressed CSV header without downloading bulk
+      - name: Inspect official compressed CSV header through Node streaming GET
         run: |
-          python - <<'PY'
-          import urllib.request,zlib
-          for k in ['bridges','redirects']:
-              u='https://reep.football/downloads/csv/'+k
-              d=zlib.decompressobj(16+zlib.MAX_WBITS)
-              with urllib.request.urlopen(u, timeout=20) as stream:
-                  print('REEP_CSV_ORIGIN',k,stream.geturl().split('/')[2])
-                  b=b''
-                  while b.count(b'\\n')<3:
-                      c=stream.read(65536)
-                      if not c: break
-                      b+=d.decompress(c)
-                      if len(b)>4_000_000: raise ValueError('suspicious lines')
-                  rows=b.split(b'\\n')
-                  header=rows[0].decode('utf-8-sig').split(',')
-                  print('REEP_CSV_SCHEMA',k,header)
-                  print('REEP_CSV_FIRST_ROW_FIELD_COUNT',k,len(rows[1].decode('utf-8').split(',')))
-          PY
+          node --input-type=module <<'NODE'
+          for(const name of ['bridges','redirects']){
+            const url='https://reep.football/downloads/csv/'+name;
+            const res=await fetch(url,{redirect:'follow',signal:AbortSignal.timeout(25000)});
+            console.log('REEP_CSV_STATUS',name,res.status,new URL(res.url).hostname);
+            if(!res.ok)throw Error('REEP_CSV_NOT_ACCESSIBLE');
+            if(!res.body)throw Error('REEP_CSV_NO_BODY');
+            const stream=res.body.pipeThrough(new DecompressionStream('gzip')).getReader();
+            const decoder=new TextDecoder();let str='';
+            while(str.split('\\n').length<4){
+              const x=await stream.read();
+              if(x.done)throw Error('REEP_CSV_TRUNCATED');
+              str+=decoder.decode(x.value,{stream:true});
+              if(str.length>100000)throw Error('REEP_CSV_LONG_RECORD');
+            }
+            console.log('REEP_CSV_SCHEMA',name,JSON.stringify(str.split('\\n')[0].replace(/^\\uFEFF/,'').split(',')));
+            console.log('REEP_CSV_ROW_LENGTH',name,str.split('\\n')[1].split(',').length);
+            await stream.cancel();
+          }
+          NODE
