@@ -1,0 +1,42 @@
+name: Audit FantaDesk D26 User G1 XLSX Format and Rights Gates
+
+on:
+  push:
+    paths:
+      - '.github/workflows/audit-fantadesk-d26-user-xlsx.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  d26-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Require private read-only credential
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: Sidious92/Fantta-Desk-data-Acquisitions
+          path: public
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: Sidious92/FantaDesk
+          ref: audit/data-coverage-source-gates-20261028
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private
+          persist-credentials: false
+      - name: Pin private audit branch exactly
+        run: test "$(git -C private rev-parse HEAD)" = "a130bfa0d9e6f4ba38a69d95d21c2418ae590ce2"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.23.2
+      - name: D25-D26 syntax and offline synthetic regression tests
+        run: |
+          node --check private/scripts/data/d25-authorized-workbook-audit.mjs
+          node --check private/scripts/data/d26-g1-offline-audit.mjs
+          node --test private/scripts/data/d25-authorized-workbook-audit.test.mjs private/scripts/data/d26-g1-offline-audit.test.mjs private/scripts/data/d24-authorized-listone-diff.test.mjs
