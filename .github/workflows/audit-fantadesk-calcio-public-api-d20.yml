@@ -1,0 +1,36 @@
+name: Audit FantaDesk D20 Public Calcio API Discovery
+
+on:
+  push:
+    paths:
+      - '.github/workflows/audit-fantadesk-calcio-public-api-d20.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-data-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Require private checkout credential
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 045c3f28ebbd1abed13ef3be116239b66c96c221
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Assert private checked SHA
+        run: test "$(git rev-parse HEAD)" = "045c3f28ebbd1abed13ef3be116239b66c96c221"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.23.2
+      - name: Public unauthenticated source discovery (no persistence)
+        run: |
+          node --check scripts/data/d20-calcio-it-public-probe.mjs
+          node scripts/data/d20-calcio-it-public-probe.mjs
