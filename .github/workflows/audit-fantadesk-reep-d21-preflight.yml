@@ -57,3 +57,19 @@ jobs:
           const head=await fetch(u,{method:'HEAD',signal:AbortSignal.timeout(15000)});
           console.log('REEP_BRIDGES_HEAD',JSON.stringify({status:head.status,targetHost:new URL(head.url).hostname,size:head.headers.get('content-length'),type:head.headers.get('content-type')}));
           NODE
+
+      - name: Aggregate D1 provider/person link structure without raw identifiers
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          const j=JSON.parse(readFileSync('data/nexus-d1/final-v3/IDENTITY_MASTER.json','utf8'));
+          const aliases=j.persons.flatMap(p=>p.providerAliases??[]);
+          const names=Object.entries(aliases.reduce((a,x)=>{const v=x.provider??'none';a[v]=(a[v]??0)+1;return a},{}));
+          console.log('D1_PERSON_ALIAS_PROVIDERS',JSON.stringify(Object.fromEntries(names)));
+          const categories=j.persons.reduce((a,p)=>{const v=[...new Set((p.providerAliases??[]).map(x=>x.provider))].sort().join('+')||'NO_ALIASES';a[v]=(a[v]??0)+1;return a},{});
+          console.log('D1_PERSON_COMBINATIONS',JSON.stringify(categories));
+          const refScopes=j.persons.flatMap(p=>p.subjectRefs??[]).reduce((a,x)=>{const v=x.scope??'NONE';a[v]=(a[v]??0)+1;return a},{});
+          console.log('D1_SUBJECTREF_SCOPES',JSON.stringify(refScopes));
+          const approved=j.persons.filter(x=>x.globalPersonPromotionGranted===true).length;
+          console.log('D1_PERSON_APPROVAL_STATES',JSON.stringify({total:j.persons.length,globalPromotionGranted:approved,notGranted:j.persons.length-approved}));
+          NODE
