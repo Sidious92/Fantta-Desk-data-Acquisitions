@@ -1,0 +1,40 @@
+name: D31 Understat 2026-27 read-only two-request source QA
+on:
+  push:
+    paths:
+      - '.github/workflows/d31-understat-2026-27-source-qa.yml'
+permissions:
+  contents: read
+concurrency:
+  group: d31-understat-single-read-research
+  cancel-in-progress: false
+jobs:
+  source-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Require existing read-only access to FantaDesk
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: Sidious92/FantaDesk
+          ref: a24cc786bc04ad1f1a6442192755b139817b1561
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private
+          persist-credentials: false
+      - name: Verify exact reviewed source
+        run: test "$(git -C private rev-parse HEAD)" = "a24cc786bc04ad1f1a6442192755b139817b1561"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.23.2
+      - name: Offline schema QA and syntax validation
+        run: |
+          node --check private/scripts/data/d31-understat-2026-27-source-contract.mjs
+          node --check private/scripts/data/d31-understat-bounded-live-cli.mjs
+          node --test private/scripts/data/d31-understat-2026-27-source-contract.test.mjs
+      - name: Research-only one league and one match request with aggregate output
+        env:
+          D31_ALLOW_TWO_PUBLIC_READS: '1'
+        run: node private/scripts/data/d31-understat-bounded-live-cli.mjs
