@@ -1,0 +1,38 @@
+name: D29-B API-Football Free Account and 2026/27 Entitlement Check
+on:
+  push:
+    paths:
+      - '.github/workflows/audit-fantadesk-d29b-entitlement.yml'
+permissions:
+  contents: read
+jobs:
+  entitlement:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check protected secrets are set
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+          API_FOOTBALL_API_KEY: ${{ secrets.API_FOOTBALL_API_KEY }}
+        run: |
+          test -n "$FANTADESK_READ_TOKEN"
+          test -n "$API_FOOTBALL_API_KEY"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 895b3e1e22c0a879a406da5185781d2f5bbd3e51
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private
+          persist-credentials: false
+      - name: Check immutable source
+        run: test "$(git -C private rev-parse HEAD)" = "895b3e1e22c0a879a406da5185781d2f5bbd3e51"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.23.2
+      - name: Validate safe entitlement script
+        run: node --check private/scripts/data/d29b-api-football-current-season-entitlement.mjs
+      - name: Check plan and one current-season league query, no raw results
+        env:
+          API_FOOTBALL_API_KEY: ${{ secrets.API_FOOTBALL_API_KEY }}
+          D29B_ALLOW_ONE_FREE_CALL: '1'
+        run: node private/scripts/data/d29b-api-football-current-season-entitlement.mjs
