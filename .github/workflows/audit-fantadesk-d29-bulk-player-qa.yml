@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: Sidious92/FantaDesk
-          ref: d2ea1f9dfcda4eda64bd5e8391411b2734793da4
+          ref: be986887419971de01c6e6e96bef33970b5f9003
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: private
           persist-credentials: false
@@ -30,4 +30,5 @@ jobs:
         run: |
           node --check private/scripts/data/d29-bulk-player-coverage.mjs
           node --check private/scripts/data/d29-bulk-player-coverage.test.mjs
+          node --check private/scripts/data/d29-api-football-free-ten-match-live-cli.mjs
           node --test private/scripts/data/d29-bulk-player-coverage.test.mjs
