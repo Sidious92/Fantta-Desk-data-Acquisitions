@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Require private checkout read token
         env:
-          FANTADESK_READ_TOKEN: \${{ secrets.FANTADESK_READ_TOKEN }}
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
         run: test -n "$FANTADESK_READ_TOKEN"
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -28,7 +28,7 @@ jobs:
         with:
           repository: Sidious92/FantaDesk
           ref: audit/data-coverage-source-gates-20261028
-          token: \${{ secrets.FANTADESK_READ_TOKEN }}
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: private
           persist-credentials: false
           fetch-depth: 1
