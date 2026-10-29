@@ -85,14 +85,14 @@ jobs:
             if(!res.body)throw Error('REEP_CSV_NO_BODY');
             const stream=res.body.pipeThrough(new DecompressionStream('gzip')).getReader();
             const decoder=new TextDecoder();let str='';
-            while(str.split('\\n').length<4){
+            while(str.split(String.fromCharCode(10)).length<4){
               const x=await stream.read();
               if(x.done)throw Error('REEP_CSV_TRUNCATED');
               str+=decoder.decode(x.value,{stream:true});
               if(str.length>5000000)throw Error('REEP_CSV_LONG_RECORD');
             }
-            console.log('REEP_CSV_SCHEMA',name,JSON.stringify(str.split('\\n')[0].replace(/^\\uFEFF/,'').split(',')));
-            console.log('REEP_CSV_ROW_LENGTH',name,str.split('\\n')[1].split(',').length);
+            console.log('REEP_CSV_SCHEMA',name,JSON.stringify(str.split(String.fromCharCode(10))[0].replace(/^\\uFEFF/,'').split(',')));
+            console.log('REEP_CSV_ROW_LENGTH',name,str.split(String.fromCharCode(10))[1].split(',').length);
             await stream.cancel();
           }
           NODE
