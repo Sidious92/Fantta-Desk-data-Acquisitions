@@ -1,0 +1,43 @@
+name: D28 Test StrikerAPI 500 credit feasibility - 17 credit one-shot
+on:
+  push:
+    paths:
+      - .github/workflows/audit-fantadesk-d28-season-team-feasibility.yml
+permissions:
+  contents: read
+concurrency:
+  group: d28-striker-single-feasibility
+  cancel-in-progress: false
+jobs:
+  investigate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Check existing secrets without printing
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+          STRIKERAPI_API_KEY: ${{ secrets.STRIKERAPI_API_KEY }}
+        run: |
+          test -n "$TOKEN"
+          test -n "$STRIKERAPI_API_KEY"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 7fce7ac4c26829d5f530140687932e800db52027
+          path: private
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+      - name: Assert immutable source
+        run: test "$(git -C private rev-parse HEAD)" = "7fce7ac4c26829d5f530140687932e800db52027"
+      - uses: actions/setup-node@49933ea5288ca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.23.2
+      - name: Check D28 syntax and existing D27 contracts
+        run: |
+          node --check private/scripts/data/d28-striker-season-team-credit-optimization-probe.mjs
+          node --test private/scripts/data/d27-striker-source-qa.test.mjs
+      - name: One season shot-map + one lineup probe - 17 credits maximum
+        env:
+          STRIKERAPI_API_KEY: ${{ secrets.STRIKERAPI_API_KEY }}
+          D28_ALLOW_17_CREDITS: '1'
+        run: node private/scripts/data/d28-striker-season-team-credit-optimization-probe.mjs
