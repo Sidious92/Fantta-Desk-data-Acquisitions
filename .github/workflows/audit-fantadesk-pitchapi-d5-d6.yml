@@ -1,4 +1,4 @@
-name: Audit FantaDesk D5-D11 PitchAPI Pure Logic
+name: Audit FantaDesk D5-D12 PitchAPI Pure Logic
 
 on:
   workflow_dispatch:
@@ -21,12 +21,12 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: Sidious92/FantaDesk
-          ref: 305496ab445f0d43d747c100dd5eda1ea7e972e8
+          ref: 06e0f143880438aca5c263c670e657c243edb2fe
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
           fetch-depth: 1
       - name: Assert exact reviewed SHA
-        run: test "$(git rev-parse HEAD)" = "305496ab445f0d43d747c100dd5eda1ea7e972e8"
+        run: test "$(git rev-parse HEAD)" = "06e0f143880438aca5c263c670e657c243edb2fe"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.23.2
@@ -45,5 +45,6 @@ jobs:
           node --check scripts/data/pitchapi-d10-official-html-parser.mjs
           node --check scripts/data/pitchapi-d10-candidate-universe.mjs
           node --check scripts/data/pitchapi-d11-prioritized-review.mjs
-      - name: D5-D11 offline logic and safe identity review
-        run: node --test scripts/data/pitchapi-d5-core.test.mjs scripts/data/pitchapi-d6-identity-review.test.mjs scripts/data/pitchapi-d7-league-candidate-qa.test.mjs scripts/data/pitchapi-d7-audit-report.test.mjs scripts/data/pitchapi-d8-temporal-census.test.mjs scripts/data/pitchapi-d8-secondary-alias-review.test.mjs scripts/data/pitchapi-d8-audit-report.test.mjs scripts/data/pitchapi-d9-global-identity-audit.test.mjs scripts/data/pitchapi-d9-transfer-evidence.test.mjs scripts/data/pitchapi-d9-audit-report.test.mjs scripts/data/pitchapi-d10-listone-diff.test.mjs scripts/data/pitchapi-d10-review-queue.test.mjs scripts/data/pitchapi-d10-official-html-parser.test.mjs scripts/data/pitchapi-d10-candidate-universe.test.mjs scripts/data/pitchapi-d10-audit-report.test.mjs scripts/data/pitchapi-d11-prioritized-review.test.mjs scripts/data/pitchapi-d11-audit-report.test.mjs
+          node --check scripts/data/pitchapi-d12-evidence-review.mjs
+      - name: D5-D12 offline identity evidence and temporal tests
+        run: node --test scripts/data/pitchapi-d5-core.test.mjs scripts/data/pitchapi-d6-identity-review.test.mjs scripts/data/pitchapi-d7-league-candidate-qa.test.mjs scripts/data/pitchapi-d7-audit-report.test.mjs scripts/data/pitchapi-d8-temporal-census.test.mjs scripts/data/pitchapi-d8-secondary-alias-review.test.mjs scripts/data/pitchapi-d8-audit-report.test.mjs scripts/data/pitchapi-d9-global-identity-audit.test.mjs scripts/data/pitchapi-d9-transfer-evidence.test.mjs scripts/data/pitchapi-d9-audit-report.test.mjs scripts/data/pitchapi-d10-listone-diff.test.mjs scripts/data/pitchapi-d10-review-queue.test.mjs scripts/data/pitchapi-d10-official-html-parser.test.mjs scripts/data/pitchapi-d10-candidate-universe.test.mjs scripts/data/pitchapi-d10-audit-report.test.mjs scripts/data/pitchapi-d11-prioritized-review.test.mjs scripts/data/pitchapi-d11-audit-report.test.mjs scripts/data/pitchapi-d12-evidence-review.test.mjs
