@@ -24,11 +24,11 @@ jobs:
         with:
           repository: Sidious92/FantaDesk
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
-          ref: 03804a0e106b27b76ed3152269919a55fa2d3589
+          ref: 0167c365b4f6d11199ee4766cea159bf0dd787bd
           path: private
           persist-credentials: false
       - name: Pin exact source
-        run: test "$(git -C private rev-parse HEAD)" = "03804a0e106b27b76ed3152269919a55fa2d3589"
+        run: test "$(git -C private rev-parse HEAD)" = "0167c365b4f6d11199ee4766cea159bf0dd787bd"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.23.2
