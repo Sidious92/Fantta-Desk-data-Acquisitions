@@ -21,12 +21,12 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: Sidious92/FantaDesk
-          ref: 1fc150ef9971c7cde14df8013c2154c84de1b3e6
+          ref: aa7a9b9eb30c3ab039d4c3b8a34542389df70f2f
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
           fetch-depth: 1
       - name: Assert exact reviewed SHA
-        run: test "$(git rev-parse HEAD)" = "1fc150ef9971c7cde14df8013c2154c84de1b3e6"
+        run: test "$(git rev-parse HEAD)" = "aa7a9b9eb30c3ab039d4c3b8a34542389df70f2f"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.23.2
@@ -42,5 +42,6 @@ jobs:
           node --check scripts/data/pitchapi-d9-transfer-evidence.mjs
           node --check scripts/data/pitchapi-d10-listone-diff.mjs
           node --check scripts/data/pitchapi-d10-review-queue.mjs
+          node --check scripts/data/pitchapi-d10-official-html-parser.mjs
       - name: D5 D6 D7 D8 D9 D10 offline logic and listone review
-        run: node --test scripts/data/pitchapi-d5-core.test.mjs scripts/data/pitchapi-d6-identity-review.test.mjs scripts/data/pitchapi-d7-league-candidate-qa.test.mjs scripts/data/pitchapi-d7-audit-report.test.mjs scripts/data/pitchapi-d8-temporal-census.test.mjs scripts/data/pitchapi-d8-secondary-alias-review.test.mjs scripts/data/pitchapi-d8-audit-report.test.mjs scripts/data/pitchapi-d9-global-identity-audit.test.mjs scripts/data/pitchapi-d9-transfer-evidence.test.mjs scripts/data/pitchapi-d9-audit-report.test.mjs scripts/data/pitchapi-d10-listone-diff.test.mjs scripts/data/pitchapi-d10-review-queue.test.mjs
+        run: node --test scripts/data/pitchapi-d5-core.test.mjs scripts/data/pitchapi-d6-identity-review.test.mjs scripts/data/pitchapi-d7-league-candidate-qa.test.mjs scripts/data/pitchapi-d7-audit-report.test.mjs scripts/data/pitchapi-d8-temporal-census.test.mjs scripts/data/pitchapi-d8-secondary-alias-review.test.mjs scripts/data/pitchapi-d8-audit-report.test.mjs scripts/data/pitchapi-d9-global-identity-audit.test.mjs scripts/data/pitchapi-d9-transfer-evidence.test.mjs scripts/data/pitchapi-d9-audit-report.test.mjs scripts/data/pitchapi-d10-listone-diff.test.mjs scripts/data/pitchapi-d10-review-queue.test.mjs scripts/data/pitchapi-d10-official-html-parser.test.mjs
