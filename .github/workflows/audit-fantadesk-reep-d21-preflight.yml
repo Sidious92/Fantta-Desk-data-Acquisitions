@@ -96,3 +96,21 @@ jobs:
             await stream.cancel();
           }
           NODE
+
+      - name: Audit D1 alias scope and Reep manifest gate exact types
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          const j=JSON.parse(readFileSync('data/nexus-d1/final-v3/IDENTITY_MASTER.json','utf8'));
+          for(const p of ['Fantacalcio','Understat']){
+            const x=j.persons.flatMap(r=>r.providerAliases??[]).filter(a=>a.provider===p);
+            console.log('D1_ALIAS_VALUE_TYPES',p,JSON.stringify({
+              scopes:x.reduce((a,z)=>(a[z.scope??'null']=(a[z.scope??'null']??0)+1,a),{}),
+              types:x.reduce((a,z)=>(a[typeof z.providerId]=(a[typeof z.providerId]??0)+1,a),{}),
+              samplePattern:x.slice(0,4).map(z=>({digitsOnly:/^\\d+$/.test(String(z.providerId)),length:String(z.providerId).length,firstChar:String(z.providerId)[0]}))
+            }));
+          }
+          const r=await fetch('https://data.reep.football/releases/2026-10-25.1/objects/a840bd0f-f3bf-420e-97bd-20d52377e67d/manifest.json');
+          const m=await r.json();
+          console.log('REEP_MANIFEST_GATE_VALUES',JSON.stringify({release_tag:m.release_tag,gates:m.gates,shaBridgeType:typeof m.checksums_sha256?.['bridges.csv.gz'],shaBridgeLength:String(m.checksums_sha256?.['bridges.csv.gz']).length}));
+          NODE
