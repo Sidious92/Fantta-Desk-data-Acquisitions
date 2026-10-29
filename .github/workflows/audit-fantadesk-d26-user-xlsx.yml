@@ -31,7 +31,7 @@ jobs:
           path: private
           persist-credentials: false
       - name: Pin private audit branch exactly
-        run: test "$(git -C private rev-parse HEAD)" = "a130bfa0d9e6f4ba38a69d95d21c2418ae590ce2"
+        run: test "$(git -C private rev-parse HEAD)" = "86b084fd50c8a6cf102d21e7ed8db7e637c92608"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 22.23.2
