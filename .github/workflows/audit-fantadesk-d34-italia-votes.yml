@@ -1,0 +1,42 @@
+name: D34 Italia Votes - ID Reconciliation, 6-Star, Staging UI
+on:
+  push:
+    paths:
+      - '.github/workflows/audit-fantadesk-d34-italia-votes.yml'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Verify private repo read token present
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$TOKEN"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: Sidious92/FantaDesk
+          ref: ad566fdadd0fe921585a5d671955170199c6775b
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private
+          persist-credentials: false
+      - name: Verify pinned reviewed source
+        run: test "$(git -C private rev-parse HEAD)" = "ad566fdadd0fe921585a5d671955170199c6775b"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.23.2
+          cache: npm
+          cache-dependency-path: private/package-lock.json
+      - name: Install dependencies from lockfile
+        working-directory: private
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Typecheck entire app
+        working-directory: private
+        run: npm run typecheck
+      - name: Run Italia parser/staging, D34 reconciliation and D33 catalog regressions
+        working-directory: private
+        run: npx vitest run src/features/campionato/italiaVoteImport.test.ts src/features/campionato/italiaVoteStaging.test.ts src/features/campionato/ItaliaVotePreviewPanel.test.tsx src/features/data/D34ItaliaReconciliation.test.ts src/features/data/D34ItaliaDraftsPanel.test.tsx src/features/data/D33DataPage.test.tsx src/domain/data/d32DataContracts.test.ts
+      - name: Production build (no Vercel publish)
+        working-directory: private
+        run: npm run build
