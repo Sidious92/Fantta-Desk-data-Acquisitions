@@ -1,0 +1,38 @@
+name: Audit FantaDesk D13 Reviewer UI
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/audit-fantadesk-d13-ui.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-reviewer-ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Require private checkout credential
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 468eb8abf6fed746721afad374f135740947b5c3
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Assert reviewed SHA
+        run: test "$(git rev-parse HEAD)" = "468eb8abf6fed746721afad374f135740947b5c3"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.23.2
+      - name: Install package lock (without lifecycle scripts)
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Typecheck private reviewer UI
+        run: npm run typecheck
+      - name: Test private reviewer UI access, demo and session reset
+        run: npx --no-install vitest run src/features/data-review/D13ReviewerPage.test.tsx
