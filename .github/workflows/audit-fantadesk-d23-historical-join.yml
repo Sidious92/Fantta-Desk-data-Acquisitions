@@ -1,0 +1,54 @@
+name: Audit FantaDesk D23 Real Historical Field Join
+
+on:
+  push:
+    paths:
+      - '.github/workflows/audit-fantadesk-d23-historical-join.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  d23:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Require read-only private repository checkout
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$FANTADESK_READ_TOKEN"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: Sidious92/Fantta-Desk-data-Acquisitions
+          path: public
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: Sidious92/FantaDesk
+          ref: f1f453358e2a8b627c70e2e8d200a1313f34ff25
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Assert immutable private SHA
+        run: test "$(git -C private rev-parse HEAD)" = "f1f453358e2a8b627c70e2e8d200a1313f34ff25"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.23.2
+      - name: D23 synthetic historical join test
+        run: |
+          node --check private/scripts/data/d23-private-history-source.mjs
+          node --check private/scripts/data/d23-history-join.mjs
+          node --check private/scripts/data/d23-real-history-audit-cli.mjs
+          node --test private/scripts/data/d23-history-join.test.mjs
+      - name: D23 full real source join aggregate only, no export
+        run: |
+          node private/scripts/data/d23-real-history-audit-cli.mjs \
+            private/data/nexus/current-listone/2026-08-30/active-listone.csv \
+            public/data/nexus-d1/final-v3/IDENTITY_MASTER.json \
+            private/src/features/auction/secasPlayerAuctionHistory.generated.ts \
+            public/data/nexus-d2/final-v1/understat \
+            private/data/coverage/D22_PRIVATE_FANTALAB_PER_PLAYER_FIELD_PRESENCE_2026-10-29.json \
+            private/data/nexus/runtime-private
