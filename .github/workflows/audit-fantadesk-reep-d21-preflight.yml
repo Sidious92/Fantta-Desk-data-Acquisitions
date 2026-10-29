@@ -73,3 +73,24 @@ jobs:
           const approved=j.persons.filter(x=>x.globalPersonPromotionGranted===true).length;
           console.log('D1_PERSON_APPROVAL_STATES',JSON.stringify({total:j.persons.length,globalPromotionGranted:approved,notGranted:j.persons.length-approved}));
           NODE
+
+      - name: Inspect official compressed CSV header without downloading bulk
+        run: |
+          python - <<'PY'
+          import urllib.request,zlib
+          for k in ['bridges','redirects']:
+              u='https://reep.football/downloads/csv/'+k
+              d=zlib.decompressobj(16+zlib.MAX_WBITS)
+              with urllib.request.urlopen(u, timeout=20) as stream:
+                  print('REEP_CSV_ORIGIN',k,stream.geturl().split('/')[2])
+                  b=b''
+                  while b.count(b'\\n')<3:
+                      c=stream.read(65536)
+                      if not c: break
+                      b+=d.decompress(c)
+                      if len(b)>4_000_000: raise ValueError('suspicious lines')
+                  rows=b.split(b'\\n')
+                  header=rows[0].decode('utf-8-sig').split(',')
+                  print('REEP_CSV_SCHEMA',k,header)
+                  print('REEP_CSV_FIRST_ROW_FIELD_COUNT',k,len(rows[1].decode('utf-8').split(',')))
+          PY
