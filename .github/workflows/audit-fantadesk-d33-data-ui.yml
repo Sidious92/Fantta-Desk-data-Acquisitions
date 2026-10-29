@@ -1,0 +1,42 @@
+name: D33 FantaDesk Data UI - typecheck, tests and production build
+on:
+  push:
+    paths:
+      - '.github/workflows/audit-fantadesk-d33-data-ui.yml'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Require read-only checkout credential
+        env:
+          TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: test -n "$TOKEN"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: Sidious92/FantaDesk
+          ref: 12502de229fe3a70c25aa38de2d82f832982af4d
+          path: private
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+      - name: Verify immutable D33 source revision
+        run: test "$(git -C private rev-parse HEAD)" = "12502de229fe3a70c25aa38de2d82f832982af4d"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.23.2
+          cache: npm
+          cache-dependency-path: private/package-lock.json
+      - name: Install frozen app dependencies
+        working-directory: private
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Run whole-app TypeScript project typecheck
+        working-directory: private
+        run: npm run typecheck
+      - name: Run D32/D33 contracts, UI and source registry regression tests
+        working-directory: private
+        run: npx vitest run src/domain/data/d32DataContracts.test.ts src/features/data/D33DataViewModel.test.ts src/features/data/D33DataPage.test.tsx src/features/campionato/serieASourceRegistry.test.ts
+      - name: Production build (no deploy)
+        working-directory: private
+        run: npm run build
