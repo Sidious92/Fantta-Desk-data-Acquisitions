@@ -1,0 +1,38 @@
+name: D29 API-Football Free 2026-27 Serie A - authorized 12-call live QA
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-source-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check private read token and separate API-Football secret
+        env:
+          FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+          API_FOOTBALL_API_KEY: ${{ secrets.API_FOOTBALL_API_KEY }}
+        run: |
+          test -n "$FANTADESK_READ_TOKEN"
+          test -n "$API_FOOTBALL_API_KEY"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: Sidious92/FantaDesk
+          ref: be986887419971de01c6e6e96bef33970b5f9003
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          path: private
+          persist-credentials: false
+      - name: Verify pinned source revision
+        run: test "$(git -C private rev-parse HEAD)" = "be986887419971de01c6e6e96bef33970b5f9003"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.23.2
+      - name: Verify parser and CLI offline
+        run: |
+          node --check private/scripts/data/d29-api-football-free-ten-match-live-cli.mjs
+          node --test private/scripts/data/d29-bulk-player-coverage.test.mjs
+      - name: Read only 12 API-Football free calls, 0 purchases, aggregate logs only
+        env:
+          API_FOOTBALL_API_KEY: ${{ secrets.API_FOOTBALL_API_KEY }}
+          D29_ALLOW_12_FREE_CALLS: '1'
+        run: node private/scripts/data/d29-api-football-free-ten-match-live-cli.mjs
