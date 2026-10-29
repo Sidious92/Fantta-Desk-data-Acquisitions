@@ -27,13 +27,13 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: Sidious92/FantaDesk
-          ref: b71f90b19b2eea2007670509592dc58fd2663f11
+          ref: 0392253c83441a152d35fdf08aa3035e43ef300c
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: private
           persist-credentials: false
           fetch-depth: 1
       - name: Pin private D22 audit SHA
-        run: test "$(git -C private rev-parse HEAD)" = "b71f90b19b2eea2007670509592dc58fd2663f11"
+        run: test "$(git -C private rev-parse HEAD)" = "0392253c83441a152d35fdf08aa3035e43ef300c"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.23.2
@@ -48,4 +48,5 @@ jobs:
             private/data/nexus/current-listone/2026-08-30/active-listone.csv \
             public/data/nexus-d1/final-v3/IDENTITY_MASTER.json \
             private/src/features/auction/secasPlayerAuctionHistory.generated.ts \
-            public/data/nexus-d2/final-v1/understat
+            public/data/nexus-d2/final-v1/understat \
+            --fantalab-evidence private/data/coverage/D22_PRIVATE_FANTALAB_PER_PLAYER_FIELD_PRESENCE_2026-10-29.json
