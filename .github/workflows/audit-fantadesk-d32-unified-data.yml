@@ -17,12 +17,12 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: Sidious92/FantaDesk
-          ref: acec7738b50e83e14da5d190eaa5f38883b5fa67
+          ref: 739df3c9a2816117e4e3472c7327bc58827ddcb9
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           path: private
           persist-credentials: false
       - name: Confirm reviewed D32 commit
-        run: test "$(git -C private rev-parse HEAD)" = "acec7738b50e83e14da5d190eaa5f38883b5fa67"
+        run: test "$(git -C private rev-parse HEAD)" = "739df3c9a2816117e4e3472c7327bc58827ddcb9"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.23.2
