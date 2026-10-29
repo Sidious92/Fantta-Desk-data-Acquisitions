@@ -21,12 +21,12 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: Sidious92/FantaDesk
-          ref: 468eb8abf6fed746721afad374f135740947b5c3
+          ref: 4c5da4f1d14c5bdecd1f7cea605598626d71095c
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
           fetch-depth: 1
       - name: Assert reviewed SHA
-        run: test "$(git rev-parse HEAD)" = "468eb8abf6fed746721afad374f135740947b5c3"
+        run: test "$(git rev-parse HEAD)" = "4c5da4f1d14c5bdecd1f7cea605598626d71095c"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.23.2
