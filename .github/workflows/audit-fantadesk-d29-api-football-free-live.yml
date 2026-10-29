@@ -15,8 +15,9 @@ jobs:
           FANTADESK_READ_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
           API_FOOTBALL_API_KEY: ${{ secrets.API_FOOTBALL_API_KEY }}
         run: |
-          test -n "$FANTADESK_READ_TOKEN"
-          test -n "$API_FOOTBALL_API_KEY"
+          if [ -z "$FANTADESK_READ_TOKEN" ]; then echo "D29_MISSING_FANTADESK_READ_TOKEN"; exit 1; fi
+          if [ -z "$API_FOOTBALL_API_KEY" ]; then echo "D29_MISSING_API_FOOTBALL_API_KEY_IN_PUBLIC_REPO"; exit 1; fi
+          echo "D29_BOTH_SECRETS_AVAILABLE"
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: Sidious92/FantaDesk
