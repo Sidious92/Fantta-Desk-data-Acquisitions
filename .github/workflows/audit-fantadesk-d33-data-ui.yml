@@ -17,12 +17,12 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: Sidious92/FantaDesk
-          ref: a4cf279d74f9617b6ad47e95d727f6d59b2a03fb
+          ref: 01d04e7235f838cb188aa83e011a76b95e57ae41
           path: private
           token: ${{ secrets.FANTADESK_READ_TOKEN }}
           persist-credentials: false
       - name: Verify immutable D33 source revision
-        run: test "$(git -C private rev-parse HEAD)" = "a4cf279d74f9617b6ad47e95d727f6d59b2a03fb"
+        run: test "$(git -C private rev-parse HEAD)" = "01d04e7235f838cb188aa83e011a76b95e57ae41"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.23.2
