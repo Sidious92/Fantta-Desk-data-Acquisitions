@@ -33,7 +33,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 1
       - name: Assert pinned private source commit
-        run: test "$(git -C private rev-parse HEAD)" = "c9f798e4f5440dc43873be49e1d2cd68b7cb07ae"
+        run: test "$(git -C private rev-parse HEAD)" = "446211f4a5e5bc5efda1bfc3b8b04d1965a71a4e"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.23.2
@@ -42,6 +42,9 @@ jobs:
           node --check private/scripts/data/d24-blindspot-triage.mjs
           node --check private/scripts/data/d24-real-38-triage-cli.mjs
           node --test private/scripts/data/d24-blindspot-triage.test.mjs
+          node --check private/scripts/data/d24-authorized-listone-diff.mjs
+          node --test private/scripts/data/d24-authorized-listone-diff.test.mjs
+          node --test private/scripts/data/d24-aggregate-evidence.test.mjs
       - name: D24 real private source intersection aggregate-only
         run: |
           node private/scripts/data/d24-real-38-triage-cli.mjs \
