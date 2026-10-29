@@ -29,7 +29,7 @@ jobs:
           persist-credentials: false
       - name: Assert immutable source
         run: test "$(git -C private rev-parse HEAD)" = "7fce7ac4c26829d5f530140687932e800db52027"
-      - uses: actions/setup-node@49933ea5288ca8642d1e84afbd3f7d6820020 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.23.2
       - name: Check D28 syntax and existing D27 contracts
