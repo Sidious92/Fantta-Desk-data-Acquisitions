@@ -1,0 +1,46 @@
+# Lightweight real read-only database traffic for FantaDesk's Supabase Free project.
+# Publishable key is deliberately PUBLIC, never the secret/service_role key.
+# RLS remains enforced for the anonymous role; the response body is discarded.
+# This is best-effort. Supabase does not promise a guaranteed no-pause threshold.
+# GitHub automatically disables scheduled workflows in public repos after 60
+# days without repository activity. Check the workflow periodically.
+name: FantaDesk - Supabase database activity
+on:
+  schedule:
+    - cron: '27 1,7,13,19 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/fantadesk-supabase-activity.yml'
+
+permissions:
+  contents: read
+concurrency:
+  group: fantadesk-supabase-activity
+  cancel-in-progress: false
+
+jobs:
+  read-only-activity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    env:
+      SUPABASE_URL: https://ifnjusovilzuzadpzuqb.supabase.co
+      SUPABASE_PUBLISHABLE_KEY: sb_publishable_PPyysREyIIwV4OCXy-7Nfw_lbMtQryl
+    steps:
+      - name: Query real FantaDesk database via anonymous RLS-protected REST API
+        shell: bash
+        run: |
+          set -euo pipefail
+          # No Authorization JWT, no browser session and no privileged key.
+          # This performs a genuine SELECT through PostgREST without exposing rows.
+          status="$(curl --silent --show-error --location \
+            --max-time 20 --retry 2 --retry-delay 3 \
+            --output /dev/null --write-out '%{http_code}' \
+            --header "apikey: ${SUPABASE_PUBLISHABLE_KEY}" \
+            --header 'accept: application/json' \
+            "${SUPABASE_URL}/rest/v1/leagues?select=id&limit=1")"
+          if [[ "$status" != "200" ]]; then
+            echo "::error::FantaDesk Supabase database read failed with HTTP $status"
+            exit 1
+          fi
+          echo "FantaDesk Supabase anonymous read: HTTP 200, no database changes"
