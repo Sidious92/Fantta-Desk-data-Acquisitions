@@ -1,0 +1,119 @@
+# QA gate 2026-10-23: full 001-038 + read-only LIVE 029 baseline signature parity + B0-B9.
+name: FantaDesk Campionato B0-B9 Integration Gates
+on:
+  push:
+    branches: [test/campionato-b1-audit-20261022]
+    paths:
+      - '.github/workflows/campionato-b1-readonly-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  typecheck-tests-build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preflight repository authorization
+        env:
+          PRIVATE_REPO_TOKEN: ${{ secrets.FANTADESK_READ_TOKEN }}
+        run: |
+          if [ -z "$PRIVATE_REPO_TOKEN" ]; then
+            echo 'FANTADESK_READ_TOKEN is missing or unavailable to this workflow.'
+            exit 1
+          fi
+          echo 'Private repository token is present; checkout will test its scope.'
+      - name: Checkout private feature branch read-only
+        uses: actions/checkout@v4
+        with:
+          repository: Sidious92/FantaDesk
+          ref: audit/campionato-b0-b9-full-chain-20261023
+          token: ${{ secrets.FANTADESK_READ_TOKEN }}
+          persist-credentials: false
+          path: app
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct dependencies without executing postinstall scripts
+        working-directory: app
+        run: |
+          npm install --package-lock-only --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+          npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - name: TypeScript compile gate
+        working-directory: app
+        run: npx tsc -b --pretty false
+      - name: Campionato contracts and UI regressions; auction stability
+        working-directory: app
+        run: npx vitest run src/features/campionato/ src/features/auction/secasHistoricalMarket.test.ts src/features/auction/auctionSession.remoteAuthority.test.ts
+      - name: Nexus runtime and Vite production build (no deploy)
+        working-directory: app
+        run: |
+          npm run nexus:runtime:build
+          npx vite build --base=./
+
+      - name: PostgreSQL 030-037 previous RLS gates + B9 read-only simulation/analytics tests (ephemeral)
+        working-directory: app
+        env:
+          PGPASSWORD: postgres
+        run: |
+          if ! command -v psql >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq postgresql-client
+          fi
+          for source in \
+            scripts/campionato-postgres-smoke-setup.sql \
+            supabase/migrations/20261022183000_030_campionato_season_core.sql \
+            supabase/migrations/20261022210500_031_campionato_italia_vote_staging.sql \
+            supabase/migrations/20261022220000_032_campionato_atomic_vote_stage.sql \
+            scripts/campionato-postgres-smoke-assert.sql \
+            scripts/campionato-postgres-vote-atomic-assert.sql \
+            supabase/migrations/20261022230000_033_campionato_player_assessments.sql \
+            scripts/campionato-postgres-player-assessments-assert.sql \
+            supabase/migrations/20261022233000_034_campionato_formation_drafts.sql \
+            scripts/campionato-postgres-formation-assert.sql \
+            supabase/migrations/20261022235000_035_campionato_match_fixtures.sql \
+            scripts/campionato-postgres-weekly-fixtures-assert.sql \
+            supabase/migrations/20261023001000_036_campionato_availability_reports.sql \
+            scripts/campionato-postgres-availability-assert.sql \
+            supabase/migrations/20261023003000_037_campionato_market_plan_events.sql \
+            scripts/campionato-postgres-market-plan-assert.sql; do
+            psql -h 127.0.0.1 -U postgres -d postgres -v ON_ERROR_STOP=1 -f "$source"
+          done
+
+      - name: Verify owner-side backup script syntax (no credentials and no backup)
+        shell: pwsh
+        working-directory: app
+        run: ./scripts/fantadesk-backup-local.ps1 -SelfTest
+
+      - name: FULL real 001-038 migration chain on isolated PostgreSQL 17 (no live DB)
+        working-directory: app
+        env:
+          PGPASSWORD: postgres
+        run: |
+          psql -h 127.0.0.1 -U postgres -d postgres -v ON_ERROR_STOP=1 -c 'create database campionato_full_chain'
+          psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-bootstrap.sql
+          for source in supabase/migrations/202609*.sql; do
+            echo "Apply pre-Campionato real migration: $source"
+            psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f "$source"
+          done
+          psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-live-029-object-parity-assert.sql
+          for source in supabase/migrations/202610*.sql; do
+            echo "Apply Campionato release migration: $source"
+            psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f "$source"
+          done
+          psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-full-chain-assert.sql
+          psql -h 127.0.0.1 -U postgres -d campionato_full_chain -v ON_ERROR_STOP=1 -f scripts/campionato-postgres-legacy-rpc-cross-owner-assert.sql
