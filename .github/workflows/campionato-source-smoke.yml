@@ -1,0 +1,47 @@
+name: FantaDesk Campionato Source Smoke
+on:
+  pull_request:
+    paths:
+      - 'scripts/fantadesk-campionato-source-smoke.mjs'
+      - 'scripts/source-smoke-utils.mjs'
+      - 'scripts/fantadesk-campionato-source-smoke.test.mjs'
+      - '.github/workflows/campionato-source-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate source parser logic
+        run: node --test scripts/fantadesk-campionato-source-smoke.test.mjs
+
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Read-only smoke on live sources
+        env:
+          FANTADESK_SMOKE_REPORT: ${{ runner.temp }}/campionato-source-smoke.json
+          # Secrets only for manually dispatched workflows on reviewed default branch.
+          API_FOOTBALL_KEY: ${{ github.event_name == 'workflow_dispatch' && secrets.API_FOOTBALL_KEY || '' }}
+          FOOTBALL_DATA_KEY: ${{ github.event_name == 'workflow_dispatch' && secrets.FOOTBALL_DATA_KEY || '' }}
+        run: node scripts/fantadesk-campionato-source-smoke.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fantadesk-campionato-source-smoke
+          path: ${{ runner.temp }}/campionato-source-smoke.json
+          retention-days: 14
+          if-no-files-found: warn
